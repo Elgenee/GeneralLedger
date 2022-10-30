@@ -9,8 +9,16 @@ namespace GeneralLedger.Core.Domain
     public partial class Sale
     {
         public int Id { get; set; }
-
+        public DateTime? TransactionDate { get; set; }
         [StringLength(500)]
-        public string ORNo { get; set; }
+        public string TRANo { get; set; }
+        [StringLength(500)]
+        public string PONo { get; set; }
+        public int intIdCustomer { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal? Total { get; set; }
+        public Customer Customer { get; set; }
+
     }
 }

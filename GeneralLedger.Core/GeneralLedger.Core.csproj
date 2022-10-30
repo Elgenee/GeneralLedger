@@ -96,6 +96,7 @@
     <Compile Include="Domain\tblTBBatchDtl.cs" />
     <Compile Include="Domain\tblTBBatchHdr.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

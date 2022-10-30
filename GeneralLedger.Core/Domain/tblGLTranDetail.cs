@@ -23,5 +23,8 @@ namespace GeneralLedger.Core.Domain
         [Column(TypeName = "money")]
         public decimal? curCredit { get; set; }
         public virtual tblGLTranHeader tblGLTranHeader { get; set; }
+        public tblMasCOA tblMasCOA { get; set; }
+        public tblMasCOASub tblMasCOASub { get; set; }
+
     }
 }

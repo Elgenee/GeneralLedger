@@ -33,6 +33,9 @@ namespace GeneralLedger.Core.Domain
 
         public int? intIncomeStatementOrderby { get; set; }
 
+        public tblMasCOAGroup tblMasCOAGroup { get; set; }
+
+        public ICollection<tblGLTranDetail> tblGLTranDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblMasCOASub> tblMasCOASubs { get; set; }
     }

@@ -16,5 +16,7 @@ namespace GeneralLedger.Core.Domain
 
         [StringLength(200)]
         public string strName { get; set; }
+
+        public ICollection<tblMasCOA> tblMasCOAs { get; set; }
     }
 }

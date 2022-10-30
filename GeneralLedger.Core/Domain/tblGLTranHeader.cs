@@ -40,7 +40,6 @@ namespace GeneralLedger.Core.Domain
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranDetail> tblGLTranDetails { get; set; }
-
         public tblGLBookType tblGLBookType { get; set; }
     }
 }

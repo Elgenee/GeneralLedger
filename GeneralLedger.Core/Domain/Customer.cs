@@ -37,5 +37,6 @@ namespace GeneralLedger.Core.Domain
         public string strContact { get; set; }
 
         public virtual PriceType PriceType { get; set; }
+        public List<Sale> Sales { get; set; }
     }
 }

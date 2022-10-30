@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using GeneralLedger.Persistence.EntityConfigurations;
 
 namespace GeneralLedger.Core.Domain
 {
@@ -477,6 +478,23 @@ namespace GeneralLedger.Core.Domain
               .WithRequired(e => e.tblGLBookType)
               .HasForeignKey(e => e.intIDGLBookType)
               .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<tblGLTranDetail>()
+                .HasRequired(e => e.tblMasCOA)
+                .WithMany(e => e.tblGLTranDetails)
+                .HasForeignKey(e => e.intIDMasCoa);
+
+            modelBuilder.Entity<tblGLTranDetail>()
+                .HasRequired(e => e.tblMasCOASub)
+                .WithMany(e => e.tblGLTranDetails)
+                .HasForeignKey(e => e.intIDMasCoaSub);
+
+            modelBuilder.Entity<tblMasCOAGroup>()
+                .HasMany(e => e.tblMasCOAs)
+                .WithRequired(e => e.tblMasCOAGroup)
+                .HasForeignKey(e => e.intIDMasCOAGroup);
+
+            modelBuilder.Configurations.Add(new SaleConfiguration());
 
 
         }

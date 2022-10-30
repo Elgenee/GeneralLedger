@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityConfigurations\SaleConfiguration.cs" />
     <Compile Include="GeneralLedgerContext.cs" />
     <Compile Include="EntityConfigurations\Configuration.cs" />
     <Compile Include="Migrations\202210300709240_InitialMigration.cs" />
@@ -60,6 +61,22 @@
     <Compile Include="Migrations\202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.cs" />
     <Compile Include="Migrations\202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.designer.cs">
       <DependentUpon>202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210301456130_AddRelationshipTblGLTranDetail.cs" />
+    <Compile Include="Migrations\202210301456130_AddRelationshipTblGLTranDetail.designer.cs">
+      <DependentUpon>202210301456130_AddRelationshipTblGLTranDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210301524212_AddRelationshipTblMasCOAGroup.cs" />
+    <Compile Include="Migrations\202210301524212_AddRelationshipTblMasCOAGroup.designer.cs">
+      <DependentUpon>202210301524212_AddRelationshipTblMasCOAGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210301605553_AddSaleColumns.cs" />
+    <Compile Include="Migrations\202210301605553_AddSaleColumns.designer.cs">
+      <DependentUpon>202210301605553_AddSaleColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210301613355_AddRelationTblSalesUpdateTransactionDate.cs" />
+    <Compile Include="Migrations\202210301613355_AddRelationTblSalesUpdateTransactionDate.designer.cs">
+      <DependentUpon>202210301613355_AddRelationTblSalesUpdateTransactionDate.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +99,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.resx">
       <DependentUpon>202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210301456130_AddRelationshipTblGLTranDetail.resx">
+      <DependentUpon>202210301456130_AddRelationshipTblGLTranDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210301524212_AddRelationshipTblMasCOAGroup.resx">
+      <DependentUpon>202210301524212_AddRelationshipTblMasCOAGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210301605553_AddSaleColumns.resx">
+      <DependentUpon>202210301605553_AddSaleColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210301613355_AddRelationTblSalesUpdateTransactionDate.resx">
+      <DependentUpon>202210301613355_AddRelationTblSalesUpdateTransactionDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

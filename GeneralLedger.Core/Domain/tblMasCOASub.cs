@@ -20,5 +20,7 @@ namespace GeneralLedger.Core.Domain
         public string strName { get; set; }
 
         public virtual tblMasCOA tblMasCOA { get; set; }
+
+        public ICollection<tblGLTranDetail> tblGLTranDetails { get; set; }
     }
 }
