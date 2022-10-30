@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8324EAA5-4250-4F77-99A2-AAA17C50B896}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GeneralLedger.Tier</RootNamespace>
+    <AssemblyName>GeneralLedger.Tier</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.18, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BAL\BankBAL.cs" />
+    <Compile Include="BAL\COABAL.cs" />
+    <Compile Include="BAL\CustomerBAL.cs" />
+    <Compile Include="BAL\GLBAL.cs" />
+    <Compile Include="BAL\JournalEntryBAL.cs" />
+    <Compile Include="BAL\LocationBAL.cs" />
+    <Compile Include="BAL\PriceTypeBAL.cs" />
+    <Compile Include="BAL\ProductBAL.cs" />
+    <Compile Include="BAL\ProductBrandBAL.cs" />
+    <Compile Include="BAL\ProductCategoryBAL.cs" />
+    <Compile Include="BAL\ProductColorBAL.cs" />
+    <Compile Include="BAL\ProductSizeBAL.cs" />
+    <Compile Include="BAL\ProductTypeBAL.cs" />
+    <Compile Include="BAL\PurchaseOrderBAL.cs" />
+    <Compile Include="BAL\PurchaseOrderReceivingBAL.cs" />
+    <Compile Include="BAL\SupplierBAL.cs" />
+    <Compile Include="BAL\TrialBalanceBAL.cs" />
+    <Compile Include="BO\Bank.cs" />
+    <Compile Include="BO\COA.cs" />
+    <Compile Include="BO\COAGroup.cs" />
+    <Compile Include="BO\COASub.cs" />
+    <Compile Include="BO\Currency.cs" />
+    <Compile Include="BO\Customer.cs" />
+    <Compile Include="BO\GLBookType.cs" />
+    <Compile Include="BO\GLTBDtl.cs" />
+    <Compile Include="BO\GLTBHdr.cs" />
+    <Compile Include="BO\GLTranDetail.cs" />
+    <Compile Include="BO\GLTranHeader.cs" />
+    <Compile Include="BO\JournalEntry.cs" />
+    <Compile Include="BO\Location.cs" />
+    <Compile Include="BO\PriceType.cs" />
+    <Compile Include="BO\Product.cs" />
+    <Compile Include="BO\ProductBrand.cs" />
+    <Compile Include="BO\ProductCategory.cs" />
+    <Compile Include="BO\ProductCharacteristic.cs" />
+    <Compile Include="BO\ProductColor.cs" />
+    <Compile Include="BO\ProductSize.cs" />
+    <Compile Include="BO\ProductType.cs" />
+    <Compile Include="BO\PurchaseOrder.cs" />
+    <Compile Include="BO\PurchaseOrderReceiving.cs" />
+    <Compile Include="BO\PurchaseOrderReceivingStatusDetails.cs" />
+    <Compile Include="BO\ReceivingStatus.cs" />
+    <Compile Include="BO\rptBSCashBank.cs" />
+    <Compile Include="BO\rptFALessACCUMDEPN.cs" />
+    <Compile Include="BO\rptFATransportationEquipment.cs" />
+    <Compile Include="BO\rptISExpenses.cs" />
+    <Compile Include="BO\rptISIncome.cs" />
+    <Compile Include="BO\rptISLessCostOfGoodSold.cs" />
+    <Compile Include="BO\rptISLessSales.cs" />
+    <Compile Include="BO\rptISNetIncome.cs" />
+    <Compile Include="BO\rptISNetSalesTotal.cs" />
+    <Compile Include="BO\rptISProvisionIT.cs" />
+    <Compile Include="BO\rptISTotal.cs" />
+    <Compile Include="BO\rptJournalProoflist.cs" />
+    <Compile Include="BO\rptOtherAsset.cs" />
+    <Compile Include="BO\SearchProductAndColorAndSize.cs" />
+    <Compile Include="BO\Supplier.cs" />
+    <Compile Include="DAL\BankDAL.cs" />
+    <Compile Include="DAL\COADAL.cs" />
+    <Compile Include="DAL\CustomerDAL.cs" />
+    <Compile Include="DAL\GLDAL.cs" />
+    <Compile Include="DAL\JournalEntryDAL.cs" />
+    <Compile Include="DAL\LocationDAL.cs" />
+    <Compile Include="DAL\PriceTypeDAL.cs" />
+    <Compile Include="DAL\ProductBrandDAL.cs" />
+    <Compile Include="DAL\ProductCategoryDAL.cs" />
+    <Compile Include="DAL\ProductColorDAL.cs" />
+    <Compile Include="DAL\ProductDAL.cs" />
+    <Compile Include="DAL\ProductSizeDAL.cs" />
+    <Compile Include="DAL\ProductTypeDAL.cs" />
+    <Compile Include="DAL\PurchaseOrderDAL.cs" />
+    <Compile Include="DAL\PurchaseOrderReceivingDAL.cs" />
+    <Compile Include="DAL\SupplierDAL.cs" />
+    <Compile Include="DAL\TrialBalanceDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptFATransportationEquipment.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeneralLedger.Utility\GeneralLedger.Utility.csproj">
+      <Project>{7f60c4ed-c61d-4dbe-bff0-a278c8743830}</Project>
+      <Name>GeneralLedger.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71AA4182-CD33-49D9-A820-19246B933C94}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GeneralLedger</RootNamespace>
+    <AssemblyName>GeneralLedger</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>B54E76088AFED675E84FF0D1BD69BD2EDEC376CC</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GeneralLedger_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar.Layout, Version=14.1.0.18, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.DotNetBar.SuperGrid, Version=14.1.0.18, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.18, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.Instrumentation, Version=14.1.0.18, Culture=neutral, PublicKeyToken=f90dc37c26666a67" />
+    <Reference Include="JRINCCustomControls">
+      <HintPath>..\..\..\..\Downloads\JRINC_currencyTextBox\JRINC_currencyTextBox\bin\Debug\JRINCCustomControls.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GeneralLedgerDataSet.cs">
+      <DependentUpon>GeneralLedgerDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralLedgerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralLedgerDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralLedgerDataSet1.cs">
+      <DependentUpon>GeneralLedgerDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralLedgerDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralLedgerDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="LogInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogInForm.Designer.cs">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\frmReportBookProoflistSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportBookProoflistSummary.Designer.cs">
+      <DependentUpon>frmReportBookProoflistSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmReportGLBalanceSheet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportGLBalanceSheet.Designer.cs">
+      <DependentUpon>frmReportGLBalanceSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmReportGLIncomeStatement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportGLIncomeStatement.Designer.cs">
+      <DependentUpon>frmReportGLIncomeStatement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmReportJournalProoflist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportJournalProoflist.Designer.cs">
+      <DependentUpon>frmReportJournalProoflist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmReportProoflistDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportProoflistDetail.Designer.cs">
+      <DependentUpon>frmReportProoflistDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmRptGLTrialBalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmRptGLTrialBalance.Designer.cs">
+      <DependentUpon>frmRptGLTrialBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AccountRunningBalances.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AccountRunningBalances.Designer.cs">
+      <DependentUpon>AccountRunningBalances.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AddProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AddProduct.Designer.cs">
+      <DependentUpon>AddProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Bank.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Bank.Designer.cs">
+      <DependentUpon>Bank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\EditPurchaseOrderProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\EditPurchaseOrderProduct.Designer.cs">
+      <DependentUpon>EditPurchaseOrderProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\EditPurchaseOrderReceivingDetailsDG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\EditPurchaseOrderReceivingDetailsDG.Designer.cs">
+      <DependentUpon>EditPurchaseOrderReceivingDetailsDG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\formReceivePurchaseOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\formReceivePurchaseOrder.Designer.cs">
+      <DependentUpon>formReceivePurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmCustomer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmCustomer.Designer.cs">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmLocation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmLocation.Designer.cs">
+      <DependentUpon>frmLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseOrder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseOrder.Designer.cs">
+      <DependentUpon>frmPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseOrderIndex.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseOrderIndex.Designer.cs">
+      <DependentUpon>frmPurchaseOrderIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseOrderPayment2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseOrderPayment2.Designer.cs">
+      <DependentUpon>frmPurchaseOrderPayment2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseOrderPaymentLedger.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseOrderPaymentLedger.Designer.cs">
+      <DependentUpon>frmPurchaseOrderPaymentLedger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\JournalEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\JournalEntry.Designer.cs">
+      <DependentUpon>JournalEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MasterfileChartOfAccounts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MasterfileChartOfAccounts.Designer.cs">
+      <DependentUpon>MasterfileChartOfAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MasterfileChartOfAccountsManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\MasterfileChartOfAccountsManage.Designer.cs">
+      <DependentUpon>MasterfileChartOfAccountsManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PriceType.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PriceType.Designer.cs">
+      <DependentUpon>PriceType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProductBrand.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProductBrand.Designer.cs">
+      <DependentUpon>ProductBrand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProductCategory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProductCategory.Designer.cs">
+      <DependentUpon>ProductCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProductColor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProductColor.Designer.cs">
+      <DependentUpon>ProductColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProductIndex.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProductIndex.Designer.cs">
+      <DependentUpon>ProductIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProductSize.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProductSize.Designer.cs">
+      <DependentUpon>ProductSize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProductType.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProductType.Designer.cs">
+      <DependentUpon>ProductType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Reports.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Reports.Designer.cs">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SeachJournalEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SeachJournalEntry.Designer.cs">
+      <DependentUpon>SeachJournalEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchBank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchBank.Designer.cs">
+      <DependentUpon>SearchBank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchChartOfAccounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchChartOfAccounts.Designer.cs">
+      <DependentUpon>SearchChartOfAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchChartOfAccountsWithoutAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchChartOfAccountsWithoutAmount.Designer.cs">
+      <DependentUpon>SearchChartOfAccountsWithoutAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchChooseProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchChooseProduct.Designer.cs">
+      <DependentUpon>SearchChooseProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchCustomer.Designer.cs">
+      <DependentUpon>SearchCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchProduct.Designer.cs">
+      <DependentUpon>SearchProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchProductColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchProductColor.Designer.cs">
+      <DependentUpon>SearchProductColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmSupplier.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmSupplier.Designer.cs">
+      <DependentUpon>frmSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchSupplier.Designer.cs">
+      <DependentUpon>SearchSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TrialBalancePosting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\TrialBalancePosting.Designer.cs">
+      <DependentUpon>TrialBalancePosting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TrialBalancePostingManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\TrialBalancePostingManage.Designer.cs">
+      <DependentUpon>TrialBalancePostingManage.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="LogInForm.resx">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Report\frmReportBookProoflistSummary.resx">
+      <DependentUpon>frmReportBookProoflistSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportGLBalanceSheet.resx">
+      <DependentUpon>frmReportGLBalanceSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportGLIncomeStatement.resx">
+      <DependentUpon>frmReportGLIncomeStatement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportJournalProoflist.resx">
+      <DependentUpon>frmReportJournalProoflist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportProoflistDetail.resx">
+      <DependentUpon>frmReportProoflistDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmRptGLTrialBalance.resx">
+      <DependentUpon>frmRptGLTrialBalance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RDLC\GLIncomeStatement.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\JournalProoflist.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\ProoflistDetail.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\rptGLAccountRunningBalance.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\rptGLBalanceSheet.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\rptGLOverAllBoolProoflistSummary.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\rptGLTrialBalance.rdlc" />
+    <EmbeddedResource Include="UserControls\AccountRunningBalances.resx">
+      <DependentUpon>AccountRunningBalances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AddProduct.resx">
+      <DependentUpon>AddProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Bank.resx">
+      <DependentUpon>Bank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\EditPurchaseOrderProduct.resx">
+      <DependentUpon>EditPurchaseOrderProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\EditPurchaseOrderReceivingDetailsDG.resx">
+      <DependentUpon>EditPurchaseOrderReceivingDetailsDG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\formReceivePurchaseOrder.resx">
+      <DependentUpon>formReceivePurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmCustomer.resx">
+      <DependentUpon>frmCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmLocation.resx">
+      <DependentUpon>frmLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmPurchaseOrder.resx">
+      <DependentUpon>frmPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmPurchaseOrderIndex.resx">
+      <DependentUpon>frmPurchaseOrderIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmPurchaseOrderPayment2.resx">
+      <DependentUpon>frmPurchaseOrderPayment2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmPurchaseOrderPaymentLedger.resx">
+      <DependentUpon>frmPurchaseOrderPaymentLedger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\JournalEntry.resx">
+      <DependentUpon>JournalEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MasterfileChartOfAccounts.resx">
+      <DependentUpon>MasterfileChartOfAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MasterfileChartOfAccountsManage.resx">
+      <DependentUpon>MasterfileChartOfAccountsManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PriceType.resx">
+      <DependentUpon>PriceType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProductBrand.resx">
+      <DependentUpon>ProductBrand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProductCategory.resx">
+      <DependentUpon>ProductCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProductColor.resx">
+      <DependentUpon>ProductColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProductIndex.resx">
+      <DependentUpon>ProductIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProductSize.resx">
+      <DependentUpon>ProductSize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProductType.resx">
+      <DependentUpon>ProductType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Reports.resx">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SeachJournalEntry.resx">
+      <DependentUpon>SeachJournalEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchBank.resx">
+      <DependentUpon>SearchBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchChartOfAccounts.resx">
+      <DependentUpon>SearchChartOfAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchChartOfAccountsWithoutAmount.resx">
+      <DependentUpon>SearchChartOfAccountsWithoutAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchChooseProduct.resx">
+      <DependentUpon>SearchChooseProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchCustomer.resx">
+      <DependentUpon>SearchCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchProduct.resx">
+      <DependentUpon>SearchProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchProductColor.resx">
+      <DependentUpon>SearchProductColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmSupplier.resx">
+      <DependentUpon>frmSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchSupplier.resx">
+      <DependentUpon>SearchSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TrialBalancePosting.resx">
+      <DependentUpon>TrialBalancePosting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TrialBalancePostingManage.resx">
+      <DependentUpon>TrialBalancePostingManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="GeneralLedgerDataSet.xsc">
+      <DependentUpon>GeneralLedgerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GeneralLedgerDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GeneralLedgerDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GeneralLedgerDataSet.xss">
+      <DependentUpon>GeneralLedgerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GeneralLedgerDataSet1.xsc">
+      <DependentUpon>GeneralLedgerDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GeneralLedgerDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GeneralLedgerDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GeneralLedgerDataSet1.xss">
+      <DependentUpon>GeneralLedgerDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GeneralLedger_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\GeneralLedger.GeneralLedgerDataSet1TableAdapters.rptISExpenseTableAdapter.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.GeneralLedgerDataSet1TableAdapters.spRPTJournalProoflistTableAdapter.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.GeneralLedgerDataSet1TableAdapters.TableAdapterManager+UpdateOrderOption.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.GeneralLedgerDataSet1TableAdapters.TableAdapterManager.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.GeneralLedgerDataSetTableAdapters.spRPTJournalProoflistTableAdapter.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.GeneralLedgerDataSetTableAdapters.TableAdapterManager+UpdateOrderOption.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.GeneralLedgerDataSetTableAdapters.TableAdapterManager.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Report.frmReportGLBalanceSheet.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Report.frmReportGLIncomeStatement.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Report.frmReportJournalProoflist.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Report.frmRptGLTrialBalance.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BAL.COABAL.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BAL.GLBAL.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BAL.JournalEntryBAL.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BAL.TrialBalanceBAL.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.COA.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.COAGroup.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.COASub.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.GLTBDtl.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.GLTBHdr.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.GLTranDetail.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.GLTranHeader.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.JournalEntry.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptBSCashBank.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptFALessACCUMDEPN.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptFATransportationEquipment.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptISExpenses.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptISIncome.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptISNetIncome.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptISProvisionIT.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptISTotal.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptJournalProoflist.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.BO.rptOtherAsset.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.DAL.COADAL.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.DAL.GLDAL.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.DAL.JournalEntryDAL.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.Tier.DAL.TrialBalanceDAL.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.UserControls.JournalEntry.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.UserControls.MasterfileChartOfAccounts.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.UserControls.MasterfileChartOfAccountsManage.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.UserControls.Reports.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.UserControls.SeachJournalEntry.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.UserControls.SearchChartOfAccounts.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.UserControls.TrialBalancePosting.datasource" />
+    <None Include="Properties\DataSources\GeneralLedger.UserControls.TrialBalancePostingManage.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\interface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ui.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeneralLedger.Tier\GeneralLedger.Tier.csproj">
+      <Project>{8324eaa5-4250-4f77-99a2-aaa17c50b896}</Project>
+      <Name>GeneralLedger.Tier</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\profile.png" />
+    <None Include="Resources\cancel.png" />
+    <Content Include="Resources\iconfinder_close2.png" />
+    <None Include="Resources\Add.png" />
+    <None Include="Resources\Close1.png" />
+    <None Include="Resources\AddButton_Image.bmp" />
+    <Content Include="Resources\Close.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

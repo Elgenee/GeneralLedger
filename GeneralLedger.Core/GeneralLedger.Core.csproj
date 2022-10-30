@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{679D5B7D-3172-4FE3-9E2F-06637AC07830}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GeneralLedger.Core</RootNamespace>
+    <AssemblyName>GeneralLedger.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\Bank.cs" />
+    <Compile Include="Domain\Company.cs" />
+    <Compile Include="Domain\Currency.cs" />
+    <Compile Include="Domain\Customer.cs" />
+    <Compile Include="Domain\GeneralLedgerContext.cs" />
+    <Compile Include="Domain\InventoryLog.cs" />
+    <Compile Include="Domain\InventoryLogOperationType.cs" />
+    <Compile Include="Domain\InventoryQuantityTotal.cs" />
+    <Compile Include="Domain\InventoryStock.cs" />
+    <Compile Include="Domain\PaymentType.cs" />
+    <Compile Include="Domain\PriceType.cs" />
+    <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\ProductBrand.cs" />
+    <Compile Include="Domain\ProductCategory.cs" />
+    <Compile Include="Domain\ProductCharacteristic.cs" />
+    <Compile Include="Domain\ProductColor.cs" />
+    <Compile Include="Domain\ProductDetail.cs" />
+    <Compile Include="Domain\ProductSize.cs" />
+    <Compile Include="Domain\ProductType.cs" />
+    <Compile Include="Domain\ProductUnit.cs" />
+    <Compile Include="Domain\PuchaseOrderReceivingStatu.cs" />
+    <Compile Include="Domain\PurchaseOrder.cs" />
+    <Compile Include="Domain\PurchaseOrderCustomerLedger.cs" />
+    <Compile Include="Domain\PurchaseOrderCustomerLedgerDetail.cs" />
+    <Compile Include="Domain\PurchaseOrderDetail.cs" />
+    <Compile Include="Domain\PurchaseOrderDetailInventoryLedger.cs" />
+    <Compile Include="Domain\PurchaseOrderInventoryLedger.cs" />
+    <Compile Include="Domain\PurchaseOrderPayment.cs" />
+    <Compile Include="Domain\PurchaseOrderPaymentStatu.cs" />
+    <Compile Include="Domain\PurchaseOrderProductDetailHistory.cs" />
+    <Compile Include="Domain\PurchaseOrderProductTransactionType.cs" />
+    <Compile Include="Domain\PurchaseOrderReceiving.cs" />
+    <Compile Include="Domain\PurchaseOrderReceivingDetail.cs" />
+    <Compile Include="Domain\Sale.cs" />
+    <Compile Include="Domain\Supplier.cs" />
+    <Compile Include="Domain\tblGLBookType.cs" />
+    <Compile Include="Domain\tblGLTranDetail.cs" />
+    <Compile Include="Domain\tblGLTranHeader.cs" />
+    <Compile Include="Domain\tblJournalEntry.cs" />
+    <Compile Include="Domain\tblLocation.cs" />
+    <Compile Include="Domain\tblMasCOA.cs" />
+    <Compile Include="Domain\tblMasCOAGroup.cs" />
+    <Compile Include="Domain\tblMasCOASub.cs" />
+    <Compile Include="Domain\tblTBBatchDtl.cs" />
+    <Compile Include="Domain\tblTBBatchHdr.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
