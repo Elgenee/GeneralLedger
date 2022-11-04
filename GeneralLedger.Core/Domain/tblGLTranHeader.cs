@@ -17,7 +17,7 @@ namespace GeneralLedger.Core.Domain
 
         public int ID { get; set; }
 
-        public int? intIDGLBookType { get; set; }
+        public int intIDGLBookType { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? datBatchDate { get; set; }
@@ -38,8 +38,11 @@ namespace GeneralLedger.Core.Domain
         [StringLength(500)]
         public string strDescription { get; set; }
 
+        public virtual tblGLBookType tblGLBookType { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranDetail> tblGLTranDetails { get; set; }
-        public tblGLBookType tblGLBookType { get; set; }
+
+        public tblJournalEntry tblJournalEntry { get; set; }
     }
 }

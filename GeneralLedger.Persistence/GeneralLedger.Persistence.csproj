@@ -43,6 +43,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,37 +54,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityConfigurations\JournalConfiguration.cs" />
     <Compile Include="EntityConfigurations\SaleConfiguration.cs" />
     <Compile Include="GeneralLedgerContext.cs" />
-    <Compile Include="EntityConfigurations\Configuration.cs" />
-    <Compile Include="Migrations\202210300709240_InitialMigration.cs" />
-    <Compile Include="Migrations\202210300709240_InitialMigration.designer.cs">
-      <DependentUpon>202210300709240_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202210310330301_IntitalModel.cs" />
+    <Compile Include="Migrations\202210310330301_IntitalModel.designer.cs">
+      <DependentUpon>202210310330301_IntitalModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.cs" />
-    <Compile Include="Migrations\202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.designer.cs">
-      <DependentUpon>202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.cs</DependentUpon>
+    <Compile Include="Migrations\202210310334326_AddRelationTblGLTranHeaderTblJournalEntry.cs" />
+    <Compile Include="Migrations\202210310334326_AddRelationTblGLTranHeaderTblJournalEntry.designer.cs">
+      <DependentUpon>202210310334326_AddRelationTblGLTranHeaderTblJournalEntry.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202210301456130_AddRelationshipTblGLTranDetail.cs" />
-    <Compile Include="Migrations\202210301456130_AddRelationshipTblGLTranDetail.designer.cs">
-      <DependentUpon>202210301456130_AddRelationshipTblGLTranDetail.cs</DependentUpon>
+    <Compile Include="Migrations\202211010429155_AddAgentTable.cs" />
+    <Compile Include="Migrations\202211010429155_AddAgentTable.designer.cs">
+      <DependentUpon>202211010429155_AddAgentTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202210301524212_AddRelationshipTblMasCOAGroup.cs" />
-    <Compile Include="Migrations\202210301524212_AddRelationshipTblMasCOAGroup.designer.cs">
-      <DependentUpon>202210301524212_AddRelationshipTblMasCOAGroup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202210301605553_AddSaleColumns.cs" />
-    <Compile Include="Migrations\202210301605553_AddSaleColumns.designer.cs">
-      <DependentUpon>202210301605553_AddSaleColumns.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202210301613355_AddRelationTblSalesUpdateTransactionDate.cs" />
-    <Compile Include="Migrations\202210301613355_AddRelationTblSalesUpdateTransactionDate.designer.cs">
-      <DependentUpon>202210301613355_AddRelationTblSalesUpdateTransactionDate.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AgentRepository.cs" />
+    <Compile Include="Repositories\JournalEntryRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\SaleRepository.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <EmbeddedResource Include="Migrations\202210310330301_IntitalModel.resx">
+      <DependentUpon>202210310330301_IntitalModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210310334326_AddRelationTblGLTranHeaderTblJournalEntry.resx">
+      <DependentUpon>202210310334326_AddRelationTblGLTranHeaderTblJournalEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202211010429155_AddAgentTable.resx">
+      <DependentUpon>202211010429155_AddAgentTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GeneralLedger.Core\GeneralLedger.Core.csproj">
@@ -93,27 +98,14 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202210300709240_InitialMigration.resx">
-      <DependentUpon>202210300709240_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.resx">
-      <DependentUpon>202210300714021_tblGLBookTypeRemoveColumnsAddRelationshiptblGLTranHeaders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210301456130_AddRelationshipTblGLTranDetail.resx">
-      <DependentUpon>202210301456130_AddRelationshipTblGLTranDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210301524212_AddRelationshipTblMasCOAGroup.resx">
-      <DependentUpon>202210301524212_AddRelationshipTblMasCOAGroup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210301605553_AddSaleColumns.resx">
-      <DependentUpon>202210301605553_AddSaleColumns.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202210301613355_AddRelationTblSalesUpdateTransactionDate.resx">
-      <DependentUpon>202210301613355_AddRelationTblSalesUpdateTransactionDate.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
+    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+  </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>

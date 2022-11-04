@@ -2,9 +2,10 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using GeneralLedger.Core.Domain;
 using GeneralLedger.Persistence.EntityConfigurations;
 
-namespace GeneralLedger.Core.Domain
+namespace GeneralLedger.Persistence
 {
     public partial class GeneralLedgerContext : DbContext
     {
@@ -12,7 +13,7 @@ namespace GeneralLedger.Core.Domain
             : base("name=GeneralLedgerContext")
         {
         }
-
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
@@ -58,6 +59,7 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<tblTBBatchDtl> tblTBBatchDtls { get; set; }
         public virtual DbSet<tblTBBatchHdr> tblTBBatchHdrs { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Agent> Agent { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -102,6 +104,11 @@ namespace GeneralLedger.Core.Domain
             modelBuilder.Entity<Customer>()
                 .Property(e => e.curCreditLimit)
                 .HasPrecision(19, 4);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(e => e.Sales)
+                .WithRequired(e => e.Customer)
+                .HasForeignKey(e => e.intIdCustomer);
 
             modelBuilder.Entity<PriceType>()
                 .HasMany(e => e.Customers)
@@ -373,6 +380,10 @@ namespace GeneralLedger.Core.Domain
                 .WithOptional(e => e.PurchaseOrderReceiving)
                 .HasForeignKey(e => e.intIDPurchaseOrderReceiving);
 
+            modelBuilder.Entity<Sale>()
+                .Property(e => e.Total)
+                .HasPrecision(19, 4);
+
             modelBuilder.Entity<Supplier>()
                 .Property(e => e.curStartingDebit)
                 .HasPrecision(19, 4);
@@ -394,9 +405,11 @@ namespace GeneralLedger.Core.Domain
                 .WithOptional(e => e.Supplier)
                 .HasForeignKey(e => e.intIDSupplier);
 
-            //modelBuilder.Entity<tblGLBookType>()
-            //    .Property(e => e.sampleColumn)
-            //    .IsFixedLength();
+            modelBuilder.Entity<tblGLBookType>()
+                .HasMany(e => e.tblGLTranHeaders)
+                .WithRequired(e => e.tblGLBookType)
+                .HasForeignKey(e => e.intIDGLBookType)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<tblGLTranDetail>()
                 .Property(e => e.curDebit)
@@ -442,6 +455,11 @@ namespace GeneralLedger.Core.Domain
                 .IsFixedLength();
 
             modelBuilder.Entity<tblMasCOA>()
+                .HasMany(e => e.tblGLTranDetails)
+                .WithRequired(e => e.tblMasCOA)
+                .HasForeignKey(e => e.intIDMasCoa);
+
+            modelBuilder.Entity<tblMasCOA>()
                 .HasMany(e => e.tblMasCOASubs)
                 .WithOptional(e => e.tblMasCOA)
                 .HasForeignKey(e => e.intIDMasCOA);
@@ -454,6 +472,11 @@ namespace GeneralLedger.Core.Domain
                 .Property(e => e.strName)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<tblMasCOAGroup>()
+                .HasMany(e => e.tblMasCOAs)
+                .WithRequired(e => e.tblMasCOAGroup)
+                .HasForeignKey(e => e.intIDMasCOAGroup);
+
             modelBuilder.Entity<tblMasCOASub>()
                 .Property(e => e.strCode)
                 .IsUnicode(false);
@@ -461,6 +484,11 @@ namespace GeneralLedger.Core.Domain
             modelBuilder.Entity<tblMasCOASub>()
                 .Property(e => e.strName)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<tblMasCOASub>()
+                .HasMany(e => e.tblGLTranDetails)
+                .WithRequired(e => e.tblMasCOASub)
+                .HasForeignKey(e => e.intIDMasCoaSub);
 
             modelBuilder.Entity<tblTBBatchHdr>()
                 .HasMany(e => e.tblTBBatchDtls)
@@ -473,30 +501,8 @@ namespace GeneralLedger.Core.Domain
                 .WithOptional(e => e.User)
                 .HasForeignKey(e => e.intIDApprover);
 
-            modelBuilder.Entity<tblGLBookType>()
-              .HasMany(e => e.tblGLTranHeaders)
-              .WithRequired(e => e.tblGLBookType)
-              .HasForeignKey(e => e.intIDGLBookType)
-              .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<tblGLTranDetail>()
-                .HasRequired(e => e.tblMasCOA)
-                .WithMany(e => e.tblGLTranDetails)
-                .HasForeignKey(e => e.intIDMasCoa);
-
-            modelBuilder.Entity<tblGLTranDetail>()
-                .HasRequired(e => e.tblMasCOASub)
-                .WithMany(e => e.tblGLTranDetails)
-                .HasForeignKey(e => e.intIDMasCoaSub);
-
-            modelBuilder.Entity<tblMasCOAGroup>()
-                .HasMany(e => e.tblMasCOAs)
-                .WithRequired(e => e.tblMasCOAGroup)
-                .HasForeignKey(e => e.intIDMasCOAGroup);
-
-            modelBuilder.Configurations.Add(new SaleConfiguration());
-
-
+            modelBuilder.Configurations.Add(new JournalConfiguration());
         }
     }
 }
+

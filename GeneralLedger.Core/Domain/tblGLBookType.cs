@@ -9,19 +9,18 @@ namespace GeneralLedger.Core.Domain
     [Table("tblGLBookType")]
     public partial class tblGLBookType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblGLBookType()
+        {
+            tblGLTranHeaders = new HashSet<tblGLTranHeader>();
+        }
+
         public int ID { get; set; }
 
         [StringLength(500)]
         public string strName { get; set; }
 
-        //[StringLength(10)]
-        //public string sampleColumn { get; set; }
-
-        //public int? sampleCOlumn1 { get; set; }
-
-        //public int? sampleColumn2 { get; set; }
-
-        //public int? sampleColumn3 { get; set; }
-        public List<tblGLTranHeader> tblGLTranHeaders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
     }
 }

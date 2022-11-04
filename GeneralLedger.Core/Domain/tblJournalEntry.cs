@@ -21,5 +21,7 @@ namespace GeneralLedger.Core.Domain
 
         [StringLength(50)]
         public string strTransactionCode { get; set; }
+
+        public List<tblGLTranHeader> tblGLTranHeader { get; set; }
     }
 }

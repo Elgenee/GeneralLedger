@@ -9,6 +9,12 @@ namespace GeneralLedger.Core.Domain
     [Table("Customer")]
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            Sales = new HashSet<Sale>();
+        }
+
         public int Id { get; set; }
 
         [StringLength(500)]
@@ -36,7 +42,9 @@ namespace GeneralLedger.Core.Domain
         [StringLength(500)]
         public string strContact { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sale> Sales { get; set; }
+
         public virtual PriceType PriceType { get; set; }
-        public List<Sale> Sales { get; set; }
     }
 }

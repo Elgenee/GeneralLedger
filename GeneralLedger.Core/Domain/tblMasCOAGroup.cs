@@ -9,6 +9,12 @@ namespace GeneralLedger.Core.Domain
     [Table("tblMasCOAGroup")]
     public partial class tblMasCOAGroup
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblMasCOAGroup()
+        {
+            tblMasCOAs = new HashSet<tblMasCOA>();
+        }
+
         public int ID { get; set; }
 
         [StringLength(50)]
@@ -17,6 +23,7 @@ namespace GeneralLedger.Core.Domain
         [StringLength(200)]
         public string strName { get; set; }
 
-        public ICollection<tblMasCOA> tblMasCOAs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMasCOA> tblMasCOAs { get; set; }
     }
 }

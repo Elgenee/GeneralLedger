@@ -1,18 +1,18 @@
-﻿namespace GeneralLedger.Persistence.EntityConfigurations
+﻿namespace GeneralLedger.Persistence.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<GeneralLedger.Core.Domain.GeneralLedgerContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<GeneralLedger.Persistence.GeneralLedgerContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(GeneralLedger.Core.Domain.GeneralLedgerContext context)
+        protected override void Seed(GeneralLedger.Persistence.GeneralLedgerContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -15,16 +15,18 @@ namespace GeneralLedger.Core.Domain
 
         public int intIDMasCoa { get; set; }
 
-        public int? intIDMasCoaSub { get; set; }
+        public int intIDMasCoaSub { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? curDebit { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? curCredit { get; set; }
-        public virtual tblGLTranHeader tblGLTranHeader { get; set; }
-        public tblMasCOA tblMasCOA { get; set; }
-        public tblMasCOASub tblMasCOASub { get; set; }
 
+        public virtual tblMasCOA tblMasCOA { get; set; }
+
+        public virtual tblMasCOASub tblMasCOASub { get; set; }
+
+        public virtual tblGLTranHeader tblGLTranHeader { get; set; }
     }
 }
