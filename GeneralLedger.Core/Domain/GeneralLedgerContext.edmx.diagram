@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3fad5c0901894c42a26df00e09cb400a" Name="Diagram1">
+        <EntityTypeShape EntityType="GeneralLedgerModel.Bank" Width="1.5" PointX="1.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Company" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Currency" Width="1.5" PointX="1.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Customer" Width="1.5" PointX="3" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.InventoryLog" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.InventoryLogOperationType" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.InventoryQuantityTotal" Width="1.5" PointX="11.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.InventoryStock" Width="1.5" PointX="11.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.InventoryStockDetail" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PaymentType" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PriceType" Width="1.5" PointX="0.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Product" Width="1.5" PointX="3" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.ProductBrand" Width="1.5" PointX="0.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.ProductCategory" Width="1.5" PointX="0.75" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.ProductCharacteristic" Width="1.5" PointX="0.75" PointY="29.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.ProductColor" Width="1.5" PointX="0.75" PointY="34.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.ProductDetail" Width="1.5" PointX="3" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.ProductSize" Width="1.5" PointX="0.75" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.ProductType" Width="1.5" PointX="0.75" PointY="32.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.ProductUnit" Width="1.5" PointX="13.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PuchaseOrderReceivingStatu" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrder" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderCustomerLedger" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderCustomerLedgerDetail" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderDetail" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderDetailInventoryLedger" Width="1.5" PointX="10.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderInventoryLedger" Width="1.5" PointX="8.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderPayment" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderPaymentStatu" Width="1.5" PointX="13.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderProductDetailHistory" Width="1.5" PointX="7.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderProductTransactionType" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderReceiving" Width="1.5" PointX="8.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderReceivingDetail" Width="1.5" PointX="10.5" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Sale" Width="1.5" PointX="8.25" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Supplier" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.sysdiagram" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblGLTranDetail" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblGLTranHeader" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblLocation" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblMasCOA" Width="1.5" PointX="8.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblMasCOAGroup" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblMasCOASub" Width="1.5" PointX="11" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblTBBatchDtl" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblTBBatchHdr" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.User" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Bank_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Suppliers_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Sales_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblCustomer_tblPriceType" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblProduct_tblPriceType" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblProduct_tblProductBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblProduct_tblProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblProduct_tblProductCharacteristic" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblProduct_tblProductTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblProductDetail_tblProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblPurchaseOrderDetail_tblProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblProductDetail_tblProductColor" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblProductDetail_tblProductDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblProductDetail_tblProductSize" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblPurchaseOrderDetail_tblProductDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrder_PuchaseOrderReceivingStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_CustomerLedger_CustomerLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrder_User" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderLedger_PurchaseOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblPurchaseOrder_tblLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblPurchaseOrder_tblSuppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblPurchaseOrderDetail_tblPurchaseOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblPurchaseOrderPayment_tblPurchaseOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_CustomerLedgerDetail_CustomerLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderDetailLedger_PurchaseOrderDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblMasCOASub_TblMasCoa" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblTBBatchDtl_tblTBBatchHdr" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOA" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblJournalEntry" Width="1.5" PointX="13.5" PointY="18.25" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Agent" Width="1.5" PointX="16.375" PointY="4.875" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Sales_Agent" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblGLBookType" Width="1.5" PointX="13.5" PointY="21.625" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

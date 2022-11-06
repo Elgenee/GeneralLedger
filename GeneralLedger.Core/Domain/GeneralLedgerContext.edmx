@@ -1,0 +1,3187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GeneralLedgerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="500" />
+          <Property Name="StartingDebit" Type="money" />
+          <Property Name="Contact" Type="varchar" MaxLength="500" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+          <Property Name="strAccountNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="strAccountName" Type="nvarchar" MaxLength="500" />
+          <Property Name="strBranch" Type="nvarchar" MaxLength="500" />
+          <Property Name="curStartingDebit" Type="money" />
+          <Property Name="curDebit" Type="money" />
+          <Property Name="curCredit" Type="money" />
+          <Property Name="curBalance" Type="money" />
+          <Property Name="intIDCurrency" Type="int" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+          <Property Name="curStartingDebit" Type="money" />
+          <Property Name="curDebit" Type="money" />
+          <Property Name="curCredit" Type="money" />
+          <Property Name="curCreditLimit" Type="money" />
+          <Property Name="intTerms" Type="int" />
+          <Property Name="intIDPriceType" Type="int" />
+          <Property Name="strAddress" Type="nvarchar" MaxLength="500" />
+          <Property Name="strContact" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="InventoryLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intProductDetailId" Type="int" />
+          <Property Name="intQuantity" Type="int" />
+          <Property Name="intInventoryLogOperationType" Type="int" />
+          <Property Name="datDateInserted" Type="datetime" />
+          <Property Name="intQuantityBefore" Type="int" />
+          <Property Name="intQuantityAfter" Type="int" />
+          <Property Name="intIDReference" Type="int" />
+        </EntityType>
+        <EntityType Name="InventoryLogOperationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="InventoryQuantityTotal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intProductId" Type="int" />
+          <Property Name="intProductDetailId" Type="int" />
+          <Property Name="intQuantityOnHand" Type="int" />
+          <Property Name="intQuantityOnSold" Type="int" />
+          <Property Name="intQuantityOnOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="InventoryStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDProduct" Type="int" />
+          <Property Name="intIDProductDetail" Type="int" />
+          <Property Name="intStockCount" Type="int" />
+          <Property Name="blnIsActive" Type="int" />
+          <Property Name="datLastModified" Type="date" />
+        </EntityType>
+        <EntityType Name="InventoryStockDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDInventoryStock" Type="int" />
+          <Property Name="intIDReference" Type="int" />
+          <Property Name="intQuantity" Type="int" />
+          <Property Name="datTransactionDate" Type="int" />
+          <Property Name="intIDInventoryStockOperationType" Type="int" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PriceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strProductName" Type="nvarchar" MaxLength="500" />
+          <Property Name="strDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="intIDProductCategory" Type="int" />
+          <Property Name="intIDProductType" Type="int" />
+          <Property Name="intIDProductBrands" Type="int" />
+          <Property Name="intDefaultMinimum" Type="int" />
+          <Property Name="intPerPiecePerBox" Type="int" />
+          <Property Name="intIDLocation" Type="int" />
+          <Property Name="intDefaultLength" Type="int" />
+          <Property Name="intDefaultWidth" Type="int" />
+          <Property Name="intDefaultHeight" Type="int" />
+          <Property Name="intDefaultCargoCost" Type="int" />
+          <Property Name="intTotal" Type="int" />
+          <Property Name="curDefaultCost" Type="money" />
+          <Property Name="intIDPriceType" Type="int" />
+          <Property Name="curDefaultRetail" Type="money" />
+          <Property Name="curDefaultWholesale" Type="money" />
+          <Property Name="curDefaultMarkup" Type="money" />
+          <Property Name="intIDProductCharacteristic" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductBrand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ProductCharacteristic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductColor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDProduct" Type="int" />
+          <Property Name="intIDProductColor" Type="int" />
+          <Property Name="intIDProductSize" Type="int" />
+          <Property Name="intMininum" Type="int" />
+          <Property Name="intLength" Type="int" />
+          <Property Name="intWidth" Type="int" />
+          <Property Name="intHeight" Type="int" />
+          <Property Name="curCargoCost" Type="money" />
+          <Property Name="curCost" Type="money" />
+          <Property Name="curRetail" Type="money" />
+          <Property Name="curWholesale" Type="money" />
+          <Property Name="curMarkUp" Type="money" />
+        </EntityType>
+        <EntityType Name="ProductSize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PuchaseOrderReceivingStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strPONumber" Type="nvarchar" MaxLength="500" />
+          <Property Name="intIDSupplier" Type="int" />
+          <Property Name="intIDLocation" Type="int" />
+          <Property Name="datDatePurchased" Type="date" />
+          <Property Name="curTotalQty" Type="money" />
+          <Property Name="curSubTotal" Type="money" />
+          <Property Name="curDiscount" Type="money" />
+          <Property Name="curDiscountPercentage" Type="money" />
+          <Property Name="curGrandTotal" Type="money" />
+          <Property Name="curTotalPaid" Type="money" />
+          <Property Name="curTotalReceived" Type="money" />
+          <Property Name="curTotalRemaining" Type="money" />
+          <Property Name="blnHasPayment" Type="bit" />
+          <Property Name="curAmountPaid" Type="money" />
+          <Property Name="curChange" Type="money" />
+          <Property Name="blnApproved" Type="bit" />
+          <Property Name="intIDApprover" Type="int" />
+          <Property Name="datDateApproved" Type="datetime" />
+          <Property Name="blnAddBalanceToSupplier" Type="bit" />
+          <Property Name="datDateInserted" Type="datetime" />
+          <Property Name="intIDCreatedBy" Type="int" />
+          <Property Name="intIDReceivingStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderCustomerLedger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDPurchaseOrder" Type="int" />
+          <Property Name="curSubTotal" Type="money" />
+          <Property Name="curDiscount" Type="money" />
+          <Property Name="curGrandTotal" Type="money" />
+          <Property Name="curTotalPaidPendingPayments" Type="money" />
+          <Property Name="curTotalDiscountsPendingDiscounts" Type="money" />
+          <Property Name="curTotalChangePendingChange" Type="money" />
+          <Property Name="curTotalBalance" Type="money" />
+          <Property Name="datDateInserted" Type="datetime" />
+          <Property Name="bitIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderCustomerLedgerDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDPurchaseOrderCustomerLedger" Type="int" />
+          <Property Name="intIDPaymentType" Type="int" />
+          <Property Name="strReference" Type="nvarchar" MaxLength="50" />
+          <Property Name="datDate" Type="date" />
+          <Property Name="curAmountPaid" Type="money" />
+          <Property Name="curChange" Type="money" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDPurchaseOrder" Type="int" />
+          <Property Name="intIDProduct" Type="int" />
+          <Property Name="intIDProductDetail" Type="int" />
+          <Property Name="curStock" Type="int" />
+          <Property Name="curActStock" Type="int" />
+          <Property Name="intQuantity" Type="int" />
+          <Property Name="intQuantityReceived" Type="int" />
+          <Property Name="intQuantityRemaining" Type="int" />
+          <Property Name="curCost" Type="money" />
+          <Property Name="curSubTotal" Type="money" />
+          <Property Name="intIDReceivingStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetailInventoryLedger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDPurchaseOrderInventoryLedger" Type="int" />
+          <Property Name="intIDPurchaseOrder" Type="int" />
+          <Property Name="intIDPurchaseOrderDetail" Type="int" />
+          <Property Name="curStock" Type="int" />
+          <Property Name="curActStock" Type="int" />
+          <Property Name="intQuantity" Type="int" />
+          <Property Name="intQuantityReceived" Type="int" />
+          <Property Name="intQuantityRemaining" Type="int" />
+          <Property Name="intIDReceivingStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderInventoryLedger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDPurchaseOrder" Type="int" />
+          <Property Name="datDateInserted" Type="date" />
+          <Property Name="curTotalQty" Type="int" />
+          <Property Name="curTotalReceived" Type="int" />
+          <Property Name="curTotalRemaining" Type="int" />
+          <Property Name="intIDReceivingStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDPurchaseOrder" Type="int" />
+          <Property Name="datPaidOn" Type="date" />
+          <Property Name="datPaidBy" Type="nvarchar" MaxLength="500" />
+          <Property Name="curTotalAmount" Type="money" />
+          <Property Name="curDiscount" Type="money" />
+          <Property Name="curGrandTotal" Type="money" />
+          <Property Name="curAmountPaid" Type="money" />
+          <Property Name="intIDPurchaseOrderPaymentStatus" Type="int" />
+          <Property Name="strBankAccounts" Type="nvarchar" MaxLength="50" />
+          <Property Name="curDatCheckDate" Type="date" />
+          <Property Name="strCheckNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="datApprovedOn" Type="date" />
+          <Property Name="datApprovedBy" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderPaymentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderProductDetailHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDPurchaseOrderDetail" Type="int" />
+          <Property Name="intIDPurchaseOrderProductTransactionType" Type="int" />
+          <Property Name="strTransactionType" Type="nvarchar" MaxLength="500" />
+          <Property Name="intQuantity" Type="int" />
+          <Property Name="intTotalReceived" Type="int" />
+          <Property Name="intTotalReturn" Type="int" />
+          <Property Name="intTotalRemaining" Type="int" />
+          <Property Name="datDateInserted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderProductTransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderReceiving">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDPurchaseOrder" Type="int" />
+          <Property Name="datDateReceived" Type="date" />
+          <Property Name="intIDLocation" Type="int" />
+          <Property Name="strAddress" Type="nvarchar" MaxLength="500" />
+          <Property Name="strMemo" Type="nvarchar" MaxLength="500" />
+          <Property Name="datDateInserted" Type="datetime" />
+          <Property Name="blnReceivedOnPO" Type="bit" />
+          <Property Name="curTotalQty" Type="int" />
+          <Property Name="curTotalReceived" Type="int" />
+          <Property Name="curTotalRemaining" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderReceivingDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDPurchaseOrderReceiving" Type="int" />
+          <Property Name="intIDPurchaseOrderDetail" Type="int" />
+          <Property Name="intQuantity" Type="int" />
+          <Property Name="intQuantityReceived" Type="int" />
+          <Property Name="intQuantityRemaining" Type="int" />
+          <Property Name="intAddedQuantityReceived" Type="int" />
+          <Property Name="blnIsReceived" Type="bit" />
+          <Property Name="datDateInserted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TRANo" Type="nvarchar" MaxLength="500" />
+          <Property Name="PONo" Type="nvarchar" MaxLength="500" />
+          <Property Name="Total" Type="money" />
+          <Property Name="intIdCustomer" Type="int" />
+          <Property Name="intIdAgent" Type="int" />
+          <Property Name="TransactionDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+          <Property Name="intIDCurrency" Type="int" />
+          <Property Name="curStartingDebit" Type="money" />
+          <Property Name="curDebit" Type="money" />
+          <Property Name="curCredit" Type="money" />
+          <Property Name="curBalance" Type="money" />
+          <Property Name="strAddress" Type="nvarchar" MaxLength="500" />
+          <Property Name="strContacts" Type="nvarchar" MaxLength="500" />
+          <Property Name="intIDBank" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblGLBookType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblGLTranDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDGLTranHeader" Type="int" Nullable="false" />
+          <Property Name="intIDMasCoa" Type="int" Nullable="false" />
+          <Property Name="intIDMasCoaSub" Type="int" Nullable="false" />
+          <Property Name="curDebit" Type="money" />
+          <Property Name="curCredit" Type="money" />
+        </EntityType>
+        <EntityType Name="tblGLTranHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDGLBookType" Type="int" />
+          <Property Name="datBatchDate" Type="date" />
+          <Property Name="intIDReference" Type="int" Nullable="false" />
+          <Property Name="strTransactionCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="curCreditAmount" Type="money" />
+          <Property Name="curDebitAmount" Type="money" />
+          <Property Name="datInsertedDate" Type="datetime" />
+          <Property Name="strDescription" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tblJournalEntry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strTransactionNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="datBatchDate" Type="datetime" />
+          <Property Name="strDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="strTransactionCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblMasCOA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDMasCOAGroup" Type="int" />
+          <Property Name="strCode" Type="varchar" MaxLength="50" />
+          <Property Name="strName" Type="varchar" MaxLength="200" />
+          <Property Name="strAcctSide" Type="nchar" MaxLength="10" />
+          <Property Name="strAcctType" Type="nchar" MaxLength="10" />
+          <Property Name="intIncomeStatementOrderby" Type="int" />
+        </EntityType>
+        <EntityType Name="tblMasCOAGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strCode" Type="varchar" MaxLength="50" />
+          <Property Name="strName" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="tblMasCOASub">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDMasCOA" Type="int" />
+          <Property Name="strCode" Type="varchar" MaxLength="50" />
+          <Property Name="strName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblTBBatchDtl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="intIDTBBatchHdr" Type="int" Nullable="false" />
+          <Property Name="COA" Type="int" />
+          <Property Name="COADesc" Type="nvarchar" MaxLength="50" />
+          <Property Name="COASub" Type="int" />
+          <Property Name="COASubDesc" Type="nvarchar" MaxLength="50" />
+          <Property Name="curBegBal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="curDebit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="curCredit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="curEndBal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="curAdjustedDebit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="curAdjustedCredit" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="curEndBalAdjusted" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblTBBatchHdr">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="datBatchDate" Type="datetime" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="50" />
+          <Property Name="bitIsLock" Type="bit" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_Bank_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bank">
+              <PropertyRef Name="intIDCurrency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerLedger_CustomerLedger">
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="PurchaseOrderCustomerLedger" Type="Self.PurchaseOrderCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderCustomerLedger">
+              <PropertyRef Name="intIDPurchaseOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerLedgerDetail_CustomerLedger">
+          <End Role="PurchaseOrderCustomerLedger" Type="Self.PurchaseOrderCustomerLedger" Multiplicity="0..1" />
+          <End Role="PurchaseOrderCustomerLedgerDetail" Type="Self.PurchaseOrderCustomerLedgerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderCustomerLedger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PurchaseOrderCustomerLedgerDetail">
+              <PropertyRef Name="intIDPurchaseOrderCustomerLedger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_PuchaseOrderReceivingStatus">
+          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatus" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PuchaseOrderReceivingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="intIDReceivingStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="intIDApprover" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus">
+          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatus" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PuchaseOrderReceivingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="intIDReceivingStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus">
+          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatus" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PuchaseOrderReceivingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetailInventoryLedger">
+              <PropertyRef Name="intIDReceivingStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetail">
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetailInventoryLedger">
+              <PropertyRef Name="intIDPurchaseOrderDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger">
+          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderInventoryLedger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetailInventoryLedger">
+              <PropertyRef Name="intIDPurchaseOrderInventoryLedger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus">
+          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatus" Multiplicity="0..1" />
+          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PuchaseOrderReceivingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderInventoryLedger">
+              <PropertyRef Name="intIDReceivingStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderLedger_PurchaseOrder">
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderInventoryLedger">
+              <PropertyRef Name="intIDPurchaseOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger">
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
+          <End Role="PurchaseOrderProductDetailHistory" Type="Self.PurchaseOrderProductDetailHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderProductDetailHistory">
+              <PropertyRef Name="intIDPurchaseOrderDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType">
+          <End Role="PurchaseOrderProductTransactionType" Type="Self.PurchaseOrderProductTransactionType" Multiplicity="0..1" />
+          <End Role="PurchaseOrderProductDetailHistory" Type="Self.PurchaseOrderProductDetailHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderProductTransactionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderProductDetailHistory">
+              <PropertyRef Name="intIDPurchaseOrderProductTransactionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving">
+          <End Role="PurchaseOrderReceiving" Type="Self.PurchaseOrderReceiving" Multiplicity="0..1" />
+          <End Role="PurchaseOrderReceivingDetails" Type="Self.PurchaseOrderReceivingDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderReceiving">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderReceivingDetails">
+              <PropertyRef Name="intIDPurchaseOrderReceiving" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails">
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
+          <End Role="PurchaseOrderReceivingDetails" Type="Self.PurchaseOrderReceivingDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderReceivingDetails">
+              <PropertyRef Name="intIDPurchaseOrderDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="intIdAgent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="intIdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suppliers_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Suppliers">
+              <PropertyRef Name="intIDBank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomer_tblPriceType">
+          <End Role="PriceType" Type="Self.PriceType" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="intIDPriceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranDetail_tblGLTranHeader">
+          <End Role="tblGLTranHeader" Type="Self.tblGLTranHeader" Multiplicity="1" />
+          <End Role="tblGLTranDetail" Type="Self.tblGLTranDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGLTranHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranDetail">
+              <PropertyRef Name="intIDGLTranHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranDetail_tblMasCOA">
+          <End Role="tblMasCOA" Type="Self.tblMasCOA" Multiplicity="1" />
+          <End Role="tblGLTranDetail" Type="Self.tblGLTranDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasCOA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranDetail">
+              <PropertyRef Name="intIDMasCoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_tblGLBookType">
+          <End Role="tblGLBookType" Type="Self.tblGLBookType" Multiplicity="0..1" />
+          <End Role="tblGLTranHeader" Type="Self.tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGLBookType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIDGLBookType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_tblJournalEntry">
+          <End Role="tblJournalEntry" Type="Self.tblJournalEntry" Multiplicity="1" />
+          <End Role="tblGLTranHeader" Type="Self.tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJournalEntry">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIDReference" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMasCOASub_TblMasCoa">
+          <End Role="tblMasCOA" Type="Self.tblMasCOA" Multiplicity="0..1" />
+          <End Role="tblMasCOASub" Type="Self.tblMasCOASub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasCOA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMasCOASub">
+              <PropertyRef Name="intIDMasCOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblPriceType">
+          <End Role="PriceType" Type="Self.PriceType" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDPriceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProductBrand">
+          <End Role="ProductBrand" Type="Self.ProductBrand" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBrand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductBrands" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProductCharacteristic">
+          <End Role="ProductCharacteristic" Type="Self.ProductCharacteristic" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCharacteristic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductCharacteristic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProductTypes">
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProduct">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="intIDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProductColor">
+          <End Role="ProductColor" Type="Self.ProductColor" Multiplicity="0..1" />
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductColor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="intIDProductColor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProductDetail">
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="1" />
+          <End Role="ProductDetail1" Type="Self.ProductDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProductSize">
+          <End Role="ProductSize" Type="Self.ProductSize" Multiplicity="0..1" />
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="intIDProductSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrder_tblLocation">
+          <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLocation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="intIDLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrder_tblSuppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="intIDSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrderDetail_tblProduct">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="intIDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrderDetail_tblProductDetail">
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="intIDProductDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrderDetail_tblPurchaseOrder">
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="intIDPurchaseOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrderPayment_tblPurchaseOrder">
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="PurchaseOrderPayment" Type="Self.PurchaseOrderPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderPayment">
+              <PropertyRef Name="intIDPurchaseOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTBBatchDtl_tblTBBatchHdr">
+          <End Role="tblTBBatchHdr" Type="Self.tblTBBatchHdr" Multiplicity="1" />
+          <End Role="tblTBBatchDtl" Type="Self.tblTBBatchDtl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTBBatchHdr">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTBBatchDtl">
+              <PropertyRef Name="intIDTBBatchHdr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GeneralLedgerModelStoreContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryLog" EntityType="Self.InventoryLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryLogOperationType" EntityType="Self.InventoryLogOperationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryQuantityTotal" EntityType="Self.InventoryQuantityTotal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryStock" EntityType="Self.InventoryStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryStockDetail" EntityType="Self.InventoryStockDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PriceType" EntityType="Self.PriceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductBrand" EntityType="Self.ProductBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCharacteristic" EntityType="Self.ProductCharacteristic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductColor" EntityType="Self.ProductColor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductSize" EntityType="Self.ProductSize" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductUnit" EntityType="Self.ProductUnit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PuchaseOrderReceivingStatus" EntityType="Self.PuchaseOrderReceivingStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrder" EntityType="Self.PurchaseOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderCustomerLedger" EntityType="Self.PurchaseOrderCustomerLedger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderCustomerLedgerDetail" EntityType="Self.PurchaseOrderCustomerLedgerDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderDetail" EntityType="Self.PurchaseOrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderDetailInventoryLedger" EntityType="Self.PurchaseOrderDetailInventoryLedger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderInventoryLedger" EntityType="Self.PurchaseOrderInventoryLedger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderPayment" EntityType="Self.PurchaseOrderPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderPaymentStatus" EntityType="Self.PurchaseOrderPaymentStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderProductDetailHistory" EntityType="Self.PurchaseOrderProductDetailHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderProductTransactionType" EntityType="Self.PurchaseOrderProductTransactionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderReceiving" EntityType="Self.PurchaseOrderReceiving" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderReceivingDetails" EntityType="Self.PurchaseOrderReceivingDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGLBookType" EntityType="Self.tblGLBookType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGLTranDetail" EntityType="Self.tblGLTranDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGLTranHeader" EntityType="Self.tblGLTranHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblJournalEntry" EntityType="Self.tblJournalEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLocation" EntityType="Self.tblLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMasCOA" EntityType="Self.tblMasCOA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMasCOAGroup" EntityType="Self.tblMasCOAGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMasCOASub" EntityType="Self.tblMasCOASub" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTBBatchDtl" EntityType="Self.tblTBBatchDtl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTBBatchHdr" EntityType="Self.tblTBBatchHdr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bank_Currency" Association="Self.FK_Bank_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Bank" EntitySet="Bank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+            <End Role="PurchaseOrderCustomerLedger" EntitySet="PurchaseOrderCustomerLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerLedgerDetail_CustomerLedger" Association="Self.FK_CustomerLedgerDetail_CustomerLedger">
+            <End Role="PurchaseOrderCustomerLedger" EntitySet="PurchaseOrderCustomerLedger" />
+            <End Role="PurchaseOrderCustomerLedgerDetail" EntitySet="PurchaseOrderCustomerLedgerDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrder_PuchaseOrderReceivingStatus">
+            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_User" Association="Self.FK_PurchaseOrder_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus">
+            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus">
+            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
+            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetail" Association="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetail">
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger" Association="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger">
+            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedger" />
+            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus">
+            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
+            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderLedger_PurchaseOrder" Association="Self.FK_PurchaseOrderLedger_PurchaseOrder">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger" Association="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger">
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+            <End Role="PurchaseOrderProductDetailHistory" EntitySet="PurchaseOrderProductDetailHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType" Association="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType">
+            <End Role="PurchaseOrderProductTransactionType" EntitySet="PurchaseOrderProductTransactionType" />
+            <End Role="PurchaseOrderProductDetailHistory" EntitySet="PurchaseOrderProductDetailHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" Association="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving">
+            <End Role="PurchaseOrderReceiving" EntitySet="PurchaseOrderReceiving" />
+            <End Role="PurchaseOrderReceivingDetails" EntitySet="PurchaseOrderReceivingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" Association="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails">
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+            <End Role="PurchaseOrderReceivingDetails" EntitySet="PurchaseOrderReceivingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Agent" Association="Self.FK_Sales_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Customer" Association="Self.FK_Sales_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suppliers_Bank" Association="Self.FK_Suppliers_Bank">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="Suppliers" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomer_tblPriceType" Association="Self.FK_tblCustomer_tblPriceType">
+            <End Role="PriceType" EntitySet="PriceType" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranDetail_tblGLTranHeader" Association="Self.FK_tblGLTranDetail_tblGLTranHeader">
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeader" />
+            <End Role="tblGLTranDetail" EntitySet="tblGLTranDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranDetail_tblMasCOA" Association="Self.FK_tblGLTranDetail_tblMasCOA">
+            <End Role="tblMasCOA" EntitySet="tblMasCOA" />
+            <End Role="tblGLTranDetail" EntitySet="tblGLTranDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_tblGLBookType" Association="Self.FK_tblGLTranHeader_tblGLBookType">
+            <End Role="tblGLBookType" EntitySet="tblGLBookType" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_tblJournalEntry" Association="Self.FK_tblGLTranHeader_tblJournalEntry">
+            <End Role="tblJournalEntry" EntitySet="tblJournalEntry" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMasCOASub_TblMasCoa" Association="Self.FK_tblMasCOASub_TblMasCoa">
+            <End Role="tblMasCOA" EntitySet="tblMasCOA" />
+            <End Role="tblMasCOASub" EntitySet="tblMasCOASub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblPriceType" Association="Self.FK_tblProduct_tblPriceType">
+            <End Role="PriceType" EntitySet="PriceType" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProductBrand" Association="Self.FK_tblProduct_tblProductBrand">
+            <End Role="ProductBrand" EntitySet="ProductBrand" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProductCategory" Association="Self.FK_tblProduct_tblProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProductCharacteristic" Association="Self.FK_tblProduct_tblProductCharacteristic">
+            <End Role="ProductCharacteristic" EntitySet="ProductCharacteristic" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProductTypes" Association="Self.FK_tblProduct_tblProductTypes">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProduct" Association="Self.FK_tblProductDetail_tblProduct">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProductColor" Association="Self.FK_tblProductDetail_tblProductColor">
+            <End Role="ProductColor" EntitySet="ProductColor" />
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProductDetail" Association="Self.FK_tblProductDetail_tblProductDetail">
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+            <End Role="ProductDetail1" EntitySet="ProductDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProductSize" Association="Self.FK_tblProductDetail_tblProductSize">
+            <End Role="ProductSize" EntitySet="ProductSize" />
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrder_tblLocation" Association="Self.FK_tblPurchaseOrder_tblLocation">
+            <End Role="tblLocation" EntitySet="tblLocation" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrder_tblSuppliers" Association="Self.FK_tblPurchaseOrder_tblSuppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblProduct" Association="Self.FK_tblPurchaseOrderDetail_tblProduct">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblProductDetail" Association="Self.FK_tblPurchaseOrderDetail_tblProductDetail">
+            <End Role="ProductDetail" EntitySet="ProductDetail" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblPurchaseOrder" Association="Self.FK_tblPurchaseOrderDetail_tblPurchaseOrder">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrderPayment_tblPurchaseOrder" Association="Self.FK_tblPurchaseOrderPayment_tblPurchaseOrder">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+            <End Role="PurchaseOrderPayment" EntitySet="PurchaseOrderPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTBBatchDtl_tblTBBatchHdr" Association="Self.FK_tblTBBatchDtl_tblTBBatchHdr">
+            <End Role="tblTBBatchHdr" EntitySet="tblTBBatchHdr" />
+            <End Role="tblTBBatchDtl" EntitySet="tblTBBatchDtl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GeneralLedgerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strAccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="strAccountName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strBranch" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="curStartingDebit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDebit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curCredit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curBalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="intIDCurrency" Type="Int32" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_Bank_Currency" FromRole="Bank" ToRole="Currency" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK_Suppliers_Bank" FromRole="Bank" ToRole="Suppliers" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Banks" Relationship="Self.FK_Bank_Currency" FromRole="Currency" ToRole="Bank" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="curStartingDebit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDebit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curCredit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curCreditLimit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="intTerms" Type="Int32" />
+          <Property Name="intIDPriceType" Type="Int32" />
+          <Property Name="strAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strContact" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Customer" FromRole="Customer" ToRole="Sales" />
+          <NavigationProperty Name="PriceType" Relationship="Self.FK_tblCustomer_tblPriceType" FromRole="Customer" ToRole="PriceType" />
+        </EntityType>
+        <EntityType Name="InventoryLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intProductDetailId" Type="Int32" />
+          <Property Name="intQuantity" Type="Int32" />
+          <Property Name="intInventoryLogOperationType" Type="Int32" />
+          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
+          <Property Name="intQuantityBefore" Type="Int32" />
+          <Property Name="intQuantityAfter" Type="Int32" />
+          <Property Name="intIDReference" Type="Int32" />
+        </EntityType>
+        <EntityType Name="InventoryLogOperationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InventoryQuantityTotal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intProductId" Type="Int32" />
+          <Property Name="intProductDetailId" Type="Int32" />
+          <Property Name="intQuantityOnHand" Type="Int32" />
+          <Property Name="intQuantityOnSold" Type="Int32" />
+          <Property Name="intQuantityOnOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="InventoryStock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDProduct" Type="Int32" />
+          <Property Name="intIDProductDetail" Type="Int32" />
+          <Property Name="intStockCount" Type="Int32" />
+          <Property Name="blnIsActive" Type="Int32" />
+          <Property Name="datLastModified" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="InventoryStockDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDInventoryStock" Type="Int32" />
+          <Property Name="intIDReference" Type="Int32" />
+          <Property Name="intQuantity" Type="Int32" />
+          <Property Name="datTransactionDate" Type="Int32" />
+          <Property Name="intIDInventoryStockOperationType" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PriceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_tblCustomer_tblPriceType" FromRole="PriceType" ToRole="Customer" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_tblProduct_tblPriceType" FromRole="PriceType" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="intIDProductCategory" Type="Int32" />
+          <Property Name="intIDProductType" Type="Int32" />
+          <Property Name="intIDProductBrands" Type="Int32" />
+          <Property Name="intDefaultMinimum" Type="Int32" />
+          <Property Name="intPerPiecePerBox" Type="Int32" />
+          <Property Name="intIDLocation" Type="Int32" />
+          <Property Name="intDefaultLength" Type="Int32" />
+          <Property Name="intDefaultWidth" Type="Int32" />
+          <Property Name="intDefaultHeight" Type="Int32" />
+          <Property Name="intDefaultCargoCost" Type="Int32" />
+          <Property Name="intTotal" Type="Int32" />
+          <Property Name="curDefaultCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="intIDPriceType" Type="Int32" />
+          <Property Name="curDefaultRetail" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDefaultWholesale" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDefaultMarkup" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="intIDProductCharacteristic" Type="Int32" />
+          <NavigationProperty Name="PriceType" Relationship="Self.FK_tblProduct_tblPriceType" FromRole="Product" ToRole="PriceType" />
+          <NavigationProperty Name="ProductBrand" Relationship="Self.FK_tblProduct_tblProductBrand" FromRole="Product" ToRole="ProductBrand" />
+          <NavigationProperty Name="ProductCategory" Relationship="Self.FK_tblProduct_tblProductCategory" FromRole="Product" ToRole="ProductCategory" />
+          <NavigationProperty Name="ProductCharacteristic" Relationship="Self.FK_tblProduct_tblProductCharacteristic" FromRole="Product" ToRole="ProductCharacteristic" />
+          <NavigationProperty Name="ProductType" Relationship="Self.FK_tblProduct_tblProductTypes" FromRole="Product" ToRole="ProductTypes" />
+          <NavigationProperty Name="ProductDetails" Relationship="Self.FK_tblProductDetail_tblProduct" FromRole="Product" ToRole="ProductDetail" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="Self.FK_tblPurchaseOrderDetail_tblProduct" FromRole="Product" ToRole="PurchaseOrderDetail" />
+        </EntityType>
+        <EntityType Name="ProductBrand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_tblProduct_tblProductBrand" FromRole="ProductBrand" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_tblProduct_tblProductCategory" FromRole="ProductCategory" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductCharacteristic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_tblProduct_tblProductCharacteristic" FromRole="ProductCharacteristic" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductColor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductDetails" Relationship="Self.FK_tblProductDetail_tblProductColor" FromRole="ProductColor" ToRole="ProductDetail" />
+        </EntityType>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDProduct" Type="Int32" />
+          <Property Name="intIDProductColor" Type="Int32" />
+          <Property Name="intIDProductSize" Type="Int32" />
+          <Property Name="intMininum" Type="Int32" />
+          <Property Name="intLength" Type="Int32" />
+          <Property Name="intWidth" Type="Int32" />
+          <Property Name="intHeight" Type="Int32" />
+          <Property Name="curCargoCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curRetail" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curWholesale" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curMarkUp" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_tblProductDetail_tblProduct" FromRole="ProductDetail" ToRole="Product" />
+          <NavigationProperty Name="ProductColor" Relationship="Self.FK_tblProductDetail_tblProductColor" FromRole="ProductDetail" ToRole="ProductColor" />
+          <NavigationProperty Name="ProductDetail1" Relationship="Self.FK_tblProductDetail_tblProductDetail" FromRole="ProductDetail" ToRole="ProductDetail1" />
+          <NavigationProperty Name="ProductDetail2" Relationship="Self.FK_tblProductDetail_tblProductDetail" FromRole="ProductDetail1" ToRole="ProductDetail" />
+          <NavigationProperty Name="ProductSize" Relationship="Self.FK_tblProductDetail_tblProductSize" FromRole="ProductDetail" ToRole="ProductSize" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="Self.FK_tblPurchaseOrderDetail_tblProductDetail" FromRole="ProductDetail" ToRole="PurchaseOrderDetail" />
+        </EntityType>
+        <EntityType Name="ProductSize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductDetails" Relationship="Self.FK_tblProductDetail_tblProductSize" FromRole="ProductSize" ToRole="ProductDetail" />
+        </EntityType>
+        <EntityType Name="ProductType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_tblProduct_tblProductTypes" FromRole="ProductTypes" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PuchaseOrderReceivingStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_PurchaseOrder_PuchaseOrderReceivingStatus" FromRole="PuchaseOrderReceivingStatus" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="Self.FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus" FromRole="PuchaseOrderReceivingStatus" ToRole="PurchaseOrderDetail" />
+          <NavigationProperty Name="PurchaseOrderDetailInventoryLedgers" Relationship="Self.FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus" FromRole="PuchaseOrderReceivingStatus" ToRole="PurchaseOrderDetailInventoryLedger" />
+          <NavigationProperty Name="PurchaseOrderInventoryLedgers" Relationship="Self.FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus" FromRole="PuchaseOrderReceivingStatus" ToRole="PurchaseOrderInventoryLedger" />
+        </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strPONumber" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="intIDSupplier" Type="Int32" />
+          <Property Name="intIDLocation" Type="Int32" />
+          <Property Name="datDatePurchased" Type="DateTime" Precision="0" />
+          <Property Name="curTotalQty" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curSubTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDiscountPercentage" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curGrandTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curTotalPaid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curTotalReceived" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curTotalRemaining" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="blnHasPayment" Type="Boolean" />
+          <Property Name="curAmountPaid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curChange" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="blnApproved" Type="Boolean" />
+          <Property Name="intIDApprover" Type="Int32" />
+          <Property Name="datDateApproved" Type="DateTime" Precision="3" />
+          <Property Name="blnAddBalanceToSupplier" Type="Boolean" />
+          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
+          <Property Name="intIDCreatedBy" Type="Int32" />
+          <Property Name="intIDReceivingStatus" Type="Int32" />
+          <NavigationProperty Name="PuchaseOrderReceivingStatu" Relationship="Self.FK_PurchaseOrder_PuchaseOrderReceivingStatus" FromRole="PurchaseOrder" ToRole="PuchaseOrderReceivingStatus" />
+          <NavigationProperty Name="PurchaseOrderCustomerLedgers" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="PurchaseOrder" ToRole="PurchaseOrderCustomerLedger" />
+          <NavigationProperty Name="User" Relationship="Self.FK_PurchaseOrder_User" FromRole="PurchaseOrder" ToRole="User" />
+          <NavigationProperty Name="PurchaseOrderInventoryLedgers" Relationship="Self.FK_PurchaseOrderLedger_PurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderInventoryLedger" />
+          <NavigationProperty Name="tblLocation" Relationship="Self.FK_tblPurchaseOrder_tblLocation" FromRole="PurchaseOrder" ToRole="tblLocation" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_tblPurchaseOrder_tblSuppliers" FromRole="PurchaseOrder" ToRole="Suppliers" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="Self.FK_tblPurchaseOrderDetail_tblPurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderDetail" />
+          <NavigationProperty Name="PurchaseOrderPayments" Relationship="Self.FK_tblPurchaseOrderPayment_tblPurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderPayment" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderCustomerLedger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDPurchaseOrder" Type="Int32" />
+          <Property Name="curSubTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curGrandTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curTotalPaidPendingPayments" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curTotalDiscountsPendingDiscounts" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curTotalChangePendingChange" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curTotalBalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
+          <Property Name="bitIsActive" Type="Boolean" />
+          <NavigationProperty Name="PurchaseOrder" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="PurchaseOrderCustomerLedger" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="PurchaseOrderCustomerLedgerDetails" Relationship="Self.FK_CustomerLedgerDetail_CustomerLedger" FromRole="PurchaseOrderCustomerLedger" ToRole="PurchaseOrderCustomerLedgerDetail" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderCustomerLedgerDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDPurchaseOrderCustomerLedger" Type="Int32" />
+          <Property Name="intIDPaymentType" Type="Int32" />
+          <Property Name="strReference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="datDate" Type="DateTime" Precision="0" />
+          <Property Name="curAmountPaid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curChange" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="PurchaseOrderCustomerLedger" Relationship="Self.FK_CustomerLedgerDetail_CustomerLedger" FromRole="PurchaseOrderCustomerLedgerDetail" ToRole="PurchaseOrderCustomerLedger" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDPurchaseOrder" Type="Int32" />
+          <Property Name="intIDProduct" Type="Int32" />
+          <Property Name="intIDProductDetail" Type="Int32" />
+          <Property Name="curStock" Type="Int32" />
+          <Property Name="curActStock" Type="Int32" />
+          <Property Name="intQuantity" Type="Int32" />
+          <Property Name="intQuantityReceived" Type="Int32" />
+          <Property Name="intQuantityRemaining" Type="Int32" />
+          <Property Name="curCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curSubTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="intIDReceivingStatus" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_tblPurchaseOrderDetail_tblProduct" FromRole="PurchaseOrderDetail" ToRole="Product" />
+          <NavigationProperty Name="ProductDetail" Relationship="Self.FK_tblPurchaseOrderDetail_tblProductDetail" FromRole="PurchaseOrderDetail" ToRole="ProductDetail" />
+          <NavigationProperty Name="PuchaseOrderReceivingStatu" Relationship="Self.FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus" FromRole="PurchaseOrderDetail" ToRole="PuchaseOrderReceivingStatus" />
+          <NavigationProperty Name="PurchaseOrder" Relationship="Self.FK_tblPurchaseOrderDetail_tblPurchaseOrder" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="PurchaseOrderDetailInventoryLedgers" Relationship="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetail" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrderDetailInventoryLedger" />
+          <NavigationProperty Name="PurchaseOrderProductDetailHistories" Relationship="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrderProductDetailHistory" />
+          <NavigationProperty Name="PurchaseOrderReceivingDetails" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrderReceivingDetails" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetailInventoryLedger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDPurchaseOrderInventoryLedger" Type="Int32" />
+          <Property Name="intIDPurchaseOrder" Type="Int32" />
+          <Property Name="intIDPurchaseOrderDetail" Type="Int32" />
+          <Property Name="curStock" Type="Int32" />
+          <Property Name="curActStock" Type="Int32" />
+          <Property Name="intQuantity" Type="Int32" />
+          <Property Name="intQuantityReceived" Type="Int32" />
+          <Property Name="intQuantityRemaining" Type="Int32" />
+          <Property Name="intIDReceivingStatus" Type="Int32" />
+          <NavigationProperty Name="PuchaseOrderReceivingStatu" Relationship="Self.FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus" FromRole="PurchaseOrderDetailInventoryLedger" ToRole="PuchaseOrderReceivingStatus" />
+          <NavigationProperty Name="PurchaseOrderDetail" Relationship="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetail" FromRole="PurchaseOrderDetailInventoryLedger" ToRole="PurchaseOrderDetail" />
+          <NavigationProperty Name="PurchaseOrderInventoryLedger" Relationship="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger" FromRole="PurchaseOrderDetailInventoryLedger" ToRole="PurchaseOrderInventoryLedger" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderInventoryLedger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDPurchaseOrder" Type="Int32" />
+          <Property Name="datDateInserted" Type="DateTime" Precision="0" />
+          <Property Name="curTotalQty" Type="Int32" />
+          <Property Name="curTotalReceived" Type="Int32" />
+          <Property Name="curTotalRemaining" Type="Int32" />
+          <Property Name="intIDReceivingStatus" Type="Int32" />
+          <NavigationProperty Name="PuchaseOrderReceivingStatu" Relationship="Self.FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus" FromRole="PurchaseOrderInventoryLedger" ToRole="PuchaseOrderReceivingStatus" />
+          <NavigationProperty Name="PurchaseOrder" Relationship="Self.FK_PurchaseOrderLedger_PurchaseOrder" FromRole="PurchaseOrderInventoryLedger" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="PurchaseOrderDetailInventoryLedgers" Relationship="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger" FromRole="PurchaseOrderInventoryLedger" ToRole="PurchaseOrderDetailInventoryLedger" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDPurchaseOrder" Type="Int32" />
+          <Property Name="datPaidOn" Type="DateTime" Precision="0" />
+          <Property Name="datPaidBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="curTotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curGrandTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curAmountPaid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="intIDPurchaseOrderPaymentStatus" Type="Int32" />
+          <Property Name="strBankAccounts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="curDatCheckDate" Type="DateTime" Precision="0" />
+          <Property Name="strCheckNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="datApprovedOn" Type="DateTime" Precision="0" />
+          <Property Name="datApprovedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseOrder" Relationship="Self.FK_tblPurchaseOrderPayment_tblPurchaseOrder" FromRole="PurchaseOrderPayment" ToRole="PurchaseOrder" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderPaymentStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderProductDetailHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDPurchaseOrderDetail" Type="Int32" />
+          <Property Name="intIDPurchaseOrderProductTransactionType" Type="Int32" />
+          <Property Name="strTransactionType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="intQuantity" Type="Int32" />
+          <Property Name="intTotalReceived" Type="Int32" />
+          <Property Name="intTotalReturn" Type="Int32" />
+          <Property Name="intTotalRemaining" Type="Int32" />
+          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PurchaseOrderDetail" Relationship="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger" FromRole="PurchaseOrderProductDetailHistory" ToRole="PurchaseOrderDetail" />
+          <NavigationProperty Name="PurchaseOrderProductTransactionType" Relationship="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType" FromRole="PurchaseOrderProductDetailHistory" ToRole="PurchaseOrderProductTransactionType" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderProductTransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseOrderProductDetailHistories" Relationship="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType" FromRole="PurchaseOrderProductTransactionType" ToRole="PurchaseOrderProductDetailHistory" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderReceiving">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDPurchaseOrder" Type="Int32" />
+          <Property Name="datDateReceived" Type="DateTime" Precision="0" />
+          <Property Name="intIDLocation" Type="Int32" />
+          <Property Name="strAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strMemo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
+          <Property Name="blnReceivedOnPO" Type="Boolean" />
+          <Property Name="curTotalQty" Type="Int32" />
+          <Property Name="curTotalReceived" Type="Int32" />
+          <Property Name="curTotalRemaining" Type="Int32" />
+          <NavigationProperty Name="PurchaseOrderReceivingDetails" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" FromRole="PurchaseOrderReceiving" ToRole="PurchaseOrderReceivingDetails" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderReceivingDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDPurchaseOrderReceiving" Type="Int32" />
+          <Property Name="intIDPurchaseOrderDetail" Type="Int32" />
+          <Property Name="intQuantity" Type="Int32" />
+          <Property Name="intQuantityReceived" Type="Int32" />
+          <Property Name="intQuantityRemaining" Type="Int32" />
+          <Property Name="intAddedQuantityReceived" Type="Int32" />
+          <Property Name="blnIsReceived" Type="Boolean" />
+          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PurchaseOrderDetail" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" FromRole="PurchaseOrderReceivingDetails" ToRole="PurchaseOrderDetail" />
+          <NavigationProperty Name="PurchaseOrderReceiving" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" FromRole="PurchaseOrderReceivingDetails" ToRole="PurchaseOrderReceiving" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TRANo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PONo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="intIdCustomer" Type="Int32" />
+          <Property Name="intIdAgent" Type="Int32" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Sales_Customer" FromRole="Sales" ToRole="Customer" />
+          <NavigationProperty Name="Agent" Relationship="GeneralLedgerModel.FK_Sales_Agent" FromRole="Sale" ToRole="Agent" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="intIDCurrency" Type="Int32" />
+          <Property Name="curStartingDebit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDebit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curCredit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curBalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="strAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strContacts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="intIDBank" Type="Int32" />
+          <NavigationProperty Name="Bank" Relationship="Self.FK_Suppliers_Bank" FromRole="Suppliers" ToRole="Bank" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_tblPurchaseOrder_tblSuppliers" FromRole="Suppliers" ToRole="PurchaseOrder" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblGLTranDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDGLTranHeader" Type="Int32" Nullable="false" />
+          <Property Name="intIDMasCoa" Type="Int32" Nullable="false" />
+          <Property Name="intIDMasCoaSub" Type="Int32" Nullable="false" />
+          <Property Name="curDebit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curCredit" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="tblGLTranHeader" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" FromRole="tblGLTranDetail" ToRole="tblGLTranHeader" />
+          <NavigationProperty Name="tblMasCOA" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOA" FromRole="tblGLTranDetail" ToRole="tblMasCOA" />
+        </EntityType>
+        <EntityType Name="tblGLTranHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDGLBookType" Type="Int32" />
+          <Property Name="datBatchDate" Type="DateTime" Precision="0" />
+          <Property Name="intIDReference" Type="Int32" Nullable="false" />
+          <Property Name="strTransactionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="curCreditAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDebitAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="datInsertedDate" Type="DateTime" Precision="3" />
+          <Property Name="strDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblGLTranDetails" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" FromRole="tblGLTranHeader" ToRole="tblGLTranDetail" />
+          <NavigationProperty Name="tblJournalEntry" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" FromRole="tblGLTranHeader" ToRole="tblJournalEntry" />
+          <NavigationProperty Name="tblGLBookType" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType" FromRole="tblGLTranHeader" ToRole="tblGLBookType" />
+        </EntityType>
+        <EntityType Name="tblLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_tblPurchaseOrder_tblLocation" FromRole="tblLocation" ToRole="PurchaseOrder" />
+        </EntityType>
+        <EntityType Name="tblMasCOA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDMasCOAGroup" Type="Int32" />
+          <Property Name="strCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="strName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="strAcctSide" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="strAcctType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="intIncomeStatementOrderby" Type="Int32" />
+          <NavigationProperty Name="tblMasCOASubs" Relationship="Self.FK_tblMasCOASub_TblMasCoa" FromRole="tblMasCOA" ToRole="tblMasCOASub" />
+          <NavigationProperty Name="tblGLTranDetails" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOA" FromRole="tblMasCOA" ToRole="tblGLTranDetail" />
+        </EntityType>
+        <EntityType Name="tblMasCOAGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="strName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblMasCOASub">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDMasCOA" Type="Int32" />
+          <Property Name="strCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblMasCOA" Relationship="Self.FK_tblMasCOASub_TblMasCoa" FromRole="tblMasCOASub" ToRole="tblMasCOA" />
+        </EntityType>
+        <EntityType Name="tblTBBatchDtl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDTBBatchHdr" Type="Int32" Nullable="false" />
+          <Property Name="COA" Type="Int32" />
+          <Property Name="COADesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COASub" Type="Int32" />
+          <Property Name="COASubDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="curBegBal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="curDebit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="curCredit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="curEndBal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="curAdjustedDebit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="curAdjustedCredit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="curEndBalAdjusted" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="tblTBBatchHdr" Relationship="Self.FK_tblTBBatchDtl_tblTBBatchHdr" FromRole="tblTBBatchDtl" ToRole="tblTBBatchHdr" />
+        </EntityType>
+        <EntityType Name="tblTBBatchHdr">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="datBatchDate" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bitIsLock" Type="Boolean" />
+          <NavigationProperty Name="tblTBBatchDtls" Relationship="Self.FK_tblTBBatchDtl_tblTBBatchHdr" FromRole="tblTBBatchHdr" ToRole="tblTBBatchDtl" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_PurchaseOrder_User" FromRole="User" ToRole="PurchaseOrder" />
+        </EntityType>
+        <Association Name="FK_Bank_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bank">
+              <PropertyRef Name="intIDCurrency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suppliers_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Suppliers">
+              <PropertyRef Name="intIDBank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="intIdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCustomer_tblPriceType">
+          <End Role="PriceType" Type="Self.PriceType" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="intIDPriceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblPriceType">
+          <End Role="PriceType" Type="Self.PriceType" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDPriceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProductBrand">
+          <End Role="ProductBrand" Type="Self.ProductBrand" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBrand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductBrands" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProductCharacteristic">
+          <End Role="ProductCharacteristic" Type="Self.ProductCharacteristic" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCharacteristic">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductCharacteristic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProduct_tblProductTypes">
+          <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProduct">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="intIDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrderDetail_tblProduct">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="intIDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProductColor">
+          <End Role="ProductColor" Type="Self.ProductColor" Multiplicity="0..1" />
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductColor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="intIDProductColor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProductDetail">
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="1" />
+          <End Role="ProductDetail1" Type="Self.ProductDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProductSize">
+          <End Role="ProductSize" Type="Self.ProductSize" Multiplicity="0..1" />
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="intIDProductSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrderDetail_tblProductDetail">
+          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="intIDProductDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_PuchaseOrderReceivingStatus">
+          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatu" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PuchaseOrderReceivingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="intIDReceivingStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus">
+          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatu" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PuchaseOrderReceivingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="intIDReceivingStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus">
+          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatu" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PuchaseOrderReceivingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetailInventoryLedger">
+              <PropertyRef Name="intIDReceivingStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus">
+          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatu" Multiplicity="0..1" />
+          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PuchaseOrderReceivingStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderInventoryLedger">
+              <PropertyRef Name="intIDReceivingStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerLedger_CustomerLedger">
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="PurchaseOrderCustomerLedger" Type="Self.PurchaseOrderCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderCustomerLedger">
+              <PropertyRef Name="intIDPurchaseOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="intIDApprover" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderLedger_PurchaseOrder">
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderInventoryLedger">
+              <PropertyRef Name="intIDPurchaseOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrder_tblLocation">
+          <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLocation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="intIDLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrder_tblSuppliers">
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="intIDSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrderDetail_tblPurchaseOrder">
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="intIDPurchaseOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPurchaseOrderPayment_tblPurchaseOrder">
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="PurchaseOrderPayment" Type="Self.PurchaseOrderPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderPayment">
+              <PropertyRef Name="intIDPurchaseOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerLedgerDetail_CustomerLedger">
+          <End Role="PurchaseOrderCustomerLedger" Type="Self.PurchaseOrderCustomerLedger" Multiplicity="0..1" />
+          <End Role="PurchaseOrderCustomerLedgerDetail" Type="Self.PurchaseOrderCustomerLedgerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderCustomerLedger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PurchaseOrderCustomerLedgerDetail">
+              <PropertyRef Name="intIDPurchaseOrderCustomerLedger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetail">
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetailInventoryLedger">
+              <PropertyRef Name="intIDPurchaseOrderDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger">
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
+          <End Role="PurchaseOrderProductDetailHistory" Type="Self.PurchaseOrderProductDetailHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderProductDetailHistory">
+              <PropertyRef Name="intIDPurchaseOrderDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails">
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
+          <End Role="PurchaseOrderReceivingDetails" Type="Self.PurchaseOrderReceivingDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderReceivingDetails">
+              <PropertyRef Name="intIDPurchaseOrderDetail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger">
+          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="0..1" />
+          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderInventoryLedger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetailInventoryLedger">
+              <PropertyRef Name="intIDPurchaseOrderInventoryLedger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType">
+          <End Role="PurchaseOrderProductTransactionType" Type="Self.PurchaseOrderProductTransactionType" Multiplicity="0..1" />
+          <End Role="PurchaseOrderProductDetailHistory" Type="Self.PurchaseOrderProductDetailHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderProductTransactionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderProductDetailHistory">
+              <PropertyRef Name="intIDPurchaseOrderProductTransactionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving">
+          <End Role="PurchaseOrderReceiving" Type="Self.PurchaseOrderReceiving" Multiplicity="0..1" />
+          <End Role="PurchaseOrderReceivingDetails" Type="Self.PurchaseOrderReceivingDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrderReceiving">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseOrderReceivingDetails">
+              <PropertyRef Name="intIDPurchaseOrderReceiving" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMasCOASub_TblMasCoa">
+          <End Role="tblMasCOA" Type="Self.tblMasCOA" Multiplicity="0..1" />
+          <End Role="tblMasCOASub" Type="Self.tblMasCOASub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasCOA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMasCOASub">
+              <PropertyRef Name="intIDMasCOA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTBBatchDtl_tblTBBatchHdr">
+          <End Role="tblTBBatchHdr" Type="Self.tblTBBatchHdr" Multiplicity="1" />
+          <End Role="tblTBBatchDtl" Type="Self.tblTBBatchDtl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTBBatchHdr">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblTBBatchDtl">
+              <PropertyRef Name="intIDTBBatchHdr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GeneralLedgerContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Banks" EntityType="Self.Bank" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Currencies" EntityType="Self.Currency" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="InventoryLogs" EntityType="Self.InventoryLog" />
+          <EntitySet Name="InventoryLogOperationTypes" EntityType="Self.InventoryLogOperationType" />
+          <EntitySet Name="InventoryQuantityTotals" EntityType="Self.InventoryQuantityTotal" />
+          <EntitySet Name="InventoryStocks" EntityType="Self.InventoryStock" />
+          <EntitySet Name="InventoryStockDetails" EntityType="Self.InventoryStockDetail" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
+          <EntitySet Name="PriceTypes" EntityType="Self.PriceType" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductBrands" EntityType="Self.ProductBrand" />
+          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+          <EntitySet Name="ProductCharacteristics" EntityType="Self.ProductCharacteristic" />
+          <EntitySet Name="ProductColors" EntityType="Self.ProductColor" />
+          <EntitySet Name="ProductDetails" EntityType="Self.ProductDetail" />
+          <EntitySet Name="ProductSizes" EntityType="Self.ProductSize" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+          <EntitySet Name="ProductUnits" EntityType="Self.ProductUnit" />
+          <EntitySet Name="PuchaseOrderReceivingStatus" EntityType="Self.PuchaseOrderReceivingStatu" />
+          <EntitySet Name="PurchaseOrders" EntityType="Self.PurchaseOrder" />
+          <EntitySet Name="PurchaseOrderCustomerLedgers" EntityType="Self.PurchaseOrderCustomerLedger" />
+          <EntitySet Name="PurchaseOrderCustomerLedgerDetails" EntityType="Self.PurchaseOrderCustomerLedgerDetail" />
+          <EntitySet Name="PurchaseOrderDetails" EntityType="Self.PurchaseOrderDetail" />
+          <EntitySet Name="PurchaseOrderDetailInventoryLedgers" EntityType="Self.PurchaseOrderDetailInventoryLedger" />
+          <EntitySet Name="PurchaseOrderInventoryLedgers" EntityType="Self.PurchaseOrderInventoryLedger" />
+          <EntitySet Name="PurchaseOrderPayments" EntityType="Self.PurchaseOrderPayment" />
+          <EntitySet Name="PurchaseOrderPaymentStatus" EntityType="Self.PurchaseOrderPaymentStatu" />
+          <EntitySet Name="PurchaseOrderProductDetailHistories" EntityType="Self.PurchaseOrderProductDetailHistory" />
+          <EntitySet Name="PurchaseOrderProductTransactionTypes" EntityType="Self.PurchaseOrderProductTransactionType" />
+          <EntitySet Name="PurchaseOrderReceivings" EntityType="Self.PurchaseOrderReceiving" />
+          <EntitySet Name="PurchaseOrderReceivingDetails" EntityType="Self.PurchaseOrderReceivingDetail" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tblGLTranDetails" EntityType="Self.tblGLTranDetail" />
+          <EntitySet Name="tblGLTranHeaders" EntityType="Self.tblGLTranHeader" />
+          <EntitySet Name="tblLocations" EntityType="Self.tblLocation" />
+          <EntitySet Name="tblMasCOAs" EntityType="Self.tblMasCOA" />
+          <EntitySet Name="tblMasCOAGroups" EntityType="Self.tblMasCOAGroup" />
+          <EntitySet Name="tblMasCOASubs" EntityType="Self.tblMasCOASub" />
+          <EntitySet Name="tblTBBatchDtls" EntityType="Self.tblTBBatchDtl" />
+          <EntitySet Name="tblTBBatchHdrs" EntityType="Self.tblTBBatchHdr" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Bank_Currency" Association="Self.FK_Bank_Currency">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Bank" EntitySet="Banks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suppliers_Bank" Association="Self.FK_Suppliers_Bank">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Suppliers" EntitySet="Suppliers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Customer" Association="Self.FK_Sales_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCustomer_tblPriceType" Association="Self.FK_tblCustomer_tblPriceType">
+            <End Role="PriceType" EntitySet="PriceTypes" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblPriceType" Association="Self.FK_tblProduct_tblPriceType">
+            <End Role="PriceType" EntitySet="PriceTypes" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProductBrand" Association="Self.FK_tblProduct_tblProductBrand">
+            <End Role="ProductBrand" EntitySet="ProductBrands" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProductCategory" Association="Self.FK_tblProduct_tblProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProductCharacteristic" Association="Self.FK_tblProduct_tblProductCharacteristic">
+            <End Role="ProductCharacteristic" EntitySet="ProductCharacteristics" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProduct_tblProductTypes" Association="Self.FK_tblProduct_tblProductTypes">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProduct" Association="Self.FK_tblProductDetail_tblProduct">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblProduct" Association="Self.FK_tblPurchaseOrderDetail_tblProduct">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProductColor" Association="Self.FK_tblProductDetail_tblProductColor">
+            <End Role="ProductColor" EntitySet="ProductColors" />
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProductDetail" Association="Self.FK_tblProductDetail_tblProductDetail">
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+            <End Role="ProductDetail1" EntitySet="ProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProductSize" Association="Self.FK_tblProductDetail_tblProductSize">
+            <End Role="ProductSize" EntitySet="ProductSizes" />
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblProductDetail" Association="Self.FK_tblPurchaseOrderDetail_tblProductDetail">
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrder_PuchaseOrderReceivingStatus">
+            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus">
+            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus">
+            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
+            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus">
+            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
+            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+            <End Role="PurchaseOrderCustomerLedger" EntitySet="PurchaseOrderCustomerLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_User" Association="Self.FK_PurchaseOrder_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderLedger_PurchaseOrder" Association="Self.FK_PurchaseOrderLedger_PurchaseOrder">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrder_tblLocation" Association="Self.FK_tblPurchaseOrder_tblLocation">
+            <End Role="tblLocation" EntitySet="tblLocations" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrder_tblSuppliers" Association="Self.FK_tblPurchaseOrder_tblSuppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblPurchaseOrder" Association="Self.FK_tblPurchaseOrderDetail_tblPurchaseOrder">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPurchaseOrderPayment_tblPurchaseOrder" Association="Self.FK_tblPurchaseOrderPayment_tblPurchaseOrder">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+            <End Role="PurchaseOrderPayment" EntitySet="PurchaseOrderPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerLedgerDetail_CustomerLedger" Association="Self.FK_CustomerLedgerDetail_CustomerLedger">
+            <End Role="PurchaseOrderCustomerLedger" EntitySet="PurchaseOrderCustomerLedgers" />
+            <End Role="PurchaseOrderCustomerLedgerDetail" EntitySet="PurchaseOrderCustomerLedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetail" Association="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetail">
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger" Association="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger">
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+            <End Role="PurchaseOrderProductDetailHistory" EntitySet="PurchaseOrderProductDetailHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" Association="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails">
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+            <End Role="PurchaseOrderReceivingDetails" EntitySet="PurchaseOrderReceivingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger" Association="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger">
+            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedgers" />
+            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType" Association="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType">
+            <End Role="PurchaseOrderProductTransactionType" EntitySet="PurchaseOrderProductTransactionTypes" />
+            <End Role="PurchaseOrderProductDetailHistory" EntitySet="PurchaseOrderProductDetailHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" Association="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving">
+            <End Role="PurchaseOrderReceiving" EntitySet="PurchaseOrderReceivings" />
+            <End Role="PurchaseOrderReceivingDetails" EntitySet="PurchaseOrderReceivingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMasCOASub_TblMasCoa" Association="Self.FK_tblMasCOASub_TblMasCoa">
+            <End Role="tblMasCOA" EntitySet="tblMasCOAs" />
+            <End Role="tblMasCOASub" EntitySet="tblMasCOASubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTBBatchDtl_tblTBBatchHdr" Association="Self.FK_tblTBBatchDtl_tblTBBatchHdr">
+            <End Role="tblTBBatchHdr" EntitySet="tblTBBatchHdrs" />
+            <End Role="tblTBBatchDtl" EntitySet="tblTBBatchDtls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranDetail_tblGLTranHeader" Association="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader">
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
+            <End Role="tblGLTranDetail" EntitySet="tblGLTranDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranDetail_tblMasCOA" Association="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOA">
+            <End Role="tblMasCOA" EntitySet="tblMasCOAs" />
+            <End Role="tblGLTranDetail" EntitySet="tblGLTranDetails" />
+          </AssociationSet>
+          <EntitySet Name="tblJournalEntries" EntityType="GeneralLedgerModel.tblJournalEntry" />
+          <AssociationSet Name="FK_tblGLTranHeader_tblJournalEntry" Association="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry">
+            <End Role="tblJournalEntry" EntitySet="tblJournalEntries" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
+          </AssociationSet>
+          <EntitySet Name="Agents" EntityType="GeneralLedgerModel.Agent" />
+          <AssociationSet Name="FK_Sales_Agent" Association="GeneralLedgerModel.FK_Sales_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <EntitySet Name="tblGLBookTypes" EntityType="GeneralLedgerModel.tblGLBookType" />
+          <AssociationSet Name="FK_tblGLTranHeader_tblGLBookType" Association="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType">
+            <End Role="tblGLBookType" EntitySet="tblGLBookTypes" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
+          </AssociationSet>
+          </EntityContainer>
+        <Association Name="FK_tblGLTranDetail_tblGLTranHeader">
+          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="1" />
+          <End Type="GeneralLedgerModel.tblGLTranDetail" Role="tblGLTranDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGLTranHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranDetail">
+              <PropertyRef Name="intIDGLTranHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranDetail_tblMasCOA">
+          <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
+          <End Type="GeneralLedgerModel.tblGLTranDetail" Role="tblGLTranDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasCOA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranDetail">
+              <PropertyRef Name="intIDMasCoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblJournalEntry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strTransactionNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="datBatchDate" Type="DateTime" Precision="3" />
+          <Property Name="strDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strTransactionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" FromRole="tblJournalEntry" ToRole="tblGLTranHeader" />
+        </EntityType>
+        <Association Name="FK_tblGLTranHeader_tblJournalEntry">
+          <End Type="GeneralLedgerModel.tblJournalEntry" Role="tblJournalEntry" Multiplicity="1" />
+          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJournalEntry">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIDReference" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="StartingDebit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Contact" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sales" Relationship="GeneralLedgerModel.FK_Sales_Agent" FromRole="Agent" ToRole="Sale" />
+        </EntityType>
+        <Association Name="FK_Sales_Agent">
+          <End Type="GeneralLedgerModel.Agent" Role="Agent" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="intIdAgent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblGLBookType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType" FromRole="tblGLBookType" ToRole="tblGLTranHeader" />
+        </EntityType>
+        <Association Name="FK_tblGLTranHeader_tblGLBookType">
+          <End Type="GeneralLedgerModel.tblGLBookType" Role="tblGLBookType" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGLBookType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIDGLBookType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GeneralLedgerModelStoreContainer" CdmEntityContainer="GeneralLedgerContext">
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Bank">
+              <MappingFragment StoreEntitySet="Bank">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="strAccountNo" ColumnName="strAccountNo" />
+                <ScalarProperty Name="strAccountName" ColumnName="strAccountName" />
+                <ScalarProperty Name="strBranch" ColumnName="strBranch" />
+                <ScalarProperty Name="curStartingDebit" ColumnName="curStartingDebit" />
+                <ScalarProperty Name="curDebit" ColumnName="curDebit" />
+                <ScalarProperty Name="curCredit" ColumnName="curCredit" />
+                <ScalarProperty Name="curBalance" ColumnName="curBalance" />
+                <ScalarProperty Name="intIDCurrency" ColumnName="intIDCurrency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="curStartingDebit" ColumnName="curStartingDebit" />
+                <ScalarProperty Name="curDebit" ColumnName="curDebit" />
+                <ScalarProperty Name="curCredit" ColumnName="curCredit" />
+                <ScalarProperty Name="curCreditLimit" ColumnName="curCreditLimit" />
+                <ScalarProperty Name="intTerms" ColumnName="intTerms" />
+                <ScalarProperty Name="intIDPriceType" ColumnName="intIDPriceType" />
+                <ScalarProperty Name="strAddress" ColumnName="strAddress" />
+                <ScalarProperty Name="strContact" ColumnName="strContact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryLogs">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.InventoryLog">
+              <MappingFragment StoreEntitySet="InventoryLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intProductDetailId" ColumnName="intProductDetailId" />
+                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
+                <ScalarProperty Name="intInventoryLogOperationType" ColumnName="intInventoryLogOperationType" />
+                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
+                <ScalarProperty Name="intQuantityBefore" ColumnName="intQuantityBefore" />
+                <ScalarProperty Name="intQuantityAfter" ColumnName="intQuantityAfter" />
+                <ScalarProperty Name="intIDReference" ColumnName="intIDReference" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryLogOperationTypes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.InventoryLogOperationType">
+              <MappingFragment StoreEntitySet="InventoryLogOperationType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryQuantityTotals">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.InventoryQuantityTotal">
+              <MappingFragment StoreEntitySet="InventoryQuantityTotal">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intProductId" ColumnName="intProductId" />
+                <ScalarProperty Name="intProductDetailId" ColumnName="intProductDetailId" />
+                <ScalarProperty Name="intQuantityOnHand" ColumnName="intQuantityOnHand" />
+                <ScalarProperty Name="intQuantityOnSold" ColumnName="intQuantityOnSold" />
+                <ScalarProperty Name="intQuantityOnOrder" ColumnName="intQuantityOnOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryStocks">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.InventoryStock">
+              <MappingFragment StoreEntitySet="InventoryStock">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDProduct" ColumnName="intIDProduct" />
+                <ScalarProperty Name="intIDProductDetail" ColumnName="intIDProductDetail" />
+                <ScalarProperty Name="intStockCount" ColumnName="intStockCount" />
+                <ScalarProperty Name="blnIsActive" ColumnName="blnIsActive" />
+                <ScalarProperty Name="datLastModified" ColumnName="datLastModified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryStockDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.InventoryStockDetail">
+              <MappingFragment StoreEntitySet="InventoryStockDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDInventoryStock" ColumnName="intIDInventoryStock" />
+                <ScalarProperty Name="intIDReference" ColumnName="intIDReference" />
+                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
+                <ScalarProperty Name="datTransactionDate" ColumnName="datTransactionDate" />
+                <ScalarProperty Name="intIDInventoryStockOperationType" ColumnName="intIDInventoryStockOperationType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceTypes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PriceType">
+              <MappingFragment StoreEntitySet="PriceType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strProductName" ColumnName="strProductName" />
+                <ScalarProperty Name="strDescription" ColumnName="strDescription" />
+                <ScalarProperty Name="intIDProductCategory" ColumnName="intIDProductCategory" />
+                <ScalarProperty Name="intIDProductType" ColumnName="intIDProductType" />
+                <ScalarProperty Name="intIDProductBrands" ColumnName="intIDProductBrands" />
+                <ScalarProperty Name="intDefaultMinimum" ColumnName="intDefaultMinimum" />
+                <ScalarProperty Name="intPerPiecePerBox" ColumnName="intPerPiecePerBox" />
+                <ScalarProperty Name="intIDLocation" ColumnName="intIDLocation" />
+                <ScalarProperty Name="intDefaultLength" ColumnName="intDefaultLength" />
+                <ScalarProperty Name="intDefaultWidth" ColumnName="intDefaultWidth" />
+                <ScalarProperty Name="intDefaultHeight" ColumnName="intDefaultHeight" />
+                <ScalarProperty Name="intDefaultCargoCost" ColumnName="intDefaultCargoCost" />
+                <ScalarProperty Name="intTotal" ColumnName="intTotal" />
+                <ScalarProperty Name="curDefaultCost" ColumnName="curDefaultCost" />
+                <ScalarProperty Name="intIDPriceType" ColumnName="intIDPriceType" />
+                <ScalarProperty Name="curDefaultRetail" ColumnName="curDefaultRetail" />
+                <ScalarProperty Name="curDefaultWholesale" ColumnName="curDefaultWholesale" />
+                <ScalarProperty Name="curDefaultMarkup" ColumnName="curDefaultMarkup" />
+                <ScalarProperty Name="intIDProductCharacteristic" ColumnName="intIDProductCharacteristic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductBrands">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductBrand">
+              <MappingFragment StoreEntitySet="ProductBrand">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCharacteristics">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductCharacteristic">
+              <MappingFragment StoreEntitySet="ProductCharacteristic">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductColors">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductColor">
+              <MappingFragment StoreEntitySet="ProductColor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductDetail">
+              <MappingFragment StoreEntitySet="ProductDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDProduct" ColumnName="intIDProduct" />
+                <ScalarProperty Name="intIDProductColor" ColumnName="intIDProductColor" />
+                <ScalarProperty Name="intIDProductSize" ColumnName="intIDProductSize" />
+                <ScalarProperty Name="intMininum" ColumnName="intMininum" />
+                <ScalarProperty Name="intLength" ColumnName="intLength" />
+                <ScalarProperty Name="intWidth" ColumnName="intWidth" />
+                <ScalarProperty Name="intHeight" ColumnName="intHeight" />
+                <ScalarProperty Name="curCargoCost" ColumnName="curCargoCost" />
+                <ScalarProperty Name="curCost" ColumnName="curCost" />
+                <ScalarProperty Name="curRetail" ColumnName="curRetail" />
+                <ScalarProperty Name="curWholesale" ColumnName="curWholesale" />
+                <ScalarProperty Name="curMarkUp" ColumnName="curMarkUp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductSizes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductSize">
+              <MappingFragment StoreEntitySet="ProductSize">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTypes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductType">
+              <MappingFragment StoreEntitySet="ProductTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductUnits">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductUnit">
+              <MappingFragment StoreEntitySet="ProductUnit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PuchaseOrderReceivingStatus">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PuchaseOrderReceivingStatu">
+              <MappingFragment StoreEntitySet="PuchaseOrderReceivingStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrders">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrder">
+              <MappingFragment StoreEntitySet="PurchaseOrder">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strPONumber" ColumnName="strPONumber" />
+                <ScalarProperty Name="intIDSupplier" ColumnName="intIDSupplier" />
+                <ScalarProperty Name="intIDLocation" ColumnName="intIDLocation" />
+                <ScalarProperty Name="datDatePurchased" ColumnName="datDatePurchased" />
+                <ScalarProperty Name="curTotalQty" ColumnName="curTotalQty" />
+                <ScalarProperty Name="curSubTotal" ColumnName="curSubTotal" />
+                <ScalarProperty Name="curDiscount" ColumnName="curDiscount" />
+                <ScalarProperty Name="curDiscountPercentage" ColumnName="curDiscountPercentage" />
+                <ScalarProperty Name="curGrandTotal" ColumnName="curGrandTotal" />
+                <ScalarProperty Name="curTotalPaid" ColumnName="curTotalPaid" />
+                <ScalarProperty Name="curTotalReceived" ColumnName="curTotalReceived" />
+                <ScalarProperty Name="curTotalRemaining" ColumnName="curTotalRemaining" />
+                <ScalarProperty Name="blnHasPayment" ColumnName="blnHasPayment" />
+                <ScalarProperty Name="curAmountPaid" ColumnName="curAmountPaid" />
+                <ScalarProperty Name="curChange" ColumnName="curChange" />
+                <ScalarProperty Name="blnApproved" ColumnName="blnApproved" />
+                <ScalarProperty Name="intIDApprover" ColumnName="intIDApprover" />
+                <ScalarProperty Name="datDateApproved" ColumnName="datDateApproved" />
+                <ScalarProperty Name="blnAddBalanceToSupplier" ColumnName="blnAddBalanceToSupplier" />
+                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
+                <ScalarProperty Name="intIDCreatedBy" ColumnName="intIDCreatedBy" />
+                <ScalarProperty Name="intIDReceivingStatus" ColumnName="intIDReceivingStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderCustomerLedgers">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderCustomerLedger">
+              <MappingFragment StoreEntitySet="PurchaseOrderCustomerLedger">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
+                <ScalarProperty Name="curSubTotal" ColumnName="curSubTotal" />
+                <ScalarProperty Name="curDiscount" ColumnName="curDiscount" />
+                <ScalarProperty Name="curGrandTotal" ColumnName="curGrandTotal" />
+                <ScalarProperty Name="curTotalPaidPendingPayments" ColumnName="curTotalPaidPendingPayments" />
+                <ScalarProperty Name="curTotalDiscountsPendingDiscounts" ColumnName="curTotalDiscountsPendingDiscounts" />
+                <ScalarProperty Name="curTotalChangePendingChange" ColumnName="curTotalChangePendingChange" />
+                <ScalarProperty Name="curTotalBalance" ColumnName="curTotalBalance" />
+                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
+                <ScalarProperty Name="bitIsActive" ColumnName="bitIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderCustomerLedgerDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderCustomerLedgerDetail">
+              <MappingFragment StoreEntitySet="PurchaseOrderCustomerLedgerDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="intIDPurchaseOrderCustomerLedger" ColumnName="intIDPurchaseOrderCustomerLedger" />
+                <ScalarProperty Name="intIDPaymentType" ColumnName="intIDPaymentType" />
+                <ScalarProperty Name="strReference" ColumnName="strReference" />
+                <ScalarProperty Name="datDate" ColumnName="datDate" />
+                <ScalarProperty Name="curAmountPaid" ColumnName="curAmountPaid" />
+                <ScalarProperty Name="curChange" ColumnName="curChange" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderDetail">
+              <MappingFragment StoreEntitySet="PurchaseOrderDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
+                <ScalarProperty Name="intIDProduct" ColumnName="intIDProduct" />
+                <ScalarProperty Name="intIDProductDetail" ColumnName="intIDProductDetail" />
+                <ScalarProperty Name="curStock" ColumnName="curStock" />
+                <ScalarProperty Name="curActStock" ColumnName="curActStock" />
+                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
+                <ScalarProperty Name="intQuantityReceived" ColumnName="intQuantityReceived" />
+                <ScalarProperty Name="intQuantityRemaining" ColumnName="intQuantityRemaining" />
+                <ScalarProperty Name="curCost" ColumnName="curCost" />
+                <ScalarProperty Name="curSubTotal" ColumnName="curSubTotal" />
+                <ScalarProperty Name="intIDReceivingStatus" ColumnName="intIDReceivingStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderDetailInventoryLedgers">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderDetailInventoryLedger">
+              <MappingFragment StoreEntitySet="PurchaseOrderDetailInventoryLedger">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDPurchaseOrderInventoryLedger" ColumnName="intIDPurchaseOrderInventoryLedger" />
+                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
+                <ScalarProperty Name="intIDPurchaseOrderDetail" ColumnName="intIDPurchaseOrderDetail" />
+                <ScalarProperty Name="curStock" ColumnName="curStock" />
+                <ScalarProperty Name="curActStock" ColumnName="curActStock" />
+                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
+                <ScalarProperty Name="intQuantityReceived" ColumnName="intQuantityReceived" />
+                <ScalarProperty Name="intQuantityRemaining" ColumnName="intQuantityRemaining" />
+                <ScalarProperty Name="intIDReceivingStatus" ColumnName="intIDReceivingStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderInventoryLedgers">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderInventoryLedger">
+              <MappingFragment StoreEntitySet="PurchaseOrderInventoryLedger">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
+                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
+                <ScalarProperty Name="curTotalQty" ColumnName="curTotalQty" />
+                <ScalarProperty Name="curTotalReceived" ColumnName="curTotalReceived" />
+                <ScalarProperty Name="curTotalRemaining" ColumnName="curTotalRemaining" />
+                <ScalarProperty Name="intIDReceivingStatus" ColumnName="intIDReceivingStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderPayments">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderPayment">
+              <MappingFragment StoreEntitySet="PurchaseOrderPayment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
+                <ScalarProperty Name="datPaidOn" ColumnName="datPaidOn" />
+                <ScalarProperty Name="datPaidBy" ColumnName="datPaidBy" />
+                <ScalarProperty Name="curTotalAmount" ColumnName="curTotalAmount" />
+                <ScalarProperty Name="curDiscount" ColumnName="curDiscount" />
+                <ScalarProperty Name="curGrandTotal" ColumnName="curGrandTotal" />
+                <ScalarProperty Name="curAmountPaid" ColumnName="curAmountPaid" />
+                <ScalarProperty Name="intIDPurchaseOrderPaymentStatus" ColumnName="intIDPurchaseOrderPaymentStatus" />
+                <ScalarProperty Name="strBankAccounts" ColumnName="strBankAccounts" />
+                <ScalarProperty Name="curDatCheckDate" ColumnName="curDatCheckDate" />
+                <ScalarProperty Name="strCheckNo" ColumnName="strCheckNo" />
+                <ScalarProperty Name="datApprovedOn" ColumnName="datApprovedOn" />
+                <ScalarProperty Name="datApprovedBy" ColumnName="datApprovedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderPaymentStatus">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderPaymentStatu">
+              <MappingFragment StoreEntitySet="PurchaseOrderPaymentStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderProductDetailHistories">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderProductDetailHistory">
+              <MappingFragment StoreEntitySet="PurchaseOrderProductDetailHistory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDPurchaseOrderDetail" ColumnName="intIDPurchaseOrderDetail" />
+                <ScalarProperty Name="intIDPurchaseOrderProductTransactionType" ColumnName="intIDPurchaseOrderProductTransactionType" />
+                <ScalarProperty Name="strTransactionType" ColumnName="strTransactionType" />
+                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
+                <ScalarProperty Name="intTotalReceived" ColumnName="intTotalReceived" />
+                <ScalarProperty Name="intTotalReturn" ColumnName="intTotalReturn" />
+                <ScalarProperty Name="intTotalRemaining" ColumnName="intTotalRemaining" />
+                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderProductTransactionTypes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderProductTransactionType">
+              <MappingFragment StoreEntitySet="PurchaseOrderProductTransactionType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderReceivings">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderReceiving">
+              <MappingFragment StoreEntitySet="PurchaseOrderReceiving">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
+                <ScalarProperty Name="datDateReceived" ColumnName="datDateReceived" />
+                <ScalarProperty Name="intIDLocation" ColumnName="intIDLocation" />
+                <ScalarProperty Name="strAddress" ColumnName="strAddress" />
+                <ScalarProperty Name="strMemo" ColumnName="strMemo" />
+                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
+                <ScalarProperty Name="blnReceivedOnPO" ColumnName="blnReceivedOnPO" />
+                <ScalarProperty Name="curTotalQty" ColumnName="curTotalQty" />
+                <ScalarProperty Name="curTotalReceived" ColumnName="curTotalReceived" />
+                <ScalarProperty Name="curTotalRemaining" ColumnName="curTotalRemaining" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderReceivingDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderReceivingDetail">
+              <MappingFragment StoreEntitySet="PurchaseOrderReceivingDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="intIDPurchaseOrderReceiving" ColumnName="intIDPurchaseOrderReceiving" />
+                <ScalarProperty Name="intIDPurchaseOrderDetail" ColumnName="intIDPurchaseOrderDetail" />
+                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
+                <ScalarProperty Name="intQuantityReceived" ColumnName="intQuantityReceived" />
+                <ScalarProperty Name="intQuantityRemaining" ColumnName="intQuantityRemaining" />
+                <ScalarProperty Name="intAddedQuantityReceived" ColumnName="intAddedQuantityReceived" />
+                <ScalarProperty Name="blnIsReceived" ColumnName="blnIsReceived" />
+                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Sale">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TRANo" ColumnName="TRANo" />
+                <ScalarProperty Name="PONo" ColumnName="PONo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="intIdCustomer" ColumnName="intIdCustomer" />
+                <ScalarProperty Name="intIdAgent" ColumnName="intIdAgent" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="intIDCurrency" ColumnName="intIDCurrency" />
+                <ScalarProperty Name="curStartingDebit" ColumnName="curStartingDebit" />
+                <ScalarProperty Name="curDebit" ColumnName="curDebit" />
+                <ScalarProperty Name="curCredit" ColumnName="curCredit" />
+                <ScalarProperty Name="curBalance" ColumnName="curBalance" />
+                <ScalarProperty Name="strAddress" ColumnName="strAddress" />
+                <ScalarProperty Name="strContacts" ColumnName="strContacts" />
+                <ScalarProperty Name="intIDBank" ColumnName="intIDBank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGLTranDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblGLTranDetail">
+              <MappingFragment StoreEntitySet="tblGLTranDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="intIDGLTranHeader" ColumnName="intIDGLTranHeader" />
+                <ScalarProperty Name="intIDMasCoa" ColumnName="intIDMasCoa" />
+                <ScalarProperty Name="intIDMasCoaSub" ColumnName="intIDMasCoaSub" />
+                <ScalarProperty Name="curDebit" ColumnName="curDebit" />
+                <ScalarProperty Name="curCredit" ColumnName="curCredit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGLTranHeaders">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblGLTranHeader">
+              <MappingFragment StoreEntitySet="tblGLTranHeader">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="intIDGLBookType" ColumnName="intIDGLBookType" />
+                <ScalarProperty Name="datBatchDate" ColumnName="datBatchDate" />
+                <ScalarProperty Name="intIDReference" ColumnName="intIDReference" />
+                <ScalarProperty Name="strTransactionCode" ColumnName="strTransactionCode" />
+                <ScalarProperty Name="curCreditAmount" ColumnName="curCreditAmount" />
+                <ScalarProperty Name="curDebitAmount" ColumnName="curDebitAmount" />
+                <ScalarProperty Name="datInsertedDate" ColumnName="datInsertedDate" />
+                <ScalarProperty Name="strDescription" ColumnName="strDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLocations">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblLocation">
+              <MappingFragment StoreEntitySet="tblLocation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMasCOAs">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblMasCOA">
+              <MappingFragment StoreEntitySet="tblMasCOA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="intIDMasCOAGroup" ColumnName="intIDMasCOAGroup" />
+                <ScalarProperty Name="strCode" ColumnName="strCode" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="strAcctSide" ColumnName="strAcctSide" />
+                <ScalarProperty Name="strAcctType" ColumnName="strAcctType" />
+                <ScalarProperty Name="intIncomeStatementOrderby" ColumnName="intIncomeStatementOrderby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMasCOAGroups">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblMasCOAGroup">
+              <MappingFragment StoreEntitySet="tblMasCOAGroup">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="strCode" ColumnName="strCode" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMasCOASubs">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblMasCOASub">
+              <MappingFragment StoreEntitySet="tblMasCOASub">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="intIDMasCOA" ColumnName="intIDMasCOA" />
+                <ScalarProperty Name="strCode" ColumnName="strCode" />
+                <ScalarProperty Name="strName" ColumnName="strName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTBBatchDtls">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblTBBatchDtl">
+              <MappingFragment StoreEntitySet="tblTBBatchDtl">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="intIDTBBatchHdr" ColumnName="intIDTBBatchHdr" />
+                <ScalarProperty Name="COA" ColumnName="COA" />
+                <ScalarProperty Name="COADesc" ColumnName="COADesc" />
+                <ScalarProperty Name="COASub" ColumnName="COASub" />
+                <ScalarProperty Name="COASubDesc" ColumnName="COASubDesc" />
+                <ScalarProperty Name="curBegBal" ColumnName="curBegBal" />
+                <ScalarProperty Name="curDebit" ColumnName="curDebit" />
+                <ScalarProperty Name="curCredit" ColumnName="curCredit" />
+                <ScalarProperty Name="curEndBal" ColumnName="curEndBal" />
+                <ScalarProperty Name="curAdjustedDebit" ColumnName="curAdjustedDebit" />
+                <ScalarProperty Name="curAdjustedCredit" ColumnName="curAdjustedCredit" />
+                <ScalarProperty Name="curEndBalAdjusted" ColumnName="curEndBalAdjusted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTBBatchHdrs">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblTBBatchHdr">
+              <MappingFragment StoreEntitySet="tblTBBatchHdr">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="datBatchDate" ColumnName="datBatchDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="bitIsLock" ColumnName="bitIsLock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblJournalEntries">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblJournalEntry">
+              <MappingFragment StoreEntitySet="tblJournalEntry">
+                <ScalarProperty Name="strTransactionCode" ColumnName="strTransactionCode" />
+                <ScalarProperty Name="strDescription" ColumnName="strDescription" />
+                <ScalarProperty Name="datBatchDate" ColumnName="datBatchDate" />
+                <ScalarProperty Name="strTransactionNumber" ColumnName="strTransactionNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="StartingDebit" ColumnName="StartingDebit" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGLBookTypes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblGLBookType">
+              <MappingFragment StoreEntitySet="tblGLBookType">
+                <ScalarProperty Name="strName" ColumnName="strName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

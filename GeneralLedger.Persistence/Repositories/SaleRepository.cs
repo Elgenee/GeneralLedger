@@ -18,5 +18,7 @@ namespace GeneralLedger.Persistence.Repositories
         {
             get { return Context as GeneralLedgerContext; }
         }
+
+      
     }
 }

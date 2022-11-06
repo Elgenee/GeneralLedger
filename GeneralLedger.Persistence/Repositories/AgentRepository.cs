@@ -9,6 +9,7 @@ namespace GeneralLedger.Persistence.Repositories
     public class AgentRepository : Repository<Agent>, IAgentRepository
     {
 
+
         public AgentRepository(GeneralLedgerContext context) : base(context)
         {
 

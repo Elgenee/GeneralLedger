@@ -8,7 +8,7 @@ namespace GeneralLedger.Persistence.Repositories
 {
     public class JournalEntryRepository : Repository<tblJournalEntry> , IJournalEntryRepository
     {
-
+       
         public JournalEntryRepository(GeneralLedgerContext context) : base(context)
         {
 
@@ -21,14 +21,16 @@ namespace GeneralLedger.Persistence.Repositories
 
         public IEnumerable<tblJournalEntry> GetJournalEntryWithGeneralLedger(int Id)
         {
-            return GeneralLedgerContext.tblJournalEntries
-                .Include(j => j.tblGLTranHeader)
-                .Include(j => j.tblGLTranHeader.Select(h => h.tblGLTranDetails))
-                .Include(j => j.tblGLTranHeader.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOA)))
-                .Include(j => j.tblGLTranHeader.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOASub)))
-                .Where(j => j.ID == Id)
-                .ToList();
-         
+            //GeneralLedgerContext.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //return GeneralLedgerContext.tblJournalEntries
+            //    .Include(j => j.tblJournalEntry1)
+            //    .Include(j => j.tblGLTranHeader.Select(h => h.tblGLTranDetails))
+            //    .Include(j => j.tblGLTranHeader.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOA)))
+            //    .Include(j => j.tblGLTranHeader.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOASub)))
+            //    .Where(j => j.ID == Id)
+            //    .ToList();
+
+            return GeneralLedgerContext.tblJournalEntries.ToList();
         }
     }
 }

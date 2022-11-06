@@ -53,64 +53,200 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Agent.cs" />
-    <Compile Include="Domain\Bank.cs" />
-    <Compile Include="Domain\Company.cs" />
-    <Compile Include="Domain\Currency.cs" />
-    <Compile Include="Domain\Customer.cs" />
-    <Compile Include="Domain\C__MigrationHistory.cs" />
-    <Compile Include="Domain\InventoryLog.cs" />
-    <Compile Include="Domain\InventoryLogOperationType.cs" />
-    <Compile Include="Domain\InventoryQuantityTotal.cs" />
-    <Compile Include="Domain\InventoryStock.cs" />
-    <Compile Include="Domain\PaymentType.cs" />
-    <Compile Include="Domain\PriceType.cs" />
-    <Compile Include="Domain\Product.cs" />
-    <Compile Include="Domain\ProductBrand.cs" />
-    <Compile Include="Domain\ProductCategory.cs" />
-    <Compile Include="Domain\ProductCharacteristic.cs" />
-    <Compile Include="Domain\ProductColor.cs" />
-    <Compile Include="Domain\ProductDetail.cs" />
-    <Compile Include="Domain\ProductSize.cs" />
-    <Compile Include="Domain\ProductType.cs" />
-    <Compile Include="Domain\ProductUnit.cs" />
-    <Compile Include="Domain\PuchaseOrderReceivingStatu.cs" />
-    <Compile Include="Domain\PurchaseOrder.cs" />
-    <Compile Include="Domain\PurchaseOrderCustomerLedger.cs" />
-    <Compile Include="Domain\PurchaseOrderCustomerLedgerDetail.cs" />
-    <Compile Include="Domain\PurchaseOrderDetail.cs" />
-    <Compile Include="Domain\PurchaseOrderDetailInventoryLedger.cs" />
-    <Compile Include="Domain\PurchaseOrderInventoryLedger.cs" />
-    <Compile Include="Domain\PurchaseOrderPayment.cs" />
-    <Compile Include="Domain\PurchaseOrderPaymentStatu.cs" />
-    <Compile Include="Domain\PurchaseOrderProductDetailHistory.cs" />
-    <Compile Include="Domain\PurchaseOrderProductTransactionType.cs" />
-    <Compile Include="Domain\PurchaseOrderReceiving.cs" />
-    <Compile Include="Domain\PurchaseOrderReceivingDetail.cs" />
-    <Compile Include="Domain\Sale.cs" />
-    <Compile Include="Domain\Supplier.cs" />
-    <Compile Include="Domain\tblGLBookType.cs" />
-    <Compile Include="Domain\tblGLTranDetail.cs" />
-    <Compile Include="Domain\tblGLTranHeader.cs" />
-    <Compile Include="Domain\tblJournalEntry.cs" />
-    <Compile Include="Domain\tblLocation.cs" />
-    <Compile Include="Domain\tblMasCOA.cs" />
-    <Compile Include="Domain\tblMasCOAGroup.cs" />
-    <Compile Include="Domain\tblMasCOASub.cs" />
-    <Compile Include="Domain\tblTBBatchDtl.cs" />
-    <Compile Include="Domain\tblTBBatchHdr.cs" />
-    <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\Agent.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Bank.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Company.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Currency.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Customer.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\GeneralLedgerContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralLedgerContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\GeneralLedgerContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\GeneralLedgerContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralLedgerContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryLog.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryLogOperationType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryQuantityTotal.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryStock.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryStockDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PaymentType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PriceType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Product.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\ProductBrand.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\ProductCategory.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\ProductCharacteristic.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\ProductColor.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\ProductDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\ProductSize.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\ProductType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\ProductUnit.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PuchaseOrderReceivingStatu.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrder.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderCustomerLedger.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderCustomerLedgerDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderDetailInventoryLedger.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderInventoryLedger.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderPayment.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderPaymentStatu.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderProductDetailHistory.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderProductTransactionType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderReceiving.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseOrderReceivingDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Sale.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Supplier.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\sysdiagram.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblGLBookType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblGLTranDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblGLTranHeader.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblJournalEntry.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblLocation.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblMasCOA.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblMasCOAGroup.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblMasCOASub.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblTBBatchDtl.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\tblTBBatchHdr.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\User.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAgentRepository.cs" />
     <Compile Include="Repositories\IJournalEntryRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ISaleRepository.cs" />
+    <Compile Include="Services\IAgentServices.cs" />
+    <Compile Include="Services\ISaleServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Domain\GeneralLedgerContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GeneralLedgerContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Domain\GeneralLedgerContext.edmx.diagram">
+      <DependentUpon>GeneralLedgerContext.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <Content Include="Domain\GeneralLedgerContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GeneralLedgerContext.edmx</DependentUpon>
+      <LastGenOutput>GeneralLedgerContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Domain\GeneralLedgerContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GeneralLedgerContext.edmx</DependentUpon>
+      <LastGenOutput>GeneralLedgerContext.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

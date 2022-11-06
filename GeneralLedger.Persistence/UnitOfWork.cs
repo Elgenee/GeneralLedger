@@ -25,6 +25,7 @@ namespace GeneralLedger.Persistence
             _generalLedgerContext = generalLedgerContext;
             Sale = new SaleRepository(_generalLedgerContext);
             JournalEntry = new JournalEntryRepository(_generalLedgerContext);
+            Agent = new AgentRepository(_generalLedgerContext);
 
         }
         public int Complete()
