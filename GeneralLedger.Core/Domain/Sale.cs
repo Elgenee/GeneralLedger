@@ -14,6 +14,13 @@ namespace GeneralLedger.Core.Domain
     
     public partial class Sale
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Sale()
+        {
+            this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
+            this.Collections = new HashSet<Collection>();
+        }
+    
         public int Id { get; set; }
         public string TRANo { get; set; }
         public string PONo { get; set; }
@@ -21,8 +28,13 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intIdCustomer { get; set; }
         public Nullable<int> intIdAgent { get; set; }
         public Nullable<System.DateTime> TransactionDate { get; set; }
+        public string Description { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Agent Agent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Collection> Collections { get; set; }
     }
 }

@@ -106,7 +106,7 @@ namespace GeneralLedger.UserControls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //TODO:saving purchase order receiving
+        
             int intParser;
             int Quantity = int.TryParse(this.txtQuantity.Text, out intParser) ? intParser : 0;
             int NewReceivedQuantity = int.TryParse(this.txtQuantityReceived.Text, out intParser) ? intParser : 0;

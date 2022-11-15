@@ -57,10 +57,16 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AgentRepository.cs" />
+    <Compile Include="Repositories\CoaRepository.cs" />
+    <Compile Include="Repositories\CoaSubRepository.cs" />
+    <Compile Include="Repositories\GLTranDetailRepository.cs" />
+    <Compile Include="Repositories\GLTranRepository.cs" />
     <Compile Include="Repositories\JournalEntryRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\SaleRepository.cs" />
     <Compile Include="Services\AgentServices.cs" />
+    <Compile Include="Services\GlTranDetailServices.cs" />
+    <Compile Include="Services\GLTranServices.cs" />
     <Compile Include="Services\SaleServices.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>

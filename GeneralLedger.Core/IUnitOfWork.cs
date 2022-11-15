@@ -13,6 +13,10 @@ namespace GeneralLedger.Core
         ISaleRepository Sale { get; }
         IJournalEntryRepository JournalEntry { get; }
         IAgentRepository Agent { get; }
+        IGLTranRepository GLTran { get; }
+        ICoaRepository Coa { get; }
+        ICoaSubRepository CoaSub { get; }
+        IGLTranDetailRepository GLTranDetail { get; }
 
         int Complete();
     }

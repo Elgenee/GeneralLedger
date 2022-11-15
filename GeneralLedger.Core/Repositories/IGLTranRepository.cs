@@ -7,11 +7,9 @@ using GeneralLedger.Core.Domain;
 
 namespace GeneralLedger.Core.Repositories
 {
-    public interface ISaleRepository : IRepository<Sale>
+    public interface IGLTranRepository : IRepository<tblGLTranHeader>
     {
-        IEnumerable<Sale> GetSaleWithJournalEntry(int Id);
-
-        IEnumerable<Sale> GetSaleWithCustomerAgent(string criteria);
+        IEnumerable<tblGLTranHeader> GetGLEntryById(int Id);
 
     }
 }

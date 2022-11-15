@@ -23,16 +23,20 @@ namespace GeneralLedger.Core.Domain
         public int ID { get; set; }
         public Nullable<int> intIDGLBookType { get; set; }
         public Nullable<System.DateTime> datBatchDate { get; set; }
-        public int intIDReference { get; set; }
+        public Nullable<int> intIDReference { get; set; }
         public string strTransactionCode { get; set; }
         public Nullable<decimal> curCreditAmount { get; set; }
         public Nullable<decimal> curDebitAmount { get; set; }
         public Nullable<System.DateTime> datInsertedDate { get; set; }
         public string strDescription { get; set; }
+        public Nullable<int> intIdSales { get; set; }
+        public Nullable<int> intIdCollection { get; set; }
     
+        public virtual Sale Sale { get; set; }
+        public virtual tblGLBookType tblGLBookType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranDetail> tblGLTranDetails { get; set; }
         public virtual tblJournalEntry tblJournalEntry { get; set; }
-        public virtual tblGLBookType tblGLBookType { get; set; }
+        public virtual Collection Collection { get; set; }
     }
 }

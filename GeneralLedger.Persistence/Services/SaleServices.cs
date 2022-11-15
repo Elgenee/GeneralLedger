@@ -15,7 +15,43 @@ namespace GeneralLedger.Persistence.Services
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
-                unitOfWork.Sale.Add(sale);
+               unitOfWork.Sale.Add(sale);
+
+                var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1029).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+                var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
+
+                var gLTranDetail = new List<tblGLTranDetail>
+                {
+                     new tblGLTranDetail
+                     { 
+                         intIDMasCoa = (int)journalEntry1.intIDMasCOA , 
+                         intIDMasCoaSub = journalEntry1.ID,
+                         curCredit = 0,
+                         curDebit = sale.Total
+                     },
+                     new tblGLTranDetail
+                     {
+                         intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
+                         intIDMasCoaSub = journalEntry2.ID,
+                         curCredit = sale.Total,
+                         curDebit = 0
+                     }
+                };
+
+                var gLTranHeader = new tblGLTranHeader
+                {
+                       curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
+                       curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
+                       intIDGLBookType = 6,
+                       //strTransactionCode = "SAL-" + sale.Id,
+                       datBatchDate = sale.TransactionDate,
+                       datInsertedDate = DateTime.Now,
+                       tblGLTranDetails = gLTranDetail,
+                       intIdSales = sale.Id
+                };
+
+                unitOfWork.GLTran.Add(gLTranHeader);
+                //var result = unitOfWork.GLTran.GetGLEntryById(9030);
                 unitOfWork.Complete();
                 return sale;
             }
@@ -29,30 +65,72 @@ namespace GeneralLedger.Persistence.Services
             }
         }
 
+        public List<Sale> GetSaleWithCustomerAgent(string criteria)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.Sale.GetSaleWithCustomerAgent(criteria).ToList();
+
+            }
+        }
+
+        public List<Sale> GetSaleWithJournalEntry(int Id)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.Sale.GetSaleWithJournalEntry(Id).ToList();
+    
+            }
+        }
+
         public void Remove(Sale sale)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
-                var result = unitOfWork.Sale.Get(sale.Id);
-                unitOfWork.Sale.Remove(result);
+                var resultSale = unitOfWork.Sale.GetSaleWithJournalEntry(sale.Id).SingleOrDefault();
+                var tblGlTranDetails = resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList();
+                unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
+                var tblGLTranHeaders = resultSale.tblGLTranHeaders.ToList();
+                unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
+                unitOfWork.Sale.Remove(resultSale);
                 unitOfWork.Complete();
             }
         }
 
-        public Sale Update(Sale sale)
+        public Sale Update(Sale sale, List<tblGLTranDetail> tblGLTranDetail)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
-                var result = unitOfWork.Sale.Get(sale.Id);
-                result.PONo = sale.PONo;
-                result.TRANo = sale.TRANo;
-                result.Total = sale.Total;
-                result.TransactionDate = sale.TransactionDate;
-                result.intIdCustomer = sale.intIdCustomer;
-                result.intIdAgent = sale.intIdAgent;
+                var resultSale = unitOfWork.Sale.GetSaleWithJournalEntry(sale.Id).SingleOrDefault();
+                resultSale.PONo = sale.PONo;
+                resultSale.TRANo = sale.TRANo;
+                resultSale.Total = sale.Total;
+                resultSale.TransactionDate = sale.TransactionDate;
+                resultSale.intIdCustomer = sale.intIdCustomer;
+                resultSale.intIdAgent = sale.intIdAgent;
+                resultSale.Description = sale.Description;
+                resultSale.tblGLTranHeaders.ToList()[0].strDescription = sale.Description;
+                resultSale.tblGLTranHeaders.ToList()[0].datBatchDate = sale.TransactionDate;
+                //resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList().Clear();
+                unitOfWork.GLTranDetail.RemoveRange(resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList());
+                foreach (var item in tblGLTranDetail)
+                {
+                    resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
+                    {
+                        curCredit = item.curCredit,
+                        curDebit = item.curDebit,
+                        intIDGLTranHeader = item.intIDGLTranHeader,
+                        intIDMasCoa = item.intIDMasCoa,
+                        intIDMasCoaSub = item.intIDMasCoaSub
+
+                    });
+                }
+                resultSale.tblGLTranHeaders.ToList()[0].curCreditAmount = resultSale.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curCredit);
+                resultSale.tblGLTranHeaders.ToList()[0].curDebitAmount = resultSale.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curDebit);
                 unitOfWork.Complete();
-                return sale;
+                return resultSale;
             }
         }
+
     }
 }

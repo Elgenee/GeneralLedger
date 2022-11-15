@@ -21,7 +21,8 @@ namespace GeneralLedger.Core.Domain
         public Nullable<decimal> curDebit { get; set; }
         public Nullable<decimal> curCredit { get; set; }
     
-        public virtual tblGLTranHeader tblGLTranHeader { get; set; }
         public virtual tblMasCOA tblMasCOA { get; set; }
+        public virtual tblMasCOASub tblMasCOASub { get; set; }
+        public virtual tblGLTranHeader tblGLTranHeader { get; set; }
     }
 }

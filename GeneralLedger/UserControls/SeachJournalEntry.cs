@@ -60,7 +60,6 @@ namespace GeneralLedger.UserControls
                         this.dgSeachJournal.Rows[i].Cells[3].Value = journalEntryList[i].strTransactionCode;
                         this.dgSeachJournal.Rows[i].Cells[4].Value = journalEntryList[i].GLTranHeader.ID;
                         this.dgSeachJournal.Rows[i].Cells[5].Value = journalEntryList[i].strTransactionNumber;
-
                     }
 
                     setRowNumber(this.dgSeachJournal);

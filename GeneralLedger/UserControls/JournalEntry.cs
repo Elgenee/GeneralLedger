@@ -302,7 +302,7 @@ namespace GeneralLedger.UserControls
                     JournalEntryBAL journalEntryBAL = new JournalEntryBAL();
                     this.GLTranDetail = journalEntryBAL.getTranDetail(this.IDGLTranHeader);
 
-                    var result = this.GLTranDetail.Where(g => g.intIDCOA == 4037).ToList();
+                    //var result = this.GLTranDetail.Where(g => g.intIDCOA == 4037).ToList();
 
                     if (GLTranDetail.Count > 0)
                     {
@@ -379,8 +379,6 @@ namespace GeneralLedger.UserControls
             {
                 MessageBox.Show("Error:" + ex.Message);
             }
-
-          
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

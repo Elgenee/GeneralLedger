@@ -42,7 +42,6 @@
         <EntityTypeShape EntityType="GeneralLedgerModel.Supplier" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.sysdiagram" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblGLTranDetail" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GeneralLedgerModel.tblGLTranHeader" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblLocation" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblMasCOA" Width="1.5" PointX="8.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblMasCOAGroup" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="true" />
@@ -85,14 +84,21 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" ManuallyRouted="false" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblMasCOASub_TblMasCoa" ManuallyRouted="false" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblTBBatchDtl_tblTBBatchHdr" ManuallyRouted="false" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOA" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblJournalEntry" Width="1.5" PointX="13.5" PointY="18.25" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Agent" Width="1.5" PointX="16.375" PointY="4.875" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Sales_Agent" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblGLBookType" Width="1.5" PointX="13.5" PointY="21.625" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOASub" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.tblGLTranHeader" Width="1.5" PointX="15.75" PointY="21.375" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Sales" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Collection" Width="1.5" PointX="16.5" PointY="8" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Collection_Bank" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Collection_Sales" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Collection" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

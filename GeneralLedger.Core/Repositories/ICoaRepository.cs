@@ -7,11 +7,8 @@ using GeneralLedger.Core.Domain;
 
 namespace GeneralLedger.Core.Repositories
 {
-    public interface ISaleRepository : IRepository<Sale>
+    public interface ICoaRepository : IRepository<tblMasCOA>
     {
-        IEnumerable<Sale> GetSaleWithJournalEntry(int Id);
-
-        IEnumerable<Sale> GetSaleWithCustomerAgent(string criteria);
 
     }
 }

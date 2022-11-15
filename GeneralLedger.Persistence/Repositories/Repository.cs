@@ -19,7 +19,7 @@ namespace GeneralLedger.Persistence.Repositories
         }
         public void Add(TEntity entity)
         {
-            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             Context.Set<TEntity>().Add(entity);
    
         }
@@ -28,42 +28,42 @@ namespace GeneralLedger.Persistence.Repositories
         {
          
             Context.Set<TEntity>().AddRange(entities);
-            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             return Context.Set<TEntity>().Where(predicate);
         }
 
         public TEntity Get(int id)
         {
-            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             return Context.Set<TEntity>().Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             return Context.Set<TEntity>().ToList();
         }
 
         public void Remove(TEntity entity)
         {
-            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             Context.Set<TEntity>().Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             Context.Set<TEntity>().RemoveRange(entities);
         }
 
         public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
-            Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             return Context.Set<TEntity>().SingleOrDefault(predicate);
         }
     }

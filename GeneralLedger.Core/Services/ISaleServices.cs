@@ -11,10 +11,12 @@ namespace GeneralLedger.Core.Services
     public interface ISaleServices
     {
         Sale Add(Sale sale);
-        Sale Update(Sale sale);
+        Sale Update(Sale sale, List<tblGLTranDetail> tblGLTranDetail);
         void Remove(Sale sale);
         List<Sale> GetAll();
-        
+        List<Sale> GetSaleWithJournalEntry(int Id);
+        List<Sale> GetSaleWithCustomerAgent(string criteria);
+
     }
 
 }

@@ -12,21 +12,27 @@ namespace GeneralLedger.Core.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class tblMasCOASub
+    public partial class Collection
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblMasCOASub()
+        public Collection()
         {
-            this.tblGLTranDetails = new HashSet<tblGLTranDetail>();
+            this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
         }
     
-        public int ID { get; set; }
-        public Nullable<int> intIDMasCOA { get; set; }
-        public string strCode { get; set; }
-        public string strName { get; set; }
+        public int Id { get; set; }
+        public Nullable<System.DateTime> TransactionDate { get; set; }
+        public string TRANo { get; set; }
+        public Nullable<int> SalesId { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public Nullable<bool> IsCash { get; set; }
+        public Nullable<int> BankId { get; set; }
+        public string CheckDetail { get; set; }
+        public string Description { get; set; }
     
-        public virtual tblMasCOA tblMasCOA { get; set; }
+        public virtual Bank Bank { get; set; }
+        public virtual Sale Sale { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblGLTranDetail> tblGLTranDetails { get; set; }
+        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
     }
 }

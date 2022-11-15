@@ -30,6 +30,20 @@
           <Property Name="curBalance" Type="money" />
           <Property Name="intIDCurrency" Type="int" />
         </EntityType>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TransactionDate" Type="date" />
+          <Property Name="TRANo" Type="nvarchar" MaxLength="500" />
+          <Property Name="SalesId" Type="int" />
+          <Property Name="Total" Type="money" />
+          <Property Name="IsCash" Type="bit" />
+          <Property Name="BankId" Type="int" />
+          <Property Name="CheckDetail" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Companies">
           <Key>
             <PropertyRef Name="Id" />
@@ -413,6 +427,7 @@
           <Property Name="intIdCustomer" Type="int" />
           <Property Name="intIdAgent" Type="int" />
           <Property Name="TransactionDate" Type="date" />
+          <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -464,12 +479,14 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="intIDGLBookType" Type="int" />
           <Property Name="datBatchDate" Type="date" />
-          <Property Name="intIDReference" Type="int" Nullable="false" />
+          <Property Name="intIDReference" Type="int" />
           <Property Name="strTransactionCode" Type="nvarchar" MaxLength="50" />
           <Property Name="curCreditAmount" Type="money" />
           <Property Name="curDebitAmount" Type="money" />
           <Property Name="datInsertedDate" Type="datetime" />
           <Property Name="strDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="intIdSales" Type="int" />
+          <Property Name="intIdCollection" Type="int" />
         </EntityType>
         <EntityType Name="tblJournalEntry">
           <Key>
@@ -560,6 +577,30 @@
             </Principal>
             <Dependent Role="Bank">
               <PropertyRef Name="intIDCurrency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_Sales">
+          <End Role="Sales" Type="Self.Sales" Multiplicity="0..1" />
+          <End Role="Collection" Type="Self.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="SalesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -803,6 +844,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblGLTranDetail_tblMasCOASub">
+          <End Role="tblMasCOASub" Type="Self.tblMasCOASub" Multiplicity="1" />
+          <End Role="tblGLTranDetail" Type="Self.tblGLTranDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasCOASub">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranDetail">
+              <PropertyRef Name="intIDMasCoaSub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_Collection">
+          <End Role="Collection" Type="Self.Collection" Multiplicity="0..1" />
+          <End Role="tblGLTranHeader" Type="Self.tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIdCollection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_Sales">
+          <End Role="Sales" Type="Self.Sales" Multiplicity="0..1" />
+          <End Role="tblGLTranHeader" Type="Self.tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIdSales" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblGLTranHeader_tblGLBookType">
           <End Role="tblGLBookType" Type="Self.tblGLBookType" Multiplicity="0..1" />
           <End Role="tblGLTranHeader" Type="Self.tblGLTranHeader" Multiplicity="*" />
@@ -816,7 +893,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblGLTranHeader_tblJournalEntry">
-          <End Role="tblJournalEntry" Type="Self.tblJournalEntry" Multiplicity="1" />
+          <End Role="tblJournalEntry" Type="Self.tblJournalEntry" Multiplicity="0..1" />
           <End Role="tblGLTranHeader" Type="Self.tblGLTranHeader" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblJournalEntry">
@@ -1034,6 +1111,7 @@
         <EntityContainer Name="GeneralLedgerModelStoreContainer">
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Collection" EntityType="Self.Collection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -1083,6 +1161,14 @@
           <AssociationSet Name="FK_Bank_Currency" Association="Self.FK_Bank_Currency">
             <End Role="Currency" EntitySet="Currency" />
             <End Role="Bank" EntitySet="Bank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_Bank" Association="Self.FK_Collection_Bank">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="Collection" EntitySet="Collection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_Sales" Association="Self.FK_Collection_Sales">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="Collection" EntitySet="Collection" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
             <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
@@ -1163,6 +1249,18 @@
           <AssociationSet Name="FK_tblGLTranDetail_tblMasCOA" Association="Self.FK_tblGLTranDetail_tblMasCOA">
             <End Role="tblMasCOA" EntitySet="tblMasCOA" />
             <End Role="tblGLTranDetail" EntitySet="tblGLTranDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranDetail_tblMasCOASub" Association="Self.FK_tblGLTranDetail_tblMasCOASub">
+            <End Role="tblMasCOASub" EntitySet="tblMasCOASub" />
+            <End Role="tblGLTranDetail" EntitySet="tblGLTranDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_Collection" Association="Self.FK_tblGLTranHeader_Collection">
+            <End Role="Collection" EntitySet="Collection" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_Sales" Association="Self.FK_tblGLTranHeader_Sales">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeader" />
           </AssociationSet>
           <AssociationSet Name="FK_tblGLTranHeader_tblGLBookType" Association="Self.FK_tblGLTranHeader_tblGLBookType">
             <End Role="tblGLBookType" EntitySet="tblGLBookType" />
@@ -1261,6 +1359,7 @@
           <Property Name="intIDCurrency" Type="Int32" />
           <NavigationProperty Name="Currency" Relationship="Self.FK_Bank_Currency" FromRole="Bank" ToRole="Currency" />
           <NavigationProperty Name="Suppliers" Relationship="Self.FK_Suppliers_Bank" FromRole="Bank" ToRole="Suppliers" />
+          <NavigationProperty Name="Collections" Relationship="GeneralLedgerModel.FK_Collection_Bank" FromRole="Bank" ToRole="Collection" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -1706,6 +1805,9 @@
           <Property Name="TransactionDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Sales_Customer" FromRole="Sales" ToRole="Customer" />
           <NavigationProperty Name="Agent" Relationship="GeneralLedgerModel.FK_Sales_Agent" FromRole="Sale" ToRole="Agent" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Sales" FromRole="Sale" ToRole="tblGLTranHeader" />
+          <NavigationProperty Name="Collections" Relationship="GeneralLedgerModel.FK_Collection_Sales" FromRole="Sale" ToRole="Collection" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -1744,25 +1846,9 @@
           <Property Name="intIDMasCoaSub" Type="Int32" Nullable="false" />
           <Property Name="curDebit" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="curCredit" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="tblGLTranHeader" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" FromRole="tblGLTranDetail" ToRole="tblGLTranHeader" />
           <NavigationProperty Name="tblMasCOA" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOA" FromRole="tblGLTranDetail" ToRole="tblMasCOA" />
-        </EntityType>
-        <EntityType Name="tblGLTranHeader">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDGLBookType" Type="Int32" />
-          <Property Name="datBatchDate" Type="DateTime" Precision="0" />
-          <Property Name="intIDReference" Type="Int32" Nullable="false" />
-          <Property Name="strTransactionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="curCreditAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curDebitAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="datInsertedDate" Type="DateTime" Precision="3" />
-          <Property Name="strDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblGLTranDetails" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" FromRole="tblGLTranHeader" ToRole="tblGLTranDetail" />
-          <NavigationProperty Name="tblJournalEntry" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" FromRole="tblGLTranHeader" ToRole="tblJournalEntry" />
-          <NavigationProperty Name="tblGLBookType" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType" FromRole="tblGLTranHeader" ToRole="tblGLBookType" />
+          <NavigationProperty Name="tblMasCOASub" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOASub" FromRole="tblGLTranDetail" ToRole="tblMasCOASub" />
+          <NavigationProperty Name="tblGLTranHeader" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" FromRole="tblGLTranDetail" ToRole="tblGLTranHeader" />
         </EntityType>
         <EntityType Name="tblLocation">
           <Key>
@@ -1803,6 +1889,7 @@
           <Property Name="strCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblMasCOA" Relationship="Self.FK_tblMasCOASub_TblMasCoa" FromRole="tblMasCOASub" ToRole="tblMasCOA" />
+          <NavigationProperty Name="tblGLTranDetails" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOASub" FromRole="tblMasCOASub" ToRole="tblGLTranDetail" />
         </EntityType>
         <EntityType Name="tblTBBatchDtl">
           <Key>
@@ -2299,7 +2386,6 @@
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tblGLTranDetails" EntityType="Self.tblGLTranDetail" />
-          <EntitySet Name="tblGLTranHeaders" EntityType="Self.tblGLTranHeader" />
           <EntitySet Name="tblLocations" EntityType="Self.tblLocation" />
           <EntitySet Name="tblMasCOAs" EntityType="Self.tblMasCOA" />
           <EntitySet Name="tblMasCOAGroups" EntityType="Self.tblMasCOAGroup" />
@@ -2447,42 +2533,52 @@
             <End Role="tblTBBatchHdr" EntitySet="tblTBBatchHdrs" />
             <End Role="tblTBBatchDtl" EntitySet="tblTBBatchDtls" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblGLTranDetail_tblGLTranHeader" Association="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader">
-            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
-            <End Role="tblGLTranDetail" EntitySet="tblGLTranDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblGLTranDetail_tblMasCOA" Association="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOA">
             <End Role="tblMasCOA" EntitySet="tblMasCOAs" />
             <End Role="tblGLTranDetail" EntitySet="tblGLTranDetails" />
           </AssociationSet>
           <EntitySet Name="tblJournalEntries" EntityType="GeneralLedgerModel.tblJournalEntry" />
-          <AssociationSet Name="FK_tblGLTranHeader_tblJournalEntry" Association="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry">
-            <End Role="tblJournalEntry" EntitySet="tblJournalEntries" />
-            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
-          </AssociationSet>
           <EntitySet Name="Agents" EntityType="GeneralLedgerModel.Agent" />
           <AssociationSet Name="FK_Sales_Agent" Association="GeneralLedgerModel.FK_Sales_Agent">
             <End Role="Agent" EntitySet="Agents" />
             <End Role="Sale" EntitySet="Sales" />
           </AssociationSet>
           <EntitySet Name="tblGLBookTypes" EntityType="GeneralLedgerModel.tblGLBookType" />
+          <AssociationSet Name="FK_tblGLTranDetail_tblMasCOASub" Association="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOASub">
+            <End Role="tblMasCOASub" EntitySet="tblMasCOASubs" />
+            <End Role="tblGLTranDetail" EntitySet="tblGLTranDetails" />
+          </AssociationSet>
+          <EntitySet Name="tblGLTranHeaders" EntityType="GeneralLedgerModel.tblGLTranHeader" />
+          <AssociationSet Name="FK_tblGLTranHeader_Sales" Association="GeneralLedgerModel.FK_tblGLTranHeader_Sales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblGLTranHeader_tblGLBookType" Association="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType">
             <End Role="tblGLBookType" EntitySet="tblGLBookTypes" />
             <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranDetail_tblGLTranHeader" Association="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader">
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
+            <End Role="tblGLTranDetail" EntitySet="tblGLTranDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_tblJournalEntry" Association="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry">
+            <End Role="tblJournalEntry" EntitySet="tblJournalEntries" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
+          </AssociationSet>
+          <EntitySet Name="Collections" EntityType="GeneralLedgerModel.Collection" />
+          <AssociationSet Name="FK_Collection_Bank" Association="GeneralLedgerModel.FK_Collection_Bank">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Collection" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_Sales" Association="GeneralLedgerModel.FK_Collection_Sales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="Collection" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_Collection" Association="GeneralLedgerModel.FK_tblGLTranHeader_Collection">
+            <End Role="Collection" EntitySet="Collections" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
+          </AssociationSet>
           </EntityContainer>
-        <Association Name="FK_tblGLTranDetail_tblGLTranHeader">
-          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="1" />
-          <End Type="GeneralLedgerModel.tblGLTranDetail" Role="tblGLTranDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblGLTranHeader">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblGLTranDetail">
-              <PropertyRef Name="intIDGLTranHeader" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
           <End Type="GeneralLedgerModel.tblGLTranDetail" Role="tblGLTranDetail" Multiplicity="*" />
@@ -2506,18 +2602,6 @@
           <Property Name="strTransactionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" FromRole="tblJournalEntry" ToRole="tblGLTranHeader" />
         </EntityType>
-        <Association Name="FK_tblGLTranHeader_tblJournalEntry">
-          <End Type="GeneralLedgerModel.tblJournalEntry" Role="tblJournalEntry" Multiplicity="1" />
-          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblJournalEntry">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblGLTranHeader">
-              <PropertyRef Name="intIDReference" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Agent">
           <Key>
             <PropertyRef Name="Id" />
@@ -2549,6 +2633,51 @@
           <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType" FromRole="tblGLBookType" ToRole="tblGLTranHeader" />
         </EntityType>
+        <Association Name="FK_tblGLTranDetail_tblMasCOASub">
+          <End Type="GeneralLedgerModel.tblMasCOASub" Role="tblMasCOASub" Multiplicity="1" />
+          <End Type="GeneralLedgerModel.tblGLTranDetail" Role="tblGLTranDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMasCOASub">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranDetail">
+              <PropertyRef Name="intIDMasCoaSub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblGLTranHeader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDGLBookType" Type="Int32" />
+          <Property Name="datBatchDate" Type="DateTime" Precision="0" />
+          <Property Name="intIDReference" Type="Int32" />
+          <Property Name="strTransactionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="curCreditAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curDebitAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="datInsertedDate" Type="DateTime" Precision="3" />
+          <Property Name="strDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="intIdSales" Type="Int32" />
+          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Sales" FromRole="tblGLTranHeader" ToRole="Sale" />
+          <NavigationProperty Name="tblGLBookType" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType" FromRole="tblGLTranHeader" ToRole="tblGLBookType" />
+          <NavigationProperty Name="tblGLTranDetails" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" FromRole="tblGLTranHeader" ToRole="tblGLTranDetail" />
+          <NavigationProperty Name="tblJournalEntry" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" FromRole="tblGLTranHeader" ToRole="tblJournalEntry" />
+          <Property Name="intIdCollection" Type="Int32" />
+          <NavigationProperty Name="Collection" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Collection" FromRole="tblGLTranHeader" ToRole="Collection" />
+        </EntityType>
+        <Association Name="FK_tblGLTranHeader_Sales">
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIdSales" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblGLTranHeader_tblGLBookType">
           <End Type="GeneralLedgerModel.tblGLBookType" Role="tblGLBookType" Multiplicity="0..1" />
           <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
@@ -2558,6 +2687,83 @@
             </Principal>
             <Dependent Role="tblGLTranHeader">
               <PropertyRef Name="intIDGLBookType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranDetail_tblGLTranHeader">
+          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="1" />
+          <End Type="GeneralLedgerModel.tblGLTranDetail" Role="tblGLTranDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGLTranHeader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranDetail">
+              <PropertyRef Name="intIDGLTranHeader" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_tblJournalEntry">
+          <End Type="GeneralLedgerModel.tblJournalEntry" Role="tblJournalEntry" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJournalEntry">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIDReference" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="0" />
+          <Property Name="TRANo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SalesId" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsCash" Type="Boolean" />
+          <Property Name="BankId" Type="Int32" />
+          <Property Name="CheckDetail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bank" Relationship="GeneralLedgerModel.FK_Collection_Bank" FromRole="Collection" ToRole="Bank" />
+          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_Collection_Sales" FromRole="Collection" ToRole="Sale" />
+          <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Collection" FromRole="Collection" ToRole="tblGLTranHeader" />
+        </EntityType>
+        <Association Name="FK_Collection_Bank">
+          <End Type="GeneralLedgerModel.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_Sales">
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="SalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_Collection">
+          <End Type="GeneralLedgerModel.Collection" Role="Collection" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIdCollection" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2990,6 +3196,7 @@
           <EntitySetMapping Name="Sales">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Sale">
               <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TRANo" ColumnName="TRANo" />
                 <ScalarProperty Name="PONo" ColumnName="PONo" />
@@ -3036,21 +3243,6 @@
                 <ScalarProperty Name="intIDMasCoaSub" ColumnName="intIDMasCoaSub" />
                 <ScalarProperty Name="curDebit" ColumnName="curDebit" />
                 <ScalarProperty Name="curCredit" ColumnName="curCredit" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblGLTranHeaders">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.tblGLTranHeader">
-              <MappingFragment StoreEntitySet="tblGLTranHeader">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="intIDGLBookType" ColumnName="intIDGLBookType" />
-                <ScalarProperty Name="datBatchDate" ColumnName="datBatchDate" />
-                <ScalarProperty Name="intIDReference" ColumnName="intIDReference" />
-                <ScalarProperty Name="strTransactionCode" ColumnName="strTransactionCode" />
-                <ScalarProperty Name="curCreditAmount" ColumnName="curCreditAmount" />
-                <ScalarProperty Name="curDebitAmount" ColumnName="curDebitAmount" />
-                <ScalarProperty Name="datInsertedDate" ColumnName="datInsertedDate" />
-                <ScalarProperty Name="strDescription" ColumnName="strDescription" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3158,6 +3350,38 @@
               <MappingFragment StoreEntitySet="tblGLBookType">
                 <ScalarProperty Name="strName" ColumnName="strName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGLTranHeaders">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.tblGLTranHeader">
+              <MappingFragment StoreEntitySet="tblGLTranHeader">
+                <ScalarProperty Name="intIdCollection" ColumnName="intIdCollection" />
+                <ScalarProperty Name="intIdSales" ColumnName="intIdSales" />
+                <ScalarProperty Name="strDescription" ColumnName="strDescription" />
+                <ScalarProperty Name="datInsertedDate" ColumnName="datInsertedDate" />
+                <ScalarProperty Name="curDebitAmount" ColumnName="curDebitAmount" />
+                <ScalarProperty Name="curCreditAmount" ColumnName="curCreditAmount" />
+                <ScalarProperty Name="strTransactionCode" ColumnName="strTransactionCode" />
+                <ScalarProperty Name="intIDReference" ColumnName="intIDReference" />
+                <ScalarProperty Name="datBatchDate" ColumnName="datBatchDate" />
+                <ScalarProperty Name="intIDGLBookType" ColumnName="intIDGLBookType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collections">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Collection">
+              <MappingFragment StoreEntitySet="Collection">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CheckDetail" ColumnName="CheckDetail" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="IsCash" ColumnName="IsCash" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+                <ScalarProperty Name="TRANo" ColumnName="TRANo" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

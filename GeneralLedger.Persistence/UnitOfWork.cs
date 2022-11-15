@@ -20,12 +20,24 @@ namespace GeneralLedger.Persistence
 
         public IAgentRepository Agent { get; set; }
 
+        public IGLTranRepository GLTran { get; set; }
+
+        public ICoaRepository Coa { get; set; }
+
+        public ICoaSubRepository CoaSub { get; set; }
+
+        public IGLTranDetailRepository GLTranDetail { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
             Sale = new SaleRepository(_generalLedgerContext);
             JournalEntry = new JournalEntryRepository(_generalLedgerContext);
             Agent = new AgentRepository(_generalLedgerContext);
+            GLTran = new GLTranRepository(_generalLedgerContext);
+            Coa = new CoaRepository(_generalLedgerContext);
+            CoaSub = new CoaSubRepository(_generalLedgerContext);
+            GLTranDetail = new GLTranDetailRepository(_generalLedgerContext);
 
         }
         public int Complete()

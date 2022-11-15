@@ -18,6 +18,7 @@ namespace GeneralLedger.Core.Domain
         public Bank()
         {
             this.Suppliers = new HashSet<Supplier>();
+            this.Collections = new HashSet<Collection>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace GeneralLedger.Core.Domain
         public virtual Currency Currency { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supplier> Suppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Collection> Collections { get; set; }
     }
 }

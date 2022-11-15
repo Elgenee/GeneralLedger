@@ -399,6 +399,12 @@
     <Compile Include="UserControls\frmSupplier.Designer.cs">
       <DependentUpon>frmSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchSale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchSale.Designer.cs">
+      <DependentUpon>SearchSale.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -562,6 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmSupplier.resx">
       <DependentUpon>frmSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchSale.resx">
+      <DependentUpon>SearchSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchSupplier.resx">
       <DependentUpon>SearchSupplier.cs</DependentUpon>

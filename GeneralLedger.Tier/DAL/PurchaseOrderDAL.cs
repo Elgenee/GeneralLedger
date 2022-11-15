@@ -175,7 +175,7 @@ namespace GeneralLedger.Tier.DAL
             }
         }
 
-        //TODO: spGetPurchaseOrderForApproval update sp, LEFT join PurchaseOrderForApproval Table
+
         public string manage(string xml, string transType)
         {
             var dbUtil = new DatabaseManager();

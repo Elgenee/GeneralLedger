@@ -62,7 +62,6 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblGLTranDetail> tblGLTranDetails { get; set; }
-        public virtual DbSet<tblGLTranHeader> tblGLTranHeaders { get; set; }
         public virtual DbSet<tblLocation> tblLocations { get; set; }
         public virtual DbSet<tblMasCOA> tblMasCOAs { get; set; }
         public virtual DbSet<tblMasCOAGroup> tblMasCOAGroups { get; set; }
@@ -73,5 +72,7 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<tblJournalEntry> tblJournalEntries { get; set; }
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<tblGLBookType> tblGLBookTypes { get; set; }
+        public virtual DbSet<tblGLTranHeader> tblGLTranHeaders { get; set; }
+        public virtual DbSet<Collection> Collections { get; set; }
     }
 }
