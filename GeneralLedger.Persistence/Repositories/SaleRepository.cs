@@ -32,6 +32,16 @@ namespace GeneralLedger.Persistence.Repositories
                 .ToList();
         }
 
+        public Sale GetSaleWithCustomerAgent(int Id)
+        {
+            return GeneralLedgerContext.Sales
+                .Include(s => s.Customer)
+                .Include(s => s.Agent)
+                .Include(s => s.tblGLTranHeaders)
+                .Where(s => s.Id == Id)
+                .SingleOrDefault();
+        }
+
         public IEnumerable<Sale> GetSaleWithJournalEntry(int Id)
         {
             return GeneralLedgerContext.Sales

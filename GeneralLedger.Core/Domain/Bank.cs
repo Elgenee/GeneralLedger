@@ -19,6 +19,7 @@ namespace GeneralLedger.Core.Domain
         {
             this.Suppliers = new HashSet<Supplier>();
             this.Collections = new HashSet<Collection>();
+            this.tblMasCOASubs = new HashSet<tblMasCOASub>();
         }
     
         public int Id { get; set; }
@@ -37,5 +38,7 @@ namespace GeneralLedger.Core.Domain
         public virtual ICollection<Supplier> Suppliers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Collection> Collections { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMasCOASub> tblMasCOASubs { get; set; }
     }
 }

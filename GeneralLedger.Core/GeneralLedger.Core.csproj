@@ -176,6 +176,15 @@
     <Compile Include="Domain\Sale.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\SalesCustomerLedger.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\SalesCustomerLedgerTransactionType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\spGetSalesCustomerLedger_Result.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\Supplier.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
@@ -220,22 +229,26 @@
     <Compile Include="Repositories\IAgentRepository.cs" />
     <Compile Include="Repositories\ICoaRepository.cs" />
     <Compile Include="Repositories\ICoaSubRepository.cs" />
+    <Compile Include="Repositories\ICollectionRepository.cs" />
     <Compile Include="Repositories\IGLTranDetailRepository.cs" />
     <Compile Include="Repositories\IGLTranRepository.cs" />
     <Compile Include="Repositories\IJournalEntryRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ISaleRepository.cs" />
+    <Compile Include="Repositories\ISalesCustomerLedgerRepository.cs" />
     <Compile Include="Services\IAgentServices.cs" />
+    <Compile Include="Services\ICollectionServices.cs" />
     <Compile Include="Services\IGLTranDetailServices.cs" />
     <Compile Include="Services\IGLTranServices.cs" />
+    <Compile Include="Services\ISalesCustomerLedgerServices.cs" />
     <Compile Include="Services\ISaleServices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <EntityDeploy Include="Domain\GeneralLedgerContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GeneralLedgerContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.config" />
     <None Include="Domain\GeneralLedgerContext.edmx.diagram">
       <DependentUpon>GeneralLedgerContext.edmx</DependentUpon>
     </None>

@@ -18,6 +18,5 @@ namespace GeneralLedger.Tier.BO
         public decimal Debit { get; set; }
         public decimal Credit { get; set; }
         public decimal Balance { get; set; }
-
     }
 }

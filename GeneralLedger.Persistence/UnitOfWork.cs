@@ -28,6 +28,10 @@ namespace GeneralLedger.Persistence
 
         public IGLTranDetailRepository GLTranDetail { get; set; }
 
+        public ICollectionRepository Collection { get; set; }
+
+        public ISalesCustomerLedgerRepository SalesCustomerLedger { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -38,6 +42,8 @@ namespace GeneralLedger.Persistence
             Coa = new CoaRepository(_generalLedgerContext);
             CoaSub = new CoaSubRepository(_generalLedgerContext);
             GLTranDetail = new GLTranDetailRepository(_generalLedgerContext);
+            Collection = new CollectionRepository(_generalLedgerContext);
+            SalesCustomerLedger = new SalesCustomerLedgerRepository(_generalLedgerContext);
 
         }
         public int Complete()

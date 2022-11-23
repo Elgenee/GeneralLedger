@@ -12,6 +12,8 @@ namespace GeneralLedger.Core.Domain
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class GeneralLedgerContext : DbContext
     {
@@ -74,5 +76,16 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<tblGLBookType> tblGLBookTypes { get; set; }
         public virtual DbSet<tblGLTranHeader> tblGLTranHeaders { get; set; }
         public virtual DbSet<Collection> Collections { get; set; }
+        public virtual DbSet<SalesCustomerLedgerTransactionType> SalesCustomerLedgerTransactionTypes { get; set; }
+        public virtual DbSet<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
+    
+        public virtual ObjectResult<spGetSalesCustomerLedger_Result> spGetSalesCustomerLedger(Nullable<int> salesID)
+        {
+            var salesIDParameter = salesID.HasValue ?
+                new ObjectParameter("SalesID", salesID) :
+                new ObjectParameter("SalesID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetSalesCustomerLedger_Result>("spGetSalesCustomerLedger", salesIDParameter);
+        }
     }
 }

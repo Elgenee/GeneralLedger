@@ -24,9 +24,11 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intIDMasCOA { get; set; }
         public string strCode { get; set; }
         public string strName { get; set; }
+        public Nullable<int> intIDBank { get; set; }
     
         public virtual tblMasCOA tblMasCOA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranDetail> tblGLTranDetails { get; set; }
+        public virtual Bank Bank { get; set; }
     }
 }

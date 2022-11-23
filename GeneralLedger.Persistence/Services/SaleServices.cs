@@ -17,6 +17,17 @@ namespace GeneralLedger.Persistence.Services
             {
                unitOfWork.Sale.Add(sale);
 
+                var salesCustomerLedger = new SalesCustomerLedger { 
+                 intIdSales = sale.Id,
+                 intIdSalesCustomerLedgerTransctionType = 1,
+                 TotalAmount = sale.Total,
+                 TransactionDate = sale.TransactionDate,
+                 TransactionNo = sale.TRANo,
+                 DateInserted = DateTime.Now
+                };
+
+                unitOfWork.SalesCustomerLedger.Add(salesCustomerLedger);
+
                 var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1029).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
                 var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
 
@@ -65,11 +76,28 @@ namespace GeneralLedger.Persistence.Services
             }
         }
 
+        public Sale GetSale(int Id)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.Sale.Get(Id);
+            }
+        }
+
         public List<Sale> GetSaleWithCustomerAgent(string criteria)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 return unitOfWork.Sale.GetSaleWithCustomerAgent(criteria).ToList();
+
+            }
+        }
+
+        public Sale GetSaleWithCustomerAgent(int Id)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.Sale.GetSaleWithCustomerAgent(Id);
 
             }
         }
@@ -92,6 +120,8 @@ namespace GeneralLedger.Persistence.Services
                 unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
                 var tblGLTranHeaders = resultSale.tblGLTranHeaders.ToList();
                 unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
+                var salesLedger = unitOfWork.SalesCustomerLedger.Find(s => s.intIdSales == sale.Id && s.intIdSalesCustomerLedgerTransctionType == 1).SingleOrDefault();
+                unitOfWork.SalesCustomerLedger.Remove(salesLedger);
                 unitOfWork.Sale.Remove(resultSale);
                 unitOfWork.Complete();
             }
@@ -101,6 +131,7 @@ namespace GeneralLedger.Persistence.Services
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
+                //Update ledger if sale is updated
                 var resultSale = unitOfWork.Sale.GetSaleWithJournalEntry(sale.Id).SingleOrDefault();
                 resultSale.PONo = sale.PONo;
                 resultSale.TRANo = sale.TRANo;
@@ -108,9 +139,15 @@ namespace GeneralLedger.Persistence.Services
                 resultSale.TransactionDate = sale.TransactionDate;
                 resultSale.intIdCustomer = sale.intIdCustomer;
                 resultSale.intIdAgent = sale.intIdAgent;
+                resultSale.Terms = sale.Terms;
                 resultSale.Description = sale.Description;
                 resultSale.tblGLTranHeaders.ToList()[0].strDescription = sale.Description;
                 resultSale.tblGLTranHeaders.ToList()[0].datBatchDate = sale.TransactionDate;
+
+                var salesLedger = unitOfWork.SalesCustomerLedger.Find(s => s.intIdSales == sale.Id && s.intIdSalesCustomerLedgerTransctionType == 1).SingleOrDefault();
+                salesLedger.TotalAmount = sale.Total;
+                salesLedger.TransactionDate = sale.TransactionDate;
+                salesLedger.TransactionNo = sale.TRANo;
                 //resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList().Clear();
                 unitOfWork.GLTranDetail.RemoveRange(resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList());
                 foreach (var item in tblGLTranDetail)

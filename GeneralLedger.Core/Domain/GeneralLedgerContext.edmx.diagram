@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3fad5c0901894c42a26df00e09cb400a" Name="Diagram1">
+      <Diagram DiagramId="3fad5c0901894c42a26df00e09cb400a" Name="Diagram1" ZoomLevel="26">
         <EntityTypeShape EntityType="GeneralLedgerModel.Bank" Width="1.5" PointX="1.5" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Company" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Currency" Width="1.5" PointX="1.5" PointY="16.75" IsExpanded="true" />
@@ -99,6 +99,12 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_Collection_Bank" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Collection_Sales" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Collection" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblMasCOASub_Bank" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.SalesCustomerLedgerTransactionType" Width="1.5" PointX="16.5" PointY="18.5" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.SalesCustomerLedger" Width="1.5" PointX="18.75" PointY="16.875" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_Collection" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_SalesCustomerLedgerTransactionType" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

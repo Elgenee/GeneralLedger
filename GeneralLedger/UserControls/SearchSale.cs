@@ -53,8 +53,8 @@ namespace GeneralLedger.UserControls
                         this.dgSearchSale.Rows[i].Cells["ID"].Value = saleResult[i].Id;
                         this.dgSearchSale.Rows[i].Cells["TransactionNo"].Value = saleResult[i].TRANo;
                         this.dgSearchSale.Rows[i].Cells["PONo"].Value = saleResult[i].PONo;
-                        this.dgSearchSale.Rows[i].Cells["TransactionDate"].Value = saleResult[i].TransactionDate;
-                        this.dgSearchSale.Rows[i].Cells["Total"].Value = saleResult[i].Total;
+                        this.dgSearchSale.Rows[i].Cells["TransactionDate"].Value = saleResult[i].TransactionDate.Value.ToShortDateString();
+                        this.dgSearchSale.Rows[i].Cells["Total"].Value = string.Format("{0:0.00}", saleResult[i].Total);
                         this.dgSearchSale.Rows[i].Cells["CustomerId"].Value = saleResult[i].Customer.Id;
                         this.dgSearchSale.Rows[i].Cells["Customer"].Value = saleResult[i].Customer.strName;
                         this.dgSearchSale.Rows[i].Cells["Terms"].Value = saleResult[i].Customer.intTerms;

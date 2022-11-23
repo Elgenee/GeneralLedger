@@ -12,30 +12,18 @@ namespace GeneralLedger.Core.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Collection
+    public partial class SalesCustomerLedgerTransactionType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Collection()
+        public SalesCustomerLedgerTransactionType()
         {
-            this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
             this.SalesCustomerLedgers = new HashSet<SalesCustomerLedger>();
         }
     
         public int Id { get; set; }
-        public Nullable<System.DateTime> TransactionDate { get; set; }
-        public string TRANo { get; set; }
-        public Nullable<int> SalesId { get; set; }
-        public Nullable<decimal> Total { get; set; }
-        public Nullable<bool> IsCash { get; set; }
-        public Nullable<int> BankId { get; set; }
-        public string CheckDetail { get; set; }
-        public string Description { get; set; }
-        public Nullable<decimal> RunningBalance { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
     
-        public virtual Bank Bank { get; set; }
-        public virtual Sale Sale { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
     }

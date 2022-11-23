@@ -16,6 +16,8 @@ namespace GeneralLedger.Core.Services
         List<Sale> GetAll();
         List<Sale> GetSaleWithJournalEntry(int Id);
         List<Sale> GetSaleWithCustomerAgent(string criteria);
+        Sale GetSale(int Id);
+        Sale GetSaleWithCustomerAgent(int Id);
 
     }
 

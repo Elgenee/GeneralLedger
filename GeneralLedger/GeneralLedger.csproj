@@ -15,23 +15,25 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -128,6 +130,12 @@
     </Compile>
     <Compile Include="UserControls\frmAgent.Designer.cs">
       <DependentUpon>frmAgent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmCollection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmCollection.Designer.cs">
+      <DependentUpon>frmCollection.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmSales.cs">
       <SubType>UserControl</SubType>
@@ -273,6 +281,12 @@
     <Compile Include="UserControls\frmPurchaseOrderPaymentLedger.Designer.cs">
       <DependentUpon>frmPurchaseOrderPaymentLedger.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\frmSalesLedger.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmSalesLedger.Designer.cs">
+      <DependentUpon>frmSalesLedger.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\JournalEntry.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -375,6 +389,12 @@
     <Compile Include="UserControls\SearchChooseProduct.Designer.cs">
       <DependentUpon>SearchChooseProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchCollection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchCollection.Designer.cs">
+      <DependentUpon>SearchCollection.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -425,6 +445,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\frmAgent.resx">
       <DependentUpon>frmAgent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmCollection.resx">
+      <DependentUpon>frmCollection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmSales.resx">
       <DependentUpon>frmSales.cs</DependentUpon>
@@ -506,6 +529,9 @@
     <EmbeddedResource Include="UserControls\frmPurchaseOrderPaymentLedger.resx">
       <DependentUpon>frmPurchaseOrderPaymentLedger.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmSalesLedger.resx">
+      <DependentUpon>frmSalesLedger.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\JournalEntry.resx">
       <DependentUpon>JournalEntry.cs</DependentUpon>
     </EmbeddedResource>
@@ -556,6 +582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchChooseProduct.resx">
       <DependentUpon>SearchChooseProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchCollection.resx">
+      <DependentUpon>SearchCollection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchCustomer.resx">
       <DependentUpon>SearchCustomer.cs</DependentUpon>

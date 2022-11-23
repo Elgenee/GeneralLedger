@@ -17,6 +17,8 @@ namespace GeneralLedger.Core
         ICoaRepository Coa { get; }
         ICoaSubRepository CoaSub { get; }
         IGLTranDetailRepository GLTranDetail { get; }
+        ICollectionRepository Collection{ get; }
+        ISalesCustomerLedgerRepository SalesCustomerLedger { get; }
 
         int Complete();
     }

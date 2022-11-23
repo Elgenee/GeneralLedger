@@ -19,6 +19,7 @@ namespace GeneralLedger.Core.Domain
         {
             this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
             this.Collections = new HashSet<Collection>();
+            this.SalesCustomerLedgers = new HashSet<SalesCustomerLedger>();
         }
     
         public int Id { get; set; }
@@ -29,6 +30,7 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intIdAgent { get; set; }
         public Nullable<System.DateTime> TransactionDate { get; set; }
         public string Description { get; set; }
+        public Nullable<int> Terms { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Agent Agent { get; set; }
@@ -36,5 +38,7 @@ namespace GeneralLedger.Core.Domain
         public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Collection> Collections { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
     }
 }

@@ -262,6 +262,7 @@
             this.Description.MinimumWidth = 6;
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
+            this.Description.Visible = false;
             this.Description.Width = 104;
             // 
             // GLTranHeaderID
@@ -270,6 +271,7 @@
             this.GLTranHeaderID.MinimumWidth = 6;
             this.GLTranHeaderID.Name = "GLTranHeaderID";
             this.GLTranHeaderID.ReadOnly = true;
+            this.GLTranHeaderID.Visible = false;
             this.GLTranHeaderID.Width = 125;
             // 
             // SearchSale
