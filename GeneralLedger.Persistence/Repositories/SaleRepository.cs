@@ -29,7 +29,7 @@ namespace GeneralLedger.Persistence.Repositories
                 || s.TRANo.ToLower().Contains(criteria.ToLower())
                 || s.Customer.strName.ToLower().Contains(criteria.ToLower())
                 || s.Agent.Name.ToLower().Contains(criteria.ToLower()))
-                .ToList();
+                .ToList().Take(100);
         }
 
         public Sale GetSaleWithCustomerAgent(int Id)

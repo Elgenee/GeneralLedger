@@ -62,6 +62,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchSale.Rows[i].Cells["Agent"].Value = saleResult[i].Agent.Name;
                         this.dgSearchSale.Rows[i].Cells["Description"].Value = saleResult[i].Description;
                         this.dgSearchSale.Rows[i].Cells["GLTranHeaderID"].Value = saleResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
+                        this.dgSearchSale.Rows[i].Cells["UseDefaultEntry"].Value = saleResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
 
                     }
 
@@ -113,7 +114,8 @@ namespace GeneralLedger.UserControls
                          },
                         tblGLTranHeaders = new List<tblGLTranHeader> {
                             new tblGLTranHeader {
-                             ID = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["GLTranHeaderID"].Value.ToString())
+                             ID = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["GLTranHeaderID"].Value.ToString()),
+                             blnUseDefaultEntry = bool.Parse(this.dgSearchSale.Rows[this.Index].Cells["UseDefaultEntry"].Value.ToString())
                             }
                          }
                     };

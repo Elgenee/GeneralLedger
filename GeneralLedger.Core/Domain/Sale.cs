@@ -31,6 +31,8 @@ namespace GeneralLedger.Core.Domain
         public Nullable<System.DateTime> TransactionDate { get; set; }
         public string Description { get; set; }
         public Nullable<int> Terms { get; set; }
+        public Nullable<bool> IsFullyPaid { get; set; }
+        public Nullable<System.DateTime> LastPaymentDate { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Agent Agent { get; set; }

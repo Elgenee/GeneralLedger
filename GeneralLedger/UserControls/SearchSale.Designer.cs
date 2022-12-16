@@ -47,6 +47,7 @@
             this.Agent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchSale)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -133,7 +134,8 @@
             this.AgentId,
             this.Agent,
             this.Description,
-            this.GLTranHeaderID});
+            this.GLTranHeaderID,
+            this.UseDefaultEntry});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -274,6 +276,14 @@
             this.GLTranHeaderID.Visible = false;
             this.GLTranHeaderID.Width = 125;
             // 
+            // UseDefaultEntry
+            // 
+            this.UseDefaultEntry.HeaderText = "UseDefaultEntry";
+            this.UseDefaultEntry.MinimumWidth = 6;
+            this.UseDefaultEntry.Name = "UseDefaultEntry";
+            this.UseDefaultEntry.ReadOnly = true;
+            this.UseDefaultEntry.Width = 125;
+            // 
             // SearchSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -313,5 +323,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Agent;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLTranHeaderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UseDefaultEntry;
     }
 }

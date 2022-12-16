@@ -57,6 +57,7 @@ namespace GeneralLedger.UserControls
         private void btnPreview_Click(object sender, EventArgs e)
         {
             var spRptGLGeneralLedgerDetailTableAdapter = new GeneralLedgerDataSetTableAdapters.spRptGLGeneralLedgerDetailTableAdapter();
+            
             var result = spRptGLGeneralLedgerDetailTableAdapter.GetData(this.Coa, this.CoaSub, dtDateFrom.Value.ToString("MM/dd/yyyy"), dtDateTo.Value.ToString("MM/dd/yyyy")).ToList();
             var resultBegBalance = new GeneralLedgerDataSetTableAdapters.spRptGLGeneralLedgerDetailBegBalanceTableAdapter().GetData(this.Coa, this.CoaSub, dtDateFrom.Value.ToString("MM/dd/yyyy"), dtDateTo.Value.ToString("MM/dd/yyyy")).ToArray();
 

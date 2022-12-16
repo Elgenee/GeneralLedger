@@ -55,13 +55,16 @@ namespace GeneralLedger.UserControls
                         this.dgSearchSale.Rows[i].Cells["SaleTransactionNo"].Value = collectionResult[i].Sale.TRANo;
                         this.dgSearchSale.Rows[i].Cells["PONo"].Value = collectionResult[i].Sale.PONo;
                         this.dgSearchSale.Rows[i].Cells["Customer"].Value = collectionResult[i].Sale.Customer.strName;
-                        this.dgSearchSale.Rows[i].Cells["Total"].Value = string.Format("{0:0.00}", collectionResult[i].Sale.Total);
+                        this.dgSearchSale.Rows[i].Cells["Total"].Value = string.Format("{0:0.00}", collectionResult[i].Total);
                         this.dgSearchSale.Rows[i].Cells["IsCash"].Value = collectionResult[i].IsCash;
                         this.dgSearchSale.Rows[i].Cells["CheckDetail"].Value = collectionResult[i].CheckDetail;
-                        this.dgSearchSale.Rows[i].Cells["BankAccountId"].Value = ((bool)collectionResult[i].IsCash)? 1 : collectionResult[i].Bank.Id;
-                        this.dgSearchSale.Rows[i].Cells["BankAccount"].Value = ((bool)collectionResult[i].IsCash) ? string.Empty :collectionResult[i].Bank.strName;
+                        //this.dgSearchSale.Rows[i].Cells["BankAccountId"].Value = ((bool)collectionResult[i].IsCash)? 0 : collectionResult[i].Bank.Id;
+                        //this.dgSearchSale.Rows[i].Cells["BankAccount"].Value = ((bool)collectionResult[i].IsCash) ? string.Empty :collectionResult[i].Bank.strName;
+                        this.dgSearchSale.Rows[i].Cells["BankAccountId"].Value =  collectionResult[i].Bank.Id;
+                        this.dgSearchSale.Rows[i].Cells["BankAccount"].Value =  collectionResult[i].Bank.strName;
                         this.dgSearchSale.Rows[i].Cells["Description"].Value = collectionResult[i].Description;
                         this.dgSearchSale.Rows[i].Cells["GLTranHeaderID"].Value = collectionResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
+                        this.dgSearchSale.Rows[i].Cells["UseDefaultEntry"].Value = collectionResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
 
                     }
 
@@ -117,7 +120,8 @@ namespace GeneralLedger.UserControls
                         Description = this.dgSearchSale.Rows[this.Index].Cells["Description"].Value.ToString(),
                         tblGLTranHeaders = new List<tblGLTranHeader> {
                             new tblGLTranHeader {
-                             ID = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["GLTranHeaderID"].Value.ToString())
+                             ID = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["GLTranHeaderID"].Value.ToString()),
+                             blnUseDefaultEntry = bool.Parse(this.dgSearchSale.Rows[this.Index].Cells["UseDefaultEntry"].Value.ToString())
                             }
                          }
                     };

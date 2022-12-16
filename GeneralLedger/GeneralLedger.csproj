@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -125,6 +125,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UserControls\frmAccountReceivableAdjustments.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmAccountReceivableAdjustments.Designer.cs">
+      <DependentUpon>frmAccountReceivableAdjustments.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\frmAgent.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -136,6 +142,12 @@
     </Compile>
     <Compile Include="UserControls\frmCollection.Designer.cs">
       <DependentUpon>frmCollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmPurchase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmPurchase.Designer.cs">
+      <DependentUpon>frmPurchase.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmSales.cs">
       <SubType>UserControl</SubType>
@@ -443,11 +455,17 @@
     <Compile Include="UserControls\TrialBalancePostingManage.Designer.cs">
       <DependentUpon>TrialBalancePostingManage.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\frmAccountReceivableAdjustments.resx">
+      <DependentUpon>frmAccountReceivableAdjustments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmAgent.resx">
       <DependentUpon>frmAgent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmCollection.resx">
       <DependentUpon>frmCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmPurchase.resx">
+      <DependentUpon>frmPurchase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmSales.resx">
       <DependentUpon>frmSales.cs</DependentUpon>

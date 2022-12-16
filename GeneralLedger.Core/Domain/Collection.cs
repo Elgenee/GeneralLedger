@@ -18,6 +18,7 @@ namespace GeneralLedger.Core.Domain
         public Collection()
         {
             this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
+            this.AccountReceivableAdjustments = new HashSet<AccountReceivableAdjustment>();
             this.SalesCustomerLedgers = new HashSet<SalesCustomerLedger>();
         }
     
@@ -36,6 +37,8 @@ namespace GeneralLedger.Core.Domain
         public virtual Sale Sale { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountReceivableAdjustment> AccountReceivableAdjustments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
     }

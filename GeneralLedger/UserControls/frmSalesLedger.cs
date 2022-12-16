@@ -48,14 +48,14 @@ namespace GeneralLedger.UserControls
                 this.txtTransactionNo.Text = sale.TRANo;
                 this.txtPONo.Text = sale.PONo;
                 this.dtTransactionDate.Value = (DateTime)sale.TransactionDate;
-                this.txtTotal.Text = sale.Total.ToString();
+                this.txtTotal.Text = string.Format("{0:0.00}", sale.Total);
                 this.txtCustomerName.Text = sale.Customer.strName;
                 this.txtAgent.Text = sale.Agent.Name;
 
                 var saleLedger = this.SalesCustomerLedgerServices.GetSalesCustomerLedger(this.Id).ToList();
 
                 var runningBalance = saleLedger.OrderByDescending(l => l.ID).Select(l => l.curRunningBalance).FirstOrDefault();
-                this.txtRunningBalance.Text = runningBalance.ToString();
+                this.txtRunningBalance.Text = string.Format("{0:0.00}", runningBalance);
 
                 if (saleLedger != null && saleLedger.Count() > 0) {
                     this.dtgSaleLedger.RowCount = saleLedger.Count();
@@ -67,6 +67,7 @@ namespace GeneralLedger.UserControls
                         this.dtgSaleLedger.Rows[i].Cells["strType"].Value = saleLedger[i].strType;
                         this.dtgSaleLedger.Rows[i].Cells["intIdSales"].Value = saleLedger[i].intIdSales;
                         this.dtgSaleLedger.Rows[i].Cells["intIdCollection"].Value = saleLedger[i].intIdCollection;
+                        
                         this.dtgSaleLedger.Rows[i].Cells["strTransactionNo"].Value = saleLedger[i].strTransactionNo;
                         this.dtgSaleLedger.Rows[i].Cells["datDateTransaction"].Value = saleLedger[i].datDateTransaction.Value.ToShortDateString();
                         this.dtgSaleLedger.Rows[i].Cells["curTotalAmount"].Value = string.Format("{0:0.00}", saleLedger[i].curTotalAmount);

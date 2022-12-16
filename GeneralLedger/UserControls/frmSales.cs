@@ -143,7 +143,7 @@ namespace GeneralLedger.UserControls
                         Description = this.txtDescription.Text
                     };
 
-                    Sale = SaleServices.Add(Sale);
+                    Sale = SaleServices.Add(Sale, this.GLTranDetail , this.chkUseDefaultEntry.Checked);
                 
                     if (Sale != null)
                     {
@@ -161,7 +161,7 @@ namespace GeneralLedger.UserControls
                     Sale.Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
                     Sale.TransactionDate = this.dtTransactionDate.Value;
                     Sale.Description = this.txtDescription.Text;
-                    Sale = SaleServices.Update(Sale, this.GLTranDetail);
+                    Sale = SaleServices.Update(Sale, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
         
                     if (Sale != null)
                     {
@@ -290,6 +290,7 @@ namespace GeneralLedger.UserControls
                     this.txtAgent.Text = sje.Sale.Agent.Name.ToString();
 
                     this.GLTranHeader = sje.Sale.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
+                    this.chkUseDefaultEntry.Checked = (bool)sje.Sale.tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
                     this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
        
                     if (GLTranDetail.Count > 0)
@@ -365,11 +366,11 @@ namespace GeneralLedger.UserControls
 
         private void btnAddEntry_Click(object sender, EventArgs e)
         {
-            if (this.ID == 0 )
-            {
-                MessageBox.Show("Please save transaction first before editing entry");
-                return;
-            }
+            //if (this.ID == 0 )
+            //{
+            //    MessageBox.Show("Please save transaction first before editing entry");
+            //    return;
+            //}
 
             SearchChartOfAccounts sca = new SearchChartOfAccounts();
             sca.IDGLTranHeader = GLTranHeader;
@@ -625,7 +626,7 @@ namespace GeneralLedger.UserControls
                     MessageBox.Show("Please select transaction first...");
                     return;
                 }
-                //todo get ledger
+           
                 //var result = SalesCustomerLedgerServices.GetSalesCustomerLedger(this.Sale.Id);
 
                 MetroTabPage metroTabPage = new MetroTabPage();
@@ -660,6 +661,20 @@ namespace GeneralLedger.UserControls
             {
 
                 MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void chkUseDefaultEntry_Click(object sender, EventArgs e)
+        {
+            if (this.chkUseDefaultEntry.Checked)
+            {
+                this.btnAddEntry.Enabled = false;
+                this.btnDeleteEntry.Enabled = false;
+            }
+            else
+            {
+                this.btnAddEntry.Enabled = true;
+                this.btnDeleteEntry.Enabled = true;
             }
         }
     }

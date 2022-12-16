@@ -77,6 +77,11 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<tblGLTranHeader> tblGLTranHeaders { get; set; }
         public virtual DbSet<Collection> Collections { get; set; }
         public virtual DbSet<SalesCustomerLedgerTransactionType> SalesCustomerLedgerTransactionTypes { get; set; }
+        public virtual DbSet<Purchase> Purchases { get; set; }
+        public virtual DbSet<PurchaseCustomerLedgerTransactionType> PurchaseCustomerLedgerTransactionTypes { get; set; }
+        public virtual DbSet<PurchaseCustomerLedger> PurchaseCustomerLedgers { get; set; }
+        public virtual DbSet<AccountReceivableAdjustment> AccountReceivableAdjustments { get; set; }
+        public virtual DbSet<AccountsReceivableAdjustmentsType> AccountsReceivableAdjustmentsTypes { get; set; }
         public virtual DbSet<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
     
         public virtual ObjectResult<spGetSalesCustomerLedger_Result> spGetSalesCustomerLedger(Nullable<int> salesID)
@@ -86,6 +91,1029 @@ namespace GeneralLedger.Core.Domain
                 new ObjectParameter("SalesID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetSalesCustomerLedger_Result>("spGetSalesCustomerLedger", salesIDParameter);
+        }
+    
+        public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISExpense_Result>("rptISExpense", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual ObjectResult<rptISGrossSales_Result> rptISGrossSales(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISGrossSales_Result>("rptISGrossSales", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual ObjectResult<rptISIncome_Result> rptISIncome(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISIncome_Result>("rptISIncome", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual ObjectResult<rptISLessCostOfGoodSold_Result> rptISLessCostOfGoodSold(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISLessCostOfGoodSold_Result>("rptISLessCostOfGoodSold", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual ObjectResult<rptISLessCostOfGoodSoldTotal_Result> rptISLessCostOfGoodSoldTotal(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISLessCostOfGoodSoldTotal_Result>("rptISLessCostOfGoodSoldTotal", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual ObjectResult<rptISLessSales_Result> rptISLessSales(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISLessSales_Result>("rptISLessSales", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual ObjectResult<rptISNetIncome_Result> rptISNetIncome(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISNetIncome_Result>("rptISNetIncome", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual ObjectResult<rptISNetSalesTotal_Result> rptISNetSalesTotal(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISNetSalesTotal_Result>("rptISNetSalesTotal", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual ObjectResult<rptISProvIT_Result> rptISProvIT(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISProvIT_Result>("rptISProvIT", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual ObjectResult<rptISTotal_Result> rptISTotal(Nullable<int> intFiscalYear, Nullable<int> intMonth)
+        {
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptISTotal_Result>("rptISTotal", intFiscalYearParameter, intMonthParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<spBSCurrentAsset_Result> spBSCurrentAsset(Nullable<int> intMonth, Nullable<int> intFiscalYear)
+        {
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spBSCurrentAsset_Result>("spBSCurrentAsset", intMonthParameter, intFiscalYearParameter);
+        }
+    
+        public virtual ObjectResult<spBSFixedAsset_Result> spBSFixedAsset(Nullable<int> intMonth, Nullable<int> intFiscalYear)
+        {
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spBSFixedAsset_Result>("spBSFixedAsset", intMonthParameter, intFiscalYearParameter);
+        }
+    
+        public virtual ObjectResult<spGetBANK_Result> spGetBANK(string strCriteria)
+        {
+            var strCriteriaParameter = strCriteria != null ?
+                new ObjectParameter("strCriteria", strCriteria) :
+                new ObjectParameter("strCriteria", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetBANK_Result>("spGetBANK", strCriteriaParameter);
+        }
+    
+        public virtual ObjectResult<spGetCustomer_Result> spGetCustomer(string strCriteria)
+        {
+            var strCriteriaParameter = strCriteria != null ?
+                new ObjectParameter("strCriteria", strCriteria) :
+                new ObjectParameter("strCriteria", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetCustomer_Result>("spGetCustomer", strCriteriaParameter);
+        }
+    
+        public virtual ObjectResult<spGetLocation_Result> spGetLocation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetLocation_Result>("spGetLocation");
+        }
+    
+        public virtual ObjectResult<spGetProductCharacteristic_Result> spGetProductCharacteristic()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetProductCharacteristic_Result>("spGetProductCharacteristic");
+        }
+    
+        public virtual ObjectResult<spGETProductDetailsByProductID_Result> spGETProductDetailsByProductID(Nullable<int> intProductID)
+        {
+            var intProductIDParameter = intProductID.HasValue ?
+                new ObjectParameter("intProductID", intProductID) :
+                new ObjectParameter("intProductID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGETProductDetailsByProductID_Result>("spGETProductDetailsByProductID", intProductIDParameter);
+        }
+    
+        public virtual ObjectResult<spGetPurchaseOrderForApproval_Result> spGetPurchaseOrderForApproval()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetPurchaseOrderForApproval_Result>("spGetPurchaseOrderForApproval");
+        }
+    
+        public virtual ObjectResult<spGetPurchaseOrderForPending_Result> spGetPurchaseOrderForPending()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetPurchaseOrderForPending_Result>("spGetPurchaseOrderForPending");
+        }
+    
+        public virtual ObjectResult<spGetPurchaseOrderReceivingProducts_Result> spGetPurchaseOrderReceivingProducts(Nullable<int> intPurchaseOrderID)
+        {
+            var intPurchaseOrderIDParameter = intPurchaseOrderID.HasValue ?
+                new ObjectParameter("intPurchaseOrderID", intPurchaseOrderID) :
+                new ObjectParameter("intPurchaseOrderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetPurchaseOrderReceivingProducts_Result>("spGetPurchaseOrderReceivingProducts", intPurchaseOrderIDParameter);
+        }
+    
+        public virtual ObjectResult<spGetSupplier_Result> spGetSupplier(string strCriteria)
+        {
+            var strCriteriaParameter = strCriteria != null ?
+                new ObjectParameter("strCriteria", strCriteria) :
+                new ObjectParameter("strCriteria", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetSupplier_Result>("spGetSupplier", strCriteriaParameter);
+        }
+    
+        public virtual ObjectResult<spGetTranDetail_Result> spGetTranDetail(Nullable<int> intIDGLTranHeader)
+        {
+            var intIDGLTranHeaderParameter = intIDGLTranHeader.HasValue ?
+                new ObjectParameter("intIDGLTranHeader", intIDGLTranHeader) :
+                new ObjectParameter("intIDGLTranHeader", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetTranDetail_Result>("spGetTranDetail", intIDGLTranHeaderParameter);
+        }
+    
+        public virtual ObjectResult<spGLGetBookType_Result> spGLGetBookType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGLGetBookType_Result>("spGLGetBookType");
+        }
+    
+        public virtual ObjectResult<spGLGetGLTBTran_Result> spGLGetGLTBTran(Nullable<int> intID)
+        {
+            var intIDParameter = intID.HasValue ?
+                new ObjectParameter("intID", intID) :
+                new ObjectParameter("intID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGLGetGLTBTran_Result>("spGLGetGLTBTran", intIDParameter);
+        }
+    
+        public virtual ObjectResult<spGLGetTB_Result> spGLGetTB(Nullable<System.DateTime> dateFrom, Nullable<System.DateTime> dateTo)
+        {
+            var dateFromParameter = dateFrom.HasValue ?
+                new ObjectParameter("dateFrom", dateFrom) :
+                new ObjectParameter("dateFrom", typeof(System.DateTime));
+    
+            var dateToParameter = dateTo.HasValue ?
+                new ObjectParameter("dateTo", dateTo) :
+                new ObjectParameter("dateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGLGetTB_Result>("spGLGetTB", dateFromParameter, dateToParameter);
+        }
+    
+        public virtual ObjectResult<spGLGetTBDetail_Result> spGLGetTBDetail(Nullable<int> intIDhdr)
+        {
+            var intIDhdrParameter = intIDhdr.HasValue ?
+                new ObjectParameter("intIDhdr", intIDhdr) :
+                new ObjectParameter("intIDhdr", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGLGetTBDetail_Result>("spGLGetTBDetail", intIDhdrParameter);
+        }
+    
+        public virtual ObjectResult<spGLOverAllBookProoflistSummary_Result> spGLOverAllBookProoflistSummary(Nullable<System.DateTime> datFrom, Nullable<System.DateTime> datTo)
+        {
+            var datFromParameter = datFrom.HasValue ?
+                new ObjectParameter("datFrom", datFrom) :
+                new ObjectParameter("datFrom", typeof(System.DateTime));
+    
+            var datToParameter = datTo.HasValue ?
+                new ObjectParameter("datTo", datTo) :
+                new ObjectParameter("datTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGLOverAllBookProoflistSummary_Result>("spGLOverAllBookProoflistSummary", datFromParameter, datToParameter);
+        }
+    
+        public virtual ObjectResult<spJournalEntrySearch_Result> spJournalEntrySearch(string strCriteria)
+        {
+            var strCriteriaParameter = strCriteria != null ?
+                new ObjectParameter("strCriteria", strCriteria) :
+                new ObjectParameter("strCriteria", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spJournalEntrySearch_Result>("spJournalEntrySearch", strCriteriaParameter);
+        }
+    
+        public virtual ObjectResult<spLiabilityAccountsPayable_Result> spLiabilityAccountsPayable(Nullable<int> intMonth, Nullable<int> intFiscalYear)
+        {
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spLiabilityAccountsPayable_Result>("spLiabilityAccountsPayable", intMonthParameter, intFiscalYearParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageApprovePurchaseOrder(Nullable<int> intIDPO, Nullable<bool> blnUpdate, Nullable<bool> blnCancel, Nullable<int> intIDUser)
+        {
+            var intIDPOParameter = intIDPO.HasValue ?
+                new ObjectParameter("intIDPO", intIDPO) :
+                new ObjectParameter("intIDPO", typeof(int));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnCancelParameter = blnCancel.HasValue ?
+                new ObjectParameter("blnCancel", blnCancel) :
+                new ObjectParameter("blnCancel", typeof(bool));
+    
+            var intIDUserParameter = intIDUser.HasValue ?
+                new ObjectParameter("intIDUser", intIDUser) :
+                new ObjectParameter("intIDUser", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageApprovePurchaseOrder", intIDPOParameter, blnUpdateParameter, blnCancelParameter, intIDUserParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageBank(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageBank", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageCustomer(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageCustomer", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageJournalEntry(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageJournalEntry", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageLocation(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageLocation", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageLockTB(Nullable<int> intIDTB, Nullable<bool> blnBitLock, Nullable<bool> blnBitUnlock)
+        {
+            var intIDTBParameter = intIDTB.HasValue ?
+                new ObjectParameter("intIDTB", intIDTB) :
+                new ObjectParameter("intIDTB", typeof(int));
+    
+            var blnBitLockParameter = blnBitLock.HasValue ?
+                new ObjectParameter("blnBitLock", blnBitLock) :
+                new ObjectParameter("blnBitLock", typeof(bool));
+    
+            var blnBitUnlockParameter = blnBitUnlock.HasValue ?
+                new ObjectParameter("blnBitUnlock", blnBitUnlock) :
+                new ObjectParameter("blnBitUnlock", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageLockTB", intIDTBParameter, blnBitLockParameter, blnBitUnlockParameter);
+        }
+    
+        public virtual ObjectResult<string> spManagePriceType(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManagePriceType", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageProduct(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageProduct", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageProductBrand(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageProductBrand", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageProductCategory(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageProductCategory", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageProductColor(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageProductColor", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageProductDetails(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageProductDetails", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageProductSize(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageProductSize", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageProductType(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageProductType", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManagePurchaseOrder(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManagePurchaseOrder", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManagePurchaseOrderReceiving(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManagePurchaseOrderReceiving", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spManageSupplier(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spManageSupplier", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual int spMasGetAccountingSide()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spMasGetAccountingSide");
+        }
+    
+        public virtual int spMasGetAccountingType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spMasGetAccountingType");
+        }
+    
+        public virtual ObjectResult<spMasGetCOA_Result> spMasGetCOA(string strCriteria)
+        {
+            var strCriteriaParameter = strCriteria != null ?
+                new ObjectParameter("strCriteria", strCriteria) :
+                new ObjectParameter("strCriteria", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetCOA_Result>("spMasGetCOA", strCriteriaParameter);
+        }
+    
+        public virtual ObjectResult<spMasGetCOAGroup_Result> spMasGetCOAGroup()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetCOAGroup_Result>("spMasGetCOAGroup");
+        }
+    
+        public virtual ObjectResult<spMasGetCOASub_Result> spMasGetCOASub(Nullable<int> idCOA)
+        {
+            var idCOAParameter = idCOA.HasValue ?
+                new ObjectParameter("idCOA", idCOA) :
+                new ObjectParameter("idCOA", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetCOASub_Result>("spMasGetCOASub", idCOAParameter);
+        }
+    
+        public virtual ObjectResult<spMasGetCurrency_Result> spMasGetCurrency()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetCurrency_Result>("spMasGetCurrency");
+        }
+    
+        public virtual ObjectResult<spMasGetLocation_Result> spMasGetLocation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetLocation_Result>("spMasGetLocation");
+        }
+    
+        public virtual ObjectResult<spMasGetPriceType_Result> spMasGetPriceType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetPriceType_Result>("spMasGetPriceType");
+        }
+    
+        public virtual ObjectResult<spMasGetProductBrand_Result> spMasGetProductBrand()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetProductBrand_Result>("spMasGetProductBrand");
+        }
+    
+        public virtual ObjectResult<spMasGetProductCategory_Result> spMasGetProductCategory()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetProductCategory_Result>("spMasGetProductCategory");
+        }
+    
+        public virtual ObjectResult<spMasGetProductColor_Result> spMasGetProductColor()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetProductColor_Result>("spMasGetProductColor");
+        }
+    
+        public virtual ObjectResult<spMasGetProductSize_Result> spMasGetProductSize()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetProductSize_Result>("spMasGetProductSize");
+        }
+    
+        public virtual ObjectResult<spMasGetProductType_Result> spMasGetProductType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetProductType_Result>("spMasGetProductType");
+        }
+    
+        public virtual ObjectResult<spMasGetProductTypes_Result> spMasGetProductTypes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMasGetProductTypes_Result>("spMasGetProductTypes");
+        }
+    
+        public virtual ObjectResult<string> spMasManageCOA(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spMasManageCOA", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<string> spMasManageCOASub(string xmlXML, Nullable<bool> blnInsert, Nullable<bool> blnUpdate, Nullable<bool> blnDelete)
+        {
+            var xmlXMLParameter = xmlXML != null ?
+                new ObjectParameter("xmlXML", xmlXML) :
+                new ObjectParameter("xmlXML", typeof(string));
+    
+            var blnInsertParameter = blnInsert.HasValue ?
+                new ObjectParameter("blnInsert", blnInsert) :
+                new ObjectParameter("blnInsert", typeof(bool));
+    
+            var blnUpdateParameter = blnUpdate.HasValue ?
+                new ObjectParameter("blnUpdate", blnUpdate) :
+                new ObjectParameter("blnUpdate", typeof(bool));
+    
+            var blnDeleteParameter = blnDelete.HasValue ?
+                new ObjectParameter("blnDelete", blnDelete) :
+                new ObjectParameter("blnDelete", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spMasManageCOASub", xmlXMLParameter, blnInsertParameter, blnUpdateParameter, blnDeleteParameter);
+        }
+    
+        public virtual ObjectResult<spOtherAsset_Result> spOtherAsset(Nullable<int> intMonth, Nullable<int> intFiscalYear)
+        {
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spOtherAsset_Result>("spOtherAsset", intMonthParameter, intFiscalYearParameter);
+        }
+    
+        public virtual ObjectResult<spOwnersEquity_Result> spOwnersEquity(Nullable<int> intMonth, Nullable<int> intFiscalYear)
+        {
+            var intMonthParameter = intMonth.HasValue ?
+                new ObjectParameter("intMonth", intMonth) :
+                new ObjectParameter("intMonth", typeof(int));
+    
+            var intFiscalYearParameter = intFiscalYear.HasValue ?
+                new ObjectParameter("intFiscalYear", intFiscalYear) :
+                new ObjectParameter("intFiscalYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spOwnersEquity_Result>("spOwnersEquity", intMonthParameter, intFiscalYearParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spProcessTrialBalance(Nullable<System.DateTime> datBatchDate, string strRemarks)
+        {
+            var datBatchDateParameter = datBatchDate.HasValue ?
+                new ObjectParameter("datBatchDate", datBatchDate) :
+                new ObjectParameter("datBatchDate", typeof(System.DateTime));
+    
+            var strRemarksParameter = strRemarks != null ?
+                new ObjectParameter("strRemarks", strRemarks) :
+                new ObjectParameter("strRemarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spProcessTrialBalance", datBatchDateParameter, strRemarksParameter);
+        }
+    
+        public virtual ObjectResult<spProdGetProductColor_Result> spProdGetProductColor()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spProdGetProductColor_Result>("spProdGetProductColor");
+        }
+    
+        public virtual ObjectResult<spProductSearch_Result> spProductSearch(string strCriteria)
+        {
+            var strCriteriaParameter = strCriteria != null ?
+                new ObjectParameter("strCriteria", strCriteria) :
+                new ObjectParameter("strCriteria", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spProductSearch_Result>("spProductSearch", strCriteriaParameter);
+        }
+    
+        public virtual ObjectResult<spPurchaseOrderProductSearch_Result> spPurchaseOrderProductSearch(string strCriteria, Nullable<int> intProductCategoryID, Nullable<int> intProductBrandID, Nullable<int> intProductTypesID)
+        {
+            var strCriteriaParameter = strCriteria != null ?
+                new ObjectParameter("strCriteria", strCriteria) :
+                new ObjectParameter("strCriteria", typeof(string));
+    
+            var intProductCategoryIDParameter = intProductCategoryID.HasValue ?
+                new ObjectParameter("intProductCategoryID", intProductCategoryID) :
+                new ObjectParameter("intProductCategoryID", typeof(int));
+    
+            var intProductBrandIDParameter = intProductBrandID.HasValue ?
+                new ObjectParameter("intProductBrandID", intProductBrandID) :
+                new ObjectParameter("intProductBrandID", typeof(int));
+    
+            var intProductTypesIDParameter = intProductTypesID.HasValue ?
+                new ObjectParameter("intProductTypesID", intProductTypesID) :
+                new ObjectParameter("intProductTypesID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spPurchaseOrderProductSearch_Result>("spPurchaseOrderProductSearch", strCriteriaParameter, intProductCategoryIDParameter, intProductBrandIDParameter, intProductTypesIDParameter);
+        }
+    
+        public virtual ObjectResult<spRptGLGeneralLedgerDetail_Result> spRptGLGeneralLedgerDetail(Nullable<int> intIDMasCOA, Nullable<int> intIDMasCOASub, Nullable<System.DateTime> datFrom, Nullable<System.DateTime> datTo)
+        {
+            var intIDMasCOAParameter = intIDMasCOA.HasValue ?
+                new ObjectParameter("intIDMasCOA", intIDMasCOA) :
+                new ObjectParameter("intIDMasCOA", typeof(int));
+    
+            var intIDMasCOASubParameter = intIDMasCOASub.HasValue ?
+                new ObjectParameter("intIDMasCOASub", intIDMasCOASub) :
+                new ObjectParameter("intIDMasCOASub", typeof(int));
+    
+            var datFromParameter = datFrom.HasValue ?
+                new ObjectParameter("datFrom", datFrom) :
+                new ObjectParameter("datFrom", typeof(System.DateTime));
+    
+            var datToParameter = datTo.HasValue ?
+                new ObjectParameter("datTo", datTo) :
+                new ObjectParameter("datTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spRptGLGeneralLedgerDetail_Result>("spRptGLGeneralLedgerDetail", intIDMasCOAParameter, intIDMasCOASubParameter, datFromParameter, datToParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> spRptGLGeneralLedgerDetailBegBalance(Nullable<int> intIDMasCOA, Nullable<int> intIDMasCOASub, Nullable<System.DateTime> datFrom, Nullable<System.DateTime> datTo)
+        {
+            var intIDMasCOAParameter = intIDMasCOA.HasValue ?
+                new ObjectParameter("intIDMasCOA", intIDMasCOA) :
+                new ObjectParameter("intIDMasCOA", typeof(int));
+    
+            var intIDMasCOASubParameter = intIDMasCOASub.HasValue ?
+                new ObjectParameter("intIDMasCOASub", intIDMasCOASub) :
+                new ObjectParameter("intIDMasCOASub", typeof(int));
+    
+            var datFromParameter = datFrom.HasValue ?
+                new ObjectParameter("datFrom", datFrom) :
+                new ObjectParameter("datFrom", typeof(System.DateTime));
+    
+            var datToParameter = datTo.HasValue ?
+                new ObjectParameter("datTo", datTo) :
+                new ObjectParameter("datTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("spRptGLGeneralLedgerDetailBegBalance", intIDMasCOAParameter, intIDMasCOASubParameter, datFromParameter, datToParameter);
+        }
+    
+        public virtual ObjectResult<spRPTJournalProoflist_Result> spRPTJournalProoflist(Nullable<System.DateTime> datDateFrom, Nullable<System.DateTime> datDateTo)
+        {
+            var datDateFromParameter = datDateFrom.HasValue ?
+                new ObjectParameter("datDateFrom", datDateFrom) :
+                new ObjectParameter("datDateFrom", typeof(System.DateTime));
+    
+            var datDateToParameter = datDateTo.HasValue ?
+                new ObjectParameter("datDateTo", datDateTo) :
+                new ObjectParameter("datDateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spRPTJournalProoflist_Result>("spRPTJournalProoflist", datDateFromParameter, datDateToParameter);
+        }
+    
+        public virtual ObjectResult<spRptProoflistDetail_Result> spRptProoflistDetail(Nullable<int> intBookType, Nullable<System.DateTime> datDateFrom, Nullable<System.DateTime> datDateTo)
+        {
+            var intBookTypeParameter = intBookType.HasValue ?
+                new ObjectParameter("intBookType", intBookType) :
+                new ObjectParameter("intBookType", typeof(int));
+    
+            var datDateFromParameter = datDateFrom.HasValue ?
+                new ObjectParameter("datDateFrom", datDateFrom) :
+                new ObjectParameter("datDateFrom", typeof(System.DateTime));
+    
+            var datDateToParameter = datDateTo.HasValue ?
+                new ObjectParameter("datDateTo", datDateTo) :
+                new ObjectParameter("datDateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spRptProoflistDetail_Result>("spRptProoflistDetail", intBookTypeParameter, datDateFromParameter, datDateToParameter);
         }
     }
 }

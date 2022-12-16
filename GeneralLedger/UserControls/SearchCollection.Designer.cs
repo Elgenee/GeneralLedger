@@ -49,6 +49,7 @@
             this.BankAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchSale)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +61,7 @@
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 12;
             this.metroPanel1.Location = new System.Drawing.Point(39, 145);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(1285, 478);
             this.metroPanel1.TabIndex = 35;
@@ -88,7 +89,8 @@
             this.BankAccountId,
             this.BankAccount,
             this.Description,
-            this.GLTranHeaderID});
+            this.GLTranHeaderID,
+            this.UseDefaultEntry});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -111,7 +113,7 @@
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(496, 79);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(132, 28);
             this.btnSearch.TabIndex = 38;
@@ -125,10 +127,10 @@
             // 
             // 
             this.txtCriteria.CustomButton.Image = null;
-            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(321, 2);
-            this.txtCriteria.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(241, 2);
+            this.txtCriteria.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtCriteria.CustomButton.Name = "";
-            this.txtCriteria.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtCriteria.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtCriteria.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtCriteria.CustomButton.TabIndex = 1;
             this.txtCriteria.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -136,7 +138,7 @@
             this.txtCriteria.CustomButton.Visible = false;
             this.txtCriteria.Lines = new string[0];
             this.txtCriteria.Location = new System.Drawing.Point(221, 79);
-            this.txtCriteria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCriteria.Margin = new System.Windows.Forms.Padding(4);
             this.txtCriteria.MaxLength = 32767;
             this.txtCriteria.Name = "txtCriteria";
             this.txtCriteria.PasswordChar = '\0';
@@ -164,7 +166,7 @@
             // btnSelect
             // 
             this.btnSelect.Location = new System.Drawing.Point(636, 79);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(132, 28);
             this.btnSelect.TabIndex = 39;
@@ -294,6 +296,14 @@
             this.GLTranHeaderID.Visible = false;
             this.GLTranHeaderID.Width = 125;
             // 
+            // UseDefaultEntry
+            // 
+            this.UseDefaultEntry.HeaderText = "UseDefaultEntry";
+            this.UseDefaultEntry.MinimumWidth = 6;
+            this.UseDefaultEntry.Name = "UseDefaultEntry";
+            this.UseDefaultEntry.ReadOnly = true;
+            this.UseDefaultEntry.Width = 125;
+            // 
             // SearchCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -304,7 +314,7 @@
             this.Controls.Add(this.txtCriteria);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.btnSelect);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SearchCollection";
             this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.Text = "Search Collection";
@@ -337,5 +347,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BankAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLTranHeaderID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UseDefaultEntry;
     }
 }

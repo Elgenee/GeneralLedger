@@ -9,8 +9,8 @@ namespace GeneralLedger.Core.Services
 {
     public interface ICollectionServices
     {
-        Collection Add(Collection collection);
-        Collection Update(Collection collection, List<tblGLTranDetail> tblGLTranDetail);
+        Collection Add(Collection collection, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
+        Collection Update(Collection collection, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
         void Remove(Collection collection);
         List<Collection> GetAll();
         List<Collection> GetCollectionWithJournalEntry(int Id);

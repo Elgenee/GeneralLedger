@@ -32,6 +32,14 @@ namespace GeneralLedger.Persistence
 
         public ISalesCustomerLedgerRepository SalesCustomerLedger { get; set; }
 
+        public IPurchaseRepository Purchase { get; set; }
+
+        public IPurchaseCustomerLedgerRepository PurchaseCustomerLedger { get; set; }
+
+        public IAccountsReceivableAdjustmentsTypeRepository AccountsReceivableAdjustmentsType { get; set; }
+
+        public IAccountReceivableAdjustmentsRepository AccountsReceivableAdjustments { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -44,6 +52,10 @@ namespace GeneralLedger.Persistence
             GLTranDetail = new GLTranDetailRepository(_generalLedgerContext);
             Collection = new CollectionRepository(_generalLedgerContext);
             SalesCustomerLedger = new SalesCustomerLedgerRepository(_generalLedgerContext);
+            Purchase = new PurchaseRepository(_generalLedgerContext);
+            PurchaseCustomerLedger = new PurchaseCustomerLedgerRepository(_generalLedgerContext);
+            AccountsReceivableAdjustmentsType = new AccountsReceivableAdjustmentsTypeRepository(_generalLedgerContext);
+            AccountsReceivableAdjustments = new AccountReceivableAdjustmentsRepository(_generalLedgerContext);
 
         }
         public int Complete()

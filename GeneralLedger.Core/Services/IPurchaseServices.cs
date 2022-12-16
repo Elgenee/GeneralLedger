@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using GeneralLedger.Core.Domain;
+
+namespace GeneralLedger.Core.Services
+{
+    public interface IPurchaseServices
+    {
+        Purchase Add(Purchase purchase);
+        Purchase Update(Purchase purchase, List<tblGLTranDetail> tblGLTranDetail);
+        void Remove(Purchase purchase);
+        List<Purchase> GetAll();
+        List<Purchase> GetPurchasesWithJournalEntry(int Id);
+        List<Purchase> GetPurchaseWithSupplier(string criteria);
+        Purchase GetPurchase(int Id);
+        Purchase GetPurchaseWithSupplier(int Id);
+
+
+
+
+    }
+}

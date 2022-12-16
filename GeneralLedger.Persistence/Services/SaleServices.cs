@@ -11,7 +11,7 @@ namespace GeneralLedger.Persistence.Services
 {
     public class SaleServices : ISaleServices
     {
-        public Sale Add(Sale sale)
+        public Sale Add(Sale sale , List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
@@ -28,40 +28,60 @@ namespace GeneralLedger.Persistence.Services
 
                 unitOfWork.SalesCustomerLedger.Add(salesCustomerLedger);
 
-                var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1029).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
-                var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
-
-                var gLTranDetail = new List<tblGLTranDetail>
+                if (UseDefaultEntry)
                 {
-                     new tblGLTranDetail
-                     { 
-                         intIDMasCoa = (int)journalEntry1.intIDMasCOA , 
-                         intIDMasCoaSub = journalEntry1.ID,
-                         curCredit = 0,
-                         curDebit = sale.Total
-                     },
-                     new tblGLTranDetail
-                     {
-                         intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
-                         intIDMasCoaSub = journalEntry2.ID,
-                         curCredit = sale.Total,
-                         curDebit = 0
-                     }
-                };
+                    var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1029).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+                    var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
 
-                var gLTranHeader = new tblGLTranHeader
+                     var gLTranDetail = new List<tblGLTranDetail>
+                    {
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry1.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry1.ID,
+                             curCredit = 0,
+                             curDebit = sale.Total
+                         },
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry2.ID,
+                             curCredit = sale.Total,
+                             curDebit = 0
+                         }
+                    };
+
+                    var gLTranHeader = new tblGLTranHeader
+                    {
+                        curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
+                        curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
+                        intIDGLBookType = 6,
+                        //strTransactionCode = "SAL-" + sale.Id,
+                        datBatchDate = sale.TransactionDate,
+                        datInsertedDate = DateTime.Now,
+                        tblGLTranDetails = gLTranDetail,
+                        intIdSales = sale.Id,
+                        blnUseDefaultEntry = UseDefaultEntry
+                    };
+
+                    unitOfWork.GLTran.Add(gLTranHeader);
+                }
+                else
                 {
-                       curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
-                       curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
-                       intIDGLBookType = 6,
-                       //strTransactionCode = "SAL-" + sale.Id,
-                       datBatchDate = sale.TransactionDate,
-                       datInsertedDate = DateTime.Now,
-                       tblGLTranDetails = gLTranDetail,
-                       intIdSales = sale.Id
-                };
-
-                unitOfWork.GLTran.Add(gLTranHeader);
+                    var gLTranHeader = new tblGLTranHeader
+                    {
+                        curCreditAmount = tblGLTranDetail.Sum(d => d.curCredit),
+                        curDebitAmount = tblGLTranDetail.Sum(d => d.curDebit),
+                        intIDGLBookType = 6,
+                        //strTransactionCode = "SAL-" + sale.Id,
+                        datBatchDate = sale.TransactionDate,
+                        datInsertedDate = DateTime.Now,
+                        tblGLTranDetails = tblGLTranDetail,
+                        intIdSales = sale.Id,
+                        blnUseDefaultEntry = UseDefaultEntry
+                    };
+                    unitOfWork.GLTran.Add(gLTranHeader);
+                }
                 //var result = unitOfWork.GLTran.GetGLEntryById(9030);
                 unitOfWork.Complete();
                 return sale;
@@ -127,7 +147,7 @@ namespace GeneralLedger.Persistence.Services
             }
         }
 
-        public Sale Update(Sale sale, List<tblGLTranDetail> tblGLTranDetail)
+        public Sale Update(Sale sale, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
@@ -150,18 +170,60 @@ namespace GeneralLedger.Persistence.Services
                 salesLedger.TransactionNo = sale.TRANo;
                 //resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList().Clear();
                 unitOfWork.GLTranDetail.RemoveRange(resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList());
-                foreach (var item in tblGLTranDetail)
-                {
-                    resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
-                    {
-                        curCredit = item.curCredit,
-                        curDebit = item.curDebit,
-                        intIDGLTranHeader = item.intIDGLTranHeader,
-                        intIDMasCoa = item.intIDMasCoa,
-                        intIDMasCoaSub = item.intIDMasCoaSub
 
-                    });
+                if (UseDefaultEntry)
+                {
+
+                    var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1029).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+                    var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
+
+                    var gLTranDetailDefault = new List<tblGLTranDetail>
+                    {
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry1.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry1.ID,
+                             curCredit = 0,
+                             curDebit = sale.Total
+                         },
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry2.ID,
+                             curCredit = sale.Total,
+                             curDebit = 0
+                         }
+                    };
+
+                    foreach (var item in gLTranDetailDefault)
+                    {
+                        resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit,
+                            intIDGLTranHeader = item.intIDGLTranHeader,
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub
+
+                        });
+                    }
                 }
+                else
+                {
+                    foreach (var item in tblGLTranDetail)
+                    {
+                        resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit,
+                            intIDGLTranHeader = item.intIDGLTranHeader,
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub
+                       });
+                    }
+                }
+
+                resultSale.tblGLTranHeaders.ToList()[0].blnUseDefaultEntry = UseDefaultEntry;
                 resultSale.tblGLTranHeaders.ToList()[0].curCreditAmount = resultSale.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curCredit);
                 resultSale.tblGLTranHeaders.ToList()[0].curDebitAmount = resultSale.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curDebit);
                 unitOfWork.Complete();

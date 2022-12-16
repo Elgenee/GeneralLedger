@@ -31,6 +31,9 @@ namespace GeneralLedger.Core.Domain
         public string strDescription { get; set; }
         public Nullable<int> intIdSales { get; set; }
         public Nullable<int> intIdCollection { get; set; }
+        public Nullable<int> intIdPurchase { get; set; }
+        public Nullable<bool> blnUseDefaultEntry { get; set; }
+        public Nullable<int> intIdAccountReceivableAdjustment { get; set; }
     
         public virtual Sale Sale { get; set; }
         public virtual tblGLBookType tblGLBookType { get; set; }
@@ -38,5 +41,9 @@ namespace GeneralLedger.Core.Domain
         public virtual ICollection<tblGLTranDetail> tblGLTranDetails { get; set; }
         public virtual tblJournalEntry tblJournalEntry { get; set; }
         public virtual Collection Collection { get; set; }
+        public virtual Purchase Purchase { get; set; }
+        public virtual tblGLTranHeader tblGLTranHeader1 { get; set; }
+        public virtual tblGLTranHeader tblGLTranHeader2 { get; set; }
+        public virtual AccountReceivableAdjustment AccountReceivableAdjustment { get; set; }
     }
 }

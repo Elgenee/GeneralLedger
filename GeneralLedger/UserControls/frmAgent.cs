@@ -151,5 +151,10 @@ namespace GeneralLedger.UserControls
         {
             clear();
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.MetroTabControl.TabPages.Remove(MetroTabPage);
+        }
     }
 }

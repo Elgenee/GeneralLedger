@@ -495,5 +495,39 @@ namespace GeneralLedger
             metroTabControlMain.SelectedTab = metroTabPage;
 
         }
+
+        private void metroTile8_Click(object sender, EventArgs e)
+        {
+
+            MetroTabPage metroTabPage = new MetroTabPage();
+            metroTabPage.Text = "A/R Adjustments";
+            metroTabPage.AutoScroll = true;
+            metroTabPage.HorizontalScrollbar = true;
+            metroTabPage.HorizontalScrollbarBarColor = true;
+            metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+            metroTabPage.HorizontalScrollbarSize = 15;
+            metroTabPage.UseStyleColors = true;
+            metroTabPage.VerticalScrollbar = true;
+            metroTabPage.VerticalScrollbarBarColor = true;
+            metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+            metroTabPage.VerticalScrollbarSize = 15;
+            //metroTabPage.Size = new System.Drawing.Size(1200, 1013);
+            metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+            metroTabPage.Location = new System.Drawing.Point(4, 38);
+            metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
+            frmAccountReceivableAdjustments frmAccountReceivableAdjustments = new frmAccountReceivableAdjustments();
+            frmAccountReceivableAdjustments.Parent = metroTabPage;
+            frmAccountReceivableAdjustments.MetroTabPage = metroTabPage;
+            frmAccountReceivableAdjustments.AutoScroll = true;
+
+
+            frmAccountReceivableAdjustments.MetroTabControl = this.metroTabControlMain;
+
+            metroTabPage.Controls.Add(frmAccountReceivableAdjustments);
+            metroTabControlMain.TabPages.Add(metroTabPage);
+            metroTabControlMain.SelectedTab = metroTabPage;
+
+        }
     }
 }

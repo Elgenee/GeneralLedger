@@ -101,6 +101,7 @@ namespace GeneralLedger.UserControls
             {
                 row.HeaderCell.Value = (row.Index + 1).ToString();
             }
+     
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -119,11 +120,12 @@ namespace GeneralLedger.UserControls
                 string TransType = (this.ID == 0) ? "insert" : "update";
                 int? bankId = null;
 
-                if (this.chkIsCash.Checked == false)
-                {
-                    bankId = (this.cbBank.SelectedItem == null) ? 0 : ((Tier.BO.Bank)this.cbBank.SelectedItem).ID;
-                }
+                //if (this.chkIsCash.Checked == false)
+                //{
+                //    bankId = (this.cbBank.SelectedItem == null) ? 0 : ((Tier.BO.Bank)this.cbBank.SelectedItem).ID;
+                //}
 
+                bankId = (this.cbBank.SelectedItem == null) ? 0 : ((Tier.BO.Bank)this.cbBank.SelectedItem).ID;
 
                 if (TransType.Equals("insert"))
                 {
@@ -140,7 +142,7 @@ namespace GeneralLedger.UserControls
                         IsCash = this.chkIsCash.Checked
                     };
 
-                    Collection = CollectionServices.Add(Collection);
+                    Collection = CollectionServices.Add(Collection, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
 
                     if (Collection != null)
                     {
@@ -158,7 +160,7 @@ namespace GeneralLedger.UserControls
                     Collection.CheckDetail = this.txtCheckDetails.Text;
                     Collection.Description = this.txtDescription.Text;
                     Collection.IsCash = this.chkIsCash.Checked;
-                    Collection = CollectionServices.Update(Collection , this.GLTranDetail);
+                    Collection = CollectionServices.Update(Collection, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
 
                     if (Collection != null)
                     {
@@ -238,32 +240,32 @@ namespace GeneralLedger.UserControls
             catch (Exception ex)
             {
 
-                throw ex;
+                MessageBox.Show("Error:" + ex.Message);
             }
         }
 
         private void chkIsCash_CheckStateChanged(object sender, EventArgs e)
         {
-            if (this.chkIsCash.Checked)
-            {
-                this.cbBank.Enabled = false;
-                this.txtCheckDetails.Enabled = false;
+            //if (this.chkIsCash.Checked)
+            //{
+            //    this.cbBank.Enabled = false;
+            //    this.txtCheckDetails.Enabled = false;
                
-            }
-            else
-            {
-                this.cbBank.Enabled = true;
-                this.txtCheckDetails.Enabled = true;
-            }
+            //}
+            //else
+            //{
+            //    this.cbBank.Enabled = true;
+            //    this.txtCheckDetails.Enabled = true;
+            //}
         }
 
         private void btnAddEntry_Click(object sender, EventArgs e)
         {
-            if (this.ID == 0)
-            {
-                MessageBox.Show("Please save transaction first before editing entry");
-                return;
-            }
+            //if (this.ID == 0)
+            //{
+            //    MessageBox.Show("Please save transaction first before editing entry");
+            //    return;
+            //}
 
             SearchChartOfAccounts sca = new SearchChartOfAccounts();
             sca.IDGLTranHeader = GLTranHeader;
@@ -591,6 +593,20 @@ namespace GeneralLedger.UserControls
             this.txtTotal.Text = string.Empty;
             this.txtDescription.Text = string.Empty;
             GLTranDetail = new List<tblGLTranDetail>();
+        }
+
+        private void chkUseDefaultEntry_Click(object sender, EventArgs e)
+        {
+            if (this.chkUseDefaultEntry.Checked)
+            {
+                this.btnAddEntry.Enabled = false;
+                this.btnDeleteEntry.Enabled = false;
+            }
+            else
+            {
+                this.btnAddEntry.Enabled = true;
+                this.btnDeleteEntry.Enabled = true;
+            }
         }
     }
 }

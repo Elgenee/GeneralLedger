@@ -2833,7 +2833,6 @@ namespace GeneralLedger {
                 this.columndatDoc.MaxLength = 20;
                 this.columnstrcheckno.MaxLength = 100;
                 this.columndatCheck.MaxLength = 20;
-                this.columnstrparticular.MaxLength = 1000;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

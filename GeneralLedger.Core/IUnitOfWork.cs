@@ -19,7 +19,10 @@ namespace GeneralLedger.Core
         IGLTranDetailRepository GLTranDetail { get; }
         ICollectionRepository Collection{ get; }
         ISalesCustomerLedgerRepository SalesCustomerLedger { get; }
-
+        IPurchaseRepository Purchase { get; }
+        IPurchaseCustomerLedgerRepository PurchaseCustomerLedger { get; }
+        IAccountsReceivableAdjustmentsTypeRepository AccountsReceivableAdjustmentsType { get; }
+        IAccountReceivableAdjustmentsRepository AccountsReceivableAdjustments { get; }
         int Complete();
     }
 }
