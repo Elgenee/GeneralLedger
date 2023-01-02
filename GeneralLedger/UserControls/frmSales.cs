@@ -268,13 +268,13 @@ namespace GeneralLedger.UserControls
                     this.ID = sje.Sale.Id;
                     this.Sale.Id = sje.Sale.Id;
 
-                    //this.Sale.Agent.Id = sje.Sale.Agent.Id;
-                    //this.Sale.Agent.Name = sje.Sale.Agent.Name;
+                    //this.Sale.agentName.Id = sje.Sale.agentName.Id;
+                    //this.Sale.agentName.Name = sje.Sale.agentName.Name;
                     //this.Sale.TRANo = sje.Sale.TRANo;
                     //this.Sale.PONo = sje.Sale.PONo;
                     //this.Sale.Total = sje.Sale.Total;
-                    //this.Sale.Customer.Id = sje.Sale.Customer.Id;
-                    //this.Sale.Customer.strName = sje.Sale.Customer.strName;
+                    //this.Sale.customerName.Id = sje.Sale.customerName.Id;
+                    //this.Sale.customerName.strName = sje.Sale.customerName.strName;
 
                     this.txtID.Text = Sale.Id.ToString();
                     this.AgentId = sje.Sale.Agent.Id;

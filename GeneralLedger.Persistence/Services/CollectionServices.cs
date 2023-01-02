@@ -36,12 +36,24 @@ namespace GeneralLedger.Persistence.Services
                         s.intIdSalesCustomerLedgerTransctionType == 2).Sum(s => s.TotalAmount);
 
                 collSum += salesCustomerLedger.TotalAmount;
+
+                var adjSum = unitOfWork.SalesCustomerLedger
+                .Find(s => s.intIdSales == salesCustomerLedger.intIdSales &&
+                    s.intIdSalesCustomerLedgerTransctionType == 3 && s.AccountReceivableAdjustment.AccountsReceivableAdjustmentsTypeId == 1).Sum(s => s.TotalAmount);
+
                 var sale = unitOfWork.Sale.Get((int)salesCustomerLedger.intIdSales);
 
-                if ((sale.Total - collSum) <= 0)
+                if (((sale.Total + adjSum) - collSum) <= 0)
+                {
                     sale.IsFullyPaid = true;
+                    sale.LastPaymentDate = salesCustomerLedger.TransactionDate;
+                }
                 else
+                {
                     sale.IsFullyPaid = false;
+                    sale.LastPaymentDate = null;
+                }
+
 
                 if (UseDefaultEntry)
                 {
@@ -150,12 +162,22 @@ namespace GeneralLedger.Persistence.Services
 
                 var collSum = collSumList.Sum(s => s.TotalAmount);
 
+                var adjSum = unitOfWork.SalesCustomerLedger
+               .Find(s => s.intIdSales == collection.SalesId &&
+                   s.intIdSalesCustomerLedgerTransctionType == 2).Sum(s => s.TotalAmount);
+
                 var sale = unitOfWork.Sale.Get((int)collection.SalesId);
 
-                if ((sale.Total - collSum) <= 0)
+                if (((sale.Total + adjSum) - collSum) <= 0)
+                {
                     sale.IsFullyPaid = true;
+                    sale.LastPaymentDate = salesLedger.TransactionDate;
+                }
                 else
+                {
                     sale.IsFullyPaid = false;
+                    sale.LastPaymentDate = null;
+                }
 
                 unitOfWork.Collection.Remove(resultCollection);
                 unitOfWork.Complete();
@@ -187,12 +209,23 @@ namespace GeneralLedger.Persistence.Services
                     .Find(s => s.intIdSales == salesLedger.intIdSales &&
                         s.intIdSalesCustomerLedgerTransctionType == 2).Sum(s => s.TotalAmount);
 
+                var adjSum = unitOfWork.SalesCustomerLedger
+                   .Find(s => s.intIdSales == salesLedger.intIdSales &&
+                       s.intIdSalesCustomerLedgerTransctionType == 3 && s.AccountReceivableAdjustment.AccountsReceivableAdjustmentsTypeId == 1).Sum(s => s.TotalAmount);
+
                 var sale = unitOfWork.Sale.Get((int)salesLedger.intIdSales);
 
-                if ((sale.Total - collSum) <= 0)
+                if ((sale.Total + adjSum) - collSum <= 0)
+                {
                     sale.IsFullyPaid = true;
+                    sale.LastPaymentDate = salesLedger.TransactionDate;
+                }
                 else
+                {
                     sale.IsFullyPaid = false;
+                    sale.LastPaymentDate = null;
+                }
+
 
 
                 unitOfWork.GLTranDetail.RemoveRange(resultCollection.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList());

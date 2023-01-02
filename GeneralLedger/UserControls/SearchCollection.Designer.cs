@@ -182,7 +182,7 @@
             this.ID.ReadOnly = true;
             this.ID.Width = 62;
             // 
-            // TransactionNo
+            // TRANo
             // 
             this.TransactionNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.TransactionNo.HeaderText = "TransactionNo";
@@ -225,7 +225,7 @@
             this.PONo.ReadOnly = true;
             this.PONo.Width = 73;
             // 
-            // Customer
+            // customerName
             // 
             this.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Customer.HeaderText = "Customer";

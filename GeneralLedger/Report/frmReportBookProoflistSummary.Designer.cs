@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource11 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource12 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource13 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource14 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource15 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource3 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource4 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource5 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
             this.dtDateTo = new MetroFramework.Controls.MetroDateTime();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.dtDateFrom = new MetroFramework.Controls.MetroDateTime();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.metroPanel1.SuspendLayout();
             this.metroPanel3.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +60,31 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // reportViewer1
+            // 
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Top;
+            reportDataSource1.Name = "dsTotal";
+            reportDataSource1.Value = null;
+            reportDataSource2.Name = "dsISProvIT";
+            reportDataSource2.Value = null;
+            reportDataSource3.Name = "dsNetInc";
+            reportDataSource3.Value = null;
+            reportDataSource4.Name = "dsIncome";
+            reportDataSource4.Value = null;
+            reportDataSource5.Name = "dsExpense";
+            reportDataSource5.Value = null;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource3);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource4);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource5);
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "GeneralLedger.Report.RDLC.GLIncomeStatement.rdlc";
+            this.reportViewer1.Location = new System.Drawing.Point(0, 101);
+            this.reportViewer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.Size = new System.Drawing.Size(1268, 929);
+            this.reportViewer1.TabIndex = 8;
             // 
             // metroPanel3
             // 
@@ -86,9 +111,9 @@
             this.dtDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtDateTo.Location = new System.Drawing.Point(201, 66);
             this.dtDateTo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dtDateTo.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtDateTo.MinimumSize = new System.Drawing.Size(0, 30);
             this.dtDateTo.Name = "dtDateTo";
-            this.dtDateTo.Size = new System.Drawing.Size(298, 29);
+            this.dtDateTo.Size = new System.Drawing.Size(298, 30);
             this.dtDateTo.TabIndex = 8;
             // 
             // metroLabel2
@@ -97,7 +122,7 @@
             this.metroLabel2.Location = new System.Drawing.Point(24, 66);
             this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(53, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(56, 20);
             this.metroLabel2.TabIndex = 7;
             this.metroLabel2.Text = "Date To";
             // 
@@ -117,9 +142,9 @@
             this.dtDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtDateFrom.Location = new System.Drawing.Point(201, 20);
             this.dtDateFrom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dtDateFrom.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtDateFrom.MinimumSize = new System.Drawing.Size(0, 30);
             this.dtDateFrom.Name = "dtDateFrom";
-            this.dtDateFrom.Size = new System.Drawing.Size(298, 29);
+            this.dtDateFrom.Size = new System.Drawing.Size(298, 30);
             this.dtDateFrom.TabIndex = 5;
             // 
             // metroLabel1
@@ -128,34 +153,9 @@
             this.metroLabel1.Location = new System.Drawing.Point(24, 20);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(72, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(74, 20);
             this.metroLabel1.TabIndex = 2;
             this.metroLabel1.Text = "Date From";
-            // 
-            // reportViewer1
-            // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Top;
-            reportDataSource11.Name = "dsTotal";
-            reportDataSource11.Value = null;
-            reportDataSource12.Name = "dsISProvIT";
-            reportDataSource12.Value = null;
-            reportDataSource13.Name = "dsNetInc";
-            reportDataSource13.Value = null;
-            reportDataSource14.Name = "dsIncome";
-            reportDataSource14.Value = null;
-            reportDataSource15.Name = "dsExpense";
-            reportDataSource15.Value = null;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource11);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource12);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource13);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource14);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource15);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "GeneralLedger.Report.RDLC.GLIncomeStatement.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(0, 101);
-            this.reportViewer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(1268, 929);
-            this.reportViewer1.TabIndex = 8;
             // 
             // BookProoflistSummary
             // 

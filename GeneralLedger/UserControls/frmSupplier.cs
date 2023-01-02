@@ -104,8 +104,8 @@ namespace GeneralLedger.UserControls
 
                 if (res == DialogResult.OK)
                 {
-                    //this.ID = sc.Customer.ID;
-                    //this.txtID.Text = sc.Customer.ID.ToString();
+                    //this.ID = sc.customerName.ID;
+                    //this.txtID.Text = sc.customerName.ID.ToString();
                     this.ID = ss.Supplier.ID;
                     this.txtID.Text = ss.Supplier.ID.ToString();
                     this.txtSupplierName.Text = ss.Supplier.Name;

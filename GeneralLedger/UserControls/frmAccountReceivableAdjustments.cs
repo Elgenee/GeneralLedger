@@ -33,12 +33,13 @@ namespace GeneralLedger.UserControls
 
         public frmAccountReceivableAdjustments()
         {
+          
             AccountsReceivableAdjustmentsTypeServices = new AccountsReceivableAdjustmentsTypeServices();
             AccountReceivableAdjustmentsServices = new AccountReceivableAdjustmentsServices();
             GLTranServices = new GLTranServices();
             GLTranDetail = new List<tblGLTranDetail>();
+            AccountReceivableAdjustment = new AccountReceivableAdjustment();
             InitializeComponent();
-           
         }
 
         private void btnSearchSale_Click(object sender, EventArgs e)
@@ -67,7 +68,7 @@ namespace GeneralLedger.UserControls
                     //this.txtSaleID.Text = sje.Sale.Id.ToString();
                     //this.txtSaleTransactionNo.Text = sje.Sale.TRANo;
                     //this.txtSalePONo.Text = sje.Sale.PONo;
-                    //this.txtCustomerName.Text = sje.Sale.Customer.strName;
+                    //this.txtCustomerName.Text = sje.Sale.customerName.strName;
                 }
             }
             catch (Exception ex)
@@ -150,7 +151,20 @@ namespace GeneralLedger.UserControls
                 }
                 else
                 {
-        
+                    AccountReceivableAdjustment.Id = this.ID;
+                    AccountReceivableAdjustment.AccountsReceivableAdjustmentsTypeId = adjustmentType;
+                    AccountReceivableAdjustment.TransactionNo = this.txtAdjustmentTransactionNo.Text;
+                    AccountReceivableAdjustment.TransactionDate = this.dtAdjustmentTransactionDate.Value;
+                    AccountReceivableAdjustment.CollectionId = this.CollectionId;
+                    AccountReceivableAdjustment.Descrpition = this.txtDescription.Text;
+                    AccountReceivableAdjustment.SalesId = this.SaleId;
+
+                    AccountReceivableAdjustment = AccountReceivableAdjustmentsServices.Update(AccountReceivableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
+                    if (AccountReceivableAdjustment != null)
+                    {
+                        MessageBox.Show("Successfully saved");
+                    }
+
                 }
 
                 GLTranHeader = AccountReceivableAdjustment.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
@@ -218,8 +232,8 @@ namespace GeneralLedger.UserControls
                     this.txtTotalCredit.Text = string.Empty;
                 }
 
-                //this.ID = Collection.Id;
-                //this.txtCollectionId.Text = Collection.Id.ToString();
+                this.ID = AccountReceivableAdjustment.Id;
+                this.txtAdjustmentId.Text = AccountReceivableAdjustment.Id.ToString();
 
             }
             catch (Exception ex)
@@ -231,6 +245,337 @@ namespace GeneralLedger.UserControls
 
         private void btnFind_Click(object sender, EventArgs e)
         {
+            try
+            {
+                SearchAdjustmentAccountReceivableAdjustments sje = new SearchAdjustmentAccountReceivableAdjustments();
+                sje.BringToFront();
+                sje.TopMost = true;
+                DialogResult res = sje.ShowDialog(this);
+
+                if (res == DialogResult.OK)
+                {
+                    this.ID = sje.AccountReceivableAdjustment.Id;
+                    this.txtAdjustmentId.Text = sje.AccountReceivableAdjustment.Id.ToString();
+                    this.cbAdjustmentType.SelectedValue = sje.AccountReceivableAdjustment.AccountsReceivableAdjustmentsTypeId;
+                    this.txtAdjustmentTransactionNo.Text = sje.AccountReceivableAdjustment.TransactionNo;
+                    this.dtAdjustmentTransactionDate.Value = (DateTime)sje.AccountReceivableAdjustment.TransactionDate;
+                    this.CollectionId = (int)sje.AccountReceivableAdjustment.CollectionId;
+                    this.txtCollectionId.Text = sje.AccountReceivableAdjustment.CollectionId.ToString();
+                    this.SaleId = (int)sje.AccountReceivableAdjustment.SalesId;
+                    this.txtSaleTransactionNo.Text = sje.AccountReceivableAdjustment.Collection.Sale.TRANo;
+                    this.txtCustomerName.Text = sje.AccountReceivableAdjustment.Collection.Sale.Customer.strName;
+                    this.txtCollectionTransactionNo.Text = sje.AccountReceivableAdjustment.Collection.TRANo.ToString();
+                    this.cbBank.SelectedValue = sje.AccountReceivableAdjustment.Collection.BankId;
+                    this.chkIsCash.Checked = (bool)sje.AccountReceivableAdjustment.Collection.IsCash;
+                    this.txtCheckDetails.Text = sje.AccountReceivableAdjustment.Collection.CheckDetail;
+                    this.txtCollectionTotal.Text = sje.AccountReceivableAdjustment.Collection.Total.ToString();
+                    this.txtDescription.Text = sje.AccountReceivableAdjustment.Descrpition;
+                    this.GLTranHeader = sje.AccountReceivableAdjustment.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
+                    this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
+                    this.chkUseDefaultEntry.Checked = (bool)sje.AccountReceivableAdjustment.tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
+
+                    if (GLTranDetail.Count > 0)
+                    {
+
+                        this.dgJournalEntry.ColumnCount = 6;
+                        this.dgJournalEntry.RowCount = GLTranDetail.Count;
+                        //this.dgChartOfAccountsSubsidiary.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        //this.dgChartOfAccountsSubsidiary.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        this.dgJournalEntry.Columns[0].Name = "COA";
+                        this.dgJournalEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        this.dgJournalEntry.Columns[1].Name = "COA Code";
+                        this.dgJournalEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgJournalEntry.Columns[2].Name = "COA Subsidiary";
+                        this.dgJournalEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgJournalEntry.Columns[3].Name = "COA Subsidiary Code";
+                        this.dgJournalEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgJournalEntry.Columns[4].Name = "Debit";
+                        this.dgJournalEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgJournalEntry.Columns[5].Name = "Credit";
+                        this.dgJournalEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        this.dgJournalEntry.Columns[0].ReadOnly = true;
+                        this.dgJournalEntry.Columns[1].ReadOnly = true;
+                        this.dgJournalEntry.Columns[2].ReadOnly = true;
+                        this.dgJournalEntry.Columns[3].ReadOnly = true;
+                        this.dgJournalEntry.Columns[4].ReadOnly = true;
+                        this.dgJournalEntry.Columns[5].ReadOnly = true;
+                        this.dgJournalEntry.Columns[1].Visible = false;
+                        this.dgJournalEntry.Columns[3].Visible = false;
+
+                        for (int i = 0; i < GLTranDetail.Count; i++)
+                        {
+
+                            this.dgJournalEntry.Rows[i].Cells[0].Value = GLTranDetail[i].tblMasCOA.strName;
+                            this.dgJournalEntry.Rows[i].Cells[1].Value = GLTranDetail[i].tblMasCOA.strCode;
+                            this.dgJournalEntry.Rows[i].Cells[2].Value = GLTranDetail[i].tblMasCOASub.strName;
+                            this.dgJournalEntry.Rows[i].Cells[3].Value = GLTranDetail[i].tblMasCOASub.strCode;
+                            this.dgJournalEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetail[i].curDebit);
+                            this.dgJournalEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetail[i].curCredit);
+
+                            this.dgJournalEntry.Rows[i].Cells[0].ReadOnly = true;
+                            this.dgJournalEntry.Rows[i].Cells[1].ReadOnly = true;
+                            this.dgJournalEntry.Rows[i].Cells[2].ReadOnly = true;
+                            this.dgJournalEntry.Rows[i].Cells[3].ReadOnly = true;
+                            this.dgJournalEntry.Rows[i].Cells[4].ReadOnly = true;
+                            this.dgJournalEntry.Rows[i].Cells[5].ReadOnly = true;
+                        }
+
+                        setRowNumber(this.dgJournalEntry);
+
+                        this.txtTotalDebit.Text = string.Format("{0:0.00}", GLTranDetail.Sum(g => g.curDebit));
+                        this.txtTotalCredit.Text = string.Format("{0:0.00}", GLTranDetail.Sum(g => g.curCredit));
+                    }
+                    else
+                    {
+                        this.dgJournalEntry.Rows.Clear();
+                        this.dgJournalEntry.Refresh();
+                        this.GLTranDetail.Clear();
+                        this.txtTotalDebit.Text = string.Empty;
+                        this.txtTotalCredit.Text = string.Empty;
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void btnAddEntry_Click(object sender, EventArgs e)
+        {
+
+            SearchChartOfAccounts sca = new SearchChartOfAccounts();
+            sca.IDGLTranHeader = GLTranHeader;
+            sca.BringToFront();
+            sca.TopMost = true;
+            DialogResult res = sca.ShowDialog(this);
+
+            if (res == DialogResult.OK)
+            {
+
+                var convertGLTranDetailDomain = new tblGLTranDetail
+                {
+                    intIDGLTranHeader = sca.GLTranDetail.intIDGLTranHeader,
+                    intIDMasCoa = sca.GLTranDetail.intIDCOA,
+                    intIDMasCoaSub = sca.GLTranDetail.intIDCOASub,
+                    curCredit = Convert.ToDecimal(sca.GLTranDetail.curCredit),
+                    curDebit = Convert.ToDecimal(sca.GLTranDetail.curDebit),
+                    tblMasCOA = new tblMasCOA
+                    {
+                        ID = sca.GLTranDetail.COA.ID,
+                        strCode = sca.GLTranDetail.COA.strCode,
+                        strName = sca.GLTranDetail.COA.strName
+                    },
+                    tblMasCOASub = new tblMasCOASub
+                    {
+                        ID = sca.GLTranDetail.COASub.ID,
+                        strCode = sca.GLTranDetail.COASub.strCoaSubCode,
+                        strName = sca.GLTranDetail.COASub.strCoaSubName
+                    }
+                };
+
+                GLTranDetail.Add(convertGLTranDetailDomain);
+
+                if (GLTranDetail.Count > 0)
+                {
+                    this.dgJournalEntry.Rows.Clear();
+                    this.dgJournalEntry.Refresh();
+
+                    this.dgJournalEntry.ColumnCount = 6;
+                    this.dgJournalEntry.RowCount = this.GLTranDetail.Count;
+
+                    //this.dgChartOfAccountsSubsidiary.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    //this.dgChartOfAccountsSubsidiary.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgJournalEntry.Columns[0].Name = "COA";
+                    this.dgJournalEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[1].Name = "COA Code";
+                    this.dgJournalEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[2].Name = "COA Subsidiary";
+                    this.dgJournalEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[3].Name = "COA Subsidiary Code";
+                    this.dgJournalEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[4].Name = "Debit";
+                    this.dgJournalEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[5].Name = "Credit";
+                    this.dgJournalEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+
+                    this.dgJournalEntry.Columns[0].ReadOnly = true;
+                    this.dgJournalEntry.Columns[1].ReadOnly = true;
+                    this.dgJournalEntry.Columns[2].ReadOnly = true;
+                    this.dgJournalEntry.Columns[3].ReadOnly = true;
+                    this.dgJournalEntry.Columns[4].ReadOnly = true;
+                    this.dgJournalEntry.Columns[5].ReadOnly = true;
+                    this.dgJournalEntry.Columns[1].Visible = false;
+                    this.dgJournalEntry.Columns[3].Visible = false;
+
+                    for (int i = 0; i < GLTranDetail.Count; i++)
+                    {
+                        this.dgJournalEntry.Rows[i].Cells[0].Value = GLTranDetail[i].tblMasCOA.strName;
+                        this.dgJournalEntry.Rows[i].Cells[1].Value = GLTranDetail[i].tblMasCOA.strCode;
+                        this.dgJournalEntry.Rows[i].Cells[2].Value = GLTranDetail[i].tblMasCOASub.strName;
+                        this.dgJournalEntry.Rows[i].Cells[3].Value = GLTranDetail[i].tblMasCOASub.strCode;
+                        this.dgJournalEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetail[i].curDebit);
+                        this.dgJournalEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetail[i].curCredit);
+                    }
+
+                    setRowNumber(this.dgJournalEntry);
+
+                    this.txtTotalDebit.Text = string.Format("{0:0.00}", GLTranDetail.Sum(g => g.curDebit));
+                    this.txtTotalCredit.Text = string.Format("{0:0.00}", GLTranDetail.Sum(g => g.curCredit));
+                }
+            }
+        }
+
+        private void btnDeleteEntry_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (GLTranDetail.Count > 0)
+                {
+                    GLTranDetail.RemoveAt(this.IndexGrid);
+                    this.dgJournalEntry.Rows.Clear();
+                    this.dgJournalEntry.Refresh();
+
+                    if (this.GLTranDetail.Count == 0)
+                    {
+                        return;
+                    }
+
+                    this.dgJournalEntry.ColumnCount = 6;
+                    this.dgJournalEntry.RowCount = this.GLTranDetail.Count;
+
+                    this.dgJournalEntry.Columns[0].Name = "COA";
+                    this.dgJournalEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[1].Name = "COA Code";
+                    this.dgJournalEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[2].Name = "COA Subsidiary";
+                    this.dgJournalEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[3].Name = "COA SubsidiaryCode";
+                    this.dgJournalEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[4].Name = "Debit";
+                    this.dgJournalEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgJournalEntry.Columns[5].Name = "Credit";
+                    this.dgJournalEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    for (int i = 0; i < GLTranDetail.Count; i++)
+                    {
+                        this.dgJournalEntry.Rows[i].Cells[0].Value = GLTranDetail[i].tblMasCOA.strName;
+                        this.dgJournalEntry.Rows[i].Cells[1].Value = GLTranDetail[i].tblMasCOA.strCode;
+                        this.dgJournalEntry.Rows[i].Cells[2].Value = GLTranDetail[i].tblMasCOASub.strName;
+                        this.dgJournalEntry.Rows[i].Cells[3].Value = GLTranDetail[i].tblMasCOASub.strCode;
+                        this.dgJournalEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetail[i].curDebit);
+                        this.dgJournalEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetail[i].curCredit);
+                    }
+
+                    setRowNumber(this.dgJournalEntry);
+
+                    this.txtTotalDebit.Text = string.Format("{0:0.00}", GLTranDetail.Sum(g => g.curDebit));
+                    this.txtTotalCredit.Text = string.Format("{0:0.00}", GLTranDetail.Sum(g => g.curCredit));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int intParser;
+                decimal decimalParser;
+                string TransType = (this.ID > 0) ? "delete" : String.Empty;
+                var adjustmentType = (this.cbAdjustmentType.SelectedItem == null) ? 0 : ((AccountsReceivableAdjustmentsType)this.cbAdjustmentType.SelectedItem).Id;
+
+                if (TransType.Equals("delete"))
+                {
+                    AccountReceivableAdjustment = new AccountReceivableAdjustment
+                    {
+                        Id = this.ID,
+                        AccountsReceivableAdjustmentsTypeId = adjustmentType,
+                        TransactionNo = this.txtAdjustmentTransactionNo.Text,
+                        TransactionDate = this.dtAdjustmentTransactionDate.Value,
+                        CollectionId = this.CollectionId,
+                        Descrpition = this.txtDescription.Text,
+                        SalesId = this.SaleId
+                    };
+
+                    AccountReceivableAdjustmentsServices.Remove(AccountReceivableAdjustment);
+
+                    if (AccountReceivableAdjustmentsServices != null)
+                    {
+                        this.ID = 0;
+                        this.txtAdjustmentId.Text = String.Empty;
+                        this.txtAdjustmentTransactionNo.Text = String.Empty;
+                        this.SaleId = 0;
+                        this.CollectionId = 0;
+                        this.txtCollectionId.Text = String.Empty;
+                        this.txtSaleTransactionNo.Text = String.Empty;
+                        this.txtCustomerName.Text = String.Empty;
+                        this.txtCollectionTransactionNo.Text = String.Empty;
+                        this.chkIsCash.Checked = false;
+                        this.txtCheckDetails.Text = String.Empty;
+                        this.txtCollectionTotal.Text = String.Empty;
+                        this.txtDescription.Text = String.Empty;
+                        this.cbBank.Text = String.Empty;
+                        this.cbBank.SelectedText = String.Empty;
+                        this.cbBank.SelectedValue = 0;
+
+                        this.dgJournalEntry.Rows.Clear();
+                        this.dgJournalEntry.Refresh();
+                        this.GLTranDetail.Clear();
+                        this.GLTranHeader = 0;
+
+                        this.txtTotalDebit.Text = string.Empty;
+                        this.txtTotalCredit.Text = string.Empty;
+                        this.txtDescription.Text = string.Empty;
+                        GLTranDetail = new List<tblGLTranDetail>();
+                        MessageBox.Show("Successfully deleted");
+
+                    }
+                  
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            this.ID = 0;
+            this.txtAdjustmentId.Text = String.Empty;
+            this.txtAdjustmentTransactionNo.Text = String.Empty;
+            this.SaleId = 0;
+            this.CollectionId = 0;
+            this.txtCollectionId.Text = String.Empty;
+            this.txtSaleTransactionNo.Text = String.Empty;
+            this.txtCustomerName.Text = String.Empty;
+            this.txtCollectionTransactionNo.Text = String.Empty;
+            this.chkIsCash.Checked = false;
+            this.txtCheckDetails.Text = String.Empty;
+            this.txtCollectionTotal.Text = String.Empty;
+            this.txtDescription.Text = String.Empty;
+
+            this.dgJournalEntry.Rows.Clear();
+            this.dgJournalEntry.Refresh();
+            this.GLTranDetail.Clear();
+            this.GLTranHeader = 0;
+
+            this.txtTotalDebit.Text = string.Empty;
+            this.txtTotalCredit.Text = string.Empty;
+            this.txtDescription.Text = string.Empty;
+            GLTranDetail = new List<tblGLTranDetail>();
 
         }
     }

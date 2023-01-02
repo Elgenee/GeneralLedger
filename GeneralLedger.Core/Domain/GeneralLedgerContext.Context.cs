@@ -84,15 +84,6 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<AccountsReceivableAdjustmentsType> AccountsReceivableAdjustmentsTypes { get; set; }
         public virtual DbSet<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
     
-        public virtual ObjectResult<spGetSalesCustomerLedger_Result> spGetSalesCustomerLedger(Nullable<int> salesID)
-        {
-            var salesIDParameter = salesID.HasValue ?
-                new ObjectParameter("SalesID", salesID) :
-                new ObjectParameter("SalesID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetSalesCustomerLedger_Result>("spGetSalesCustomerLedger", salesIDParameter);
-        }
-    
         public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
         {
             var intFiscalYearParameter = intFiscalYear.HasValue ?
@@ -1114,6 +1105,15 @@ namespace GeneralLedger.Core.Domain
                 new ObjectParameter("datDateTo", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spRptProoflistDetail_Result>("spRptProoflistDetail", intBookTypeParameter, datDateFromParameter, datDateToParameter);
+        }
+    
+        public virtual ObjectResult<spGetSalesCustomerLedger_Result> spGetSalesCustomerLedger(Nullable<int> salesID)
+        {
+            var salesIDParameter = salesID.HasValue ?
+                new ObjectParameter("SalesID", salesID) :
+                new ObjectParameter("SalesID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetSalesCustomerLedger_Result>("spGetSalesCustomerLedger", salesIDParameter);
         }
     }
 }

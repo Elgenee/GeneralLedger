@@ -100,9 +100,9 @@
             this.dtBatchDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtBatchDate.Location = new System.Drawing.Point(234, 9);
             this.dtBatchDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dtBatchDate.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtBatchDate.MinimumSize = new System.Drawing.Size(0, 30);
             this.dtBatchDate.Name = "dtBatchDate";
-            this.dtBatchDate.Size = new System.Drawing.Size(298, 29);
+            this.dtBatchDate.Size = new System.Drawing.Size(298, 30);
             this.dtBatchDate.TabIndex = 5;
             // 
             // metroLabel1
@@ -111,7 +111,7 @@
             this.metroLabel1.Location = new System.Drawing.Point(57, 6);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(97, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(101, 20);
             this.metroLabel1.TabIndex = 2;
             this.metroLabel1.Text = "For the  Month";
             // 

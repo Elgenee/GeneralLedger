@@ -1352,8 +1352,8 @@ namespace GeneralLedger {
                 base.Columns.Add(this.columncurDebit);
                 this.columncurCredit = new global::System.Data.DataColumn("curCredit", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncurCredit);
-                this.columnstrTransactionNumber.MaxLength = 50;
-                this.columnstrTransactionCode.MaxLength = 50;
+                this.columnstrTransactionNumber.MaxLength = 500;
+                this.columnstrTransactionCode.MaxLength = 500;
                 this.columnCOA.MaxLength = 200;
                 this.columnCOASub.MaxLength = 50;
             }
@@ -9024,11 +9024,10 @@ namespace GeneralLedger {
                 base.Columns.Add(this.columncurCredit);
                 this.columnstrTransactionCode = new global::System.Data.DataColumn("strTransactionCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstrTransactionCode);
-                this.columnstrTransactionNumber.MaxLength = 50;
-                this.columnstrDescription.MaxLength = 500;
+                this.columnstrTransactionNumber.MaxLength = 500;
                 this.columncoaName.MaxLength = 200;
                 this.columncoaSubName.MaxLength = 50;
-                this.columnstrTransactionCode.MaxLength = 50;
+                this.columnstrTransactionCode.MaxLength = 500;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

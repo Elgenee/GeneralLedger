@@ -89,7 +89,11 @@ namespace GeneralLedger.UserControls
                     frmReportProoflistDetail.Show();
                 }
 
-
+                if (item.ToUpper().Equals("SUMMARY OF ACCOUNTS RECEIVABLE-SALES"))
+                {
+                    frmReportAccountsReceivableSales frmReportAccountsReceivableSales = new frmReportAccountsReceivableSales();
+                    frmReportAccountsReceivableSales.Show();
+                }
 
                 //rest of your logic 
             }

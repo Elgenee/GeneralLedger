@@ -438,9 +438,9 @@ namespace GeneralLedger.UserControls
                     this.txtCustomerName.Text = sje.Collection.Sale.Customer.strName;
                     this.cbBank.SelectedValue = sje.Collection.BankId;
                     this.txtCheckDetails.Text = sje.Collection.CheckDetail;
-
                     this.GLTranHeader = sje.Collection.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                     this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
+                    this.chkUseDefaultEntry.Checked = (bool)sje.Collection.tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
 
                     if (GLTranDetail.Count > 0)
                     {

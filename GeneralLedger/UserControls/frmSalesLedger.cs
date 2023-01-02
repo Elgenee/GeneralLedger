@@ -45,6 +45,7 @@ namespace GeneralLedger.UserControls
             try
             {
                 var sale = this.SaleServices.GetSaleWithCustomerAgent(this.Id);
+                this.txtID.Text = sale.Id.ToString();
                 this.txtTransactionNo.Text = sale.TRANo;
                 this.txtPONo.Text = sale.PONo;
                 this.dtTransactionDate.Value = (DateTime)sale.TransactionDate;
@@ -67,7 +68,7 @@ namespace GeneralLedger.UserControls
                         this.dtgSaleLedger.Rows[i].Cells["strType"].Value = saleLedger[i].strType;
                         this.dtgSaleLedger.Rows[i].Cells["intIdSales"].Value = saleLedger[i].intIdSales;
                         this.dtgSaleLedger.Rows[i].Cells["intIdCollection"].Value = saleLedger[i].intIdCollection;
-                        
+                        this.dtgSaleLedger.Rows[i].Cells["intIdAccountReceivableAdjustment"].Value = saleLedger[i].intIdAccountReceivableAdjustment;
                         this.dtgSaleLedger.Rows[i].Cells["strTransactionNo"].Value = saleLedger[i].strTransactionNo;
                         this.dtgSaleLedger.Rows[i].Cells["datDateTransaction"].Value = saleLedger[i].datDateTransaction.Value.ToShortDateString();
                         this.dtgSaleLedger.Rows[i].Cells["curTotalAmount"].Value = string.Format("{0:0.00}", saleLedger[i].curTotalAmount);
@@ -92,6 +93,60 @@ namespace GeneralLedger.UserControls
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.MetroTabControl.TabPages.Remove(MetroTabPage);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                this.dtgSaleLedger.Rows.Clear();
+                this.dtgSaleLedger.Refresh();
+
+                var sale = this.SaleServices.GetSaleWithCustomerAgent(this.Id);
+                this.txtID.Text = sale.Id.ToString();
+                this.txtTransactionNo.Text = sale.TRANo;
+                this.txtPONo.Text = sale.PONo;
+                this.dtTransactionDate.Value = (DateTime)sale.TransactionDate;
+                this.txtTotal.Text = string.Format("{0:0.00}", sale.Total);
+                this.txtCustomerName.Text = sale.Customer.strName;
+                this.txtAgent.Text = sale.Agent.Name;
+
+                var saleLedger = this.SalesCustomerLedgerServices.GetSalesCustomerLedger(this.Id).ToList();
+
+                var runningBalance = saleLedger.OrderByDescending(l => l.ID).Select(l => l.curRunningBalance).FirstOrDefault();
+                this.txtRunningBalance.Text = string.Format("{0:0.00}", runningBalance);
+
+                if (saleLedger != null && saleLedger.Count() > 0)
+                {
+                    this.dtgSaleLedger.RowCount = saleLedger.Count();
+
+                    for (int i = 0; i < saleLedger.Count(); i++)
+                    {
+                        this.dtgSaleLedger.Rows[i].Cells["ID"].Value = saleLedger[i].ID;
+                        this.dtgSaleLedger.Rows[i].Cells["intIdSalesCustomerLedgerTransactionType"].Value = saleLedger[i].intIdSalesCustomerLedgerTransctionType;
+                        this.dtgSaleLedger.Rows[i].Cells["strType"].Value = saleLedger[i].strType;
+                        this.dtgSaleLedger.Rows[i].Cells["intIdSales"].Value = saleLedger[i].intIdSales;
+                        this.dtgSaleLedger.Rows[i].Cells["intIdCollection"].Value = saleLedger[i].intIdCollection;
+                        this.dtgSaleLedger.Rows[i].Cells["intIdAccountReceivableAdjustment"].Value = saleLedger[i].intIdAccountReceivableAdjustment;
+                        this.dtgSaleLedger.Rows[i].Cells["strTransactionNo"].Value = saleLedger[i].strTransactionNo;
+                        this.dtgSaleLedger.Rows[i].Cells["datDateTransaction"].Value = saleLedger[i].datDateTransaction.Value.ToShortDateString();
+                        this.dtgSaleLedger.Rows[i].Cells["curTotalAmount"].Value = string.Format("{0:0.00}", saleLedger[i].curTotalAmount);
+                        this.dtgSaleLedger.Rows[i].Cells["curRunningBalance"].Value = string.Format("{0:0.00}", saleLedger[i].curRunningBalance);
+                    }
+                }
+                else
+                {
+                    this.dtgSaleLedger.Rows.Clear();
+                    this.dtgSaleLedger.Refresh();
+                    MessageBox.Show("No Result");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

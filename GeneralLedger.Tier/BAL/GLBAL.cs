@@ -41,6 +41,13 @@ namespace GeneralLedger.Tier.BAL
 
         }
 
+        public List<rptGetSummaryOfAccountsReceivablesSales> getSummaryOfAccountsReceivablesSales(string datDateAsOf)
+        {
+            GLDAL gltb = new GLDAL();
+            return gltb.getSummaryOfAccountsReceivablesSales(datDateAsOf);
+
+        }
+
         public List<rptBSCashBank> getBSCashBank(int intFiscalYear, int intMonth)
         {
             GLDAL gltb = new GLDAL();

@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -124,6 +124,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Report\frmReportAccountsReceivableSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportAccountsReceivableSales.Designer.cs">
+      <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UserControls\frmAccountReceivableAdjustments.cs">
       <SubType>UserControl</SubType>
@@ -371,6 +377,12 @@
     <Compile Include="UserControls\SeachJournalEntry.Designer.cs">
       <DependentUpon>SeachJournalEntry.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustments.Designer.cs">
+      <DependentUpon>SearchAdjustmentAccountReceivableAdjustments.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchAgent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -455,6 +467,12 @@
     <Compile Include="UserControls\TrialBalancePostingManage.Designer.cs">
       <DependentUpon>TrialBalancePostingManage.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Report\frmReportAccountsReceivableSales.resx">
+      <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RDLC\rptReportAccountsReceivableSales.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmAccountReceivableAdjustments.resx">
       <DependentUpon>frmAccountReceivableAdjustments.cs</DependentUpon>
     </EmbeddedResource>
@@ -585,6 +603,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SeachJournalEntry.resx">
       <DependentUpon>SeachJournalEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchAdjustmentAccountReceivableAdjustments.resx">
+      <DependentUpon>SearchAdjustmentAccountReceivableAdjustments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchAgent.resx">
       <DependentUpon>SearchAgent.cs</DependentUpon>

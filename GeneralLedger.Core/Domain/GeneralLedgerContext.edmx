@@ -3145,9 +3145,6 @@
             <End Role="tblMasCOASub" EntitySet="tblMasCOASubs" />
           </AssociationSet>
           <EntitySet Name="SalesCustomerLedgerTransactionTypes" EntityType="GeneralLedgerModel.SalesCustomerLedgerTransactionType" />
-          <FunctionImport Name="spGetSalesCustomerLedger" ReturnType="Collection(GeneralLedgerModel.spGetSalesCustomerLedger_Result)">
-          <Parameter Name="SalesID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="Purchases" EntityType="GeneralLedgerModel.Purchase" />
           <EntitySet Name="PurchaseCustomerLedgerTransactionTypes" EntityType="GeneralLedgerModel.PurchaseCustomerLedgerTransactionType" />
           <AssociationSet Name="FK_Purchase_Suppliers" Association="GeneralLedgerModel.FK_Purchase_Suppliers">
@@ -3494,6 +3491,9 @@
             <Parameter Name="datDateFrom" Mode="In" Type="DateTime" />
             <Parameter Name="datDateTo" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="spGetSalesCustomerLedger" ReturnType="Collection(GeneralLedgerModel.spGetSalesCustomerLedger_Result)">
+            <Parameter Name="SalesID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -3714,17 +3714,6 @@
           <Property Name="Code" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_SalesCustomerLedgerTransactionType" FromRole="SalesCustomerLedgerTransactionType" ToRole="SalesCustomerLedger" />
         </EntityType>
-        <ComplexType Name="spGetSalesCustomerLedger_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="intIdSalesCustomerLedgerTransctionType" Nullable="true" />
-          <Property Type="String" Name="strType" Nullable="true" MaxLength="10" />
-          <Property Type="Int32" Name="intIdSales" Nullable="true" />
-          <Property Type="Int32" Name="intIdCollection" Nullable="true" />
-          <Property Type="String" Name="strTransactionNo" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="datDateTransaction" Nullable="true" Precision="23" />
-          <Property Type="Decimal" Name="curTotalAmount" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="curRunningBalance" Nullable="true" Precision="19" />
-        </ComplexType>
         <EntityType Name="Purchase">
           <Key>
             <PropertyRef Name="Id" />
@@ -4354,6 +4343,18 @@
           <Property Type="String" Name="coaSubName" Nullable="true" MaxLength="50" />
           <Property Type="Decimal" Name="curDebit" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="curCredit" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="spGetSalesCustomerLedger_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="intIdSalesCustomerLedgerTransctionType" Nullable="true" />
+          <Property Type="String" Name="strType" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="intIdSales" Nullable="true" />
+          <Property Type="Int32" Name="intIdCollection" Nullable="true" />
+          <Property Type="Int32" Name="intIdAccountReceivableAdjustment" Nullable="true" />
+          <Property Type="String" Name="strTransactionNo" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="datDateTransaction" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="curTotalAmount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="curRunningBalance" Nullable="true" Precision="19" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4990,21 +4991,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spGetSalesCustomerLedger" FunctionName="GeneralLedgerModel.Store.spGetSalesCustomerLedger">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="GeneralLedgerModel.spGetSalesCustomerLedger_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="intIdSalesCustomerLedgerTransctionType" ColumnName="intIdSalesCustomerLedgerTransctionType" />
-                <ScalarProperty Name="strType" ColumnName="strType" />
-                <ScalarProperty Name="intIdSales" ColumnName="intIdSales" />
-                <ScalarProperty Name="intIdCollection" ColumnName="intIdCollection" />
-                <ScalarProperty Name="strTransactionNo" ColumnName="strTransactionNo" />
-                <ScalarProperty Name="datDateTransaction" ColumnName="datDateTransaction" />
-                <ScalarProperty Name="curTotalAmount" ColumnName="curTotalAmount" />
-                <ScalarProperty Name="curRunningBalance" ColumnName="curRunningBalance" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Purchases">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Purchase">
               <MappingFragment StoreEntitySet="Purchase">
@@ -5725,6 +5711,22 @@
                 <ScalarProperty Name="coaSubName" ColumnName="coaSubName" />
                 <ScalarProperty Name="curDebit" ColumnName="curDebit" />
                 <ScalarProperty Name="curCredit" ColumnName="curCredit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetSalesCustomerLedger" FunctionName="GeneralLedgerModel.Store.spGetSalesCustomerLedger">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GeneralLedgerModel.spGetSalesCustomerLedger_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="intIdSalesCustomerLedgerTransctionType" ColumnName="intIdSalesCustomerLedgerTransctionType" />
+                <ScalarProperty Name="strType" ColumnName="strType" />
+                <ScalarProperty Name="intIdSales" ColumnName="intIdSales" />
+                <ScalarProperty Name="intIdCollection" ColumnName="intIdCollection" />
+                <ScalarProperty Name="intIdAccountReceivableAdjustment" ColumnName="intIdAccountReceivableAdjustment" />
+                <ScalarProperty Name="strTransactionNo" ColumnName="strTransactionNo" />
+                <ScalarProperty Name="datDateTransaction" ColumnName="datDateTransaction" />
+                <ScalarProperty Name="curTotalAmount" ColumnName="curTotalAmount" />
+                <ScalarProperty Name="curRunningBalance" ColumnName="curRunningBalance" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -18,6 +18,7 @@ namespace GeneralLedger.Core.Domain
         public string strType { get; set; }
         public Nullable<int> intIdSales { get; set; }
         public Nullable<int> intIdCollection { get; set; }
+        public Nullable<int> intIdAccountReceivableAdjustment { get; set; }
         public string strTransactionNo { get; set; }
         public Nullable<System.DateTime> datDateTransaction { get; set; }
         public Nullable<decimal> curTotalAmount { get; set; }

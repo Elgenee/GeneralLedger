@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
             this.txtAgent = new MetroFramework.Controls.MetroTextBox();
@@ -49,17 +49,19 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtgSaleLedger = new MetroFramework.Controls.MetroGrid();
+            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+            this.txtRunningBalance = new MetroFramework.Controls.MetroTextBox();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.intIdSalesCustomerLedgerTransactionType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.intIdSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.intIdCollection = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.intIdAccountReceivableAdjustment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.datDateTransaction = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.curTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.curRunningBalance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-            this.txtRunningBalance = new MetroFramework.Controls.MetroTextBox();
+            this.btnRefresh = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotal)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgSaleLedger)).BeginInit();
@@ -376,14 +378,14 @@
             this.dtgSaleLedger.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dtgSaleLedger.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dtgSaleLedger.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgSaleLedger.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgSaleLedger.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dtgSaleLedger.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgSaleLedger.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -391,18 +393,19 @@
             this.strType,
             this.intIdSales,
             this.intIdCollection,
+            this.intIdAccountReceivableAdjustment,
             this.strTransactionNo,
             this.datDateTransaction,
             this.curTotalAmount,
             this.curRunningBalance});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgSaleLedger.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgSaleLedger.DefaultCellStyle = dataGridViewCellStyle5;
             this.dtgSaleLedger.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtgSaleLedger.EnableHeadersVisualStyles = false;
             this.dtgSaleLedger.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -411,90 +414,19 @@
             this.dtgSaleLedger.Margin = new System.Windows.Forms.Padding(4);
             this.dtgSaleLedger.Name = "dtgSaleLedger";
             this.dtgSaleLedger.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgSaleLedger.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgSaleLedger.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dtgSaleLedger.RowHeadersWidth = 51;
             this.dtgSaleLedger.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dtgSaleLedger.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgSaleLedger.Size = new System.Drawing.Size(1336, 573);
             this.dtgSaleLedger.TabIndex = 14;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.MinimumWidth = 6;
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            this.ID.Width = 125;
-            // 
-            // intIdSalesCustomerLedgerTransactionType
-            // 
-            this.intIdSalesCustomerLedgerTransactionType.HeaderText = "intIdSalesCustomerLedgerTransactionType";
-            this.intIdSalesCustomerLedgerTransactionType.MinimumWidth = 6;
-            this.intIdSalesCustomerLedgerTransactionType.Name = "intIdSalesCustomerLedgerTransactionType";
-            this.intIdSalesCustomerLedgerTransactionType.ReadOnly = true;
-            this.intIdSalesCustomerLedgerTransactionType.Visible = false;
-            this.intIdSalesCustomerLedgerTransactionType.Width = 125;
-            // 
-            // strType
-            // 
-            this.strType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.strType.HeaderText = "Type";
-            this.strType.MinimumWidth = 6;
-            this.strType.Name = "strType";
-            this.strType.ReadOnly = true;
-            // 
-            // intIdSales
-            // 
-            this.intIdSales.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.intIdSales.HeaderText = "intIdSales";
-            this.intIdSales.MinimumWidth = 6;
-            this.intIdSales.Name = "intIdSales";
-            this.intIdSales.ReadOnly = true;
-            this.intIdSales.Visible = false;
-            // 
-            // intIdCollection
-            // 
-            this.intIdCollection.HeaderText = "intIdCollection";
-            this.intIdCollection.MinimumWidth = 6;
-            this.intIdCollection.Name = "intIdCollection";
-            this.intIdCollection.Visible = false;
-            this.intIdCollection.Width = 125;
-            // 
-            // strTransactionNo
-            // 
-            this.strTransactionNo.HeaderText = "Transaction No";
-            this.strTransactionNo.MinimumWidth = 6;
-            this.strTransactionNo.Name = "strTransactionNo";
-            this.strTransactionNo.Width = 125;
-            // 
-            // datDateTransaction
-            // 
-            this.datDateTransaction.HeaderText = "Date Transaction";
-            this.datDateTransaction.MinimumWidth = 6;
-            this.datDateTransaction.Name = "datDateTransaction";
-            this.datDateTransaction.Width = 125;
-            // 
-            // curTotalAmount
-            // 
-            this.curTotalAmount.HeaderText = "Total Amount";
-            this.curTotalAmount.MinimumWidth = 6;
-            this.curTotalAmount.Name = "curTotalAmount";
-            this.curTotalAmount.Width = 125;
-            // 
-            // curRunningBalance
-            // 
-            this.curRunningBalance.HeaderText = "Running Balance";
-            this.curRunningBalance.MinimumWidth = 6;
-            this.curRunningBalance.Name = "curRunningBalance";
-            this.curRunningBalance.Width = 125;
             // 
             // metroLabel8
             // 
@@ -539,10 +471,101 @@
             this.txtRunningBalance.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtRunningBalance.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 6;
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            this.ID.Width = 125;
+            // 
+            // intIdSalesCustomerLedgerTransactionType
+            // 
+            this.intIdSalesCustomerLedgerTransactionType.HeaderText = "intIdSalesCustomerLedgerTransactionType";
+            this.intIdSalesCustomerLedgerTransactionType.MinimumWidth = 6;
+            this.intIdSalesCustomerLedgerTransactionType.Name = "intIdSalesCustomerLedgerTransactionType";
+            this.intIdSalesCustomerLedgerTransactionType.ReadOnly = true;
+            this.intIdSalesCustomerLedgerTransactionType.Visible = false;
+            this.intIdSalesCustomerLedgerTransactionType.Width = 125;
+            // 
+            // strType
+            // 
+            this.strType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.strType.HeaderText = "Type";
+            this.strType.MinimumWidth = 6;
+            this.strType.Name = "strType";
+            this.strType.ReadOnly = true;
+            // 
+            // intIdSales
+            // 
+            this.intIdSales.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.intIdSales.HeaderText = "intIdSales";
+            this.intIdSales.MinimumWidth = 6;
+            this.intIdSales.Name = "intIdSales";
+            this.intIdSales.ReadOnly = true;
+            this.intIdSales.Visible = false;
+            // 
+            // intIdCollection
+            // 
+            this.intIdCollection.HeaderText = "intIdCollection";
+            this.intIdCollection.MinimumWidth = 6;
+            this.intIdCollection.Name = "intIdCollection";
+            this.intIdCollection.Visible = false;
+            this.intIdCollection.Width = 125;
+            // 
+            // intIdAccountReceivableAdjustment
+            // 
+            this.intIdAccountReceivableAdjustment.HeaderText = "intIdAccountReceivableAdjustment";
+            this.intIdAccountReceivableAdjustment.MinimumWidth = 6;
+            this.intIdAccountReceivableAdjustment.Name = "intIdAccountReceivableAdjustment";
+            this.intIdAccountReceivableAdjustment.Visible = false;
+            this.intIdAccountReceivableAdjustment.Width = 125;
+            // 
+            // strTransactionNo
+            // 
+            this.strTransactionNo.HeaderText = "Transaction No";
+            this.strTransactionNo.MinimumWidth = 6;
+            this.strTransactionNo.Name = "strTransactionNo";
+            this.strTransactionNo.Width = 125;
+            // 
+            // datDateTransaction
+            // 
+            this.datDateTransaction.HeaderText = "Date Transaction";
+            this.datDateTransaction.MinimumWidth = 6;
+            this.datDateTransaction.Name = "datDateTransaction";
+            this.datDateTransaction.Width = 125;
+            // 
+            // curTotalAmount
+            // 
+            this.curTotalAmount.HeaderText = "Total Amount";
+            this.curTotalAmount.MinimumWidth = 6;
+            this.curTotalAmount.Name = "curTotalAmount";
+            this.curTotalAmount.Width = 125;
+            // 
+            // curRunningBalance
+            // 
+            this.curRunningBalance.HeaderText = "Running Balance";
+            this.curRunningBalance.MinimumWidth = 6;
+            this.curRunningBalance.Name = "curRunningBalance";
+            this.curRunningBalance.Width = 125;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(846, 172);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(132, 28);
+            this.btnRefresh.TabIndex = 195;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseSelectable = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // frmSalesLedger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.metroLabel8);
             this.Controls.Add(this.txtRunningBalance);
             this.Controls.Add(this.panel1);
@@ -593,16 +616,18 @@
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private System.Windows.Forms.Panel panel1;
         private MetroFramework.Controls.MetroGrid dtgSaleLedger;
+        private MetroFramework.Controls.MetroLabel metroLabel8;
+        private MetroFramework.Controls.MetroTextBox txtRunningBalance;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn intIdSalesCustomerLedgerTransactionType;
         private System.Windows.Forms.DataGridViewTextBoxColumn strType;
         private System.Windows.Forms.DataGridViewTextBoxColumn intIdSales;
         private System.Windows.Forms.DataGridViewTextBoxColumn intIdCollection;
+        private System.Windows.Forms.DataGridViewTextBoxColumn intIdAccountReceivableAdjustment;
         private System.Windows.Forms.DataGridViewTextBoxColumn strTransactionNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn datDateTransaction;
         private System.Windows.Forms.DataGridViewTextBoxColumn curTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn curRunningBalance;
-        private MetroFramework.Controls.MetroLabel metroLabel8;
-        private MetroFramework.Controls.MetroTextBox txtRunningBalance;
+        private MetroFramework.Controls.MetroButton btnRefresh;
     }
 }

@@ -50,6 +50,8 @@ namespace GeneralLedger {
         
         private rptISLessCostOfGoodSoldTotalDataTable tablerptISLessCostOfGoodSoldTotal;
         
+        private spGetSummaryOfAccountsReceivablesSalesDataTable tablespGetSummaryOfAccountsReceivablesSales;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -116,6 +118,9 @@ namespace GeneralLedger {
                 }
                 if ((ds.Tables["rptISLessCostOfGoodSoldTotal"] != null)) {
                     base.Tables.Add(new rptISLessCostOfGoodSoldTotalDataTable(ds.Tables["rptISLessCostOfGoodSoldTotal"]));
+                }
+                if ((ds.Tables["spGetSummaryOfAccountsReceivablesSales"] != null)) {
+                    base.Tables.Add(new spGetSummaryOfAccountsReceivablesSalesDataTable(ds.Tables["spGetSummaryOfAccountsReceivablesSales"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -267,6 +272,16 @@ namespace GeneralLedger {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public spGetSummaryOfAccountsReceivablesSalesDataTable spGetSummaryOfAccountsReceivablesSales {
+            get {
+                return this.tablespGetSummaryOfAccountsReceivablesSales;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -370,6 +385,9 @@ namespace GeneralLedger {
                 }
                 if ((ds.Tables["rptISLessCostOfGoodSoldTotal"] != null)) {
                     base.Tables.Add(new rptISLessCostOfGoodSoldTotalDataTable(ds.Tables["rptISLessCostOfGoodSoldTotal"]));
+                }
+                if ((ds.Tables["spGetSummaryOfAccountsReceivablesSales"] != null)) {
+                    base.Tables.Add(new spGetSummaryOfAccountsReceivablesSalesDataTable(ds.Tables["spGetSummaryOfAccountsReceivablesSales"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -482,6 +500,12 @@ namespace GeneralLedger {
                     this.tablerptISLessCostOfGoodSoldTotal.InitVars();
                 }
             }
+            this.tablespGetSummaryOfAccountsReceivablesSales = ((spGetSummaryOfAccountsReceivablesSalesDataTable)(base.Tables["spGetSummaryOfAccountsReceivablesSales"]));
+            if ((initTable == true)) {
+                if ((this.tablespGetSummaryOfAccountsReceivablesSales != null)) {
+                    this.tablespGetSummaryOfAccountsReceivablesSales.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -518,6 +542,8 @@ namespace GeneralLedger {
             base.Tables.Add(this.tablerptISNetSalesTotal);
             this.tablerptISLessCostOfGoodSoldTotal = new rptISLessCostOfGoodSoldTotalDataTable();
             base.Tables.Add(this.tablerptISLessCostOfGoodSoldTotal);
+            this.tablespGetSummaryOfAccountsReceivablesSales = new spGetSummaryOfAccountsReceivablesSalesDataTable();
+            base.Tables.Add(this.tablespGetSummaryOfAccountsReceivablesSales);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -595,6 +621,12 @@ namespace GeneralLedger {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializerptISLessCostOfGoodSoldTotal() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializespGetSummaryOfAccountsReceivablesSales() {
             return false;
         }
         
@@ -691,6 +723,9 @@ namespace GeneralLedger {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void rptISLessCostOfGoodSoldTotalRowChangeEventHandler(object sender, rptISLessCostOfGoodSoldTotalRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void spGetSummaryOfAccountsReceivablesSalesRowChangeEventHandler(object sender, spGetSummaryOfAccountsReceivablesSalesRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -927,7 +962,6 @@ namespace GeneralLedger {
                 base.Columns.Add(this.columnstrBookType);
                 this.columnstrTransactionNumber.MaxLength = 50;
                 this.columnstrTransactionCode.MaxLength = 50;
-                this.columnCOA.MaxLength = 200;
                 this.columnCOASub.MaxLength = 50;
                 this.columnstrBookType.MaxLength = 500;
             }
@@ -4785,6 +4819,327 @@ namespace GeneralLedger {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class spGetSummaryOfAccountsReceivablesSalesDataTable : global::System.Data.TypedTableBase<spGetSummaryOfAccountsReceivablesSalesRow> {
+            
+            private global::System.Data.DataColumn columncustomerName;
+            
+            private global::System.Data.DataColumn columnTransactionDate;
+            
+            private global::System.Data.DataColumn columnTRANo;
+            
+            private global::System.Data.DataColumn columnagentName;
+            
+            private global::System.Data.DataColumn columnTotal;
+            
+            private global::System.Data.DataColumn columndatAsOfDate;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetSummaryOfAccountsReceivablesSalesDataTable() {
+                this.TableName = "spGetSummaryOfAccountsReceivablesSales";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal spGetSummaryOfAccountsReceivablesSalesDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected spGetSummaryOfAccountsReceivablesSalesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn customerNameColumn {
+                get {
+                    return this.columncustomerName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TransactionDateColumn {
+                get {
+                    return this.columnTransactionDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TRANoColumn {
+                get {
+                    return this.columnTRANo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn agentNameColumn {
+                get {
+                    return this.columnagentName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TotalColumn {
+                get {
+                    return this.columnTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn datAsOfDateColumn {
+                get {
+                    return this.columndatAsOfDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetSummaryOfAccountsReceivablesSalesRow this[int index] {
+                get {
+                    return ((spGetSummaryOfAccountsReceivablesSalesRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event spGetSummaryOfAccountsReceivablesSalesRowChangeEventHandler spGetSummaryOfAccountsReceivablesSalesRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event spGetSummaryOfAccountsReceivablesSalesRowChangeEventHandler spGetSummaryOfAccountsReceivablesSalesRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event spGetSummaryOfAccountsReceivablesSalesRowChangeEventHandler spGetSummaryOfAccountsReceivablesSalesRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event spGetSummaryOfAccountsReceivablesSalesRowChangeEventHandler spGetSummaryOfAccountsReceivablesSalesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddspGetSummaryOfAccountsReceivablesSalesRow(spGetSummaryOfAccountsReceivablesSalesRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetSummaryOfAccountsReceivablesSalesRow AddspGetSummaryOfAccountsReceivablesSalesRow(string customerName, System.DateTime TransactionDate, string TRANo, string agentName, decimal Total, System.DateTime datAsOfDate) {
+                spGetSummaryOfAccountsReceivablesSalesRow rowspGetSummaryOfAccountsReceivablesSalesRow = ((spGetSummaryOfAccountsReceivablesSalesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        customerName,
+                        TransactionDate,
+                        TRANo,
+                        agentName,
+                        Total,
+                        datAsOfDate};
+                rowspGetSummaryOfAccountsReceivablesSalesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowspGetSummaryOfAccountsReceivablesSalesRow);
+                return rowspGetSummaryOfAccountsReceivablesSalesRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                spGetSummaryOfAccountsReceivablesSalesDataTable cln = ((spGetSummaryOfAccountsReceivablesSalesDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new spGetSummaryOfAccountsReceivablesSalesDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columncustomerName = base.Columns["customerName"];
+                this.columnTransactionDate = base.Columns["TransactionDate"];
+                this.columnTRANo = base.Columns["TRANo"];
+                this.columnagentName = base.Columns["agentName"];
+                this.columnTotal = base.Columns["Total"];
+                this.columndatAsOfDate = base.Columns["datAsOfDate"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columncustomerName = new global::System.Data.DataColumn("customerName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncustomerName);
+                this.columnTransactionDate = new global::System.Data.DataColumn("TransactionDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTransactionDate);
+                this.columnTRANo = new global::System.Data.DataColumn("TRANo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTRANo);
+                this.columnagentName = new global::System.Data.DataColumn("agentName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnagentName);
+                this.columnTotal = new global::System.Data.DataColumn("Total", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotal);
+                this.columndatAsOfDate = new global::System.Data.DataColumn("datAsOfDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndatAsOfDate);
+                this.columncustomerName.MaxLength = 500;
+                this.columnTRANo.MaxLength = 500;
+                this.columnagentName.MaxLength = 500;
+                this.columndatAsOfDate.ReadOnly = true;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetSummaryOfAccountsReceivablesSalesRow NewspGetSummaryOfAccountsReceivablesSalesRow() {
+                return ((spGetSummaryOfAccountsReceivablesSalesRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new spGetSummaryOfAccountsReceivablesSalesRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(spGetSummaryOfAccountsReceivablesSalesRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.spGetSummaryOfAccountsReceivablesSalesRowChanged != null)) {
+                    this.spGetSummaryOfAccountsReceivablesSalesRowChanged(this, new spGetSummaryOfAccountsReceivablesSalesRowChangeEvent(((spGetSummaryOfAccountsReceivablesSalesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.spGetSummaryOfAccountsReceivablesSalesRowChanging != null)) {
+                    this.spGetSummaryOfAccountsReceivablesSalesRowChanging(this, new spGetSummaryOfAccountsReceivablesSalesRowChangeEvent(((spGetSummaryOfAccountsReceivablesSalesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.spGetSummaryOfAccountsReceivablesSalesRowDeleted != null)) {
+                    this.spGetSummaryOfAccountsReceivablesSalesRowDeleted(this, new spGetSummaryOfAccountsReceivablesSalesRowChangeEvent(((spGetSummaryOfAccountsReceivablesSalesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.spGetSummaryOfAccountsReceivablesSalesRowDeleting != null)) {
+                    this.spGetSummaryOfAccountsReceivablesSalesRowDeleting(this, new spGetSummaryOfAccountsReceivablesSalesRowChangeEvent(((spGetSummaryOfAccountsReceivablesSalesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovespGetSummaryOfAccountsReceivablesSalesRow(spGetSummaryOfAccountsReceivablesSalesRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                GeneralLedgerDataSet ds = new GeneralLedgerDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "spGetSummaryOfAccountsReceivablesSalesDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class spRPTJournalProoflistRow : global::System.Data.DataRow {
@@ -6993,6 +7348,195 @@ namespace GeneralLedger {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class spGetSummaryOfAccountsReceivablesSalesRow : global::System.Data.DataRow {
+            
+            private spGetSummaryOfAccountsReceivablesSalesDataTable tablespGetSummaryOfAccountsReceivablesSales;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal spGetSummaryOfAccountsReceivablesSalesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablespGetSummaryOfAccountsReceivablesSales = ((spGetSummaryOfAccountsReceivablesSalesDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string customerName {
+                get {
+                    try {
+                        return ((string)(this[this.tablespGetSummaryOfAccountsReceivablesSales.customerNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'customerName\' in table \'spGetSummaryOfAccountsReceivablesSa" +
+                                "les\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetSummaryOfAccountsReceivablesSales.customerNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime TransactionDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablespGetSummaryOfAccountsReceivablesSales.TransactionDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TransactionDate\' in table \'spGetSummaryOfAccountsReceivable" +
+                                "sSales\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetSummaryOfAccountsReceivablesSales.TransactionDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string TRANo {
+                get {
+                    try {
+                        return ((string)(this[this.tablespGetSummaryOfAccountsReceivablesSales.TRANoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TRANo\' in table \'spGetSummaryOfAccountsReceivablesSales\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetSummaryOfAccountsReceivablesSales.TRANoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string agentName {
+                get {
+                    try {
+                        return ((string)(this[this.tablespGetSummaryOfAccountsReceivablesSales.agentNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'agentName\' in table \'spGetSummaryOfAccountsReceivablesSales" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetSummaryOfAccountsReceivablesSales.agentNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal Total {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablespGetSummaryOfAccountsReceivablesSales.TotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Total\' in table \'spGetSummaryOfAccountsReceivablesSales\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetSummaryOfAccountsReceivablesSales.TotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime datAsOfDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablespGetSummaryOfAccountsReceivablesSales.datAsOfDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'datAsOfDate\' in table \'spGetSummaryOfAccountsReceivablesSal" +
+                                "es\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetSummaryOfAccountsReceivablesSales.datAsOfDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscustomerNameNull() {
+                return this.IsNull(this.tablespGetSummaryOfAccountsReceivablesSales.customerNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcustomerNameNull() {
+                this[this.tablespGetSummaryOfAccountsReceivablesSales.customerNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTransactionDateNull() {
+                return this.IsNull(this.tablespGetSummaryOfAccountsReceivablesSales.TransactionDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTransactionDateNull() {
+                this[this.tablespGetSummaryOfAccountsReceivablesSales.TransactionDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTRANoNull() {
+                return this.IsNull(this.tablespGetSummaryOfAccountsReceivablesSales.TRANoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTRANoNull() {
+                this[this.tablespGetSummaryOfAccountsReceivablesSales.TRANoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsagentNameNull() {
+                return this.IsNull(this.tablespGetSummaryOfAccountsReceivablesSales.agentNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetagentNameNull() {
+                this[this.tablespGetSummaryOfAccountsReceivablesSales.agentNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTotalNull() {
+                return this.IsNull(this.tablespGetSummaryOfAccountsReceivablesSales.TotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTotalNull() {
+                this[this.tablespGetSummaryOfAccountsReceivablesSales.TotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsdatAsOfDateNull() {
+                return this.IsNull(this.tablespGetSummaryOfAccountsReceivablesSales.datAsOfDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetdatAsOfDateNull() {
+                this[this.tablespGetSummaryOfAccountsReceivablesSales.datAsOfDateColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -7420,6 +7964,40 @@ namespace GeneralLedger {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public rptISLessCostOfGoodSoldTotalRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class spGetSummaryOfAccountsReceivablesSalesRowChangeEvent : global::System.EventArgs {
+            
+            private spGetSummaryOfAccountsReceivablesSalesRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetSummaryOfAccountsReceivablesSalesRowChangeEvent(spGetSummaryOfAccountsReceivablesSalesRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetSummaryOfAccountsReceivablesSalesRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -10065,6 +10643,192 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
                 this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             GeneralLedgerDataSet.rptISLessCostOfGoodSoldTotalDataTable dataTable = new GeneralLedgerDataSet.rptISLessCostOfGoodSoldTotalDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class spGetSummaryOfAccountsReceivablesSalesTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public spGetSummaryOfAccountsReceivablesSalesTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "spGetSummaryOfAccountsReceivablesSales";
+            tableMapping.ColumnMappings.Add("customerName", "customerName");
+            tableMapping.ColumnMappings.Add("TransactionDate", "TransactionDate");
+            tableMapping.ColumnMappings.Add("TRANo", "TRANo");
+            tableMapping.ColumnMappings.Add("agentName", "agentName");
+            tableMapping.ColumnMappings.Add("Total", "Total");
+            tableMapping.ColumnMappings.Add("datAsOfDate", "datAsOfDate");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GeneralLedger.Properties.Settings.Default.GeneralLedgerConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "dbo.spGetSummaryOfAccountsReceivablesSales";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@datAsOfDate", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(GeneralLedgerDataSet.spGetSummaryOfAccountsReceivablesSalesDataTable dataTable, global::System.Nullable<global::System.DateTime> datAsOfDate) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((datAsOfDate.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(datAsOfDate.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual GeneralLedgerDataSet.spGetSummaryOfAccountsReceivablesSalesDataTable GetData(global::System.Nullable<global::System.DateTime> datAsOfDate) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((datAsOfDate.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(datAsOfDate.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            GeneralLedgerDataSet.spGetSummaryOfAccountsReceivablesSalesDataTable dataTable = new GeneralLedgerDataSet.spGetSummaryOfAccountsReceivablesSalesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

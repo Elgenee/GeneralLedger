@@ -4,6 +4,10 @@
 
     partial class GeneralLedgerDataSet
     {
+        partial class spGetSummaryOfAccountsReceivablesSalesDataTable
+        {
+        }
+
         partial class spRptGLGeneralLedgerDetailBegBalanceDataTable
         {
         }

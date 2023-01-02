@@ -520,6 +520,46 @@ namespace GeneralLedger.Tier.DAL
             }
         }
 
+        public List<rptGetSummaryOfAccountsReceivablesSales> getSummaryOfAccountsReceivablesSales(string datDateAsOf)
+        {
+            var dbUtil = new DatabaseManager();
+            var rptGetSummaryOfAccountsReceivablesSalesList = new List<rptGetSummaryOfAccountsReceivablesSales>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spGetSummaryOfAccountsReceivablesSales";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@datAsOfDate", datDateAsOf);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rptGetSummaryOfAccountsReceivablesSales = new rptGetSummaryOfAccountsReceivablesSales
+                            {
+                                customerName = ReferenceEquals(reader["customerName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["customerName"]),
+                                TransactionDate = ReferenceEquals(reader["TransactionDate"], DBNull.Value) ? string.Empty : Convert.ToString(reader["TransactionDate"]),
+                                TRANo = ReferenceEquals(reader["TRANo"], DBNull.Value) ? string.Empty : Convert.ToString(reader["TRANo"]),
+                                agentName = ReferenceEquals(reader["agentName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["agentName"]),
+                                Total = ReferenceEquals(reader["Total"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["Total"]),
+                                datAsOfDate = ReferenceEquals(reader["datAsOfDate"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datAsOfDate"])
+
+                            };
+
+                            rptGetSummaryOfAccountsReceivablesSalesList.Add(rptGetSummaryOfAccountsReceivablesSales);
+                        }
+                        return rptGetSummaryOfAccountsReceivablesSalesList;
+                    }
+                }
+            }
+        }
+
         public List<rptISExpenses> getRepISExpense(int intFiscalYear, int intMonth)
         {
             var dbUtil = new DatabaseManager();
