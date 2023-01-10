@@ -57,6 +57,7 @@ namespace GeneralLedger.Persistence.Services
                         curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                         intIDGLBookType = 6,
                         //strTransactionCode = "SAL-" + sale.Id,
+                        strDescription = sale.Description,
                         datBatchDate = sale.TransactionDate,
                         datInsertedDate = DateTime.Now,
                         tblGLTranDetails = gLTranDetail,
@@ -74,6 +75,7 @@ namespace GeneralLedger.Persistence.Services
                         curDebitAmount = tblGLTranDetail.Sum(d => d.curDebit),
                         intIDGLBookType = 6,
                         //strTransactionCode = "SAL-" + sale.Id,
+                        strDescription = sale.Description,
                         datBatchDate = sale.TransactionDate,
                         datInsertedDate = DateTime.Now,
                         tblGLTranDetails = tblGLTranDetail,
@@ -224,6 +226,7 @@ namespace GeneralLedger.Persistence.Services
                 }
 
                 resultSale.tblGLTranHeaders.ToList()[0].blnUseDefaultEntry = UseDefaultEntry;
+                resultSale.tblGLTranHeaders.ToList()[0].strDescription = resultSale.Description;
                 resultSale.tblGLTranHeaders.ToList()[0].curCreditAmount = resultSale.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curCredit);
                 resultSale.tblGLTranHeaders.ToList()[0].curDebitAmount = resultSale.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curDebit);
                 unitOfWork.Complete();

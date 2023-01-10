@@ -277,7 +277,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="intIdPurchaseCustomerLedgerTransactionType" Type="int" />
           <Property Name="TransactionNo" Type="nvarchar" MaxLength="500" />
           <Property Name="TransactionDate" Type="datetime" />
@@ -538,7 +538,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tblGLTranDetail">
@@ -745,6 +745,30 @@
             </Principal>
             <Dependent Role="Purchase">
               <PropertyRef Name="intIDSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseCustomerLedger_Purchase">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="PurchaseCustomerLedger" Type="Self.PurchaseCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseCustomerLedger">
+              <PropertyRef Name="intIdPurchase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType">
+          <End Role="PurchaseCustomerLedgerTransactionType" Type="Self.PurchaseCustomerLedgerTransactionType" Multiplicity="0..1" />
+          <End Role="PurchaseCustomerLedger" Type="Self.PurchaseCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseCustomerLedgerTransactionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseCustomerLedger">
+              <PropertyRef Name="intIdPurchaseCustomerLedgerTransactionType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1045,6 +1069,18 @@
             </Principal>
             <Dependent Role="tblGLTranHeader">
               <PropertyRef Name="intIdCollection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_Purchase">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="tblGLTranHeader" Type="Self.tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIdPurchase" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1704,6 +1740,14 @@
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Purchase" EntitySet="Purchase" />
           </AssociationSet>
+          <AssociationSet Name="FK_PurchaseCustomerLedger_Purchase" Association="Self.FK_PurchaseCustomerLedger_Purchase">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="PurchaseCustomerLedger" EntitySet="PurchaseCustomerLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType" Association="Self.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType">
+            <End Role="PurchaseCustomerLedgerTransactionType" EntitySet="PurchaseCustomerLedgerTransactionType" />
+            <End Role="PurchaseCustomerLedger" EntitySet="PurchaseCustomerLedger" />
+          </AssociationSet>
           <AssociationSet Name="FK_PurchaseOrder_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrder_PuchaseOrderReceivingStatus">
             <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
             <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
@@ -1802,6 +1846,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_tblGLTranHeader_Collection" Association="Self.FK_tblGLTranHeader_Collection">
             <End Role="Collection" EntitySet="Collection" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_Purchase" Association="Self.FK_tblGLTranHeader_Purchase">
+            <End Role="Purchase" EntitySet="Purchase" />
             <End Role="tblGLTranHeader" EntitySet="tblGLTranHeader" />
           </AssociationSet>
           <AssociationSet Name="FK_tblGLTranHeader_Sales" Association="Self.FK_tblGLTranHeader_Sales">
@@ -3492,8 +3540,12 @@
             <Parameter Name="datDateTo" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="spGetSalesCustomerLedger" ReturnType="Collection(GeneralLedgerModel.spGetSalesCustomerLedger_Result)">
-            <Parameter Name="SalesID" Mode="In" Type="Int32" />
+          <Parameter Name="SalesID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType" Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType">
+            <End Role="PurchaseCustomerLedgerTransactionType" EntitySet="PurchaseCustomerLedgerTransactionTypes" />
+            <End Role="PurchaseCustomerLedger" EntitySet="PurchaseCustomerLedgers" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -3738,6 +3790,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseCustomerLedgers" Relationship="GeneralLedgerModel.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType" FromRole="PurchaseCustomerLedgerTransactionType" ToRole="PurchaseCustomerLedger" />
         </EntityType>
         <Association Name="FK_Purchase_Suppliers">
           <End Type="GeneralLedgerModel.Supplier" Role="Supplier" Multiplicity="0..1" />
@@ -3788,6 +3841,7 @@
           <Property Name="intIdPayment" Type="Int32" />
           <Property Name="DateInserted" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Purchase" Relationship="GeneralLedgerModel.FK_PurhcaseCustomerLedger_PurchaseCustomerLedgerTransactionType" FromRole="PurchaseCustomerLedger" ToRole="Purchase" />
+          <NavigationProperty Name="PurchaseCustomerLedgerTransactionType" Relationship="GeneralLedgerModel.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType" FromRole="PurchaseCustomerLedger" ToRole="PurchaseCustomerLedgerTransactionType" />
         </EntityType>
         <Association Name="FK_PurhcaseCustomerLedger_PurchaseCustomerLedgerTransactionType">
           <End Type="GeneralLedgerModel.Purchase" Role="Purchase" Multiplicity="0..1" />
@@ -4356,6 +4410,18 @@
           <Property Type="Decimal" Name="curTotalAmount" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="curRunningBalance" Nullable="true" Precision="19" />
         </ComplexType>
+        <Association Name="FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType">
+          <End Type="GeneralLedgerModel.PurchaseCustomerLedgerTransactionType" Role="PurchaseCustomerLedgerTransactionType" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.PurchaseCustomerLedger" Role="PurchaseCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseCustomerLedgerTransactionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseCustomerLedger">
+              <PropertyRef Name="intIdPurchaseCustomerLedgerTransactionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

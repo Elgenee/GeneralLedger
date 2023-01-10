@@ -39,7 +39,7 @@ namespace GeneralLedger.Persistence.Repositories
                 || p.TRANo.ToLower().Contains(criteria.ToLower())
                 || p.Supplier.strName.ToLower().Contains(criteria.ToLower())
                 || p.SIDR.ToLower().Contains(criteria.ToLower()))
-                .ToList();     
+                .ToList().Take(100);
         }
 
         public Purchase GetPurchaseWithSupplier(int Id)

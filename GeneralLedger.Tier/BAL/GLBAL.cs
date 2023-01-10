@@ -41,6 +41,20 @@ namespace GeneralLedger.Tier.BAL
 
         }
 
+        public List<rptJournalProoflist> getSalesEntryProoflist(string datDateFrom, string datDateTo)
+        {
+            GLDAL gltb = new GLDAL();
+            return gltb.getSalesEntryProoflist(datDateFrom, datDateTo);
+
+        }
+
+        public List<rptJournalProoflist> getCollectionEntryProoflist(string datDateFrom, string datDateTo)
+        {
+            GLDAL gltb = new GLDAL();
+            return gltb.getCollectionEntryProoflist(datDateFrom, datDateTo);
+
+        }
+
         public List<rptGetSummaryOfAccountsReceivablesSales> getSummaryOfAccountsReceivablesSales(string datDateAsOf)
         {
             GLDAL gltb = new GLDAL();

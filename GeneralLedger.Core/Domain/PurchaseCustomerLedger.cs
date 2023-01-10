@@ -24,5 +24,6 @@ namespace GeneralLedger.Core.Domain
         public Nullable<System.DateTime> DateInserted { get; set; }
     
         public virtual Purchase Purchase { get; set; }
+        public virtual PurchaseCustomerLedgerTransactionType PurchaseCustomerLedgerTransactionType { get; set; }
     }
 }

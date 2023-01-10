@@ -130,6 +130,18 @@
     <Compile Include="Report\frmReportAccountsReceivableSales.Designer.cs">
       <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\frmReportCollectionProoflist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportCollectionProoflist.Designer.cs">
+      <DependentUpon>frmReportCollectionProoflist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmReportSaleProoflist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportSaleProoflist.Designer.cs">
+      <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UserControls\frmAccountReceivableAdjustments.cs">
       <SubType>UserControl</SubType>
@@ -148,6 +160,12 @@
     </Compile>
     <Compile Include="UserControls\frmCollection.Designer.cs">
       <DependentUpon>frmCollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmPayment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmPayment.Designer.cs">
+      <DependentUpon>frmPayment.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmPurchase.cs">
       <SubType>UserControl</SubType>
@@ -443,6 +461,12 @@
     <Compile Include="UserControls\frmSupplier.Designer.cs">
       <DependentUpon>frmSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchPurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchPurchase.Designer.cs">
+      <DependentUpon>SearchPurchase.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchSale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -470,6 +494,14 @@
     <EmbeddedResource Include="Report\frmReportAccountsReceivableSales.resx">
       <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportCollectionProoflist.resx">
+      <DependentUpon>frmReportCollectionProoflist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportSaleProoflist.resx">
+      <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RDLC\CollectionProoflist.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\SalesProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\rptReportAccountsReceivableSales.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -481,6 +513,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmCollection.resx">
       <DependentUpon>frmCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmPayment.resx">
+      <DependentUpon>frmPayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmPurchase.resx">
       <DependentUpon>frmPurchase.cs</DependentUpon>
@@ -636,6 +671,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmSupplier.resx">
       <DependentUpon>frmSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchPurchase.resx">
+      <DependentUpon>SearchPurchase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchSale.resx">
       <DependentUpon>SearchSale.cs</DependentUpon>

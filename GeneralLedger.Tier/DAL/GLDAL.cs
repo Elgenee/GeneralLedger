@@ -520,6 +520,94 @@ namespace GeneralLedger.Tier.DAL
             }
         }
 
+        public List<rptJournalProoflist> getSalesEntryProoflist(string datDateFrom, string datDateTo)
+        {
+            var dbUtil = new DatabaseManager();
+            var rptJournalProoflistList = new List<rptJournalProoflist>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spRPTSalesProoflist";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@datDateFrom", datDateFrom);
+                    cmd.Parameters.AddWithValue("@datDateTo", datDateTo);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rptJournalProoflist = new rptJournalProoflist
+                            {
+                                strTransactionNumber = ReferenceEquals(reader["strTransactionNumber"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionNumber"]),
+                                datBatchDate = ReferenceEquals(reader["datBatchDate"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datBatchDate"]),
+                                strTransactionCode = ReferenceEquals(reader["strTransactionCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionCode"]),
+                                COA = ReferenceEquals(reader["COA"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COA"]),
+                                COASub = ReferenceEquals(reader["COASub"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COASub"]),
+                                curDebit = ReferenceEquals(reader["curDebit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curDebit"]),
+                                curCredit = ReferenceEquals(reader["curCredit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCredit"]),
+                                strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
+                                strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"])
+
+                            };
+
+                            rptJournalProoflistList.Add(rptJournalProoflist);
+                        }
+                        return rptJournalProoflistList;
+                    }
+                }
+            }
+        }
+
+        public List<rptJournalProoflist> getCollectionEntryProoflist(string datDateFrom, string datDateTo)
+        {
+            var dbUtil = new DatabaseManager();
+            var rptJournalProoflistList = new List<rptJournalProoflist>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spRPTCollectionProoflist";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@datDateFrom", datDateFrom);
+                    cmd.Parameters.AddWithValue("@datDateTo", datDateTo);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rptJournalProoflist = new rptJournalProoflist
+                            {
+                                strTransactionNumber = ReferenceEquals(reader["strTransactionNumber"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionNumber"]),
+                                datBatchDate = ReferenceEquals(reader["datBatchDate"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datBatchDate"]),
+                                strTransactionCode = ReferenceEquals(reader["strTransactionCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionCode"]),
+                                COA = ReferenceEquals(reader["COA"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COA"]),
+                                COASub = ReferenceEquals(reader["COASub"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COASub"]),
+                                curDebit = ReferenceEquals(reader["curDebit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curDebit"]),
+                                curCredit = ReferenceEquals(reader["curCredit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCredit"]),
+                                strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
+                                strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"])
+
+                            };
+
+                            rptJournalProoflistList.Add(rptJournalProoflist);
+                        }
+                        return rptJournalProoflistList;
+                    }
+                }
+            }
+        }
+
         public List<rptGetSummaryOfAccountsReceivablesSales> getSummaryOfAccountsReceivablesSales(string datDateAsOf)
         {
             var dbUtil = new DatabaseManager();

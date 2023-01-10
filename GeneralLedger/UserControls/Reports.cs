@@ -57,6 +57,20 @@ namespace GeneralLedger.UserControls
                     frmReportJournalProoflist.Show();
                 }
 
+                if (item.ToUpper().Equals("SALES PROOFLIST"))
+                {
+                    
+                    frmReportSaleProoflist frmReportSalesProoflist = new frmReportSaleProoflist();
+                    frmReportSalesProoflist.Show();
+                }
+
+                if (item.ToUpper().Equals("COLLECTION PROOFLIST"))
+                {
+
+                    frmReportCollectionProoflist frmReportCollectionProoflist = new frmReportCollectionProoflist();
+                    frmReportCollectionProoflist.Show();
+                }
+
                 if (item.ToUpper().Equals("BALANCE SHEET"))
                 {
                     frmReportGLBalanceSheet frmReportGLBalanceSheet = new frmReportGLBalanceSheet();
