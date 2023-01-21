@@ -61,10 +61,10 @@
             listViewItem9,
             listViewItem10});
             this.metroListView1.Location = new System.Drawing.Point(0, 0);
-            this.metroListView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroListView1.Margin = new System.Windows.Forms.Padding(4);
             this.metroListView1.Name = "metroListView1";
             this.metroListView1.OwnerDraw = true;
-            this.metroListView1.Size = new System.Drawing.Size(639, 474);
+            this.metroListView1.Size = new System.Drawing.Size(639, 636);
             this.metroListView1.TabIndex = 0;
             this.metroListView1.UseCompatibleStateImageBehavior = false;
             this.metroListView1.UseSelectable = true;
@@ -77,8 +77,8 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 12;
-            this.metroPanel1.Location = new System.Drawing.Point(0, 475);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroPanel1.Location = new System.Drawing.Point(0, 640);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(820, 52);
             this.metroPanel1.TabIndex = 1;
@@ -89,7 +89,7 @@
             // ViewReport
             // 
             this.ViewReport.Location = new System.Drawing.Point(4, 4);
-            this.ViewReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ViewReport.Margin = new System.Windows.Forms.Padding(4);
             this.ViewReport.Name = "ViewReport";
             this.ViewReport.Size = new System.Drawing.Size(163, 46);
             this.ViewReport.TabIndex = 2;
@@ -119,9 +119,9 @@
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroListView1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Reports";
-            this.Size = new System.Drawing.Size(820, 527);
+            this.Size = new System.Drawing.Size(820, 692);
             this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
