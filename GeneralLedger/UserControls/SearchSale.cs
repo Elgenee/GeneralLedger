@@ -57,7 +57,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchSale.Rows[i].Cells["Total"].Value = string.Format("{0:0.00}", saleResult[i].Total);
                         this.dgSearchSale.Rows[i].Cells["CustomerId"].Value = saleResult[i].Customer.Id;
                         this.dgSearchSale.Rows[i].Cells["Customer"].Value = saleResult[i].Customer.strName;
-                        this.dgSearchSale.Rows[i].Cells["Terms"].Value = saleResult[i].Customer.intTerms;
+                        this.dgSearchSale.Rows[i].Cells["Terms"].Value = saleResult[i].Terms;
                         this.dgSearchSale.Rows[i].Cells["AgentId"].Value = saleResult[i].Agent.Id;
                         this.dgSearchSale.Rows[i].Cells["Agent"].Value = saleResult[i].Agent.Name;
                         this.dgSearchSale.Rows[i].Cells["Description"].Value = saleResult[i].Description;
@@ -103,6 +103,7 @@ namespace GeneralLedger.UserControls
                          intIdCustomer = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["CustomerId"].Value.ToString()),
                          intIdAgent = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value.ToString()),
                          Description = this.dgSearchSale.Rows[this.Index].Cells["Description"].Value.ToString(),
+                         Terms =  Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value.ToString()),
                          Agent = new Agent { 
                             Id = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value.ToString()),
                             Name = this.dgSearchSale.Rows[this.Index].Cells["Agent"].Value.ToString()

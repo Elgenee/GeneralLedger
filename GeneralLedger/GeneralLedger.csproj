@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>23</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -503,6 +503,7 @@
     <EmbeddedResource Include="Report\frmReportSaleProoflist.resx">
       <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\RDLC\CustomerLedgerOverall.rdlc" />
     <EmbeddedResource Include="Report\RDLC\CollectionProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\SalesProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\rptReportAccountsReceivableSales.rdlc">

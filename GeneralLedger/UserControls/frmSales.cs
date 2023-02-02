@@ -158,6 +158,7 @@ namespace GeneralLedger.UserControls
                     Sale.TRANo = this.txtTransactionNo.Text;
                     Sale.intIdAgent = this.AgentId;
                     Sale.intIdCustomer = this.CustomerId;
+                    Sale.Terms = int.TryParse(this.txtTerms.Text, out intParser) ? intParser : 0;
                     Sale.Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
                     Sale.TransactionDate = this.dtTransactionDate.Value;
                     Sale.Description = this.txtDescription.Text;
@@ -288,6 +289,7 @@ namespace GeneralLedger.UserControls
                     this.txtCustomerName.Text = sje.Sale.Customer.strName;
                     this.txtAgentID.Text = sje.Sale.Agent.Id.ToString();
                     this.txtAgent.Text = sje.Sale.Agent.Name.ToString();
+                    this.txtTerms.Text = sje.Sale.Terms.ToString();
 
                     this.GLTranHeader = sje.Sale.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                     this.chkUseDefaultEntry.Checked = (bool)sje.Sale.tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();

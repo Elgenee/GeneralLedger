@@ -56,6 +56,8 @@ namespace GeneralLedger {
         
         private spRPTCollectionProoflistDataTable tablespRPTCollectionProoflist;
         
+        private spGetCustomerLedgerOverallDataTable tablespGetCustomerLedgerOverall;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -131,6 +133,9 @@ namespace GeneralLedger {
                 }
                 if ((ds.Tables["spRPTCollectionProoflist"] != null)) {
                     base.Tables.Add(new spRPTCollectionProoflistDataTable(ds.Tables["spRPTCollectionProoflist"]));
+                }
+                if ((ds.Tables["spGetCustomerLedgerOverall"] != null)) {
+                    base.Tables.Add(new spGetCustomerLedgerOverallDataTable(ds.Tables["spGetCustomerLedgerOverall"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -312,6 +317,16 @@ namespace GeneralLedger {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public spGetCustomerLedgerOverallDataTable spGetCustomerLedgerOverall {
+            get {
+                return this.tablespGetCustomerLedgerOverall;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -424,6 +439,9 @@ namespace GeneralLedger {
                 }
                 if ((ds.Tables["spRPTCollectionProoflist"] != null)) {
                     base.Tables.Add(new spRPTCollectionProoflistDataTable(ds.Tables["spRPTCollectionProoflist"]));
+                }
+                if ((ds.Tables["spGetCustomerLedgerOverall"] != null)) {
+                    base.Tables.Add(new spGetCustomerLedgerOverallDataTable(ds.Tables["spGetCustomerLedgerOverall"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -554,6 +572,12 @@ namespace GeneralLedger {
                     this.tablespRPTCollectionProoflist.InitVars();
                 }
             }
+            this.tablespGetCustomerLedgerOverall = ((spGetCustomerLedgerOverallDataTable)(base.Tables["spGetCustomerLedgerOverall"]));
+            if ((initTable == true)) {
+                if ((this.tablespGetCustomerLedgerOverall != null)) {
+                    this.tablespGetCustomerLedgerOverall.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -596,6 +620,8 @@ namespace GeneralLedger {
             base.Tables.Add(this.tablespRPTSalesProoflist);
             this.tablespRPTCollectionProoflist = new spRPTCollectionProoflistDataTable();
             base.Tables.Add(this.tablespRPTCollectionProoflist);
+            this.tablespGetCustomerLedgerOverall = new spGetCustomerLedgerOverallDataTable();
+            base.Tables.Add(this.tablespGetCustomerLedgerOverall);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -691,6 +717,12 @@ namespace GeneralLedger {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializespRPTCollectionProoflist() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializespGetCustomerLedgerOverall() {
             return false;
         }
         
@@ -797,6 +829,9 @@ namespace GeneralLedger {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void spRPTCollectionProoflistRowChangeEventHandler(object sender, spRPTCollectionProoflistRowChangeEvent e);
         
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void spGetCustomerLedgerOverallRowChangeEventHandler(object sender, spGetCustomerLedgerOverallRowChangeEvent e);
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
@@ -821,6 +856,8 @@ namespace GeneralLedger {
             private global::System.Data.DataColumn columnstrDescription;
             
             private global::System.Data.DataColumn columnstrBookType;
+            
+            private global::System.Data.DataColumn columnstrCustomer;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -929,6 +966,14 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strCustomerColumn {
+                get {
+                    return this.columnstrCustomer;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -964,7 +1009,7 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spRPTJournalProoflistRow AddspRPTJournalProoflistRow(string strTransactionNumber, System.DateTime datBatchDate, string strTransactionCode, string COA, string COASub, decimal curDebit, decimal curCredit, string strDescription, string strBookType) {
+            public spRPTJournalProoflistRow AddspRPTJournalProoflistRow(string strTransactionNumber, System.DateTime datBatchDate, string strTransactionCode, string COA, string COASub, decimal curDebit, decimal curCredit, string strDescription, string strBookType, string strCustomer) {
                 spRPTJournalProoflistRow rowspRPTJournalProoflistRow = ((spRPTJournalProoflistRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         strTransactionNumber,
@@ -975,7 +1020,8 @@ namespace GeneralLedger {
                         curDebit,
                         curCredit,
                         strDescription,
-                        strBookType};
+                        strBookType,
+                        strCustomer};
                 rowspRPTJournalProoflistRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowspRPTJournalProoflistRow);
                 return rowspRPTJournalProoflistRow;
@@ -1007,6 +1053,7 @@ namespace GeneralLedger {
                 this.columncurCredit = base.Columns["curCredit"];
                 this.columnstrDescription = base.Columns["strDescription"];
                 this.columnstrBookType = base.Columns["strBookType"];
+                this.columnstrCustomer = base.Columns["strCustomer"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1030,10 +1077,13 @@ namespace GeneralLedger {
                 base.Columns.Add(this.columnstrDescription);
                 this.columnstrBookType = new global::System.Data.DataColumn("strBookType", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstrBookType);
+                this.columnstrCustomer = new global::System.Data.DataColumn("strCustomer", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrCustomer);
                 this.columnstrTransactionNumber.MaxLength = 50;
                 this.columnstrTransactionCode.MaxLength = 50;
                 this.columnCOASub.MaxLength = 50;
                 this.columnstrBookType.MaxLength = 500;
+                this.columnstrCustomer.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5234,6 +5284,8 @@ namespace GeneralLedger {
             
             private global::System.Data.DataColumn columnstrDescription;
             
+            private global::System.Data.DataColumn columnstrCustomer;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public spRPTSalesProoflistDataTable() {
@@ -5341,6 +5393,14 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strCustomerColumn {
+                get {
+                    return this.columnstrCustomer;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5376,7 +5436,7 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spRPTSalesProoflistRow AddspRPTSalesProoflistRow(string strBookType, string strTransactionNumber, string datBatchDate, string strTransactionCode, string COA, string COASub, decimal curDebit, decimal curCredit, string strDescription) {
+            public spRPTSalesProoflistRow AddspRPTSalesProoflistRow(string strBookType, string strTransactionNumber, string datBatchDate, string strTransactionCode, string COA, string COASub, decimal curDebit, decimal curCredit, string strDescription, string strCustomer) {
                 spRPTSalesProoflistRow rowspRPTSalesProoflistRow = ((spRPTSalesProoflistRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         strBookType,
@@ -5387,7 +5447,8 @@ namespace GeneralLedger {
                         COASub,
                         curDebit,
                         curCredit,
-                        strDescription};
+                        strDescription,
+                        strCustomer};
                 rowspRPTSalesProoflistRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowspRPTSalesProoflistRow);
                 return rowspRPTSalesProoflistRow;
@@ -5419,6 +5480,7 @@ namespace GeneralLedger {
                 this.columncurDebit = base.Columns["curDebit"];
                 this.columncurCredit = base.Columns["curCredit"];
                 this.columnstrDescription = base.Columns["strDescription"];
+                this.columnstrCustomer = base.Columns["strCustomer"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5442,6 +5504,8 @@ namespace GeneralLedger {
                 base.Columns.Add(this.columncurCredit);
                 this.columnstrDescription = new global::System.Data.DataColumn("strDescription", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstrDescription);
+                this.columnstrCustomer = new global::System.Data.DataColumn("strCustomer", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrCustomer);
                 this.columnstrBookType.MaxLength = 2147483647;
                 this.columnstrTransactionNumber.MaxLength = 500;
                 this.columndatBatchDate.MaxLength = 12;
@@ -5449,6 +5513,7 @@ namespace GeneralLedger {
                 this.columnCOA.MaxLength = 2147483647;
                 this.columnCOASub.MaxLength = 2147483647;
                 this.columnstrDescription.MaxLength = 2147483647;
+                this.columnstrCustomer.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5942,6 +6007,400 @@ namespace GeneralLedger {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class spGetCustomerLedgerOverallDataTable : global::System.Data.TypedTableBase<spGetCustomerLedgerOverallRow> {
+            
+            private global::System.Data.DataColumn columnID;
+            
+            private global::System.Data.DataColumn columnintIdSalesCustomerLedgerTransctionType;
+            
+            private global::System.Data.DataColumn columnstrType;
+            
+            private global::System.Data.DataColumn columnintIdSales;
+            
+            private global::System.Data.DataColumn columnintIdCollection;
+            
+            private global::System.Data.DataColumn columnintIdAccountReceivableAdjustment;
+            
+            private global::System.Data.DataColumn columnstrTransactionNo;
+            
+            private global::System.Data.DataColumn columndatDateTransaction;
+            
+            private global::System.Data.DataColumn columncurTotalAmountDebit;
+            
+            private global::System.Data.DataColumn columncurTotalAmountCredit;
+            
+            private global::System.Data.DataColumn columncurRunningBalance;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetCustomerLedgerOverallDataTable() {
+                this.TableName = "spGetCustomerLedgerOverall";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal spGetCustomerLedgerOverallDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected spGetCustomerLedgerOverallDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn intIdSalesCustomerLedgerTransctionTypeColumn {
+                get {
+                    return this.columnintIdSalesCustomerLedgerTransctionType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strTypeColumn {
+                get {
+                    return this.columnstrType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn intIdSalesColumn {
+                get {
+                    return this.columnintIdSales;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn intIdCollectionColumn {
+                get {
+                    return this.columnintIdCollection;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn intIdAccountReceivableAdjustmentColumn {
+                get {
+                    return this.columnintIdAccountReceivableAdjustment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strTransactionNoColumn {
+                get {
+                    return this.columnstrTransactionNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn datDateTransactionColumn {
+                get {
+                    return this.columndatDateTransaction;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn curTotalAmountDebitColumn {
+                get {
+                    return this.columncurTotalAmountDebit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn curTotalAmountCreditColumn {
+                get {
+                    return this.columncurTotalAmountCredit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn curRunningBalanceColumn {
+                get {
+                    return this.columncurRunningBalance;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetCustomerLedgerOverallRow this[int index] {
+                get {
+                    return ((spGetCustomerLedgerOverallRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event spGetCustomerLedgerOverallRowChangeEventHandler spGetCustomerLedgerOverallRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event spGetCustomerLedgerOverallRowChangeEventHandler spGetCustomerLedgerOverallRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event spGetCustomerLedgerOverallRowChangeEventHandler spGetCustomerLedgerOverallRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event spGetCustomerLedgerOverallRowChangeEventHandler spGetCustomerLedgerOverallRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddspGetCustomerLedgerOverallRow(spGetCustomerLedgerOverallRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetCustomerLedgerOverallRow AddspGetCustomerLedgerOverallRow(int intIdSalesCustomerLedgerTransctionType, string strType, int intIdSales, int intIdCollection, int intIdAccountReceivableAdjustment, string strTransactionNo, System.DateTime datDateTransaction, decimal curTotalAmountDebit, decimal curTotalAmountCredit, decimal curRunningBalance) {
+                spGetCustomerLedgerOverallRow rowspGetCustomerLedgerOverallRow = ((spGetCustomerLedgerOverallRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        intIdSalesCustomerLedgerTransctionType,
+                        strType,
+                        intIdSales,
+                        intIdCollection,
+                        intIdAccountReceivableAdjustment,
+                        strTransactionNo,
+                        datDateTransaction,
+                        curTotalAmountDebit,
+                        curTotalAmountCredit,
+                        curRunningBalance};
+                rowspGetCustomerLedgerOverallRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowspGetCustomerLedgerOverallRow);
+                return rowspGetCustomerLedgerOverallRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                spGetCustomerLedgerOverallDataTable cln = ((spGetCustomerLedgerOverallDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new spGetCustomerLedgerOverallDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnID = base.Columns["ID"];
+                this.columnintIdSalesCustomerLedgerTransctionType = base.Columns["intIdSalesCustomerLedgerTransctionType"];
+                this.columnstrType = base.Columns["strType"];
+                this.columnintIdSales = base.Columns["intIdSales"];
+                this.columnintIdCollection = base.Columns["intIdCollection"];
+                this.columnintIdAccountReceivableAdjustment = base.Columns["intIdAccountReceivableAdjustment"];
+                this.columnstrTransactionNo = base.Columns["strTransactionNo"];
+                this.columndatDateTransaction = base.Columns["datDateTransaction"];
+                this.columncurTotalAmountDebit = base.Columns["curTotalAmountDebit"];
+                this.columncurTotalAmountCredit = base.Columns["curTotalAmountCredit"];
+                this.columncurRunningBalance = base.Columns["curRunningBalance"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
+                this.columnintIdSalesCustomerLedgerTransctionType = new global::System.Data.DataColumn("intIdSalesCustomerLedgerTransctionType", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnintIdSalesCustomerLedgerTransctionType);
+                this.columnstrType = new global::System.Data.DataColumn("strType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrType);
+                this.columnintIdSales = new global::System.Data.DataColumn("intIdSales", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnintIdSales);
+                this.columnintIdCollection = new global::System.Data.DataColumn("intIdCollection", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnintIdCollection);
+                this.columnintIdAccountReceivableAdjustment = new global::System.Data.DataColumn("intIdAccountReceivableAdjustment", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnintIdAccountReceivableAdjustment);
+                this.columnstrTransactionNo = new global::System.Data.DataColumn("strTransactionNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrTransactionNo);
+                this.columndatDateTransaction = new global::System.Data.DataColumn("datDateTransaction", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndatDateTransaction);
+                this.columncurTotalAmountDebit = new global::System.Data.DataColumn("curTotalAmountDebit", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurTotalAmountDebit);
+                this.columncurTotalAmountCredit = new global::System.Data.DataColumn("curTotalAmountCredit", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurTotalAmountCredit);
+                this.columncurRunningBalance = new global::System.Data.DataColumn("curRunningBalance", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurRunningBalance);
+                this.columnID.AutoIncrement = true;
+                this.columnID.AutoIncrementSeed = -1;
+                this.columnID.AutoIncrementStep = -1;
+                this.columnID.AllowDBNull = false;
+                this.columnID.ReadOnly = true;
+                this.columnstrType.MaxLength = 10;
+                this.columnstrTransactionNo.MaxLength = 500;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetCustomerLedgerOverallRow NewspGetCustomerLedgerOverallRow() {
+                return ((spGetCustomerLedgerOverallRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new spGetCustomerLedgerOverallRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(spGetCustomerLedgerOverallRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.spGetCustomerLedgerOverallRowChanged != null)) {
+                    this.spGetCustomerLedgerOverallRowChanged(this, new spGetCustomerLedgerOverallRowChangeEvent(((spGetCustomerLedgerOverallRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.spGetCustomerLedgerOverallRowChanging != null)) {
+                    this.spGetCustomerLedgerOverallRowChanging(this, new spGetCustomerLedgerOverallRowChangeEvent(((spGetCustomerLedgerOverallRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.spGetCustomerLedgerOverallRowDeleted != null)) {
+                    this.spGetCustomerLedgerOverallRowDeleted(this, new spGetCustomerLedgerOverallRowChangeEvent(((spGetCustomerLedgerOverallRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.spGetCustomerLedgerOverallRowDeleting != null)) {
+                    this.spGetCustomerLedgerOverallRowDeleting(this, new spGetCustomerLedgerOverallRowChangeEvent(((spGetCustomerLedgerOverallRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovespGetCustomerLedgerOverallRow(spGetCustomerLedgerOverallRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                GeneralLedgerDataSet ds = new GeneralLedgerDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "spGetCustomerLedgerOverallDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class spRPTJournalProoflistRow : global::System.Data.DataRow {
@@ -6104,6 +6563,22 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strCustomer {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTJournalProoflist.strCustomerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strCustomer\' in table \'spRPTJournalProoflist\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTJournalProoflist.strCustomerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsstrTransactionNumberNull() {
                 return this.IsNull(this.tablespRPTJournalProoflist.strTransactionNumberColumn);
             }
@@ -6208,6 +6683,18 @@ namespace GeneralLedger {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetstrBookTypeNull() {
                 this[this.tablespRPTJournalProoflist.strBookTypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrCustomerNull() {
+                return this.IsNull(this.tablespRPTJournalProoflist.strCustomerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrCustomerNull() {
+                this[this.tablespRPTJournalProoflist.strCustomerColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8500,6 +8987,22 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strCustomer {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTSalesProoflist.strCustomerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strCustomer\' in table \'spRPTSalesProoflist\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTSalesProoflist.strCustomerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsstrBookTypeNull() {
                 return this.IsNull(this.tablespRPTSalesProoflist.strBookTypeColumn);
             }
@@ -8604,6 +9107,18 @@ namespace GeneralLedger {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetstrDescriptionNull() {
                 this[this.tablespRPTSalesProoflist.strDescriptionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrCustomerNull() {
+                return this.IsNull(this.tablespRPTSalesProoflist.strCustomerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrCustomerNull() {
+                this[this.tablespRPTSalesProoflist.strCustomerColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8876,6 +9391,321 @@ namespace GeneralLedger {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetstrDescriptionNull() {
                 this[this.tablespRPTCollectionProoflist.strDescriptionColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class spGetCustomerLedgerOverallRow : global::System.Data.DataRow {
+            
+            private spGetCustomerLedgerOverallDataTable tablespGetCustomerLedgerOverall;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal spGetCustomerLedgerOverallRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablespGetCustomerLedgerOverall = ((spGetCustomerLedgerOverallDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int ID {
+                get {
+                    return ((int)(this[this.tablespGetCustomerLedgerOverall.IDColumn]));
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int intIdSalesCustomerLedgerTransctionType {
+                get {
+                    try {
+                        return ((int)(this[this.tablespGetCustomerLedgerOverall.intIdSalesCustomerLedgerTransctionTypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'intIdSalesCustomerLedgerTransctionType\' in table \'spGetCust" +
+                                "omerLedgerOverall\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.intIdSalesCustomerLedgerTransctionTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strType {
+                get {
+                    try {
+                        return ((string)(this[this.tablespGetCustomerLedgerOverall.strTypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strType\' in table \'spGetCustomerLedgerOverall\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.strTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int intIdSales {
+                get {
+                    try {
+                        return ((int)(this[this.tablespGetCustomerLedgerOverall.intIdSalesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'intIdSales\' in table \'spGetCustomerLedgerOverall\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.intIdSalesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int intIdCollection {
+                get {
+                    try {
+                        return ((int)(this[this.tablespGetCustomerLedgerOverall.intIdCollectionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'intIdCollection\' in table \'spGetCustomerLedgerOverall\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.intIdCollectionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int intIdAccountReceivableAdjustment {
+                get {
+                    try {
+                        return ((int)(this[this.tablespGetCustomerLedgerOverall.intIdAccountReceivableAdjustmentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'intIdAccountReceivableAdjustment\' in table \'spGetCustomerLe" +
+                                "dgerOverall\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.intIdAccountReceivableAdjustmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strTransactionNo {
+                get {
+                    try {
+                        return ((string)(this[this.tablespGetCustomerLedgerOverall.strTransactionNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strTransactionNo\' in table \'spGetCustomerLedgerOverall\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.strTransactionNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime datDateTransaction {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablespGetCustomerLedgerOverall.datDateTransactionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'datDateTransaction\' in table \'spGetCustomerLedgerOverall\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.datDateTransactionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal curTotalAmountDebit {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablespGetCustomerLedgerOverall.curTotalAmountDebitColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'curTotalAmountDebit\' in table \'spGetCustomerLedgerOverall\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.curTotalAmountDebitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal curTotalAmountCredit {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablespGetCustomerLedgerOverall.curTotalAmountCreditColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'curTotalAmountCredit\' in table \'spGetCustomerLedgerOverall\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.curTotalAmountCreditColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal curRunningBalance {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablespGetCustomerLedgerOverall.curRunningBalanceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'curRunningBalance\' in table \'spGetCustomerLedgerOverall\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespGetCustomerLedgerOverall.curRunningBalanceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsintIdSalesCustomerLedgerTransctionTypeNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.intIdSalesCustomerLedgerTransctionTypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetintIdSalesCustomerLedgerTransctionTypeNull() {
+                this[this.tablespGetCustomerLedgerOverall.intIdSalesCustomerLedgerTransctionTypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrTypeNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.strTypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrTypeNull() {
+                this[this.tablespGetCustomerLedgerOverall.strTypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsintIdSalesNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.intIdSalesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetintIdSalesNull() {
+                this[this.tablespGetCustomerLedgerOverall.intIdSalesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsintIdCollectionNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.intIdCollectionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetintIdCollectionNull() {
+                this[this.tablespGetCustomerLedgerOverall.intIdCollectionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsintIdAccountReceivableAdjustmentNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.intIdAccountReceivableAdjustmentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetintIdAccountReceivableAdjustmentNull() {
+                this[this.tablespGetCustomerLedgerOverall.intIdAccountReceivableAdjustmentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrTransactionNoNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.strTransactionNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrTransactionNoNull() {
+                this[this.tablespGetCustomerLedgerOverall.strTransactionNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsdatDateTransactionNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.datDateTransactionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetdatDateTransactionNull() {
+                this[this.tablespGetCustomerLedgerOverall.datDateTransactionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscurTotalAmountDebitNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.curTotalAmountDebitColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcurTotalAmountDebitNull() {
+                this[this.tablespGetCustomerLedgerOverall.curTotalAmountDebitColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscurTotalAmountCreditNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.curTotalAmountCreditColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcurTotalAmountCreditNull() {
+                this[this.tablespGetCustomerLedgerOverall.curTotalAmountCreditColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscurRunningBalanceNull() {
+                return this.IsNull(this.tablespGetCustomerLedgerOverall.curRunningBalanceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcurRunningBalanceNull() {
+                this[this.tablespGetCustomerLedgerOverall.curRunningBalanceColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -9422,6 +10252,40 @@ namespace GeneralLedger {
                 }
             }
         }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class spGetCustomerLedgerOverallRowChangeEvent : global::System.EventArgs {
+            
+            private spGetCustomerLedgerOverallRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetCustomerLedgerOverallRowChangeEvent(spGetCustomerLedgerOverallRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public spGetCustomerLedgerOverallRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
     }
 }
 namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
@@ -9556,6 +10420,7 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("curCredit", "curCredit");
             tableMapping.ColumnMappings.Add("strBookType", "strBookType");
             tableMapping.ColumnMappings.Add("strDescription", "strDescription");
+            tableMapping.ColumnMappings.Add("strCustomer", "strCustomer");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -12375,6 +13240,7 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("curDebit", "curDebit");
             tableMapping.ColumnMappings.Add("curCredit", "curCredit");
             tableMapping.ColumnMappings.Add("strDescription", "strDescription");
+            tableMapping.ColumnMappings.Add("strCustomer", "strCustomer");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -12644,6 +13510,197 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
                 this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             GeneralLedgerDataSet.spRPTCollectionProoflistDataTable dataTable = new GeneralLedgerDataSet.spRPTCollectionProoflistDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class spGetCustomerLedgerOverallTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public spGetCustomerLedgerOverallTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "spGetCustomerLedgerOverall";
+            tableMapping.ColumnMappings.Add("ID", "ID");
+            tableMapping.ColumnMappings.Add("intIdSalesCustomerLedgerTransctionType", "intIdSalesCustomerLedgerTransctionType");
+            tableMapping.ColumnMappings.Add("strType", "strType");
+            tableMapping.ColumnMappings.Add("intIdSales", "intIdSales");
+            tableMapping.ColumnMappings.Add("intIdCollection", "intIdCollection");
+            tableMapping.ColumnMappings.Add("intIdAccountReceivableAdjustment", "intIdAccountReceivableAdjustment");
+            tableMapping.ColumnMappings.Add("strTransactionNo", "strTransactionNo");
+            tableMapping.ColumnMappings.Add("datDateTransaction", "datDateTransaction");
+            tableMapping.ColumnMappings.Add("curTotalAmountDebit", "curTotalAmountDebit");
+            tableMapping.ColumnMappings.Add("curTotalAmountCredit", "curTotalAmountCredit");
+            tableMapping.ColumnMappings.Add("curRunningBalance", "curRunningBalance");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GeneralLedger.Properties.Settings.Default.GeneralLedgerConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "dbo.spGetCustomerLedgerOverall";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(GeneralLedgerDataSet.spGetCustomerLedgerOverallDataTable dataTable, global::System.Nullable<int> CustomerID) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((CustomerID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(CustomerID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual GeneralLedgerDataSet.spGetCustomerLedgerOverallDataTable GetData(global::System.Nullable<int> CustomerID) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((CustomerID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(CustomerID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            GeneralLedgerDataSet.spGetCustomerLedgerOverallDataTable dataTable = new GeneralLedgerDataSet.spGetCustomerLedgerOverallDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

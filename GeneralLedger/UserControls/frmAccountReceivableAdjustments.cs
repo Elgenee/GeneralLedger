@@ -64,6 +64,8 @@ namespace GeneralLedger.UserControls
                     this.chkIsCash.Checked = (bool)sje.Collection.IsCash;
                     this.SaleId = (int)sje.Collection.SalesId;
 
+                    checkAdjustmentType();
+
                     //this.SaleId = sje.Sale.Id;
                     //this.txtSaleID.Text = sje.Sale.Id.ToString();
                     //this.txtSaleTransactionNo.Text = sje.Sale.TRANo;
@@ -139,7 +141,8 @@ namespace GeneralLedger.UserControls
                          TransactionDate = this.dtAdjustmentTransactionDate.Value,
                          CollectionId = this.CollectionId,
                          Descrpition = this.txtDescription.Text,
-                         SalesId = this.SaleId
+                         TotalAmount = decimal.TryParse(this.txtCollectionTotal.Text, out decimalParser) ? decimalParser : 0,
+                        SalesId = this.SaleId
                     };
 
                     AccountReceivableAdjustment = AccountReceivableAdjustmentsServices.Add(AccountReceivableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
@@ -158,6 +161,7 @@ namespace GeneralLedger.UserControls
                     AccountReceivableAdjustment.CollectionId = this.CollectionId;
                     AccountReceivableAdjustment.Descrpition = this.txtDescription.Text;
                     AccountReceivableAdjustment.SalesId = this.SaleId;
+                    AccountReceivableAdjustment.TotalAmount = decimal.TryParse(this.txtCollectionTotal.Text, out decimalParser) ? decimalParser : 0;
 
                     AccountReceivableAdjustment = AccountReceivableAdjustmentsServices.Update(AccountReceivableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
                     if (AccountReceivableAdjustment != null)
@@ -254,6 +258,7 @@ namespace GeneralLedger.UserControls
 
                 if (res == DialogResult.OK)
                 {
+                    checkAdjustmentType();
                     this.ID = sje.AccountReceivableAdjustment.Id;
                     this.txtAdjustmentId.Text = sje.AccountReceivableAdjustment.Id.ToString();
                     this.cbAdjustmentType.SelectedValue = sje.AccountReceivableAdjustment.AccountsReceivableAdjustmentsTypeId;
@@ -268,11 +273,12 @@ namespace GeneralLedger.UserControls
                     this.cbBank.SelectedValue = sje.AccountReceivableAdjustment.Collection.BankId;
                     this.chkIsCash.Checked = (bool)sje.AccountReceivableAdjustment.Collection.IsCash;
                     this.txtCheckDetails.Text = sje.AccountReceivableAdjustment.Collection.CheckDetail;
-                    this.txtCollectionTotal.Text = sje.AccountReceivableAdjustment.Collection.Total.ToString();
+                    this.txtCollectionTotal.Text = sje.AccountReceivableAdjustment.TotalAmount.ToString();
                     this.txtDescription.Text = sje.AccountReceivableAdjustment.Descrpition;
                     this.GLTranHeader = sje.AccountReceivableAdjustment.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                     this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
                     this.chkUseDefaultEntry.Checked = (bool)sje.AccountReceivableAdjustment.tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
+           
 
                     if (GLTranDetail.Count > 0)
                     {
@@ -577,6 +583,36 @@ namespace GeneralLedger.UserControls
             this.txtDescription.Text = string.Empty;
             GLTranDetail = new List<tblGLTranDetail>();
 
+        }
+
+        private void cbAdjustmentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            checkAdjustmentType();
+        }
+
+        public void checkAdjustmentType() {
+           
+            var adjustmentType = (this.cbAdjustmentType.SelectedItem == null) ? string.Empty : ((AccountsReceivableAdjustmentsType)this.cbAdjustmentType.SelectedItem).Name;
+
+            if (adjustmentType.ToLower().Equals("return check"))
+            {
+                this.txtCollectionTotal.Enabled = false;
+                this.txtCollectionTotal.IsInputReadOnly = true;
+                this.txtCollectionTotal.BackColor = Color.Transparent;
+                this.txtCollectionTotal.BackgroundStyle.BackColor = System.Drawing.SystemColors.Control;
+                this.txtCollectionTotal.BackgroundStyle.BackColor2 = System.Drawing.SystemColors.Control;
+
+
+            }
+            else
+            {
+                this.txtCollectionTotal.Value = 0;
+                this.txtCollectionTotal.Enabled = true;
+                this.txtCollectionTotal.IsInputReadOnly = false;
+                this.txtCollectionTotal.BackColor = Color.Transparent;
+                this.txtCollectionTotal.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+                this.txtCollectionTotal.BackgroundStyle.BackColor2 = System.Drawing.SystemColors.Window;
+            }
         }
     }
 }

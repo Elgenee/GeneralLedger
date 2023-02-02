@@ -97,6 +97,7 @@
     <Compile Include="BO\rptBSCashBank.cs" />
     <Compile Include="BO\rptFALessACCUMDEPN.cs" />
     <Compile Include="BO\rptFATransportationEquipment.cs" />
+    <Compile Include="BO\rptGetCustomerLedgerOverall.cs" />
     <Compile Include="BO\rptGetSummaryOfAccountsReceivablesSales.cs" />
     <Compile Include="BO\rptISExpenses.cs" />
     <Compile Include="BO\rptISIncome.cs" />

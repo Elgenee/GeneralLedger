@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.txtCriteria = new MetroFramework.Controls.MetroTextBox();
             this.btnSelect = new MetroFramework.Controls.MetroButton();
@@ -40,6 +40,7 @@
             this.AccountsReceivableAdjustmentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsReceivableAdjustmentTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsReceivableAdjustmentTransactionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CollectionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SalesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SalesTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,6 +134,7 @@
             this.AccountsReceivableAdjustmentType,
             this.AccountsReceivableAdjustmentTransactionNo,
             this.AccountsReceivableAdjustmentTransactionDate,
+            this.TotalAmount,
             this.CollectionId,
             this.SalesId,
             this.SalesTransactionNo,
@@ -146,14 +148,14 @@
             this.GLTranHeaderID,
             this.Description,
             this.UseDefaultEntry});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgSearchAccountReceivableAdjustments.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgSearchAccountReceivableAdjustments.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgSearchAccountReceivableAdjustments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgSearchAccountReceivableAdjustments.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgSearchAccountReceivableAdjustments.Location = new System.Drawing.Point(0, 0);
@@ -222,6 +224,14 @@
             this.AccountsReceivableAdjustmentTransactionDate.ReadOnly = true;
             this.AccountsReceivableAdjustmentTransactionDate.Width = 327;
             // 
+            // TotalAmount
+            // 
+            this.TotalAmount.HeaderText = "TotalAmount";
+            this.TotalAmount.MinimumWidth = 6;
+            this.TotalAmount.Name = "TotalAmount";
+            this.TotalAmount.ReadOnly = true;
+            this.TotalAmount.Width = 125;
+            // 
             // CollectionId
             // 
             this.CollectionId.HeaderText = "CollectionId";
@@ -247,7 +257,7 @@
             this.SalesTransactionNo.ReadOnly = true;
             this.SalesTransactionNo.Width = 125;
             // 
-            // customerName
+            // Customer
             // 
             this.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Customer.HeaderText = "Customer";
@@ -362,6 +372,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsReceivableAdjustmentType;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsReceivableAdjustmentTransactionNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsReceivableAdjustmentTransactionDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn CollectionId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SalesId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SalesTransactionNo;

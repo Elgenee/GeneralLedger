@@ -38,6 +38,7 @@
             System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("GL Overall Book Prooflist Summary");
             System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Prooflist Detail");
             System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Summary Of Accounts Receivable-Sales");
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Customer Ledger");
             this.metroListView1 = new MetroFramework.Controls.MetroListView();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.ViewReport = new MetroFramework.Controls.MetroButton();
@@ -59,12 +60,13 @@
             listViewItem7,
             listViewItem8,
             listViewItem9,
-            listViewItem10});
+            listViewItem10,
+            listViewItem11});
             this.metroListView1.Location = new System.Drawing.Point(0, 0);
             this.metroListView1.Margin = new System.Windows.Forms.Padding(4);
             this.metroListView1.Name = "metroListView1";
             this.metroListView1.OwnerDraw = true;
-            this.metroListView1.Size = new System.Drawing.Size(639, 636);
+            this.metroListView1.Size = new System.Drawing.Size(639, 666);
             this.metroListView1.TabIndex = 0;
             this.metroListView1.UseCompatibleStateImageBehavior = false;
             this.metroListView1.UseSelectable = true;
@@ -77,7 +79,7 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 12;
-            this.metroPanel1.Location = new System.Drawing.Point(0, 640);
+            this.metroPanel1.Location = new System.Drawing.Point(0, 674);
             this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(820, 52);
@@ -121,7 +123,7 @@
             this.Controls.Add(this.metroListView1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Reports";
-            this.Size = new System.Drawing.Size(820, 692);
+            this.Size = new System.Drawing.Size(820, 726);
             this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

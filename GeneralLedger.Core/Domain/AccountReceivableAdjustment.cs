@@ -28,6 +28,7 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> CollectionId { get; set; }
         public Nullable<int> SalesId { get; set; }
         public string Descrpition { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
     
         public virtual AccountsReceivableAdjustmentsType AccountsReceivableAdjustmentsType { get; set; }
         public virtual Collection Collection { get; set; }

@@ -28,22 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource21 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource22 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource23 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource24 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource25 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource51 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource52 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource53 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource54 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource55 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.reportViewer2 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.txtCustomerName = new MetroFramework.Controls.MetroTextBox();
+            this.btnSearchCustomer = new MetroFramework.Controls.MetroButton();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroPanel1
             // 
+            this.metroPanel1.Controls.Add(this.btnSearchCustomer);
             this.metroPanel1.Controls.Add(this.metroLabel6);
             this.metroPanel1.Controls.Add(this.txtCustomerName);
             this.metroPanel1.Controls.Add(this.metroButton1);
@@ -62,10 +64,10 @@
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(606, 16);
+            this.metroButton1.Location = new System.Drawing.Point(851, 16);
             this.metroButton1.Margin = new System.Windows.Forms.Padding(4);
             this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(208, 28);
+            this.metroButton1.Size = new System.Drawing.Size(123, 28);
             this.metroButton1.TabIndex = 6;
             this.metroButton1.Text = "Preview";
             this.metroButton1.UseSelectable = true;
@@ -74,21 +76,21 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource21.Name = "dsTotal";
-            reportDataSource21.Value = null;
-            reportDataSource22.Name = "dsISProvIT";
-            reportDataSource22.Value = null;
-            reportDataSource23.Name = "dsNetInc";
-            reportDataSource23.Value = null;
-            reportDataSource24.Name = "dsIncome";
-            reportDataSource24.Value = null;
-            reportDataSource25.Name = "dsExpense";
-            reportDataSource25.Value = null;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource21);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource22);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource23);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource24);
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource25);
+            reportDataSource51.Name = "dsTotal";
+            reportDataSource51.Value = null;
+            reportDataSource52.Name = "dsISProvIT";
+            reportDataSource52.Value = null;
+            reportDataSource53.Name = "dsNetInc";
+            reportDataSource53.Value = null;
+            reportDataSource54.Name = "dsIncome";
+            reportDataSource54.Value = null;
+            reportDataSource55.Name = "dsExpense";
+            reportDataSource55.Value = null;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource51);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource52);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource53);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource54);
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource55);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "GeneralLedger.Report.RDLC.GLIncomeStatement.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(27, 74);
             this.reportViewer1.Margin = new System.Windows.Forms.Padding(4);
@@ -100,6 +102,7 @@
             // reportViewer2
             // 
             this.reportViewer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportViewer2.LocalReport.ReportEmbeddedResource = "GeneralLedger.Report.RDLC.CustomerLedgerOverall.rdlc";
             this.reportViewer2.Location = new System.Drawing.Point(27, 135);
             this.reportViewer2.Name = "reportViewer2";
             this.reportViewer2.ServerReport.BearerToken = null;
@@ -133,7 +136,7 @@
             this.txtCustomerName.CustomButton.UseSelectable = true;
             this.txtCustomerName.CustomButton.Visible = false;
             this.txtCustomerName.Lines = new string[0];
-            this.txtCustomerName.Location = new System.Drawing.Point(191, 16);
+            this.txtCustomerName.Location = new System.Drawing.Point(199, 16);
             this.txtCustomerName.Margin = new System.Windows.Forms.Padding(4);
             this.txtCustomerName.MaxLength = 32767;
             this.txtCustomerName.Name = "txtCustomerName";
@@ -144,12 +147,23 @@
             this.txtCustomerName.SelectionLength = 0;
             this.txtCustomerName.SelectionStart = 0;
             this.txtCustomerName.ShortcutsEnabled = true;
-            this.txtCustomerName.Size = new System.Drawing.Size(407, 28);
+            this.txtCustomerName.Size = new System.Drawing.Size(482, 28);
             this.txtCustomerName.TabIndex = 115;
             this.txtCustomerName.UseCustomBackColor = true;
             this.txtCustomerName.UseSelectable = true;
             this.txtCustomerName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCustomerName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // btnSearchCustomer
+            // 
+            this.btnSearchCustomer.Location = new System.Drawing.Point(689, 16);
+            this.btnSearchCustomer.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearchCustomer.Name = "btnSearchCustomer";
+            this.btnSearchCustomer.Size = new System.Drawing.Size(132, 28);
+            this.btnSearchCustomer.TabIndex = 119;
+            this.btnSearchCustomer.Text = "Search Customer";
+            this.btnSearchCustomer.UseSelectable = true;
+            this.btnSearchCustomer.Click += new System.EventHandler(this.btnSearchCustomer_Click);
             // 
             // frmReportCustomerLedger
             // 
@@ -178,5 +192,6 @@
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer2;
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroTextBox txtCustomerName;
+        private MetroFramework.Controls.MetroButton btnSearchCustomer;
     }
 }

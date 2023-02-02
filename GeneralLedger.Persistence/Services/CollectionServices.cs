@@ -110,7 +110,8 @@ namespace GeneralLedger.Persistence.Services
                         datBatchDate = collection.TransactionDate,
                         datInsertedDate = DateTime.Now,
                         tblGLTranDetails = tblGLTranDetail,
-                        intIdCollection = collection.Id
+                        intIdCollection = collection.Id,
+                        blnUseDefaultEntry = UseDefaultEntry
                     };
                     unitOfWork.GLTran.Add(gLTranHeader);
                 }

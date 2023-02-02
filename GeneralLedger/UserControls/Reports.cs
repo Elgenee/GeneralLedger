@@ -109,6 +109,12 @@ namespace GeneralLedger.UserControls
                     frmReportAccountsReceivableSales.Show();
                 }
 
+                if (item.ToUpper().Equals("CUSTOMER LEDGER"))
+                {
+                    frmReportCustomerLedger frmReportCustomerLedger = new frmReportCustomerLedger();
+                    frmReportCustomerLedger.Show();
+                }
+
                 //rest of your logic 
             }
         }

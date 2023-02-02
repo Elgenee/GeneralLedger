@@ -63,6 +63,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["GLTranHeaderID"].Value = adjustmentReceivableResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["Description"].Value = adjustmentReceivableResult[i].Descrpition;
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["UseDefaultEntry"].Value = adjustmentReceivableResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["TotalAmount"].Value = adjustmentReceivableResult[i].TotalAmount;
                     }
 
                     setRowNumber(this.dgSearchAccountReceivableAdjustments);
@@ -104,6 +105,7 @@ namespace GeneralLedger.UserControls
                         CollectionId = Int32.Parse(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["CollectionId"].Value.ToString()),
                         SalesId = Int32.Parse(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesId"].Value.ToString()),
                         Descrpition = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["Description"].Value.ToString(),
+                        TotalAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["TotalAmount"].Value.ToString()),
                         Collection = new Collection
                         {
                             Id = Int32.Parse(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["CollectionId"].Value.ToString()),

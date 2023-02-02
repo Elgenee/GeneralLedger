@@ -552,7 +552,8 @@ namespace GeneralLedger.Tier.DAL
                                 curDebit = ReferenceEquals(reader["curDebit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curDebit"]),
                                 curCredit = ReferenceEquals(reader["curCredit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCredit"]),
                                 strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
-                                strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"])
+                                strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"]),
+                                strCustomer = ReferenceEquals(reader["strCustomer"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strCustomer"]),
 
                             };
 
@@ -596,7 +597,8 @@ namespace GeneralLedger.Tier.DAL
                                 curDebit = ReferenceEquals(reader["curDebit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curDebit"]),
                                 curCredit = ReferenceEquals(reader["curCredit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCredit"]),
                                 strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
-                                strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"])
+                                strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"]),
+                                strCustomer = ReferenceEquals(reader["strCustomer"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strCustomer"]),
 
                             };
 
@@ -643,6 +645,45 @@ namespace GeneralLedger.Tier.DAL
                             rptGetSummaryOfAccountsReceivablesSalesList.Add(rptGetSummaryOfAccountsReceivablesSales);
                         }
                         return rptGetSummaryOfAccountsReceivablesSalesList;
+                    }
+                }
+            }
+        }
+
+        public List<rptGetCustomerLedgerOverall> getCustomerLedgerOverall(int customerId)
+        {
+            var dbUtil = new DatabaseManager();
+            var rptGetCustomerLedgerOverallList = new List<rptGetCustomerLedgerOverall>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spGetCustomerLedgerOverall";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@CustomerID", customerId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rptGetCustomerLedgerOverall = new rptGetCustomerLedgerOverall
+                            {
+                                strType = ReferenceEquals(reader["strType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strType"]),
+                                strTransactionNo = ReferenceEquals(reader["strTransactionNo"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionNo"]),
+                                datDateTransaction = ReferenceEquals(reader["datDateTransaction"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datDateTransaction"]),
+                                curTotalAmountDebit = ReferenceEquals(reader["curTotalAmountDebit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curTotalAmountDebit"]),
+                                curTotalAmountCredit = ReferenceEquals(reader["curTotalAmountCredit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curTotalAmountCredit"]),
+                                curRunningBalance = ReferenceEquals(reader["curRunningBalance"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curRunningBalance"])
+                            };
+
+                            rptGetCustomerLedgerOverallList.Add(rptGetCustomerLedgerOverall);
+                        }
+                        return rptGetCustomerLedgerOverallList;
                     }
                 }
             }

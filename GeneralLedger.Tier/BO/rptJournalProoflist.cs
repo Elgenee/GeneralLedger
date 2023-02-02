@@ -12,6 +12,7 @@ namespace GeneralLedger.Tier.BO
         public string strTransactionNumber { get; set; }
         public string datBatchDate { get; set; }
         public string strTransactionCode { get; set; }
+        public string strCustomer { get; set; }
 
         public string COA { get; set; }
         public string COASub { get; set; }

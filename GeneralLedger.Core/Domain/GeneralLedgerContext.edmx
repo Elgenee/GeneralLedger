@@ -16,6 +16,7 @@
           <Property Name="CollectionId" Type="int" />
           <Property Name="SalesId" Type="int" />
           <Property Name="Descrpition" Type="nvarchar(max)" />
+          <Property Name="TotalAmount" Type="money" />
         </EntityType>
         <EntityType Name="AccountsReceivableAdjustmentsType">
           <Key>
@@ -3870,6 +3871,7 @@
           <NavigationProperty Name="Collection" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustments_Collection" FromRole="AccountReceivableAdjustment" ToRole="Collection" />
           <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="SalesCustomerLedger" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="tblGLTranHeader" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="AccountsReceivableAdjustmentsType">
           <Key>
@@ -5098,6 +5100,7 @@
           <EntitySetMapping Name="AccountReceivableAdjustments">
             <EntityTypeMapping TypeName="GeneralLedgerModel.AccountReceivableAdjustment">
               <MappingFragment StoreEntitySet="AccountReceivableAdjustments">
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="Descrpition" ColumnName="Descrpition" />
                 <ScalarProperty Name="SalesId" ColumnName="SalesId" />
                 <ScalarProperty Name="CollectionId" ColumnName="CollectionId" />

@@ -28,7 +28,7 @@ namespace GeneralLedger.Persistence.Services
                     //intIdCollection = accountReceivableAdjustment.Id,
                     intIdAccountReceivableAdjustment = accountReceivableAdjustment.Id,
                     intIdSalesCustomerLedgerTransctionType = 3,
-                    TotalAmount = collection.Total,
+                    TotalAmount = accountReceivableAdjustment.TotalAmount,
                     TransactionDate = accountReceivableAdjustment.TransactionDate,
                     TransactionNo = accountReceivableAdjustment.TransactionNo,
                     DateInserted = DateTime.Now
@@ -53,13 +53,13 @@ namespace GeneralLedger.Persistence.Services
                          intIDMasCoa = (int)journalEntry1.intIDMasCOA ,
                          intIDMasCoaSub = journalEntry1.ID,
                          curCredit = 0,
-                         curDebit = collection.Total
+                         curDebit = accountReceivableAdjustment.TotalAmount
                      },
                      new tblGLTranDetail
                      {
                          intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
                          intIDMasCoaSub = journalEntry2.ID,
-                         curCredit =  collection.Total,
+                         curCredit =  accountReceivableAdjustment.TotalAmount,
                          curDebit = 0
                      }
                     };
@@ -119,9 +119,6 @@ namespace GeneralLedger.Persistence.Services
                     sale.IsFullyPaid = false;
                     sale.LastPaymentDate = null;
                 }
-
-
-
                 unitOfWork.Complete();
                 return accountReceivableAdjustment;
             }
@@ -203,13 +200,14 @@ namespace GeneralLedger.Persistence.Services
                 resultAdjustmentReceivableAdjusment.SalesId = accountReceivableAdjustment.SalesId;
                 resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].strDescription = accountReceivableAdjustment.Descrpition;
                 resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].datBatchDate = accountReceivableAdjustment.TransactionDate;
+                resultAdjustmentReceivableAdjusment.TotalAmount = accountReceivableAdjustment.TotalAmount;
 
                 var collection = unitOfWork.Collection.Get((int)accountReceivableAdjustment.CollectionId);
 
                 var salesCustomerLedger = unitOfWork.SalesCustomerLedger.Find(s => s.intIdAccountReceivableAdjustment == accountReceivableAdjustment.Id && s.intIdSalesCustomerLedgerTransctionType == 3).SingleOrDefault();
                 salesCustomerLedger.intIdSales = accountReceivableAdjustment.SalesId;
                 salesCustomerLedger.intIdAccountReceivableAdjustment = accountReceivableAdjustment.Id;
-                salesCustomerLedger.TotalAmount = collection.Total;
+                salesCustomerLedger.TotalAmount = accountReceivableAdjustment.TotalAmount; 
                 salesCustomerLedger.TransactionDate = accountReceivableAdjustment.TransactionDate;
                 salesCustomerLedger.TransactionNo = accountReceivableAdjustment.TransactionNo;
                 salesCustomerLedger.DateInserted = DateTime.Now;
@@ -259,13 +257,13 @@ namespace GeneralLedger.Persistence.Services
                          intIDMasCoa = (int)journalEntry1.intIDMasCOA ,
                          intIDMasCoaSub = journalEntry1.ID,
                          curCredit = 0,
-                         curDebit = resultAdjustmentReceivableAdjusment.Collection.Total
+                         curDebit = accountReceivableAdjustment.TotalAmount
                      },
                      new tblGLTranDetail
                      {
                          intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
                          intIDMasCoaSub = journalEntry2.ID,
-                         curCredit =  resultAdjustmentReceivableAdjusment.Collection.Total,
+                         curCredit = accountReceivableAdjustment.TotalAmount,
                          curDebit = 0
                      }
                     };
