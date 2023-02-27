@@ -108,7 +108,7 @@ namespace GeneralLedger.UserControls
             }
 
         }
-        //TODO: update AccountsReceivable, delete
+
         private void btnSave_Click(object sender, EventArgs e)
         {
 
@@ -117,6 +117,12 @@ namespace GeneralLedger.UserControls
                 if (this.CollectionId == 0)
                 {
                     MessageBox.Show("Please select collection...");
+                    return;
+                }
+
+                if (this.GLTranDetail.Sum(d => d.curCredit) != this.GLTranDetail.Sum(d => d.curDebit))
+                {
+                    MessageBox.Show("Disbal journal entry");
                     return;
                 }
 

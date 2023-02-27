@@ -122,6 +122,12 @@ namespace GeneralLedger.UserControls
                     MessageBox.Show("Please select customer...");
                     return;
                 }
+
+                if (this.GLTranDetail.Sum(d => d.curCredit) != this.GLTranDetail.Sum(d => d.curDebit))
+                {
+                    MessageBox.Show("Disbal journal entry");
+                    return;
+                }
                
 
                 int intParser;
@@ -140,8 +146,17 @@ namespace GeneralLedger.UserControls
                         Terms = int.TryParse(this.txtTerms.Text , out intParser) ? intParser : 0,
                         Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
                         TransactionDate = this.dtTransactionDate.Value,
+                        SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0,
+                        COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0,
+                        CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0,
                         Description = this.txtDescription.Text
                     };
+
+                    if (Sale.Total < (Sale.CFAmount + Sale.COMMAmount + Sale.SOPAmount))
+                    {
+                        MessageBox.Show("Please check amount");
+                        return;
+                    }
 
                     Sale = SaleServices.Add(Sale, this.GLTranDetail , this.chkUseDefaultEntry.Checked);
                 
@@ -161,9 +176,17 @@ namespace GeneralLedger.UserControls
                     Sale.Terms = int.TryParse(this.txtTerms.Text, out intParser) ? intParser : 0;
                     Sale.Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
                     Sale.TransactionDate = this.dtTransactionDate.Value;
+                    Sale.SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0;
+                    Sale.COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0;
+                    Sale.CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser:0;
                     Sale.Description = this.txtDescription.Text;
                     Sale = SaleServices.Update(Sale, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
-        
+
+                    if (Sale.Total < (Sale.CFAmount + Sale.COMMAmount + Sale.SOPAmount))
+                    {
+                        MessageBox.Show("Please check amount");
+                        return;
+                    }
                     if (Sale != null)
                     {
                         MessageBox.Show("Successfully saved");
@@ -575,6 +598,9 @@ namespace GeneralLedger.UserControls
                         this.txtTotalCredit.Text = string.Empty;
                         this.txtTotal.Text = string.Empty;
                         this.txtDescription.Text = string.Empty;
+                        this.txtCFAmount.Text = String.Empty;
+                        this.txtCOMMAmount.Text = String.Empty;
+                        this.txtSOPAmount.Text = String.Empty;
                         GLTranDetail = new List<tblGLTranDetail>();
                         MessageBox.Show("Successfully deleted");
 
@@ -609,6 +635,9 @@ namespace GeneralLedger.UserControls
             this.txtTotalCredit.Text = string.Empty;
             this.txtTotal.Text = string.Empty;
             this.txtDescription.Text = string.Empty;
+            this.txtCFAmount.Text = String.Empty;
+            this.txtCOMMAmount.Text = String.Empty;
+            this.txtSOPAmount.Text = String.Empty;
             GLTranDetail = new List<tblGLTranDetail>();
 
         }

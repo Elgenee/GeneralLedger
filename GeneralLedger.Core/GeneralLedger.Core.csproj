@@ -116,6 +116,9 @@
     <Compile Include="Domain\InventoryStockDetail.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Payment.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\PaymentType.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
@@ -412,6 +415,7 @@
     <Compile Include="Repositories\IGLTranDetailRepository.cs" />
     <Compile Include="Repositories\IGLTranRepository.cs" />
     <Compile Include="Repositories\IJournalEntryRepository.cs" />
+    <Compile Include="Repositories\IPaymentRepository.cs" />
     <Compile Include="Repositories\IPurchaseCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\IPurchaseRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -423,6 +427,7 @@
     <Compile Include="Services\ICollectionServices.cs" />
     <Compile Include="Services\IGLTranDetailServices.cs" />
     <Compile Include="Services\IGLTranServices.cs" />
+    <Compile Include="Services\IPaymentServices.cs" />
     <Compile Include="Services\IPurchaseServices.cs" />
     <Compile Include="Services\ISalesCustomerLedgerServices.cs" />
     <Compile Include="Services\ISaleServices.cs" />

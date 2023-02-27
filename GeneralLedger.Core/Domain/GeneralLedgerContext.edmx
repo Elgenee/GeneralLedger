@@ -147,6 +147,21 @@
           <Property Name="datTransactionDate" Type="int" />
           <Property Name="intIDInventoryStockOperationType" Type="int" />
         </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentCV" Type="nvarchar" MaxLength="200" />
+          <Property Name="PaymentSIDR" Type="nvarchar" MaxLength="200" />
+          <Property Name="PaymentTransactionDate" Type="date" />
+          <Property Name="PaymentTotal" Type="money" />
+          <Property Name="PaymentBankId" Type="int" />
+          <Property Name="PaymentIsCash" Type="bit" />
+          <Property Name="PaymentCheckDetail" Type="nvarchar" MaxLength="200" />
+          <Property Name="PaymentDescription" Type="nvarchar(max)" />
+          <Property Name="PurchaseId" Type="int" />
+        </EntityType>
         <EntityType Name="PaymentType">
           <Key>
             <PropertyRef Name="ID" />
@@ -273,6 +288,8 @@
           <Property Name="Total" Type="money" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Terms" Type="int" />
+          <Property Name="IsFullyPaid" Type="bit" />
+          <Property Name="LastPaymentDate" Type="date" />
         </EntityType>
         <EntityType Name="PurchaseCustomerLedger">
           <Key>
@@ -487,6 +504,9 @@
           <Property Name="Terms" Type="int" />
           <Property Name="IsFullyPaid" Type="bit" />
           <Property Name="LastPaymentDate" Type="date" />
+          <Property Name="SOPAmount" Type="money" />
+          <Property Name="COMMAmount" Type="money" />
+          <Property Name="CFAmount" Type="money" />
         </EntityType>
         <EntityType Name="SalesCustomerLedger">
           <Key>
@@ -571,6 +591,7 @@
           <Property Name="intIdPurchase" Type="int" />
           <Property Name="blnUseDefaultEntry" Type="bit" />
           <Property Name="intIdAccountReceivableAdjustment" Type="int" />
+          <Property Name="intIdPayment" Type="int" />
         </EntityType>
         <EntityType Name="tblJournalEntry">
           <Key>
@@ -737,6 +758,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Payment_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PaymentBankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Purchase">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PurchaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Purchase_Suppliers">
           <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
           <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
@@ -746,6 +791,18 @@
             </Principal>
             <Dependent Role="Purchase">
               <PropertyRef Name="intIDSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseCustomerLedger_Payment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="PurchaseCustomerLedger" Type="Self.PurchaseCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseCustomerLedger">
+              <PropertyRef Name="intIdPayment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1070,6 +1127,18 @@
             </Principal>
             <Dependent Role="tblGLTranHeader">
               <PropertyRef Name="intIdCollection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_Payment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="tblGLTranHeader" Type="Self.tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIdPayment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1666,6 +1735,7 @@
           <EntitySet Name="InventoryQuantityTotal" EntityType="Self.InventoryQuantityTotal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryStock" EntityType="Self.InventoryStock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryStockDetail" EntityType="Self.InventoryStockDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PriceType" EntityType="Self.PriceType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
@@ -1737,9 +1807,21 @@
             <End Role="PurchaseOrderCustomerLedger" EntitySet="PurchaseOrderCustomerLedger" />
             <End Role="PurchaseOrderCustomerLedgerDetail" EntitySet="PurchaseOrderCustomerLedgerDetail" />
           </AssociationSet>
+          <AssociationSet Name="FK_Payment_Bank" Association="Self.FK_Payment_Bank">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Purchase" Association="Self.FK_Payment_Purchase">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
           <AssociationSet Name="FK_Purchase_Suppliers" Association="Self.FK_Purchase_Suppliers">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseCustomerLedger_Payment" Association="Self.FK_PurchaseCustomerLedger_Payment">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="PurchaseCustomerLedger" EntitySet="PurchaseCustomerLedger" />
           </AssociationSet>
           <AssociationSet Name="FK_PurchaseCustomerLedger_Purchase" Association="Self.FK_PurchaseCustomerLedger_Purchase">
             <End Role="Purchase" EntitySet="Purchase" />
@@ -1847,6 +1929,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_tblGLTranHeader_Collection" Association="Self.FK_tblGLTranHeader_Collection">
             <End Role="Collection" EntitySet="Collection" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_Payment" Association="Self.FK_tblGLTranHeader_Payment">
+            <End Role="Payment" EntitySet="Payment" />
             <End Role="tblGLTranHeader" EntitySet="tblGLTranHeader" />
           </AssociationSet>
           <AssociationSet Name="FK_tblGLTranHeader_Purchase" Association="Self.FK_tblGLTranHeader_Purchase">
@@ -1964,6 +2050,7 @@
           <NavigationProperty Name="Suppliers" Relationship="Self.FK_Suppliers_Bank" FromRole="Bank" ToRole="Suppliers" />
           <NavigationProperty Name="Collections" Relationship="GeneralLedgerModel.FK_Collection_Bank" FromRole="Bank" ToRole="Collection" />
           <NavigationProperty Name="tblMasCOASubs" Relationship="GeneralLedgerModel.FK_tblMasCOASub_Bank" FromRole="Bank" ToRole="tblMasCOASub" />
+          <NavigationProperty Name="Payments" Relationship="GeneralLedgerModel.FK_Payment_Bank" FromRole="Bank" ToRole="Payment" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -2416,6 +2503,9 @@
           <Property Name="IsFullyPaid" Type="Boolean" />
           <Property Name="LastPaymentDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" FromRole="Sale" ToRole="SalesCustomerLedger" />
+          <Property Name="SOPAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="COMMAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CFAmount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -3547,6 +3637,23 @@
             <End Role="PurchaseCustomerLedgerTransactionType" EntitySet="PurchaseCustomerLedgerTransactionTypes" />
             <End Role="PurchaseCustomerLedger" EntitySet="PurchaseCustomerLedgers" />
           </AssociationSet>
+          <EntitySet Name="Payments" EntityType="GeneralLedgerModel.Payment" />
+          <AssociationSet Name="FK_Payment_Payment" Association="GeneralLedgerModel.FK_Payment_Payment">
+            <End Role="Purchase" EntitySet="Purchases" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_Payment" Association="GeneralLedgerModel.FK_tblGLTranHeader_Payment">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Bank" Association="GeneralLedgerModel.FK_Payment_Bank">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseCustomerLedger_Payment" Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Payment">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="PurchaseCustomerLedger" EntitySet="PurchaseCustomerLedgers" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -3641,6 +3748,8 @@
           <Property Name="blnUseDefaultEntry" Type="Boolean" />
           <Property Name="intIdAccountReceivableAdjustment" Type="Int32" />
           <NavigationProperty Name="AccountReceivableAdjustment" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" FromRole="tblGLTranHeader" ToRole="AccountReceivableAdjustment" />
+          <Property Name="intIdPayment" Type="Int32" />
+          <NavigationProperty Name="Payment" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Payment" FromRole="tblGLTranHeader" ToRole="Payment" />
         </EntityType>
         <Association Name="FK_tblGLTranHeader_Sales">
           <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
@@ -3783,6 +3892,9 @@
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Purchase" FromRole="Purchase" ToRole="tblGLTranHeader" />
           <NavigationProperty Name="PurchaseCustomerLedgers" Relationship="GeneralLedgerModel.FK_PurhcaseCustomerLedger_PurchaseCustomerLedgerTransactionType" FromRole="Purchase" ToRole="PurchaseCustomerLedger" />
           <Property Name="TRANo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payments" Relationship="GeneralLedgerModel.FK_Payment_Payment" FromRole="Purchase" ToRole="Payment" />
+          <Property Name="IsFullyPaid" Type="Boolean" />
+          <Property Name="LastPaymentDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="PurchaseCustomerLedgerTransactionType">
           <Key>
@@ -3843,6 +3955,7 @@
           <Property Name="DateInserted" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Purchase" Relationship="GeneralLedgerModel.FK_PurhcaseCustomerLedger_PurchaseCustomerLedgerTransactionType" FromRole="PurchaseCustomerLedger" ToRole="Purchase" />
           <NavigationProperty Name="PurchaseCustomerLedgerTransactionType" Relationship="GeneralLedgerModel.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType" FromRole="PurchaseCustomerLedger" ToRole="PurchaseCustomerLedgerTransactionType" />
+          <NavigationProperty Name="Payment" Relationship="GeneralLedgerModel.FK_PurchaseCustomerLedger_Payment" FromRole="PurchaseCustomerLedger" ToRole="Payment" />
         </EntityType>
         <Association Name="FK_PurhcaseCustomerLedger_PurchaseCustomerLedgerTransactionType">
           <End Type="GeneralLedgerModel.Purchase" Role="Purchase" Multiplicity="0..1" />
@@ -4424,6 +4537,73 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentCV" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentSIDR" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentTransactionDate" Type="DateTime" Precision="0" />
+          <Property Name="PaymentTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PaymentBankId" Type="Int32" />
+          <Property Name="PaymentIsCash" Type="Boolean" />
+          <Property Name="PaymentCheckDetail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseId" Type="Int32" />
+          <NavigationProperty Name="Purchase" Relationship="GeneralLedgerModel.FK_Payment_Payment" FromRole="Payment" ToRole="Purchase" />
+          <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Payment" FromRole="Payment" ToRole="tblGLTranHeader" />
+          <NavigationProperty Name="Bank" Relationship="GeneralLedgerModel.FK_Payment_Bank" FromRole="Payment" ToRole="Bank" />
+          <NavigationProperty Name="PurchaseCustomerLedgers" Relationship="GeneralLedgerModel.FK_PurchaseCustomerLedger_Payment" FromRole="Payment" ToRole="PurchaseCustomerLedger" />
+        </EntityType>
+        <Association Name="FK_Payment_Payment">
+          <End Type="GeneralLedgerModel.Purchase" Role="Purchase" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PurchaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_Payment">
+          <End Type="GeneralLedgerModel.Payment" Role="Payment" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIdPayment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Bank">
+          <End Type="GeneralLedgerModel.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PaymentBankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseCustomerLedger_Payment">
+          <End Type="GeneralLedgerModel.Payment" Role="Payment" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.PurchaseCustomerLedger" Role="PurchaseCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseCustomerLedger">
+              <PropertyRef Name="intIdPayment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4853,6 +5033,9 @@
           <EntitySetMapping Name="Sales">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Sale">
               <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="CFAmount" ColumnName="CFAmount" />
+                <ScalarProperty Name="COMMAmount" ColumnName="COMMAmount" />
+                <ScalarProperty Name="SOPAmount" ColumnName="SOPAmount" />
                 <ScalarProperty Name="LastPaymentDate" ColumnName="LastPaymentDate" />
                 <ScalarProperty Name="IsFullyPaid" ColumnName="IsFullyPaid" />
                 <ScalarProperty Name="Terms" ColumnName="Terms" />
@@ -5017,6 +5200,7 @@
           <EntitySetMapping Name="tblGLTranHeaders">
             <EntityTypeMapping TypeName="GeneralLedgerModel.tblGLTranHeader">
               <MappingFragment StoreEntitySet="tblGLTranHeader">
+                <ScalarProperty Name="intIdPayment" ColumnName="intIdPayment" />
                 <ScalarProperty Name="intIdAccountReceivableAdjustment" ColumnName="intIdAccountReceivableAdjustment" />
                 <ScalarProperty Name="blnUseDefaultEntry" ColumnName="blnUseDefaultEntry" />
                 <ScalarProperty Name="intIdPurchase" ColumnName="intIdPurchase" />
@@ -5062,6 +5246,8 @@
           <EntitySetMapping Name="Purchases">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Purchase">
               <MappingFragment StoreEntitySet="Purchase">
+                <ScalarProperty Name="LastPaymentDate" ColumnName="LastPaymentDate" />
+                <ScalarProperty Name="IsFullyPaid" ColumnName="IsFullyPaid" />
                 <ScalarProperty Name="TRANo" ColumnName="TRANo" />
                 <ScalarProperty Name="Terms" ColumnName="Terms" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -5799,6 +5985,22 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
+                <ScalarProperty Name="PaymentDescription" ColumnName="PaymentDescription" />
+                <ScalarProperty Name="PaymentCheckDetail" ColumnName="PaymentCheckDetail" />
+                <ScalarProperty Name="PaymentIsCash" ColumnName="PaymentIsCash" />
+                <ScalarProperty Name="PaymentBankId" ColumnName="PaymentBankId" />
+                <ScalarProperty Name="PaymentTotal" ColumnName="PaymentTotal" />
+                <ScalarProperty Name="PaymentTransactionDate" ColumnName="PaymentTransactionDate" />
+                <ScalarProperty Name="PaymentSIDR" ColumnName="PaymentSIDR" />
+                <ScalarProperty Name="PaymentCV" ColumnName="PaymentCV" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

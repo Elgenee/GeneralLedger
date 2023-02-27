@@ -109,10 +109,23 @@ namespace GeneralLedger.Persistence.Services
                         intIDGLBookType = 7,
                         datBatchDate = collection.TransactionDate,
                         datInsertedDate = DateTime.Now,
-                        tblGLTranDetails = tblGLTranDetail,
+                        //tblGLTranDetails = tblGLTranDetail,
                         intIdCollection = collection.Id,
                         blnUseDefaultEntry = UseDefaultEntry
                     };
+
+                    foreach (var item in tblGLTranDetail)
+                    {
+                        gLTranHeader.tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub,
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit
+
+                        });
+                    }
+
                     unitOfWork.GLTran.Add(gLTranHeader);
                 }
                 unitOfWork.Complete();

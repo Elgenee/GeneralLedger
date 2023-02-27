@@ -41,7 +41,7 @@ namespace GeneralLedger.UserControls
             {
                 var saleResult = SaleServices.GetSaleWithCustomerAgent(this.txtCriteria.Text);
                 //List<GeneralLedger.Tier.BO.customerName> customerList = customerBAL.getCustomer(this.txtCriteria.Text);
-
+                int intParser;
                 if ((saleResult != null) && saleResult.Count > 0)
                 {
                     //this.dgSearchCustomer.ColumnCount = 9;
@@ -50,14 +50,14 @@ namespace GeneralLedger.UserControls
                     for (int i = 0; i < saleResult.Count; i++)
                     {
 
-                        this.dgSearchSale.Rows[i].Cells["ID"].Value = saleResult[i].Id;
+                        this.dgSearchSale.Rows[i].Cells["ID"].Value = ReferenceEquals(saleResult[i].Id, DBNull.Value) ? 0 : saleResult[i].Id; 
                         this.dgSearchSale.Rows[i].Cells["TransactionNo"].Value = saleResult[i].TRANo;
                         this.dgSearchSale.Rows[i].Cells["PONo"].Value = saleResult[i].PONo;
                         this.dgSearchSale.Rows[i].Cells["TransactionDate"].Value = saleResult[i].TransactionDate.Value.ToShortDateString();
                         this.dgSearchSale.Rows[i].Cells["Total"].Value = string.Format("{0:0.00}", saleResult[i].Total);
                         this.dgSearchSale.Rows[i].Cells["CustomerId"].Value = saleResult[i].Customer.Id;
                         this.dgSearchSale.Rows[i].Cells["Customer"].Value = saleResult[i].Customer.strName;
-                        this.dgSearchSale.Rows[i].Cells["Terms"].Value = saleResult[i].Terms;
+                        this.dgSearchSale.Rows[i].Cells["Terms"].Value = ReferenceEquals(saleResult[i].Terms, DBNull.Value) ? 0 : saleResult[i].Terms;  
                         this.dgSearchSale.Rows[i].Cells["AgentId"].Value = saleResult[i].Agent.Id;
                         this.dgSearchSale.Rows[i].Cells["Agent"].Value = saleResult[i].Agent.Name;
                         this.dgSearchSale.Rows[i].Cells["Description"].Value = saleResult[i].Description;
@@ -94,29 +94,49 @@ namespace GeneralLedger.UserControls
 
                 if (Index >= 0)
                 {
+                    var test = DateTime.MinValue;
+                    var id = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["ID"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["ID"].Value);  
+                    var TRANo = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["TransactionNo"].Value, DBNull.Value) ? string.Empty : Convert.ToString(this.dgSearchSale.Rows[this.Index].Cells["TransactionNo"].Value);
+                    var PONo = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["PONo"].Value, DBNull.Value) ? string.Empty : Convert.ToString(this.dgSearchSale.Rows[this.Index].Cells["PONo"].Value);  
+                    var TransactionDate = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["TransactionDate"].Value, DBNull.Value) ? DateTime.MinValue : Convert.ToDateTime(this.dgSearchSale.Rows[this.Index].Cells["TransactionDate"].Value); 
+                    var Total = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Total"].Value, DBNull.Value) ? 0 : Convert.ToDecimal(this.dgSearchSale.Rows[this.Index].Cells["Total"].Value); 
+                    var intIdCustomer = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["CustomerId"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["CustomerId"].Value);  
+                    var intIdAgent = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value);  
+                    var Description = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Description"].Value, DBNull.Value) ? string.Empty : Convert.ToString(this.dgSearchSale.Rows[this.Index].Cells["Description"].Value);  
+                    var Terms = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value , DBNull.Value) ? 0: Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value);
+                    var AgentId = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value);
+                    var AgentName = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Agent"].Value, DBNull.Value) ? string.Empty : Convert.ToString(this.dgSearchSale.Rows[this.Index].Cells["Agent"].Value);
+                    var CustomerId = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["CustomerId"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["CustomerId"].Value);
+                    var Customer = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Customer"].Value, DBNull.Value) ? string.Empty : Convert.ToString(this.dgSearchSale.Rows[this.Index].Cells["Customer"].Value);
+                    var CustomerTerms = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value);
+                    var GLTranHeaderID = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["GLTranHeaderID"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["GLTranHeaderID"].Value);
+                    var DefaultEntry = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["UseDefaultEntry"].Value, DBNull.Value) ? false : Convert.ToBoolean(this.dgSearchSale.Rows[this.Index].Cells["UseDefaultEntry"].Value);
+
                     this.Sale = new Sale { 
-                         Id = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["ID"].Value.ToString()),
-                         TRANo = this.dgSearchSale.Rows[this.Index].Cells["TransactionNo"].Value.ToString(),
-                         PONo = this.dgSearchSale.Rows[this.Index].Cells["PONo"].Value.ToString(),
-                         TransactionDate = Convert.ToDateTime(this.dgSearchSale.Rows[this.Index].Cells["TransactionDate"].Value.ToString()),
-                         Total = Convert.ToDecimal(this.dgSearchSale.Rows[this.Index].Cells["Total"].Value.ToString()),
-                         intIdCustomer = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["CustomerId"].Value.ToString()),
-                         intIdAgent = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value.ToString()),
-                         Description = this.dgSearchSale.Rows[this.Index].Cells["Description"].Value.ToString(),
-                         Terms =  Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value.ToString()),
-                         Agent = new Agent { 
-                            Id = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value.ToString()),
-                            Name = this.dgSearchSale.Rows[this.Index].Cells["Agent"].Value.ToString()
-                         },
-                         Customer = new Customer { 
-                             Id = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["CustomerId"].Value.ToString()),
-                             strName = this.dgSearchSale.Rows[this.Index].Cells["Customer"].Value.ToString(),
-                             intTerms = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value.ToString())
-                         },
+                         Id = id,
+                         TRANo = TRANo,
+                         PONo = PONo,
+                         TransactionDate = TransactionDate,
+                         Total = Total,
+                         intIdCustomer = intIdCustomer,
+                         intIdAgent = intIdAgent,
+                         Description = Description,
+                         Terms = Terms,
+                        Agent = new Agent
+                        {
+                            Id = AgentId,
+                            Name = AgentName
+                        },
+                        Customer = new Customer
+                        {
+                            Id = CustomerId,
+                            strName = Customer,
+                            intTerms = CustomerTerms
+                        },
                         tblGLTranHeaders = new List<tblGLTranHeader> {
                             new tblGLTranHeader {
-                             ID = Int32.Parse(this.dgSearchSale.Rows[this.Index].Cells["GLTranHeaderID"].Value.ToString()),
-                             blnUseDefaultEntry = bool.Parse(this.dgSearchSale.Rows[this.Index].Cells["UseDefaultEntry"].Value.ToString())
+                             ID = GLTranHeaderID,
+                             blnUseDefaultEntry = DefaultEntry
                             }
                          }
                     };

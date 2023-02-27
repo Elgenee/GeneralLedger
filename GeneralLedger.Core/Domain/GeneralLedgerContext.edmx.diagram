@@ -119,6 +119,11 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_AccountReceivableAdjustments" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" />
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Payment" Width="1.5" PointX="5.25" PointY="44.25" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Payment_Payment" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Payment" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Payment_Bank" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Payment" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -74,6 +74,7 @@
     <Compile Include="Repositories\GLTranDetailRepository.cs" />
     <Compile Include="Repositories\GLTranRepository.cs" />
     <Compile Include="Repositories\JournalEntryRepository.cs" />
+    <Compile Include="Repositories\PaymentRepository.cs" />
     <Compile Include="Repositories\PurchaseCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\PurchaseRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Services\CollectionServices.cs" />
     <Compile Include="Services\GlTranDetailServices.cs" />
     <Compile Include="Services\GLTranServices.cs" />
+    <Compile Include="Services\PaymentServices.cs" />
     <Compile Include="Services\PurchaseServices.cs" />
     <Compile Include="Services\SalesCustomerLedgerServices.cs" />
     <Compile Include="Services\SaleServices.cs" />

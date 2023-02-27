@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSales));
             this.btnFind = new MetroFramework.Controls.MetroButton();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
@@ -71,14 +71,23 @@
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.btnViewLedger = new MetroFramework.Controls.MetroButton();
             this.chkUseDefaultEntry = new MetroFramework.Controls.MetroCheckBox();
+            this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
+            this.txtSOPAmount = new DevComponents.Editors.DoubleInput();
+            this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
+            this.txtCOMMAmount = new DevComponents.Editors.DoubleInput();
+            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
+            this.txtCFAmount = new DevComponents.Editors.DoubleInput();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTerms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgJournalEntry)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSOPAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCOMMAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCFAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFind
             // 
-            this.btnFind.Location = new System.Drawing.Point(485, 969);
+            this.btnFind.Location = new System.Drawing.Point(485, 1069);
             this.btnFind.Margin = new System.Windows.Forms.Padding(4);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(132, 28);
@@ -89,7 +98,7 @@
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(72, 969);
+            this.metroButton1.Location = new System.Drawing.Point(69, 1069);
             this.metroButton1.Margin = new System.Windows.Forms.Padding(4);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(132, 28);
@@ -100,7 +109,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(347, 969);
+            this.btnDelete.Location = new System.Drawing.Point(347, 1069);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(132, 28);
@@ -111,7 +120,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(209, 969);
+            this.btnSave.Location = new System.Drawing.Point(209, 1069);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(132, 28);
@@ -430,38 +439,38 @@
             this.dgJournalEntry.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgJournalEntry.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgJournalEntry.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgJournalEntry.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgJournalEntry.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgJournalEntry.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgJournalEntry.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgJournalEntry.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgJournalEntry.EnableHeadersVisualStyles = false;
             this.dgJournalEntry.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.dgJournalEntry.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dgJournalEntry.Location = new System.Drawing.Point(29, 558);
+            this.dgJournalEntry.Location = new System.Drawing.Point(29, 658);
             this.dgJournalEntry.Margin = new System.Windows.Forms.Padding(4);
             this.dgJournalEntry.Name = "dgJournalEntry";
             this.dgJournalEntry.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgJournalEntry.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgJournalEntry.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgJournalEntry.RowHeadersWidth = 51;
             this.dgJournalEntry.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgJournalEntry.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -486,17 +495,17 @@
             // 
             // 
             this.txtDescription.CustomButton.Image = null;
-            this.txtDescription.CustomButton.Location = new System.Drawing.Point(553, 2);
+            this.txtDescription.CustomButton.Location = new System.Drawing.Point(563, 1);
             this.txtDescription.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescription.CustomButton.Name = "";
-            this.txtDescription.CustomButton.Size = new System.Drawing.Size(207, 207);
+            this.txtDescription.CustomButton.Size = new System.Drawing.Size(199, 199);
             this.txtDescription.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtDescription.CustomButton.TabIndex = 1;
             this.txtDescription.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtDescription.CustomButton.UseSelectable = true;
             this.txtDescription.CustomButton.Visible = false;
             this.txtDescription.Lines = new string[0];
-            this.txtDescription.Location = new System.Drawing.Point(225, 283);
+            this.txtDescription.Location = new System.Drawing.Point(225, 381);
             this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescription.MaxLength = 32767;
             this.txtDescription.Multiline = true;
@@ -507,7 +516,7 @@
             this.txtDescription.SelectionLength = 0;
             this.txtDescription.SelectionStart = 0;
             this.txtDescription.ShortcutsEnabled = true;
-            this.txtDescription.Size = new System.Drawing.Size(763, 212);
+            this.txtDescription.Size = new System.Drawing.Size(763, 201);
             this.txtDescription.TabIndex = 120;
             this.txtDescription.UseSelectable = true;
             this.txtDescription.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -516,7 +525,7 @@
             // metroLabel8
             // 
             this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(29, 283);
+            this.metroLabel8.Location = new System.Drawing.Point(29, 381);
             this.metroLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel8.Name = "metroLabel8";
             this.metroLabel8.Size = new System.Drawing.Size(79, 20);
@@ -626,7 +635,7 @@
             // metroLabel11
             // 
             this.metroLabel11.AutoSize = true;
-            this.metroLabel11.Location = new System.Drawing.Point(47, 517);
+            this.metroLabel11.Location = new System.Drawing.Point(47, 617);
             this.metroLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel11.Name = "metroLabel11";
             this.metroLabel11.Size = new System.Drawing.Size(90, 20);
@@ -636,7 +645,7 @@
             // metroLabel12
             // 
             this.metroLabel12.AutoSize = true;
-            this.metroLabel12.Location = new System.Drawing.Point(1088, 927);
+            this.metroLabel12.Location = new System.Drawing.Point(1088, 1027);
             this.metroLabel12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel12.Name = "metroLabel12";
             this.metroLabel12.Size = new System.Drawing.Size(78, 20);
@@ -659,7 +668,7 @@
             this.txtTotalCredit.CustomButton.UseSelectable = true;
             this.txtTotalCredit.CustomButton.Visible = false;
             this.txtTotalCredit.Lines = new string[0];
-            this.txtTotalCredit.Location = new System.Drawing.Point(1189, 927);
+            this.txtTotalCredit.Location = new System.Drawing.Point(1189, 1027);
             this.txtTotalCredit.Margin = new System.Windows.Forms.Padding(4);
             this.txtTotalCredit.MaxLength = 32767;
             this.txtTotalCredit.Name = "txtTotalCredit";
@@ -679,7 +688,7 @@
             // metroLabel13
             // 
             this.metroLabel13.AutoSize = true;
-            this.metroLabel13.Location = new System.Drawing.Point(797, 927);
+            this.metroLabel13.Location = new System.Drawing.Point(797, 1027);
             this.metroLabel13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel13.Name = "metroLabel13";
             this.metroLabel13.Size = new System.Drawing.Size(74, 20);
@@ -702,7 +711,7 @@
             this.txtTotalDebit.CustomButton.UseSelectable = true;
             this.txtTotalDebit.CustomButton.Visible = false;
             this.txtTotalDebit.Lines = new string[0];
-            this.txtTotalDebit.Location = new System.Drawing.Point(901, 927);
+            this.txtTotalDebit.Location = new System.Drawing.Point(901, 1027);
             this.txtTotalDebit.Margin = new System.Windows.Forms.Padding(4);
             this.txtTotalDebit.MaxLength = 32767;
             this.txtTotalDebit.Name = "txtTotalDebit";
@@ -721,7 +730,7 @@
             // 
             // btnDeleteEntry
             // 
-            this.btnDeleteEntry.Location = new System.Drawing.Point(1160, 517);
+            this.btnDeleteEntry.Location = new System.Drawing.Point(1160, 617);
             this.btnDeleteEntry.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteEntry.Name = "btnDeleteEntry";
             this.btnDeleteEntry.Size = new System.Drawing.Size(132, 28);
@@ -732,7 +741,7 @@
             // 
             // btnAddEntry
             // 
-            this.btnAddEntry.Location = new System.Drawing.Point(1019, 517);
+            this.btnAddEntry.Location = new System.Drawing.Point(1019, 617);
             this.btnAddEntry.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddEntry.Name = "btnAddEntry";
             this.btnAddEntry.Size = new System.Drawing.Size(132, 28);
@@ -758,7 +767,7 @@
             // 
             // btnViewLedger
             // 
-            this.btnViewLedger.Location = new System.Drawing.Point(625, 969);
+            this.btnViewLedger.Location = new System.Drawing.Point(625, 1069);
             this.btnViewLedger.Margin = new System.Windows.Forms.Padding(4);
             this.btnViewLedger.Name = "btnViewLedger";
             this.btnViewLedger.Size = new System.Drawing.Size(179, 28);
@@ -774,7 +783,7 @@
             this.chkUseDefaultEntry.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkUseDefaultEntry.DisplayFocus = true;
             this.chkUseDefaultEntry.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.chkUseDefaultEntry.Location = new System.Drawing.Point(779, 517);
+            this.chkUseDefaultEntry.Location = new System.Drawing.Point(779, 617);
             this.chkUseDefaultEntry.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkUseDefaultEntry.Name = "chkUseDefaultEntry";
             this.chkUseDefaultEntry.Size = new System.Drawing.Size(144, 20);
@@ -784,10 +793,112 @@
             this.chkUseDefaultEntry.UseSelectable = true;
             this.chkUseDefaultEntry.Click += new System.EventHandler(this.chkUseDefaultEntry_Click);
             // 
+            // metroLabel14
+            // 
+            this.metroLabel14.AutoSize = true;
+            this.metroLabel14.Location = new System.Drawing.Point(29, 278);
+            this.metroLabel14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel14.Name = "metroLabel14";
+            this.metroLabel14.Size = new System.Drawing.Size(88, 20);
+            this.metroLabel14.TabIndex = 144;
+            this.metroLabel14.Text = "SOP Amount";
+            // 
+            // txtSOPAmount
+            // 
+            // 
+            // 
+            // 
+            this.txtSOPAmount.BackgroundStyle.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtSOPAmount.BackgroundStyle.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.txtSOPAmount.BackgroundStyle.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtSOPAmount.BackgroundStyle.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtSOPAmount.BackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtSOPAmount.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtSOPAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtSOPAmount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtSOPAmount.Increment = 1D;
+            this.txtSOPAmount.Location = new System.Drawing.Point(225, 278);
+            this.txtSOPAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSOPAmount.MinimumSize = new System.Drawing.Size(0, 28);
+            this.txtSOPAmount.Name = "txtSOPAmount";
+            this.txtSOPAmount.ShowUpDown = true;
+            this.txtSOPAmount.Size = new System.Drawing.Size(267, 28);
+            this.txtSOPAmount.TabIndex = 143;
+            // 
+            // metroLabel15
+            // 
+            this.metroLabel15.AutoSize = true;
+            this.metroLabel15.Location = new System.Drawing.Point(571, 278);
+            this.metroLabel15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel15.Name = "metroLabel15";
+            this.metroLabel15.Size = new System.Drawing.Size(106, 20);
+            this.metroLabel15.TabIndex = 146;
+            this.metroLabel15.Text = "COMM Amount";
+            // 
+            // txtCOMMAmount
+            // 
+            // 
+            // 
+            // 
+            this.txtCOMMAmount.BackgroundStyle.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtCOMMAmount.BackgroundStyle.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.txtCOMMAmount.BackgroundStyle.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtCOMMAmount.BackgroundStyle.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtCOMMAmount.BackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtCOMMAmount.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtCOMMAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtCOMMAmount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtCOMMAmount.Increment = 1D;
+            this.txtCOMMAmount.Location = new System.Drawing.Point(723, 278);
+            this.txtCOMMAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCOMMAmount.MinimumSize = new System.Drawing.Size(0, 28);
+            this.txtCOMMAmount.Name = "txtCOMMAmount";
+            this.txtCOMMAmount.ShowUpDown = true;
+            this.txtCOMMAmount.Size = new System.Drawing.Size(267, 28);
+            this.txtCOMMAmount.TabIndex = 145;
+            // 
+            // metroLabel16
+            // 
+            this.metroLabel16.AutoSize = true;
+            this.metroLabel16.Location = new System.Drawing.Point(29, 332);
+            this.metroLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel16.Name = "metroLabel16";
+            this.metroLabel16.Size = new System.Drawing.Size(98, 25);
+            this.metroLabel16.TabIndex = 148;
+            this.metroLabel16.Text = "CF Amount";
+            // 
+            // txtCFAmount
+            // 
+            // 
+            // 
+            // 
+            this.txtCFAmount.BackgroundStyle.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtCFAmount.BackgroundStyle.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.txtCFAmount.BackgroundStyle.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtCFAmount.BackgroundStyle.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtCFAmount.BackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtCFAmount.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtCFAmount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtCFAmount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtCFAmount.Increment = 1D;
+            this.txtCFAmount.Location = new System.Drawing.Point(225, 332);
+            this.txtCFAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCFAmount.MinimumSize = new System.Drawing.Size(0, 28);
+            this.txtCFAmount.Name = "txtCFAmount";
+            this.txtCFAmount.ShowUpDown = true;
+            this.txtCFAmount.Size = new System.Drawing.Size(267, 28);
+            this.txtCFAmount.TabIndex = 147;
+            // 
             // frmSales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.metroLabel16);
+            this.Controls.Add(this.txtCFAmount);
+            this.Controls.Add(this.metroLabel15);
+            this.Controls.Add(this.txtCOMMAmount);
+            this.Controls.Add(this.metroLabel14);
+            this.Controls.Add(this.txtSOPAmount);
             this.Controls.Add(this.chkUseDefaultEntry);
             this.Controls.Add(this.btnViewLedger);
             this.Controls.Add(this.btnDeleteEntry);
@@ -829,11 +940,14 @@
             this.Controls.Add(this.btnClose);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmSales";
-            this.Size = new System.Drawing.Size(1409, 1141);
+            this.Size = new System.Drawing.Size(1409, 1232);
             this.Load += new System.EventHandler(this.frmSales_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtTotal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTerms)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgJournalEntry)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSOPAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCOMMAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCFAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -880,5 +994,11 @@
         private MetroFramework.Controls.MetroButton btnAddEntry;
         private MetroFramework.Controls.MetroButton btnViewLedger;
         private MetroFramework.Controls.MetroCheckBox chkUseDefaultEntry;
+        private MetroFramework.Controls.MetroLabel metroLabel14;
+        private DevComponents.Editors.DoubleInput txtSOPAmount;
+        private MetroFramework.Controls.MetroLabel metroLabel15;
+        private DevComponents.Editors.DoubleInput txtCOMMAmount;
+        private MetroFramework.Controls.MetroLabel metroLabel16;
+        private DevComponents.Editors.DoubleInput txtCFAmount;
     }
 }

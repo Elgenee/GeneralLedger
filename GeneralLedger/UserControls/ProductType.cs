@@ -173,13 +173,7 @@ namespace GeneralLedger.UserControls
             if (e.RowIndex >= 0)
             {
                
-                //TODO:FOR updating gridview
-                //if (e.ColumnIndex == this.btnEdit.Index)
-                //{
-                //    this.dgProductType.Rows[e.RowIndex].Cells[0].Value = 1234;
-                //    this.dgProductType.Rows[e.RowIndex].Cells[1].Value = "test";
-                //    this.dgProductType.Rows[e.RowIndex].Cells[2].Value = "Edit tst";
-                //}
+      
 
                 this.ID = Convert.ToInt32(dgProductType.Rows[e.RowIndex].Cells[0].Value.ToString());
                 this.txtID.Text = dgProductType.Rows[e.RowIndex].Cells[0].Value.ToString();

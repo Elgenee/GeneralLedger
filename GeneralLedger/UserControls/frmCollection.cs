@@ -114,6 +114,12 @@ namespace GeneralLedger.UserControls
                     return;
                 }
 
+                if (this.GLTranDetail.Sum(d => d.curCredit) != this.GLTranDetail.Sum(d => d.curDebit))
+                {
+                    MessageBox.Show("Disbal journal entry");
+                    return;
+                }
+
                 int intParser;
                 decimal decimalParser;
 

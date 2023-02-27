@@ -12,34 +12,31 @@ namespace GeneralLedger.Core.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Purchase
+    public partial class Payment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Purchase()
+        public Payment()
         {
             this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
             this.PurchaseCustomerLedgers = new HashSet<PurchaseCustomerLedger>();
-            this.Payments = new HashSet<Payment>();
         }
     
         public int Id { get; set; }
-        public string PONo { get; set; }
-        public Nullable<System.DateTime> TransactionDate { get; set; }
-        public Nullable<int> intIDSupplier { get; set; }
-        public string SIDR { get; set; }
-        public Nullable<decimal> Total { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> Terms { get; set; }
-        public string TRANo { get; set; }
-        public Nullable<bool> IsFullyPaid { get; set; }
-        public Nullable<System.DateTime> LastPaymentDate { get; set; }
+        public string PaymentCV { get; set; }
+        public string PaymentSIDR { get; set; }
+        public Nullable<System.DateTime> PaymentTransactionDate { get; set; }
+        public Nullable<decimal> PaymentTotal { get; set; }
+        public Nullable<int> PaymentBankId { get; set; }
+        public Nullable<bool> PaymentIsCash { get; set; }
+        public string PaymentCheckDetail { get; set; }
+        public string PaymentDescription { get; set; }
+        public Nullable<int> PurchaseId { get; set; }
     
-        public virtual Supplier Supplier { get; set; }
+        public virtual Purchase Purchase { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
+        public virtual Bank Bank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseCustomerLedger> PurchaseCustomerLedgers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

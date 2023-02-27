@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>23</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -443,6 +443,12 @@
     <Compile Include="UserControls\SearchCustomer.Designer.cs">
       <DependentUpon>SearchCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchPayment.Designer.cs">
+      <DependentUpon>SearchPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -666,6 +672,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchCustomer.resx">
       <DependentUpon>SearchCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchPayment.resx">
+      <DependentUpon>SearchPayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchProduct.resx">
       <DependentUpon>SearchProduct.cs</DependentUpon>

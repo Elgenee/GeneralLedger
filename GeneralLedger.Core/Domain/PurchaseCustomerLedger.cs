@@ -25,5 +25,6 @@ namespace GeneralLedger.Core.Domain
     
         public virtual Purchase Purchase { get; set; }
         public virtual PurchaseCustomerLedgerTransactionType PurchaseCustomerLedgerTransactionType { get; set; }
+        public virtual Payment Payment { get; set; }
     }
 }

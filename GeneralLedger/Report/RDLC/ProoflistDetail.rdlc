@@ -7,7 +7,6 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>7f841a32-d478-453c-bfd7-3db1f4289485</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -783,7 +782,7 @@
                 <TablixMember>
                   <Group Name="strTransactionNumber">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!strTransactionCode.Value</GroupExpression>
+                      <GroupExpression>=Fields!strTransactionNumber.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <TablixHeader>

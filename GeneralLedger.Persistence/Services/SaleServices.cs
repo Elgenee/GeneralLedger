@@ -31,22 +31,46 @@ namespace GeneralLedger.Persistence.Services
                 if (UseDefaultEntry)
                 {
                     var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1029).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
-                    var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
+                    var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1055).SingleOrDefault(); // SALES
+                    var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1053).SingleOrDefault(); // SALES
+                    var journalEntry4 = unitOfWork.CoaSub.Find(c => c.ID == 2119).SingleOrDefault(); // SALES
+                    var journalEntry5 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
 
-                     var gLTranDetail = new List<tblGLTranDetail>
+                    var gLTranDetail = new List<tblGLTranDetail>
                     {
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry1.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry1.ID,
                              curCredit = 0,
-                             curDebit = sale.Total
+                             curDebit = sale.Total 
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry2.ID,
-                             curCredit = sale.Total,
+                             curCredit = sale.SOPAmount,
+                             curDebit = 0
+                         },
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry3.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry3.ID,
+                             curCredit = sale.COMMAmount,
+                             curDebit = 0
+                         },
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry4.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry4.ID,
+                             curCredit = sale.CFAmount,
+                             curDebit = 0
+                         },
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry5.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry5.ID,
+                             curCredit = sale.Total - (sale.COMMAmount + sale.SOPAmount + sale.CFAmount),
                              curDebit = 0
                          }
                     };
@@ -78,12 +102,26 @@ namespace GeneralLedger.Persistence.Services
                         strDescription = sale.Description,
                         datBatchDate = sale.TransactionDate,
                         datInsertedDate = DateTime.Now,
-                        tblGLTranDetails = tblGLTranDetail,
+                        //tblGLTranDetails = tblGLTranDetail,
                         intIdSales = sale.Id,
                         blnUseDefaultEntry = UseDefaultEntry
                     };
+
+                    foreach (var item in tblGLTranDetail)
+                    {
+                        gLTranHeader.tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub,
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit
+    
+                        });
+                    }
                     unitOfWork.GLTran.Add(gLTranHeader);
                 }
+
+
                 //var result = unitOfWork.GLTran.GetGLEntryById(9030);
                 unitOfWork.Complete();
                 return sale;
@@ -177,22 +215,47 @@ namespace GeneralLedger.Persistence.Services
                 {
 
                     var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1029).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
-                    var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
+                    var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1055).SingleOrDefault(); // SOP
+                    var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1053).SingleOrDefault(); // COMM
+                    var journalEntry4 = unitOfWork.CoaSub.Find(c => c.ID == 2119).SingleOrDefault(); // CFA
+                    var journalEntry5 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
 
                     var gLTranDetailDefault = new List<tblGLTranDetail>
                     {
+
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry1.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry1.ID,
                              curCredit = 0,
-                             curDebit = sale.Total
+                             curDebit = sale.Total 
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry2.ID,
-                             curCredit = sale.Total,
+                             curCredit = sale.SOPAmount,
+                             curDebit = 0
+                         },
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry3.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry3.ID,
+                             curCredit = sale.COMMAmount,
+                             curDebit = 0
+                         },
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry4.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry4.ID,
+                             curCredit = sale.CFAmount,
+                             curDebit = 0
+                         },
+                         new tblGLTranDetail
+                         {
+                             intIDMasCoa = (int)journalEntry5.intIDMasCOA ,
+                             intIDMasCoaSub = journalEntry5.ID,
+                             curCredit = sale.Total - (sale.COMMAmount + sale.SOPAmount + sale.CFAmount),
                              curDebit = 0
                          }
                     };

@@ -31,7 +31,7 @@ namespace GeneralLedger.Persistence.Services
 
                 if (UseDefaultEntry)
                 {
-                    //TODO : check entry
+             
                     var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1071).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
                     var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1056).SingleOrDefault(); // SALES
 
@@ -80,10 +80,22 @@ namespace GeneralLedger.Persistence.Services
                         strDescription = purchase.Description,
                         datBatchDate = purchase.TransactionDate,
                         datInsertedDate = DateTime.Now,
-                        tblGLTranDetails = tblGLTranDetail,
+                        //tblGLTranDetails = tblGLTranDetail,
                         intIdPurchase = purchase.Id,
                         blnUseDefaultEntry = UseDefaultEntry
                     };
+
+                    foreach (var item in tblGLTranDetail)
+                    {
+                        gLTranHeader.tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub,
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit
+
+                        });
+                    }
                     unitOfWork.GLTran.Add(gLTranHeader);
 
                 }

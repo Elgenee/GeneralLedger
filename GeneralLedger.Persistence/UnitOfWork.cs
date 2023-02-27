@@ -40,6 +40,8 @@ namespace GeneralLedger.Persistence
 
         public IAccountReceivableAdjustmentsRepository AccountsReceivableAdjustments { get; set; }
 
+        public IPaymentRepository Payment { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -56,6 +58,7 @@ namespace GeneralLedger.Persistence
             PurchaseCustomerLedger = new PurchaseCustomerLedgerRepository(_generalLedgerContext);
             AccountsReceivableAdjustmentsType = new AccountsReceivableAdjustmentsTypeRepository(_generalLedgerContext);
             AccountsReceivableAdjustments = new AccountReceivableAdjustmentsRepository(_generalLedgerContext);
+            Payment = new PaymentRepository(_generalLedgerContext);
 
         }
         public int Complete()

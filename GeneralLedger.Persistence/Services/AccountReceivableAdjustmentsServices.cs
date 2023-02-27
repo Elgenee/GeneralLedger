@@ -13,7 +13,7 @@ namespace GeneralLedger.Persistence.Services
     public class AccountReceivableAdjustmentsServices : IAccountReceivableAdjustmentsServices
     {
 
-        //TODO:here adding accountReceivableAdjusmnt
+
         public AccountReceivableAdjustment Add(AccountReceivableAdjustment accountReceivableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
@@ -71,10 +71,22 @@ namespace GeneralLedger.Persistence.Services
                         intIDGLBookType = 8,
                         datBatchDate = accountReceivableAdjustment.TransactionDate,
                         datInsertedDate = DateTime.Now,
-                        tblGLTranDetails = gLTranDetail,
+                        //tblGLTranDetails = gLTranDetail,
                         intIdAccountReceivableAdjustment = accountReceivableAdjustment.Id,
                         blnUseDefaultEntry = UseDefaultEntry
                     };
+
+                    foreach (var item in tblGLTranDetail)
+                    {
+                        gLTranHeader.tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub,
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit
+
+                        });
+                    }
 
                     unitOfWork.GLTran.Add(gLTranHeader);
                 }
@@ -88,10 +100,23 @@ namespace GeneralLedger.Persistence.Services
                         intIDGLBookType = 8,
                         datBatchDate = accountReceivableAdjustment.TransactionDate,
                         datInsertedDate = DateTime.Now,
-                        tblGLTranDetails = tblGLTranDetail,
+                        //tblGLTranDetails = tblGLTranDetail,
                         intIdAccountReceivableAdjustment = accountReceivableAdjustment.Id,
                         blnUseDefaultEntry = UseDefaultEntry
                     };
+
+
+                    foreach (var item in tblGLTranDetail)
+                    {
+                        gLTranHeader.tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub,
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit
+
+                        });
+                    }
                     unitOfWork.GLTran.Add(gLTranHeader);
                 }
 
