@@ -26,6 +26,8 @@ namespace GeneralLedger.UserControls
         public SaleServices SaleServices { get; set; }
         public GLTranServices GLTranServices { get; set; }
         public SalesCustomerLedgerServices SalesCustomerLedgerServices { get; set; }
+
+        public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
         public int ID { get; set; }
 
         public int GLTranHeader { get; set; }
@@ -49,6 +51,7 @@ namespace GeneralLedger.UserControls
             AgentId = 0;
             this.Sale = new Sale();
             SalesCustomerLedgerServices = new SalesCustomerLedgerServices();
+            tblTBBatchHdrServices = new tblTBBatchHdrServices();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -132,6 +135,15 @@ namespace GeneralLedger.UserControls
 
                 int intParser;
                 decimal decimalParser;
+
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtTransactionDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
+
 
                 string TransType = (this.ID == 0) ? "insert" : "update";
                 if (TransType.Equals("insert"))
@@ -559,6 +571,15 @@ namespace GeneralLedger.UserControls
             {
                 int intParser;
                 decimal decimalParser;
+
+
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtTransactionDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
 
                 string TransType = (this.ID > 0) ? "delete" : String.Empty;
                 if (TransType.Equals("delete"))

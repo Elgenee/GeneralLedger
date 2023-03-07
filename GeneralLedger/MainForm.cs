@@ -28,8 +28,232 @@ namespace GeneralLedger
             this.metroTabControlMain.Dock = DockStyle.Top;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+            var roles = UserProfile.UserProfileRoles;
+            this.LoginUser.Text = "*" + UserProfile.UserUserProfile.Name;
 
-   
+            if (UserProfile.UserUserProfile.Name != "Administrator")
+            {
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "AGENTS"))
+                {
+                    this.btnAgents.Enabled = true;
+                    this.btnAgents.Style = MetroFramework.MetroColorStyle.Blue;
+                    //this.btnLock.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "AR ADJUSTMENTS"))
+                {
+                    this.btnARAdjustment.Enabled = true;
+                    this.btnARAdjustment.Style = MetroFramework.MetroColorStyle.Blue;
+                    //this.btnUnlock.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "BANK ACCOUNTS"))
+                {
+                    this.btnBankAccounts.Enabled = true;
+                    this.btnBankAccounts.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "CHART OF ACCOUNTS"))
+                {
+                    this.btnChartOfAccounts.Enabled = true;
+                    this.btnChartOfAccounts.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "COLLECTION"))
+                {
+                    this.btnCollection.Enabled = true;
+                    this.btnCollection.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "COMPANIES"))
+                {
+                    this.btnCompanies.Enabled = true;
+                    this.btnCompanies.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "CUSTOMER"))
+                {
+                    this.btnCustomer.Enabled = true;
+                    this.btnCustomer.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "JOURNAL ENTRY"))
+                {
+                    this.btnJournalEntry.Enabled = true;
+                    this.btnJournalEntry.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "LOCATION"))
+                {
+                    this.btnLocation.Enabled = true;
+                    this.btnLocation.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PAYMENTS"))
+                {
+                    this.btnPayment.Enabled = true;
+                    this.btnPayment.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PRICE TYPE"))
+                {
+                    this.btnPriceType.Enabled = true;
+                    this.btnPriceType.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PRODUCT"))
+                {
+                    this.btnProduct.Enabled = true;
+                    this.btnProduct.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PRODUCT BRAND"))
+                {
+                    this.btnProductBrand.Enabled = true;
+                    this.btnProductBrand.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PRODUCT CATEGORY"))
+                {
+                    this.btnProductCategory.Enabled = true;
+                    this.btnProductCategory.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PRODUCT COLOR"))
+                {
+                    this.btnProductColor.Enabled = true;
+                    this.btnProductColor.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PRODUCT SIZE"))
+                {
+                    this.btnProductSize.Enabled = true;
+                    this.btnProductSize.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PRODUCT TYPES"))
+                {
+                    this.btnProductType.Enabled = true;
+                    this.btnProductType.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PURCHASE"))
+                {
+                    this.btnPurchase.Enabled = true;
+                    this.btnPurchase.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "REPORTS"))
+                {
+                    this.btnReports.Enabled = true;
+                    this.btnReports.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "SALE"))
+                {
+                    this.btnSales.Enabled = true;
+                    this.btnSales.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "TRIAL BALANCE"))
+                {
+                    this.btnTrialBalance.Enabled = true;
+                    this.btnTrialBalance.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "SUPPLIER"))
+                {
+                    this.btnSupplier.Enabled = true;
+                    this.btnSupplier.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "USER"))
+                {
+                    this.btnUser.Enabled = true;
+                    this.btnUser.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+            }
+            else
+            {
+
+
+                    this.btnAgents.Enabled = true;
+                    this.btnAgents.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnARAdjustment.Enabled = true;
+                    this.btnARAdjustment.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnBankAccounts.Enabled = true;
+                    this.btnBankAccounts.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnChartOfAccounts.Enabled = true;
+                    this.btnChartOfAccounts.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnCollection.Enabled = true;
+                    this.btnCollection.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnCompanies.Enabled = true;
+                    this.btnCompanies.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnCustomer.Enabled = true;
+                    this.btnCustomer.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnJournalEntry.Enabled = true;
+                    this.btnJournalEntry.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnLocation.Enabled = true;
+                    this.btnLocation.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnPayment.Enabled = true;
+                    this.btnPayment.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnPriceType.Enabled = true;
+                    this.btnPriceType.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnProduct.Enabled = true;
+                    this.btnProduct.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnProductBrand.Enabled = true;
+                    this.btnProductBrand.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnProductCategory.Enabled = true;
+                    this.btnProductCategory.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnProductColor.Enabled = true;
+                    this.btnProductColor.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnProductSize.Enabled = true;
+                    this.btnProductSize.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnProductType.Enabled = true;
+                    this.btnProductType.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnPurchase.Enabled = true;
+                    this.btnPurchase.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnReports.Enabled = true;
+                    this.btnReports.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnSales.Enabled = true;
+                    this.btnSales.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnSupplier.Enabled = true;
+                    this.btnSupplier.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnUser.Enabled = true;
+                    this.btnUser.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnTrialBalance.Enabled = true;
+                    this.btnTrialBalance.Style = MetroFramework.MetroColorStyle.Blue;
+            }
         }
 
 
@@ -592,6 +816,45 @@ namespace GeneralLedger
             metroTabControlMain.SelectedTab = metroTabPage;
 
 
+        }
+
+        private void btnUser_Click(object sender, EventArgs e)
+        {
+            MetroTabPage metroTabPage = new MetroTabPage();
+            metroTabPage.Text = "User";
+            metroTabPage.AutoScroll = true;
+            metroTabPage.HorizontalScrollbar = true;
+            metroTabPage.HorizontalScrollbarBarColor = true;
+            metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+            metroTabPage.HorizontalScrollbarSize = 15;
+            metroTabPage.UseStyleColors = true;
+            metroTabPage.VerticalScrollbar = true;
+            metroTabPage.VerticalScrollbarBarColor = true;
+            metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+            metroTabPage.VerticalScrollbarSize = 15;
+            //metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+            //metroTabPage.Location = new System.Drawing.Point(15, 38);
+            //metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            frmUser frmUser = new frmUser();
+            frmUser.Parent = metroTabPage;
+            frmUser.MetroTabPage = metroTabPage;
+            frmUser.MetroTabControl = this.metroTabControlMain;
+            metroTabPage.Controls.Add(frmUser);
+            metroTabControlMain.TabPages.Add(metroTabPage);
+            metroTabControlMain.SelectedTab = metroTabPage;
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+           
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //MessageBox.Show("testt");
+           // this.Close();
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

@@ -11,5 +11,6 @@ namespace GeneralLedger.Tier.BO
         public int ID { get; set; }
         public string datBatchDate { get; set; }
         public string Remarks { get; set; }
+        public bool bitLock { get; set; }
     }
 }

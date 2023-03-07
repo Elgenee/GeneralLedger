@@ -23,6 +23,10 @@ namespace GeneralLedger.Core
         IPurchaseCustomerLedgerRepository PurchaseCustomerLedger { get; }
         IAccountsReceivableAdjustmentsTypeRepository AccountsReceivableAdjustmentsType { get; }
         IAccountReceivableAdjustmentsRepository AccountsReceivableAdjustments { get; }
+        IUserRepository User { get; }
+        IRoleRepository Role { get; }
+        IUserRoleRepository UserRole { get; }
+        ItblTBBatchHdrRepository tblTBBatchHdr { get; }
         int Complete();
     }
 }

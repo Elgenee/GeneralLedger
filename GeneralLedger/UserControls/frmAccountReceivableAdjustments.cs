@@ -23,6 +23,8 @@ namespace GeneralLedger.UserControls
         public AccountReceivableAdjustment AccountReceivableAdjustment { get; set; }
         public AccountReceivableAdjustmentsServices AccountReceivableAdjustmentsServices { get; set; }
         public AccountsReceivableAdjustmentsTypeServices AccountsReceivableAdjustmentsTypeServices { get; set; }
+
+        public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
         public GLTranServices GLTranServices { get; set; }
         public List<tblGLTranDetail> GLTranDetail { get; set; }
         public int ID { get; set; }
@@ -39,6 +41,7 @@ namespace GeneralLedger.UserControls
             GLTranServices = new GLTranServices();
             GLTranDetail = new List<tblGLTranDetail>();
             AccountReceivableAdjustment = new AccountReceivableAdjustment();
+            tblTBBatchHdrServices = new tblTBBatchHdrServices();
             InitializeComponent();
         }
 
@@ -128,6 +131,14 @@ namespace GeneralLedger.UserControls
 
                 int intParser;
                 decimal decimalParser;
+
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtAdjustmentTransactionDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
 
                 string TransType = (this.ID == 0) ? "insert" : "update";
                 int? bankId = null;
@@ -504,6 +515,15 @@ namespace GeneralLedger.UserControls
             {
                 int intParser;
                 decimal decimalParser;
+
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtAdjustmentTransactionDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
+
                 string TransType = (this.ID > 0) ? "delete" : String.Empty;
                 var adjustmentType = (this.cbAdjustmentType.SelectedItem == null) ? 0 : ((AccountsReceivableAdjustmentsType)this.cbAdjustmentType.SelectedItem).Id;
 

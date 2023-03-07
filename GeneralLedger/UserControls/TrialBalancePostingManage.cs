@@ -13,16 +13,24 @@ using GeneralLedger.Tier.BAL;
 using MetroFramework.Forms;
 using GeneralLedger.Report;
 using System.Globalization;
+using GeneralLedger.Persistence.Services;
 
 namespace GeneralLedger.UserControls
 {
     public partial class TrialBalancePostingManage : MetroForm
     {
         public int Id { get; set; }
+
+        public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
         public TrialBalancePostingManage(int id , string batchDate , string remarks)
         {
 
             InitializeComponent();
+
+            if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "POST TRIAL BALANCE"))
+            {
+                this.btnPostBatchDate.Visible = true;
+            }
             this.Id = id;
             this.dtBatchDate.Text = batchDate;
             this.txtRemarks.Text = remarks;
@@ -32,7 +40,24 @@ namespace GeneralLedger.UserControls
             {
                 loadTBDetail();
             }
-           
+
+            tblTBBatchHdrServices = new tblTBBatchHdrServices();
+
+            if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "LOCK TRIAL BALANCE"))
+            {
+                this.btnLock.Visible = true;
+            }
+
+            if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "UNLOCK TRIAL BALANCE"))
+            {
+                this.btnUnlock.Visible = true;
+            }
+
+            if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "POST TRIAL BALANCE"))
+            {
+                this.btnPostBatchDate.Visible = true;
+            }
+
         }
 
         private void btnPostBatchDate_Click(object sender, EventArgs e)
@@ -202,6 +227,42 @@ namespace GeneralLedger.UserControls
             frmRptGLTrialBalance.ID = this.Id;
             frmRptGLTrialBalance.BringToFront();
             frmRptGLTrialBalance.Show();
+        }
+
+        private void btnLock_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                    var IsLock = tblTBBatchHdrServices.Lock(this.Id);
+                    if (IsLock)
+                    {
+                        MessageBox.Show("Lock...");
+                 
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void btnUnlock_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var IsLock = tblTBBatchHdrServices.Unlock(this.Id);
+                if (IsLock)
+                {
+                    MessageBox.Show("Unlock...");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
         }
     }
 }

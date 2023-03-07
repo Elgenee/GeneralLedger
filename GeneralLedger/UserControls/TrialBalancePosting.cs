@@ -10,7 +10,8 @@ using System.Windows.Forms;
 using MetroFramework.Controls;
 using GeneralLedger.Tier.BO;
 using GeneralLedger.Tier.BAL;
-
+using GeneralLedger.Persistence.Services;
+using GeneralLedger.Core.Domain;
 
 namespace GeneralLedger.UserControls
 {
@@ -18,12 +19,31 @@ namespace GeneralLedger.UserControls
     {
         public MetroTabControl MetroTabControl { get; set; }
         public MetroTabPage MetroTabPage { get; set; }
+        public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
+
         public int TBHdrID { get; set; }
         
 
         public TrialBalancePosting()
         {
             InitializeComponent();
+            tblTBBatchHdrServices = new tblTBBatchHdrServices();
+
+            if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "LOCK TRIAL BALANCE"))
+            {
+                this.btnLock.Visible = true;
+            }
+
+            if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "UNLOCK TRIAL BALANCE"))
+            {
+                this.btnUnlock.Visible = true;
+            }
+
+            if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "POST TRIAL BALANCE"))
+            {
+                this.btnPostNew.Visible = true;
+            }
+
         }
 
         private void setRowNumber(DataGridView dgv)
@@ -39,50 +59,58 @@ namespace GeneralLedger.UserControls
             this.MetroTabControl.TabPages.Remove(MetroTabPage);
         }
 
+
+        private void Search()
+        {
+            TrialBalanceBAL trialBalanceBAL = new TrialBalanceBAL();
+            List<GLTBHdr> tbHdr = trialBalanceBAL.getGLTB(this.dpPeriodFrom.Value, this.dpPeriodTo.Value);
+
+            if ((tbHdr != null) && tbHdr.Count > 0)
+            {
+
+                this.dgTrialBalanceData.ColumnCount = 4;
+
+
+                this.dgTrialBalanceData.RowCount = tbHdr.Count;
+
+                //this.dtgCoa.Columns[0].Name = "ID";
+                //this.dtgCoa.Columns[1].Name = "Code";
+                //this.dtgCoa.Columns[2].Name = "Name";
+
+                //this.dtgCoa.Columns[3].Name = "Accounting Side";
+                //this.dtgCoa.Columns[4].Name = "IDMasCOAGroup";
+                //this.dtgCoa.Columns[5].Name = "Accounting Group";
+                //this.dtgCoa.Columns[6].Name = "Accounting Type";
+
+                this.dgTrialBalanceData.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                this.dgTrialBalanceData.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                this.dgTrialBalanceData.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                this.dgTrialBalanceData.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                for (int i = 0; i < tbHdr.Count; i++)
+                {
+                    this.dgTrialBalanceData.Rows[i].Cells[0].Value = tbHdr[i].ID;
+                    this.dgTrialBalanceData.Rows[i].Cells[1].Value = tbHdr[i].datBatchDate;
+                    this.dgTrialBalanceData.Rows[i].Cells[2].Value = tbHdr[i].Remarks;
+                    this.dgTrialBalanceData.Rows[i].Cells[3].Value = tbHdr[i].bitLock;
+                    setRowNumber(this.dgTrialBalanceData);
+                }
+
+            }
+            else
+            {
+                this.dgTrialBalanceData.Rows.Clear();
+                this.dgTrialBalanceData.Refresh();
+                MessageBox.Show("No Result");
+            }
+
+
+        }
         private void btnSearch_Click(object sender, EventArgs e)
         {
             try
             {
-                TrialBalanceBAL trialBalanceBAL = new TrialBalanceBAL();
-                List<GLTBHdr> tbHdr = trialBalanceBAL.getGLTB(this.dpPeriodFrom.Value, this.dpPeriodTo.Value);
-
-                if ((tbHdr != null) && tbHdr.Count > 0)
-                {
-
-                    this.dgTrialBalanceData.ColumnCount = 3;
-
-
-                    this.dgTrialBalanceData.RowCount = tbHdr.Count;
-
-                    //this.dtgCoa.Columns[0].Name = "ID";
-                    //this.dtgCoa.Columns[1].Name = "Code";
-                    //this.dtgCoa.Columns[2].Name = "Name";
-
-                    //this.dtgCoa.Columns[3].Name = "Accounting Side";
-                    //this.dtgCoa.Columns[4].Name = "IDMasCOAGroup";
-                    //this.dtgCoa.Columns[5].Name = "Accounting Group";
-                    //this.dtgCoa.Columns[6].Name = "Accounting Type";
-
-                    this.dgTrialBalanceData.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    this.dgTrialBalanceData.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    this.dgTrialBalanceData.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-                    for (int i = 0; i < tbHdr.Count; i++)
-                    {
-                        this.dgTrialBalanceData.Rows[i].Cells[0].Value = tbHdr[i].ID;
-                        this.dgTrialBalanceData.Rows[i].Cells[1].Value = tbHdr[i].datBatchDate;
-                        this.dgTrialBalanceData.Rows[i].Cells[2].Value = tbHdr[i].Remarks;
-
-                        setRowNumber(this.dgTrialBalanceData);
-                    }
-
-                }
-                else
-                {
-                    this.dgTrialBalanceData.Rows.Clear();
-                    this.dgTrialBalanceData.Refresh();
-                    MessageBox.Show("No Result");
-                }
+                Search();
             }
             catch (Exception ex)
             {
@@ -109,6 +137,7 @@ namespace GeneralLedger.UserControls
             {
                 if (e.RowIndex >= 0)
                 {
+                    bool ifLock = bool.Parse(this.dgTrialBalanceData.Rows[e.RowIndex].Cells[3].Value.ToString());
                     this.TBHdrID = Int32.Parse(this.dgTrialBalanceData.Rows[e.RowIndex].Cells[0].Value.ToString());
                     string date = this.dgTrialBalanceData.Rows[e.RowIndex].Cells[1].Value.ToString();
                     string remarks = this.dgTrialBalanceData.Rows[e.RowIndex].Cells[2].Value.ToString();
@@ -130,6 +159,53 @@ namespace GeneralLedger.UserControls
         private void btnClose_Click_1(object sender, EventArgs e)
         {
             this.MetroTabControl.TabPages.Remove(MetroTabPage);
+        }
+
+        private void btnLock_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (this.dgTrialBalanceData.CurrentCell.RowIndex != null)
+                {
+                    var IsLock = tblTBBatchHdrServices.Lock(TBHdrID);
+
+                    if (IsLock)
+                    {
+                        MessageBox.Show("Lock...");
+                        Search();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void btnUnlock_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.dgTrialBalanceData.CurrentCell.RowIndex != null)
+                {
+                    var IsUnlock = tblTBBatchHdrServices.Unlock(TBHdrID);
+
+                    if (IsUnlock)
+                    {
+                        MessageBox.Show("Unlock...");
+                        Search();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
         }
     }
 }

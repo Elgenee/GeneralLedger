@@ -27,6 +27,8 @@ namespace GeneralLedger.UserControls
         public int ID { get; set; }
         public int PurchaseId { get; set; }
         public List<tblGLTranDetail> GLTranDetail { get; set; }
+
+        public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
         public int IndexGrid { get; set; }
         public int GLTranHeader { get; set; }
 
@@ -40,6 +42,7 @@ namespace GeneralLedger.UserControls
             GLTranDetail = new List<tblGLTranDetail>();
             PurchaseId = 0;
             this.Payment = new Payment();
+            tblTBBatchHdrServices = new tblTBBatchHdrServices();
         }
 
         private void setRowNumber(DataGridView dgv)
@@ -72,6 +75,15 @@ namespace GeneralLedger.UserControls
 
                 int intParser;
                 decimal decimalParser;
+
+
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtPaymentTransactionDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
 
                 string TransType = (this.ID == 0) ? "insert" : "update";
                 int? bankId = null;
@@ -485,6 +497,11 @@ namespace GeneralLedger.UserControls
 
                 MessageBox.Show("Error:" + ex.Message);
             }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

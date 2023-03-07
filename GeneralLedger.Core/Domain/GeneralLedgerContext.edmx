@@ -489,6 +489,13 @@
           <Property Name="blnIsReceived" Type="bit" />
           <Property Name="datDateInserted" Type="datetime" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Sales">
           <Key>
             <PropertyRef Name="Id" />
@@ -673,6 +680,17 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Username" Type="nvarchar" MaxLength="500" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsResetPassword" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RoleId" Type="int" />
         </EntityType>
         <Association Name="FK_AccountReceivableAdjustments_AccountsReceivableAdjustmentsType">
           <End Role="AccountsReceivableAdjustmentsType" Type="Self.AccountsReceivableAdjustmentsType" Multiplicity="0..1" />
@@ -1418,6 +1436,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="fxGetEndOfMonth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="datetime">
           <Parameter Name="datDate" Type="datetime" Mode="In" />
@@ -1763,6 +1805,7 @@
           <EntitySet Name="PurchaseOrderProductTransactionType" EntityType="Self.PurchaseOrderProductTransactionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseOrderReceiving" EntityType="Self.PurchaseOrderReceiving" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseOrderReceivingDetails" EntityType="Self.PurchaseOrderReceivingDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesCustomerLedger" EntityType="Self.SalesCustomerLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesCustomerLedgerTransactionType" EntityType="Self.SalesCustomerLedgerTransactionType" Schema="dbo" store:Type="Tables" />
@@ -1779,6 +1822,7 @@
           <EntitySet Name="tblTBBatchDtl" EntityType="Self.tblTBBatchDtl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTBBatchHdr" EntityType="Self.tblTBBatchHdr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AccountReceivableAdjustments_AccountsReceivableAdjustmentsType" Association="Self.FK_AccountReceivableAdjustments_AccountsReceivableAdjustmentsType">
             <End Role="AccountsReceivableAdjustmentsType" EntitySet="AccountsReceivableAdjustmentsType" />
             <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
@@ -2026,6 +2070,14 @@
           <AssociationSet Name="FK_tblTBBatchDtl_tblTBBatchHdr" Association="Self.FK_tblTBBatchDtl_tblTBBatchHdr">
             <End Role="tblTBBatchHdr" EntitySet="tblTBBatchHdr" />
             <End Role="tblTBBatchDtl" EntitySet="tblTBBatchDtl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -2628,6 +2680,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_PurchaseOrder_User" FromRole="User" ToRole="PurchaseOrder" />
+          <Property Name="Username" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsResetPassword" Type="Boolean" />
+          <NavigationProperty Name="UserRoles" Relationship="GeneralLedgerModel.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
         </EntityType>
         <Association Name="FK_Bank_Currency">
           <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
@@ -3654,6 +3710,16 @@
             <End Role="Payment" EntitySet="Payments" />
             <End Role="PurchaseCustomerLedger" EntitySet="PurchaseCustomerLedgers" />
           </AssociationSet>
+          <EntitySet Name="Roles" EntityType="GeneralLedgerModel.Role" />
+          <EntitySet Name="UserRoles" EntityType="GeneralLedgerModel.UserRole" />
+          <AssociationSet Name="FK_UserRole_Role" Association="GeneralLedgerModel.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="GeneralLedgerModel.FK_UserRole_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -4604,6 +4670,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRoles" Relationship="GeneralLedgerModel.FK_UserRole_Role" FromRole="Role" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="GeneralLedgerModel.FK_UserRole_Role" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="GeneralLedgerModel.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_UserRole_Role">
+          <End Type="GeneralLedgerModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Type="GeneralLedgerModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5162,6 +5270,9 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="GeneralLedgerModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsResetPassword" ColumnName="IsResetPassword" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -5997,6 +6108,23 @@
                 <ScalarProperty Name="PaymentTransactionDate" ColumnName="PaymentTransactionDate" />
                 <ScalarProperty Name="PaymentSIDR" ColumnName="PaymentSIDR" />
                 <ScalarProperty Name="PaymentCV" ColumnName="PaymentCV" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

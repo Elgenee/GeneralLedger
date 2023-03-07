@@ -24,6 +24,8 @@ namespace GeneralLedger.UserControls
         public Collection Collection { get; set; }
         public CollectionServices CollectionServices { get; set; }
         public GLTranServices GLTranServices { get; set; }
+
+        public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
         public int ID { get; set; }
         public int SaleId { get; set; }
         public List<tblGLTranDetail> GLTranDetail { get; set; }
@@ -38,6 +40,7 @@ namespace GeneralLedger.UserControls
             GLTranDetail = new List<tblGLTranDetail>();
             SaleId = 0;
             this.Collection = new Collection();
+            tblTBBatchHdrServices = new tblTBBatchHdrServices();
         }
 
         private void frmCollection_Load(object sender, EventArgs e)
@@ -122,6 +125,15 @@ namespace GeneralLedger.UserControls
 
                 int intParser;
                 decimal decimalParser;
+
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtTransactionDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
+
 
                 string TransType = (this.ID == 0) ? "insert" : "update";
                 int? bankId = null;
@@ -526,6 +538,14 @@ namespace GeneralLedger.UserControls
             {
                 int intParser;
                 decimal decimalParser;
+
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtTransactionDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
 
                 string TransType = (this.ID > 0) ? "delete" : String.Empty;
                 if (TransType.Equals("delete"))

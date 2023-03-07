@@ -71,6 +71,7 @@ namespace GeneralLedger.Tier.DAL
                                 ID = ReferenceEquals(reader["ID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ID"]),
                                 intIDGLTranHeader = ReferenceEquals(reader["intIDGLTranHeader"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intIDGLTranHeader"]),
                                 intIDCOA = ReferenceEquals(reader["intIDMasCoa"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intIDMasCoa"]),
+                                intIDCOASub = ReferenceEquals(reader["intIDMasCoaSub"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intIDMasCoaSub"]),
                                 COA = new COA
                                 {
                                     ID = ReferenceEquals(reader["intIDMasCoa"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intIDMasCoa"]),

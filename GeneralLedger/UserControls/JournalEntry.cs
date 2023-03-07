@@ -11,6 +11,7 @@ using MetroFramework.Controls;
 using GeneralLedger.Tier.BO;
 using GeneralLedger.Tier.BAL;
 using System.Globalization;
+using GeneralLedger.Persistence.Services;
 
 
 namespace GeneralLedger.UserControls
@@ -21,6 +22,8 @@ namespace GeneralLedger.UserControls
         public MetroTabPage MetroTabPage { get; set; }
         public List<GLTranDetail> GLTranDetail { get; set; }
 
+        public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
+
         public int IndexGrid { get; set; }
         public int ID { get; set; }
         public int IDGLTranHeader { get; set; }
@@ -30,6 +33,7 @@ namespace GeneralLedger.UserControls
         {
             GLTranDetail = new List<GLTranDetail>();
             InitializeComponent();
+            tblTBBatchHdrServices = new tblTBBatchHdrServices();
         }
 
         private void setRowNumber(DataGridView dgv)
@@ -199,6 +203,7 @@ namespace GeneralLedger.UserControls
                 MessageBox.Show("Error:" + ex.Message);
             }
         }
+        
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -210,7 +215,14 @@ namespace GeneralLedger.UserControls
                     return;
                 }
 
-              
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtBatchDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
+
                 string TransType = (this.ID == 0) ? "insert" : "update";
                 Dictionary<string, string> param = new Dictionary<string, string>();
                 param.Add("&ID", this.ID.ToString());
@@ -234,13 +246,13 @@ namespace GeneralLedger.UserControls
               
                    
                     this.txtTransactionCode.Text = result.Split(',')[1];
-                    this.txtID.Enabled = false;
-                    this.txtTransactionCode.Enabled = false;
-                    this.dtBatchDate.Enabled = false;
-                    this.txtDescription.Enabled = false;
-                    this.btnAddEntry.Enabled = false;
-                    this.btnDeleteEntry.Enabled = false;
-                    this.txtTransactionNo.Enabled = false;
+                    //this.txtID.Enabled = false;
+                    //this.txtTransactionCode.Enabled = false;
+                    //this.dtBatchDate.Enabled = false;
+                    //this.txtDescription.Enabled = false;
+                    //this.btnAddEntry.Enabled = false;
+                    //this.btnDeleteEntry.Enabled = false;
+                    //this.txtTransactionNo.Enabled = false;
                     this.IDGLTranHeader = Convert.ToInt32(result.Split(',')[2]);
                     MessageBox.Show("Successfully Saved");
                 }
@@ -294,6 +306,7 @@ namespace GeneralLedger.UserControls
                 {
 
                     this.ID = sje.JournalEntry.ID;
+                    this.txtID.Text = sje.JournalEntry.ID.ToString();
                     this.txtTransactionNo.Text = sje.JournalEntry.strTransactionNumber;
                     this.txtTransactionCode.Text = sje.JournalEntry.strTransactionCode;
                     this.txtDescription.Text = sje.JournalEntry.strDescription;
@@ -390,6 +403,14 @@ namespace GeneralLedger.UserControls
                 //    return;
                 //}
 
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtBatchDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
+
                 string TransType =  "delete";
                 Dictionary<string, string> param = new Dictionary<string, string>();
                 param.Add("&ID", this.ID.ToString());
@@ -402,6 +423,8 @@ namespace GeneralLedger.UserControls
                 param.Add("&IDGLTranHeader", this.IDGLTranHeader.ToString());
                 JournalEntryBAL JournalEntryBAL = new JournalEntryBAL();
                 string result = JournalEntryBAL.ManageJournalEntry(param, TransType, this.GLTranDetail);
+
+
 
                 if (result != string.Empty)
                 {

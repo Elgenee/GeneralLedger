@@ -54,7 +54,7 @@
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 12;
             this.metroPanel1.Location = new System.Drawing.Point(31, 183);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(1269, 479);
             this.metroPanel1.TabIndex = 0;
@@ -98,7 +98,7 @@
             this.dgSeachJournal.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.dgSeachJournal.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dgSeachJournal.Location = new System.Drawing.Point(0, 0);
-            this.dgSeachJournal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgSeachJournal.Margin = new System.Windows.Forms.Padding(4);
             this.dgSeachJournal.Name = "dgSeachJournal";
             this.dgSeachJournal.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -170,10 +170,10 @@
             // 
             // 
             this.txtCriteria.CustomButton.Image = null;
-            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(321, 2);
-            this.txtCriteria.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(241, 2);
+            this.txtCriteria.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtCriteria.CustomButton.Name = "";
-            this.txtCriteria.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtCriteria.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtCriteria.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtCriteria.CustomButton.TabIndex = 1;
             this.txtCriteria.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -181,7 +181,7 @@
             this.txtCriteria.CustomButton.Visible = false;
             this.txtCriteria.Lines = new string[0];
             this.txtCriteria.Location = new System.Drawing.Point(212, 117);
-            this.txtCriteria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCriteria.Margin = new System.Windows.Forms.Padding(4);
             this.txtCriteria.MaxLength = 32767;
             this.txtCriteria.Name = "txtCriteria";
             this.txtCriteria.PasswordChar = '\0';
@@ -209,7 +209,7 @@
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(487, 117);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(132, 28);
             this.btnSearch.TabIndex = 18;
@@ -220,7 +220,7 @@
             // btnSelect
             // 
             this.btnSelect.Location = new System.Drawing.Point(627, 117);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(132, 28);
             this.btnSelect.TabIndex = 19;
@@ -238,10 +238,10 @@
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.txtCriteria);
             this.Controls.Add(this.metroPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SeachJournalEntry";
             this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
-            this.Text = "Seach Sale";
+            this.Text = "Seach Journal Entry";
             this.metroPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgSeachJournal)).EndInit();
             this.ResumeLayout(false);

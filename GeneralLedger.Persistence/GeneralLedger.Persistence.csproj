@@ -78,8 +78,12 @@
     <Compile Include="Repositories\PurchaseCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\PurchaseRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\SaleRepository.cs" />
     <Compile Include="Repositories\SalesCustomerLedgerRepository.cs" />
+    <Compile Include="Repositories\tblTBBatchHdrRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\UserRoleRepository.cs" />
     <Compile Include="Services\AccountReceivableAdjustmentsServices.cs" />
     <Compile Include="Services\AccountsReceivableAdjustmentsTypeServices.cs" />
     <Compile Include="Services\AgentServices.cs" />
@@ -88,8 +92,11 @@
     <Compile Include="Services\GLTranServices.cs" />
     <Compile Include="Services\PaymentServices.cs" />
     <Compile Include="Services\PurchaseServices.cs" />
+    <Compile Include="Services\RoleServices.cs" />
     <Compile Include="Services\SalesCustomerLedgerServices.cs" />
     <Compile Include="Services\SaleServices.cs" />
+    <Compile Include="Services\tblTBBatchHdrServices.cs" />
+    <Compile Include="Services\UserServices.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>

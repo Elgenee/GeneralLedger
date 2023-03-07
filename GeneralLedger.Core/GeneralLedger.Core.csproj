@@ -200,6 +200,9 @@
     <Compile Include="Domain\PurchaseOrderReceivingDetail.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Role.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\rptISExpense_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
@@ -404,6 +407,9 @@
     <Compile Include="Domain\User.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\UserRole.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAccountReceivableAdjustmentsRepository.cs" />
@@ -419,8 +425,12 @@
     <Compile Include="Repositories\IPurchaseCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\IPurchaseRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IRoleRepository.cs" />
     <Compile Include="Repositories\ISaleRepository.cs" />
     <Compile Include="Repositories\ISalesCustomerLedgerRepository.cs" />
+    <Compile Include="Repositories\ItblTBBatchHdrRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\IUserRoleRepository.cs" />
     <Compile Include="Services\IAccountReceivableAdjustmentsServices.cs" />
     <Compile Include="Services\IAccountsReceivableAdjustmentsTypeServices.cs" />
     <Compile Include="Services\IAgentServices.cs" />
@@ -429,8 +439,11 @@
     <Compile Include="Services\IGLTranServices.cs" />
     <Compile Include="Services\IPaymentServices.cs" />
     <Compile Include="Services\IPurchaseServices.cs" />
+    <Compile Include="Services\IRoleServices.cs" />
     <Compile Include="Services\ISalesCustomerLedgerServices.cs" />
     <Compile Include="Services\ISaleServices.cs" />
+    <Compile Include="Services\ItblTBBatchHdrServices.cs" />
+    <Compile Include="Services\IUserServices.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>

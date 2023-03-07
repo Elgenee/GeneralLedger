@@ -12,23 +12,17 @@ namespace GeneralLedger.Core.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Role()
         {
-            this.PurchaseOrders = new HashSet<PurchaseOrder>();
             this.UserRoles = new HashSet<UserRole>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public Nullable<bool> IsResetPassword { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }
     }

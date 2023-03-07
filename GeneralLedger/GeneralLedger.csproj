@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>29</ApplicationRevision>
+    <ApplicationRevision>30</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -141,6 +141,12 @@
     </Compile>
     <Compile Include="Report\frmReportSaleProoflist.Designer.cs">
       <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResetPassword.Designer.cs">
+      <DependentUpon>ResetPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UserControls\frmAccountReceivableAdjustments.cs">
@@ -323,6 +329,12 @@
     <Compile Include="UserControls\frmSalesLedger.Designer.cs">
       <DependentUpon>frmSalesLedger.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\frmUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmUser.Designer.cs">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\JournalEntry.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -473,6 +485,12 @@
     <Compile Include="UserControls\SearchPurchase.Designer.cs">
       <DependentUpon>SearchPurchase.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchRole.Designer.cs">
+      <DependentUpon>SearchRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchSale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -484,6 +502,12 @@
     </Compile>
     <Compile Include="UserControls\SearchSupplier.Designer.cs">
       <DependentUpon>SearchSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchUser.Designer.cs">
+      <DependentUpon>SearchUser.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\TrialBalancePosting.cs">
       <SubType>UserControl</SubType>
@@ -497,6 +521,8 @@
     <Compile Include="UserControls\TrialBalancePostingManage.Designer.cs">
       <DependentUpon>TrialBalancePostingManage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserProfile.cs" />
+    <Compile Include="Utility.cs" />
     <EmbeddedResource Include="Report\frmReportAccountsReceivableSales.resx">
       <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
     </EmbeddedResource>
@@ -514,6 +540,9 @@
     <EmbeddedResource Include="Report\RDLC\SalesProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\rptReportAccountsReceivableSales.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResetPassword.resx">
+      <DependentUpon>ResetPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmAccountReceivableAdjustments.resx">
       <DependentUpon>frmAccountReceivableAdjustments.cs</DependentUpon>
@@ -613,6 +642,9 @@
     <EmbeddedResource Include="UserControls\frmSalesLedger.resx">
       <DependentUpon>frmSalesLedger.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmUser.resx">
+      <DependentUpon>frmUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\JournalEntry.resx">
       <DependentUpon>JournalEntry.cs</DependentUpon>
     </EmbeddedResource>
@@ -688,11 +720,17 @@
     <EmbeddedResource Include="UserControls\SearchPurchase.resx">
       <DependentUpon>SearchPurchase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchRole.resx">
+      <DependentUpon>SearchRole.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchSale.resx">
       <DependentUpon>SearchSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchSupplier.resx">
       <DependentUpon>SearchSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchUser.resx">
+      <DependentUpon>SearchUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\TrialBalancePosting.resx">
       <DependentUpon>TrialBalancePosting.cs</DependentUpon>

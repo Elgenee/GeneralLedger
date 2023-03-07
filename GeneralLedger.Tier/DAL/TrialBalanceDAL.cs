@@ -43,6 +43,7 @@ namespace GeneralLedger.Tier.DAL
                                 ID = ReferenceEquals(reader["ID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ID"]),
                                 datBatchDate = ReferenceEquals(reader["datBatchDate"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datBatchDate"]),
                                 Remarks = ReferenceEquals(reader["Remarks"], DBNull.Value) ? string.Empty : Convert.ToString(reader["Remarks"]),
+                                bitLock = ReferenceEquals(reader["bitIsLock"], DBNull.Value) ? false : Convert.ToBoolean(reader["bitIsLock"])
 
                             };
                             glList.Add(GLTBHdr);

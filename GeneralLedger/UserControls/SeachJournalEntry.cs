@@ -18,6 +18,8 @@ namespace GeneralLedger.UserControls
         public GeneralLedger.Tier.BO.JournalEntry JournalEntry { get; set; }
         public int JournalEntryID { get; set; }
 
+        public int Index { get; set; }
+
         public SeachJournalEntry()
         {
             JournalEntry = new GeneralLedger.Tier.BO.JournalEntry();
@@ -39,17 +41,10 @@ namespace GeneralLedger.UserControls
             {
                 JournalEntryBAL journalEntryBAL = new JournalEntryBAL();
                 List<GeneralLedger.Tier.BO.JournalEntry> journalEntryList = journalEntryBAL.getJournalEntryRecord(this.txtCriteria.Text);
-
-
-
                 if ((journalEntryList != null) && journalEntryList.Count > 0)
                 {
-
-
                     this.dgSeachJournal.ColumnCount = 6;
                     this.dgSeachJournal.RowCount = journalEntryList.Count;
-
-
 
                     for (int i = 0; i < journalEntryList.Count; i++)
                     {
@@ -82,30 +77,30 @@ namespace GeneralLedger.UserControls
 
         private void dgSeachJournal_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex >= 0)
-                {
-                    this.JournalEntryID = Int32.Parse(this.dgSeachJournal.Rows[e.RowIndex].Cells[0].Value.ToString());
-                    this.JournalEntry = new Tier.BO.JournalEntry
-                    {
-                        ID = Int32.Parse(this.dgSeachJournal.Rows[e.RowIndex].Cells[0].Value.ToString()),
-                        datBatchDate = this.dgSeachJournal.Rows[e.RowIndex].Cells[1].Value.ToString(),
-                        strDescription = this.dgSeachJournal.Rows[e.RowIndex].Cells[2].Value.ToString(),
-                        strTransactionCode = this.dgSeachJournal.Rows[e.RowIndex].Cells[3].Value.ToString(),
-                        GLTranHeader = new GLTranHeader
-                        {
-                            ID = Int32.Parse(this.dgSeachJournal.Rows[e.RowIndex].Cells[4].Value.ToString())
-                        },
-                        strTransactionNumber = this.dgSeachJournal.Rows[e.RowIndex].Cells[5].Value.ToString()
-                    };
-                }
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    if (e.RowIndex >= 0)
+            //    {
+            //        this.JournalEntryID = Int32.Parse(this.dgSeachJournal.Rows[e.RowIndex].Cells[0].Value.ToString());
+            //        this.JournalEntry = new Tier.BO.JournalEntry
+            //        {
+            //            ID = Int32.Parse(this.dgSeachJournal.Rows[e.RowIndex].Cells[0].Value.ToString()),
+            //            datBatchDate = this.dgSeachJournal.Rows[e.RowIndex].Cells[1].Value.ToString(),
+            //            strDescription = this.dgSeachJournal.Rows[e.RowIndex].Cells[2].Value.ToString(),
+            //            strTransactionCode = this.dgSeachJournal.Rows[e.RowIndex].Cells[3].Value.ToString(),
+            //            GLTranHeader = new GLTranHeader
+            //            {
+            //                ID = Int32.Parse(this.dgSeachJournal.Rows[e.RowIndex].Cells[4].Value.ToString())
+            //            },
+            //            strTransactionNumber = this.dgSeachJournal.Rows[e.RowIndex].Cells[5].Value.ToString()
+            //        };
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
 
-                MessageBox.Show("Error:" + ex.Message);
-            }
+            //    MessageBox.Show("Error:" + ex.Message);
+            //}
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -113,8 +108,29 @@ namespace GeneralLedger.UserControls
 
             try
             {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                this.Index = this.dgSeachJournal.CurrentCell.RowIndex;
+                if (Index >= 0)
+                {
+                    this.JournalEntryID = Int32.Parse(this.dgSeachJournal.Rows[Index].Cells[0].Value.ToString());
+                    this.JournalEntry = new Tier.BO.JournalEntry
+                    {
+                        ID = Int32.Parse(this.dgSeachJournal.Rows[Index].Cells[0].Value.ToString()),
+                        datBatchDate = this.dgSeachJournal.Rows[Index].Cells[1].Value.ToString(),
+                        strDescription = this.dgSeachJournal.Rows[Index].Cells[2].Value.ToString(),
+                        strTransactionCode = this.dgSeachJournal.Rows[Index].Cells[3].Value.ToString(),
+                        GLTranHeader = new GLTranHeader
+                        {
+                            ID = Int32.Parse(this.dgSeachJournal.Rows[Index].Cells[4].Value.ToString())
+                        },
+                        strTransactionNumber = this.dgSeachJournal.Rows[Index].Cells[5].Value.ToString()
+                    };
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Select item");
+                }
             }
             catch (Exception ex)
             {

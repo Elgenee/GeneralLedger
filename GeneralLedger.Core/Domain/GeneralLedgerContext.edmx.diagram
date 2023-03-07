@@ -124,6 +124,10 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Payment" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Payment_Bank" />
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Payment" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Role" Width="1.5" PointX="3.75" PointY="4.75" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.UserRole" Width="1.5" PointX="6" PointY="26.625" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_UserRole_Role" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_UserRole_User" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

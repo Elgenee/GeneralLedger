@@ -42,6 +42,14 @@ namespace GeneralLedger.Persistence
 
         public IPaymentRepository Payment { get; set; }
 
+        public IUserRepository User { get; set; }
+
+        public IRoleRepository Role { get; set; }
+
+        public IUserRoleRepository UserRole { get; set; }
+
+        public ItblTBBatchHdrRepository tblTBBatchHdr { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -59,6 +67,10 @@ namespace GeneralLedger.Persistence
             AccountsReceivableAdjustmentsType = new AccountsReceivableAdjustmentsTypeRepository(_generalLedgerContext);
             AccountsReceivableAdjustments = new AccountReceivableAdjustmentsRepository(_generalLedgerContext);
             Payment = new PaymentRepository(_generalLedgerContext);
+            User = new UserRepository(_generalLedgerContext);
+            Role = new RoleRepository(_generalLedgerContext);
+            UserRole = new UserRoleRepository(_generalLedgerContext);
+            tblTBBatchHdr = new tblTBBatchHdrRepository(_generalLedgerContext);
 
         }
         public int Complete()
