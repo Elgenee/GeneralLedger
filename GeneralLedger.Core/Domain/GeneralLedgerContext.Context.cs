@@ -78,14 +78,16 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<Collection> Collections { get; set; }
         public virtual DbSet<SalesCustomerLedgerTransactionType> SalesCustomerLedgerTransactionTypes { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
-        public virtual DbSet<PurchaseCustomerLedgerTransactionType> PurchaseCustomerLedgerTransactionTypes { get; set; }
-        public virtual DbSet<PurchaseCustomerLedger> PurchaseCustomerLedgers { get; set; }
         public virtual DbSet<AccountReceivableAdjustment> AccountReceivableAdjustments { get; set; }
         public virtual DbSet<AccountsReceivableAdjustmentsType> AccountsReceivableAdjustmentsTypes { get; set; }
         public virtual DbSet<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
+        public virtual DbSet<AccountsPayableAdjustmentsType> AccountsPayableAdjustmentsTypes { get; set; }
+        public virtual DbSet<PurchaseSupplierLedger> PurchaseSupplierLedgers { get; set; }
+        public virtual DbSet<PurchaseSupplierLedgerTransactionType> PurchaseSupplierLedgerTransactionTypes { get; set; }
     
         public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
         {
@@ -1117,6 +1119,72 @@ namespace GeneralLedger.Core.Domain
                 new ObjectParameter("SalesID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetSalesCustomerLedger_Result>("spGetSalesCustomerLedger", salesIDParameter);
+        }
+    
+        public virtual ObjectResult<spGetCustomerLedgerOverall_Result> spGetCustomerLedgerOverall(Nullable<int> customerID)
+        {
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetCustomerLedgerOverall_Result>("spGetCustomerLedgerOverall", customerIDParameter);
+        }
+    
+        public virtual ObjectResult<spGetPurchaseSupplierLedger_Result> spGetPurchaseSupplierLedger(Nullable<int> purchaseID)
+        {
+            var purchaseIDParameter = purchaseID.HasValue ?
+                new ObjectParameter("PurchaseID", purchaseID) :
+                new ObjectParameter("PurchaseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetPurchaseSupplierLedger_Result>("spGetPurchaseSupplierLedger", purchaseIDParameter);
+        }
+    
+        public virtual ObjectResult<spGetSalesCustomerLedgerRunningBalanceOnAsOfDate_Result> spGetSalesCustomerLedgerRunningBalanceOnAsOfDate(Nullable<int> salesID, Nullable<System.DateTime> datAsOfDate)
+        {
+            var salesIDParameter = salesID.HasValue ?
+                new ObjectParameter("SalesID", salesID) :
+                new ObjectParameter("SalesID", typeof(int));
+    
+            var datAsOfDateParameter = datAsOfDate.HasValue ?
+                new ObjectParameter("datAsOfDate", datAsOfDate) :
+                new ObjectParameter("datAsOfDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetSalesCustomerLedgerRunningBalanceOnAsOfDate_Result>("spGetSalesCustomerLedgerRunningBalanceOnAsOfDate", salesIDParameter, datAsOfDateParameter);
+        }
+    
+        public virtual ObjectResult<spGetSummaryOfAccountsReceivablesSales_Result> spGetSummaryOfAccountsReceivablesSales(Nullable<System.DateTime> datAsOfDate)
+        {
+            var datAsOfDateParameter = datAsOfDate.HasValue ?
+                new ObjectParameter("datAsOfDate", datAsOfDate) :
+                new ObjectParameter("datAsOfDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetSummaryOfAccountsReceivablesSales_Result>("spGetSummaryOfAccountsReceivablesSales", datAsOfDateParameter);
+        }
+    
+        public virtual ObjectResult<spRPTCollectionProoflist_Result> spRPTCollectionProoflist(Nullable<System.DateTime> datDateFrom, Nullable<System.DateTime> datDateTo)
+        {
+            var datDateFromParameter = datDateFrom.HasValue ?
+                new ObjectParameter("datDateFrom", datDateFrom) :
+                new ObjectParameter("datDateFrom", typeof(System.DateTime));
+    
+            var datDateToParameter = datDateTo.HasValue ?
+                new ObjectParameter("datDateTo", datDateTo) :
+                new ObjectParameter("datDateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spRPTCollectionProoflist_Result>("spRPTCollectionProoflist", datDateFromParameter, datDateToParameter);
+        }
+    
+        public virtual ObjectResult<spRPTSalesProoflist_Result> spRPTSalesProoflist(Nullable<System.DateTime> datDateFrom, Nullable<System.DateTime> datDateTo)
+        {
+            var datDateFromParameter = datDateFrom.HasValue ?
+                new ObjectParameter("datDateFrom", datDateFrom) :
+                new ObjectParameter("datDateFrom", typeof(System.DateTime));
+    
+            var datDateToParameter = datDateTo.HasValue ?
+                new ObjectParameter("datDateTo", datDateTo) :
+                new ObjectParameter("datDateTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spRPTSalesProoflist_Result>("spRPTSalesProoflist", datDateFromParameter, datDateToParameter);
         }
     }
 }

@@ -18,28 +18,28 @@ namespace GeneralLedger.Persistence.Services
             {
                 unitOfWork.Payment.Add(payment);
 
-                var purchaseCustomerLedger = new PurchaseCustomerLedger
+                var purchaseCustomerLedger = new PurchaseSupplierLedger
                 {
                     intIdPurchase = payment.PurchaseId,
                     intIdPayment = payment.Id,
-                    intIdPurchaseCustomerLedgerTransactionType = 2,
+                    intIdPurchaseSupplierLedgerTransactionType = 2,
                     TotalAmount = payment.PaymentTotal,
                     TransactionDate = payment.PaymentTransactionDate,
                     TransactionNo = payment.PaymentCV,
                     DateInserted = DateTime.Now
                 };
 
-                unitOfWork.PurchaseCustomerLedger.Add(purchaseCustomerLedger);
+                unitOfWork.PurchaseSupplierLedger.Add(purchaseCustomerLedger);
 
-                var paySum = unitOfWork.PurchaseCustomerLedger
+                var paySum = unitOfWork.PurchaseSupplierLedger
                     .Find(s => s.intIdPurchase == purchaseCustomerLedger.intIdPurchase &&
-                s.intIdPurchaseCustomerLedgerTransactionType == 2).Sum(s => s.TotalAmount);
+                s.intIdPurchaseSupplierLedgerTransactionType == 2).Sum(s => s.TotalAmount);
 
                 paySum += purchaseCustomerLedger.TotalAmount;
 
-                var adjSum = unitOfWork.PurchaseCustomerLedger
+                var adjSum = unitOfWork.PurchaseSupplierLedger
                    .Find(s => s.intIdPurchase == purchaseCustomerLedger.intIdPurchase &&
-               s.intIdPurchaseCustomerLedgerTransactionType == 3).Sum(s => s.TotalAmount);
+               s.intIdPurchaseSupplierLedgerTransactionType == 3).Sum(s => s.TotalAmount);
 
                 var purchase = unitOfWork.Purchase.Get((int) purchaseCustomerLedger.intIdPurchase);
 
@@ -151,12 +151,155 @@ namespace GeneralLedger.Persistence.Services
 
         public void Remove(Payment payment)
         {
-            throw new NotImplementedException();
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                var resultPayment = unitOfWork.Payment.GetPaymentWithJournalEntry(payment.Id).SingleOrDefault();
+                var tblGlTranDetails = resultPayment.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList();
+                unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
+                var tblGLTranHeaders = resultPayment.tblGLTranHeaders.ToList();
+                unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
+                var purchaseLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdPayment == payment.Id && p.intIdPurchaseSupplierLedgerTransactionType == 2).SingleOrDefault();
+                unitOfWork.PurchaseSupplierLedger.Remove(purchaseLedger);
+
+                var paySumList = unitOfWork.PurchaseSupplierLedger
+                   .Find(s => s.intIdPurchase == purchaseLedger.intIdPurchase &&
+                    s.intIdPurchaseSupplierLedgerTransactionType == 2).ToList();
+
+                paySumList.Remove(purchaseLedger);
+
+                var paySum = paySumList.Sum(p => p.TotalAmount);
+
+                //change here if naay lain adjustment
+                var adjSum = unitOfWork.PurchaseSupplierLedger
+                 .Find(s => s.intIdPurchase == purchaseLedger.intIdPurchase &&
+                  s.intIdPurchaseSupplierLedgerTransactionType == 3).Sum(s => s.TotalAmount);
+
+                var purchase = unitOfWork.Purchase.Get((int)payment.PurchaseId);
+
+
+                if (((purchase.Total + adjSum) - paySum) <= 0)
+                {
+                    purchase.IsFullyPaid = true;
+                    purchase.LastPaymentDate = purchaseLedger.TransactionDate;
+                }
+                else
+                {
+                    purchase.IsFullyPaid = false;
+                    purchase.LastPaymentDate = null;
+                }
+
+                unitOfWork.Payment.Remove(resultPayment);
+                unitOfWork.Complete();
+
+            }
         }
 
         public Payment Update(Payment payment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
         {
-            throw new NotImplementedException();
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                var resultPayment = unitOfWork.Payment.GetPaymentWithJournalEntry(payment.Id).SingleOrDefault();
+                resultPayment.PaymentCV = payment.PaymentCV;
+                resultPayment.PaymentSIDR = payment.PaymentSIDR;
+                resultPayment.PaymentTransactionDate = payment.PaymentTransactionDate;
+                resultPayment.PaymentTotal = payment.PaymentTotal;
+                resultPayment.PaymentIsCash = payment.PaymentIsCash;
+                resultPayment.PurchaseId = payment.PurchaseId;
+                resultPayment.PaymentBankId = payment.PaymentBankId;
+                resultPayment.PaymentCheckDetail = payment.PaymentCheckDetail;
+
+                var purchaseLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdPayment == payment.Id && p.intIdPurchaseSupplierLedgerTransactionType == 2).SingleOrDefault();
+                purchaseLedger.TotalAmount = payment.PaymentTotal;
+                purchaseLedger.TransactionDate = payment.PaymentTransactionDate;
+                purchaseLedger.TransactionNo = payment.PaymentCV;
+
+
+                var paySum = unitOfWork.PurchaseSupplierLedger
+                    .Find(s => s.intIdPurchase == purchaseLedger.intIdPurchase &&
+                s.intIdPurchaseSupplierLedgerTransactionType == 2).Sum(s => s.TotalAmount);
+
+                var adjSum = unitOfWork.PurchaseSupplierLedger
+                   .Find(s => s.intIdPurchase == purchaseLedger.intIdPurchase &&
+               s.intIdPurchaseSupplierLedgerTransactionType == 3).Sum(s => s.TotalAmount);
+
+                var purchase = unitOfWork.Purchase.Get((int)purchaseLedger.intIdPurchase);
+
+                if (((purchase.Total + adjSum) - paySum) <= 0)
+                {
+                    purchase.IsFullyPaid = true;
+                    purchase.LastPaymentDate = purchaseLedger.TransactionDate;
+                }
+                else
+                {
+                    purchase.IsFullyPaid = false;
+                    purchase.LastPaymentDate = null;
+                }
+
+                unitOfWork.GLTranDetail.RemoveRange(resultPayment.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList());
+
+
+                if (UseDefaultEntry)
+                {
+
+                    tblMasCOASub journalEntry1;
+                    journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1056).SingleOrDefault();
+
+                    var journalEntry2 = unitOfWork.CoaSub.Find(c => c.intIDBank == payment.PaymentBankId).SingleOrDefault();
+
+                    var gLTranDetailDefault = new List<tblGLTranDetail>
+                    {
+                     new tblGLTranDetail
+                     {
+                         intIDMasCoa = (int)journalEntry1.intIDMasCOA ,
+                         intIDMasCoaSub = journalEntry1.ID,
+                         curCredit = 0,
+                         curDebit = payment.PaymentTotal
+                     },
+                     new tblGLTranDetail
+                     {
+                         intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
+                         intIDMasCoaSub = journalEntry2.ID,
+                         curCredit =  payment.PaymentTotal,
+                         curDebit = 0
+                     }
+                    };
+
+                    foreach (var item in gLTranDetailDefault)
+                    {
+                        resultPayment.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit,
+                            intIDGLTranHeader = item.intIDGLTranHeader,
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub
+
+                        });
+                    }
+                }
+                else
+                {
+
+                    foreach (var item in tblGLTranDetail)
+                    {
+                        resultPayment.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit,
+                            intIDGLTranHeader = item.intIDGLTranHeader,
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub
+
+                        });
+                    }
+                }
+
+                resultPayment.tblGLTranHeaders.ToList()[0].blnUseDefaultEntry = UseDefaultEntry;
+                resultPayment.tblGLTranHeaders.ToList()[0].curCreditAmount = resultPayment.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curCredit);
+                resultPayment.tblGLTranHeaders.ToList()[0].curDebitAmount = resultPayment.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curDebit);
+                unitOfWork.Complete();
+                return resultPayment;
+            }
         }
     }
 }

@@ -102,12 +102,9 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_tblMasCOASub_Bank" />
         <EntityTypeShape EntityType="GeneralLedgerModel.SalesCustomerLedgerTransactionType" Width="1.5" PointX="16.5" PointY="18.5" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Purchase" Width="1.5" PointX="3" PointY="40.125" />
-        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseCustomerLedgerTransactionType" Width="1.5" PointX="16.375" PointY="0.75" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Purchase_Suppliers" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Purchase" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_tblGLTranHeader" />
-        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseCustomerLedger" Width="1.5" PointX="5.25" PointY="40.375" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_PurhcaseCustomerLedger_PurchaseCustomerLedgerTransactionType" />
         <EntityTypeShape EntityType="GeneralLedgerModel.AccountReceivableAdjustment" Width="1.5" PointX="18.75" PointY="8.625" />
         <EntityTypeShape EntityType="GeneralLedgerModel.AccountsReceivableAdjustmentsType" Width="1.5" PointX="16.5" PointY="27.125" />
         <AssociationConnector Association="GeneralLedgerModel.FK_AccountReceivableAdjustments_AccountsReceivableAdjustmentsType" />
@@ -118,16 +115,25 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_SalesCustomerLedgerTransactionType" />
         <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_AccountReceivableAdjustments" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Payment" Width="1.5" PointX="5.25" PointY="44.25" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Payment_Payment" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Payment" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Payment_Bank" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Payment" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Role" Width="1.5" PointX="3.75" PointY="4.75" />
         <EntityTypeShape EntityType="GeneralLedgerModel.UserRole" Width="1.5" PointX="6" PointY="26.625" />
         <AssociationConnector Association="GeneralLedgerModel.FK_UserRole_Role" />
         <AssociationConnector Association="GeneralLedgerModel.FK_UserRole_User" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.AccountPayableAdjustment" Width="1.5" PointX="7.5" PointY="42.5" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.AccountsPayableAdjustmentsType" Width="1.5" PointX="5.25" PointY="37.375" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_AccountsPayableAdjustmentsType" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Payment" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Purchase" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseSupplierLedger" Width="1.5" PointX="9.75" PointY="42.5" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseSupplierLedgerTransactionType" Width="1.5" PointX="7.5" PointY="39.375" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_AccountPayableAdjustments1" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Payment1" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Purchase" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

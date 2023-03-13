@@ -77,6 +77,7 @@
     <Compile Include="Repositories\PaymentRepository.cs" />
     <Compile Include="Repositories\PurchaseCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\PurchaseRepository.cs" />
+    <Compile Include="Repositories\PurchaseSupplierLedgerRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\SaleRepository.cs" />

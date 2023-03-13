@@ -178,7 +178,7 @@ namespace GeneralLedger.Persistence.Services
 
                 var adjSum = unitOfWork.SalesCustomerLedger
                .Find(s => s.intIdSales == collection.SalesId &&
-                   s.intIdSalesCustomerLedgerTransctionType == 2).Sum(s => s.TotalAmount);
+                   s.intIdSalesCustomerLedgerTransctionType == 3).Sum(s => s.TotalAmount);
 
                 var sale = unitOfWork.Sale.Get((int)collection.SalesId);
 

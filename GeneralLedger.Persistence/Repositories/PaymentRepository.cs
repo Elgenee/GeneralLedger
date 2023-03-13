@@ -21,7 +21,13 @@ namespace GeneralLedger.Persistence.Repositories
 
         public IEnumerable<Payment> GetPaymentWithJournalEntry(int Id)
         {
-            throw new System.NotImplementedException();
+            return GeneralLedgerContext.Payments
+                .Include(p => p.tblGLTranHeaders)
+                .Include(p => p.tblGLTranHeaders.Select(h => h.tblGLTranDetails))
+                .Include(p => p.tblGLTranHeaders.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOA)))
+                .Include(p => p.tblGLTranHeaders.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOASub)))
+                .Where(p => p.Id == Id)
+                .ToList();
         }
 
         public IEnumerable<Payment> GetPaymentWithPurchaseBank(string criteria)

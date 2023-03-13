@@ -18,7 +18,8 @@ namespace GeneralLedger.Core.Domain
         public Payment()
         {
             this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
-            this.PurchaseCustomerLedgers = new HashSet<PurchaseCustomerLedger>();
+            this.AccountPayableAdjustments = new HashSet<AccountPayableAdjustment>();
+            this.PurchaseSupplierLedgers = new HashSet<PurchaseSupplierLedger>();
         }
     
         public int Id { get; set; }
@@ -37,6 +38,8 @@ namespace GeneralLedger.Core.Domain
         public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
         public virtual Bank Bank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseCustomerLedger> PurchaseCustomerLedgers { get; set; }
+        public virtual ICollection<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseSupplierLedger> PurchaseSupplierLedgers { get; set; }
     }
 }

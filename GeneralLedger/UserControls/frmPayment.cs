@@ -125,6 +125,11 @@ namespace GeneralLedger.UserControls
                     Payment.PaymentDescription = this.txtDescription.Text;
                     Payment.PurchaseId = int.TryParse(this.txtPurchaseId.Text, out intParser) ? intParser : 0;
                     Payment = PaymentServices.Update(Payment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
+
+                    if (Payment != null)
+                    {
+                        MessageBox.Show("Successfully saved");
+                    }
                 }
 
                 GLTranHeader = Payment.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
@@ -498,10 +503,103 @@ namespace GeneralLedger.UserControls
                 MessageBox.Show("Error:" + ex.Message);
             }
         }
-
+        //TODO:ADD
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int intParser;
+                decimal decimalParser;
 
+                var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtPaymentTransactionDate.Value);
+
+                if (isLock)
+                {
+                    MessageBox.Show("Already lock...");
+                    return;
+                }
+
+                int? bankId = null;
+                bankId = (this.cbBank.SelectedItem == null) ? 0 : ((Tier.BO.Bank)this.cbBank.SelectedItem).ID;
+                string TransType = (this.ID > 0) ? "delete" : String.Empty;
+
+                if (TransType.Equals("delete"))
+                {
+                    Payment = new Payment
+                    {
+                        Id = this.ID,
+                        PaymentCV = this.txtPaymentCV.Text,
+                        PaymentSIDR = this.txtPaymentSIDR.Text,
+                        PaymentTransactionDate = this.dtPaymentTransactionDate.Value,
+                        PaymentTotal = decimal.TryParse(this.txtPaymentTotal.Text, out decimalParser) ? decimalParser : 0,
+                        PaymentCheckDetail = this.txtCheckDetails.Text,
+                        PaymentBankId = bankId,
+                        PaymentIsCash = this.chkIsCash.Checked,
+                        PaymentDescription = this.txtDescription.Text,
+                        PurchaseId = int.TryParse(this.txtPurchaseId.Text, out intParser) ? intParser : 0
+                    };
+
+                    PaymentServices.Remove(Payment);
+
+                    if (Payment != null)
+                    {
+                        this.ID = 0;
+                        this.txtPaymentId.Text = String.Empty;
+                        this.txtPaymentCV.Text = String.Empty;
+                        this.txtPaymentSIDR.Text = String.Empty;
+                        this.txtPaymentTotal.Text = String.Empty;
+                        this.PurchaseId = 0;
+                        this.txtPurchaseId.Text = String.Empty;
+                        this.txtSupplier.Text = String.Empty;
+                        this.txtPurchasePONo.Text = String.Empty;
+                        this.txtPurchaseSIDR.Text = String.Empty;
+                        this.txtPurchaseTotal.Text = String.Empty;
+                        this.txtCheckDetails.Text = String.Empty;
+                        this.txtDescription.Text = String.Empty;
+                        this.txtCheckDetails.Text = String.Empty;
+                        this.dgJournalEntry.Rows.Clear();
+                        this.dgJournalEntry.Refresh();
+                        this.GLTranDetail.Clear();
+                        this.txtTotalDebit.Text = string.Empty;
+                        this.txtTotalCredit.Text = string.Empty;
+                        GLTranDetail = new List<tblGLTranDetail>();
+                        MessageBox.Show("Successfully deleted");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            this.ID = 0;
+            this.txtPaymentId.Text = String.Empty;
+            this.txtPaymentCV.Text = String.Empty;
+            this.txtPaymentSIDR.Text = String.Empty;
+            this.txtPaymentTotal.Text = String.Empty;
+            this.PurchaseId = 0;
+            this.txtPurchaseId.Text = String.Empty;
+            this.txtSupplier.Text = String.Empty;
+            this.txtPurchasePONo.Text = String.Empty;
+            this.txtPurchaseSIDR.Text = String.Empty;
+            this.txtPurchaseTotal.Text = String.Empty;
+            this.txtCheckDetails.Text = String.Empty;
+            this.txtDescription.Text = String.Empty;
+            this.txtCheckDetails.Text = String.Empty;
+            this.dgJournalEntry.Rows.Clear();
+            this.dgJournalEntry.Refresh();
+            this.GLTranDetail.Clear();
+            this.txtTotalDebit.Text = string.Empty;
+            this.txtTotalCredit.Text = string.Empty;
+            GLTranDetail = new List<tblGLTranDetail>();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.MetroTabControl.TabPages.Remove(MetroTabPage);
         }
     }
 }

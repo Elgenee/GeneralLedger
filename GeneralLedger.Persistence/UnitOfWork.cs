@@ -34,7 +34,7 @@ namespace GeneralLedger.Persistence
 
         public IPurchaseRepository Purchase { get; set; }
 
-        public IPurchaseCustomerLedgerRepository PurchaseCustomerLedger { get; set; }
+        public IPurchaseSupplierLedgerRepository PurchaseSupplierLedger { get; set; }
 
         public IAccountsReceivableAdjustmentsTypeRepository AccountsReceivableAdjustmentsType { get; set; }
 
@@ -63,7 +63,7 @@ namespace GeneralLedger.Persistence
             Collection = new CollectionRepository(_generalLedgerContext);
             SalesCustomerLedger = new SalesCustomerLedgerRepository(_generalLedgerContext);
             Purchase = new PurchaseRepository(_generalLedgerContext);
-            PurchaseCustomerLedger = new PurchaseCustomerLedgerRepository(_generalLedgerContext);
+            PurchaseSupplierLedger = new PurchaseCustomerLedgerRepository(_generalLedgerContext);
             AccountsReceivableAdjustmentsType = new AccountsReceivableAdjustmentsTypeRepository(_generalLedgerContext);
             AccountsReceivableAdjustments = new AccountReceivableAdjustmentsRepository(_generalLedgerContext);
             Payment = new PaymentRepository(_generalLedgerContext);

@@ -17,17 +17,17 @@ namespace GeneralLedger.Persistence.Services
             {
                 unitOfWork.Purchase.Add(purchase);
 
-                var purchaseCustomerLedger = new PurchaseCustomerLedger
+                var purchaseCustomerLedger = new PurchaseSupplierLedger
                 {
                     intIdPurchase = purchase.Id,
-                    intIdPurchaseCustomerLedgerTransactionType = 1,
+                    intIdPurchaseSupplierLedgerTransactionType = 1,
                     TotalAmount = purchase.Total,
                     TransactionDate = purchase.TransactionDate,
                     TransactionNo = purchase.TRANo,
                     DateInserted = DateTime.Now
                 };
 
-                unitOfWork.PurchaseCustomerLedger.Add(purchaseCustomerLedger);
+                unitOfWork.PurchaseSupplierLedger.Add(purchaseCustomerLedger);
 
                 if (UseDefaultEntry)
                 {
@@ -143,8 +143,8 @@ namespace GeneralLedger.Persistence.Services
                 unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
                 var tblGLTranHeaders = resultPurchase.tblGLTranHeaders.ToList();
                 unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
-                var purchaseLedger = unitOfWork.PurchaseCustomerLedger.Find(p => p.intIdPurchase == purchase.Id && p.intIdPurchaseCustomerLedgerTransactionType == 1).SingleOrDefault();
-                unitOfWork.PurchaseCustomerLedger.Remove(purchaseLedger);
+                var purchaseLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdPurchase == purchase.Id && p.intIdPurchaseSupplierLedgerTransactionType == 1).SingleOrDefault();
+                unitOfWork.PurchaseSupplierLedger.Remove(purchaseLedger);
                 unitOfWork.Purchase.Remove(resultPurchase);
                 unitOfWork.Complete();
             }
@@ -165,7 +165,7 @@ namespace GeneralLedger.Persistence.Services
                 resultPurchase.tblGLTranHeaders.ToList()[0].strDescription = purchase.Description;
                 resultPurchase.tblGLTranHeaders.ToList()[0].datBatchDate = purchase.TransactionDate;
 
-                var purchaseLedger = unitOfWork.PurchaseCustomerLedger.Find(p => p.intIdPurchase == purchase.Id && p.intIdPurchaseCustomerLedgerTransactionType == 1).SingleOrDefault();
+                var purchaseLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdPurchase == purchase.Id && p.intIdPurchaseSupplierLedgerTransactionType == 1).SingleOrDefault();
                 purchaseLedger.TotalAmount = purchase.Total;
                 purchaseLedger.TransactionDate = purchase.TransactionDate;
                 purchaseLedger.TransactionNo = purchase.TRANo;

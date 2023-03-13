@@ -149,11 +149,17 @@
       <DependentUpon>ResetPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="UserControls\frmAccountReceivableAdjustments.cs">
+    <Compile Include="UserControls\frmAccountReceivableAdjustmentsReturnCheck.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\frmAccountReceivableAdjustments.Designer.cs">
-      <DependentUpon>frmAccountReceivableAdjustments.cs</DependentUpon>
+    <Compile Include="UserControls\frmAccountReceivableAdjustmentsReturnCheck.Designer.cs">
+      <DependentUpon>frmAccountReceivableAdjustmentsReturnCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmAccountReceivableAdjustmentsReturnSales.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmAccountReceivableAdjustmentsReturnSales.Designer.cs">
+      <DependentUpon>frmAccountReceivableAdjustmentsReturnSales.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmAgent.cs">
       <SubType>UserControl</SubType>
@@ -178,6 +184,12 @@
     </Compile>
     <Compile Include="UserControls\frmPurchase.Designer.cs">
       <DependentUpon>frmPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseLedger.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseLedger.Designer.cs">
+      <DependentUpon>frmPurchaseLedger.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmSales.cs">
       <SubType>UserControl</SubType>
@@ -544,8 +556,8 @@
     <EmbeddedResource Include="ResetPassword.resx">
       <DependentUpon>ResetPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\frmAccountReceivableAdjustments.resx">
-      <DependentUpon>frmAccountReceivableAdjustments.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\frmAccountReceivableAdjustmentsReturnCheck.resx">
+      <DependentUpon>frmAccountReceivableAdjustmentsReturnCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmAgent.resx">
       <DependentUpon>frmAgent.cs</DependentUpon>
@@ -558,6 +570,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmPurchase.resx">
       <DependentUpon>frmPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmPurchaseLedger.resx">
+      <DependentUpon>frmPurchaseLedger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmSales.resx">
       <DependentUpon>frmSales.cs</DependentUpon>

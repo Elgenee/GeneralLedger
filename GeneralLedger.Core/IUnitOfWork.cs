@@ -20,7 +20,7 @@ namespace GeneralLedger.Core
         ICollectionRepository Collection{ get; }
         ISalesCustomerLedgerRepository SalesCustomerLedger { get; }
         IPurchaseRepository Purchase { get; }
-        IPurchaseCustomerLedgerRepository PurchaseCustomerLedger { get; }
+        IPurchaseSupplierLedgerRepository PurchaseSupplierLedger { get; }
         IAccountsReceivableAdjustmentsTypeRepository AccountsReceivableAdjustmentsType { get; }
         IAccountReceivableAdjustmentsRepository AccountsReceivableAdjustments { get; }
         IUserRepository User { get; }

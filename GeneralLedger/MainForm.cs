@@ -724,7 +724,7 @@ namespace GeneralLedger
         {
 
             MetroTabPage metroTabPage = new MetroTabPage();
-            metroTabPage.Text = "A/R Adjustments";
+            metroTabPage.Text = "Return Check";
             metroTabPage.AutoScroll = true;
             metroTabPage.HorizontalScrollbar = true;
             metroTabPage.HorizontalScrollbarBarColor = true;
@@ -740,7 +740,7 @@ namespace GeneralLedger
             metroTabPage.Location = new System.Drawing.Point(4, 38);
             metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 
-            frmAccountReceivableAdjustments frmAccountReceivableAdjustments = new frmAccountReceivableAdjustments();
+            frmAccountReceivableAdjustmentsReturnCheck frmAccountReceivableAdjustments = new frmAccountReceivableAdjustmentsReturnCheck();
             frmAccountReceivableAdjustments.Parent = metroTabPage;
             frmAccountReceivableAdjustments.MetroTabPage = metroTabPage;
             frmAccountReceivableAdjustments.AutoScroll = true;
@@ -855,6 +855,11 @@ namespace GeneralLedger
             //MessageBox.Show("testt");
            // this.Close();
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void metroTile2_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

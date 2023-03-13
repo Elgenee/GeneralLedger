@@ -12,19 +12,21 @@ namespace GeneralLedger.Core.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class PurchaseCustomerLedger
+    public partial class PurchaseSupplierLedger
     {
         public int Id { get; set; }
-        public Nullable<int> intIdPurchaseCustomerLedgerTransactionType { get; set; }
+        public Nullable<int> intIdPurchaseSupplierLedgerTransactionType { get; set; }
         public string TransactionNo { get; set; }
         public Nullable<System.DateTime> TransactionDate { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
         public Nullable<int> intIdPurchase { get; set; }
         public Nullable<int> intIdPayment { get; set; }
         public Nullable<System.DateTime> DateInserted { get; set; }
+        public Nullable<int> intIdAccountPayableAdjustment { get; set; }
     
-        public virtual Purchase Purchase { get; set; }
-        public virtual PurchaseCustomerLedgerTransactionType PurchaseCustomerLedgerTransactionType { get; set; }
+        public virtual AccountPayableAdjustment AccountPayableAdjustment { get; set; }
         public virtual Payment Payment { get; set; }
+        public virtual Purchase Purchase { get; set; }
+        public virtual PurchaseSupplierLedgerTransactionType PurchaseSupplierLedgerTransactionType { get; set; }
     }
 }

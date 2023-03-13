@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace GeneralLedger.Persistence.Repositories
 {
-    public class PurchaseCustomerLedgerRepository : Repository<PurchaseCustomerLedger> , IPurchaseCustomerLedgerRepository
+    public class PurchaseCustomerLedgerRepository : Repository<PurchaseSupplierLedger> , IPurchaseSupplierLedgerRepository
     {
 
         public PurchaseCustomerLedgerRepository(GeneralLedgerContext context) : base(context)
@@ -18,6 +18,11 @@ namespace GeneralLedger.Persistence.Repositories
         public GeneralLedgerContext GeneralLedgerContext
         {
             get { return Context as GeneralLedgerContext; }
+        }
+
+        public IEnumerable<spGetPurchaseSupplierLedger_Result> GetPurchaseSupplierLedger(int Id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

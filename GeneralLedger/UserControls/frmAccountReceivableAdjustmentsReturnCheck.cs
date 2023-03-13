@@ -16,7 +16,7 @@ using GeneralLedger.Core.Domain;
 
 namespace GeneralLedger.UserControls
 {
-    public partial class frmAccountReceivableAdjustments : MetroUserControl
+    public partial class frmAccountReceivableAdjustmentsReturnCheck : MetroUserControl
     {
         public MetroTabControl MetroTabControl { get; set; }
         public MetroTabPage MetroTabPage { get; set; }
@@ -33,7 +33,7 @@ namespace GeneralLedger.UserControls
         public int IndexGrid { get; set; }
         public int GLTranHeader { get; set; }
 
-        public frmAccountReceivableAdjustments()
+        public frmAccountReceivableAdjustmentsReturnCheck()
         {
           
             AccountsReceivableAdjustmentsTypeServices = new AccountsReceivableAdjustmentsTypeServices();
@@ -159,7 +159,7 @@ namespace GeneralLedger.UserControls
                          CollectionId = this.CollectionId,
                          Descrpition = this.txtDescription.Text,
                          TotalAmount = decimal.TryParse(this.txtCollectionTotal.Text, out decimalParser) ? decimalParser : 0,
-                        SalesId = this.SaleId
+                         SalesId = this.SaleId
                     };
 
                     AccountReceivableAdjustment = AccountReceivableAdjustmentsServices.Add(AccountReceivableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);

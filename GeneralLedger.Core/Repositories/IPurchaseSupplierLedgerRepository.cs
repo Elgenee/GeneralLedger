@@ -8,8 +8,9 @@ using GeneralLedger.Core.Domain;
 
 namespace GeneralLedger.Core.Repositories
 {
-    public interface IPurchaseCustomerLedgerRepository : IRepository<PurchaseCustomerLedger>
+    public interface IPurchaseSupplierLedgerRepository : IRepository<PurchaseSupplierLedger>
     {
 
+        IEnumerable<spGetPurchaseSupplierLedger_Result> GetPurchaseSupplierLedger(int Id);
     }
 }

@@ -62,7 +62,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\AccountPayableAdjustment.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\AccountReceivableAdjustment.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\AccountsPayableAdjustmentsType.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\AccountsReceivableAdjustmentsType.cs">
@@ -158,12 +164,6 @@
     <Compile Include="Domain\Purchase.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\PurchaseCustomerLedger.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseCustomerLedgerTransactionType.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Domain\PurchaseOrder.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
@@ -198,6 +198,12 @@
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\PurchaseOrderReceivingDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseSupplierLedger.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\PurchaseSupplierLedgerTransactionType.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\Role.cs">
@@ -251,6 +257,9 @@
     <Compile Include="Domain\spGetBANK_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\spGetCustomerLedgerOverall_Result.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\spGetCustomer_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
@@ -272,7 +281,16 @@
     <Compile Include="Domain\spGetPurchaseOrderReceivingProducts_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\spGetPurchaseSupplierLedger_Result.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\spGetSalesCustomerLedgerRunningBalanceOnAsOfDate_Result.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\spGetSalesCustomerLedger_Result.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\spGetSummaryOfAccountsReceivablesSales_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\spGetSupplier_Result.cs">
@@ -353,6 +371,9 @@
     <Compile Include="Domain\spPurchaseOrderProductSearch_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\spRPTCollectionProoflist_Result.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\spRptGLGeneralLedgerDetail_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
@@ -360,6 +381,9 @@
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\spRptProoflistDetail_Result.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\spRPTSalesProoflist_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\sp_helpdiagramdefinition_Result.cs">
@@ -422,8 +446,8 @@
     <Compile Include="Repositories\IGLTranRepository.cs" />
     <Compile Include="Repositories\IJournalEntryRepository.cs" />
     <Compile Include="Repositories\IPaymentRepository.cs" />
-    <Compile Include="Repositories\IPurchaseCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\IPurchaseRepository.cs" />
+    <Compile Include="Repositories\IPurchaseSupplierLedgerRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IRoleRepository.cs" />
     <Compile Include="Repositories\ISaleRepository.cs" />

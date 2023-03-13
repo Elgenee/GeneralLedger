@@ -1,6 +1,6 @@
 ﻿namespace GeneralLedger.UserControls
 {
-    partial class frmAccountReceivableAdjustments
+    partial class frmAccountReceivableAdjustmentsReturnCheck
     {
         /// <summary> 
         /// Required designer variable.

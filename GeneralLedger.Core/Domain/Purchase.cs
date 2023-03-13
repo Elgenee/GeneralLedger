@@ -18,8 +18,9 @@ namespace GeneralLedger.Core.Domain
         public Purchase()
         {
             this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
-            this.PurchaseCustomerLedgers = new HashSet<PurchaseCustomerLedger>();
             this.Payments = new HashSet<Payment>();
+            this.AccountPayableAdjustments = new HashSet<AccountPayableAdjustment>();
+            this.PurchaseSupplierLedgers = new HashSet<PurchaseSupplierLedger>();
         }
     
         public int Id { get; set; }
@@ -38,8 +39,10 @@ namespace GeneralLedger.Core.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseCustomerLedger> PurchaseCustomerLedgers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseSupplierLedger> PurchaseSupplierLedgers { get; set; }
     }
 }
