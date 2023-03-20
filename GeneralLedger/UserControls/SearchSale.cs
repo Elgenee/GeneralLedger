@@ -63,7 +63,9 @@ namespace GeneralLedger.UserControls
                         this.dgSearchSale.Rows[i].Cells["Description"].Value = saleResult[i].Description;
                         this.dgSearchSale.Rows[i].Cells["GLTranHeaderID"].Value = saleResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                         this.dgSearchSale.Rows[i].Cells["UseDefaultEntry"].Value = saleResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
-
+                        this.dgSearchSale.Rows[i].Cells["SOPAmount"].Value = saleResult[i].SOPAmount;
+                        this.dgSearchSale.Rows[i].Cells["CFAmount"].Value = saleResult[i].CFAmount;
+                        this.dgSearchSale.Rows[i].Cells["COMMAmount"].Value = saleResult[i].COMMAmount;
                     }
 
                     setRowNumber(this.dgSearchSale);
@@ -111,6 +113,9 @@ namespace GeneralLedger.UserControls
                     var CustomerTerms = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value);
                     var GLTranHeaderID = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["GLTranHeaderID"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["GLTranHeaderID"].Value);
                     var DefaultEntry = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["UseDefaultEntry"].Value, DBNull.Value) ? false : Convert.ToBoolean(this.dgSearchSale.Rows[this.Index].Cells["UseDefaultEntry"].Value);
+                    var SOPAmount = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["SOPAmount"].Value, DBNull.Value) ? 0 : Convert.ToDecimal(this.dgSearchSale.Rows[this.Index].Cells["SOPAmount"].Value);
+                    var CFAmount = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["CFAmount"].Value, DBNull.Value) ? 0 : Convert.ToDecimal(this.dgSearchSale.Rows[this.Index].Cells["CFAmount"].Value);
+                    var COMMAmount = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["COMMAmount"].Value, DBNull.Value) ? 0 : Convert.ToDecimal(this.dgSearchSale.Rows[this.Index].Cells["COMMAmount"].Value);
 
                     this.Sale = new Sale { 
                          Id = id,
@@ -122,6 +127,9 @@ namespace GeneralLedger.UserControls
                          intIdAgent = intIdAgent,
                          Description = Description,
                          Terms = Terms,
+                         SOPAmount = SOPAmount,
+                         CFAmount = CFAmount,
+                         COMMAmount = COMMAmount,
                         Agent = new Agent
                         {
                             Id = AgentId,

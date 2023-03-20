@@ -535,6 +535,7 @@
           <Property Name="SOPAmount" Type="money" />
           <Property Name="COMMAmount" Type="money" />
           <Property Name="CFAmount" Type="money" />
+          <Property Name="IsSalesReturn" Type="bit" />
         </EntityType>
         <EntityType Name="SalesCustomerLedger">
           <Key>
@@ -545,6 +546,7 @@
           <Property Name="TransactionNo" Type="nvarchar" MaxLength="500" />
           <Property Name="TransactionDate" Type="date" />
           <Property Name="TotalAmount" Type="money" />
+          <Property Name="intIdCustomer" Type="int" />
           <Property Name="intIdSales" Type="int" />
           <Property Name="intIdCollection" Type="int" />
           <Property Name="DateInserted" Type="datetime" />
@@ -770,6 +772,18 @@
             </Principal>
             <Dependent Role="AccountReceivableAdjustments">
               <PropertyRef Name="CollectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountReceivableAdjustments_Sales">
+          <End Role="Sales" Type="Self.Sales" Multiplicity="0..1" />
+          <End Role="AccountReceivableAdjustments" Type="Self.AccountReceivableAdjustments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountReceivableAdjustments">
+              <PropertyRef Name="SalesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1106,6 +1120,18 @@
             </Principal>
             <Dependent Role="SalesCustomerLedger">
               <PropertyRef Name="intIdCollection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesCustomerLedger_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="SalesCustomerLedger" Type="Self.SalesCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesCustomerLedger">
+              <PropertyRef Name="intIdCustomer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1935,6 +1961,10 @@
             <End Role="Collection" EntitySet="Collection" />
             <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
           </AssociationSet>
+          <AssociationSet Name="FK_AccountReceivableAdjustments_Sales" Association="Self.FK_AccountReceivableAdjustments_Sales">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bank_Currency" Association="Self.FK_Bank_Currency">
             <End Role="Currency" EntitySet="Currency" />
             <End Role="Bank" EntitySet="Bank" />
@@ -2045,6 +2075,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_SalesCustomerLedger_Collection" Association="Self.FK_SalesCustomerLedger_Collection">
             <End Role="Collection" EntitySet="Collection" />
+            <End Role="SalesCustomerLedger" EntitySet="SalesCustomerLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesCustomerLedger_Customer" Association="Self.FK_SalesCustomerLedger_Customer">
+            <End Role="Customer" EntitySet="Customer" />
             <End Role="SalesCustomerLedger" EntitySet="SalesCustomerLedger" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesCustomerLedger_Sales" Association="Self.FK_SalesCustomerLedger_Sales">
@@ -2241,8 +2275,9 @@
           <Property Name="intIDPriceType" Type="Int32" />
           <Property Name="strAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="strContact" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Customer" FromRole="Customer" ToRole="Sales" />
           <NavigationProperty Name="PriceType" Relationship="Self.FK_tblCustomer_tblPriceType" FromRole="Customer" ToRole="PriceType" />
+          <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Customer" FromRole="Customer" ToRole="SalesCustomerLedger" />
+          <NavigationProperty Name="Sales" Relationship="GeneralLedgerModel.FK_Sales_Customer" FromRole="Customer" ToRole="Sale" />
         </EntityType>
         <EntityType Name="InventoryLog">
           <Key>
@@ -2643,30 +2678,6 @@
           <NavigationProperty Name="PurchaseOrderDetail" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" FromRole="PurchaseOrderReceivingDetails" ToRole="PurchaseOrderDetail" />
           <NavigationProperty Name="PurchaseOrderReceiving" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" FromRole="PurchaseOrderReceivingDetails" ToRole="PurchaseOrderReceiving" />
         </EntityType>
-        <EntityType Name="Sale">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TRANo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="PONo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="intIdCustomer" Type="Int32" />
-          <Property Name="intIdAgent" Type="Int32" />
-          <Property Name="TransactionDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Sales_Customer" FromRole="Sales" ToRole="Customer" />
-          <NavigationProperty Name="Agent" Relationship="GeneralLedgerModel.FK_Sales_Agent" FromRole="Sale" ToRole="Agent" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Sales" FromRole="Sale" ToRole="tblGLTranHeader" />
-          <NavigationProperty Name="Collections" Relationship="GeneralLedgerModel.FK_Collection_Sales" FromRole="Sale" ToRole="Collection" />
-          <Property Name="Terms" Type="Int32" />
-          <Property Name="IsFullyPaid" Type="Boolean" />
-          <Property Name="LastPaymentDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" FromRole="Sale" ToRole="SalesCustomerLedger" />
-          <Property Name="SOPAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="COMMAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="CFAmount" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
         <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="Id" />
@@ -2814,18 +2825,6 @@
             </Principal>
             <Dependent Role="Suppliers">
               <PropertyRef Name="intIDBank" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sales_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Sales">
-              <PropertyRef Name="intIdCustomer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3247,7 +3246,6 @@
           <EntitySet Name="PurchaseOrderProductTransactionTypes" EntityType="Self.PurchaseOrderProductTransactionType" />
           <EntitySet Name="PurchaseOrderReceivings" EntityType="Self.PurchaseOrderReceiving" />
           <EntitySet Name="PurchaseOrderReceivingDetails" EntityType="Self.PurchaseOrderReceivingDetail" />
-          <EntitySet Name="Sales" EntityType="Self.Sale" />
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tblGLTranDetails" EntityType="Self.tblGLTranDetail" />
@@ -3265,10 +3263,6 @@
           <AssociationSet Name="FK_Suppliers_Bank" Association="Self.FK_Suppliers_Bank">
             <End Role="Bank" EntitySet="Banks" />
             <End Role="Suppliers" EntitySet="Suppliers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sales_Customer" Association="Self.FK_Sales_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Sales" EntitySet="Sales" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCustomer_tblPriceType" Association="Self.FK_tblCustomer_tblPriceType">
             <End Role="PriceType" EntitySet="PriceTypes" />
@@ -3404,20 +3398,12 @@
           </AssociationSet>
           <EntitySet Name="tblJournalEntries" EntityType="GeneralLedgerModel.tblJournalEntry" />
           <EntitySet Name="Agents" EntityType="GeneralLedgerModel.Agent" />
-          <AssociationSet Name="FK_Sales_Agent" Association="GeneralLedgerModel.FK_Sales_Agent">
-            <End Role="Agent" EntitySet="Agents" />
-            <End Role="Sale" EntitySet="Sales" />
-          </AssociationSet>
           <EntitySet Name="tblGLBookTypes" EntityType="GeneralLedgerModel.tblGLBookType" />
           <AssociationSet Name="FK_tblGLTranDetail_tblMasCOASub" Association="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOASub">
             <End Role="tblMasCOASub" EntitySet="tblMasCOASubs" />
             <End Role="tblGLTranDetail" EntitySet="tblGLTranDetails" />
           </AssociationSet>
           <EntitySet Name="tblGLTranHeaders" EntityType="GeneralLedgerModel.tblGLTranHeader" />
-          <AssociationSet Name="FK_tblGLTranHeader_Sales" Association="GeneralLedgerModel.FK_tblGLTranHeader_Sales">
-            <End Role="Sale" EntitySet="Sales" />
-            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblGLTranHeader_tblGLBookType" Association="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType">
             <End Role="tblGLBookType" EntitySet="tblGLBookTypes" />
             <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
@@ -3433,10 +3419,6 @@
           <EntitySet Name="Collections" EntityType="GeneralLedgerModel.Collection" />
           <AssociationSet Name="FK_Collection_Bank" Association="GeneralLedgerModel.FK_Collection_Bank">
             <End Role="Bank" EntitySet="Banks" />
-            <End Role="Collection" EntitySet="Collections" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Collection_Sales" Association="GeneralLedgerModel.FK_Collection_Sales">
-            <End Role="Sale" EntitySet="Sales" />
             <End Role="Collection" EntitySet="Collections" />
           </AssociationSet>
           <AssociationSet Name="FK_tblGLTranHeader_Collection" Association="GeneralLedgerModel.FK_tblGLTranHeader_Collection">
@@ -3474,10 +3456,6 @@
           <EntitySet Name="SalesCustomerLedgers" EntityType="GeneralLedgerModel.SalesCustomerLedger" />
           <AssociationSet Name="FK_SalesCustomerLedger_Collection" Association="GeneralLedgerModel.FK_SalesCustomerLedger_Collection">
             <End Role="Collection" EntitySet="Collections" />
-            <End Role="SalesCustomerLedger" EntitySet="SalesCustomerLedgers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SalesCustomerLedger_Sales" Association="GeneralLedgerModel.FK_SalesCustomerLedger_Sales">
-            <End Role="Sale" EntitySet="Sales" />
             <End Role="SalesCustomerLedger" EntitySet="SalesCustomerLedgers" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesCustomerLedger_SalesCustomerLedgerTransactionType" Association="GeneralLedgerModel.FK_SalesCustomerLedger_SalesCustomerLedgerTransactionType">
@@ -3867,6 +3845,35 @@
             <End Role="PurchaseSupplierLedgerTransactionType" EntitySet="PurchaseSupplierLedgerTransactionTypes" />
             <End Role="PurchaseSupplierLedger" EntitySet="PurchaseSupplierLedgers" />
           </AssociationSet>
+          <AssociationSet Name="FK_SalesCustomerLedger_Customer" Association="GeneralLedgerModel.FK_SalesCustomerLedger_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="SalesCustomerLedger" EntitySet="SalesCustomerLedgers" />
+          </AssociationSet>
+          <EntitySet Name="Sales" EntityType="GeneralLedgerModel.Sale" />
+          <AssociationSet Name="FK_AccountReceivableAdjustments_Sales" Association="GeneralLedgerModel.FK_AccountReceivableAdjustments_Sales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="AccountReceivableAdjustment" EntitySet="AccountReceivableAdjustments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Agent" Association="GeneralLedgerModel.FK_Sales_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collection_Sales" Association="GeneralLedgerModel.FK_Collection_Sales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="Collection" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Customer" Association="GeneralLedgerModel.FK_Sales_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesCustomerLedger_Sales" Association="GeneralLedgerModel.FK_SalesCustomerLedger_Sales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="SalesCustomerLedger" EntitySet="SalesCustomerLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblGLTranHeader_Sales" Association="GeneralLedgerModel.FK_tblGLTranHeader_Sales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -3902,18 +3909,6 @@
           <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Sales" Relationship="GeneralLedgerModel.FK_Sales_Agent" FromRole="Agent" ToRole="Sale" />
         </EntityType>
-        <Association Name="FK_Sales_Agent">
-          <End Type="GeneralLedgerModel.Agent" Role="Agent" Multiplicity="0..1" />
-          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Agent">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Sale">
-              <PropertyRef Name="intIdAgent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="tblGLBookType">
           <Key>
             <PropertyRef Name="ID" />
@@ -3948,7 +3943,6 @@
           <Property Name="datInsertedDate" Type="DateTime" Precision="3" />
           <Property Name="strDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="intIdSales" Type="Int32" />
-          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Sales" FromRole="tblGLTranHeader" ToRole="Sale" />
           <NavigationProperty Name="tblGLBookType" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType" FromRole="tblGLTranHeader" ToRole="tblGLBookType" />
           <NavigationProperty Name="tblGLTranDetails" Relationship="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" FromRole="tblGLTranHeader" ToRole="tblGLTranDetail" />
           <NavigationProperty Name="tblJournalEntry" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" FromRole="tblGLTranHeader" ToRole="tblJournalEntry" />
@@ -3963,19 +3957,8 @@
           <NavigationProperty Name="AccountReceivableAdjustment" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" FromRole="tblGLTranHeader" ToRole="AccountReceivableAdjustment" />
           <Property Name="intIdPayment" Type="Int32" />
           <NavigationProperty Name="Payment" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Payment" FromRole="tblGLTranHeader" ToRole="Payment" />
+          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Sales" FromRole="tblGLTranHeader" ToRole="Sale" />
         </EntityType>
-        <Association Name="FK_tblGLTranHeader_Sales">
-          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
-          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sale">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tblGLTranHeader">
-              <PropertyRef Name="intIdSales" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblGLTranHeader_tblGLBookType">
           <End Type="GeneralLedgerModel.tblGLBookType" Role="tblGLBookType" Multiplicity="0..1" />
           <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
@@ -4026,11 +4009,11 @@
           <Property Name="CheckDetail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bank" Relationship="GeneralLedgerModel.FK_Collection_Bank" FromRole="Collection" ToRole="Bank" />
-          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_Collection_Sales" FromRole="Collection" ToRole="Sale" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Collection" FromRole="Collection" ToRole="tblGLTranHeader" />
           <Property Name="RunningBalance" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="AccountReceivableAdjustments" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustments_Collection" FromRole="Collection" ToRole="AccountReceivableAdjustment" />
           <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Collection" FromRole="Collection" ToRole="SalesCustomerLedger" />
+          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_Collection_Sales" FromRole="Collection" ToRole="Sale" />
         </EntityType>
         <Association Name="FK_Collection_Bank">
           <End Type="GeneralLedgerModel.Bank" Role="Bank" Multiplicity="0..1" />
@@ -4041,18 +4024,6 @@
             </Principal>
             <Dependent Role="Collection">
               <PropertyRef Name="BankId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Collection_Sales">
-          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
-          <End Type="GeneralLedgerModel.Collection" Role="Collection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sale">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Collection">
-              <PropertyRef Name="SalesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4162,6 +4133,7 @@
           <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="SalesCustomerLedger" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="tblGLTranHeader" />
           <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustments_Sales" FromRole="AccountReceivableAdjustment" ToRole="Sale" />
         </EntityType>
         <EntityType Name="AccountsReceivableAdjustmentsType">
           <Key>
@@ -4208,10 +4180,12 @@
           <Property Name="intIdCollection" Type="Int32" />
           <Property Name="DateInserted" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Collection" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Collection" FromRole="SalesCustomerLedger" ToRole="Collection" />
-          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" FromRole="SalesCustomerLedger" ToRole="Sale" />
           <NavigationProperty Name="SalesCustomerLedgerTransactionType" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_SalesCustomerLedgerTransactionType" FromRole="SalesCustomerLedger" ToRole="SalesCustomerLedgerTransactionType" />
           <Property Name="intIdAccountReceivableAdjustment" Type="Int32" />
           <NavigationProperty Name="AccountReceivableAdjustment" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_AccountReceivableAdjustments" FromRole="SalesCustomerLedger" ToRole="AccountReceivableAdjustment" />
+          <Property Name="intIdCustomer" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Customer" FromRole="SalesCustomerLedger" ToRole="Customer" />
+          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" FromRole="SalesCustomerLedger" ToRole="Sale" />
         </EntityType>
         <Association Name="FK_SalesCustomerLedger_Collection">
           <End Type="GeneralLedgerModel.Collection" Role="Collection" Multiplicity="0..1" />
@@ -4222,18 +4196,6 @@
             </Principal>
             <Dependent Role="SalesCustomerLedger">
               <PropertyRef Name="intIdCollection" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SalesCustomerLedger_Sales">
-          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
-          <End Type="GeneralLedgerModel.SalesCustomerLedger" Role="SalesCustomerLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sale">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SalesCustomerLedger">
-              <PropertyRef Name="intIdSales" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5003,6 +4965,116 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SalesCustomerLedger_Customer">
+          <End Type="GeneralLedgerModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.SalesCustomerLedger" Role="SalesCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesCustomerLedger">
+              <PropertyRef Name="intIdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TRANo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PONo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="intIdCustomer" Type="Int32" />
+          <Property Name="intIdAgent" Type="Int32" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Terms" Type="Int32" />
+          <Property Name="IsFullyPaid" Type="Boolean" />
+          <Property Name="LastPaymentDate" Type="DateTime" Precision="0" />
+          <Property Name="SOPAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="COMMAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CFAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsSalesReturn" Type="Boolean" />
+          <NavigationProperty Name="AccountReceivableAdjustments" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustments_Sales" FromRole="Sale" ToRole="AccountReceivableAdjustment" />
+          <NavigationProperty Name="Agent" Relationship="GeneralLedgerModel.FK_Sales_Agent" FromRole="Sale" ToRole="Agent" />
+          <NavigationProperty Name="Collections" Relationship="GeneralLedgerModel.FK_Collection_Sales" FromRole="Sale" ToRole="Collection" />
+          <NavigationProperty Name="Customer" Relationship="GeneralLedgerModel.FK_Sales_Customer" FromRole="Sale" ToRole="Customer" />
+          <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" FromRole="Sale" ToRole="SalesCustomerLedger" />
+          <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Sales" FromRole="Sale" ToRole="tblGLTranHeader" />
+        </EntityType>
+        <Association Name="FK_AccountReceivableAdjustments_Sales">
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.AccountReceivableAdjustment" Role="AccountReceivableAdjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountReceivableAdjustment">
+              <PropertyRef Name="SalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Agent">
+          <End Type="GeneralLedgerModel.Agent" Role="Agent" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="intIdAgent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collection_Sales">
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="SalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Customer">
+          <End Type="GeneralLedgerModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="intIdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesCustomerLedger_Sales">
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.SalesCustomerLedger" Role="SalesCustomerLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesCustomerLedger">
+              <PropertyRef Name="intIdSales" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblGLTranHeader_Sales">
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.tblGLTranHeader" Role="tblGLTranHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblGLTranHeader">
+              <PropertyRef Name="intIdSales" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5429,26 +5501,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sales">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.Sale">
-              <MappingFragment StoreEntitySet="Sales">
-                <ScalarProperty Name="CFAmount" ColumnName="CFAmount" />
-                <ScalarProperty Name="COMMAmount" ColumnName="COMMAmount" />
-                <ScalarProperty Name="SOPAmount" ColumnName="SOPAmount" />
-                <ScalarProperty Name="LastPaymentDate" ColumnName="LastPaymentDate" />
-                <ScalarProperty Name="IsFullyPaid" ColumnName="IsFullyPaid" />
-                <ScalarProperty Name="Terms" ColumnName="Terms" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TRANo" ColumnName="TRANo" />
-                <ScalarProperty Name="PONo" ColumnName="PONo" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="intIdCustomer" ColumnName="intIdCustomer" />
-                <ScalarProperty Name="intIdAgent" ColumnName="intIdAgent" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Suppliers">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Supplier">
               <MappingFragment StoreEntitySet="Suppliers">
@@ -5687,6 +5739,7 @@
           <EntitySetMapping Name="SalesCustomerLedgers">
             <EntityTypeMapping TypeName="GeneralLedgerModel.SalesCustomerLedger">
               <MappingFragment StoreEntitySet="SalesCustomerLedger">
+                <ScalarProperty Name="intIdCustomer" ColumnName="intIdCustomer" />
                 <ScalarProperty Name="intIdAccountReceivableAdjustment" ColumnName="intIdAccountReceivableAdjustment" />
                 <ScalarProperty Name="DateInserted" ColumnName="DateInserted" />
                 <ScalarProperty Name="intIdCollection" ColumnName="intIdCollection" />
@@ -6530,6 +6583,27 @@
               <MappingFragment StoreEntitySet="PurchaseSupplierLedgerTransactionType">
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Sale">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="IsSalesReturn" ColumnName="IsSalesReturn" />
+                <ScalarProperty Name="CFAmount" ColumnName="CFAmount" />
+                <ScalarProperty Name="COMMAmount" ColumnName="COMMAmount" />
+                <ScalarProperty Name="SOPAmount" ColumnName="SOPAmount" />
+                <ScalarProperty Name="LastPaymentDate" ColumnName="LastPaymentDate" />
+                <ScalarProperty Name="IsFullyPaid" ColumnName="IsFullyPaid" />
+                <ScalarProperty Name="Terms" ColumnName="Terms" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="intIdAgent" ColumnName="intIdAgent" />
+                <ScalarProperty Name="intIdCustomer" ColumnName="intIdCustomer" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="PONo" ColumnName="PONo" />
+                <ScalarProperty Name="TRANo" ColumnName="TRANo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

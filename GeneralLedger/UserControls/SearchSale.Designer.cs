@@ -48,6 +48,9 @@
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SOPAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CFAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.COMMAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchSale)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -135,7 +138,10 @@
             this.Agent,
             this.Description,
             this.GLTranHeaderID,
-            this.UseDefaultEntry});
+            this.UseDefaultEntry,
+            this.SOPAmount,
+            this.CFAmount,
+            this.COMMAmount});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -178,7 +184,7 @@
             this.ID.ReadOnly = true;
             this.ID.Width = 62;
             // 
-            // TRANo
+            // TransactionNo
             // 
             this.TransactionNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.TransactionNo.HeaderText = "TransactionNo";
@@ -221,7 +227,7 @@
             this.CustomerId.ReadOnly = true;
             this.CustomerId.Width = 125;
             // 
-            // customerName
+            // Customer
             // 
             this.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Customer.HeaderText = "Customer";
@@ -248,7 +254,7 @@
             this.AgentId.ReadOnly = true;
             this.AgentId.Width = 82;
             // 
-            // agentName
+            // Agent
             // 
             this.Agent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Agent.HeaderText = "Agent";
@@ -283,6 +289,30 @@
             this.UseDefaultEntry.Name = "UseDefaultEntry";
             this.UseDefaultEntry.ReadOnly = true;
             this.UseDefaultEntry.Width = 125;
+            // 
+            // SOPAmount
+            // 
+            this.SOPAmount.HeaderText = "SOPAmount";
+            this.SOPAmount.MinimumWidth = 6;
+            this.SOPAmount.Name = "SOPAmount";
+            this.SOPAmount.ReadOnly = true;
+            this.SOPAmount.Width = 125;
+            // 
+            // CFAmount
+            // 
+            this.CFAmount.HeaderText = "CFAmount";
+            this.CFAmount.MinimumWidth = 6;
+            this.CFAmount.Name = "CFAmount";
+            this.CFAmount.ReadOnly = true;
+            this.CFAmount.Width = 125;
+            // 
+            // COMMAmount
+            // 
+            this.COMMAmount.HeaderText = "COMMAmount";
+            this.COMMAmount.MinimumWidth = 6;
+            this.COMMAmount.Name = "COMMAmount";
+            this.COMMAmount.ReadOnly = true;
+            this.COMMAmount.Width = 125;
             // 
             // SearchSale
             // 
@@ -324,5 +354,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLTranHeaderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn UseDefaultEntry;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SOPAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CFAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn COMMAmount;
     }
 }

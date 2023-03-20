@@ -23,10 +23,12 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intIdCollection { get; set; }
         public Nullable<System.DateTime> DateInserted { get; set; }
         public Nullable<int> intIdAccountReceivableAdjustment { get; set; }
+        public Nullable<int> intIdCustomer { get; set; }
     
         public virtual Collection Collection { get; set; }
-        public virtual Sale Sale { get; set; }
         public virtual SalesCustomerLedgerTransactionType SalesCustomerLedgerTransactionType { get; set; }
         public virtual AccountReceivableAdjustment AccountReceivableAdjustment { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual Sale Sale { get; set; }
     }
 }

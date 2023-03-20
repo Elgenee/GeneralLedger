@@ -38,7 +38,6 @@
         <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderProductTransactionType" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderReceiving" Width="1.5" PointX="8.25" PointY="20.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseOrderReceivingDetail" Width="1.5" PointX="10.5" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GeneralLedgerModel.Sale" Width="1.5" PointX="8.25" PointY="25.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Supplier" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.sysdiagram" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblGLTranDetail" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
@@ -51,7 +50,6 @@
         <EntityTypeShape EntityType="GeneralLedgerModel.User" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Bank_Currency" ManuallyRouted="false" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Suppliers_Bank" ManuallyRouted="false" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_Sales_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblCustomer_tblPriceType" ManuallyRouted="false" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblProduct_tblPriceType" ManuallyRouted="false" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblProduct_tblProductBrand" ManuallyRouted="false" />
@@ -87,17 +85,14 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOA" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblJournalEntry" Width="1.5" PointX="13.5" PointY="18.25" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Agent" Width="1.5" PointX="16.375" PointY="4.875" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_Sales_Agent" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblGLBookType" Width="1.5" PointX="13.5" PointY="21.625" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranDetail_tblMasCOASub" />
         <EntityTypeShape EntityType="GeneralLedgerModel.tblGLTranHeader" Width="1.5" PointX="15.75" PointY="21.375" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Sales" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_tblGLBookType" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranDetail_tblGLTranHeader" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_tblJournalEntry" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Collection" Width="1.5" PointX="16.5" PointY="8" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Collection_Bank" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_Collection_Sales" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Collection" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblMasCOASub_Bank" />
         <EntityTypeShape EntityType="GeneralLedgerModel.SalesCustomerLedgerTransactionType" Width="1.5" PointX="16.5" PointY="18.5" />
@@ -111,7 +106,6 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_AccountReceivableAdjustments_Collection" />
         <EntityTypeShape EntityType="GeneralLedgerModel.SalesCustomerLedger" Width="1.5" PointX="18.75" PointY="17" />
         <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_Collection" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" />
         <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_SalesCustomerLedgerTransactionType" />
         <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_AccountReceivableAdjustments" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" />
@@ -134,6 +128,14 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Payment1" />
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Purchase" />
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType1" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_Customer" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.Sale" Width="1.5" PointX="21.625" PointY="12.125" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_AccountReceivableAdjustments_Sales" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Sales_Agent" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Collection_Sales" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Sales_Customer" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Sales" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

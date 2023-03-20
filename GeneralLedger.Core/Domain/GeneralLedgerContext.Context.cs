@@ -60,7 +60,6 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<PurchaseOrderProductTransactionType> PurchaseOrderProductTransactionTypes { get; set; }
         public virtual DbSet<PurchaseOrderReceiving> PurchaseOrderReceivings { get; set; }
         public virtual DbSet<PurchaseOrderReceivingDetail> PurchaseOrderReceivingDetails { get; set; }
-        public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblGLTranDetail> tblGLTranDetails { get; set; }
@@ -88,6 +87,7 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<AccountsPayableAdjustmentsType> AccountsPayableAdjustmentsTypes { get; set; }
         public virtual DbSet<PurchaseSupplierLedger> PurchaseSupplierLedgers { get; set; }
         public virtual DbSet<PurchaseSupplierLedgerTransactionType> PurchaseSupplierLedgerTransactionTypes { get; set; }
+        public virtual DbSet<Sale> Sales { get; set; }
     
         public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
         {

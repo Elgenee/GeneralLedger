@@ -36,7 +36,6 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intIdAccountReceivableAdjustment { get; set; }
         public Nullable<int> intIdPayment { get; set; }
     
-        public virtual Sale Sale { get; set; }
         public virtual tblGLBookType tblGLBookType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranDetail> tblGLTranDetails { get; set; }
@@ -47,5 +46,6 @@ namespace GeneralLedger.Core.Domain
         public virtual tblGLTranHeader tblGLTranHeader2 { get; set; }
         public virtual AccountReceivableAdjustment AccountReceivableAdjustment { get; set; }
         public virtual Payment Payment { get; set; }
+        public virtual Sale Sale { get; set; }
     }
 }

@@ -21,10 +21,12 @@ namespace GeneralLedger.Persistence.Services
                 unitOfWork.AccountsReceivableAdjustments.Add(accountReceivableAdjustment);
 
                 var collection = unitOfWork.Collection.Get((int)accountReceivableAdjustment.CollectionId);
+                var sales = unitOfWork.Sale.Get((int)accountReceivableAdjustment.SalesId);
 
                 var salesCustomerLedger = new SalesCustomerLedger
                 {
                     intIdSales = accountReceivableAdjustment.SalesId,
+                    intIdCustomer = sales.intIdCustomer,
                     //intIdCollection = accountReceivableAdjustment.Id,
                     intIdAccountReceivableAdjustment = accountReceivableAdjustment.Id,
                     intIdSalesCustomerLedgerTransctionType = 3,
@@ -69,6 +71,7 @@ namespace GeneralLedger.Persistence.Services
                         curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
                         curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                         intIDGLBookType = 8,
+                        strDescription = accountReceivableAdjustment.Descrpition,
                         datBatchDate = accountReceivableAdjustment.TransactionDate,
                         datInsertedDate = DateTime.Now,
                         //tblGLTranDetails = gLTranDetail,
@@ -76,7 +79,7 @@ namespace GeneralLedger.Persistence.Services
                         blnUseDefaultEntry = UseDefaultEntry
                     };
 
-                    foreach (var item in tblGLTranDetail)
+                    foreach (var item in gLTranDetail)
                     {
                         gLTranHeader.tblGLTranDetails.Add(new tblGLTranDetail
                         {

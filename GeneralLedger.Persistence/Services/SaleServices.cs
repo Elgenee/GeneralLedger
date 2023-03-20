@@ -19,6 +19,7 @@ namespace GeneralLedger.Persistence.Services
 
                 var salesCustomerLedger = new SalesCustomerLedger { 
                  intIdSales = sale.Id,
+                 intIdCustomer = sale.intIdCustomer,
                  intIdSalesCustomerLedgerTransctionType = 1,
                  TotalAmount = sale.Total,
                  TransactionDate = sale.TransactionDate,
@@ -208,6 +209,7 @@ namespace GeneralLedger.Persistence.Services
                 salesLedger.TotalAmount = sale.Total;
                 salesLedger.TransactionDate = sale.TransactionDate;
                 salesLedger.TransactionNo = sale.TRANo;
+                salesLedger.intIdCustomer = sale.intIdCustomer;
                 //resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList().Clear();
                 unitOfWork.GLTranDetail.RemoveRange(resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList());
 

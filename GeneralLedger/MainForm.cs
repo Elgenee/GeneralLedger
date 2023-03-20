@@ -41,12 +41,21 @@ namespace GeneralLedger
                     //this.btnLock.Visible = true;
                 }
 
-                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "AR ADJUSTMENTS"))
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "AR ADJUSTMENTS RETURN CHECK"))
                 {
-                    this.btnARAdjustment.Enabled = true;
-                    this.btnARAdjustment.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnReturnCheck.Enabled = true;
+                    this.btnReturnCheck.Style = MetroFramework.MetroColorStyle.Blue;
                     //this.btnUnlock.Visible = true;
                 }
+
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "AR ADJUSTMENTS RETURN SALES"))
+                {
+                    this.btnReturnSales.Enabled = true;
+                    this.btnReturnSales.Style = MetroFramework.MetroColorStyle.Blue;
+                    //this.btnUnlock.Visible = true;
+                }
+
 
                 if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "BANK ACCOUNTS"))
                 {
@@ -209,8 +218,10 @@ namespace GeneralLedger
 
                     this.btnAgents.Enabled = true;
                     this.btnAgents.Style = MetroFramework.MetroColorStyle.Blue;
-                    this.btnARAdjustment.Enabled = true;
-                    this.btnARAdjustment.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnReturnCheck.Enabled = true;
+                    this.btnReturnCheck.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnReturnSales.Enabled = true;
+                    this.btnReturnSales.Style = MetroFramework.MetroColorStyle.Blue;
                     this.btnBankAccounts.Enabled = true;
                     this.btnBankAccounts.Style = MetroFramework.MetroColorStyle.Blue;
                     this.btnChartOfAccounts.Enabled = true;
@@ -859,6 +870,29 @@ namespace GeneralLedger
 
         private void metroTile2_Click_1(object sender, EventArgs e)
         {
+
+            MetroTabPage metroTabPage = new MetroTabPage();
+            metroTabPage.Text = "Return Sales";
+            metroTabPage.AutoScroll = true;
+            metroTabPage.HorizontalScrollbar = true;
+            metroTabPage.HorizontalScrollbarBarColor = true;
+            metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+            metroTabPage.HorizontalScrollbarSize = 15;
+            metroTabPage.UseStyleColors = true;
+            metroTabPage.VerticalScrollbar = true;
+            metroTabPage.VerticalScrollbarBarColor = true;
+            metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+            metroTabPage.VerticalScrollbarSize = 15;
+            //metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+            //metroTabPage.Location = new System.Drawing.Point(15, 38);
+            //metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            frmAccountReceivableAdjustmentsReturnSales frmAccountReceivableAdjustmentsReturnSales = new frmAccountReceivableAdjustmentsReturnSales();
+            frmAccountReceivableAdjustmentsReturnSales.Parent = metroTabPage;
+            frmAccountReceivableAdjustmentsReturnSales.MetroTabPage = metroTabPage;
+            frmAccountReceivableAdjustmentsReturnSales.MetroTabControl = this.metroTabControlMain;
+            metroTabPage.Controls.Add(frmAccountReceivableAdjustmentsReturnSales);
+            metroTabControlMain.TabPages.Add(metroTabPage);
+            metroTabControlMain.SelectedTab = metroTabPage;
 
         }
     }

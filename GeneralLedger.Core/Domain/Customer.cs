@@ -17,6 +17,7 @@ namespace GeneralLedger.Core.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
+            this.SalesCustomerLedgers = new HashSet<SalesCustomerLedger>();
             this.Sales = new HashSet<Sale>();
         }
     
@@ -31,8 +32,10 @@ namespace GeneralLedger.Core.Domain
         public string strAddress { get; set; }
         public string strContact { get; set; }
     
+        public virtual PriceType PriceType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }
-        public virtual PriceType PriceType { get; set; }
     }
 }

@@ -18,8 +18,10 @@ namespace GeneralLedger.Persistence.Services
             {
                 unitOfWork.Collection.Add(collection);
 
+                var sale = unitOfWork.Sale.Get((int)collection.SalesId);
                 var salesCustomerLedger = new SalesCustomerLedger
                 {
+                    intIdCustomer = sale.intIdCustomer,
                     intIdSales = collection.SalesId,
                     intIdCollection = collection.Id,
                     intIdSalesCustomerLedgerTransctionType = 2,
@@ -40,8 +42,6 @@ namespace GeneralLedger.Persistence.Services
                 var adjSum = unitOfWork.SalesCustomerLedger
                 .Find(s => s.intIdSales == salesCustomerLedger.intIdSales &&
                     s.intIdSalesCustomerLedgerTransctionType == 3 && s.AccountReceivableAdjustment.AccountsReceivableAdjustmentsTypeId == 1).Sum(s => s.TotalAmount);
-
-                var sale = unitOfWork.Sale.Get((int)salesCustomerLedger.intIdSales);
 
                 if (((sale.Total + adjSum) - collSum) <= 0)
                 {

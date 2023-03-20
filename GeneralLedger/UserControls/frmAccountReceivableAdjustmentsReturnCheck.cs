@@ -92,7 +92,9 @@ namespace GeneralLedger.UserControls
             this.cbBank.ValueMember = "ID";
             this.cbBank.DisplayMember = "Name";
 
-            var accountReceivableAdjustmentTpesList = AccountsReceivableAdjustmentsTypeServices.GetAll();
+            var accountReceivableAdjustmentTpesList = AccountsReceivableAdjustmentsTypeServices.GetAll()
+                .Where(a => a.Name.ToUpper().Equals("RETURN CHECK"))
+                .ToList();
             this.cbAdjustmentType.DataSource = accountReceivableAdjustmentTpesList;
             this.cbAdjustmentType.ValueMember = "ID";
             this.cbAdjustmentType.DisplayMember = "Name";

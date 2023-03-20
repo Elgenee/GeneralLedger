@@ -325,11 +325,13 @@ namespace GeneralLedger.UserControls
                     this.txtAgentID.Text = sje.Sale.Agent.Id.ToString();
                     this.txtAgent.Text = sje.Sale.Agent.Name.ToString();
                     this.txtTerms.Text = sje.Sale.Terms.ToString();
-
                     this.GLTranHeader = sje.Sale.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                     this.chkUseDefaultEntry.Checked = (bool)sje.Sale.tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
                     this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
-       
+                    this.txtSOPAmount.Text = sje.Sale.SOPAmount.ToString();
+                    this.txtCFAmount.Text = sje.Sale.CFAmount.ToString();
+                    this.txtCOMMAmount.Text = sje.Sale.COMMAmount.ToString();
+
                     if (GLTranDetail.Count > 0)
                     {
 
