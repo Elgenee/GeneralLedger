@@ -211,6 +211,13 @@ namespace GeneralLedger
                     // this.btnPostNew.Visible = true;
                 }
 
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "AR ADJUSTMENTS DMCM"))
+                {
+                    this.ARDMCM.Enabled = true;
+                    this.ARDMCM.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
             }
             else
             {
@@ -264,6 +271,8 @@ namespace GeneralLedger
                     this.btnUser.Style = MetroFramework.MetroColorStyle.Blue;
                     this.btnTrialBalance.Enabled = true;
                     this.btnTrialBalance.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.ARDMCM.Enabled = true;
+                    this.ARDMCM.Style = MetroFramework.MetroColorStyle.Blue;
             }
         }
 
@@ -891,6 +900,34 @@ namespace GeneralLedger
             frmAccountReceivableAdjustmentsReturnSales.MetroTabPage = metroTabPage;
             frmAccountReceivableAdjustmentsReturnSales.MetroTabControl = this.metroTabControlMain;
             metroTabPage.Controls.Add(frmAccountReceivableAdjustmentsReturnSales);
+            metroTabControlMain.TabPages.Add(metroTabPage);
+            metroTabControlMain.SelectedTab = metroTabPage;
+
+        }
+
+        private void ARDMCM_Click(object sender, EventArgs e)
+        {
+
+            MetroTabPage metroTabPage = new MetroTabPage();
+            metroTabPage.Text = "AR DM/CM";
+            metroTabPage.AutoScroll = true;
+            metroTabPage.HorizontalScrollbar = true;
+            metroTabPage.HorizontalScrollbarBarColor = true;
+            metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+            metroTabPage.HorizontalScrollbarSize = 15;
+            metroTabPage.UseStyleColors = true;
+            metroTabPage.VerticalScrollbar = true;
+            metroTabPage.VerticalScrollbarBarColor = true;
+            metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+            metroTabPage.VerticalScrollbarSize = 15;
+            //metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+            //metroTabPage.Location = new System.Drawing.Point(15, 38);
+            //metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            frmAccountReceivableAdjustmentsDebitCreditMemo frmAccountReceivableAdjustmentsDebitCreditMemo = new frmAccountReceivableAdjustmentsDebitCreditMemo();
+            frmAccountReceivableAdjustmentsDebitCreditMemo.Parent = metroTabPage;
+            frmAccountReceivableAdjustmentsDebitCreditMemo.MetroTabPage = metroTabPage;
+            frmAccountReceivableAdjustmentsDebitCreditMemo.MetroTabControl = this.metroTabControlMain;
+            metroTabPage.Controls.Add(frmAccountReceivableAdjustmentsDebitCreditMemo);
             metroTabControlMain.TabPages.Add(metroTabPage);
             metroTabControlMain.SelectedTab = metroTabPage;
 

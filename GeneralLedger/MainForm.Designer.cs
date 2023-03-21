@@ -61,6 +61,7 @@
             this.btnChartOfAccounts = new MetroFramework.Controls.MetroTile();
             this.btnJournalEntry = new MetroFramework.Controls.MetroTile();
             this.LoginUser = new MetroFramework.Controls.MetroLabel();
+            this.ARDMCM = new MetroFramework.Controls.MetroTile();
             this.metroTabControlMain.SuspendLayout();
             this.metroTabPageHome.SuspendLayout();
             this.SuspendLayout();
@@ -85,6 +86,7 @@
             // metroTabPageHome
             // 
             this.metroTabPageHome.AutoScroll = true;
+            this.metroTabPageHome.Controls.Add(this.ARDMCM);
             this.metroTabPageHome.Controls.Add(this.btnReturnSales);
             this.metroTabPageHome.Controls.Add(this.btnReturnCheck);
             this.metroTabPageHome.Controls.Add(this.btnPayment);
@@ -630,6 +632,23 @@
             this.LoginUser.TabIndex = 6;
             this.LoginUser.Text = "LoginUser";
             // 
+            // ARDMCM
+            // 
+            this.ARDMCM.ActiveControl = null;
+            this.ARDMCM.Enabled = false;
+            this.ARDMCM.Location = new System.Drawing.Point(535, 640);
+            this.ARDMCM.Margin = new System.Windows.Forms.Padding(4);
+            this.ARDMCM.Name = "ARDMCM";
+            this.ARDMCM.Size = new System.Drawing.Size(248, 86);
+            this.ARDMCM.Style = MetroFramework.MetroColorStyle.Silver;
+            this.ARDMCM.TabIndex = 33;
+            this.ARDMCM.Text = "AR DM/CM";
+            this.ARDMCM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ARDMCM.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.ARDMCM.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.ARDMCM.UseSelectable = true;
+            this.ARDMCM.Click += new System.EventHandler(this.ARDMCM_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -688,5 +707,6 @@
         private MetroFramework.Controls.MetroTile btnReturnCheck;
         private MetroFramework.Controls.MetroLabel LoginUser;
         private MetroFramework.Controls.MetroTile btnReturnSales;
+        private MetroFramework.Controls.MetroTile ARDMCM;
     }
 }

@@ -136,6 +136,7 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_Sales_Customer" />
         <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Sales" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_AccountReceivableAdjustments_Customer" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

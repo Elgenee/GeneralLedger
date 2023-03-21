@@ -29,6 +29,7 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> SalesId { get; set; }
         public string Descrpition { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
+        public Nullable<int> CustomerId { get; set; }
     
         public virtual AccountsReceivableAdjustmentsType AccountsReceivableAdjustmentsType { get; set; }
         public virtual Collection Collection { get; set; }
@@ -37,5 +38,6 @@ namespace GeneralLedger.Core.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
         public virtual Sale Sale { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

@@ -30,6 +30,7 @@
           <Property Name="SalesId" Type="int" />
           <Property Name="Descrpition" Type="nvarchar(max)" />
           <Property Name="TotalAmount" Type="money" />
+          <Property Name="CustomerId" Type="int" />
         </EntityType>
         <EntityType Name="AccountsPayableAdjustmentsType">
           <Key>
@@ -772,6 +773,18 @@
             </Principal>
             <Dependent Role="AccountReceivableAdjustments">
               <PropertyRef Name="CollectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountReceivableAdjustments_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="AccountReceivableAdjustments" Type="Self.AccountReceivableAdjustments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountReceivableAdjustments">
+              <PropertyRef Name="CustomerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1961,6 +1974,10 @@
             <End Role="Collection" EntitySet="Collection" />
             <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
           </AssociationSet>
+          <AssociationSet Name="FK_AccountReceivableAdjustments_Customer" Association="Self.FK_AccountReceivableAdjustments_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
+          </AssociationSet>
           <AssociationSet Name="FK_AccountReceivableAdjustments_Sales" Association="Self.FK_AccountReceivableAdjustments_Sales">
             <End Role="Sales" EntitySet="Sales" />
             <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
@@ -2278,6 +2295,7 @@
           <NavigationProperty Name="PriceType" Relationship="Self.FK_tblCustomer_tblPriceType" FromRole="Customer" ToRole="PriceType" />
           <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Customer" FromRole="Customer" ToRole="SalesCustomerLedger" />
           <NavigationProperty Name="Sales" Relationship="GeneralLedgerModel.FK_Sales_Customer" FromRole="Customer" ToRole="Sale" />
+          <NavigationProperty Name="AccountReceivableAdjustments" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustments_Customer" FromRole="Customer" ToRole="AccountReceivableAdjustment" />
         </EntityType>
         <EntityType Name="InventoryLog">
           <Key>
@@ -3874,6 +3892,10 @@
             <End Role="Sale" EntitySet="Sales" />
             <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
           </AssociationSet>
+          <AssociationSet Name="FK_AccountReceivableAdjustments_Customer" Association="GeneralLedgerModel.FK_AccountReceivableAdjustments_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="AccountReceivableAdjustment" EntitySet="AccountReceivableAdjustments" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -4134,6 +4156,8 @@
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="tblGLTranHeader" />
           <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustments_Sales" FromRole="AccountReceivableAdjustment" ToRole="Sale" />
+          <Property Name="CustomerId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustments_Customer" FromRole="AccountReceivableAdjustment" ToRole="Customer" />
         </EntityType>
         <EntityType Name="AccountsReceivableAdjustmentsType">
           <Key>
@@ -5075,6 +5099,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AccountReceivableAdjustments_Customer">
+          <End Type="GeneralLedgerModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.AccountReceivableAdjustment" Role="AccountReceivableAdjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountReceivableAdjustment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5717,6 +5753,7 @@
           <EntitySetMapping Name="AccountReceivableAdjustments">
             <EntityTypeMapping TypeName="GeneralLedgerModel.AccountReceivableAdjustment">
               <MappingFragment StoreEntitySet="AccountReceivableAdjustments">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="Descrpition" ColumnName="Descrpition" />
                 <ScalarProperty Name="SalesId" ColumnName="SalesId" />

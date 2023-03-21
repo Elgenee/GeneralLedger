@@ -1,6 +1,6 @@
 ﻿namespace GeneralLedger.UserControls
 {
-    partial class SearchAdjustmentAccountReceivableAdjustments
+    partial class SearchAdjustmentAccountReceivableAdjustmentsReturnSales
     {
         /// <summary>
         /// Required designer variable.
@@ -41,16 +41,10 @@
             this.AccountsReceivableAdjustmentTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsReceivableAdjustmentTransactionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CollectionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SalesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SalesTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalesPoNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CollectionTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BankAccountsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BankAccounts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CheckDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CollectionTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -135,16 +129,10 @@
             this.AccountsReceivableAdjustmentTransactionNo,
             this.AccountsReceivableAdjustmentTransactionDate,
             this.TotalAmount,
-            this.CollectionId,
             this.SalesId,
             this.SalesTransactionNo,
+            this.SalesPoNo,
             this.Customer,
-            this.CollectionTransactionNo,
-            this.IsCash,
-            this.BankAccountsId,
-            this.BankAccounts,
-            this.CheckDetails,
-            this.CollectionTotalAmount,
             this.GLTranHeaderID,
             this.Description,
             this.UseDefaultEntry});
@@ -193,15 +181,15 @@
             // AccountsReceivableAdjustmentsTypeId
             // 
             this.AccountsReceivableAdjustmentsTypeId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.AccountsReceivableAdjustmentsTypeId.HeaderText = "AccountsReceivableAdjustmentsTypeId";
+            this.AccountsReceivableAdjustmentsTypeId.HeaderText = "AdjustmentsTypeId";
             this.AccountsReceivableAdjustmentsTypeId.MinimumWidth = 6;
             this.AccountsReceivableAdjustmentsTypeId.Name = "AccountsReceivableAdjustmentsTypeId";
             this.AccountsReceivableAdjustmentsTypeId.ReadOnly = true;
-            this.AccountsReceivableAdjustmentsTypeId.Width = 277;
+            this.AccountsReceivableAdjustmentsTypeId.Width = 152;
             // 
             // AccountsReceivableAdjustmentType
             // 
-            this.AccountsReceivableAdjustmentType.HeaderText = "AccountsReceivableAdjustmentType";
+            this.AccountsReceivableAdjustmentType.HeaderText = "AdjustmentType";
             this.AccountsReceivableAdjustmentType.MinimumWidth = 6;
             this.AccountsReceivableAdjustmentType.Name = "AccountsReceivableAdjustmentType";
             this.AccountsReceivableAdjustmentType.ReadOnly = true;
@@ -209,7 +197,7 @@
             // 
             // AccountsReceivableAdjustmentTransactionNo
             // 
-            this.AccountsReceivableAdjustmentTransactionNo.HeaderText = "AccountsReceivableAdjustmentTransactionNo";
+            this.AccountsReceivableAdjustmentTransactionNo.HeaderText = "AdjustmentTransactionNo";
             this.AccountsReceivableAdjustmentTransactionNo.MinimumWidth = 6;
             this.AccountsReceivableAdjustmentTransactionNo.Name = "AccountsReceivableAdjustmentTransactionNo";
             this.AccountsReceivableAdjustmentTransactionNo.ReadOnly = true;
@@ -218,11 +206,11 @@
             // AccountsReceivableAdjustmentTransactionDate
             // 
             this.AccountsReceivableAdjustmentTransactionDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.AccountsReceivableAdjustmentTransactionDate.HeaderText = "AccountsReceivableAdjustmentTransactionDate";
+            this.AccountsReceivableAdjustmentTransactionDate.HeaderText = "AdjustmentTransactionDate";
             this.AccountsReceivableAdjustmentTransactionDate.MinimumWidth = 6;
             this.AccountsReceivableAdjustmentTransactionDate.Name = "AccountsReceivableAdjustmentTransactionDate";
             this.AccountsReceivableAdjustmentTransactionDate.ReadOnly = true;
-            this.AccountsReceivableAdjustmentTransactionDate.Width = 327;
+            this.AccountsReceivableAdjustmentTransactionDate.Width = 202;
             // 
             // TotalAmount
             // 
@@ -231,14 +219,6 @@
             this.TotalAmount.Name = "TotalAmount";
             this.TotalAmount.ReadOnly = true;
             this.TotalAmount.Width = 125;
-            // 
-            // CollectionId
-            // 
-            this.CollectionId.HeaderText = "CollectionId";
-            this.CollectionId.MinimumWidth = 6;
-            this.CollectionId.Name = "CollectionId";
-            this.CollectionId.ReadOnly = true;
-            this.CollectionId.Width = 125;
             // 
             // SalesId
             // 
@@ -257,6 +237,14 @@
             this.SalesTransactionNo.ReadOnly = true;
             this.SalesTransactionNo.Width = 125;
             // 
+            // SalesPoNo
+            // 
+            this.SalesPoNo.HeaderText = "SalesPoNo";
+            this.SalesPoNo.MinimumWidth = 6;
+            this.SalesPoNo.Name = "SalesPoNo";
+            this.SalesPoNo.ReadOnly = true;
+            this.SalesPoNo.Width = 125;
+            // 
             // Customer
             // 
             this.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -265,55 +253,6 @@
             this.Customer.Name = "Customer";
             this.Customer.ReadOnly = true;
             this.Customer.Width = 93;
-            // 
-            // CollectionTransactionNo
-            // 
-            this.CollectionTransactionNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.CollectionTransactionNo.HeaderText = "CollectionTransactionNo";
-            this.CollectionTransactionNo.MinimumWidth = 6;
-            this.CollectionTransactionNo.Name = "CollectionTransactionNo";
-            this.CollectionTransactionNo.ReadOnly = true;
-            this.CollectionTransactionNo.Width = 184;
-            // 
-            // IsCash
-            // 
-            this.IsCash.HeaderText = "IsCash";
-            this.IsCash.MinimumWidth = 6;
-            this.IsCash.Name = "IsCash";
-            this.IsCash.ReadOnly = true;
-            this.IsCash.Width = 125;
-            // 
-            // BankAccountsId
-            // 
-            this.BankAccountsId.HeaderText = "BankAccountsId";
-            this.BankAccountsId.MinimumWidth = 6;
-            this.BankAccountsId.Name = "BankAccountsId";
-            this.BankAccountsId.ReadOnly = true;
-            this.BankAccountsId.Width = 125;
-            // 
-            // BankAccounts
-            // 
-            this.BankAccounts.HeaderText = "BankAccounts";
-            this.BankAccounts.MinimumWidth = 6;
-            this.BankAccounts.Name = "BankAccounts";
-            this.BankAccounts.ReadOnly = true;
-            this.BankAccounts.Width = 125;
-            // 
-            // CheckDetails
-            // 
-            this.CheckDetails.HeaderText = "CheckDetails";
-            this.CheckDetails.MinimumWidth = 6;
-            this.CheckDetails.Name = "CheckDetails";
-            this.CheckDetails.ReadOnly = true;
-            this.CheckDetails.Width = 125;
-            // 
-            // CollectionTotalAmount
-            // 
-            this.CollectionTotalAmount.HeaderText = "CollectionTotalAmount";
-            this.CollectionTotalAmount.MinimumWidth = 6;
-            this.CollectionTotalAmount.Name = "CollectionTotalAmount";
-            this.CollectionTotalAmount.ReadOnly = true;
-            this.CollectionTotalAmount.Width = 125;
             // 
             // GLTranHeaderID
             // 
@@ -340,7 +279,7 @@
             this.UseDefaultEntry.ReadOnly = true;
             this.UseDefaultEntry.Width = 125;
             // 
-            // SearchAdjustmentAccountReceivableAdjustments
+            // SearchAdjustmentAccountReceivableAdjustmentsReturnSales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -350,8 +289,8 @@
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroPanel1);
-            this.Name = "SearchAdjustmentAccountReceivableAdjustments";
-            this.Text = "Search Accounts Receivable Adjustments";
+            this.Name = "SearchAdjustmentAccountReceivableAdjustmentsReturnSales";
+            this.Text = "Search Accounts Receivable Adjustments - Return Sales";
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchAccountReceivableAdjustments)).EndInit();
             this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -373,16 +312,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsReceivableAdjustmentTransactionNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsReceivableAdjustmentTransactionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CollectionId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SalesId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SalesTransactionNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SalesPoNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CollectionTransactionNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsCash;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BankAccountsId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BankAccounts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CheckDetails;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CollectionTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLTranHeaderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn UseDefaultEntry;

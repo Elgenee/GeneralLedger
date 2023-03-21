@@ -13,13 +13,13 @@ using GeneralLedger.Core.Domain;
 
 namespace GeneralLedger.UserControls
 {
-    public partial class SearchAdjustmentAccountReceivableAdjustments : MetroForm
+    public partial class SearchAdjustmentAccountReceivableAdjustmentsReturnCheck : MetroForm
     {
 
         public AccountReceivableAdjustment AccountReceivableAdjustment { get; set; }
         public AccountReceivableAdjustmentsServices AccountReceivableAdjustmentsServices { get; set; }
         public int Index { get; set; }
-        public SearchAdjustmentAccountReceivableAdjustments()
+        public SearchAdjustmentAccountReceivableAdjustmentsReturnCheck()
         {
             InitializeComponent();
             AccountReceivableAdjustment = new AccountReceivableAdjustment();
@@ -38,7 +38,7 @@ namespace GeneralLedger.UserControls
         {
             try
             {
-                var adjustmentReceivableResult = AccountReceivableAdjustmentsServices.GetAccountReceivableAdjustmentsWithCollectionSales(this.txtCriteria.Text);
+                var adjustmentReceivableResult = AccountReceivableAdjustmentsServices.GetAccountReceivableAdjustmentsWithCollectionSales(this.txtCriteria.Text, 1);
                 if ((adjustmentReceivableResult != null) && adjustmentReceivableResult.Count > 0)
                 {
                     this.dgSearchAccountReceivableAdjustments.RowCount = adjustmentReceivableResult.Count;

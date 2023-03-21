@@ -155,6 +155,12 @@
     <Compile Include="UserControls\frmAccountReceivableAdjustmentsReturnCheck.Designer.cs">
       <DependentUpon>frmAccountReceivableAdjustmentsReturnCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\frmAccountReceivableAdjustmentsDebitCreditMemo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmAccountReceivableAdjustmentsDebitCreditMemo.Designer.cs">
+      <DependentUpon>frmAccountReceivableAdjustmentsDebitCreditMemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\frmAccountReceivableAdjustmentsReturnSales.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -419,11 +425,23 @@
     <Compile Include="UserControls\SeachJournalEntry.Designer.cs">
       <DependentUpon>SeachJournalEntry.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustments.cs">
+    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsDebitCreditMemo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustments.Designer.cs">
-      <DependentUpon>SearchAdjustmentAccountReceivableAdjustments.cs</DependentUpon>
+    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsDebitCreditMemo.Designer.cs">
+      <DependentUpon>SearchAdjustmentAccountReceivableAdjustmentsDebitCreditMemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsReturnSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsReturnSales.Designer.cs">
+      <DependentUpon>SearchAdjustmentAccountReceivableAdjustmentsReturnSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsReturnCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsReturnCheck.Designer.cs">
+      <DependentUpon>SearchAdjustmentAccountReceivableAdjustmentsReturnCheck.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SearchAgent.cs">
       <SubType>Form</SubType>
@@ -558,6 +576,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmAccountReceivableAdjustmentsReturnCheck.resx">
       <DependentUpon>frmAccountReceivableAdjustmentsReturnCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmAccountReceivableAdjustmentsDebitCreditMemo.resx">
+      <DependentUpon>frmAccountReceivableAdjustmentsDebitCreditMemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmAccountReceivableAdjustmentsReturnSales.resx">
       <DependentUpon>frmAccountReceivableAdjustmentsReturnSales.cs</DependentUpon>
@@ -699,8 +720,14 @@
     <EmbeddedResource Include="UserControls\SeachJournalEntry.resx">
       <DependentUpon>SeachJournalEntry.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\SearchAdjustmentAccountReceivableAdjustments.resx">
-      <DependentUpon>SearchAdjustmentAccountReceivableAdjustments.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsDebitCreditMemo.resx">
+      <DependentUpon>SearchAdjustmentAccountReceivableAdjustmentsDebitCreditMemo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsReturnSales.resx">
+      <DependentUpon>SearchAdjustmentAccountReceivableAdjustmentsReturnSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsReturnCheck.resx">
+      <DependentUpon>SearchAdjustmentAccountReceivableAdjustmentsReturnCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchAgent.resx">
       <DependentUpon>SearchAgent.cs</DependentUpon>
