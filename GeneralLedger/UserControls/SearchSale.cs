@@ -66,6 +66,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchSale.Rows[i].Cells["SOPAmount"].Value = saleResult[i].SOPAmount;
                         this.dgSearchSale.Rows[i].Cells["CFAmount"].Value = saleResult[i].CFAmount;
                         this.dgSearchSale.Rows[i].Cells["COMMAmount"].Value = saleResult[i].COMMAmount;
+                        this.dgSearchSale.Rows[i].Cells["IsFullyPaid"].Value = ReferenceEquals(saleResult[i].IsFullyPaid, DBNull.Value) ? false: saleResult[i].IsFullyPaid;
                     }
 
                     setRowNumber(this.dgSearchSale);
@@ -89,7 +90,7 @@ namespace GeneralLedger.UserControls
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-
+            
             try
             {
                 this.Index = this.dgSearchSale.CurrentCell.RowIndex;
@@ -116,7 +117,7 @@ namespace GeneralLedger.UserControls
                     var SOPAmount = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["SOPAmount"].Value, DBNull.Value) ? 0 : Convert.ToDecimal(this.dgSearchSale.Rows[this.Index].Cells["SOPAmount"].Value);
                     var CFAmount = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["CFAmount"].Value, DBNull.Value) ? 0 : Convert.ToDecimal(this.dgSearchSale.Rows[this.Index].Cells["CFAmount"].Value);
                     var COMMAmount = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["COMMAmount"].Value, DBNull.Value) ? 0 : Convert.ToDecimal(this.dgSearchSale.Rows[this.Index].Cells["COMMAmount"].Value);
-
+                    var IsFullyPaid = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["IsFullyPaid"].Value, DBNull.Value) ? false : Convert.ToBoolean(this.dgSearchSale.Rows[this.Index].Cells["IsFullyPaid"].Value);
                     this.Sale = new Sale { 
                          Id = id,
                          TRANo = TRANo,
@@ -130,6 +131,7 @@ namespace GeneralLedger.UserControls
                          SOPAmount = SOPAmount,
                          CFAmount = CFAmount,
                          COMMAmount = COMMAmount,
+                         IsFullyPaid = IsFullyPaid,
                         Agent = new Agent
                         {
                             Id = AgentId,

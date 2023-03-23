@@ -67,6 +67,7 @@
             this.reportViewer1.Location = new System.Drawing.Point(20, 157);
             this.reportViewer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(1294, 658);
             this.reportViewer1.TabIndex = 4;
             // 
@@ -98,18 +99,18 @@
             this.metroLabel8.Location = new System.Drawing.Point(524, 14);
             this.metroLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel8.Name = "metroLabel8";
-            this.metroLabel8.Size = new System.Drawing.Size(70, 19);
+            this.metroLabel8.Size = new System.Drawing.Size(74, 20);
             this.metroLabel8.TabIndex = 17;
             this.metroLabel8.Text = "Book Type";
             // 
             // cbBookType
             // 
             this.cbBookType.FormattingEnabled = true;
-            this.cbBookType.ItemHeight = 23;
+            this.cbBookType.ItemHeight = 24;
             this.cbBookType.Location = new System.Drawing.Point(672, 15);
             this.cbBookType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbBookType.Name = "cbBookType";
-            this.cbBookType.Size = new System.Drawing.Size(330, 29);
+            this.cbBookType.Size = new System.Drawing.Size(330, 30);
             this.cbBookType.TabIndex = 16;
             this.cbBookType.UseSelectable = true;
             // 
@@ -118,9 +119,9 @@
             this.dtDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtDateTo.Location = new System.Drawing.Point(201, 54);
             this.dtDateTo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dtDateTo.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtDateTo.MinimumSize = new System.Drawing.Size(0, 30);
             this.dtDateTo.Name = "dtDateTo";
-            this.dtDateTo.Size = new System.Drawing.Size(298, 29);
+            this.dtDateTo.Size = new System.Drawing.Size(298, 30);
             this.dtDateTo.TabIndex = 8;
             // 
             // metroLabel2
@@ -129,7 +130,7 @@
             this.metroLabel2.Location = new System.Drawing.Point(24, 54);
             this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(53, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(56, 20);
             this.metroLabel2.TabIndex = 7;
             this.metroLabel2.Text = "Date To";
             // 
@@ -149,9 +150,9 @@
             this.dtDateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtDateFrom.Location = new System.Drawing.Point(201, 15);
             this.dtDateFrom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dtDateFrom.MinimumSize = new System.Drawing.Size(0, 29);
+            this.dtDateFrom.MinimumSize = new System.Drawing.Size(0, 30);
             this.dtDateFrom.Name = "dtDateFrom";
-            this.dtDateFrom.Size = new System.Drawing.Size(298, 29);
+            this.dtDateFrom.Size = new System.Drawing.Size(298, 30);
             this.dtDateFrom.TabIndex = 5;
             // 
             // metroLabel1
@@ -160,7 +161,7 @@
             this.metroLabel1.Location = new System.Drawing.Point(24, 14);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(72, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(74, 20);
             this.metroLabel1.TabIndex = 2;
             this.metroLabel1.Text = "Date From";
             // 

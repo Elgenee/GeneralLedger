@@ -8828,6 +8828,8 @@ namespace GeneralLedger {
             
             private global::System.Data.DataColumn columnstrTransactionCode;
             
+            private global::System.Data.DataColumn columnstrCustomer;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public spRptProoflistDetailDataTable() {
@@ -8927,6 +8929,14 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strCustomerColumn {
+                get {
+                    return this.columnstrCustomer;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -8962,7 +8972,7 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spRptProoflistDetailRow AddspRptProoflistDetailRow(string strTransactionNumber, System.DateTime datBatchDate, string strDescription, string coaName, string coaSubName, decimal curDebit, decimal curCredit, string strTransactionCode) {
+            public spRptProoflistDetailRow AddspRptProoflistDetailRow(string strTransactionNumber, System.DateTime datBatchDate, string strDescription, string coaName, string coaSubName, decimal curDebit, decimal curCredit, string strTransactionCode, string strCustomer) {
                 spRptProoflistDetailRow rowspRptProoflistDetailRow = ((spRptProoflistDetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         strTransactionNumber,
@@ -8972,7 +8982,8 @@ namespace GeneralLedger {
                         coaSubName,
                         curDebit,
                         curCredit,
-                        strTransactionCode};
+                        strTransactionCode,
+                        strCustomer};
                 rowspRptProoflistDetailRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowspRptProoflistDetailRow);
                 return rowspRptProoflistDetailRow;
@@ -9003,6 +9014,7 @@ namespace GeneralLedger {
                 this.columncurDebit = base.Columns["curDebit"];
                 this.columncurCredit = base.Columns["curCredit"];
                 this.columnstrTransactionCode = base.Columns["strTransactionCode"];
+                this.columnstrCustomer = base.Columns["strCustomer"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9024,6 +9036,8 @@ namespace GeneralLedger {
                 base.Columns.Add(this.columncurCredit);
                 this.columnstrTransactionCode = new global::System.Data.DataColumn("strTransactionCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstrTransactionCode);
+                this.columnstrCustomer = new global::System.Data.DataColumn("strCustomer", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrCustomer);
                 this.columnstrTransactionNumber.MaxLength = 500;
                 this.columncoaName.MaxLength = 200;
                 this.columncoaSubName.MaxLength = 50;
@@ -12756,6 +12770,22 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strCustomer {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRptProoflistDetail.strCustomerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strCustomer\' in table \'spRptProoflistDetail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRptProoflistDetail.strCustomerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsstrTransactionNumberNull() {
                 return this.IsNull(this.tablespRptProoflistDetail.strTransactionNumberColumn);
             }
@@ -12848,6 +12878,18 @@ namespace GeneralLedger {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetstrTransactionCodeNull() {
                 this[this.tablespRptProoflistDetail.strTransactionCodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrCustomerNull() {
+                return this.IsNull(this.tablespRptProoflistDetail.strCustomerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrCustomerNull() {
+                this[this.tablespRptProoflistDetail.strCustomerColumn] = global::System.Convert.DBNull;
             }
         }
         

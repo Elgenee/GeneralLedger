@@ -4,6 +4,9 @@
 
     partial class GeneralLedgerDataSet1
     {
+        partial class spRptProoflistDetailDataTable
+        {
+        }
     }
 }
 

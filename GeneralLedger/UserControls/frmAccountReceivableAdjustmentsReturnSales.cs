@@ -73,6 +73,7 @@ namespace GeneralLedger.UserControls
                     this.txtSalePONo.Text = sje.Sale.PONo;
                     this.txtCustomerName.Text = sje.Sale.Customer.strName;
                     this.txtTotal.Text = sje.Sale.Total.ToString();
+                    this.chkIsFullyPaid.Checked = (bool)sje.Sale.IsFullyPaid;
                 }
             }
             catch (Exception ex)
