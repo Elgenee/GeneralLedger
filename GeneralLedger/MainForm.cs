@@ -218,6 +218,28 @@ namespace GeneralLedger
                     // this.btnPostNew.Visible = true;
                 }
 
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "AP ADJUSTMENTS RETURN PAYMENT"))
+                {
+                    this.btnReturnPayment.Enabled = true;
+                    this.btnReturnPayment.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "AP ADJUSTMENTS RETURN PURCHASE"))
+                {
+                    this.btnReturnPurchase.Enabled = true;
+                    this.btnReturnPurchase.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "AP ADJUSTMENTS DMCM"))
+                {
+                    this.btnAPDMCM.Enabled = true;
+                    this.btnAPDMCM.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
             }
             else
             {
@@ -273,8 +295,15 @@ namespace GeneralLedger
                     this.btnTrialBalance.Style = MetroFramework.MetroColorStyle.Blue;
                     this.ARDMCM.Enabled = true;
                     this.ARDMCM.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnReturnPayment.Enabled = true;
+                    this.btnReturnPayment.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnReturnPurchase.Enabled = true;
+                    this.btnReturnPurchase.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnAPDMCM.Enabled = true;
+                    this.btnAPDMCM.Style = MetroFramework.MetroColorStyle.Blue;
+         
+                }
             }
-        }
 
 
 
@@ -928,6 +957,38 @@ namespace GeneralLedger
             frmAccountReceivableAdjustmentsDebitCreditMemo.MetroTabPage = metroTabPage;
             frmAccountReceivableAdjustmentsDebitCreditMemo.MetroTabControl = this.metroTabControlMain;
             metroTabPage.Controls.Add(frmAccountReceivableAdjustmentsDebitCreditMemo);
+            metroTabControlMain.TabPages.Add(metroTabPage);
+            metroTabControlMain.SelectedTab = metroTabPage;
+
+        }
+
+        private void btnReturnPurchase_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReturnPayment_Click(object sender, EventArgs e)
+        {
+            MetroTabPage metroTabPage = new MetroTabPage();
+            metroTabPage.Text = "Return Payment";
+            metroTabPage.AutoScroll = true;
+            metroTabPage.HorizontalScrollbar = true;
+            metroTabPage.HorizontalScrollbarBarColor = true;
+            metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+            metroTabPage.HorizontalScrollbarSize = 15;
+            metroTabPage.UseStyleColors = true;
+            metroTabPage.VerticalScrollbar = true;
+            metroTabPage.VerticalScrollbarBarColor = true;
+            metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+            metroTabPage.VerticalScrollbarSize = 15;
+            //metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+            //metroTabPage.Location = new System.Drawing.Point(15, 38);
+            //metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            frmAccountPayableAdjustmentReturnPayment frmAccountPayableAdjustmentReturnPayment = new frmAccountPayableAdjustmentReturnPayment();
+            frmAccountPayableAdjustmentReturnPayment.Parent = metroTabPage;
+            frmAccountPayableAdjustmentReturnPayment.MetroTabPage = metroTabPage;
+            frmAccountPayableAdjustmentReturnPayment.MetroTabControl = this.metroTabControlMain;
+            metroTabPage.Controls.Add(frmAccountPayableAdjustmentReturnPayment);
             metroTabControlMain.TabPages.Add(metroTabPage);
             metroTabControlMain.SelectedTab = metroTabPage;
 

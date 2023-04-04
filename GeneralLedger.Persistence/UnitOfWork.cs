@@ -50,6 +50,10 @@ namespace GeneralLedger.Persistence
 
         public ItblTBBatchHdrRepository tblTBBatchHdr { get; set; }
 
+        public IAccountsPayableAdjustmentsTypeRepository AccountsPayableAdjustmentsType { get; set; }
+
+        public IAccountsPayableAdjustmentsRepository AccountsPayableAdjustments { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -71,6 +75,8 @@ namespace GeneralLedger.Persistence
             Role = new RoleRepository(_generalLedgerContext);
             UserRole = new UserRoleRepository(_generalLedgerContext);
             tblTBBatchHdr = new tblTBBatchHdrRepository(_generalLedgerContext);
+            AccountsPayableAdjustments = new AccountsPayableAdjustmentsRepository(_generalLedgerContext);
+            AccountsPayableAdjustmentsType = new AccountsPayableAdjustmentsTypeRepository(_generalLedgerContext);
 
         }
         public int Complete()

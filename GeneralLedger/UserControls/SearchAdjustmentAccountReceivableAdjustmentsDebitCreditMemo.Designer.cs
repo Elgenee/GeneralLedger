@@ -34,7 +34,6 @@
             this.btnSelect = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.dgSearchAccountReceivableAdjustments = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsReceivableAdjustmentsTypeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsReceivableAdjustmentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,6 +45,7 @@
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchAccountReceivableAdjustments)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -151,21 +151,6 @@
             this.dgSearchAccountReceivableAdjustments.Size = new System.Drawing.Size(1285, 478);
             this.dgSearchAccountReceivableAdjustments.TabIndex = 66;
             // 
-            // metroPanel1
-            // 
-            this.metroPanel1.Controls.Add(this.dgSearchAccountReceivableAdjustments);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 12;
-            this.metroPanel1.Location = new System.Drawing.Point(44, 141);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1285, 478);
-            this.metroPanel1.TabIndex = 40;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 13;
-            // 
             // ID
             // 
             this.ID.HeaderText = "ID";
@@ -258,6 +243,21 @@
             this.UseDefaultEntry.ReadOnly = true;
             this.UseDefaultEntry.Width = 125;
             // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.dgSearchAccountReceivableAdjustments);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 12;
+            this.metroPanel1.Location = new System.Drawing.Point(44, 141);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1285, 478);
+            this.metroPanel1.TabIndex = 40;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 13;
+            // 
             // SearchAdjustmentAccountReceivableAdjustmentsDebitCreditMemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -269,7 +269,7 @@
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroPanel1);
             this.Name = "SearchAdjustmentAccountReceivableAdjustmentsDebitCreditMemo";
-            this.Text = "Search Accounts Receivable Adjustments - Return Sales";
+            this.Text = "Search Accounts Receivable Adjustments - Debit Credit Memo";
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchAccountReceivableAdjustments)).EndInit();
             this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

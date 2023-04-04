@@ -214,10 +214,14 @@ namespace GeneralLedger.Persistence.Services
                 resultCollection.tblGLTranHeaders.ToList()[0].strDescription = collection.Description;
                 resultCollection.tblGLTranHeaders.ToList()[0].datBatchDate = collection.TransactionDate;
 
+                var sale = unitOfWork.Sale.Get((int)collection.SalesId);
+
                 var salesLedger = unitOfWork.SalesCustomerLedger.Find(s => s.intIdCollection == collection.Id && s.intIdSalesCustomerLedgerTransctionType == 2).SingleOrDefault();
                 salesLedger.TotalAmount = collection.Total;
                 salesLedger.TransactionDate = collection.TransactionDate;
                 salesLedger.TransactionNo = collection.TRANo;
+                salesLedger.intIdSales = collection.SalesId;
+                salesLedger.intIdCustomer = sale.intIdCustomer;
 
                 var collSum = unitOfWork.SalesCustomerLedger
                     .Find(s => s.intIdSales == salesLedger.intIdSales &&
@@ -227,7 +231,7 @@ namespace GeneralLedger.Persistence.Services
                    .Find(s => s.intIdSales == salesLedger.intIdSales &&
                        s.intIdSalesCustomerLedgerTransctionType == 3 && s.AccountReceivableAdjustment.AccountsReceivableAdjustmentsTypeId == 1).Sum(s => s.TotalAmount);
 
-                var sale = unitOfWork.Sale.Get((int)salesLedger.intIdSales);
+
 
                 if ((sale.Total + adjSum) - collSum <= 0)
                 {

@@ -23,10 +23,12 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intIdPayment { get; set; }
         public Nullable<System.DateTime> DateInserted { get; set; }
         public Nullable<int> intIdAccountPayableAdjustment { get; set; }
+        public Nullable<int> intIdSupplier { get; set; }
     
-        public virtual AccountPayableAdjustment AccountPayableAdjustment { get; set; }
         public virtual Payment Payment { get; set; }
         public virtual Purchase Purchase { get; set; }
         public virtual PurchaseSupplierLedgerTransactionType PurchaseSupplierLedgerTransactionType { get; set; }
+        public virtual Supplier Supplier { get; set; }
+        public virtual AccountPayableAdjustment AccountPayableAdjustment { get; set; }
     }
 }

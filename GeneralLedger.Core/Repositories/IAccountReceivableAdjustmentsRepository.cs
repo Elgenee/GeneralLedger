@@ -14,7 +14,6 @@ namespace GeneralLedger.Core.Repositories
         IEnumerable<AccountReceivableAdjustment> GetAccountReceivableAdjustmentsWithCollectionSales(string criteria, int intIdAccountsReceivableAdjustmentsType);
         IEnumerable<AccountReceivableAdjustment> GetAccountReceivableAdjustmentsWithSales(string criteria, int intIdAccountsReceivableAdjustmentsType);
         IEnumerable<AccountReceivableAdjustment> GetAccountReceivableAdjustmentsWithCustomer(string criteria, int intIdAccountsReceivableAdjustmentsType);
-
         IEnumerable<AccountReceivableAdjustment> GetAccountReceivableAdjustmentsDMCM(string criteria);
     }
 }

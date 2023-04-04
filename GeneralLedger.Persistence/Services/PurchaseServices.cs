@@ -20,6 +20,7 @@ namespace GeneralLedger.Persistence.Services
                 var purchaseCustomerLedger = new PurchaseSupplierLedger
                 {
                     intIdPurchase = purchase.Id,
+                    intIdSupplier = purchase.intIDSupplier,
                     intIdPurchaseSupplierLedgerTransactionType = 1,
                     TotalAmount = purchase.Total,
                     TransactionDate = purchase.TransactionDate,
@@ -167,6 +168,7 @@ namespace GeneralLedger.Persistence.Services
 
                 var purchaseLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdPurchase == purchase.Id && p.intIdPurchaseSupplierLedgerTransactionType == 1).SingleOrDefault();
                 purchaseLedger.TotalAmount = purchase.Total;
+                purchaseLedger.intIdSupplier = purchase.intIDSupplier;
                 purchaseLedger.TransactionDate = purchase.TransactionDate;
                 purchaseLedger.TransactionNo = purchase.TRANo;
 

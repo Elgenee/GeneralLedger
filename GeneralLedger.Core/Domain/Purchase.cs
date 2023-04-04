@@ -19,8 +19,8 @@ namespace GeneralLedger.Core.Domain
         {
             this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
             this.Payments = new HashSet<Payment>();
-            this.AccountPayableAdjustments = new HashSet<AccountPayableAdjustment>();
             this.PurchaseSupplierLedgers = new HashSet<PurchaseSupplierLedger>();
+            this.AccountPayableAdjustments = new HashSet<AccountPayableAdjustment>();
         }
     
         public int Id { get; set; }
@@ -34,6 +34,7 @@ namespace GeneralLedger.Core.Domain
         public string TRANo { get; set; }
         public Nullable<bool> IsFullyPaid { get; set; }
         public Nullable<System.DateTime> LastPaymentDate { get; set; }
+        public Nullable<bool> IsPurchaseReturn { get; set; }
     
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -41,8 +42,8 @@ namespace GeneralLedger.Core.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseSupplierLedger> PurchaseSupplierLedgers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
     }
 }

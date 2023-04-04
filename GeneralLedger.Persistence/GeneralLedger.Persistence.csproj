@@ -66,6 +66,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountReceivableAdjustmentsRepository.cs" />
+    <Compile Include="Repositories\AccountsPayableAdjustmentsRepository.cs" />
+    <Compile Include="Repositories\AccountsPayableAdjustmentsTypeRepository.cs" />
     <Compile Include="Repositories\AccountsReceivableAdjustmentsTypeRepository.cs" />
     <Compile Include="Repositories\AgentRepository.cs" />
     <Compile Include="Repositories\CoaRepository.cs" />
@@ -86,6 +88,8 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
     <Compile Include="Services\AccountReceivableAdjustmentsServices.cs" />
+    <Compile Include="Services\AccountsPayableAdjustmentsServices.cs" />
+    <Compile Include="Services\AccountsPayableAdjustmentsTypeServices.cs" />
     <Compile Include="Services\AccountsReceivableAdjustmentsTypeServices.cs" />
     <Compile Include="Services\AgentServices.cs" />
     <Compile Include="Services\CollectionServices.cs" />

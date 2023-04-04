@@ -30,6 +30,10 @@
         {
             this.metroTabControlMain = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPageHome = new MetroFramework.Controls.MetroTabPage();
+            this.btnAPDMCM = new MetroFramework.Controls.MetroTile();
+            this.btnReturnPayment = new MetroFramework.Controls.MetroTile();
+            this.btnReturnPurchase = new MetroFramework.Controls.MetroTile();
+            this.ARDMCM = new MetroFramework.Controls.MetroTile();
             this.btnReturnSales = new MetroFramework.Controls.MetroTile();
             this.btnReturnCheck = new MetroFramework.Controls.MetroTile();
             this.btnPayment = new MetroFramework.Controls.MetroTile();
@@ -61,7 +65,6 @@
             this.btnChartOfAccounts = new MetroFramework.Controls.MetroTile();
             this.btnJournalEntry = new MetroFramework.Controls.MetroTile();
             this.LoginUser = new MetroFramework.Controls.MetroLabel();
-            this.ARDMCM = new MetroFramework.Controls.MetroTile();
             this.metroTabControlMain.SuspendLayout();
             this.metroTabPageHome.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +89,9 @@
             // metroTabPageHome
             // 
             this.metroTabPageHome.AutoScroll = true;
+            this.metroTabPageHome.Controls.Add(this.btnAPDMCM);
+            this.metroTabPageHome.Controls.Add(this.btnReturnPayment);
+            this.metroTabPageHome.Controls.Add(this.btnReturnPurchase);
             this.metroTabPageHome.Controls.Add(this.ARDMCM);
             this.metroTabPageHome.Controls.Add(this.btnReturnSales);
             this.metroTabPageHome.Controls.Add(this.btnReturnCheck);
@@ -135,6 +141,73 @@
             this.metroTabPageHome.VerticalScrollbarHighlightOnWheel = true;
             this.metroTabPageHome.VerticalScrollbarSize = 13;
             this.metroTabPageHome.Click += new System.EventHandler(this.metroTabPageHome_Click);
+            // 
+            // btnAPDMCM
+            // 
+            this.btnAPDMCM.ActiveControl = null;
+            this.btnAPDMCM.Enabled = false;
+            this.btnAPDMCM.Location = new System.Drawing.Point(535, 896);
+            this.btnAPDMCM.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAPDMCM.Name = "btnAPDMCM";
+            this.btnAPDMCM.Size = new System.Drawing.Size(248, 86);
+            this.btnAPDMCM.Style = MetroFramework.MetroColorStyle.Silver;
+            this.btnAPDMCM.TabIndex = 36;
+            this.btnAPDMCM.Text = "AP DM/CM";
+            this.btnAPDMCM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAPDMCM.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnAPDMCM.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.btnAPDMCM.UseSelectable = true;
+            // 
+            // btnReturnPayment
+            // 
+            this.btnReturnPayment.ActiveControl = null;
+            this.btnReturnPayment.Enabled = false;
+            this.btnReturnPayment.Location = new System.Drawing.Point(279, 990);
+            this.btnReturnPayment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReturnPayment.Name = "btnReturnPayment";
+            this.btnReturnPayment.Size = new System.Drawing.Size(248, 86);
+            this.btnReturnPayment.Style = MetroFramework.MetroColorStyle.Silver;
+            this.btnReturnPayment.TabIndex = 35;
+            this.btnReturnPayment.Text = "Return Payment";
+            this.btnReturnPayment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnReturnPayment.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnReturnPayment.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.btnReturnPayment.UseSelectable = true;
+            this.btnReturnPayment.Click += new System.EventHandler(this.btnReturnPayment_Click);
+            // 
+            // btnReturnPurchase
+            // 
+            this.btnReturnPurchase.ActiveControl = null;
+            this.btnReturnPurchase.Enabled = false;
+            this.btnReturnPurchase.Location = new System.Drawing.Point(279, 896);
+            this.btnReturnPurchase.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReturnPurchase.Name = "btnReturnPurchase";
+            this.btnReturnPurchase.Size = new System.Drawing.Size(248, 86);
+            this.btnReturnPurchase.Style = MetroFramework.MetroColorStyle.Silver;
+            this.btnReturnPurchase.TabIndex = 34;
+            this.btnReturnPurchase.Text = "Return Purchase";
+            this.btnReturnPurchase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnReturnPurchase.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnReturnPurchase.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.btnReturnPurchase.UseSelectable = true;
+            this.btnReturnPurchase.Click += new System.EventHandler(this.btnReturnPurchase_Click);
+            // 
+            // ARDMCM
+            // 
+            this.ARDMCM.ActiveControl = null;
+            this.ARDMCM.Enabled = false;
+            this.ARDMCM.Location = new System.Drawing.Point(535, 640);
+            this.ARDMCM.Margin = new System.Windows.Forms.Padding(4);
+            this.ARDMCM.Name = "ARDMCM";
+            this.ARDMCM.Size = new System.Drawing.Size(248, 86);
+            this.ARDMCM.Style = MetroFramework.MetroColorStyle.Silver;
+            this.ARDMCM.TabIndex = 33;
+            this.ARDMCM.Text = "AR DM/CM";
+            this.ARDMCM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ARDMCM.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.ARDMCM.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.ARDMCM.UseSelectable = true;
+            this.ARDMCM.Click += new System.EventHandler(this.ARDMCM_Click);
             // 
             // btnReturnSales
             // 
@@ -264,7 +337,7 @@
             // 
             this.metroTile1.ActiveControl = null;
             this.metroTile1.Enabled = false;
-            this.metroTile1.Location = new System.Drawing.Point(279, 896);
+            this.metroTile1.Location = new System.Drawing.Point(535, 990);
             this.metroTile1.Margin = new System.Windows.Forms.Padding(4);
             this.metroTile1.Name = "metroTile1";
             this.metroTile1.Size = new System.Drawing.Size(248, 86);
@@ -632,23 +705,6 @@
             this.LoginUser.TabIndex = 6;
             this.LoginUser.Text = "LoginUser";
             // 
-            // ARDMCM
-            // 
-            this.ARDMCM.ActiveControl = null;
-            this.ARDMCM.Enabled = false;
-            this.ARDMCM.Location = new System.Drawing.Point(535, 640);
-            this.ARDMCM.Margin = new System.Windows.Forms.Padding(4);
-            this.ARDMCM.Name = "ARDMCM";
-            this.ARDMCM.Size = new System.Drawing.Size(248, 86);
-            this.ARDMCM.Style = MetroFramework.MetroColorStyle.Silver;
-            this.ARDMCM.TabIndex = 33;
-            this.ARDMCM.Text = "AR DM/CM";
-            this.ARDMCM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ARDMCM.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.ARDMCM.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
-            this.ARDMCM.UseSelectable = true;
-            this.ARDMCM.Click += new System.EventHandler(this.ARDMCM_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -708,5 +764,8 @@
         private MetroFramework.Controls.MetroLabel LoginUser;
         private MetroFramework.Controls.MetroTile btnReturnSales;
         private MetroFramework.Controls.MetroTile ARDMCM;
+        private MetroFramework.Controls.MetroTile btnReturnPayment;
+        private MetroFramework.Controls.MetroTile btnReturnPurchase;
+        private MetroFramework.Controls.MetroTile btnAPDMCM;
     }
 }

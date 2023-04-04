@@ -117,14 +117,9 @@
         <EntityTypeShape EntityType="GeneralLedgerModel.UserRole" Width="1.5" PointX="6" PointY="26.625" />
         <AssociationConnector Association="GeneralLedgerModel.FK_UserRole_Role" />
         <AssociationConnector Association="GeneralLedgerModel.FK_UserRole_User" />
-        <EntityTypeShape EntityType="GeneralLedgerModel.AccountPayableAdjustment" Width="1.5" PointX="7.5" PointY="42.5" />
         <EntityTypeShape EntityType="GeneralLedgerModel.AccountsPayableAdjustmentsType" Width="1.5" PointX="5.25" PointY="37.375" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_AccountsPayableAdjustmentsType" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Payment" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Purchase" />
         <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseSupplierLedger" Width="1.5" PointX="9.75" PointY="42.5" />
         <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseSupplierLedgerTransactionType" Width="1.5" PointX="7.5" PointY="39.375" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_AccountPayableAdjustments1" />
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Payment1" />
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_Purchase" />
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType1" />
@@ -137,6 +132,14 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_Sales" />
         <AssociationConnector Association="GeneralLedgerModel.FK_AccountReceivableAdjustments_Customer" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseSupplierLedger_Suppliers" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.AccountPayableAdjustment" Width="1.5" PointX="7.5" PointY="42" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_AccountsPayableAdjustmentsType" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Payment" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Purchase" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_AccountPayableAdjustments" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_AccountPayableAdjustments" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Suppliers" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

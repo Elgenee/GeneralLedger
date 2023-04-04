@@ -437,6 +437,8 @@
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAccountReceivableAdjustmentsRepository.cs" />
+    <Compile Include="Repositories\IAccountsPayableAdjustmentsRepository.cs" />
+    <Compile Include="Repositories\IAccountsPayableAdjustmentsType.cs" />
     <Compile Include="Repositories\IAccountsReceivableAdjustmentsTypeRepository.cs" />
     <Compile Include="Repositories\IAgentRepository.cs" />
     <Compile Include="Repositories\ICoaRepository.cs" />
@@ -456,6 +458,8 @@
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\IUserRoleRepository.cs" />
     <Compile Include="Services\IAccountReceivableAdjustmentsServices.cs" />
+    <Compile Include="Services\IAccountsPayableAdjustmentsServices.cs" />
+    <Compile Include="Services\IAccountsPayableAdjustmentsTypeServices.cs" />
     <Compile Include="Services\IAccountsReceivableAdjustmentsTypeServices.cs" />
     <Compile Include="Services\IAgentServices.cs" />
     <Compile Include="Services\ICollectionServices.cs" />

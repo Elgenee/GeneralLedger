@@ -27,6 +27,8 @@ namespace GeneralLedger.Core
         IRoleRepository Role { get; }
         IUserRoleRepository UserRole { get; }
         ItblTBBatchHdrRepository tblTBBatchHdr { get; }
+        IAccountsPayableAdjustmentsRepository AccountsPayableAdjustments { get; }
+        IAccountsPayableAdjustmentsTypeRepository AccountsPayableAdjustmentsType { get; }
         int Complete();
     }
 }

@@ -83,11 +83,11 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
-        public virtual DbSet<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
         public virtual DbSet<AccountsPayableAdjustmentsType> AccountsPayableAdjustmentsTypes { get; set; }
         public virtual DbSet<PurchaseSupplierLedger> PurchaseSupplierLedgers { get; set; }
         public virtual DbSet<PurchaseSupplierLedgerTransactionType> PurchaseSupplierLedgerTransactionTypes { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
+        public virtual DbSet<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
     
         public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
         {

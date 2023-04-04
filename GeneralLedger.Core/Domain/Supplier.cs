@@ -19,6 +19,8 @@ namespace GeneralLedger.Core.Domain
         {
             this.PurchaseOrders = new HashSet<PurchaseOrder>();
             this.Purchases = new HashSet<Purchase>();
+            this.PurchaseSupplierLedgers = new HashSet<PurchaseSupplierLedger>();
+            this.AccountPayableAdjustments = new HashSet<AccountPayableAdjustment>();
         }
     
         public int Id { get; set; }
@@ -37,5 +39,9 @@ namespace GeneralLedger.Core.Domain
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Purchase> Purchases { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseSupplierLedger> PurchaseSupplierLedgers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
     }
 }

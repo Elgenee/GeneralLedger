@@ -17,11 +17,13 @@ namespace GeneralLedger.Persistence.Services
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 unitOfWork.Payment.Add(payment);
+                var purchase = unitOfWork.Purchase.Get((int)payment.PurchaseId);
 
                 var purchaseCustomerLedger = new PurchaseSupplierLedger
                 {
                     intIdPurchase = payment.PurchaseId,
                     intIdPayment = payment.Id,
+                    intIdSupplier = purchase.intIDSupplier,
                     intIdPurchaseSupplierLedgerTransactionType = 2,
                     TotalAmount = payment.PaymentTotal,
                     TransactionDate = payment.PaymentTransactionDate,
@@ -39,10 +41,9 @@ namespace GeneralLedger.Persistence.Services
 
                 var adjSum = unitOfWork.PurchaseSupplierLedger
                    .Find(s => s.intIdPurchase == purchaseCustomerLedger.intIdPurchase &&
-               s.intIdPurchaseSupplierLedgerTransactionType == 3).Sum(s => s.TotalAmount);
+               s.intIdPurchaseSupplierLedgerTransactionType == 3 && s.AccountPayableAdjustment.AccountsPayableAdjustmentTypeId == 1).Sum(s => s.TotalAmount);
 
-                var purchase = unitOfWork.Purchase.Get((int) purchaseCustomerLedger.intIdPurchase);
-
+         
                 if (((purchase.Total + adjSum) - paySum) <= 0)
                 {
                     purchase.IsFullyPaid = true;
@@ -201,17 +202,24 @@ namespace GeneralLedger.Persistence.Services
                 var resultPayment = unitOfWork.Payment.GetPaymentWithJournalEntry(payment.Id).SingleOrDefault();
                 resultPayment.PaymentCV = payment.PaymentCV;
                 resultPayment.PaymentSIDR = payment.PaymentSIDR;
-                resultPayment.PaymentTransactionDate = payment.PaymentTransactionDate;
+                resultPayment.PaymentTransactionDate = payment.PaymentTransactionDate;  
                 resultPayment.PaymentTotal = payment.PaymentTotal;
                 resultPayment.PaymentIsCash = payment.PaymentIsCash;
                 resultPayment.PurchaseId = payment.PurchaseId;
                 resultPayment.PaymentBankId = payment.PaymentBankId;
                 resultPayment.PaymentCheckDetail = payment.PaymentCheckDetail;
+                resultPayment.tblGLTranHeaders.ToList()[0].strDescription = payment.PaymentCheckDetail;
+                resultPayment.tblGLTranHeaders.ToList()[0].datBatchDate = payment.PaymentTransactionDate;
+
+                var purchase = unitOfWork.Purchase.Get((int)payment.PurchaseId);
+
 
                 var purchaseLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdPayment == payment.Id && p.intIdPurchaseSupplierLedgerTransactionType == 2).SingleOrDefault();
                 purchaseLedger.TotalAmount = payment.PaymentTotal;
                 purchaseLedger.TransactionDate = payment.PaymentTransactionDate;
                 purchaseLedger.TransactionNo = payment.PaymentCV;
+                purchaseLedger.intIdPurchase = payment.PurchaseId;
+                purchaseLedger.intIdSupplier = purchase.intIDSupplier;
 
 
                 var paySum = unitOfWork.PurchaseSupplierLedger
@@ -222,7 +230,7 @@ namespace GeneralLedger.Persistence.Services
                    .Find(s => s.intIdPurchase == purchaseLedger.intIdPurchase &&
                s.intIdPurchaseSupplierLedgerTransactionType == 3).Sum(s => s.TotalAmount);
 
-                var purchase = unitOfWork.Purchase.Get((int)purchaseLedger.intIdPurchase);
+        
 
                 if (((purchase.Total + adjSum) - paySum) <= 0)
                 {

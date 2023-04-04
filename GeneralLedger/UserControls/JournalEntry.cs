@@ -311,6 +311,7 @@ namespace GeneralLedger.UserControls
                     this.txtTransactionCode.Text = sje.JournalEntry.strTransactionCode;
                     this.txtDescription.Text = sje.JournalEntry.strDescription;
                     this.IDGLTranHeader = sje.JournalEntry.GLTranHeader.ID;
+                    this.dtBatchDate.Text = sje.JournalEntry.datBatchDate;
 
                     JournalEntryBAL journalEntryBAL = new JournalEntryBAL();
                     this.GLTranDetail = journalEntryBAL.getTranDetail(this.IDGLTranHeader);
