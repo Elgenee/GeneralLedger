@@ -965,6 +965,28 @@ namespace GeneralLedger
         private void btnReturnPurchase_Click(object sender, EventArgs e)
         {
 
+            MetroTabPage metroTabPage = new MetroTabPage();
+            metroTabPage.Text = "Return Purchase";
+            metroTabPage.AutoScroll = true;
+            metroTabPage.HorizontalScrollbar = true;
+            metroTabPage.HorizontalScrollbarBarColor = true;
+            metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+            metroTabPage.HorizontalScrollbarSize = 15;
+            metroTabPage.UseStyleColors = true;
+            metroTabPage.VerticalScrollbar = true;
+            metroTabPage.VerticalScrollbarBarColor = true;
+            metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+            metroTabPage.VerticalScrollbarSize = 15;
+            //metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+            //metroTabPage.Location = new System.Drawing.Point(15, 38);
+            //metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            frmAccountPayableAdjustmentReturnPurchase frmAccountPayableAdjustmentReturnPurchase = new frmAccountPayableAdjustmentReturnPurchase();
+            frmAccountPayableAdjustmentReturnPurchase.Parent = metroTabPage;
+            frmAccountPayableAdjustmentReturnPurchase.MetroTabPage = metroTabPage;
+            frmAccountPayableAdjustmentReturnPurchase.MetroTabControl = this.metroTabControlMain;
+            metroTabPage.Controls.Add(frmAccountPayableAdjustmentReturnPurchase);
+            metroTabControlMain.TabPages.Add(metroTabPage);
+            metroTabControlMain.SelectedTab = metroTabPage;
         }
 
         private void btnReturnPayment_Click(object sender, EventArgs e)

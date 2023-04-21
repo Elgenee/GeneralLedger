@@ -115,6 +115,12 @@ namespace GeneralLedger.UserControls
                     frmReportCustomerLedger.Show();
                 }
 
+
+                if (item.ToUpper().Equals("SUPPLIER LEDGER"))
+                {
+                    frmReportSupplierLedger frmReportSupplierLedger = new frmReportSupplierLedger();
+                    frmReportSupplierLedger.Show();
+                }
                 //rest of your logic 
             }
         }

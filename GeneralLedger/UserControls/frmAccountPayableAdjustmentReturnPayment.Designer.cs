@@ -53,26 +53,26 @@
             this.txtAdjustmentTransactionNo = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.txtAdjustmentId = new MetroFramework.Controls.MetroTextBox();
-            this.btnSearchSale = new MetroFramework.Controls.MetroButton();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.txtPaymentCV = new MetroFramework.Controls.MetroTextBox();
+            this.btnSearchPayment = new MetroFramework.Controls.MetroButton();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.txtPaymentID = new MetroFramework.Controls.MetroTextBox();
-            this.btnClose = new DevComponents.DotNetBar.ButtonX();
-            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-            this.txtPurchaseTransactionNO = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
-            this.txtSupplier = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.txtCheckDetails = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
-            this.cbBank = new MetroFramework.Controls.MetroComboBox();
-            this.chkIsCash = new MetroFramework.Controls.MetroCheckBox();
             this.chkUseDefaultEntry = new MetroFramework.Controls.MetroCheckBox();
+            this.txtPaymentCV = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.chkIsCash = new MetroFramework.Controls.MetroCheckBox();
+            this.txtPurchaseTransactionNO = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+            this.txtSupplier = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+            this.cbBank = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.txtCheckDetails = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
             this.txtTotal = new DevComponents.Editors.DoubleInput();
-            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
             this.txtPaymentSIDR = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
+            this.btnClose = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dgJournalEntry)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotal)).BeginInit();
             this.SuspendLayout();
@@ -264,7 +264,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(355, 1108);
+            this.btnDelete.Location = new System.Drawing.Point(356, 1108);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(132, 28);
@@ -457,60 +457,16 @@
             this.txtAdjustmentId.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.txtAdjustmentId.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // btnSearchSale
+            // btnSearchPayment
             // 
-            this.btnSearchSale.Location = new System.Drawing.Point(1178, 31);
-            this.btnSearchSale.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSearchSale.Name = "btnSearchSale";
-            this.btnSearchSale.Size = new System.Drawing.Size(132, 28);
-            this.btnSearchSale.TabIndex = 165;
-            this.btnSearchSale.Text = "Search Payment";
-            this.btnSearchSale.UseSelectable = true;
-            this.btnSearchSale.Click += new System.EventHandler(this.btnSearchSale_Click);
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(667, 172);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(93, 20);
-            this.metroLabel1.TabIndex = 162;
-            this.metroLabel1.Text = "Payment CV#";
-            // 
-            // txtPaymentCV
-            // 
-            // 
-            // 
-            // 
-            this.txtPaymentCV.CustomButton.Image = null;
-            this.txtPaymentCV.CustomButton.Location = new System.Drawing.Point(239, 2);
-            this.txtPaymentCV.CustomButton.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPaymentCV.CustomButton.Name = "";
-            this.txtPaymentCV.CustomButton.Size = new System.Drawing.Size(23, 23);
-            this.txtPaymentCV.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtPaymentCV.CustomButton.TabIndex = 1;
-            this.txtPaymentCV.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtPaymentCV.CustomButton.UseSelectable = true;
-            this.txtPaymentCV.CustomButton.Visible = false;
-            this.txtPaymentCV.Lines = new string[0];
-            this.txtPaymentCV.Location = new System.Drawing.Point(907, 172);
-            this.txtPaymentCV.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPaymentCV.MaxLength = 32767;
-            this.txtPaymentCV.Name = "txtPaymentCV";
-            this.txtPaymentCV.PasswordChar = '\0';
-            this.txtPaymentCV.ReadOnly = true;
-            this.txtPaymentCV.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtPaymentCV.SelectedText = "";
-            this.txtPaymentCV.SelectionLength = 0;
-            this.txtPaymentCV.SelectionStart = 0;
-            this.txtPaymentCV.ShortcutsEnabled = true;
-            this.txtPaymentCV.Size = new System.Drawing.Size(265, 28);
-            this.txtPaymentCV.TabIndex = 161;
-            this.txtPaymentCV.UseCustomBackColor = true;
-            this.txtPaymentCV.UseSelectable = true;
-            this.txtPaymentCV.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtPaymentCV.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.btnSearchPayment.Location = new System.Drawing.Point(1178, 31);
+            this.btnSearchPayment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearchPayment.Name = "btnSearchPayment";
+            this.btnSearchPayment.Size = new System.Drawing.Size(132, 28);
+            this.btnSearchPayment.TabIndex = 165;
+            this.btnSearchPayment.Text = "Search Payment";
+            this.btnSearchPayment.UseSelectable = true;
+            this.btnSearchPayment.Click += new System.EventHandler(this.btnSearchPayment_Click);
             // 
             // metroLabel7
             // 
@@ -557,30 +513,80 @@
             this.txtPaymentID.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.txtPaymentID.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // btnClose
+            // chkUseDefaultEntry
             // 
-            this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClose.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.Magenta;
-            this.btnClose.Image = global::GeneralLedger.Properties.Resources.cancel;
-            this.btnClose.Location = new System.Drawing.Point(1373, 15);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(137, 44);
-            this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
-            this.btnClose.TabIndex = 158;
-            this.btnClose.Text = "Close Page";
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.chkUseDefaultEntry.AutoSize = true;
+            this.chkUseDefaultEntry.Checked = true;
+            this.chkUseDefaultEntry.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUseDefaultEntry.DisplayFocus = true;
+            this.chkUseDefaultEntry.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.chkUseDefaultEntry.Location = new System.Drawing.Point(808, 655);
+            this.chkUseDefaultEntry.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkUseDefaultEntry.Name = "chkUseDefaultEntry";
+            this.chkUseDefaultEntry.Size = new System.Drawing.Size(144, 20);
+            this.chkUseDefaultEntry.TabIndex = 205;
+            this.chkUseDefaultEntry.Text = "Use default entry?";
+            this.chkUseDefaultEntry.UseCustomBackColor = true;
+            this.chkUseDefaultEntry.UseSelectable = true;
             // 
-            // metroLabel8
+            // txtPaymentCV
             // 
-            this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(667, 84);
-            this.metroLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel8.Name = "metroLabel8";
-            this.metroLabel8.Size = new System.Drawing.Size(165, 20);
-            this.metroLabel8.TabIndex = 196;
-            this.metroLabel8.Text = "Purchase Transaction No.";
+            // 
+            // 
+            // 
+            this.txtPaymentCV.CustomButton.Image = null;
+            this.txtPaymentCV.CustomButton.Location = new System.Drawing.Point(239, 2);
+            this.txtPaymentCV.CustomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPaymentCV.CustomButton.Name = "";
+            this.txtPaymentCV.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtPaymentCV.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtPaymentCV.CustomButton.TabIndex = 1;
+            this.txtPaymentCV.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtPaymentCV.CustomButton.UseSelectable = true;
+            this.txtPaymentCV.CustomButton.Visible = false;
+            this.txtPaymentCV.Lines = new string[0];
+            this.txtPaymentCV.Location = new System.Drawing.Point(907, 172);
+            this.txtPaymentCV.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPaymentCV.MaxLength = 32767;
+            this.txtPaymentCV.Name = "txtPaymentCV";
+            this.txtPaymentCV.PasswordChar = '\0';
+            this.txtPaymentCV.ReadOnly = true;
+            this.txtPaymentCV.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtPaymentCV.SelectedText = "";
+            this.txtPaymentCV.SelectionLength = 0;
+            this.txtPaymentCV.SelectionStart = 0;
+            this.txtPaymentCV.ShortcutsEnabled = true;
+            this.txtPaymentCV.Size = new System.Drawing.Size(265, 28);
+            this.txtPaymentCV.TabIndex = 161;
+            this.txtPaymentCV.UseCustomBackColor = true;
+            this.txtPaymentCV.UseSelectable = true;
+            this.txtPaymentCV.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtPaymentCV.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(667, 172);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(93, 20);
+            this.metroLabel1.TabIndex = 162;
+            this.metroLabel1.Text = "Payment CV#";
+            // 
+            // chkIsCash
+            // 
+            this.chkIsCash.AutoSize = true;
+            this.chkIsCash.DisplayFocus = true;
+            this.chkIsCash.Enabled = false;
+            this.chkIsCash.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.chkIsCash.Location = new System.Drawing.Point(1183, 180);
+            this.chkIsCash.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkIsCash.Name = "chkIsCash";
+            this.chkIsCash.Size = new System.Drawing.Size(56, 20);
+            this.chkIsCash.TabIndex = 141;
+            this.chkIsCash.Text = "Cash";
+            this.chkIsCash.UseCustomBackColor = true;
+            this.chkIsCash.UseSelectable = true;
             // 
             // txtPurchaseTransactionNO
             // 
@@ -616,15 +622,15 @@
             this.txtPurchaseTransactionNO.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPurchaseTransactionNO.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroLabel10
+            // metroLabel8
             // 
-            this.metroLabel10.AutoSize = true;
-            this.metroLabel10.Location = new System.Drawing.Point(667, 127);
-            this.metroLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel10.Name = "metroLabel10";
-            this.metroLabel10.Size = new System.Drawing.Size(59, 20);
-            this.metroLabel10.TabIndex = 198;
-            this.metroLabel10.Text = "Supplier";
+            this.metroLabel8.AutoSize = true;
+            this.metroLabel8.Location = new System.Drawing.Point(667, 84);
+            this.metroLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel8.Name = "metroLabel8";
+            this.metroLabel8.Size = new System.Drawing.Size(165, 20);
+            this.metroLabel8.TabIndex = 196;
+            this.metroLabel8.Text = "Purchase Transaction No.";
             // 
             // txtSupplier
             // 
@@ -660,15 +666,39 @@
             this.txtSupplier.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtSupplier.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroLabel2
+            // metroLabel10
             // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(667, 315);
-            this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(93, 20);
-            this.metroLabel2.TabIndex = 202;
-            this.metroLabel2.Text = "Check Details";
+            this.metroLabel10.AutoSize = true;
+            this.metroLabel10.Location = new System.Drawing.Point(667, 127);
+            this.metroLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel10.Name = "metroLabel10";
+            this.metroLabel10.Size = new System.Drawing.Size(59, 20);
+            this.metroLabel10.TabIndex = 198;
+            this.metroLabel10.Text = "Supplier";
+            // 
+            // cbBank
+            // 
+            this.cbBank.BackColor = System.Drawing.SystemColors.Control;
+            this.cbBank.Enabled = false;
+            this.cbBank.FormattingEnabled = true;
+            this.cbBank.ItemHeight = 24;
+            this.cbBank.Location = new System.Drawing.Point(907, 265);
+            this.cbBank.Margin = new System.Windows.Forms.Padding(4);
+            this.cbBank.Name = "cbBank";
+            this.cbBank.Size = new System.Drawing.Size(265, 30);
+            this.cbBank.TabIndex = 199;
+            this.cbBank.UseCustomBackColor = true;
+            this.cbBank.UseSelectable = true;
+            // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(667, 265);
+            this.metroLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(100, 20);
+            this.metroLabel6.TabIndex = 200;
+            this.metroLabel6.Text = "Bank Accounts";
             // 
             // txtCheckDetails
             // 
@@ -704,60 +734,15 @@
             this.txtCheckDetails.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCheckDetails.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroLabel6
+            // metroLabel2
             // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(667, 265);
-            this.metroLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(100, 20);
-            this.metroLabel6.TabIndex = 200;
-            this.metroLabel6.Text = "Bank Accounts";
-            // 
-            // cbBank
-            // 
-            this.cbBank.BackColor = System.Drawing.SystemColors.Control;
-            this.cbBank.Enabled = false;
-            this.cbBank.FormattingEnabled = true;
-            this.cbBank.ItemHeight = 24;
-            this.cbBank.Location = new System.Drawing.Point(907, 265);
-            this.cbBank.Margin = new System.Windows.Forms.Padding(4);
-            this.cbBank.Name = "cbBank";
-            this.cbBank.Size = new System.Drawing.Size(265, 30);
-            this.cbBank.TabIndex = 199;
-            this.cbBank.UseCustomBackColor = true;
-            this.cbBank.UseSelectable = true;
-            // 
-            // chkIsCash
-            // 
-            this.chkIsCash.AutoSize = true;
-            this.chkIsCash.DisplayFocus = true;
-            this.chkIsCash.Enabled = false;
-            this.chkIsCash.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.chkIsCash.Location = new System.Drawing.Point(1183, 180);
-            this.chkIsCash.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.chkIsCash.Name = "chkIsCash";
-            this.chkIsCash.Size = new System.Drawing.Size(56, 20);
-            this.chkIsCash.TabIndex = 141;
-            this.chkIsCash.Text = "Cash";
-            this.chkIsCash.UseCustomBackColor = true;
-            this.chkIsCash.UseSelectable = true;
-            // 
-            // chkUseDefaultEntry
-            // 
-            this.chkUseDefaultEntry.AutoSize = true;
-            this.chkUseDefaultEntry.Checked = true;
-            this.chkUseDefaultEntry.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkUseDefaultEntry.DisplayFocus = true;
-            this.chkUseDefaultEntry.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
-            this.chkUseDefaultEntry.Location = new System.Drawing.Point(808, 655);
-            this.chkUseDefaultEntry.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.chkUseDefaultEntry.Name = "chkUseDefaultEntry";
-            this.chkUseDefaultEntry.Size = new System.Drawing.Size(144, 20);
-            this.chkUseDefaultEntry.TabIndex = 205;
-            this.chkUseDefaultEntry.Text = "Use default entry?";
-            this.chkUseDefaultEntry.UseCustomBackColor = true;
-            this.chkUseDefaultEntry.UseSelectable = true;
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(667, 315);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(93, 20);
+            this.metroLabel2.TabIndex = 202;
+            this.metroLabel2.Text = "Check Details";
             // 
             // metroLabel15
             // 
@@ -793,16 +778,6 @@
             this.txtTotal.Size = new System.Drawing.Size(265, 28);
             this.txtTotal.TabIndex = 259;
             // 
-            // metroLabel16
-            // 
-            this.metroLabel16.AutoSize = true;
-            this.metroLabel16.Location = new System.Drawing.Point(667, 217);
-            this.metroLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel16.Name = "metroLabel16";
-            this.metroLabel16.Size = new System.Drawing.Size(99, 20);
-            this.metroLabel16.TabIndex = 261;
-            this.metroLabel16.Text = "Payment SI/DR";
-            // 
             // txtPaymentSIDR
             // 
             // 
@@ -836,6 +811,31 @@
             this.txtPaymentSIDR.UseSelectable = true;
             this.txtPaymentSIDR.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPaymentSIDR.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel16
+            // 
+            this.metroLabel16.AutoSize = true;
+            this.metroLabel16.Location = new System.Drawing.Point(667, 217);
+            this.metroLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel16.Name = "metroLabel16";
+            this.metroLabel16.Size = new System.Drawing.Size(99, 20);
+            this.metroLabel16.TabIndex = 261;
+            this.metroLabel16.Text = "Payment SI/DR";
+            // 
+            // btnClose
+            // 
+            this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClose.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.Magenta;
+            this.btnClose.Image = global::GeneralLedger.Properties.Resources.cancel;
+            this.btnClose.Location = new System.Drawing.Point(1373, 15);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(137, 44);
+            this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
+            this.btnClose.TabIndex = 158;
+            this.btnClose.Text = "Close Page";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // frmAccountPayableAdjustmentReturnPayment
             // 
@@ -877,7 +877,7 @@
             this.Controls.Add(this.txtAdjustmentTransactionNo);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.txtAdjustmentId);
-            this.Controls.Add(this.btnSearchSale);
+            this.Controls.Add(this.btnSearchPayment);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.txtPaymentCV);
             this.Controls.Add(this.metroLabel7);
@@ -918,25 +918,25 @@
         private MetroFramework.Controls.MetroTextBox txtAdjustmentTransactionNo;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroTextBox txtAdjustmentId;
-        private MetroFramework.Controls.MetroButton btnSearchSale;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroTextBox txtPaymentCV;
+        private MetroFramework.Controls.MetroButton btnSearchPayment;
         private MetroFramework.Controls.MetroLabel metroLabel7;
         private MetroFramework.Controls.MetroTextBox txtPaymentID;
         private DevComponents.DotNetBar.ButtonX btnClose;
-        private MetroFramework.Controls.MetroLabel metroLabel8;
-        private MetroFramework.Controls.MetroTextBox txtPurchaseTransactionNO;
-        private MetroFramework.Controls.MetroLabel metroLabel10;
-        private MetroFramework.Controls.MetroTextBox txtSupplier;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroTextBox txtCheckDetails;
-        private MetroFramework.Controls.MetroLabel metroLabel6;
-        private MetroFramework.Controls.MetroComboBox cbBank;
-        private MetroFramework.Controls.MetroCheckBox chkIsCash;
         private MetroFramework.Controls.MetroCheckBox chkUseDefaultEntry;
+        private MetroFramework.Controls.MetroTextBox txtPaymentCV;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroCheckBox chkIsCash;
+        private MetroFramework.Controls.MetroTextBox txtPurchaseTransactionNO;
+        private MetroFramework.Controls.MetroLabel metroLabel8;
+        private MetroFramework.Controls.MetroTextBox txtSupplier;
+        private MetroFramework.Controls.MetroLabel metroLabel10;
+        private MetroFramework.Controls.MetroComboBox cbBank;
+        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroTextBox txtCheckDetails;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroLabel metroLabel15;
         private DevComponents.Editors.DoubleInput txtTotal;
-        private MetroFramework.Controls.MetroLabel metroLabel16;
         private MetroFramework.Controls.MetroTextBox txtPaymentSIDR;
+        private MetroFramework.Controls.MetroLabel metroLabel16;
     }
 }

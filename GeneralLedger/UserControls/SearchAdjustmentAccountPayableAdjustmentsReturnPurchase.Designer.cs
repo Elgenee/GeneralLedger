@@ -1,6 +1,6 @@
 ﻿namespace GeneralLedger.UserControls
 {
-    partial class SearchAdjustmentAccountPayableAdjustmentsReturnPayment
+    partial class SearchAdjustmentAccountPayableAdjustmentsReturnPurchase
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.txtCriteria = new MetroFramework.Controls.MetroTextBox();
             this.btnSelect = new MetroFramework.Controls.MetroButton();
@@ -36,22 +36,18 @@
             this.dgSearchAccountsPayableAdjustments = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseSIDR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchasePONo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsPayableAdjustmentsTypeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsPayableAdjustmentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsPayableAdjustmentTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsPayableAdjustmentTransactionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentCV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentSIDR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BankAccountsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BankAccounts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CheckDetails = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplierId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -131,33 +127,29 @@
             this.dgSearchAccountsPayableAdjustments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSearchAccountsPayableAdjustments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
+            this.PurchaseTotalAmount,
+            this.PurchaseSIDR,
+            this.PurchasePONo,
             this.AccountsPayableAdjustmentsTypeId,
             this.AccountsPayableAdjustmentType,
             this.AccountsPayableAdjustmentTransactionNo,
             this.AccountsPayableAdjustmentTransactionDate,
             this.TotalAmount,
-            this.PaymentId,
             this.PurchaseId,
             this.PurchaseTransactionNo,
             this.Supplier,
-            this.PaymentCV,
-            this.PaymentSIDR,
-            this.IsCash,
-            this.BankAccountsId,
-            this.BankAccounts,
-            this.CheckDetails,
-            this.PaymentTotalAmount,
+            this.SupplierId,
             this.GLTranHeaderID,
             this.Description,
             this.UseDefaultEntry});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgSearchAccountsPayableAdjustments.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgSearchAccountsPayableAdjustments.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgSearchAccountsPayableAdjustments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgSearchAccountsPayableAdjustments.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgSearchAccountsPayableAdjustments.Location = new System.Drawing.Point(0, 0);
@@ -191,6 +183,30 @@
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
             this.ID.Width = 62;
+            // 
+            // PurchaseTotalAmount
+            // 
+            this.PurchaseTotalAmount.HeaderText = "PurchaseTotalAmount";
+            this.PurchaseTotalAmount.MinimumWidth = 6;
+            this.PurchaseTotalAmount.Name = "PurchaseTotalAmount";
+            this.PurchaseTotalAmount.ReadOnly = true;
+            this.PurchaseTotalAmount.Width = 125;
+            // 
+            // PurchaseSIDR
+            // 
+            this.PurchaseSIDR.HeaderText = "PurchaseSIDR";
+            this.PurchaseSIDR.MinimumWidth = 6;
+            this.PurchaseSIDR.Name = "PurchaseSIDR";
+            this.PurchaseSIDR.ReadOnly = true;
+            this.PurchaseSIDR.Width = 125;
+            // 
+            // PurchasePONo
+            // 
+            this.PurchasePONo.HeaderText = "PurchasePONo";
+            this.PurchasePONo.MinimumWidth = 6;
+            this.PurchasePONo.Name = "PurchasePONo";
+            this.PurchasePONo.ReadOnly = true;
+            this.PurchasePONo.Width = 125;
             // 
             // AccountsPayableAdjustmentsTypeId
             // 
@@ -234,14 +250,6 @@
             this.TotalAmount.ReadOnly = true;
             this.TotalAmount.Width = 125;
             // 
-            // PaymentId
-            // 
-            this.PaymentId.HeaderText = "PaymentId";
-            this.PaymentId.MinimumWidth = 6;
-            this.PaymentId.Name = "PaymentId";
-            this.PaymentId.ReadOnly = true;
-            this.PaymentId.Width = 125;
-            // 
             // PurchaseId
             // 
             this.PurchaseId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -268,62 +276,13 @@
             this.Supplier.ReadOnly = true;
             this.Supplier.Width = 86;
             // 
-            // PaymentCV
+            // SupplierId
             // 
-            this.PaymentCV.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.PaymentCV.HeaderText = "PaymentCV";
-            this.PaymentCV.MinimumWidth = 6;
-            this.PaymentCV.Name = "PaymentCV";
-            this.PaymentCV.ReadOnly = true;
-            this.PaymentCV.Width = 107;
-            // 
-            // PaymentSIDR
-            // 
-            this.PaymentSIDR.HeaderText = "PaymentSIDR";
-            this.PaymentSIDR.MinimumWidth = 6;
-            this.PaymentSIDR.Name = "PaymentSIDR";
-            this.PaymentSIDR.ReadOnly = true;
-            this.PaymentSIDR.Width = 125;
-            // 
-            // IsCash
-            // 
-            this.IsCash.HeaderText = "IsCash";
-            this.IsCash.MinimumWidth = 6;
-            this.IsCash.Name = "IsCash";
-            this.IsCash.ReadOnly = true;
-            this.IsCash.Width = 125;
-            // 
-            // BankAccountsId
-            // 
-            this.BankAccountsId.HeaderText = "BankAccountsId";
-            this.BankAccountsId.MinimumWidth = 6;
-            this.BankAccountsId.Name = "BankAccountsId";
-            this.BankAccountsId.ReadOnly = true;
-            this.BankAccountsId.Width = 125;
-            // 
-            // BankAccounts
-            // 
-            this.BankAccounts.HeaderText = "BankAccounts";
-            this.BankAccounts.MinimumWidth = 6;
-            this.BankAccounts.Name = "BankAccounts";
-            this.BankAccounts.ReadOnly = true;
-            this.BankAccounts.Width = 125;
-            // 
-            // CheckDetails
-            // 
-            this.CheckDetails.HeaderText = "CheckDetails";
-            this.CheckDetails.MinimumWidth = 6;
-            this.CheckDetails.Name = "CheckDetails";
-            this.CheckDetails.ReadOnly = true;
-            this.CheckDetails.Width = 125;
-            // 
-            // PaymentTotalAmount
-            // 
-            this.PaymentTotalAmount.HeaderText = "PaymentTotalAmount";
-            this.PaymentTotalAmount.MinimumWidth = 6;
-            this.PaymentTotalAmount.Name = "PaymentTotalAmount";
-            this.PaymentTotalAmount.ReadOnly = true;
-            this.PaymentTotalAmount.Width = 125;
+            this.SupplierId.HeaderText = "SupplierId";
+            this.SupplierId.MinimumWidth = 6;
+            this.SupplierId.Name = "SupplierId";
+            this.SupplierId.ReadOnly = true;
+            this.SupplierId.Width = 125;
             // 
             // GLTranHeaderID
             // 
@@ -350,7 +309,7 @@
             this.UseDefaultEntry.ReadOnly = true;
             this.UseDefaultEntry.Width = 125;
             // 
-            // SearchAdjustmentAccountPayableAdjustmentsReturnPayment
+            // SearchAdjustmentAccountPayableAdjustmentsReturnPurchase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -360,8 +319,8 @@
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroPanel1);
-            this.Name = "SearchAdjustmentAccountPayableAdjustmentsReturnPayment";
-            this.Text = "Search Accounts Payable Adjustments - Return Payment";
+            this.Name = "SearchAdjustmentAccountPayableAdjustmentsReturnPurchase";
+            this.Text = "Search Accounts Payable Adjustments - Return Purchase";
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchAccountsPayableAdjustments)).EndInit();
             this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -378,22 +337,18 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dgSearchAccountsPayableAdjustments;
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseTotalAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseSIDR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchasePONo;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsPayableAdjustmentsTypeId;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsPayableAdjustmentType;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsPayableAdjustmentTransactionNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsPayableAdjustmentTransactionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentId;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseId;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseTransactionNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Supplier;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentCV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentSIDR;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsCash;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BankAccountsId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BankAccounts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CheckDetails;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentTotalAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SupplierId;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLTranHeaderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn UseDefaultEntry;

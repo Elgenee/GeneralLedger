@@ -41,6 +41,7 @@ namespace GeneralLedger.Persistence.Repositories
                  .Include(a => a.Payment.Purchase.Supplier)
                  .Where(a => (a.TransactionNo.ToLower().Contains(criteria.ToLower())
                 || a.Payment.Purchase.Supplier.strName.ToLower().Contains(criteria.ToLower())
+                 || a.Payment.PaymentSIDR.ToLower().Contains(criteria.ToLower())
                 || a.Payment.PaymentCV.ToLower().Contains(criteria.ToLower()))
                 && a.AccountsPayableAdjustmentTypeId == intIdAccountsPayableAdjustmentsType).ToList().Take(100);
 

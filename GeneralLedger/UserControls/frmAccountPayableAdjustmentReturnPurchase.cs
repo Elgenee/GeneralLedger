@@ -16,7 +16,7 @@ using GeneralLedger.Core.Domain;
 
 namespace GeneralLedger.UserControls
 {
-    public partial class frmAccountPayableAdjustmentReturnPayment : MetroUserControl
+    public partial class frmAccountPayableAdjustmentReturnPurchase : MetroUserControl
     {
         public MetroTabControl MetroTabControl { get; set; }
         public MetroTabPage MetroTabPage { get; set; }
@@ -33,7 +33,7 @@ namespace GeneralLedger.UserControls
         public int IndexGrid { get; set; }
         public int GLTranHeader { get; set; }
 
-        public frmAccountPayableAdjustmentReturnPayment()
+        public frmAccountPayableAdjustmentReturnPurchase()
         {
 
             AccountsPayableAdjustmentsTypeServices = new AccountsPayableAdjustmentsTypeServices();
@@ -58,14 +58,14 @@ namespace GeneralLedger.UserControls
                 if (res == DialogResult.OK)
                 {
                     this.PaymentId = sp.Payment.Id;
-                    this.txtPaymentID.Text = sp.Payment.Id.ToString();
-                    this.txtPurchaseTransactionNO.Text = sp.Payment.Purchase.TRANo;
+                    this.txtPurchaseId.Text = sp.Payment.Id.ToString();
+                    //this.txtPurchaseTransactionNO.Text = sp.Payment.Purchase.TRANo;
                     this.txtSupplier.Text = sp.Payment.Purchase.Supplier.strName;
-                    this.txtPaymentCV.Text = sp.Payment.PaymentCV.ToString();
+                    //this.txtPaymentCV.Text = sp.Payment.PaymentCV.ToString();
                     this.PurchaseId = sp.Payment.Purchase.Id;
-                    this.txtTotal.Text = sp.Payment.PaymentTotal.ToString();
-                    this.txtPaymentSIDR.Text = sp.Payment.PaymentSIDR.ToString();
-                    this.txtCheckDetails.Text = sp.Payment.PaymentCheckDetail.ToString();
+                    //this.txtTotal.Text = sp.Payment.PaymentTotal.ToString();
+                    //this.txtPaymentSIDR.Text = sp.Payment.PaymentSIDR.ToString();
+                    //this.txtCheckDetails.Text = sp.Payment.PaymentCheckDetail.ToString();
 
                
 
@@ -104,12 +104,12 @@ namespace GeneralLedger.UserControls
             BankBAL bankBAL = new BankBAL();
 
             var bankList = bankBAL.getBank(string.Empty);
-            this.cbBank.DataSource = bankList;
-            this.cbBank.ValueMember = "ID";
-            this.cbBank.DisplayMember = "Name";
+            //this.cbBank.DataSource = bankList;
+            //this.cbBank.ValueMember = "ID";
+            //this.cbBank.DisplayMember = "Name";
 
             var accountReceivableAdjustmentTpesList = AccountsPayableAdjustmentsTypeServices.GetAll()
-                .Where(a => a.Name.ToUpper().Equals("RETURN PAYMENT"))
+                .Where(a => a.Name.ToUpper().Equals("RETURN PURCHASE"))
                 .ToList();
             this.cbAdjustmentType.DataSource = accountReceivableAdjustmentTpesList;
             this.cbAdjustmentType.ValueMember = "ID";
@@ -135,12 +135,7 @@ namespace GeneralLedger.UserControls
 
             try
             {
-                if (this.PaymentId == 0)
-                {
-                    MessageBox.Show("Please select collection...");
-                    return;
-                }
-
+              
                 if (this.GLTranDetail.Sum(d => d.curCredit) != this.GLTranDetail.Sum(d => d.curDebit))
                 {
                     MessageBox.Show("Disbal journal entry");
@@ -175,13 +170,12 @@ namespace GeneralLedger.UserControls
                          AccountsPayableAdjustmentTypeId = adjustmentType,
                          TransactionNo = this.txtAdjustmentTransactionNo.Text,
                          TransactionDate = this.dtAdjustmentTransactionDate.Value,
-                         PaymentId = this.PaymentId,
                          Description = this.txtDescription.Text,
-                         TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
+                         TotalAmount = decimal.TryParse(this.txtPurchaseTotal.Text, out decimalParser) ? decimalParser : 0,
                          PurchaseId = this.PurchaseId
                     };
 
-                    AccountPayableAdjustment = AccountsPayableAdjustmentsServices.AddReturnPayment(AccountPayableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
+                    AccountPayableAdjustment = AccountsPayableAdjustmentsServices.AddReturnPurchases(AccountPayableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
                     if (AccountPayableAdjustment != null)
                     {
                         MessageBox.Show("Successfully saved");
@@ -193,12 +187,11 @@ namespace GeneralLedger.UserControls
                     AccountPayableAdjustment.AccountsPayableAdjustmentTypeId = adjustmentType;
                     AccountPayableAdjustment.TransactionNo = this.txtAdjustmentTransactionNo.Text;
                     AccountPayableAdjustment.TransactionDate = this.dtAdjustmentTransactionDate.Value;
-                    AccountPayableAdjustment.PaymentId = this.PaymentId;
                     AccountPayableAdjustment.Description = this.txtDescription.Text;
                     AccountPayableAdjustment.PurchaseId = this.PurchaseId;
-                    AccountPayableAdjustment.TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
+                    AccountPayableAdjustment.TotalAmount = decimal.TryParse(this.txtPurchaseTotal.Text, out decimalParser) ? decimalParser : 0;
 
-                    AccountPayableAdjustment = AccountsPayableAdjustmentsServices.UpdateReturnPayment(AccountPayableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
+                    AccountPayableAdjustment = AccountsPayableAdjustmentsServices.UpdateReturnPurchases(AccountPayableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
                     if (AccountPayableAdjustment != null)
                     {
                         MessageBox.Show("Successfully saved");
@@ -286,7 +279,7 @@ namespace GeneralLedger.UserControls
         {
             try
             {
-                SearchAdjustmentAccountPayableAdjustmentsReturnPayment spe = new SearchAdjustmentAccountPayableAdjustmentsReturnPayment();
+                SearchAdjustmentAccountPayableAdjustmentsReturnPurchase spe = new SearchAdjustmentAccountPayableAdjustmentsReturnPurchase();
                 spe.BringToFront();
                 spe.TopMost = true;
                 DialogResult res = spe.ShowDialog(this);
@@ -299,17 +292,19 @@ namespace GeneralLedger.UserControls
                     this.cbAdjustmentType.SelectedValue = spe.AccountPayableAdjustment.AccountsPayableAdjustmentTypeId;
                     this.txtAdjustmentTransactionNo.Text = spe.AccountPayableAdjustment.TransactionNo;
                     this.dtAdjustmentTransactionDate.Value = (DateTime)spe.AccountPayableAdjustment.TransactionDate;
-                    this.PaymentId = (int)spe.AccountPayableAdjustment.PaymentId;
-                    this.txtPaymentID.Text = spe.AccountPayableAdjustment.PaymentId.ToString();
+                    //this.PaymentId = (int)spe.AccountPayableAdjustment.PaymentId;
+                  
                     this.PurchaseId = (int)spe.AccountPayableAdjustment.PurchaseId;
-                    this.txtPurchaseTransactionNO.Text = spe.AccountPayableAdjustment.Payment.Purchase.TRANo;
-                    this.txtSupplier.Text = spe.AccountPayableAdjustment.Payment.Purchase.Supplier.strName;
-                    this.txtPaymentCV.Text = spe.AccountPayableAdjustment.Payment.PaymentCV.ToString();
-                    this.txtPaymentSIDR.Text = spe.AccountPayableAdjustment.Payment.PaymentSIDR.ToString();
-                    this.cbBank.SelectedValue = spe.AccountPayableAdjustment.Payment.PaymentBankId;
-                    this.chkIsCash.Checked = (bool)spe.AccountPayableAdjustment.Payment.PaymentIsCash;
-                    this.txtCheckDetails.Text = spe.AccountPayableAdjustment.Payment.PaymentCheckDetail;
-                    this.txtTotal.Text = spe.AccountPayableAdjustment.TotalAmount.ToString();
+                    this.txtPurchaseId.Text = spe.AccountPayableAdjustment.PurchaseId.ToString();
+                    this.txtPurchasePONo.Text = spe.AccountPayableAdjustment.Purchase.PONo;
+                    this.txtPurchaseSIDR.Text = spe.AccountPayableAdjustment.Purchase.SIDR;
+                    this.txtSupplier.Text = spe.AccountPayableAdjustment.Purchase.Supplier.strName;
+                    //this.txtPaymentCV.Text = spe.AccountPayableAdjustment.Payment.PaymentCV.ToString();
+                    //this.txtPurchaseSIDR.Text = spe.AccountPayableAdjustment.Payment.PaymentSIDR.ToString();
+                    //this.cbBank.SelectedValue = spe.AccountPayableAdjustment.Payment.PaymentBankId;
+                    //this.chkIsCash.Checked = (bool)spe.AccountPayableAdjustment.Payment.PaymentIsCash;
+                    // this.txtCheckDetails.Text = spe.AccountPayableAdjustment.Payment.PaymentCheckDetail;
+                    this.txtPurchaseTotal.Text = spe.AccountPayableAdjustment.TotalAmount.ToString();
                     this.txtDescription.Text = spe.AccountPayableAdjustment.Description;
                     this.GLTranHeader = spe.AccountPayableAdjustment.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                     this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
@@ -558,7 +553,7 @@ namespace GeneralLedger.UserControls
                         PurchaseId = this.PurchaseId
                     };
 
-                    AccountsPayableAdjustmentsServices.RemoveReturnPayment(AccountPayableAdjustment);
+                    AccountsPayableAdjustmentsServices.RemoveReturnPurchases(AccountPayableAdjustment);
 
                     if (AccountPayableAdjustment != null)
                     {
@@ -567,18 +562,21 @@ namespace GeneralLedger.UserControls
                         this.txtAdjustmentTransactionNo.Text = String.Empty;
                         this.PurchaseId = 0;
                         this.PaymentId = 0;
-                        this.txtPaymentID.Text = String.Empty;
-                        this.txtPurchaseTransactionNO.Text = String.Empty;
+                        this.txtPurchaseId.Text = String.Empty;
+                        //this.txtPurchaseTransactionNO.Text = String.Empty;
                         this.txtSupplier.Text = String.Empty;
-                        this.txtPaymentCV.Text = String.Empty;
-                        this.chkIsCash.Checked = false;
-                        this.txtCheckDetails.Text = String.Empty;
-                        this.txtTotal.Text = String.Empty;
+                        this.txtPurchasePONo.Text = string.Empty;
+                        this.txtPurchaseSIDR.Text = string.Empty;
+                        this.txtPurchaseTotal.Text = string.Empty;
+                        //this.txtPaymentCV.Text = String.Empty;
+                        //this.chkIsCash.Checked = false;
+                        //this.txtCheckDetails.Text = String.Empty;
+                        //this.txtTotal.Text = String.Empty;
                         this.txtDescription.Text = String.Empty;
-                        this.txtPaymentSIDR.Text = String.Empty;
-                        this.cbBank.Text = String.Empty;
-                        this.cbBank.SelectedText = String.Empty;
-                        this.cbBank.SelectedValue = 0;
+                        //this.txtPaymentSIDR.Text = String.Empty;
+                        //this.cbBank.Text = String.Empty;
+                        //this.cbBank.SelectedText = String.Empty;
+                        //this.cbBank.SelectedValue = 0;
 
                         this.dgJournalEntry.Rows.Clear();
                         this.dgJournalEntry.Refresh();
@@ -609,15 +607,15 @@ namespace GeneralLedger.UserControls
             this.txtAdjustmentTransactionNo.Text = String.Empty;
             this.PurchaseId = 0;
             this.PaymentId = 0;
-            this.txtPaymentID.Text = String.Empty;
-            this.txtPurchaseTransactionNO.Text = String.Empty;
+            this.txtPurchaseId.Text = String.Empty;
+            //this.txtPurchaseTransactionNO.Text = String.Empty;
             this.txtSupplier.Text = String.Empty;
-            this.txtPaymentCV.Text = String.Empty;
-            this.chkIsCash.Checked = false;
-            this.txtCheckDetails.Text = String.Empty;
-            this.txtTotal.Text = String.Empty;
+           // this.txtPaymentCV.Text = String.Empty;
+           // this.chkIsCash.Checked = false;
+           // this.txtCheckDetails.Text = String.Empty;
+           // this.txtTotal.Text = String.Empty;
             this.txtDescription.Text = String.Empty;
-            this.txtPaymentSIDR.Text = String.Empty;
+
             this.dgJournalEntry.Rows.Clear();
             this.dgJournalEntry.Refresh();
             this.GLTranDetail.Clear();
@@ -639,23 +637,19 @@ namespace GeneralLedger.UserControls
         {
             try
             {
-                SearchPayment sp = new SearchPayment();
+                SearchPurchase sp = new SearchPurchase();
                 sp.BringToFront();
                 sp.TopMost = true;
                 DialogResult res = sp.ShowDialog(this);
 
                 if (res == DialogResult.OK)
                 {
-                    this.PaymentId = sp.Payment.Id;
-                    this.txtPaymentID.Text = sp.Payment.Id.ToString();
-                    this.txtPurchaseTransactionNO.Text = sp.Payment.Purchase.TRANo;
-                    this.txtSupplier.Text = sp.Payment.Purchase.Supplier.strName;
-                    this.txtPaymentCV.Text = sp.Payment.PaymentCV.ToString();
-                    this.txtPaymentSIDR.Text = sp.Payment.PaymentSIDR.ToString();
-                    this.PurchaseId = sp.Payment.Purchase.Id;
-                    this.txtTotal.Text = sp.Payment.PaymentTotal.ToString();
-                    this.txtPaymentSIDR.Text = sp.Payment.PaymentSIDR.ToString();
-                    this.txtCheckDetails.Text = sp.Payment.PaymentCheckDetail.ToString();
+                    this.PurchaseId = sp.Purchase.Id;
+                    this.txtPurchaseId.Text = sp.Purchase.Id.ToString();
+                    this.txtSupplier.Text = sp.Purchase.Supplier.strName;
+                    this.txtPurchasePONo.Text = sp.Purchase.PONo;
+                    this.txtPurchaseSIDR.Text = sp.Purchase.SIDR;
+                    this.txtPurchaseTotal.Text = sp.Purchase.Total.ToString();
 
                 }
 

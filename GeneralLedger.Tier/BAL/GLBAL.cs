@@ -69,6 +69,13 @@ namespace GeneralLedger.Tier.BAL
 
         }
 
+        public List<rptGetSupplierLedgerOverall> getSupplierLedgerOverall(int supplierId)
+        {
+            GLDAL gltb = new GLDAL();
+            return gltb.getSupplierLedgerOverall(supplierId);
+
+        }
+
         public List<rptBSCashBank> getBSCashBank(int intFiscalYear, int intMonth)
         {
             GLDAL gltb = new GLDAL();

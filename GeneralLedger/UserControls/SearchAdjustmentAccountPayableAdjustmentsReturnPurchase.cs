@@ -13,13 +13,13 @@ using GeneralLedger.Core.Domain;
 
 namespace GeneralLedger.UserControls
 {
-    public partial class SearchAdjustmentAccountPayableAdjustmentsReturnPayment : MetroForm
+    public partial class SearchAdjustmentAccountPayableAdjustmentsReturnPurchase : MetroForm
     {
 
         public AccountPayableAdjustment AccountPayableAdjustment { get; set; }
         public AccountsPayableAdjustmentsServices AccountsPayableAdjustmentsServices { get; set; }
         public int Index { get; set; }
-        public SearchAdjustmentAccountPayableAdjustmentsReturnPayment()
+        public SearchAdjustmentAccountPayableAdjustmentsReturnPurchase()
         {
             InitializeComponent();
             AccountPayableAdjustment = new AccountPayableAdjustment();
@@ -38,7 +38,7 @@ namespace GeneralLedger.UserControls
         {
             try
             {
-                var adjustmentPayableResult = AccountsPayableAdjustmentsServices.GetAccountPayableAdjustmentsWithPaymentPurchases(this.txtCriteria.Text, 1);
+                var adjustmentPayableResult = AccountsPayableAdjustmentsServices.GetAccountPayableAdjustmentsWithPurchases(this.txtCriteria.Text, 4);
                 if ((adjustmentPayableResult != null) && adjustmentPayableResult.Count > 0)
                 {
                     this.dgSearchAccountsPayableAdjustments.RowCount = adjustmentPayableResult.Count;
@@ -50,17 +50,13 @@ namespace GeneralLedger.UserControls
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["AccountsPayableAdjustmentType"].Value = adjustmentPayableResult[i].AccountsPayableAdjustmentsType.Name;
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["AccountsPayableAdjustmentTransactionNo"].Value = adjustmentPayableResult[i].TransactionNo;
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["AccountsPayableAdjustmentTransactionDate"].Value = adjustmentPayableResult[i].TransactionDate.Value.ToShortDateString();
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PaymentId"].Value = adjustmentPayableResult[i].Payment.Id;
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PurchaseId"].Value = adjustmentPayableResult[i].Purchase.Id;
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PurchaseTransactionNo"].Value = adjustmentPayableResult[i].Payment.Purchase.TRANo;
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["Supplier"].Value = adjustmentPayableResult[i].Payment.Purchase.Supplier.strName;
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PaymentCV"].Value = adjustmentPayableResult[i].Payment.PaymentCV;
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PaymentSIDR"].Value = adjustmentPayableResult[i].Payment.PaymentSIDR;
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["IsCash"].Value = adjustmentPayableResult[i].Payment.PaymentIsCash;
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["BankAccountsId"].Value = adjustmentPayableResult[i].Payment.Bank.Id;
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["BankAccounts"].Value = adjustmentPayableResult[i].Payment.Bank.strName;
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["CheckDetails"].Value = adjustmentPayableResult[i].Payment.PaymentCheckDetail;
-                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PaymentTotalAmount"].Value = string.Format("{0:0.00}", adjustmentPayableResult[i].Payment.PaymentTotal);
+                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PurchasePONo"].Value = adjustmentPayableResult[i].Purchase.PONo;
+                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PurchaseTransactionNo"].Value = adjustmentPayableResult[i].Purchase.TRANo;
+                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PurchaseSIDR"].Value = adjustmentPayableResult[i].Purchase.SIDR;
+                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["PurchaseTotalAmount"].Value = adjustmentPayableResult[i].Purchase.Total;
+                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["Supplier"].Value = adjustmentPayableResult[i].Purchase.Supplier.strName;
+                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["SupplierID"].Value = adjustmentPayableResult[i].Purchase.Supplier.Id;
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["GLTranHeaderID"].Value = adjustmentPayableResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["Description"].Value = adjustmentPayableResult[i].Description;
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["UseDefaultEntry"].Value = adjustmentPayableResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
@@ -101,35 +97,20 @@ namespace GeneralLedger.UserControls
                         },
                         TransactionNo = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["AccountsPayableAdjustmentTransactionNo"].Value.ToString(),
                         TransactionDate = Convert.ToDateTime(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["AccountsPayableAdjustmentTransactionDate"].Value.ToString()),
-                        PaymentId = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PaymentId"].Value.ToString()),
+                        //PaymentId = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PaymentId"].Value.ToString()),
                         PurchaseId = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseId"].Value.ToString()),
                         Description = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["Description"].Value.ToString(),
                         TotalAmount = Convert.ToDecimal(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["TotalAmount"].Value.ToString()),
-                        Payment = new Payment
-                        {
-                            Id = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PaymentId"].Value.ToString()),
-                            PaymentCV = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PaymentCV"].Value.ToString(),
-                            PaymentSIDR = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PaymentSIDR"].Value.ToString(),
-                            PaymentIsCash = bool.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["IsCash"].Value.ToString()),
-                            Purchase = new Purchase
-                            {
-                                Id = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseId"].Value.ToString()),
-                                TRANo = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseTransactionNo"].Value.ToString(),
-                                Supplier = new Supplier
-                                {
-                                    strName = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["Supplier"].Value.ToString(),
-
-                                }
-                            },
-                            Bank = new Core.Domain.Bank
-                            {
-                                Id = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["BankAccountsId"].Value.ToString()),
-                                strName = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["BankAccounts"].Value.ToString()
-                            },
-                            PaymentBankId = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["BankAccountsId"].Value.ToString()),
-                            PaymentCheckDetail = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["CheckDetails"].Value.ToString(),
-                            PaymentTotal = Convert.ToDecimal(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PaymentTotalAmount"].Value.ToString()),
-
+                        Purchase = new Purchase {
+                            Id = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseId"].Value.ToString()),
+                            PONo = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchasePONo"].Value.ToString(),
+                            SIDR =  this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseSIDR"].Value.ToString(),
+                            TRANo = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseTransactionNo"].Value.ToString(),
+                            Total = Convert.ToDecimal(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseTotalAmount"].Value.ToString()),
+                            Supplier = new Supplier {
+                                 Id = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["SupplierID"].Value.ToString()),
+                                 strName = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["Supplier"].Value.ToString()
+                            }
                         },
                         tblGLTranHeaders = new List<tblGLTranHeader> {
                             new tblGLTranHeader {

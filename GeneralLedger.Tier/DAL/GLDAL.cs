@@ -689,6 +689,45 @@ namespace GeneralLedger.Tier.DAL
             }
         }
 
+
+        public List<rptGetSupplierLedgerOverall> getSupplierLedgerOverall(int supplierID)
+        {
+            var dbUtil = new DatabaseManager();
+            var rptGetSupplierLedgerOverallList = new List<rptGetSupplierLedgerOverall>();
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spGetSupplierLedgerOverall";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@SupplierID", supplierID);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rptGetCustomerLedgerOverall = new rptGetSupplierLedgerOverall
+                            {
+                                strType = ReferenceEquals(reader["strType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strType"]),
+                                strTransactionNo = ReferenceEquals(reader["strTransactionNo"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionNo"]),
+                                datDateTransaction = ReferenceEquals(reader["datDateTransaction"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datDateTransaction"]),
+                                curTotalAmountDebit = ReferenceEquals(reader["curTotalAmountDebit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curTotalAmountDebit"]),
+                                curTotalAmountCredit = ReferenceEquals(reader["curTotalAmountCredit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curTotalAmountCredit"]),
+                                curRunningBalance = ReferenceEquals(reader["curRunningBalance"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curRunningBalance"])
+                            };
+
+                            rptGetSupplierLedgerOverallList.Add(rptGetCustomerLedgerOverall);
+                        }
+                        return rptGetSupplierLedgerOverallList;
+                    }
+                }
+            }
+        }
+
         public List<rptISExpenses> getRepISExpense(int intFiscalYear, int intMonth)
         {
             var dbUtil = new DatabaseManager();
