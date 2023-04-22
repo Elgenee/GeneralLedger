@@ -108,6 +108,8 @@
     <Compile Include="BO\rptISNetSalesTotal.cs" />
     <Compile Include="BO\rptISProvisionIT.cs" />
     <Compile Include="BO\rptISTotal.cs" />
+    <Compile Include="BO\rptPaymentProoflist.cs" />
+    <Compile Include="BO\rptPurchaseProoflist.cs" />
     <Compile Include="BO\rptJournalProoflist.cs" />
     <Compile Include="BO\rptOtherAsset.cs" />
     <Compile Include="BO\SearchProductAndColorAndSize.cs" />

@@ -121,6 +121,19 @@ namespace GeneralLedger.UserControls
                     frmReportSupplierLedger frmReportSupplierLedger = new frmReportSupplierLedger();
                     frmReportSupplierLedger.Show();
                 }
+
+                if (item.ToUpper().Equals("PURCHASE PROOFLIST"))
+                {
+                    frmReportPurchseProoflist frmReportPurchseProoflist = new frmReportPurchseProoflist();
+                    frmReportPurchseProoflist.Show();
+                }
+
+
+                if (item.ToUpper().Equals("PAYMENT PROOFLIST"))
+                {
+                    frmReportPaymentProoflist frmReportPaymentProoflist = new frmReportPaymentProoflist();
+                    frmReportPaymentProoflist.Show();
+                }
                 //rest of your logic 
             }
         }

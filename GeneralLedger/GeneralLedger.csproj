@@ -124,11 +124,23 @@
     <Compile Include="Report\frmReportAccountsReceivableSales.Designer.cs">
       <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\frmReportPaymentProoflist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportPaymentProoflist.Designer.cs">
+      <DependentUpon>frmReportPaymentProoflist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\frmReportCollectionProoflist.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Report\frmReportCollectionProoflist.Designer.cs">
       <DependentUpon>frmReportCollectionProoflist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmReportPurchseProoflist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportPurchseProoflist.Designer.cs">
+      <DependentUpon>frmReportPurchseProoflist.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\frmReportSupplierLedger.cs">
       <SubType>Form</SubType>
@@ -586,8 +598,14 @@
     <EmbeddedResource Include="Report\frmReportAccountsReceivableSales.resx">
       <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportPaymentProoflist.resx">
+      <DependentUpon>frmReportPaymentProoflist.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\frmReportCollectionProoflist.resx">
       <DependentUpon>frmReportCollectionProoflist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportPurchseProoflist.resx">
+      <DependentUpon>frmReportPurchseProoflist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmReportSupplierLedger.resx">
       <DependentUpon>frmReportSupplierLedger.cs</DependentUpon>
@@ -598,6 +616,8 @@
     <EmbeddedResource Include="Report\frmReportSaleProoflist.resx">
       <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\RDLC\PaymentProoflist.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\PurchaseProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\SupplierLedgerOverall.rdlc" />
     <EmbeddedResource Include="Report\RDLC\CustomerLedgerOverall.rdlc" />
     <EmbeddedResource Include="Report\RDLC\CollectionProoflist.rdlc" />

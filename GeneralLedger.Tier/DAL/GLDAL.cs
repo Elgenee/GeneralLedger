@@ -565,6 +565,51 @@ namespace GeneralLedger.Tier.DAL
             }
         }
 
+        public List<rptPurchaseProoflist> getPurchaseProoflist(string datDateFrom, string datDateTo)
+        {
+            var dbUtil = new DatabaseManager();
+            var rptPurchaseProoflistList = new List<rptPurchaseProoflist>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spRPTPurchaseProoflist";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@datDateFrom", datDateFrom);
+                    cmd.Parameters.AddWithValue("@datDateTo", datDateTo);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rptPurchaseProoflist = new rptPurchaseProoflist
+                            {
+                                strTransactionNumber = ReferenceEquals(reader["strTransactionNumber"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionNumber"]),
+                                datBatchDate = ReferenceEquals(reader["datBatchDate"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datBatchDate"]),
+                                strTransactionCode = ReferenceEquals(reader["strTransactionCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionCode"]),
+                                COA = ReferenceEquals(reader["COA"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COA"]),
+                                COASub = ReferenceEquals(reader["COASub"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COASub"]),
+                                curDebit = ReferenceEquals(reader["curDebit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curDebit"]),
+                                curCredit = ReferenceEquals(reader["curCredit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCredit"]),
+                                strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
+                                strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"]),
+                                strSupplier = ReferenceEquals(reader["strSupplier"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strSupplier"]),
+
+                            };
+
+                            rptPurchaseProoflistList.Add(rptPurchaseProoflist);
+                        }
+                        return rptPurchaseProoflistList;
+                    }
+                }
+            }
+        }
+
         public List<rptJournalProoflist> getCollectionEntryProoflist(string datDateFrom, string datDateTo)
         {
             var dbUtil = new DatabaseManager();
@@ -605,6 +650,51 @@ namespace GeneralLedger.Tier.DAL
                             rptJournalProoflistList.Add(rptJournalProoflist);
                         }
                         return rptJournalProoflistList;
+                    }
+                }
+            }
+        }
+
+
+        public List<rptPaymentProoflist> getPaymentProoflist(string datDateFrom, string datDateTo)
+        {
+            var dbUtil = new DatabaseManager();
+            var rptPaymentProoflistList = new List<rptPaymentProoflist>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spRPTPaymentProoflist";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@datDateFrom", datDateFrom);
+                    cmd.Parameters.AddWithValue("@datDateTo", datDateTo);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rptPaymentProoflist = new rptPaymentProoflist
+                            {
+                                strTransactionNumber = ReferenceEquals(reader["strTransactionNumber"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionNumber"]),
+                                datBatchDate = ReferenceEquals(reader["datBatchDate"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datBatchDate"]),
+                                strTransactionCode = ReferenceEquals(reader["strTransactionCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionCode"]),
+                                COA = ReferenceEquals(reader["COA"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COA"]),
+                                COASub = ReferenceEquals(reader["COASub"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COASub"]),
+                                curDebit = ReferenceEquals(reader["curDebit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curDebit"]),
+                                curCredit = ReferenceEquals(reader["curCredit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCredit"]),
+                                strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
+                                strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"]),
+                                strSupplier = ReferenceEquals(reader["strSupplier"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strSupplier"]),
+                            };
+
+                            rptPaymentProoflistList.Add(rptPaymentProoflist);
+                        }
+                        return rptPaymentProoflistList;
                     }
                 }
             }
