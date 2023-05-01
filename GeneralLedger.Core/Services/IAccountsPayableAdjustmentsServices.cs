@@ -16,6 +16,7 @@ namespace GeneralLedger.Core.Services
         void RemoveReturnPayment(AccountPayableAdjustment accountPayableAdjustment);
         AccountPayableAdjustment AddReturnPurchases(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
         AccountPayableAdjustment UpdateReturnPurchases(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
+
         void RemoveReturnPurchases(AccountPayableAdjustment accountPayableAdjustment);
 
         AccountPayableAdjustment AddDebitCreditMemo(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);

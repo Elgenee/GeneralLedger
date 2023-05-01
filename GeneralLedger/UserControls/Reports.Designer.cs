@@ -72,7 +72,7 @@
             this.metroListView1.Margin = new System.Windows.Forms.Padding(4);
             this.metroListView1.Name = "metroListView1";
             this.metroListView1.OwnerDraw = true;
-            this.metroListView1.Size = new System.Drawing.Size(639, 797);
+            this.metroListView1.Size = new System.Drawing.Size(639, 519);
             this.metroListView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.metroListView1.TabIndex = 0;
             this.metroListView1.UseCompatibleStateImageBehavior = false;
@@ -86,7 +86,7 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 12;
-            this.metroPanel1.Location = new System.Drawing.Point(0, 801);
+            this.metroPanel1.Location = new System.Drawing.Point(0, 523);
             this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(1165, 65);
@@ -130,7 +130,7 @@
             this.Controls.Add(this.metroListView1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Reports";
-            this.Size = new System.Drawing.Size(1165, 866);
+            this.Size = new System.Drawing.Size(1165, 588);
             this.metroPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

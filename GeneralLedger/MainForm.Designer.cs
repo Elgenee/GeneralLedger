@@ -157,6 +157,7 @@
             this.btnAPDMCM.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
             this.btnAPDMCM.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
             this.btnAPDMCM.UseSelectable = true;
+            this.btnAPDMCM.Click += new System.EventHandler(this.btnAPDMCM_Click);
             // 
             // btnReturnPayment
             // 

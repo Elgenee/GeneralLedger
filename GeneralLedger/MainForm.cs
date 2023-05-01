@@ -1015,5 +1015,31 @@ namespace GeneralLedger
             metroTabControlMain.SelectedTab = metroTabPage;
 
         }
+
+        private void btnAPDMCM_Click(object sender, EventArgs e)
+        {
+            MetroTabPage metroTabPage = new MetroTabPage();
+            metroTabPage.Text = "AP DM/CM";
+            metroTabPage.AutoScroll = true;
+            metroTabPage.HorizontalScrollbar = true;
+            metroTabPage.HorizontalScrollbarBarColor = true;
+            metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+            metroTabPage.HorizontalScrollbarSize = 15;
+            metroTabPage.UseStyleColors = true;
+            metroTabPage.VerticalScrollbar = true;
+            metroTabPage.VerticalScrollbarBarColor = true;
+            metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+            metroTabPage.VerticalScrollbarSize = 15;
+            //metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+            //metroTabPage.Location = new System.Drawing.Point(15, 38);
+            //metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            frmAccountPayableAdjustmentDebitCreditMemo frmAccountPayableAdjustmentDebitCreditMemo = new frmAccountPayableAdjustmentDebitCreditMemo();
+            frmAccountPayableAdjustmentDebitCreditMemo.Parent = metroTabPage;
+            frmAccountPayableAdjustmentDebitCreditMemo.MetroTabPage = metroTabPage;
+            frmAccountPayableAdjustmentDebitCreditMemo.MetroTabControl = this.metroTabControlMain;
+            metroTabPage.Controls.Add(frmAccountPayableAdjustmentDebitCreditMemo);
+            metroTabControlMain.TabPages.Add(metroTabPage);
+            metroTabControlMain.SelectedTab = metroTabPage;
+        }
     }
 }

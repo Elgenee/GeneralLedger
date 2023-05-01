@@ -13,7 +13,91 @@ namespace GeneralLedger.Persistence.Services
     {
         public AccountPayableAdjustment AddDebitCreditMemo(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
         {
-            throw new NotImplementedException();
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+
+                //var purchase = unitOfWork.Purchase.Get((int)accountPayableAdjustment.PurchaseId);
+                unitOfWork.AccountsPayableAdjustments.Add(accountPayableAdjustment);
+
+                var purchaseCustomerLedger = new PurchaseSupplierLedger
+                {
+                    //intIdPurchase = accountPayableAdjustment.PurchaseId,
+                    //intIdPayment = payment.Id,
+                    intIdSupplier = accountPayableAdjustment.SupplierId,
+                    intIdAccountPayableAdjustment = accountPayableAdjustment.Id,
+                    intIdPurchaseSupplierLedgerTransactionType = 3,
+                    TotalAmount = accountPayableAdjustment.TotalAmount,
+                    TransactionDate = accountPayableAdjustment.TransactionDate,
+                    TransactionNo = accountPayableAdjustment.TransactionNo,
+                    DateInserted = DateTime.Now
+                };
+
+                if (UseDefaultEntry)
+                {
+
+                    var gLTranDetail = new List<tblGLTranDetail>();
+                    var gLTranHeader = new tblGLTranHeader
+                    {
+                        curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
+                        curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
+                        intIDGLBookType = 11,
+                        strDescription = accountPayableAdjustment.Description,
+                        datBatchDate = accountPayableAdjustment.TransactionDate,
+                        datInsertedDate = DateTime.Now,
+                        //tblGLTranDetails = gLTranDetail,
+                        intIdAccountPayableAdjustment = accountPayableAdjustment.Id,
+                        blnUseDefaultEntry = UseDefaultEntry
+                    };
+
+                    foreach (var item in gLTranDetail)
+                    {
+                        gLTranHeader.tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub,
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit
+
+                        });
+                    }
+
+
+                    unitOfWork.GLTran.Add(gLTranHeader);
+
+                }
+                else
+                {
+
+                    var gLTranHeader = new tblGLTranHeader
+                    {
+                        curCreditAmount = tblGLTranDetail.Sum(d => d.curCredit),
+                        curDebitAmount = tblGLTranDetail.Sum(d => d.curDebit),
+                        intIDGLBookType = 11,
+                        datBatchDate = accountPayableAdjustment.TransactionDate,
+                        datInsertedDate = DateTime.Now,
+                        //tblGLTranDetails = tblGLTranDetail,
+                        intIdAccountPayableAdjustment = accountPayableAdjustment.Id,
+                        blnUseDefaultEntry = UseDefaultEntry
+                    };
+
+                    foreach (var item in tblGLTranDetail)
+                    {
+                        gLTranHeader.tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub,
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit
+
+                        });
+                    }
+                    unitOfWork.GLTran.Add(gLTranHeader);
+                }
+
+                unitOfWork.PurchaseSupplierLedger.Add(purchaseCustomerLedger);
+                unitOfWork.Complete();
+                return accountPayableAdjustment;
+            }
         }
 
         public AccountPayableAdjustment AddReturnPayment(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
@@ -246,7 +330,11 @@ namespace GeneralLedger.Persistence.Services
 
         public List<AccountPayableAdjustment> GetAccountPayableAdjustmentsDMCM(string criteria)
         {
-            throw new NotImplementedException();
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.AccountsPayableAdjustments.GetAccountPayableAdjustmentsDMCM(criteria).ToList();
+
+            }
         }
 
         public List<AccountPayableAdjustment> GetAccountPayableAdjustmentsWithJournalEntry(int Id)
@@ -284,7 +372,18 @@ namespace GeneralLedger.Persistence.Services
 
         public void RemoveDebitCreditMemo(AccountPayableAdjustment accountPayableAdjustment)
         {
-            throw new NotImplementedException();
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                var resultAccountPayableAdjustment = unitOfWork.AccountsPayableAdjustments.GetAccountPayableAdjustmentsWithJournalEntry(accountPayableAdjustment.Id).SingleOrDefault();
+                var tblGlTranDetails = resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList();
+                unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
+                var tblGLTranHeaders = resultAccountPayableAdjustment.tblGLTranHeaders.ToList();
+                unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
+                var purchaseCustomerLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdAccountPayableAdjustment == accountPayableAdjustment.Id && p.intIdPurchaseSupplierLedgerTransactionType == 3).SingleOrDefault();
+                unitOfWork.PurchaseSupplierLedger.Remove(purchaseCustomerLedger);
+                unitOfWork.AccountsPayableAdjustments.Remove(resultAccountPayableAdjustment);
+                unitOfWork.Complete();
+            }
         }
 
         //TODO:Remove Return Payment
@@ -363,7 +462,73 @@ namespace GeneralLedger.Persistence.Services
 
         public AccountPayableAdjustment UpdateDebitCreditMemo(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
         {
-            throw new NotImplementedException();
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                var resultAccountPayableAdjustment = unitOfWork.AccountsPayableAdjustments.GetAccountPayableAdjustmentsWithJournalEntry(accountPayableAdjustment.Id).SingleOrDefault();
+                resultAccountPayableAdjustment.AccountsPayableAdjustmentTypeId = accountPayableAdjustment.AccountsPayableAdjustmentTypeId;
+                resultAccountPayableAdjustment.TransactionNo = accountPayableAdjustment.TransactionNo;
+                resultAccountPayableAdjustment.TransactionDate = accountPayableAdjustment.TransactionDate;
+                //resultAccountPayableAdjustment.PaymentId = accountPayableAdjustment.PaymentId;
+                resultAccountPayableAdjustment.Description = accountPayableAdjustment.Description;
+                resultAccountPayableAdjustment.SupplierId = accountPayableAdjustment.SupplierId;
+                resultAccountPayableAdjustment.TotalAmount = accountPayableAdjustment.TotalAmount;
+                resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].strDescription = accountPayableAdjustment.Description;
+                resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].datBatchDate = accountPayableAdjustment.TransactionDate;
+
+                //var purchase = unitOfWork.Purchase.Get((int)accountPayableAdjustment.PurchaseId);
+                //var payment = unitOfWork.Payment.Get((int)accountPayableAdjustment.PaymentId);
+
+                var purchaseCustomerLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdAccountPayableAdjustment == accountPayableAdjustment.Id && p.intIdPurchaseSupplierLedgerTransactionType == 3).SingleOrDefault();
+                //purchaseCustomerLedger.intIdPurchase = resultAccountPayableAdjustment.PurchaseId;
+                purchaseCustomerLedger.intIdSupplier = accountPayableAdjustment.SupplierId;
+                purchaseCustomerLedger.intIdAccountPayableAdjustment = accountPayableAdjustment.Id;
+                purchaseCustomerLedger.TotalAmount = resultAccountPayableAdjustment.TotalAmount;
+                purchaseCustomerLedger.TransactionDate = accountPayableAdjustment.TransactionDate;
+                purchaseCustomerLedger.TransactionNo = accountPayableAdjustment.TransactionNo;
+                purchaseCustomerLedger.DateInserted = DateTime.Now;
+                //purchase.IsPurchaseReturn = true;
+
+                unitOfWork.GLTranDetail.RemoveRange(resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList());
+
+                if (UseDefaultEntry)
+                {
+                    var gLTranDetailDefault = new List<tblGLTranDetail>();
+                    foreach (var item in gLTranDetailDefault)
+                    {
+                        resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit,
+                            intIDGLTranHeader = item.intIDGLTranHeader,
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub
+
+                        });
+                    }
+                }
+                else
+                {
+                    foreach (var item in tblGLTranDetail)
+                    {
+                        resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
+                        {
+                            curCredit = item.curCredit,
+                            curDebit = item.curDebit,
+                            intIDGLTranHeader = item.intIDGLTranHeader,
+                            intIDMasCoa = item.intIDMasCoa,
+                            intIDMasCoaSub = item.intIDMasCoaSub
+
+                        });
+                    }
+
+                }
+
+                resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].blnUseDefaultEntry = UseDefaultEntry;
+                resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].curCreditAmount = resultAccountPayableAdjustment.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curCredit);
+                resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].curDebitAmount = resultAccountPayableAdjustment.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curDebit);
+                unitOfWork.Complete();
+                return resultAccountPayableAdjustment;
+            }
         }
 
         public AccountPayableAdjustment UpdateReturnPayment(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)

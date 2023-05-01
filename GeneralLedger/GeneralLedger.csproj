@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>38</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -167,6 +167,12 @@
       <DependentUpon>ResetPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UserControls\frmAccountPayableAdjustmentDebitCreditMemo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmAccountPayableAdjustmentDebitCreditMemo.Designer.cs">
+      <DependentUpon>frmAccountPayableAdjustmentDebitCreditMemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\frmAccountPayableAdjustmentReturnPurchase.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -455,6 +461,12 @@
     <Compile Include="UserControls\SeachJournalEntry.Designer.cs">
       <DependentUpon>SeachJournalEntry.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchAdjustmentAccountPayableAdjustmentsDebitCreditMemo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchAdjustmentAccountPayableAdjustmentsDebitCreditMemo.Designer.cs">
+      <DependentUpon>SearchAdjustmentAccountPayableAdjustmentsDebitCreditMemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchAdjustmentAccountPayableAdjustmentsReturnPurchase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -628,6 +640,9 @@
     <EmbeddedResource Include="ResetPassword.resx">
       <DependentUpon>ResetPassword.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmAccountPayableAdjustmentDebitCreditMemo.resx">
+      <DependentUpon>frmAccountPayableAdjustmentDebitCreditMemo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmAccountPayableAdjustmentReturnPurchase.resx">
       <DependentUpon>frmAccountPayableAdjustmentReturnPurchase.cs</DependentUpon>
     </EmbeddedResource>
@@ -779,6 +794,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SeachJournalEntry.resx">
       <DependentUpon>SeachJournalEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchAdjustmentAccountPayableAdjustmentsDebitCreditMemo.resx">
+      <DependentUpon>SearchAdjustmentAccountPayableAdjustmentsDebitCreditMemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchAdjustmentAccountPayableAdjustmentsReturnPurchase.resx">
       <DependentUpon>SearchAdjustmentAccountPayableAdjustmentsReturnPurchase.cs</DependentUpon>
