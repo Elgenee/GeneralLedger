@@ -24,6 +24,7 @@ namespace GeneralLedger.Persistence.Repositories
                  .Include(a => a.tblGLTranHeaders)
                  .Include(a => a.AccountsPayableAdjustmentsType)
                  .Include(a => a.Supplier)
+                 .Include(a => a.Purchase)
                  .Where(a => (a.TransactionNo.ToLower().Contains(criteria.ToLower())
                 || a.Supplier.strName.ToLower().Contains(criteria.ToLower()))
                 && (a.AccountsPayableAdjustmentTypeId == 2 || a.AccountsPayableAdjustmentTypeId == 3)).ToList().Take(100);

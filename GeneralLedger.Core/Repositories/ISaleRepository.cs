@@ -13,6 +13,8 @@ namespace GeneralLedger.Core.Repositories
 
         IEnumerable<Sale> GetSaleWithCustomerAgent(string criteria);
 
+        IEnumerable<Sale> GetSalesWithoutReturnSales(string criteria);
+
         Sale GetSaleWithCustomerAgent(int Id);
 
     }

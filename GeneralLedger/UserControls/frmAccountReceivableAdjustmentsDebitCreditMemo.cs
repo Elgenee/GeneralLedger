@@ -27,8 +27,8 @@ namespace GeneralLedger.UserControls
         public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
         public GLTranServices GLTranServices { get; set; }
         public List<tblGLTranDetail> GLTranDetail { get; set; }
-
         public int ID { get; set; }
+        public int SaleId { get; set; }
         public int CustomerId { get; set; }
         public int IndexGrid { get; set; }
         public int GLTranHeader { get; set; }
@@ -92,6 +92,7 @@ namespace GeneralLedger.UserControls
                         TransactionNo = this.txtAdjustmentTransactionNo.Text,
                         TransactionDate = this.dtAdjustmentTransactionDate.Value,
                         Descrpition = this.txtDescription.Text,
+                        SalesId = this.SaleId,
                         CustomerId = this.CustomerId,
                         TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0
                    
@@ -111,7 +112,8 @@ namespace GeneralLedger.UserControls
                     AccountReceivableAdjustment.TransactionNo = this.txtAdjustmentTransactionNo.Text;
                     AccountReceivableAdjustment.TransactionDate = this.dtAdjustmentTransactionDate.Value;
                     AccountReceivableAdjustment.Descrpition = this.txtDescription.Text;
-                    AccountReceivableAdjustment.CustomerId = CustomerId;
+                    AccountReceivableAdjustment.SalesId = SaleId;
+                    AccountReceivableAdjustment.CustomerId = this.CustomerId;
                     AccountReceivableAdjustment.TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
 
 
@@ -367,15 +369,15 @@ namespace GeneralLedger.UserControls
                     this.txtAdjustmentTransactionNo.Text = sje.AccountReceivableAdjustment.TransactionNo;
                     this.dtAdjustmentTransactionDate.Value = (DateTime)sje.AccountReceivableAdjustment.TransactionDate;
                     this.CustomerId = sje.AccountReceivableAdjustment.Customer.Id;
-                    this.txtCustomerID.Text = sje.AccountReceivableAdjustment.Customer.Id.ToString();
-                    this.txtCustomerName.Text = sje.AccountReceivableAdjustment.Customer.strName;
+                    //this.txtCustomerID.Text = sje.AccountReceivableAdjustment.Customer.Id.ToString();
+                    //this.txtCustomerName.Text = sje.AccountReceivableAdjustment.Customer.strName;
                     //this.CollectionId = (int)sje.AccountReceivableAdjustment.CollectionId;
                     // this.txtCollectionId.Text = sje.AccountReceivableAdjustment.CollectionId.ToString();
-                    //this.SaleId = (int)sje.AccountReceivableAdjustment.SalesId;
-                    //this.txtSaleTransactionNo.Text = sje.AccountReceivableAdjustment.Sale.TRANo;
-                    //this.txtCustomerName.Text = sje.AccountReceivableAdjustment.Sale.Customer.strName;
-                    //this.txtSaleID.Text = this.SaleId.ToString();
-                    //this.txtSalePONo.Text = sje.AccountReceivableAdjustment.Sale.PONo;
+                    this.SaleId = (int)sje.AccountReceivableAdjustment.Sale.Id;
+                    this.txtSaleTransactionNo.Text = sje.AccountReceivableAdjustment.Sale.TRANo;
+                    this.txtCustomerName.Text = sje.AccountReceivableAdjustment.Sale.Customer.strName;
+                    this.txtSaleID.Text = this.SaleId.ToString();
+                    this.txtSalePONo.Text = sje.AccountReceivableAdjustment.Sale.PONo;
                     //this.txtCollectionTransactionNo.Text = sje.AccountReceivableAdjustment.Collection.TRANo.ToString();
                     //this.cbBank.SelectedValue = sje.AccountReceivableAdjustment.Collection.BankId;
                     //this.chkIsCash.Checked = (bool)sje.AccountReceivableAdjustment.Collection.IsCash;
@@ -472,8 +474,12 @@ namespace GeneralLedger.UserControls
             this.txtAdjustmentId.Text = String.Empty;
             this.txtAdjustmentTransactionNo.Text =  String.Empty; 
             this.CustomerId = 0;
-            this.txtCustomerID.Text = String.Empty;
+            this.SaleId = 0;
+            this.txtSaleID.Text = String.Empty;
+            this.txtSaleTransactionNo.Text = String.Empty;
             this.txtCustomerName.Text = String.Empty;
+            //this.txtCustomerID.Text = String.Empty;
+            //this.txtCustomerName.Text = String.Empty;
             this.txtTotal.Text =  String.Empty;
             this.txtDescription.Text = String.Empty;
             this.txtTotalDebit.Text = string.Empty;
@@ -553,8 +559,8 @@ namespace GeneralLedger.UserControls
                 if (res == DialogResult.OK)
                 {
                     this.CustomerId = sc.Customer.ID;
-                    this.txtCustomerID.Text = sc.Customer.ID.ToString();
-                    this.txtCustomerName.Text = sc.Customer.Name;
+                    //this.txtCustomerID.Text = sc.Customer.ID.ToString();
+                    //this.txtCustomerName.Text = sc.Customer.Name;
    
                 }
 
@@ -574,6 +580,36 @@ namespace GeneralLedger.UserControls
             this.cbAdjustmentType.DataSource = accountReceivableAdjustmentTpesList;
             this.cbAdjustmentType.ValueMember = "ID";
             this.cbAdjustmentType.DisplayMember = "Name";
+        }
+
+        
+        private void btnSearchSale_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SearchSale sje = new SearchSale();
+                sje.BringToFront();
+                sje.TopMost = true;
+                sje.IsSales = true;
+                DialogResult res = sje.ShowDialog(this);
+
+                if (res == DialogResult.OK)
+                {
+                    this.SaleId = sje.Sale.Id;
+                    this.CustomerId = (int)sje.Sale.intIdCustomer;
+                    this.txtSaleID.Text = sje.Sale.Id.ToString();
+                    this.txtSaleTransactionNo.Text = sje.Sale.TRANo;
+                    this.txtSalePONo.Text = sje.Sale.PONo;
+                    this.txtCustomerName.Text = sje.Sale.Customer.strName;
+                    //this.txtTotal.Text = sje.Sale.Total.ToString();
+     
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

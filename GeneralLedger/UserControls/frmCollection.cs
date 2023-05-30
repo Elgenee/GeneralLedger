@@ -80,6 +80,7 @@ namespace GeneralLedger.UserControls
                 SearchSale sje = new SearchSale();
                 sje.BringToFront();
                 sje.TopMost = true;
+                sje.IsCollection = true;
                 DialogResult res = sje.ShowDialog(this);
 
                 if (res == DialogResult.OK)

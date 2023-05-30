@@ -35,7 +35,7 @@ namespace GeneralLedger.UserControls
             }
         }
 
-        //TODO:Add reset password
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             try

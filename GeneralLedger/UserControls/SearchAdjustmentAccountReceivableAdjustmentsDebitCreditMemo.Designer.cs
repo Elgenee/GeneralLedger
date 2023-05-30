@@ -34,6 +34,7 @@
             this.btnSelect = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.dgSearchAccountReceivableAdjustments = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsReceivableAdjustmentsTypeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AccountsReceivableAdjustmentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,11 +42,13 @@
             this.AccountsReceivableAdjustmentTransactionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CustomerId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalesTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalesPoNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchAccountReceivableAdjustments)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -128,7 +131,10 @@
             this.AccountsReceivableAdjustmentTransactionDate,
             this.TotalAmount,
             this.CustomerId,
+            this.SalesId,
             this.Customer,
+            this.SalesTransactionNo,
+            this.SalesPoNo,
             this.GLTranHeaderID,
             this.Description,
             this.UseDefaultEntry});
@@ -150,6 +156,21 @@
             this.dgSearchAccountReceivableAdjustments.RowTemplate.Height = 30;
             this.dgSearchAccountReceivableAdjustments.Size = new System.Drawing.Size(1285, 478);
             this.dgSearchAccountReceivableAdjustments.TabIndex = 66;
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.dgSearchAccountReceivableAdjustments);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 12;
+            this.metroPanel1.Location = new System.Drawing.Point(44, 141);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1285, 478);
+            this.metroPanel1.TabIndex = 40;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 13;
             // 
             // ID
             // 
@@ -209,6 +230,14 @@
             this.CustomerId.ReadOnly = true;
             this.CustomerId.Width = 125;
             // 
+            // SalesId
+            // 
+            this.SalesId.HeaderText = "SalesId";
+            this.SalesId.MinimumWidth = 6;
+            this.SalesId.Name = "SalesId";
+            this.SalesId.ReadOnly = true;
+            this.SalesId.Width = 125;
+            // 
             // Customer
             // 
             this.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -217,6 +246,22 @@
             this.Customer.Name = "Customer";
             this.Customer.ReadOnly = true;
             this.Customer.Width = 93;
+            // 
+            // SalesTransactionNo
+            // 
+            this.SalesTransactionNo.HeaderText = "SalesTransactionNo";
+            this.SalesTransactionNo.MinimumWidth = 6;
+            this.SalesTransactionNo.Name = "SalesTransactionNo";
+            this.SalesTransactionNo.ReadOnly = true;
+            this.SalesTransactionNo.Width = 125;
+            // 
+            // SalesPoNo
+            // 
+            this.SalesPoNo.HeaderText = "SalesPoNo";
+            this.SalesPoNo.MinimumWidth = 6;
+            this.SalesPoNo.Name = "SalesPoNo";
+            this.SalesPoNo.ReadOnly = true;
+            this.SalesPoNo.Width = 125;
             // 
             // GLTranHeaderID
             // 
@@ -242,21 +287,6 @@
             this.UseDefaultEntry.Name = "UseDefaultEntry";
             this.UseDefaultEntry.ReadOnly = true;
             this.UseDefaultEntry.Width = 125;
-            // 
-            // metroPanel1
-            // 
-            this.metroPanel1.Controls.Add(this.dgSearchAccountReceivableAdjustments);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 12;
-            this.metroPanel1.Location = new System.Drawing.Point(44, 141);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1285, 478);
-            this.metroPanel1.TabIndex = 40;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 13;
             // 
             // SearchAdjustmentAccountReceivableAdjustmentsDebitCreditMemo
             // 
@@ -292,7 +322,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsReceivableAdjustmentTransactionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SalesId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Customer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SalesTransactionNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SalesPoNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLTranHeaderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn UseDefaultEntry;

@@ -20,6 +20,8 @@ namespace GeneralLedger.UserControls
         public SaleServices SaleServices { get; set; }
         //public GeneralLedger.Tier.BO.customerName customerName { get; set; }
         public int Index { get; set; }
+        public bool IsCollection { get; set; } = false;
+        public bool IsSales { get; set; } = false;
 
         public SearchSale()
         {
@@ -39,7 +41,17 @@ namespace GeneralLedger.UserControls
         {
             try
             {
-                var saleResult = SaleServices.GetSaleWithCustomerAgent(this.txtCriteria.Text);
+                List<Sale> saleResult;
+
+                if (IsCollection)
+                {
+                    saleResult = SaleServices.GetSalesWithoutReturnSales(this.txtCriteria.Text);
+                }
+                else
+                {
+                    saleResult = SaleServices.GetSaleWithCustomerAgent(this.txtCriteria.Text);
+                }
+                //var saleResult = SaleServices.GetSaleWithCustomerAgent(this.txtCriteria.Text);
                 //List<GeneralLedger.Tier.BO.customerName> customerList = customerBAL.getCustomer(this.txtCriteria.Text);
                 int intParser;
                 if ((saleResult != null) && saleResult.Count > 0)

@@ -19,17 +19,34 @@ namespace GeneralLedger.Persistence.Repositories
             get { return Context as GeneralLedgerContext; }
         }
 
+        public IEnumerable<Sale> GetSalesWithoutReturnSales(string criteria)
+        {
+
+            return GeneralLedgerContext.Sales
+               .Include(s => s.Customer)
+               .Include(s => s.Agent)
+               .Include(s => s.tblGLTranHeaders)
+               .Include(s => s.AccountReceivableAdjustments)
+               .Where(s => (s.PONo.ToLower().Contains(criteria.ToLower())
+               || s.TRANo.ToLower().Contains(criteria.ToLower())
+               || s.Customer.strName.ToLower().Contains(criteria.ToLower())
+               || s.Agent.Name.ToLower().Contains(criteria.ToLower())) &&
+               ((s.AccountReceivableAdjustments.Count > 0 && s.AccountReceivableAdjustments.Any(a => a.AccountsReceivableAdjustmentsTypeId != 1002))
+                || s.AccountReceivableAdjustments.Count == 0))
+               .ToList()
+               .Take(100);
+        }
+
         public IEnumerable<Sale> GetSaleWithCustomerAgent(string criteria)
         {
             return GeneralLedgerContext.Sales
                 .Include(s => s.Customer)
                 .Include(s => s.Agent)
                 .Include(s => s.tblGLTranHeaders)
-                .Where(s => s.PONo.ToLower().Contains(criteria.ToLower())
+                .Include(s => s.AccountReceivableAdjustments)
+                .Where(s => (s.PONo.ToLower().Contains(criteria.ToLower())
                 || s.TRANo.ToLower().Contains(criteria.ToLower())
-                || s.Customer.strName.ToLower().Contains(criteria.ToLower())
-                || s.Agent.Name.ToLower().Contains(criteria.ToLower()))
-                .ToList().Take(100);
+                || s.Customer.strName.ToLower().Contains(criteria.ToLower()))).ToList().Take(100);
         }
 
         public Sale GetSaleWithCustomerAgent(int Id)

@@ -30,11 +30,26 @@ namespace GeneralLedger.Persistence.Repositories
                 .ToList();
         }
 
+        public IEnumerable<Purchase> GetPurchaseWithoutReturnPurchases(string criteria)
+        {
+            return GeneralLedgerContext.Purchases
+                 .Include(p => p.Supplier)
+                 .Include(p => p.tblGLTranHeaders)
+                 .Where(p => (p.PONo.ToLower().Contains(criteria.ToLower())
+                 || p.TRANo.ToLower().Contains(criteria.ToLower())
+                 || p.Supplier.strName.ToLower().Contains(criteria.ToLower())
+                 || p.SIDR.ToLower().Contains(criteria.ToLower())) &&
+                 ((p.AccountPayableAdjustments.Count > 0 && p.AccountPayableAdjustments.Any(a => a.AccountsPayableAdjustmentTypeId != 4))
+                 || p.AccountPayableAdjustments.Count == 0))
+                 .ToList().Take(100);
+        }
+
         public IEnumerable<Purchase> GetPurchaseWithSupplier(string criteria)
         {
             return GeneralLedgerContext.Purchases
                 .Include(p => p.Supplier)
                 .Include(p => p.tblGLTranHeaders)
+                .Include(p => p.AccountPayableAdjustments)
                 .Where(p => p.PONo.ToLower().Contains(criteria.ToLower())
                 || p.TRANo.ToLower().Contains(criteria.ToLower())
                 || p.Supplier.strName.ToLower().Contains(criteria.ToLower())

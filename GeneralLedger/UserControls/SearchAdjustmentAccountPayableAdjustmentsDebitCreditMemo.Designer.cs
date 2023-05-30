@@ -42,6 +42,11 @@
             this.AccountsPayableAdjustmentTransactionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplierId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchasePONo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseTransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseSIDR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -128,6 +133,11 @@
             this.AccountsPayableAdjustmentTransactionDate,
             this.Supplier,
             this.SupplierId,
+            this.PurchaseId,
+            this.PurchasePONo,
+            this.PurchaseTransactionNo,
+            this.PurchaseSIDR,
+            this.PurchaseTotalAmount,
             this.GLTranHeaderID,
             this.Description,
             this.UseDefaultEntry,
@@ -225,6 +235,46 @@
             this.SupplierId.ReadOnly = true;
             this.SupplierId.Width = 125;
             // 
+            // PurchaseId
+            // 
+            this.PurchaseId.HeaderText = "PurchaseId";
+            this.PurchaseId.MinimumWidth = 6;
+            this.PurchaseId.Name = "PurchaseId";
+            this.PurchaseId.ReadOnly = true;
+            this.PurchaseId.Width = 125;
+            // 
+            // PurchasePONo
+            // 
+            this.PurchasePONo.HeaderText = "PurchasePONo";
+            this.PurchasePONo.MinimumWidth = 6;
+            this.PurchasePONo.Name = "PurchasePONo";
+            this.PurchasePONo.ReadOnly = true;
+            this.PurchasePONo.Width = 125;
+            // 
+            // PurchaseTransactionNo
+            // 
+            this.PurchaseTransactionNo.HeaderText = "PurchaseTransactionNo";
+            this.PurchaseTransactionNo.MinimumWidth = 6;
+            this.PurchaseTransactionNo.Name = "PurchaseTransactionNo";
+            this.PurchaseTransactionNo.ReadOnly = true;
+            this.PurchaseTransactionNo.Width = 125;
+            // 
+            // PurchaseSIDR
+            // 
+            this.PurchaseSIDR.HeaderText = "PurchaseSIDR";
+            this.PurchaseSIDR.MinimumWidth = 6;
+            this.PurchaseSIDR.Name = "PurchaseSIDR";
+            this.PurchaseSIDR.ReadOnly = true;
+            this.PurchaseSIDR.Width = 125;
+            // 
+            // PurchaseTotalAmount
+            // 
+            this.PurchaseTotalAmount.HeaderText = "PurchaseTotalAmount";
+            this.PurchaseTotalAmount.MinimumWidth = 6;
+            this.PurchaseTotalAmount.Name = "PurchaseTotalAmount";
+            this.PurchaseTotalAmount.ReadOnly = true;
+            this.PurchaseTotalAmount.Width = 125;
+            // 
             // GLTranHeaderID
             // 
             this.GLTranHeaderID.HeaderText = "GLTranHeaderID";
@@ -292,6 +342,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AccountsPayableAdjustmentTransactionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn SupplierId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchasePONo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseTransactionNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseSIDR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLTranHeaderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn UseDefaultEntry;

@@ -145,6 +145,15 @@ namespace GeneralLedger.Persistence.Services
             }
         }
 
+        public List<Sale> GetSalesWithoutReturnSales(string criteria)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.Sale.GetSalesWithoutReturnSales(criteria).ToList();
+
+            }
+        }
+
         public List<Sale> GetSaleWithCustomerAgent(string criteria)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))

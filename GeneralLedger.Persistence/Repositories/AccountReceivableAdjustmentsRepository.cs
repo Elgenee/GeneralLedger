@@ -26,7 +26,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .Include(aj => aj.tblGLTranHeaders)
                 .Include(aj => aj.AccountsReceivableAdjustmentsType)
                 .Include(aj => aj.Customer)
-                //.Include(aj => aj.Sale.Customer)
+                .Include(aj => aj.Sale)
                 //.Include(aj => aj.Collection.Sale)
                 //.Include(aj => aj.Collection.Bank)
                 //.Include(aj => aj.Collection.Sale.Customer)

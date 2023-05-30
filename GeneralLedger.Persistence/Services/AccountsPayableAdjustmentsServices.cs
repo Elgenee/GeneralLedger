@@ -21,7 +21,7 @@ namespace GeneralLedger.Persistence.Services
 
                 var purchaseCustomerLedger = new PurchaseSupplierLedger
                 {
-                    //intIdPurchase = accountPayableAdjustment.PurchaseId,
+                    intIdPurchase = accountPayableAdjustment.PurchaseId,
                     //intIdPayment = payment.Id,
                     intIdSupplier = accountPayableAdjustment.SupplierId,
                     intIdAccountPayableAdjustment = accountPayableAdjustment.Id,
@@ -470,6 +470,7 @@ namespace GeneralLedger.Persistence.Services
                 resultAccountPayableAdjustment.TransactionDate = accountPayableAdjustment.TransactionDate;
                 //resultAccountPayableAdjustment.PaymentId = accountPayableAdjustment.PaymentId;
                 resultAccountPayableAdjustment.Description = accountPayableAdjustment.Description;
+                resultAccountPayableAdjustment.PurchaseId = accountPayableAdjustment.PurchaseId;
                 resultAccountPayableAdjustment.SupplierId = accountPayableAdjustment.SupplierId;
                 resultAccountPayableAdjustment.TotalAmount = accountPayableAdjustment.TotalAmount;
                 resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].strDescription = accountPayableAdjustment.Description;

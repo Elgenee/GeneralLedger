@@ -15,6 +15,9 @@ namespace GeneralLedger.Core.Services
         List<Purchase> GetAll();
         List<Purchase> GetPurchasesWithJournalEntry(int Id);
         List<Purchase> GetPurchaseWithSupplier(string criteria);
+
+        List<Purchase> GetPurchaseWithoutReturnPurchase(string criteria);
+
         Purchase GetPurchase(int Id);
         Purchase GetPurchaseWithSupplier(int Id);
 

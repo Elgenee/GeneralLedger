@@ -235,6 +235,7 @@ namespace GeneralLedger.UserControls
                 SearchPurchase sp = new SearchPurchase();
                 sp.BringToFront();
                 sp.TopMost = true;
+                sp.IsPayment = true;
                 DialogResult res = sp.ShowDialog(this);
 
                 if (res == DialogResult.OK)

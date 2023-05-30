@@ -11,6 +11,8 @@ namespace GeneralLedger.Core.Repositories
     {
         IEnumerable<Purchase> GetPurchasesWithJournalEntry(int Id);
         IEnumerable<Purchase> GetPurchaseWithSupplier(string criteria);
+
+        IEnumerable<Purchase> GetPurchaseWithoutReturnPurchases(string criteria);
         Purchase GetPurchaseWithSupplier(int Id);
 
     }

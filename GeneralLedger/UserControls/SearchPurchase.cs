@@ -19,6 +19,9 @@ namespace GeneralLedger.UserControls
         public Purchase Purchase { get; set; }
         public PurchaseServices PurchaseServices { get; set; }
         public int Index { get; set; }
+        public bool IsPurchase { get; set; } = false;
+        public bool IsPayment { get; set; } = false;
+
 
         public SearchPurchase()
         {
@@ -38,7 +41,19 @@ namespace GeneralLedger.UserControls
         {
             try
             {
-                var purchaseResult = PurchaseServices.GetPurchaseWithSupplier(this.txtCriteria.Text);
+  
+                List<Purchase> purchaseResult;
+
+                if (IsPayment)
+                {
+                    purchaseResult = PurchaseServices.GetPurchaseWithoutReturnPurchase(this.txtCriteria.Text);
+                }
+                else
+                {
+                    purchaseResult = PurchaseServices.GetPurchaseWithSupplier(this.txtCriteria.Text);
+                }
+
+                //var purchaseResult = PurchaseServices.GetPurchaseWithSupplier(this.txtCriteria.Text);
 
                 if ((purchaseResult != null) && purchaseResult.Count > 0)
                 {

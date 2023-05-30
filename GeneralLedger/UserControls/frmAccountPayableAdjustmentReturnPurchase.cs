@@ -640,6 +640,7 @@ namespace GeneralLedger.UserControls
                 SearchPurchase sp = new SearchPurchase();
                 sp.BringToFront();
                 sp.TopMost = true;
+                sp.IsPurchase = true;
                 DialogResult res = sp.ShowDialog(this);
 
                 if (res == DialogResult.OK)

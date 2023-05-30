@@ -30,6 +30,7 @@ namespace GeneralLedger.UserControls
         public int ID { get; set; }
         //public int PaymentId { get; set; }
         public int SupplierId { get; set; }
+        public int PurchaseId { get; set; }
         public int IndexGrid { get; set; }
         public int GLTranHeader { get; set; }
 
@@ -171,6 +172,7 @@ namespace GeneralLedger.UserControls
                          TransactionNo = this.txtAdjustmentTransactionNo.Text,
                          TransactionDate = this.dtAdjustmentTransactionDate.Value,
                          Description = this.txtDescription.Text,
+                         PurchaseId = this.PurchaseId,
                          SupplierId = this.SupplierId,
                          TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0
                      
@@ -189,6 +191,7 @@ namespace GeneralLedger.UserControls
                     AccountPayableAdjustment.TransactionNo = this.txtAdjustmentTransactionNo.Text;
                     AccountPayableAdjustment.TransactionDate = this.dtAdjustmentTransactionDate.Value;
                     AccountPayableAdjustment.Description = this.txtDescription.Text;
+                    AccountPayableAdjustment.PurchaseId = this.PurchaseId;
                     AccountPayableAdjustment.SupplierId = this.SupplierId;
                     AccountPayableAdjustment.TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
 
@@ -296,12 +299,13 @@ namespace GeneralLedger.UserControls
                     this.txtAdjustmentTransactionNo.Text = spe.AccountPayableAdjustment.TransactionNo;
                     this.dtAdjustmentTransactionDate.Value = (DateTime)spe.AccountPayableAdjustment.TransactionDate;
                     //this.PaymentId = (int)spe.AccountPayableAdjustment.PaymentId;
-           
-                    //this.PurchaseId = (int)spe.AccountPayableAdjustment.PurchaseId;
-                    this.txtSupplierId.Text = spe.AccountPayableAdjustment.Supplier.Id.ToString();
+                 
+                    this.PurchaseId = (int)spe.AccountPayableAdjustment.Purchase.Id;
+                    this.txtPurchaseId.Text = this.PurchaseId.ToString();
+                 //this.txtSupplierId.Text = spe.AccountPayableAdjustment.Supplier.Id.ToString();
                     this.SupplierId = spe.AccountPayableAdjustment.Supplier.Id;
-                    //this.txtPurchasePONo.Text = spe.AccountPayableAdjustment.Purchase.PONo;
-                    //this.txtPurchaseSIDR.Text = spe.AccountPayableAdjustment.Purchase.SIDR;
+                    this.txtPurchasePONo.Text = spe.AccountPayableAdjustment.Purchase.PONo;
+                    this.txtPurchaseSIDR.Text = spe.AccountPayableAdjustment.Purchase.SIDR;
                     this.txtSupplier.Text = spe.AccountPayableAdjustment.Supplier.strName;
                     //this.txtPaymentCV.Text = spe.AccountPayableAdjustment.Payment.PaymentCV.ToString();
                     //this.txtPurchaseSIDR.Text = spe.AccountPayableAdjustment.Payment.PaymentSIDR.ToString();
@@ -566,7 +570,7 @@ namespace GeneralLedger.UserControls
                         this.txtAdjustmentTransactionNo.Text = String.Empty;
                         //this.PurchaseId = 0;
                         //this.PaymentId = 0;
-                        this.txtSupplierId.Text = String.Empty;
+                        //this.txtSupplierId.Text = String.Empty;
                         //this.txtPurchaseTransactionNO.Text = String.Empty;
                         this.txtSupplier.Text = String.Empty;
                         //this.txtPurchasePONo.Text = string.Empty;
@@ -609,15 +613,20 @@ namespace GeneralLedger.UserControls
             this.ID = 0;
             this.txtAdjustmentId.Text = String.Empty;
             this.txtAdjustmentTransactionNo.Text = String.Empty;
-            //this.PurchaseId = 0;
+            this.PurchaseId = 0;
+            this.txtPurchaseId.Text = String.Empty;
+            this.SupplierId = 0;
+            this.txtPurchasePONo.Text = String.Empty;
+            this.txtPurchaseSIDR.Text = String.Empty;
+         
             //this.PaymentId = 0;
-            this.txtSupplierId.Text = String.Empty;
+            //this.txtSupplierId.Text = String.Empty;
             //this.txtPurchaseTransactionNO.Text = String.Empty;
             this.txtSupplier.Text = String.Empty;
            // this.txtPaymentCV.Text = String.Empty;
            // this.chkIsCash.Checked = false;
            // this.txtCheckDetails.Text = String.Empty;
-           // this.txtTotal.Text = String.Empty;
+            this.txtTotal.Text = String.Empty;
             this.txtDescription.Text = String.Empty;
 
             this.dgJournalEntry.Rows.Clear();
@@ -637,39 +646,63 @@ namespace GeneralLedger.UserControls
             
         }
 
+        //private void btnSearchSupplier_Click(object sender, EventArgs e)
+        //{
+
+        //    try
+        //    {
+        //        SearchSupplier sp = new SearchSupplier();
+        //        sp.BringToFront();
+        //        sp.TopMost = true;
+        //        DialogResult res = sp.ShowDialog(this);
+
+        //        if (res == DialogResult.OK)
+        //        {
+        //            //this.PurchaseId = sp.Purchase.Id;
+        //            //this.txtSupplierId.Text = sp.Purchase.Id.ToString();
+        //            this.SupplierId = sp.Supplier.ID;
+        //            this.txtSupplier.Text = sp.Supplier.Name;
+        //            this.txtSupplierId.Text = sp.Supplier.ID.ToString();
+        //            //this.txtPurchasePONo.Text = sp.Purchase.PONo;
+        //            // this.txtPurchaseSIDR.Text = sp.Purchase.SIDR;
+        //            // this.txtPurchaseTotal.Text = sp.Purchase.Total.ToString();
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error:" + ex.Message);
+        //    }
+
+        //}
+
         private void btnSearchPayment_Click(object sender, EventArgs e)
         {
-         
-        }
-
-        private void btnSearchSupplier_Click(object sender, EventArgs e)
-        {
-
             try
             {
-                SearchSupplier sp = new SearchSupplier();
+                SearchPurchase sp = new SearchPurchase();
                 sp.BringToFront();
                 sp.TopMost = true;
                 DialogResult res = sp.ShowDialog(this);
 
                 if (res == DialogResult.OK)
                 {
-                    //this.PurchaseId = sp.Purchase.Id;
-                    //this.txtSupplierId.Text = sp.Purchase.Id.ToString();
-                    this.SupplierId = sp.Supplier.ID;
-                    this.txtSupplier.Text = sp.Supplier.Name;
-                    this.txtSupplierId.Text = sp.Supplier.ID.ToString();
-                    //this.txtPurchasePONo.Text = sp.Purchase.PONo;
-                    // this.txtPurchaseSIDR.Text = sp.Purchase.SIDR;
-                    // this.txtPurchaseTotal.Text = sp.Purchase.Total.ToString();
+                    this.PurchaseId = sp.Purchase.Id;
+                    this.txtPurchaseId.Text = sp.Purchase.Id.ToString();
+                    this.SupplierId = sp.Purchase.Supplier.Id;
+                    this.txtSupplier.Text = sp.Purchase.Supplier.strName;
+                    this.txtPurchasePONo.Text = sp.Purchase.PONo;
+                    this.txtPurchaseSIDR.Text = sp.Purchase.SIDR;
+                    //this.txtPurchaseTotal.Text = sp.Purchase.Total.ToString();
+
                 }
 
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show("Error:" + ex.Message);
             }
-
         }
 
         //public void checkAdjustmentType() {

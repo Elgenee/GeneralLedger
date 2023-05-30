@@ -37,6 +37,7 @@ namespace GeneralLedger.UserControls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            //TODO:add column sales here
             try
             {
                 var adjustmentReceivableResult = AccountReceivableAdjustmentsServices.GetAccountReceivableAdjustmentsDMCM(this.txtCriteria.Text);
@@ -53,6 +54,9 @@ namespace GeneralLedger.UserControls
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AccountsReceivableAdjustmentTransactionDate"].Value = adjustmentReceivableResult[i].TransactionDate.Value.ToShortDateString();
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["CustomerId"].Value = adjustmentReceivableResult[i].Customer.Id;
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["Customer"].Value = adjustmentReceivableResult[i].Customer.strName;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SalesId"].Value = adjustmentReceivableResult[i].Sale.Id;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SalesTransactionNo"].Value = adjustmentReceivableResult[i].Sale.TRANo;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SalesPoNo"].Value = adjustmentReceivableResult[i].Sale.PONo;
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["GLTranHeaderID"].Value = adjustmentReceivableResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["Description"].Value = adjustmentReceivableResult[i].Descrpition;
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["UseDefaultEntry"].Value = adjustmentReceivableResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
@@ -101,6 +105,16 @@ namespace GeneralLedger.UserControls
                         {
                             Id = Int32.Parse(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["CustomerId"].Value.ToString()),
                             strName = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["Customer"].Value.ToString()
+                        },
+                        Sale = new Sale
+                        {
+                            Id = Int32.Parse(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesId"].Value.ToString()),
+                            TRANo = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesTransactionNo"].Value.ToString(),
+                            PONo = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesPoNo"].Value.ToString(),
+                            Customer = new Customer
+                            {
+                                strName = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["Customer"].Value.ToString()
+                            }
                         },
                         tblGLTranHeaders = new List<tblGLTranHeader> {
                             new tblGLTranHeader {

@@ -121,6 +121,15 @@ namespace GeneralLedger.Persistence.Services
             throw new NotImplementedException();
         }
 
+        public List<Purchase> GetPurchaseWithoutReturnPurchase(string criteria)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.Purchase.GetPurchaseWithoutReturnPurchases(criteria).ToList();
+
+            }
+        }
+
         public List<Purchase> GetPurchaseWithSupplier(string criteria)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))

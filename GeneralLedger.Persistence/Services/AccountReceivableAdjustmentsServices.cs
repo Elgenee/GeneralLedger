@@ -617,7 +617,7 @@ namespace GeneralLedger.Persistence.Services
 
                 var salesCustomerLedger = new SalesCustomerLedger
                 {
-                    //intIdSales = accountReceivableAdjustment.SalesId,
+                    intIdSales = accountReceivableAdjustment.SalesId,
                     intIdCustomer = accountReceivableAdjustment.CustomerId,
                     //intIdCollection = accountReceivableAdjustment.Id,
                     intIdAccountReceivableAdjustment = accountReceivableAdjustment.Id,
@@ -705,6 +705,7 @@ namespace GeneralLedger.Persistence.Services
                 resultAdjustmentReceivableAdjusment.TransactionDate = accountReceivableAdjustment.TransactionDate;
                 //resultAdjustmentReceivableAdjusment.CollectionId = accountReceivableAdjustment.CollectionId;
                 resultAdjustmentReceivableAdjusment.Descrpition = accountReceivableAdjustment.Descrpition;
+                resultAdjustmentReceivableAdjusment.SalesId = accountReceivableAdjustment.SalesId;
                 resultAdjustmentReceivableAdjusment.CustomerId = accountReceivableAdjustment.CustomerId;
                 resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].strDescription = accountReceivableAdjustment.Descrpition;
                 resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].datBatchDate = accountReceivableAdjustment.TransactionDate;
