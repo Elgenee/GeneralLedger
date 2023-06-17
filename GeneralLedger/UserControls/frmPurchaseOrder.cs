@@ -77,7 +77,7 @@ namespace GeneralLedger.UserControls
                             this.dgPurchaseOrderDetails.Rows[i].Cells["ActStock"].Value = ListOfProducts[i].ProductDetails[0].ActStock;
                             this.dgPurchaseOrderDetails.Rows[i].Cells["Quantity"].Value = ListOfProducts[i].ProductDetails[0].Quantity;
                             this.dgPurchaseOrderDetails.Rows[i].Cells["QuantityReceived"].Value = ListOfProducts[i].ProductDetails[0].QuantityReceived;
-                            this.dgPurchaseOrderDetails.Rows[i].Cells["Cost"].Value = ListOfProducts[i].ProductDetails[0].Cost.ToString("N", CultureInfo.InvariantCulture);
+               
                             this.dgPurchaseOrderDetails.Rows[i].Cells["SubTotal"].Value = ListOfProducts[i].ProductDetails[0].Subtotal.ToString("N", CultureInfo.InvariantCulture);
 
                         }
@@ -251,7 +251,6 @@ namespace GeneralLedger.UserControls
                            },
                            CurStock =  int.TryParse(this.dgPurchaseOrderDetails.Rows[this.Index].Cells["CurStock"].Value.ToString() , out intParser) ? intParser : 0,
                            ActStock = int.TryParse(this.dgPurchaseOrderDetails.Rows[this.Index].Cells["ActStock"].Value.ToString() , out intParser) ? intParser : 0,
-                           Cost = decimal.TryParse(this.dgPurchaseOrderDetails.Rows[this.Index].Cells["Cost"].Value.ToString(), out decimalParser) ? decimalParser : 0,
                            Quantity = int.TryParse(this.dgPurchaseOrderDetails.Rows[this.Index].Cells["Quantity"].Value.ToString() , out intParser) ? intParser : 0,
                            QuantityReceived = int.TryParse(this.dgPurchaseOrderDetails.Rows[this.Index].Cells["QuantityReceived"].Value.ToString() , out intParser) ? intParser : 0,
                            Subtotal =  decimal.TryParse(this.dgPurchaseOrderDetails.Rows[this.Index].Cells["SubTotal"].Value.ToString(), out decimalParser) ? decimalParser : 0,
@@ -276,7 +275,6 @@ namespace GeneralLedger.UserControls
                     if (obj != null)
                     {
                         obj.ProductDetails[0].Quantity = epop.Product.ProductDetails[0].Quantity;
-                        obj.ProductDetails[0].Cost = epop.Product.ProductDetails[0].Cost;
                         obj.ProductDetails[0].Subtotal = epop.Product.ProductDetails[0].Subtotal;
                         obj.ProductDetails[0].QuantityReceived = epop.Product.ProductDetails[0].QuantityReceived;
 
@@ -297,7 +295,6 @@ namespace GeneralLedger.UserControls
                                 this.dgPurchaseOrderDetails.Rows[i].Cells["ActStock"].Value = ListOfProducts[i].ProductDetails[0].ActStock;
                                 this.dgPurchaseOrderDetails.Rows[i].Cells["Quantity"].Value = ListOfProducts[i].ProductDetails[0].Quantity;
                                 this.dgPurchaseOrderDetails.Rows[i].Cells["QuantityReceived"].Value = ListOfProducts[i].ProductDetails[0].QuantityReceived;
-                                this.dgPurchaseOrderDetails.Rows[i].Cells["Cost"].Value = ListOfProducts[i].ProductDetails[0].Cost.ToString("N", CultureInfo.InvariantCulture);
                                 this.dgPurchaseOrderDetails.Rows[i].Cells["SubTotal"].Value = ListOfProducts[i].ProductDetails[0].Subtotal.ToString("N", CultureInfo.InvariantCulture);
 
                             }
@@ -352,7 +349,6 @@ namespace GeneralLedger.UserControls
                         this.dgPurchaseOrderDetails.Rows[i].Cells["ActStock"].Value = ListOfProducts[i].ProductDetails[0].ActStock;
                         this.dgPurchaseOrderDetails.Rows[i].Cells["Quantity"].Value = ListOfProducts[i].ProductDetails[0].Quantity;
                         this.dgPurchaseOrderDetails.Rows[i].Cells["QuantityReceived"].Value = ListOfProducts[i].ProductDetails[0].QuantityReceived;
-                        this.dgPurchaseOrderDetails.Rows[i].Cells["Cost"].Value = ListOfProducts[i].ProductDetails[0].Cost.ToString("N", CultureInfo.InvariantCulture);
                         this.dgPurchaseOrderDetails.Rows[i].Cells["SubTotal"].Value = ListOfProducts[i].ProductDetails[0].Subtotal.ToString("N", CultureInfo.InvariantCulture);
 
                     }

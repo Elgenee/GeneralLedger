@@ -127,7 +127,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells["Brand"].Value = productList[i].ProductBrand.Name;
                         this.dgProduct.Rows[i].Cells["CurStock"].Value = productList[i].ProductDetails[0].CurStock;
                         this.dgProduct.Rows[i].Cells["ActStock"].Value = productList[i].ProductDetails[0].ActStock;
-                        this.dgProduct.Rows[i].Cells["Cost"].Value = productList[i].ProductDetails[0].Cost.ToString("N", CultureInfo.InvariantCulture);
+                     
                     }
 
                     setRowNumber(this.dgProduct);
@@ -224,7 +224,6 @@ namespace GeneralLedger.UserControls
                            },
                            CurStock =  int.TryParse(this.dgProduct.Rows[this.Index].Cells["CurStock"].Value.ToString() , out intParser) ? intParser : 0,
                            ActStock = int.TryParse(this.dgProduct.Rows[this.Index].Cells["ActStock"].Value.ToString() , out intParser) ? intParser : 0,
-                           Cost = decimal.TryParse(this.txtCost.Text, out decimalParser) ? decimalParser : 0,
                            Quantity = int.TryParse(this.txtQuantity.Text , out intParser) ? intParser : 0,
                            QuantityReceived = int.TryParse(this.txtQuantityReceived.Text , out intParser) ? intParser : 0,
                            Subtotal =  decimal.TryParse(this.txtSubTotal.Text, out decimalParser) ? decimalParser : 0,

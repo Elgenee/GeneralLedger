@@ -54,7 +54,7 @@ namespace GeneralLedger.Tier.DAL
                                              Name = ReferenceEquals(reader["ProductSize"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductSize"])
                                          },
                                          CurStock =  ReferenceEquals(reader["curStock"], DBNull.Value) ? 0 : Convert.ToInt32(reader["curStock"]),
-                                         Cost =  ReferenceEquals(reader["curCost"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCost"]),
+                                         //Cost =  ReferenceEquals(reader["curCost"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCost"]),
                                          ActStock =  ReferenceEquals(reader["actStock"], DBNull.Value) ? 0 : Convert.ToInt32(reader["actStock"]),
                                     }
                                 },

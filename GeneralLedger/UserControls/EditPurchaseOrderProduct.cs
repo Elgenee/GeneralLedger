@@ -34,7 +34,6 @@ namespace GeneralLedger.UserControls
                 this.txtCurStock.Text = this.Product.ProductDetails[0].CurStock.ToString();
                 this.txtActStock.Text = this.Product.ProductDetails[0].ActStock.ToString();
                 this.txtQuantity.Text = this.Product.ProductDetails[0].Quantity.ToString();
-                this.txtCost.Text = this.Product.ProductDetails[0].Cost.ToString();
                 this.txtSubTotal.Text = this.Product.ProductDetails[0].Subtotal.ToString();
                 this.txtQuantityReceived.Text = this.Product.ProductDetails[0].QuantityReceived.ToString();
             }
@@ -53,7 +52,7 @@ namespace GeneralLedger.UserControls
                 int intParser;
                 decimal decimalParser;
                 this.Product.ProductDetails[0].Quantity = int.TryParse(this.txtQuantity.Text, out intParser) ? intParser : 0;
-                this.Product.ProductDetails[0].Cost = decimal.TryParse(this.txtCost.Text, out decimalParser) ? decimalParser : 0;
+         
                 this.Product.ProductDetails[0].Subtotal = decimal.TryParse(this.txtSubTotal.Text, out decimalParser) ? decimalParser : 0;
                 this.Product.ProductDetails[0].QuantityReceived = int.TryParse(this.txtQuantityReceived.Text, out intParser) ? intParser : 0;
 

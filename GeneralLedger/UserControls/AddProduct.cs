@@ -119,9 +119,9 @@ namespace GeneralLedger.UserControls
                     Length = decimal.TryParse(this.txtLength.Text, out decimalParser) ? decimalParser : 0,
                     Width = decimal.TryParse(this.txtWidth.Text, out decimalParser) ? decimalParser : 0,
                     Height = decimal.TryParse(this.txtHeight.Text, out decimalParser) ? decimalParser : 0,
-                    Cost = decimal.TryParse(this.txtCost.Text, out decimalParser) ? decimalParser : 0,
-                    Retail = decimal.TryParse(this.txtRetail.Text, out decimalParser) ? decimalParser : 0,
-                    Wholesale = decimal.TryParse(this.txtWholesale.Text, out decimalParser) ? decimalParser : 0,
+                    //Cost = decimal.TryParse(this.txtCost.Text, out decimalParser) ? decimalParser : 0,
+                    //Retail = decimal.TryParse(this.txtRetail.Text, out decimalParser) ? decimalParser : 0,
+                    //Wholesale = decimal.TryParse(this.txtWholesale.Text, out decimalParser) ? decimalParser : 0,
 
                 };
 
@@ -171,9 +171,7 @@ namespace GeneralLedger.UserControls
                         this.dgProductColorAndProductSize.Rows[i].Cells[6].Value = searchProductAndColorAndSizeList[i].Length;
                         this.dgProductColorAndProductSize.Rows[i].Cells[7].Value = searchProductAndColorAndSizeList[i].Width;
                         this.dgProductColorAndProductSize.Rows[i].Cells[8].Value = searchProductAndColorAndSizeList[i].Height;
-                        this.dgProductColorAndProductSize.Rows[i].Cells[9].Value = searchProductAndColorAndSizeList[i].Cost.ToString("N", CultureInfo.InvariantCulture);
-                        this.dgProductColorAndProductSize.Rows[i].Cells[10].Value = searchProductAndColorAndSizeList[i].Retail.ToString("N", CultureInfo.InvariantCulture);
-                        this.dgProductColorAndProductSize.Rows[i].Cells[11].Value = searchProductAndColorAndSizeList[i].Wholesale.ToString("N", CultureInfo.InvariantCulture);
+                     
                     }
 
                     setRowNumber(this.dgProductColorAndProductSize);
@@ -223,10 +221,7 @@ namespace GeneralLedger.UserControls
             this.dgProductColorAndProductSize.Columns[6].Visible = true;
             this.dgProductColorAndProductSize.Columns[7].Visible = true;
             this.dgProductColorAndProductSize.Columns[8].Visible = true;
-            this.dgProductColorAndProductSize.Columns[9].Visible = true;
-            this.dgProductColorAndProductSize.Columns[10].Visible = true;
-            this.dgProductColorAndProductSize.Columns[11].Visible = true;
-            this.dgProductColorAndProductSize.Columns[12].Visible = true;
+            //this.dgProductColorAndProductSize.Columns[9].Visible = true;
             //this.dgProductColorAndProductSize.Columns[13].Visible = true;
             this.dgProductColorAndProductSize.Rows.Clear();
 
@@ -280,9 +275,7 @@ namespace GeneralLedger.UserControls
                     this.txtLength.Value = Int32.TryParse(dgProductColorAndProductSize.Rows[e.RowIndex].Cells[6].Value.ToString(), out intParser) ? intParser : 0;
                     this.txtWidth.Value =  Int32.TryParse(dgProductColorAndProductSize.Rows[e.RowIndex].Cells[7].Value.ToString(), out intParser) ? intParser : 0;
                     this.txtHeight.Value = Int32.TryParse(dgProductColorAndProductSize.Rows[e.RowIndex].Cells[8].Value.ToString(), out intParser) ? intParser : 0;
-                    this.txtCost.Value = Double.TryParse(dgProductColorAndProductSize.Rows[e.RowIndex].Cells[9].Value.ToString(), out doubleParser) ? doubleParser : 0;
-                    this.txtRetail.Value = Double.TryParse(dgProductColorAndProductSize.Rows[e.RowIndex].Cells[10].Value.ToString(), out doubleParser) ? doubleParser : 0;
-                    this.txtWholesale.Value = Double.TryParse(dgProductColorAndProductSize.Rows[e.RowIndex].Cells[11].Value.ToString(), out doubleParser) ? doubleParser : 0;
+                   
                 }
                
             }
@@ -328,9 +321,6 @@ namespace GeneralLedger.UserControls
                     Length = decimal.TryParse(this.txtLength.Text, out decimalParser) ? decimalParser : 0,
                     Width = decimal.TryParse(this.txtWidth.Text, out decimalParser) ? decimalParser : 0,
                     Height = decimal.TryParse(this.txtHeight.Text, out decimalParser) ? decimalParser : 0,
-                    Cost = decimal.TryParse(this.txtCost.Text, out decimalParser) ? decimalParser : 0,
-                    Retail = decimal.TryParse(this.txtRetail.Text, out decimalParser) ? decimalParser : 0,
-                    Wholesale = decimal.TryParse(this.txtWholesale.Text, out decimalParser) ? decimalParser : 0,
 
                 };
 
@@ -346,9 +336,6 @@ namespace GeneralLedger.UserControls
                     this.txtLength.Text = string.Empty;
                     this.txtWidth.Text = string.Empty;
                     this.txtHeight.Text = string.Empty;
-                    this.txtCost.Text = string.Empty;
-                    this.txtRetail.Text = string.Empty;
-                    this.txtWholesale.Text = string.Empty;
                     LoadProductDetail(this.ID);
                     MessageBox.Show("Successfully deleted");
                 }
@@ -601,9 +588,7 @@ namespace GeneralLedger.UserControls
             this.txtLength.Text = string.Empty;
             this.txtWidth.Text = string.Empty;
             this.txtHeight.Text = string.Empty;
-            this.txtCost.Text = string.Empty;
-            this.txtRetail.Text = string.Empty;
-            this.txtWholesale.Text = string.Empty;
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -619,9 +604,7 @@ namespace GeneralLedger.UserControls
             this.txtLength.Text = string.Empty;
             this.txtWidth.Text = string.Empty;
             this.txtHeight.Text = string.Empty;
-            this.txtCost.Text = string.Empty;
-            this.txtRetail.Text = string.Empty;
-            this.txtWholesale.Text = string.Empty;
+
             this.cbCharacteristic.Enabled = true;
             LoadProductDetail(0);
         }
@@ -659,10 +642,7 @@ namespace GeneralLedger.UserControls
                     Mininum = decimal.TryParse(this.txtMinimun.Text, out decimalParser) ? decimalParser : 0,
                     Length = decimal.TryParse(this.txtLength.Text, out decimalParser) ? decimalParser : 0,
                     Width = decimal.TryParse(this.txtWidth.Text, out decimalParser) ? decimalParser : 0,
-                    Height = decimal.TryParse(this.txtHeight.Text, out decimalParser) ? decimalParser : 0,
-                    Cost = decimal.TryParse(this.txtCost.Text, out decimalParser) ? decimalParser : 0,
-                    Retail = decimal.TryParse(this.txtRetail.Text, out decimalParser) ? decimalParser : 0,
-                    Wholesale = decimal.TryParse(this.txtWholesale.Text, out decimalParser) ? decimalParser : 0,
+                    Height = decimal.TryParse(this.txtHeight.Text, out decimalParser) ? decimalParser : 0
 
                 };
 
@@ -679,9 +659,6 @@ namespace GeneralLedger.UserControls
                     this.txtLength.Text = string.Empty;
                     this.txtWidth.Text = string.Empty;
                     this.txtHeight.Text = string.Empty;
-                    this.txtCost.Text = string.Empty;
-                    this.txtRetail.Text = string.Empty;
-                    this.txtWholesale.Text = string.Empty;
                     LoadProductDetail(this.ID);
                 }
             }

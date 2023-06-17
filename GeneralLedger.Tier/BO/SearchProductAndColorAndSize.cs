@@ -21,9 +21,6 @@ namespace GeneralLedger.Tier.BO
         public decimal Length { get; set; }
         public decimal Width { get; set; }
         public decimal Height { get; set; }
-        public decimal Cost { get; set; }
-        public decimal Retail { get; set; }
-        public decimal Wholesale { get; set; }
         public string Unit { get; set; }
         public int Quantity { get; set; }
         public int QuantityReceived { get; set; }

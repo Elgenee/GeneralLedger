@@ -257,10 +257,7 @@ namespace GeneralLedger.Tier.DAL
                                 Length = ReferenceEquals(reader["intLength"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intLength"]),
                                 Width = ReferenceEquals(reader["intWidth"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intWidth"]),
                                 Height = ReferenceEquals(reader["intHeight"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intHeight"]),
-                                Cost = ReferenceEquals(reader["curCost"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCost"]),
-                                Retail = ReferenceEquals(reader["curRetail"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curRetail"]),
-                                Wholesale = ReferenceEquals(reader["curWholesale"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curWholesale"])
-                               
+                              
 
                             };
                             SearchProductAndColorAndSizeList.Add(SearchProductAndColorAndSize);

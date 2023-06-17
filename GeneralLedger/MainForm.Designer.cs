@@ -65,6 +65,7 @@
             this.btnChartOfAccounts = new MetroFramework.Controls.MetroTile();
             this.btnJournalEntry = new MetroFramework.Controls.MetroTile();
             this.LoginUser = new MetroFramework.Controls.MetroLabel();
+            this.btnProductUnit = new MetroFramework.Controls.MetroTile();
             this.metroTabControlMain.SuspendLayout();
             this.metroTabPageHome.SuspendLayout();
             this.SuspendLayout();
@@ -89,6 +90,7 @@
             // metroTabPageHome
             // 
             this.metroTabPageHome.AutoScroll = true;
+            this.metroTabPageHome.Controls.Add(this.btnProductUnit);
             this.metroTabPageHome.Controls.Add(this.btnAPDMCM);
             this.metroTabPageHome.Controls.Add(this.btnReturnPayment);
             this.metroTabPageHome.Controls.Add(this.btnReturnPurchase);
@@ -403,7 +405,7 @@
             // 
             this.btnUser.ActiveControl = null;
             this.btnUser.Enabled = false;
-            this.btnUser.Location = new System.Drawing.Point(633, 388);
+            this.btnUser.Location = new System.Drawing.Point(1316, 295);
             this.btnUser.Margin = new System.Windows.Forms.Padding(4);
             this.btnUser.Name = "btnUser";
             this.btnUser.Size = new System.Drawing.Size(231, 85);
@@ -706,6 +708,22 @@
             this.LoginUser.TabIndex = 6;
             this.LoginUser.Text = "LoginUser";
             // 
+            // btnProductUnit
+            // 
+            this.btnProductUnit.ActiveControl = null;
+            this.btnProductUnit.Enabled = false;
+            this.btnProductUnit.Location = new System.Drawing.Point(633, 388);
+            this.btnProductUnit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnProductUnit.Name = "btnProductUnit";
+            this.btnProductUnit.Size = new System.Drawing.Size(231, 85);
+            this.btnProductUnit.Style = MetroFramework.MetroColorStyle.Silver;
+            this.btnProductUnit.TabIndex = 37;
+            this.btnProductUnit.Text = "Product Unit";
+            this.btnProductUnit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnProductUnit.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnProductUnit.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.btnProductUnit.UseSelectable = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -768,5 +786,6 @@
         private MetroFramework.Controls.MetroTile btnReturnPayment;
         private MetroFramework.Controls.MetroTile btnReturnPurchase;
         private MetroFramework.Controls.MetroTile btnAPDMCM;
+        private MetroFramework.Controls.MetroTile btnProductUnit;
     }
 }
