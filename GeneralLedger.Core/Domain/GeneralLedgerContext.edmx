@@ -158,17 +158,6 @@
           <Property Name="blnIsActive" Type="int" />
           <Property Name="datLastModified" Type="date" />
         </EntityType>
-        <EntityType Name="InventoryStockDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDInventoryStock" Type="int" />
-          <Property Name="intIDReference" Type="int" />
-          <Property Name="intQuantity" Type="int" />
-          <Property Name="datTransactionDate" Type="int" />
-          <Property Name="intIDInventoryStockOperationType" Type="int" />
-        </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="Id" />
@@ -218,9 +207,6 @@
           <Property Name="intTotal" Type="int" />
           <Property Name="curDefaultCost" Type="money" />
           <Property Name="intIDPriceType" Type="int" />
-          <Property Name="curDefaultRetail" Type="money" />
-          <Property Name="curDefaultWholesale" Type="money" />
-          <Property Name="curDefaultMarkup" Type="money" />
           <Property Name="intIDProductCharacteristic" Type="int" />
         </EntityType>
         <EntityType Name="ProductBrand">
@@ -264,10 +250,6 @@
           <Property Name="intWidth" Type="int" />
           <Property Name="intHeight" Type="int" />
           <Property Name="curCargoCost" Type="money" />
-          <Property Name="curCost" Type="money" />
-          <Property Name="curRetail" Type="money" />
-          <Property Name="curWholesale" Type="money" />
-          <Property Name="curMarkUp" Type="money" />
         </EntityType>
         <EntityType Name="ProductSize">
           <Key>
@@ -284,13 +266,6 @@
           <Property Name="strName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ProductUnit">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="strName" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="PuchaseOrderReceivingStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -314,183 +289,6 @@
           <Property Name="LastPaymentDate" Type="date" />
           <Property Name="IsPurchaseReturn" Type="bit" />
         </EntityType>
-        <EntityType Name="PurchaseOrder">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="strPONumber" Type="nvarchar" MaxLength="500" />
-          <Property Name="intIDSupplier" Type="int" />
-          <Property Name="intIDLocation" Type="int" />
-          <Property Name="datDatePurchased" Type="date" />
-          <Property Name="curTotalQty" Type="money" />
-          <Property Name="curSubTotal" Type="money" />
-          <Property Name="curDiscount" Type="money" />
-          <Property Name="curDiscountPercentage" Type="money" />
-          <Property Name="curGrandTotal" Type="money" />
-          <Property Name="curTotalPaid" Type="money" />
-          <Property Name="curTotalReceived" Type="money" />
-          <Property Name="curTotalRemaining" Type="money" />
-          <Property Name="blnHasPayment" Type="bit" />
-          <Property Name="curAmountPaid" Type="money" />
-          <Property Name="curChange" Type="money" />
-          <Property Name="blnApproved" Type="bit" />
-          <Property Name="intIDApprover" Type="int" />
-          <Property Name="datDateApproved" Type="datetime" />
-          <Property Name="blnAddBalanceToSupplier" Type="bit" />
-          <Property Name="datDateInserted" Type="datetime" />
-          <Property Name="intIDCreatedBy" Type="int" />
-          <Property Name="intIDReceivingStatus" Type="int" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderCustomerLedger">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDPurchaseOrder" Type="int" />
-          <Property Name="curSubTotal" Type="money" />
-          <Property Name="curDiscount" Type="money" />
-          <Property Name="curGrandTotal" Type="money" />
-          <Property Name="curTotalPaidPendingPayments" Type="money" />
-          <Property Name="curTotalDiscountsPendingDiscounts" Type="money" />
-          <Property Name="curTotalChangePendingChange" Type="money" />
-          <Property Name="curTotalBalance" Type="money" />
-          <Property Name="datDateInserted" Type="datetime" />
-          <Property Name="bitIsActive" Type="bit" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderCustomerLedgerDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDPurchaseOrderCustomerLedger" Type="int" />
-          <Property Name="intIDPaymentType" Type="int" />
-          <Property Name="strReference" Type="nvarchar" MaxLength="50" />
-          <Property Name="datDate" Type="date" />
-          <Property Name="curAmountPaid" Type="money" />
-          <Property Name="curChange" Type="money" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDPurchaseOrder" Type="int" />
-          <Property Name="intIDProduct" Type="int" />
-          <Property Name="intIDProductDetail" Type="int" />
-          <Property Name="curStock" Type="int" />
-          <Property Name="curActStock" Type="int" />
-          <Property Name="intQuantity" Type="int" />
-          <Property Name="intQuantityReceived" Type="int" />
-          <Property Name="intQuantityRemaining" Type="int" />
-          <Property Name="curCost" Type="money" />
-          <Property Name="curSubTotal" Type="money" />
-          <Property Name="intIDReceivingStatus" Type="int" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderDetailInventoryLedger">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDPurchaseOrderInventoryLedger" Type="int" />
-          <Property Name="intIDPurchaseOrder" Type="int" />
-          <Property Name="intIDPurchaseOrderDetail" Type="int" />
-          <Property Name="curStock" Type="int" />
-          <Property Name="curActStock" Type="int" />
-          <Property Name="intQuantity" Type="int" />
-          <Property Name="intQuantityReceived" Type="int" />
-          <Property Name="intQuantityRemaining" Type="int" />
-          <Property Name="intIDReceivingStatus" Type="int" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderInventoryLedger">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDPurchaseOrder" Type="int" />
-          <Property Name="datDateInserted" Type="date" />
-          <Property Name="curTotalQty" Type="int" />
-          <Property Name="curTotalReceived" Type="int" />
-          <Property Name="curTotalRemaining" Type="int" />
-          <Property Name="intIDReceivingStatus" Type="int" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderPayment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDPurchaseOrder" Type="int" />
-          <Property Name="datPaidOn" Type="date" />
-          <Property Name="datPaidBy" Type="nvarchar" MaxLength="500" />
-          <Property Name="curTotalAmount" Type="money" />
-          <Property Name="curDiscount" Type="money" />
-          <Property Name="curGrandTotal" Type="money" />
-          <Property Name="curAmountPaid" Type="money" />
-          <Property Name="intIDPurchaseOrderPaymentStatus" Type="int" />
-          <Property Name="strBankAccounts" Type="nvarchar" MaxLength="50" />
-          <Property Name="curDatCheckDate" Type="date" />
-          <Property Name="strCheckNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="datApprovedOn" Type="date" />
-          <Property Name="datApprovedBy" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderPaymentStatus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="strName" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderProductDetailHistory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDPurchaseOrderDetail" Type="int" />
-          <Property Name="intIDPurchaseOrderProductTransactionType" Type="int" />
-          <Property Name="strTransactionType" Type="nvarchar" MaxLength="500" />
-          <Property Name="intQuantity" Type="int" />
-          <Property Name="intTotalReceived" Type="int" />
-          <Property Name="intTotalReturn" Type="int" />
-          <Property Name="intTotalRemaining" Type="int" />
-          <Property Name="datDateInserted" Type="datetime" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderProductTransactionType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="strName" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderReceiving">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDPurchaseOrder" Type="int" />
-          <Property Name="datDateReceived" Type="date" />
-          <Property Name="intIDLocation" Type="int" />
-          <Property Name="strAddress" Type="nvarchar" MaxLength="500" />
-          <Property Name="strMemo" Type="nvarchar" MaxLength="500" />
-          <Property Name="datDateInserted" Type="datetime" />
-          <Property Name="blnReceivedOnPO" Type="bit" />
-          <Property Name="curTotalQty" Type="int" />
-          <Property Name="curTotalReceived" Type="int" />
-          <Property Name="curTotalRemaining" Type="int" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderReceivingDetails">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDPurchaseOrderReceiving" Type="int" />
-          <Property Name="intIDPurchaseOrderDetail" Type="int" />
-          <Property Name="intQuantity" Type="int" />
-          <Property Name="intQuantityReceived" Type="int" />
-          <Property Name="intQuantityRemaining" Type="int" />
-          <Property Name="intAddedQuantityReceived" Type="int" />
-          <Property Name="blnIsReceived" Type="bit" />
-          <Property Name="datDateInserted" Type="datetime" />
-        </EntityType>
         <EntityType Name="PurchaseSupplierLedger">
           <Key>
             <PropertyRef Name="Id" />
@@ -500,11 +298,11 @@
           <Property Name="TransactionNo" Type="nvarchar" MaxLength="500" />
           <Property Name="TransactionDate" Type="datetime" />
           <Property Name="TotalAmount" Type="money" />
-          <Property Name="intIdSupplier" Type="int" />
           <Property Name="intIdPurchase" Type="int" />
           <Property Name="intIdPayment" Type="int" />
           <Property Name="DateInserted" Type="datetime" />
           <Property Name="intIdAccountPayableAdjustment" Type="int" />
+          <Property Name="intIdSupplier" Type="int" />
         </EntityType>
         <EntityType Name="PurchaseSupplierLedgerTransactionType">
           <Key>
@@ -852,30 +650,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CustomerLedger_CustomerLedger">
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
-          <End Role="PurchaseOrderCustomerLedger" Type="Self.PurchaseOrderCustomerLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderCustomerLedger">
-              <PropertyRef Name="intIDPurchaseOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CustomerLedgerDetail_CustomerLedger">
-          <End Role="PurchaseOrderCustomerLedger" Type="Self.PurchaseOrderCustomerLedger" Multiplicity="0..1" />
-          <End Role="PurchaseOrderCustomerLedgerDetail" Type="Self.PurchaseOrderCustomerLedgerDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderCustomerLedger">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PurchaseOrderCustomerLedgerDetail">
-              <PropertyRef Name="intIDPurchaseOrderCustomerLedger" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Payment_Bank">
           <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
@@ -957,150 +731,6 @@
             </Principal>
             <Dependent Role="PurchaseSupplierLedger">
               <PropertyRef Name="intIdPurchaseSupplierLedgerTransactionType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrder_PuchaseOrderReceivingStatus">
-          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatus" Multiplicity="0..1" />
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PuchaseOrderReceivingStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrder">
-              <PropertyRef Name="intIDReceivingStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrder_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrder">
-              <PropertyRef Name="intIDApprover" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus">
-          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatus" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PuchaseOrderReceivingStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetail">
-              <PropertyRef Name="intIDReceivingStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus">
-          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatus" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PuchaseOrderReceivingStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetailInventoryLedger">
-              <PropertyRef Name="intIDReceivingStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetail">
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetailInventoryLedger">
-              <PropertyRef Name="intIDPurchaseOrderDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger">
-          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderInventoryLedger">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetailInventoryLedger">
-              <PropertyRef Name="intIDPurchaseOrderInventoryLedger" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus">
-          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatus" Multiplicity="0..1" />
-          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PuchaseOrderReceivingStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderInventoryLedger">
-              <PropertyRef Name="intIDReceivingStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderLedger_PurchaseOrder">
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
-          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderInventoryLedger">
-              <PropertyRef Name="intIDPurchaseOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger">
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
-          <End Role="PurchaseOrderProductDetailHistory" Type="Self.PurchaseOrderProductDetailHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderProductDetailHistory">
-              <PropertyRef Name="intIDPurchaseOrderDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType">
-          <End Role="PurchaseOrderProductTransactionType" Type="Self.PurchaseOrderProductTransactionType" Multiplicity="0..1" />
-          <End Role="PurchaseOrderProductDetailHistory" Type="Self.PurchaseOrderProductDetailHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderProductTransactionType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderProductDetailHistory">
-              <PropertyRef Name="intIDPurchaseOrderProductTransactionType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving">
-          <End Role="PurchaseOrderReceiving" Type="Self.PurchaseOrderReceiving" Multiplicity="0..1" />
-          <End Role="PurchaseOrderReceivingDetails" Type="Self.PurchaseOrderReceivingDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderReceiving">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderReceivingDetails">
-              <PropertyRef Name="intIDPurchaseOrderReceiving" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails">
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
-          <End Role="PurchaseOrderReceivingDetails" Type="Self.PurchaseOrderReceivingDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderReceivingDetails">
-              <PropertyRef Name="intIDPurchaseOrderDetail" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1488,78 +1118,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblPurchaseOrder_tblLocation">
-          <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblLocation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrder">
-              <PropertyRef Name="intIDLocation" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrder_tblSuppliers">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrder">
-              <PropertyRef Name="intIDSupplier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrderDetail_tblProduct">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetail">
-              <PropertyRef Name="intIDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrderDetail_tblProductDetail">
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetail">
-              <PropertyRef Name="intIDProductDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrderDetail_tblPurchaseOrder">
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetail">
-              <PropertyRef Name="intIDPurchaseOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrderPayment_tblPurchaseOrder">
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
-          <End Role="PurchaseOrderPayment" Type="Self.PurchaseOrderPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderPayment">
-              <PropertyRef Name="intIDPurchaseOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblTBBatchDtl_tblTBBatchHdr">
           <End Role="tblTBBatchHdr" Type="Self.tblTBBatchHdr" Multiplicity="1" />
           <End Role="tblTBBatchDtl" Type="Self.tblTBBatchDtl" Multiplicity="*" />
@@ -1935,7 +1493,6 @@
           <EntitySet Name="InventoryLogOperationType" EntityType="Self.InventoryLogOperationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryQuantityTotal" EntityType="Self.InventoryQuantityTotal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryStock" EntityType="Self.InventoryStock" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InventoryStockDetail" EntityType="Self.InventoryStockDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PriceType" EntityType="Self.PriceType" Schema="dbo" store:Type="Tables" />
@@ -1948,20 +1505,7 @@
           <EntitySet Name="ProductSize" EntityType="Self.ProductSize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductUnit" EntityType="Self.ProductUnit" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PuchaseOrderReceivingStatus" EntityType="Self.PuchaseOrderReceivingStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrder" EntityType="Self.PurchaseOrder" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderCustomerLedger" EntityType="Self.PurchaseOrderCustomerLedger" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderCustomerLedgerDetail" EntityType="Self.PurchaseOrderCustomerLedgerDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderDetail" EntityType="Self.PurchaseOrderDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderDetailInventoryLedger" EntityType="Self.PurchaseOrderDetailInventoryLedger" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderInventoryLedger" EntityType="Self.PurchaseOrderInventoryLedger" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderPayment" EntityType="Self.PurchaseOrderPayment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderPaymentStatus" EntityType="Self.PurchaseOrderPaymentStatus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderProductDetailHistory" EntityType="Self.PurchaseOrderProductDetailHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderProductTransactionType" EntityType="Self.PurchaseOrderProductTransactionType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderReceiving" EntityType="Self.PurchaseOrderReceiving" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PurchaseOrderReceivingDetails" EntityType="Self.PurchaseOrderReceivingDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseSupplierLedger" EntityType="Self.PurchaseSupplierLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseSupplierLedgerTransactionType" EntityType="Self.PurchaseSupplierLedgerTransactionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -2026,14 +1570,6 @@
             <End Role="Sales" EntitySet="Sales" />
             <End Role="Collection" EntitySet="Collection" />
           </AssociationSet>
-          <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-            <End Role="PurchaseOrderCustomerLedger" EntitySet="PurchaseOrderCustomerLedger" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CustomerLedgerDetail_CustomerLedger" Association="Self.FK_CustomerLedgerDetail_CustomerLedger">
-            <End Role="PurchaseOrderCustomerLedger" EntitySet="PurchaseOrderCustomerLedger" />
-            <End Role="PurchaseOrderCustomerLedgerDetail" EntitySet="PurchaseOrderCustomerLedgerDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_Payment_Bank" Association="Self.FK_Payment_Bank">
             <End Role="Bank" EntitySet="Bank" />
             <End Role="Payment" EntitySet="Payment" />
@@ -2061,54 +1597,6 @@
           <AssociationSet Name="FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType" Association="Self.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType">
             <End Role="PurchaseSupplierLedgerTransactionType" EntitySet="PurchaseSupplierLedgerTransactionType" />
             <End Role="PurchaseSupplierLedger" EntitySet="PurchaseSupplierLedger" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrder_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrder_PuchaseOrderReceivingStatus">
-            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrder_User" Association="Self.FK_PurchaseOrder_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus">
-            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus">
-            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
-            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedger" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetail" Association="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetail">
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
-            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedger" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger" Association="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger">
-            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedger" />
-            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedger" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus">
-            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
-            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedger" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderLedger_PurchaseOrder" Association="Self.FK_PurchaseOrderLedger_PurchaseOrder">
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedger" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger" Association="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger">
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
-            <End Role="PurchaseOrderProductDetailHistory" EntitySet="PurchaseOrderProductDetailHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType" Association="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType">
-            <End Role="PurchaseOrderProductTransactionType" EntitySet="PurchaseOrderProductTransactionType" />
-            <End Role="PurchaseOrderProductDetailHistory" EntitySet="PurchaseOrderProductDetailHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" Association="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving">
-            <End Role="PurchaseOrderReceiving" EntitySet="PurchaseOrderReceiving" />
-            <End Role="PurchaseOrderReceivingDetails" EntitySet="PurchaseOrderReceivingDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" Association="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails">
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
-            <End Role="PurchaseOrderReceivingDetails" EntitySet="PurchaseOrderReceivingDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_PurchaseSupplierLedger_Suppliers" Association="Self.FK_PurchaseSupplierLedger_Suppliers">
             <End Role="Suppliers" EntitySet="Suppliers" />
@@ -2238,30 +1726,6 @@
             <End Role="ProductSize" EntitySet="ProductSize" />
             <End Role="ProductDetail" EntitySet="ProductDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrder_tblLocation" Association="Self.FK_tblPurchaseOrder_tblLocation">
-            <End Role="tblLocation" EntitySet="tblLocation" />
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrder_tblSuppliers" Association="Self.FK_tblPurchaseOrder_tblSuppliers">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblProduct" Association="Self.FK_tblPurchaseOrderDetail_tblProduct">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblProductDetail" Association="Self.FK_tblPurchaseOrderDetail_tblProductDetail">
-            <End Role="ProductDetail" EntitySet="ProductDetail" />
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblPurchaseOrder" Association="Self.FK_tblPurchaseOrderDetail_tblPurchaseOrder">
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrderPayment_tblPurchaseOrder" Association="Self.FK_tblPurchaseOrderPayment_tblPurchaseOrder">
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
-            <End Role="PurchaseOrderPayment" EntitySet="PurchaseOrderPayment" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblTBBatchDtl_tblTBBatchHdr" Association="Self.FK_tblTBBatchDtl_tblTBBatchHdr">
             <End Role="tblTBBatchHdr" EntitySet="tblTBBatchHdr" />
             <End Role="tblTBBatchDtl" EntitySet="tblTBBatchDtl" />
@@ -2375,17 +1839,6 @@
           <Property Name="blnIsActive" Type="Int32" />
           <Property Name="datLastModified" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="InventoryStockDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDInventoryStock" Type="Int32" />
-          <Property Name="intIDReference" Type="Int32" />
-          <Property Name="intQuantity" Type="Int32" />
-          <Property Name="datTransactionDate" Type="Int32" />
-          <Property Name="intIDInventoryStockOperationType" Type="Int32" />
-        </EntityType>
         <EntityType Name="PaymentType">
           <Key>
             <PropertyRef Name="ID" />
@@ -2422,17 +1875,13 @@
           <Property Name="intTotal" Type="Int32" />
           <Property Name="curDefaultCost" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="intIDPriceType" Type="Int32" />
-          <Property Name="curDefaultRetail" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curDefaultWholesale" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curDefaultMarkup" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="intIDProductCharacteristic" Type="Int32" />
           <NavigationProperty Name="PriceType" Relationship="Self.FK_tblProduct_tblPriceType" FromRole="Product" ToRole="PriceType" />
           <NavigationProperty Name="ProductBrand" Relationship="Self.FK_tblProduct_tblProductBrand" FromRole="Product" ToRole="ProductBrand" />
           <NavigationProperty Name="ProductCategory" Relationship="Self.FK_tblProduct_tblProductCategory" FromRole="Product" ToRole="ProductCategory" />
           <NavigationProperty Name="ProductCharacteristic" Relationship="Self.FK_tblProduct_tblProductCharacteristic" FromRole="Product" ToRole="ProductCharacteristic" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_tblProduct_tblProductTypes" FromRole="Product" ToRole="ProductTypes" />
-          <NavigationProperty Name="ProductDetails" Relationship="Self.FK_tblProductDetail_tblProduct" FromRole="Product" ToRole="ProductDetail" />
-          <NavigationProperty Name="PurchaseOrderDetails" Relationship="Self.FK_tblPurchaseOrderDetail_tblProduct" FromRole="Product" ToRole="PurchaseOrderDetail" />
+          <NavigationProperty Name="ProductDetails" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProduct" FromRole="Product" ToRole="ProductDetail" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -2464,31 +1913,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProductDetails" Relationship="Self.FK_tblProductDetail_tblProductColor" FromRole="ProductColor" ToRole="ProductDetail" />
-        </EntityType>
-        <EntityType Name="ProductDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDProduct" Type="Int32" />
-          <Property Name="intIDProductColor" Type="Int32" />
-          <Property Name="intIDProductSize" Type="Int32" />
-          <Property Name="intMininum" Type="Int32" />
-          <Property Name="intLength" Type="Int32" />
-          <Property Name="intWidth" Type="Int32" />
-          <Property Name="intHeight" Type="Int32" />
-          <Property Name="curCargoCost" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curCost" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curRetail" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curWholesale" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curMarkUp" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_tblProductDetail_tblProduct" FromRole="ProductDetail" ToRole="Product" />
-          <NavigationProperty Name="ProductColor" Relationship="Self.FK_tblProductDetail_tblProductColor" FromRole="ProductDetail" ToRole="ProductColor" />
-          <NavigationProperty Name="ProductDetail1" Relationship="Self.FK_tblProductDetail_tblProductDetail" FromRole="ProductDetail" ToRole="ProductDetail1" />
-          <NavigationProperty Name="ProductDetail2" Relationship="Self.FK_tblProductDetail_tblProductDetail" FromRole="ProductDetail1" ToRole="ProductDetail" />
-          <NavigationProperty Name="ProductSize" Relationship="Self.FK_tblProductDetail_tblProductSize" FromRole="ProductDetail" ToRole="ProductSize" />
-          <NavigationProperty Name="PurchaseOrderDetails" Relationship="Self.FK_tblPurchaseOrderDetail_tblProductDetail" FromRole="ProductDetail" ToRole="PurchaseOrderDetail" />
+          <NavigationProperty Name="ProductDetails" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductColor" FromRole="ProductColor" ToRole="ProductDetail" />
         </EntityType>
         <EntityType Name="ProductSize">
           <Key>
@@ -2496,7 +1921,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProductDetails" Relationship="Self.FK_tblProductDetail_tblProductSize" FromRole="ProductSize" ToRole="ProductDetail" />
+          <NavigationProperty Name="ProductDetails" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductSize" FromRole="ProductSize" ToRole="ProductDetail" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -2513,225 +1938,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="PuchaseOrderReceivingStatu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_PurchaseOrder_PuchaseOrderReceivingStatus" FromRole="PuchaseOrderReceivingStatus" ToRole="PurchaseOrder" />
-          <NavigationProperty Name="PurchaseOrderDetails" Relationship="Self.FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus" FromRole="PuchaseOrderReceivingStatus" ToRole="PurchaseOrderDetail" />
-          <NavigationProperty Name="PurchaseOrderDetailInventoryLedgers" Relationship="Self.FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus" FromRole="PuchaseOrderReceivingStatus" ToRole="PurchaseOrderDetailInventoryLedger" />
-          <NavigationProperty Name="PurchaseOrderInventoryLedgers" Relationship="Self.FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus" FromRole="PuchaseOrderReceivingStatus" ToRole="PurchaseOrderInventoryLedger" />
-        </EntityType>
-        <EntityType Name="PurchaseOrder">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strPONumber" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="intIDSupplier" Type="Int32" />
-          <Property Name="intIDLocation" Type="Int32" />
-          <Property Name="datDatePurchased" Type="DateTime" Precision="0" />
-          <Property Name="curTotalQty" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curSubTotal" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curDiscount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curDiscountPercentage" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curGrandTotal" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curTotalPaid" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curTotalReceived" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curTotalRemaining" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="blnHasPayment" Type="Boolean" />
-          <Property Name="curAmountPaid" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curChange" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="blnApproved" Type="Boolean" />
-          <Property Name="intIDApprover" Type="Int32" />
-          <Property Name="datDateApproved" Type="DateTime" Precision="3" />
-          <Property Name="blnAddBalanceToSupplier" Type="Boolean" />
-          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
-          <Property Name="intIDCreatedBy" Type="Int32" />
-          <Property Name="intIDReceivingStatus" Type="Int32" />
-          <NavigationProperty Name="PuchaseOrderReceivingStatu" Relationship="Self.FK_PurchaseOrder_PuchaseOrderReceivingStatus" FromRole="PurchaseOrder" ToRole="PuchaseOrderReceivingStatus" />
-          <NavigationProperty Name="PurchaseOrderCustomerLedgers" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="PurchaseOrder" ToRole="PurchaseOrderCustomerLedger" />
-          <NavigationProperty Name="User" Relationship="Self.FK_PurchaseOrder_User" FromRole="PurchaseOrder" ToRole="User" />
-          <NavigationProperty Name="PurchaseOrderInventoryLedgers" Relationship="Self.FK_PurchaseOrderLedger_PurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderInventoryLedger" />
-          <NavigationProperty Name="tblLocation" Relationship="Self.FK_tblPurchaseOrder_tblLocation" FromRole="PurchaseOrder" ToRole="tblLocation" />
-          <NavigationProperty Name="Supplier" Relationship="Self.FK_tblPurchaseOrder_tblSuppliers" FromRole="PurchaseOrder" ToRole="Suppliers" />
-          <NavigationProperty Name="PurchaseOrderDetails" Relationship="Self.FK_tblPurchaseOrderDetail_tblPurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderDetail" />
-          <NavigationProperty Name="PurchaseOrderPayments" Relationship="Self.FK_tblPurchaseOrderPayment_tblPurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderPayment" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderCustomerLedger">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDPurchaseOrder" Type="Int32" />
-          <Property Name="curSubTotal" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curDiscount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curGrandTotal" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curTotalPaidPendingPayments" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curTotalDiscountsPendingDiscounts" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curTotalChangePendingChange" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curTotalBalance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
-          <Property Name="bitIsActive" Type="Boolean" />
-          <NavigationProperty Name="PurchaseOrder" Relationship="Self.FK_CustomerLedger_CustomerLedger" FromRole="PurchaseOrderCustomerLedger" ToRole="PurchaseOrder" />
-          <NavigationProperty Name="PurchaseOrderCustomerLedgerDetails" Relationship="Self.FK_CustomerLedgerDetail_CustomerLedger" FromRole="PurchaseOrderCustomerLedger" ToRole="PurchaseOrderCustomerLedgerDetail" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderCustomerLedgerDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDPurchaseOrderCustomerLedger" Type="Int32" />
-          <Property Name="intIDPaymentType" Type="Int32" />
-          <Property Name="strReference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="datDate" Type="DateTime" Precision="0" />
-          <Property Name="curAmountPaid" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curChange" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="PurchaseOrderCustomerLedger" Relationship="Self.FK_CustomerLedgerDetail_CustomerLedger" FromRole="PurchaseOrderCustomerLedgerDetail" ToRole="PurchaseOrderCustomerLedger" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDPurchaseOrder" Type="Int32" />
-          <Property Name="intIDProduct" Type="Int32" />
-          <Property Name="intIDProductDetail" Type="Int32" />
-          <Property Name="curStock" Type="Int32" />
-          <Property Name="curActStock" Type="Int32" />
-          <Property Name="intQuantity" Type="Int32" />
-          <Property Name="intQuantityReceived" Type="Int32" />
-          <Property Name="intQuantityRemaining" Type="Int32" />
-          <Property Name="curCost" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curSubTotal" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="intIDReceivingStatus" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_tblPurchaseOrderDetail_tblProduct" FromRole="PurchaseOrderDetail" ToRole="Product" />
-          <NavigationProperty Name="ProductDetail" Relationship="Self.FK_tblPurchaseOrderDetail_tblProductDetail" FromRole="PurchaseOrderDetail" ToRole="ProductDetail" />
-          <NavigationProperty Name="PuchaseOrderReceivingStatu" Relationship="Self.FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus" FromRole="PurchaseOrderDetail" ToRole="PuchaseOrderReceivingStatus" />
-          <NavigationProperty Name="PurchaseOrder" Relationship="Self.FK_tblPurchaseOrderDetail_tblPurchaseOrder" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrder" />
-          <NavigationProperty Name="PurchaseOrderDetailInventoryLedgers" Relationship="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetail" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrderDetailInventoryLedger" />
-          <NavigationProperty Name="PurchaseOrderProductDetailHistories" Relationship="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrderProductDetailHistory" />
-          <NavigationProperty Name="PurchaseOrderReceivingDetails" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrderReceivingDetails" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderDetailInventoryLedger">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDPurchaseOrderInventoryLedger" Type="Int32" />
-          <Property Name="intIDPurchaseOrder" Type="Int32" />
-          <Property Name="intIDPurchaseOrderDetail" Type="Int32" />
-          <Property Name="curStock" Type="Int32" />
-          <Property Name="curActStock" Type="Int32" />
-          <Property Name="intQuantity" Type="Int32" />
-          <Property Name="intQuantityReceived" Type="Int32" />
-          <Property Name="intQuantityRemaining" Type="Int32" />
-          <Property Name="intIDReceivingStatus" Type="Int32" />
-          <NavigationProperty Name="PuchaseOrderReceivingStatu" Relationship="Self.FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus" FromRole="PurchaseOrderDetailInventoryLedger" ToRole="PuchaseOrderReceivingStatus" />
-          <NavigationProperty Name="PurchaseOrderDetail" Relationship="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetail" FromRole="PurchaseOrderDetailInventoryLedger" ToRole="PurchaseOrderDetail" />
-          <NavigationProperty Name="PurchaseOrderInventoryLedger" Relationship="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger" FromRole="PurchaseOrderDetailInventoryLedger" ToRole="PurchaseOrderInventoryLedger" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderInventoryLedger">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDPurchaseOrder" Type="Int32" />
-          <Property Name="datDateInserted" Type="DateTime" Precision="0" />
-          <Property Name="curTotalQty" Type="Int32" />
-          <Property Name="curTotalReceived" Type="Int32" />
-          <Property Name="curTotalRemaining" Type="Int32" />
-          <Property Name="intIDReceivingStatus" Type="Int32" />
-          <NavigationProperty Name="PuchaseOrderReceivingStatu" Relationship="Self.FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus" FromRole="PurchaseOrderInventoryLedger" ToRole="PuchaseOrderReceivingStatus" />
-          <NavigationProperty Name="PurchaseOrder" Relationship="Self.FK_PurchaseOrderLedger_PurchaseOrder" FromRole="PurchaseOrderInventoryLedger" ToRole="PurchaseOrder" />
-          <NavigationProperty Name="PurchaseOrderDetailInventoryLedgers" Relationship="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger" FromRole="PurchaseOrderInventoryLedger" ToRole="PurchaseOrderDetailInventoryLedger" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderPayment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDPurchaseOrder" Type="Int32" />
-          <Property Name="datPaidOn" Type="DateTime" Precision="0" />
-          <Property Name="datPaidBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="curTotalAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curDiscount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curGrandTotal" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="curAmountPaid" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="intIDPurchaseOrderPaymentStatus" Type="Int32" />
-          <Property Name="strBankAccounts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="curDatCheckDate" Type="DateTime" Precision="0" />
-          <Property Name="strCheckNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="datApprovedOn" Type="DateTime" Precision="0" />
-          <Property Name="datApprovedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PurchaseOrder" Relationship="Self.FK_tblPurchaseOrderPayment_tblPurchaseOrder" FromRole="PurchaseOrderPayment" ToRole="PurchaseOrder" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderPaymentStatu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderProductDetailHistory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDPurchaseOrderDetail" Type="Int32" />
-          <Property Name="intIDPurchaseOrderProductTransactionType" Type="Int32" />
-          <Property Name="strTransactionType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="intQuantity" Type="Int32" />
-          <Property Name="intTotalReceived" Type="Int32" />
-          <Property Name="intTotalReturn" Type="Int32" />
-          <Property Name="intTotalRemaining" Type="Int32" />
-          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="PurchaseOrderDetail" Relationship="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger" FromRole="PurchaseOrderProductDetailHistory" ToRole="PurchaseOrderDetail" />
-          <NavigationProperty Name="PurchaseOrderProductTransactionType" Relationship="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType" FromRole="PurchaseOrderProductDetailHistory" ToRole="PurchaseOrderProductTransactionType" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderProductTransactionType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PurchaseOrderProductDetailHistories" Relationship="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType" FromRole="PurchaseOrderProductTransactionType" ToRole="PurchaseOrderProductDetailHistory" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderReceiving">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDPurchaseOrder" Type="Int32" />
-          <Property Name="datDateReceived" Type="DateTime" Precision="0" />
-          <Property Name="intIDLocation" Type="Int32" />
-          <Property Name="strAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="strMemo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
-          <Property Name="blnReceivedOnPO" Type="Boolean" />
-          <Property Name="curTotalQty" Type="Int32" />
-          <Property Name="curTotalReceived" Type="Int32" />
-          <Property Name="curTotalRemaining" Type="Int32" />
-          <NavigationProperty Name="PurchaseOrderReceivingDetails" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" FromRole="PurchaseOrderReceiving" ToRole="PurchaseOrderReceivingDetails" />
-        </EntityType>
-        <EntityType Name="PurchaseOrderReceivingDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDPurchaseOrderReceiving" Type="Int32" />
-          <Property Name="intIDPurchaseOrderDetail" Type="Int32" />
-          <Property Name="intQuantity" Type="Int32" />
-          <Property Name="intQuantityReceived" Type="Int32" />
-          <Property Name="intQuantityRemaining" Type="Int32" />
-          <Property Name="intAddedQuantityReceived" Type="Int32" />
-          <Property Name="blnIsReceived" Type="Boolean" />
-          <Property Name="datDateInserted" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="PurchaseOrderDetail" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" FromRole="PurchaseOrderReceivingDetails" ToRole="PurchaseOrderDetail" />
-          <NavigationProperty Name="PurchaseOrderReceiving" Relationship="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" FromRole="PurchaseOrderReceivingDetails" ToRole="PurchaseOrderReceiving" />
-        </EntityType>
         <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="Id" />
@@ -2747,7 +1953,6 @@
           <Property Name="strContacts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="intIDBank" Type="Int32" />
           <NavigationProperty Name="Bank" Relationship="Self.FK_Suppliers_Bank" FromRole="Suppliers" ToRole="Bank" />
-          <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_tblPurchaseOrder_tblSuppliers" FromRole="Suppliers" ToRole="PurchaseOrder" />
           <NavigationProperty Name="Purchases" Relationship="GeneralLedgerModel.FK_Purchase_Suppliers" FromRole="Supplier" ToRole="Purchase" />
           <NavigationProperty Name="PurchaseSupplierLedgers" Relationship="GeneralLedgerModel.FK_PurchaseSupplierLedger_Suppliers" FromRole="Supplier" ToRole="PurchaseSupplierLedger" />
           <NavigationProperty Name="AccountPayableAdjustments" Relationship="GeneralLedgerModel.FK_AccountPayableAdjustments_Suppliers" FromRole="Supplier" ToRole="AccountPayableAdjustment" />
@@ -2782,7 +1987,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_tblPurchaseOrder_tblLocation" FromRole="tblLocation" ToRole="PurchaseOrder" />
         </EntityType>
         <EntityType Name="tblMasCOA">
           <Key>
@@ -2854,7 +2058,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_PurchaseOrder_User" FromRole="User" ToRole="PurchaseOrder" />
           <Property Name="Username" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsResetPassword" Type="Boolean" />
@@ -2956,294 +2159,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblProductDetail_tblProduct">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="intIDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrderDetail_tblProduct">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetail">
-              <PropertyRef Name="intIDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProductDetail_tblProductColor">
-          <End Role="ProductColor" Type="Self.ProductColor" Multiplicity="0..1" />
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductColor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="intIDProductColor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProductDetail_tblProductDetail">
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="1" />
-          <End Role="ProductDetail1" Type="Self.ProductDetail" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ProductDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProductDetail_tblProductSize">
-          <End Role="ProductSize" Type="Self.ProductSize" Multiplicity="0..1" />
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductSize">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="intIDProductSize" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrderDetail_tblProductDetail">
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetail">
-              <PropertyRef Name="intIDProductDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrder_PuchaseOrderReceivingStatus">
-          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatu" Multiplicity="0..1" />
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PuchaseOrderReceivingStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrder">
-              <PropertyRef Name="intIDReceivingStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus">
-          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatu" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PuchaseOrderReceivingStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetail">
-              <PropertyRef Name="intIDReceivingStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus">
-          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatu" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PuchaseOrderReceivingStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetailInventoryLedger">
-              <PropertyRef Name="intIDReceivingStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus">
-          <End Role="PuchaseOrderReceivingStatus" Type="Self.PuchaseOrderReceivingStatu" Multiplicity="0..1" />
-          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PuchaseOrderReceivingStatus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderInventoryLedger">
-              <PropertyRef Name="intIDReceivingStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CustomerLedger_CustomerLedger">
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
-          <End Role="PurchaseOrderCustomerLedger" Type="Self.PurchaseOrderCustomerLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderCustomerLedger">
-              <PropertyRef Name="intIDPurchaseOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrder_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrder">
-              <PropertyRef Name="intIDApprover" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderLedger_PurchaseOrder">
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
-          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderInventoryLedger">
-              <PropertyRef Name="intIDPurchaseOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrder_tblLocation">
-          <End Role="tblLocation" Type="Self.tblLocation" Multiplicity="0..1" />
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblLocation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrder">
-              <PropertyRef Name="intIDLocation" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrder_tblSuppliers">
-          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="0..1" />
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrder">
-              <PropertyRef Name="intIDSupplier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrderDetail_tblPurchaseOrder">
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetail">
-              <PropertyRef Name="intIDPurchaseOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblPurchaseOrderPayment_tblPurchaseOrder">
-          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
-          <End Role="PurchaseOrderPayment" Type="Self.PurchaseOrderPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrder">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderPayment">
-              <PropertyRef Name="intIDPurchaseOrder" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CustomerLedgerDetail_CustomerLedger">
-          <End Role="PurchaseOrderCustomerLedger" Type="Self.PurchaseOrderCustomerLedger" Multiplicity="0..1" />
-          <End Role="PurchaseOrderCustomerLedgerDetail" Type="Self.PurchaseOrderCustomerLedgerDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderCustomerLedger">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PurchaseOrderCustomerLedgerDetail">
-              <PropertyRef Name="intIDPurchaseOrderCustomerLedger" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetail">
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetailInventoryLedger">
-              <PropertyRef Name="intIDPurchaseOrderDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger">
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
-          <End Role="PurchaseOrderProductDetailHistory" Type="Self.PurchaseOrderProductDetailHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderProductDetailHistory">
-              <PropertyRef Name="intIDPurchaseOrderDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails">
-          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="0..1" />
-          <End Role="PurchaseOrderReceivingDetails" Type="Self.PurchaseOrderReceivingDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderReceivingDetails">
-              <PropertyRef Name="intIDPurchaseOrderDetail" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger">
-          <End Role="PurchaseOrderInventoryLedger" Type="Self.PurchaseOrderInventoryLedger" Multiplicity="0..1" />
-          <End Role="PurchaseOrderDetailInventoryLedger" Type="Self.PurchaseOrderDetailInventoryLedger" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderInventoryLedger">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderDetailInventoryLedger">
-              <PropertyRef Name="intIDPurchaseOrderInventoryLedger" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType">
-          <End Role="PurchaseOrderProductTransactionType" Type="Self.PurchaseOrderProductTransactionType" Multiplicity="0..1" />
-          <End Role="PurchaseOrderProductDetailHistory" Type="Self.PurchaseOrderProductDetailHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderProductTransactionType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderProductDetailHistory">
-              <PropertyRef Name="intIDPurchaseOrderProductTransactionType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving">
-          <End Role="PurchaseOrderReceiving" Type="Self.PurchaseOrderReceiving" Multiplicity="0..1" />
-          <End Role="PurchaseOrderReceivingDetails" Type="Self.PurchaseOrderReceivingDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PurchaseOrderReceiving">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PurchaseOrderReceivingDetails">
-              <PropertyRef Name="intIDPurchaseOrderReceiving" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblMasCOASub_TblMasCoa">
           <End Role="tblMasCOA" Type="Self.tblMasCOA" Multiplicity="0..1" />
           <End Role="tblMasCOASub" Type="Self.tblMasCOASub" Multiplicity="*" />
@@ -3277,7 +2192,6 @@
           <EntitySet Name="InventoryLogOperationTypes" EntityType="Self.InventoryLogOperationType" />
           <EntitySet Name="InventoryQuantityTotals" EntityType="Self.InventoryQuantityTotal" />
           <EntitySet Name="InventoryStocks" EntityType="Self.InventoryStock" />
-          <EntitySet Name="InventoryStockDetails" EntityType="Self.InventoryStockDetail" />
           <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
           <EntitySet Name="PriceTypes" EntityType="Self.PriceType" />
           <EntitySet Name="Products" EntityType="Self.Product" />
@@ -3285,23 +2199,9 @@
           <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
           <EntitySet Name="ProductCharacteristics" EntityType="Self.ProductCharacteristic" />
           <EntitySet Name="ProductColors" EntityType="Self.ProductColor" />
-          <EntitySet Name="ProductDetails" EntityType="Self.ProductDetail" />
           <EntitySet Name="ProductSizes" EntityType="Self.ProductSize" />
           <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
           <EntitySet Name="ProductUnits" EntityType="Self.ProductUnit" />
-          <EntitySet Name="PuchaseOrderReceivingStatus" EntityType="Self.PuchaseOrderReceivingStatu" />
-          <EntitySet Name="PurchaseOrders" EntityType="Self.PurchaseOrder" />
-          <EntitySet Name="PurchaseOrderCustomerLedgers" EntityType="Self.PurchaseOrderCustomerLedger" />
-          <EntitySet Name="PurchaseOrderCustomerLedgerDetails" EntityType="Self.PurchaseOrderCustomerLedgerDetail" />
-          <EntitySet Name="PurchaseOrderDetails" EntityType="Self.PurchaseOrderDetail" />
-          <EntitySet Name="PurchaseOrderDetailInventoryLedgers" EntityType="Self.PurchaseOrderDetailInventoryLedger" />
-          <EntitySet Name="PurchaseOrderInventoryLedgers" EntityType="Self.PurchaseOrderInventoryLedger" />
-          <EntitySet Name="PurchaseOrderPayments" EntityType="Self.PurchaseOrderPayment" />
-          <EntitySet Name="PurchaseOrderPaymentStatus" EntityType="Self.PurchaseOrderPaymentStatu" />
-          <EntitySet Name="PurchaseOrderProductDetailHistories" EntityType="Self.PurchaseOrderProductDetailHistory" />
-          <EntitySet Name="PurchaseOrderProductTransactionTypes" EntityType="Self.PurchaseOrderProductTransactionType" />
-          <EntitySet Name="PurchaseOrderReceivings" EntityType="Self.PurchaseOrderReceiving" />
-          <EntitySet Name="PurchaseOrderReceivingDetails" EntityType="Self.PurchaseOrderReceivingDetail" />
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tblGLTranDetails" EntityType="Self.tblGLTranDetail" />
@@ -3343,102 +2243,6 @@
           <AssociationSet Name="FK_tblProduct_tblProductTypes" Association="Self.FK_tblProduct_tblProductTypes">
             <End Role="ProductTypes" EntitySet="ProductTypes" />
             <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProduct" Association="Self.FK_tblProductDetail_tblProduct">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblProduct" Association="Self.FK_tblPurchaseOrderDetail_tblProduct">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProductColor" Association="Self.FK_tblProductDetail_tblProductColor">
-            <End Role="ProductColor" EntitySet="ProductColors" />
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProductDetail" Association="Self.FK_tblProductDetail_tblProductDetail">
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
-            <End Role="ProductDetail1" EntitySet="ProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProductSize" Association="Self.FK_tblProductDetail_tblProductSize">
-            <End Role="ProductSize" EntitySet="ProductSizes" />
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblProductDetail" Association="Self.FK_tblPurchaseOrderDetail_tblProductDetail">
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrder_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrder_PuchaseOrderReceivingStatus">
-            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderDetail_PuchaseOrderReceivingStatus">
-            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderDetailLedger_PuchaseOrderReceivingStatus">
-            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
-            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedgers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus" Association="Self.FK_PurchaseOrderLedger_PuchaseOrderReceivingStatus">
-            <End Role="PuchaseOrderReceivingStatus" EntitySet="PuchaseOrderReceivingStatus" />
-            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedgers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CustomerLedger_CustomerLedger" Association="Self.FK_CustomerLedger_CustomerLedger">
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
-            <End Role="PurchaseOrderCustomerLedger" EntitySet="PurchaseOrderCustomerLedgers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrder_User" Association="Self.FK_PurchaseOrder_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderLedger_PurchaseOrder" Association="Self.FK_PurchaseOrderLedger_PurchaseOrder">
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
-            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedgers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrder_tblLocation" Association="Self.FK_tblPurchaseOrder_tblLocation">
-            <End Role="tblLocation" EntitySet="tblLocations" />
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrder_tblSuppliers" Association="Self.FK_tblPurchaseOrder_tblSuppliers">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrderDetail_tblPurchaseOrder" Association="Self.FK_tblPurchaseOrderDetail_tblPurchaseOrder">
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblPurchaseOrderPayment_tblPurchaseOrder" Association="Self.FK_tblPurchaseOrderPayment_tblPurchaseOrder">
-            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
-            <End Role="PurchaseOrderPayment" EntitySet="PurchaseOrderPayments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CustomerLedgerDetail_CustomerLedger" Association="Self.FK_CustomerLedgerDetail_CustomerLedger">
-            <End Role="PurchaseOrderCustomerLedger" EntitySet="PurchaseOrderCustomerLedgers" />
-            <End Role="PurchaseOrderCustomerLedgerDetail" EntitySet="PurchaseOrderCustomerLedgerDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetail" Association="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetail">
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
-            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedgers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger" Association="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductDetailLedger">
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
-            <End Role="PurchaseOrderProductDetailHistory" EntitySet="PurchaseOrderProductDetailHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails" Association="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceivingDetails">
-            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
-            <End Role="PurchaseOrderReceivingDetails" EntitySet="PurchaseOrderReceivingDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger" Association="Self.FK_PurchaseOrderDetailLedger_PurchaseOrderDetailLedger">
-            <End Role="PurchaseOrderInventoryLedger" EntitySet="PurchaseOrderInventoryLedgers" />
-            <End Role="PurchaseOrderDetailInventoryLedger" EntitySet="PurchaseOrderDetailInventoryLedgers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType" Association="Self.FK_PurchaseOrderProductDetailLedger_PurchaseOrderProductTransactionType">
-            <End Role="PurchaseOrderProductTransactionType" EntitySet="PurchaseOrderProductTransactionTypes" />
-            <End Role="PurchaseOrderProductDetailHistory" EntitySet="PurchaseOrderProductDetailHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving" Association="Self.FK_PurchaseOrderReceivingDetails_PurchaseOrderReceiving">
-            <End Role="PurchaseOrderReceiving" EntitySet="PurchaseOrderReceivings" />
-            <End Role="PurchaseOrderReceivingDetails" EntitySet="PurchaseOrderReceivingDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_tblMasCOASub_TblMasCoa" Association="Self.FK_tblMasCOASub_TblMasCoa">
             <End Role="tblMasCOA" EntitySet="tblMasCOAs" />
@@ -3945,6 +2749,23 @@
           <AssociationSet Name="FK_AccountPayableAdjustments_Suppliers" Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Suppliers">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="AccountPayableAdjustment" EntitySet="AccountPayableAdjustments" />
+          </AssociationSet>
+          <EntitySet Name="ProductDetails" EntityType="GeneralLedgerModel.ProductDetail" />
+          <AssociationSet Name="FK_tblProductDetail_tblProduct" Association="GeneralLedgerModel.FK_tblProductDetail_tblProduct">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProductColor" Association="GeneralLedgerModel.FK_tblProductDetail_tblProductColor">
+            <End Role="ProductColor" EntitySet="ProductColors" />
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProductDetail" Association="GeneralLedgerModel.FK_tblProductDetail_tblProductDetail">
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
+            <End Role="ProductDetail1" EntitySet="ProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblProductDetail_tblProductSize" Association="GeneralLedgerModel.FK_tblProductDetail_tblProductSize">
+            <End Role="ProductSize" EntitySet="ProductSizes" />
+            <End Role="ProductDetail" EntitySet="ProductDetails" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
@@ -5205,6 +4026,73 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProductDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="intIDProduct" Type="Int32" />
+          <Property Name="intIDProductColor" Type="Int32" />
+          <Property Name="intIDProductSize" Type="Int32" />
+          <Property Name="intMininum" Type="Int32" />
+          <Property Name="intLength" Type="Int32" />
+          <Property Name="intWidth" Type="Int32" />
+          <Property Name="intHeight" Type="Int32" />
+          <Property Name="curCargoCost" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProduct" FromRole="ProductDetail" ToRole="Product" />
+          <NavigationProperty Name="ProductColor" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductColor" FromRole="ProductDetail" ToRole="ProductColor" />
+          <NavigationProperty Name="ProductDetail1" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductDetail" FromRole="ProductDetail" ToRole="ProductDetail1" />
+          <NavigationProperty Name="ProductDetail2" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductDetail" FromRole="ProductDetail1" ToRole="ProductDetail" />
+          <NavigationProperty Name="ProductSize" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductSize" FromRole="ProductDetail" ToRole="ProductSize" />
+        </EntityType>
+        <Association Name="FK_tblProductDetail_tblProduct">
+          <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="intIDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProductColor">
+          <End Type="GeneralLedgerModel.ProductColor" Role="ProductColor" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductColor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="intIDProductColor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProductDetail">
+          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail" Multiplicity="1" />
+          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblProductDetail_tblProductSize">
+          <End Type="GeneralLedgerModel.ProductSize" Role="ProductSize" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDetail">
+              <PropertyRef Name="intIDProductSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5305,18 +4193,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="InventoryStockDetails">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.InventoryStockDetail">
-              <MappingFragment StoreEntitySet="InventoryStockDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="intIDInventoryStock" ColumnName="intIDInventoryStock" />
-                <ScalarProperty Name="intIDReference" ColumnName="intIDReference" />
-                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
-                <ScalarProperty Name="datTransactionDate" ColumnName="datTransactionDate" />
-                <ScalarProperty Name="intIDInventoryStockOperationType" ColumnName="intIDInventoryStockOperationType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PaymentTypes">
             <EntityTypeMapping TypeName="GeneralLedgerModel.PaymentType">
               <MappingFragment StoreEntitySet="PaymentType">
@@ -5352,9 +4228,6 @@
                 <ScalarProperty Name="intTotal" ColumnName="intTotal" />
                 <ScalarProperty Name="curDefaultCost" ColumnName="curDefaultCost" />
                 <ScalarProperty Name="intIDPriceType" ColumnName="intIDPriceType" />
-                <ScalarProperty Name="curDefaultRetail" ColumnName="curDefaultRetail" />
-                <ScalarProperty Name="curDefaultWholesale" ColumnName="curDefaultWholesale" />
-                <ScalarProperty Name="curDefaultMarkup" ColumnName="curDefaultMarkup" />
                 <ScalarProperty Name="intIDProductCharacteristic" ColumnName="intIDProductCharacteristic" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5391,25 +4264,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductDetails">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductDetail">
-              <MappingFragment StoreEntitySet="ProductDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="intIDProduct" ColumnName="intIDProduct" />
-                <ScalarProperty Name="intIDProductColor" ColumnName="intIDProductColor" />
-                <ScalarProperty Name="intIDProductSize" ColumnName="intIDProductSize" />
-                <ScalarProperty Name="intMininum" ColumnName="intMininum" />
-                <ScalarProperty Name="intLength" ColumnName="intLength" />
-                <ScalarProperty Name="intWidth" ColumnName="intWidth" />
-                <ScalarProperty Name="intHeight" ColumnName="intHeight" />
-                <ScalarProperty Name="curCargoCost" ColumnName="curCargoCost" />
-                <ScalarProperty Name="curCost" ColumnName="curCost" />
-                <ScalarProperty Name="curRetail" ColumnName="curRetail" />
-                <ScalarProperty Name="curWholesale" ColumnName="curWholesale" />
-                <ScalarProperty Name="curMarkUp" ColumnName="curMarkUp" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProductSizes">
             <EntityTypeMapping TypeName="GeneralLedgerModel.ProductSize">
               <MappingFragment StoreEntitySet="ProductSize">
@@ -5431,203 +4285,6 @@
               <MappingFragment StoreEntitySet="ProductUnit">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="strName" ColumnName="strName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PuchaseOrderReceivingStatus">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PuchaseOrderReceivingStatu">
-              <MappingFragment StoreEntitySet="PuchaseOrderReceivingStatus">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="strName" ColumnName="strName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrders">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrder">
-              <MappingFragment StoreEntitySet="PurchaseOrder">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="strPONumber" ColumnName="strPONumber" />
-                <ScalarProperty Name="intIDSupplier" ColumnName="intIDSupplier" />
-                <ScalarProperty Name="intIDLocation" ColumnName="intIDLocation" />
-                <ScalarProperty Name="datDatePurchased" ColumnName="datDatePurchased" />
-                <ScalarProperty Name="curTotalQty" ColumnName="curTotalQty" />
-                <ScalarProperty Name="curSubTotal" ColumnName="curSubTotal" />
-                <ScalarProperty Name="curDiscount" ColumnName="curDiscount" />
-                <ScalarProperty Name="curDiscountPercentage" ColumnName="curDiscountPercentage" />
-                <ScalarProperty Name="curGrandTotal" ColumnName="curGrandTotal" />
-                <ScalarProperty Name="curTotalPaid" ColumnName="curTotalPaid" />
-                <ScalarProperty Name="curTotalReceived" ColumnName="curTotalReceived" />
-                <ScalarProperty Name="curTotalRemaining" ColumnName="curTotalRemaining" />
-                <ScalarProperty Name="blnHasPayment" ColumnName="blnHasPayment" />
-                <ScalarProperty Name="curAmountPaid" ColumnName="curAmountPaid" />
-                <ScalarProperty Name="curChange" ColumnName="curChange" />
-                <ScalarProperty Name="blnApproved" ColumnName="blnApproved" />
-                <ScalarProperty Name="intIDApprover" ColumnName="intIDApprover" />
-                <ScalarProperty Name="datDateApproved" ColumnName="datDateApproved" />
-                <ScalarProperty Name="blnAddBalanceToSupplier" ColumnName="blnAddBalanceToSupplier" />
-                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
-                <ScalarProperty Name="intIDCreatedBy" ColumnName="intIDCreatedBy" />
-                <ScalarProperty Name="intIDReceivingStatus" ColumnName="intIDReceivingStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderCustomerLedgers">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderCustomerLedger">
-              <MappingFragment StoreEntitySet="PurchaseOrderCustomerLedger">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
-                <ScalarProperty Name="curSubTotal" ColumnName="curSubTotal" />
-                <ScalarProperty Name="curDiscount" ColumnName="curDiscount" />
-                <ScalarProperty Name="curGrandTotal" ColumnName="curGrandTotal" />
-                <ScalarProperty Name="curTotalPaidPendingPayments" ColumnName="curTotalPaidPendingPayments" />
-                <ScalarProperty Name="curTotalDiscountsPendingDiscounts" ColumnName="curTotalDiscountsPendingDiscounts" />
-                <ScalarProperty Name="curTotalChangePendingChange" ColumnName="curTotalChangePendingChange" />
-                <ScalarProperty Name="curTotalBalance" ColumnName="curTotalBalance" />
-                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
-                <ScalarProperty Name="bitIsActive" ColumnName="bitIsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderCustomerLedgerDetails">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderCustomerLedgerDetail">
-              <MappingFragment StoreEntitySet="PurchaseOrderCustomerLedgerDetail">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="intIDPurchaseOrderCustomerLedger" ColumnName="intIDPurchaseOrderCustomerLedger" />
-                <ScalarProperty Name="intIDPaymentType" ColumnName="intIDPaymentType" />
-                <ScalarProperty Name="strReference" ColumnName="strReference" />
-                <ScalarProperty Name="datDate" ColumnName="datDate" />
-                <ScalarProperty Name="curAmountPaid" ColumnName="curAmountPaid" />
-                <ScalarProperty Name="curChange" ColumnName="curChange" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderDetails">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderDetail">
-              <MappingFragment StoreEntitySet="PurchaseOrderDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
-                <ScalarProperty Name="intIDProduct" ColumnName="intIDProduct" />
-                <ScalarProperty Name="intIDProductDetail" ColumnName="intIDProductDetail" />
-                <ScalarProperty Name="curStock" ColumnName="curStock" />
-                <ScalarProperty Name="curActStock" ColumnName="curActStock" />
-                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
-                <ScalarProperty Name="intQuantityReceived" ColumnName="intQuantityReceived" />
-                <ScalarProperty Name="intQuantityRemaining" ColumnName="intQuantityRemaining" />
-                <ScalarProperty Name="curCost" ColumnName="curCost" />
-                <ScalarProperty Name="curSubTotal" ColumnName="curSubTotal" />
-                <ScalarProperty Name="intIDReceivingStatus" ColumnName="intIDReceivingStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderDetailInventoryLedgers">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderDetailInventoryLedger">
-              <MappingFragment StoreEntitySet="PurchaseOrderDetailInventoryLedger">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="intIDPurchaseOrderInventoryLedger" ColumnName="intIDPurchaseOrderInventoryLedger" />
-                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
-                <ScalarProperty Name="intIDPurchaseOrderDetail" ColumnName="intIDPurchaseOrderDetail" />
-                <ScalarProperty Name="curStock" ColumnName="curStock" />
-                <ScalarProperty Name="curActStock" ColumnName="curActStock" />
-                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
-                <ScalarProperty Name="intQuantityReceived" ColumnName="intQuantityReceived" />
-                <ScalarProperty Name="intQuantityRemaining" ColumnName="intQuantityRemaining" />
-                <ScalarProperty Name="intIDReceivingStatus" ColumnName="intIDReceivingStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderInventoryLedgers">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderInventoryLedger">
-              <MappingFragment StoreEntitySet="PurchaseOrderInventoryLedger">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
-                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
-                <ScalarProperty Name="curTotalQty" ColumnName="curTotalQty" />
-                <ScalarProperty Name="curTotalReceived" ColumnName="curTotalReceived" />
-                <ScalarProperty Name="curTotalRemaining" ColumnName="curTotalRemaining" />
-                <ScalarProperty Name="intIDReceivingStatus" ColumnName="intIDReceivingStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderPayments">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderPayment">
-              <MappingFragment StoreEntitySet="PurchaseOrderPayment">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
-                <ScalarProperty Name="datPaidOn" ColumnName="datPaidOn" />
-                <ScalarProperty Name="datPaidBy" ColumnName="datPaidBy" />
-                <ScalarProperty Name="curTotalAmount" ColumnName="curTotalAmount" />
-                <ScalarProperty Name="curDiscount" ColumnName="curDiscount" />
-                <ScalarProperty Name="curGrandTotal" ColumnName="curGrandTotal" />
-                <ScalarProperty Name="curAmountPaid" ColumnName="curAmountPaid" />
-                <ScalarProperty Name="intIDPurchaseOrderPaymentStatus" ColumnName="intIDPurchaseOrderPaymentStatus" />
-                <ScalarProperty Name="strBankAccounts" ColumnName="strBankAccounts" />
-                <ScalarProperty Name="curDatCheckDate" ColumnName="curDatCheckDate" />
-                <ScalarProperty Name="strCheckNo" ColumnName="strCheckNo" />
-                <ScalarProperty Name="datApprovedOn" ColumnName="datApprovedOn" />
-                <ScalarProperty Name="datApprovedBy" ColumnName="datApprovedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderPaymentStatus">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderPaymentStatu">
-              <MappingFragment StoreEntitySet="PurchaseOrderPaymentStatus">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="strName" ColumnName="strName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderProductDetailHistories">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderProductDetailHistory">
-              <MappingFragment StoreEntitySet="PurchaseOrderProductDetailHistory">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="intIDPurchaseOrderDetail" ColumnName="intIDPurchaseOrderDetail" />
-                <ScalarProperty Name="intIDPurchaseOrderProductTransactionType" ColumnName="intIDPurchaseOrderProductTransactionType" />
-                <ScalarProperty Name="strTransactionType" ColumnName="strTransactionType" />
-                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
-                <ScalarProperty Name="intTotalReceived" ColumnName="intTotalReceived" />
-                <ScalarProperty Name="intTotalReturn" ColumnName="intTotalReturn" />
-                <ScalarProperty Name="intTotalRemaining" ColumnName="intTotalRemaining" />
-                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderProductTransactionTypes">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderProductTransactionType">
-              <MappingFragment StoreEntitySet="PurchaseOrderProductTransactionType">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="strName" ColumnName="strName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderReceivings">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderReceiving">
-              <MappingFragment StoreEntitySet="PurchaseOrderReceiving">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="intIDPurchaseOrder" ColumnName="intIDPurchaseOrder" />
-                <ScalarProperty Name="datDateReceived" ColumnName="datDateReceived" />
-                <ScalarProperty Name="intIDLocation" ColumnName="intIDLocation" />
-                <ScalarProperty Name="strAddress" ColumnName="strAddress" />
-                <ScalarProperty Name="strMemo" ColumnName="strMemo" />
-                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
-                <ScalarProperty Name="blnReceivedOnPO" ColumnName="blnReceivedOnPO" />
-                <ScalarProperty Name="curTotalQty" ColumnName="curTotalQty" />
-                <ScalarProperty Name="curTotalReceived" ColumnName="curTotalReceived" />
-                <ScalarProperty Name="curTotalRemaining" ColumnName="curTotalRemaining" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PurchaseOrderReceivingDetails">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseOrderReceivingDetail">
-              <MappingFragment StoreEntitySet="PurchaseOrderReceivingDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="intIDPurchaseOrderReceiving" ColumnName="intIDPurchaseOrderReceiving" />
-                <ScalarProperty Name="intIDPurchaseOrderDetail" ColumnName="intIDPurchaseOrderDetail" />
-                <ScalarProperty Name="intQuantity" ColumnName="intQuantity" />
-                <ScalarProperty Name="intQuantityReceived" ColumnName="intQuantityReceived" />
-                <ScalarProperty Name="intQuantityRemaining" ColumnName="intQuantityRemaining" />
-                <ScalarProperty Name="intAddedQuantityReceived" ColumnName="intAddedQuantityReceived" />
-                <ScalarProperty Name="blnIsReceived" ColumnName="blnIsReceived" />
-                <ScalarProperty Name="datDateInserted" ColumnName="datDateInserted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6739,6 +5396,21 @@
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
                 <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
                 <ScalarProperty Name="AccountsPayableAdjustmentTypeId" ColumnName="AccountsPayableAdjustmentTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductDetail">
+              <MappingFragment StoreEntitySet="ProductDetail">
+                <ScalarProperty Name="curCargoCost" ColumnName="curCargoCost" />
+                <ScalarProperty Name="intHeight" ColumnName="intHeight" />
+                <ScalarProperty Name="intWidth" ColumnName="intWidth" />
+                <ScalarProperty Name="intLength" ColumnName="intLength" />
+                <ScalarProperty Name="intMininum" ColumnName="intMininum" />
+                <ScalarProperty Name="intIDProductSize" ColumnName="intIDProductSize" />
+                <ScalarProperty Name="intIDProductColor" ColumnName="intIDProductColor" />
+                <ScalarProperty Name="intIDProduct" ColumnName="intIDProduct" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

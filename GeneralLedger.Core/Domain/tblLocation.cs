@@ -14,16 +14,7 @@ namespace GeneralLedger.Core.Domain
     
     public partial class tblLocation
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblLocation()
-        {
-            this.PurchaseOrders = new HashSet<PurchaseOrder>();
-        }
-    
         public int Id { get; set; }
         public string strName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

@@ -35,7 +35,6 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<InventoryLogOperationType> InventoryLogOperationTypes { get; set; }
         public virtual DbSet<InventoryQuantityTotal> InventoryQuantityTotals { get; set; }
         public virtual DbSet<InventoryStock> InventoryStocks { get; set; }
-        public virtual DbSet<InventoryStockDetail> InventoryStockDetails { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
         public virtual DbSet<PriceType> PriceTypes { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -43,23 +42,9 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductCharacteristic> ProductCharacteristics { get; set; }
         public virtual DbSet<ProductColor> ProductColors { get; set; }
-        public virtual DbSet<ProductDetail> ProductDetails { get; set; }
         public virtual DbSet<ProductSize> ProductSizes { get; set; }
         public virtual DbSet<ProductType> ProductTypes { get; set; }
         public virtual DbSet<ProductUnit> ProductUnits { get; set; }
-        public virtual DbSet<PuchaseOrderReceivingStatu> PuchaseOrderReceivingStatus { get; set; }
-        public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
-        public virtual DbSet<PurchaseOrderCustomerLedger> PurchaseOrderCustomerLedgers { get; set; }
-        public virtual DbSet<PurchaseOrderCustomerLedgerDetail> PurchaseOrderCustomerLedgerDetails { get; set; }
-        public virtual DbSet<PurchaseOrderDetail> PurchaseOrderDetails { get; set; }
-        public virtual DbSet<PurchaseOrderDetailInventoryLedger> PurchaseOrderDetailInventoryLedgers { get; set; }
-        public virtual DbSet<PurchaseOrderInventoryLedger> PurchaseOrderInventoryLedgers { get; set; }
-        public virtual DbSet<PurchaseOrderPayment> PurchaseOrderPayments { get; set; }
-        public virtual DbSet<PurchaseOrderPaymentStatu> PurchaseOrderPaymentStatus { get; set; }
-        public virtual DbSet<PurchaseOrderProductDetailHistory> PurchaseOrderProductDetailHistories { get; set; }
-        public virtual DbSet<PurchaseOrderProductTransactionType> PurchaseOrderProductTransactionTypes { get; set; }
-        public virtual DbSet<PurchaseOrderReceiving> PurchaseOrderReceivings { get; set; }
-        public virtual DbSet<PurchaseOrderReceivingDetail> PurchaseOrderReceivingDetails { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tblGLTranDetail> tblGLTranDetails { get; set; }
@@ -88,6 +73,7 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<PurchaseSupplierLedgerTransactionType> PurchaseSupplierLedgerTransactionTypes { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
+        public virtual DbSet<ProductDetail> ProductDetails { get; set; }
     
         public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
         {

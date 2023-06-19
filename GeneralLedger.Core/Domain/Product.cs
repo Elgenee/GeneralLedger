@@ -18,7 +18,6 @@ namespace GeneralLedger.Core.Domain
         public Product()
         {
             this.ProductDetails = new HashSet<ProductDetail>();
-            this.PurchaseOrderDetails = new HashSet<PurchaseOrderDetail>();
         }
     
         public int Id { get; set; }
@@ -37,9 +36,6 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intTotal { get; set; }
         public Nullable<decimal> curDefaultCost { get; set; }
         public Nullable<int> intIDPriceType { get; set; }
-        public Nullable<decimal> curDefaultRetail { get; set; }
-        public Nullable<decimal> curDefaultWholesale { get; set; }
-        public Nullable<decimal> curDefaultMarkup { get; set; }
         public Nullable<int> intIDProductCharacteristic { get; set; }
     
         public virtual PriceType PriceType { get; set; }
@@ -49,7 +45,5 @@ namespace GeneralLedger.Core.Domain
         public virtual ProductType ProductType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductDetail> ProductDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrderDetail> PurchaseOrderDetails { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace GeneralLedger.Core.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Supplier()
         {
-            this.PurchaseOrders = new HashSet<PurchaseOrder>();
             this.Purchases = new HashSet<Purchase>();
             this.PurchaseSupplierLedgers = new HashSet<PurchaseSupplierLedger>();
             this.AccountPayableAdjustments = new HashSet<AccountPayableAdjustment>();
@@ -35,8 +34,6 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intIDBank { get; set; }
     
         public virtual Bank Bank { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Purchase> Purchases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

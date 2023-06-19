@@ -14,12 +14,6 @@ namespace GeneralLedger.Core.Domain
     
     public partial class ProductDetail
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductDetail()
-        {
-            this.PurchaseOrderDetails = new HashSet<PurchaseOrderDetail>();
-        }
-    
         public int Id { get; set; }
         public Nullable<int> intIDProduct { get; set; }
         public Nullable<int> intIDProductColor { get; set; }
@@ -29,17 +23,11 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intWidth { get; set; }
         public Nullable<int> intHeight { get; set; }
         public Nullable<decimal> curCargoCost { get; set; }
-        public Nullable<decimal> curCost { get; set; }
-        public Nullable<decimal> curRetail { get; set; }
-        public Nullable<decimal> curWholesale { get; set; }
-        public Nullable<decimal> curMarkUp { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual ProductColor ProductColor { get; set; }
         public virtual ProductDetail ProductDetail1 { get; set; }
         public virtual ProductDetail ProductDetail2 { get; set; }
         public virtual ProductSize ProductSize { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrderDetail> PurchaseOrderDetails { get; set; }
     }
 }

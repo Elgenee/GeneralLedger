@@ -119,9 +119,6 @@
     <Compile Include="Domain\InventoryStock.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\InventoryStockDetail.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Domain\Payment.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
@@ -158,46 +155,7 @@
     <Compile Include="Domain\ProductUnit.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\PuchaseOrderReceivingStatu.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Domain\Purchase.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrder.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderCustomerLedger.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderCustomerLedgerDetail.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderDetail.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderDetailInventoryLedger.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderInventoryLedger.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderPayment.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderPaymentStatu.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderProductDetailHistory.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderProductTransactionType.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderReceiving.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Domain\PurchaseOrderReceivingDetail.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\PurchaseSupplierLedger.cs">

@@ -17,7 +17,6 @@ namespace GeneralLedger.Core.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.PurchaseOrders = new HashSet<PurchaseOrder>();
             this.UserRoles = new HashSet<UserRole>();
         }
     
@@ -27,8 +26,6 @@ namespace GeneralLedger.Core.Domain
         public string Password { get; set; }
         public Nullable<bool> IsResetPassword { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }
     }
