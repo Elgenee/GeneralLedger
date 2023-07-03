@@ -237,20 +237,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="ProductDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="intIDProduct" Type="int" />
-          <Property Name="intIDProductColor" Type="int" />
-          <Property Name="intIDProductSize" Type="int" />
-          <Property Name="intMininum" Type="int" />
-          <Property Name="intLength" Type="int" />
-          <Property Name="intWidth" Type="int" />
-          <Property Name="intHeight" Type="int" />
-          <Property Name="curCargoCost" Type="money" />
-        </EntityType>
         <EntityType Name="ProductSize">
           <Key>
             <PropertyRef Name="Id" />
@@ -1070,54 +1056,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblProductDetail_tblProduct">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="intIDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProductDetail_tblProductColor">
-          <End Role="ProductColor" Type="Self.ProductColor" Multiplicity="0..1" />
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductColor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="intIDProductColor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProductDetail_tblProductDetail">
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="1" />
-          <End Role="ProductDetail1" Type="Self.ProductDetail" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ProductDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProductDetail_tblProductSize">
-          <End Role="ProductSize" Type="Self.ProductSize" Multiplicity="0..1" />
-          <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductSize">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="intIDProductSize" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblTBBatchDtl_tblTBBatchHdr">
           <End Role="tblTBBatchHdr" Type="Self.tblTBBatchHdr" Multiplicity="1" />
           <End Role="tblTBBatchDtl" Type="Self.tblTBBatchDtl" Multiplicity="*" />
@@ -1501,7 +1439,6 @@
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCharacteristic" EntityType="Self.ProductCharacteristic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductColor" EntityType="Self.ProductColor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductSize" EntityType="Self.ProductSize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductUnit" EntityType="Self.ProductUnit" Schema="dbo" store:Type="Tables" />
@@ -1710,22 +1647,6 @@
             <End Role="ProductTypes" EntitySet="ProductTypes" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProduct" Association="Self.FK_tblProductDetail_tblProduct">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductDetail" EntitySet="ProductDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProductColor" Association="Self.FK_tblProductDetail_tblProductColor">
-            <End Role="ProductColor" EntitySet="ProductColor" />
-            <End Role="ProductDetail" EntitySet="ProductDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProductDetail" Association="Self.FK_tblProductDetail_tblProductDetail">
-            <End Role="ProductDetail" EntitySet="ProductDetail" />
-            <End Role="ProductDetail1" EntitySet="ProductDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProductSize" Association="Self.FK_tblProductDetail_tblProductSize">
-            <End Role="ProductSize" EntitySet="ProductSize" />
-            <End Role="ProductDetail" EntitySet="ProductDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_tblTBBatchDtl_tblTBBatchHdr" Association="Self.FK_tblTBBatchDtl_tblTBBatchHdr">
             <End Role="tblTBBatchHdr" EntitySet="tblTBBatchHdr" />
             <End Role="tblTBBatchDtl" EntitySet="tblTBBatchDtl" />
@@ -1881,7 +1802,6 @@
           <NavigationProperty Name="ProductCategory" Relationship="Self.FK_tblProduct_tblProductCategory" FromRole="Product" ToRole="ProductCategory" />
           <NavigationProperty Name="ProductCharacteristic" Relationship="Self.FK_tblProduct_tblProductCharacteristic" FromRole="Product" ToRole="ProductCharacteristic" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_tblProduct_tblProductTypes" FromRole="Product" ToRole="ProductTypes" />
-          <NavigationProperty Name="ProductDetails" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProduct" FromRole="Product" ToRole="ProductDetail" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -1913,7 +1833,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProductDetails" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductColor" FromRole="ProductColor" ToRole="ProductDetail" />
         </EntityType>
         <EntityType Name="ProductSize">
           <Key>
@@ -1921,7 +1840,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ProductDetails" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductSize" FromRole="ProductSize" ToRole="ProductDetail" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -2749,23 +2667,6 @@
           <AssociationSet Name="FK_AccountPayableAdjustments_Suppliers" Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Suppliers">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="AccountPayableAdjustment" EntitySet="AccountPayableAdjustments" />
-          </AssociationSet>
-          <EntitySet Name="ProductDetails" EntityType="GeneralLedgerModel.ProductDetail" />
-          <AssociationSet Name="FK_tblProductDetail_tblProduct" Association="GeneralLedgerModel.FK_tblProductDetail_tblProduct">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProductColor" Association="GeneralLedgerModel.FK_tblProductDetail_tblProductColor">
-            <End Role="ProductColor" EntitySet="ProductColors" />
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProductDetail" Association="GeneralLedgerModel.FK_tblProductDetail_tblProductDetail">
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
-            <End Role="ProductDetail1" EntitySet="ProductDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProductDetail_tblProductSize" Association="GeneralLedgerModel.FK_tblProductDetail_tblProductSize">
-            <End Role="ProductSize" EntitySet="ProductSizes" />
-            <End Role="ProductDetail" EntitySet="ProductDetails" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
@@ -4023,73 +3924,6 @@
             </Principal>
             <Dependent Role="AccountPayableAdjustment">
               <PropertyRef Name="SupplierId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ProductDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="intIDProduct" Type="Int32" />
-          <Property Name="intIDProductColor" Type="Int32" />
-          <Property Name="intIDProductSize" Type="Int32" />
-          <Property Name="intMininum" Type="Int32" />
-          <Property Name="intLength" Type="Int32" />
-          <Property Name="intWidth" Type="Int32" />
-          <Property Name="intHeight" Type="Int32" />
-          <Property Name="curCargoCost" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Product" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProduct" FromRole="ProductDetail" ToRole="Product" />
-          <NavigationProperty Name="ProductColor" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductColor" FromRole="ProductDetail" ToRole="ProductColor" />
-          <NavigationProperty Name="ProductDetail1" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductDetail" FromRole="ProductDetail" ToRole="ProductDetail1" />
-          <NavigationProperty Name="ProductDetail2" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductDetail" FromRole="ProductDetail1" ToRole="ProductDetail" />
-          <NavigationProperty Name="ProductSize" Relationship="GeneralLedgerModel.FK_tblProductDetail_tblProductSize" FromRole="ProductDetail" ToRole="ProductSize" />
-        </EntityType>
-        <Association Name="FK_tblProductDetail_tblProduct">
-          <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="intIDProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProductDetail_tblProductColor">
-          <End Type="GeneralLedgerModel.ProductColor" Role="ProductColor" Multiplicity="0..1" />
-          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductColor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="intIDProductColor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProductDetail_tblProductDetail">
-          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail" Multiplicity="1" />
-          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ProductDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProductDetail_tblProductSize">
-          <End Type="GeneralLedgerModel.ProductSize" Role="ProductSize" Multiplicity="0..1" />
-          <End Type="GeneralLedgerModel.ProductDetail" Role="ProductDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductSize">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProductDetail">
-              <PropertyRef Name="intIDProductSize" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5396,21 +5230,6 @@
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
                 <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
                 <ScalarProperty Name="AccountsPayableAdjustmentTypeId" ColumnName="AccountsPayableAdjustmentTypeId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductDetails">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.ProductDetail">
-              <MappingFragment StoreEntitySet="ProductDetail">
-                <ScalarProperty Name="curCargoCost" ColumnName="curCargoCost" />
-                <ScalarProperty Name="intHeight" ColumnName="intHeight" />
-                <ScalarProperty Name="intWidth" ColumnName="intWidth" />
-                <ScalarProperty Name="intLength" ColumnName="intLength" />
-                <ScalarProperty Name="intMininum" ColumnName="intMininum" />
-                <ScalarProperty Name="intIDProductSize" ColumnName="intIDProductSize" />
-                <ScalarProperty Name="intIDProductColor" ColumnName="intIDProductColor" />
-                <ScalarProperty Name="intIDProduct" ColumnName="intIDProduct" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

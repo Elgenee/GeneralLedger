@@ -143,9 +143,6 @@
     <Compile Include="Domain\ProductColor.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\ProductDetail.cs">
-      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Domain\ProductSize.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>

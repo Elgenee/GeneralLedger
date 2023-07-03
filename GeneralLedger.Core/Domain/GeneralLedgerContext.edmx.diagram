@@ -101,11 +101,6 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_AccountPayableAdjustments" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_AccountPayableAdjustments" />
         <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Suppliers" />
-        <EntityTypeShape EntityType="GeneralLedgerModel.ProductDetail" Width="1.5" PointX="6.625" PointY="30.125" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_tblProductDetail_tblProduct" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_tblProductDetail_tblProductColor" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_tblProductDetail_tblProductDetail" />
-        <AssociationConnector Association="GeneralLedgerModel.FK_tblProductDetail_tblProductSize" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

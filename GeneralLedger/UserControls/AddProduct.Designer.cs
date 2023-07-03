@@ -33,8 +33,6 @@
             this.txtProductName = new MetroFramework.Controls.MetroTextBox();
             this.txtDescription = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-            this.cbCharacteristic = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.cbCategories = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
@@ -48,6 +46,15 @@
             this.txtPerPiecePerBox = new MetroFramework.Controls.MetroTextBox();
             this.panelForGrid = new MetroFramework.Controls.MetroPanel();
             this.dgProductColorAndProductSize = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.ProductDetailsID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SizeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Minimum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Length = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Width = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Height = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddColorAndSize = new MetroFramework.Controls.MetroButton();
             this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
@@ -76,15 +83,6 @@
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.dataGridViewButtonXColumn1 = new DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn();
             this.ClearColorAndSize = new MetroFramework.Controls.MetroButton();
-            this.ProductDetailsID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColorID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SizeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Minimum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Length = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Width = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Height = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelForGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProductColorAndProductSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtHeight)).BeginInit();
@@ -99,10 +97,10 @@
             // 
             // 
             this.txtProductName.CustomButton.Image = null;
-            this.txtProductName.CustomButton.Location = new System.Drawing.Point(368, 2);
-            this.txtProductName.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProductName.CustomButton.Location = new System.Drawing.Point(414, 2);
+            this.txtProductName.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtProductName.CustomButton.Name = "";
-            this.txtProductName.CustomButton.Size = new System.Drawing.Size(20, 18);
+            this.txtProductName.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtProductName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtProductName.CustomButton.TabIndex = 1;
             this.txtProductName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -110,7 +108,7 @@
             this.txtProductName.CustomButton.Visible = false;
             this.txtProductName.Lines = new string[0];
             this.txtProductName.Location = new System.Drawing.Point(204, 104);
-            this.txtProductName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProductName.Margin = new System.Windows.Forms.Padding(4);
             this.txtProductName.MaxLength = 32767;
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.PasswordChar = '\0';
@@ -131,10 +129,10 @@
             // 
             // 
             this.txtDescription.CustomButton.Image = null;
-            this.txtDescription.CustomButton.Location = new System.Drawing.Point(284, 2);
-            this.txtDescription.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescription.CustomButton.Location = new System.Drawing.Point(320, 2);
+            this.txtDescription.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescription.CustomButton.Name = "";
-            this.txtDescription.CustomButton.Size = new System.Drawing.Size(104, 94);
+            this.txtDescription.CustomButton.Size = new System.Drawing.Size(117, 117);
             this.txtDescription.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtDescription.CustomButton.TabIndex = 1;
             this.txtDescription.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -142,7 +140,7 @@
             this.txtDescription.CustomButton.Visible = false;
             this.txtDescription.Lines = new string[0];
             this.txtDescription.Location = new System.Drawing.Point(204, 140);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescription.MaxLength = 32767;
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
@@ -168,32 +166,10 @@
             this.metroLabel4.TabIndex = 10;
             this.metroLabel4.Text = "Description";
             // 
-            // metroLabel8
-            // 
-            this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(716, 104);
-            this.metroLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel8.Name = "metroLabel8";
-            this.metroLabel8.Size = new System.Drawing.Size(92, 20);
-            this.metroLabel8.TabIndex = 17;
-            this.metroLabel8.Text = "Characteristic";
-            // 
-            // cbCharacteristic
-            // 
-            this.cbCharacteristic.FormattingEnabled = true;
-            this.cbCharacteristic.ItemHeight = 24;
-            this.cbCharacteristic.Location = new System.Drawing.Point(888, 104);
-            this.cbCharacteristic.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cbCharacteristic.Name = "cbCharacteristic";
-            this.cbCharacteristic.Size = new System.Drawing.Size(294, 30);
-            this.cbCharacteristic.TabIndex = 16;
-            this.cbCharacteristic.UseSelectable = true;
-            this.cbCharacteristic.SelectedValueChanged += new System.EventHandler(this.cbCharacteristic_SelectedValueChanged);
-            // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(716, 145);
+            this.metroLabel2.Location = new System.Drawing.Point(703, 68);
             this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(127, 20);
@@ -204,8 +180,8 @@
             // 
             this.cbCategories.FormattingEnabled = true;
             this.cbCategories.ItemHeight = 24;
-            this.cbCategories.Location = new System.Drawing.Point(888, 145);
-            this.cbCategories.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCategories.Location = new System.Drawing.Point(875, 68);
+            this.cbCategories.Margin = new System.Windows.Forms.Padding(4);
             this.cbCategories.Name = "cbCategories";
             this.cbCategories.Size = new System.Drawing.Size(294, 30);
             this.cbCategories.TabIndex = 18;
@@ -214,7 +190,7 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(716, 187);
+            this.metroLabel3.Location = new System.Drawing.Point(703, 110);
             this.metroLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(97, 20);
@@ -225,8 +201,8 @@
             // 
             this.cbProductTypes.FormattingEnabled = true;
             this.cbProductTypes.ItemHeight = 24;
-            this.cbProductTypes.Location = new System.Drawing.Point(888, 187);
-            this.cbProductTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbProductTypes.Location = new System.Drawing.Point(875, 110);
+            this.cbProductTypes.Margin = new System.Windows.Forms.Padding(4);
             this.cbProductTypes.Name = "cbProductTypes";
             this.cbProductTypes.Size = new System.Drawing.Size(294, 30);
             this.cbProductTypes.TabIndex = 20;
@@ -235,7 +211,7 @@
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(716, 229);
+            this.metroLabel5.Location = new System.Drawing.Point(703, 152);
             this.metroLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(97, 20);
@@ -246,8 +222,8 @@
             // 
             this.cbProductBrand.FormattingEnabled = true;
             this.cbProductBrand.ItemHeight = 24;
-            this.cbProductBrand.Location = new System.Drawing.Point(888, 229);
-            this.cbProductBrand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbProductBrand.Location = new System.Drawing.Point(875, 152);
+            this.cbProductBrand.Margin = new System.Windows.Forms.Padding(4);
             this.cbProductBrand.Name = "cbProductBrand";
             this.cbProductBrand.Size = new System.Drawing.Size(294, 30);
             this.cbProductBrand.TabIndex = 22;
@@ -301,10 +277,10 @@
             // 
             // 
             this.txtPerPiecePerBox.CustomButton.Image = null;
-            this.txtPerPiecePerBox.CustomButton.Location = new System.Drawing.Point(143, 2);
-            this.txtPerPiecePerBox.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPerPiecePerBox.CustomButton.Location = new System.Drawing.Point(161, 2);
+            this.txtPerPiecePerBox.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtPerPiecePerBox.CustomButton.Name = "";
-            this.txtPerPiecePerBox.CustomButton.Size = new System.Drawing.Size(20, 18);
+            this.txtPerPiecePerBox.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtPerPiecePerBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtPerPiecePerBox.CustomButton.TabIndex = 1;
             this.txtPerPiecePerBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -312,7 +288,7 @@
             this.txtPerPiecePerBox.CustomButton.Visible = false;
             this.txtPerPiecePerBox.Lines = new string[0];
             this.txtPerPiecePerBox.Location = new System.Drawing.Point(225, 308);
-            this.txtPerPiecePerBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPerPiecePerBox.Margin = new System.Windows.Forms.Padding(4);
             this.txtPerPiecePerBox.MaxLength = 32767;
             this.txtPerPiecePerBox.Name = "txtPerPiecePerBox";
             this.txtPerPiecePerBox.PasswordChar = '\0';
@@ -378,10 +354,90 @@
             this.dgProductColorAndProductSize.TabIndex = 63;
             this.dgProductColorAndProductSize.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProductColorAndProductSize_CellClick);
             // 
+            // ProductDetailsID
+            // 
+            this.ProductDetailsID.HeaderText = "ID";
+            this.ProductDetailsID.MinimumWidth = 6;
+            this.ProductDetailsID.Name = "ProductDetailsID";
+            this.ProductDetailsID.ReadOnly = true;
+            this.ProductDetailsID.Width = 125;
+            // 
+            // gdName
+            // 
+            this.gdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.gdName.HeaderText = "Color";
+            this.gdName.MinimumWidth = 6;
+            this.gdName.Name = "gdName";
+            this.gdName.ReadOnly = true;
+            this.gdName.Width = 68;
+            // 
+            // ColorID
+            // 
+            this.ColorID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColorID.HeaderText = "ColorID";
+            this.ColorID.MinimumWidth = 6;
+            this.ColorID.Name = "ColorID";
+            this.ColorID.ReadOnly = true;
+            this.ColorID.Width = 81;
+            // 
+            // ProductSize
+            // 
+            this.ProductSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ProductSize.HeaderText = "Size";
+            this.ProductSize.MinimumWidth = 6;
+            this.ProductSize.Name = "ProductSize";
+            this.ProductSize.ReadOnly = true;
+            this.ProductSize.Width = 62;
+            // 
+            // SizeID
+            // 
+            this.SizeID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.SizeID.HeaderText = "SizeID";
+            this.SizeID.MinimumWidth = 6;
+            this.SizeID.Name = "SizeID";
+            this.SizeID.ReadOnly = true;
+            this.SizeID.Width = 75;
+            // 
+            // Minimum
+            // 
+            this.Minimum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Minimum.HeaderText = "Minimum";
+            this.Minimum.MinimumWidth = 6;
+            this.Minimum.Name = "Minimum";
+            this.Minimum.ReadOnly = true;
+            this.Minimum.Width = 89;
+            // 
+            // Length
+            // 
+            this.Length.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Length.HeaderText = "Length";
+            this.Length.MinimumWidth = 6;
+            this.Length.Name = "Length";
+            this.Length.ReadOnly = true;
+            this.Length.Width = 76;
+            // 
+            // Width
+            // 
+            this.Width.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Width.HeaderText = "Width";
+            this.Width.MinimumWidth = 6;
+            this.Width.Name = "Width";
+            this.Width.ReadOnly = true;
+            this.Width.Width = 70;
+            // 
+            // Height
+            // 
+            this.Height.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Height.HeaderText = "Height";
+            this.Height.MinimumWidth = 6;
+            this.Height.Name = "Height";
+            this.Height.ReadOnly = true;
+            this.Height.Width = 75;
+            // 
             // btnAddColorAndSize
             // 
             this.btnAddColorAndSize.Location = new System.Drawing.Point(920, 995);
-            this.btnAddColorAndSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddColorAndSize.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddColorAndSize.Name = "btnAddColorAndSize";
             this.btnAddColorAndSize.Size = new System.Drawing.Size(187, 28);
             this.btnAddColorAndSize.TabIndex = 56;
@@ -415,7 +471,7 @@
             this.cbLocation.FormattingEnabled = true;
             this.cbLocation.ItemHeight = 24;
             this.cbLocation.Location = new System.Drawing.Point(658, 308);
-            this.cbLocation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbLocation.Margin = new System.Windows.Forms.Padding(4);
             this.cbLocation.Name = "cbLocation";
             this.cbLocation.Size = new System.Drawing.Size(294, 30);
             this.cbLocation.TabIndex = 58;
@@ -424,7 +480,7 @@
             // btnDeleteColorSize
             // 
             this.btnDeleteColorSize.Location = new System.Drawing.Point(1112, 995);
-            this.btnDeleteColorSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDeleteColorSize.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteColorSize.Name = "btnDeleteColorSize";
             this.btnDeleteColorSize.Size = new System.Drawing.Size(187, 28);
             this.btnDeleteColorSize.TabIndex = 63;
@@ -449,10 +505,10 @@
             // 
             // 
             this.txtID.CustomButton.Image = null;
-            this.txtID.CustomButton.Location = new System.Drawing.Point(368, 2);
-            this.txtID.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtID.CustomButton.Location = new System.Drawing.Point(414, 2);
+            this.txtID.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtID.CustomButton.Name = "";
-            this.txtID.CustomButton.Size = new System.Drawing.Size(20, 18);
+            this.txtID.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtID.CustomButton.TabIndex = 1;
             this.txtID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -461,7 +517,7 @@
             this.txtID.Enabled = false;
             this.txtID.Lines = new string[0];
             this.txtID.Location = new System.Drawing.Point(204, 68);
-            this.txtID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtID.Margin = new System.Windows.Forms.Padding(4);
             this.txtID.MaxLength = 32767;
             this.txtID.Name = "txtID";
             this.txtID.PasswordChar = '\0';
@@ -481,7 +537,7 @@
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(761, 382);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(132, 28);
             this.btnSave.TabIndex = 60;
@@ -492,7 +548,7 @@
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(903, 382);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(132, 28);
             this.btnDelete.TabIndex = 61;
@@ -503,7 +559,7 @@
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(615, 382);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(132, 28);
             this.btnClear.TabIndex = 62;
@@ -514,7 +570,7 @@
             // btnFindProduct
             // 
             this.btnFindProduct.Location = new System.Drawing.Point(1050, 382);
-            this.btnFindProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFindProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnFindProduct.Name = "btnFindProduct";
             this.btnFindProduct.Size = new System.Drawing.Size(132, 28);
             this.btnFindProduct.TabIndex = 64;
@@ -537,7 +593,7 @@
             this.cbSize.FormattingEnabled = true;
             this.cbSize.ItemHeight = 24;
             this.cbSize.Location = new System.Drawing.Point(725, 788);
-            this.cbSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSize.Margin = new System.Windows.Forms.Padding(4);
             this.cbSize.Name = "cbSize";
             this.cbSize.Size = new System.Drawing.Size(353, 30);
             this.cbSize.TabIndex = 83;
@@ -558,7 +614,7 @@
             this.cbColor.FormattingEnabled = true;
             this.cbColor.ItemHeight = 24;
             this.cbColor.Location = new System.Drawing.Point(156, 827);
-            this.cbColor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbColor.Margin = new System.Windows.Forms.Padding(4);
             this.cbColor.Name = "cbColor";
             this.cbColor.Size = new System.Drawing.Size(353, 30);
             this.cbColor.TabIndex = 81;
@@ -708,10 +764,10 @@
             // 
             // 
             this.txtProductDetailsID.CustomButton.Image = null;
-            this.txtProductDetailsID.CustomButton.Location = new System.Drawing.Point(292, 2);
-            this.txtProductDetailsID.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProductDetailsID.CustomButton.Location = new System.Drawing.Point(329, 2);
+            this.txtProductDetailsID.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtProductDetailsID.CustomButton.Name = "";
-            this.txtProductDetailsID.CustomButton.Size = new System.Drawing.Size(20, 18);
+            this.txtProductDetailsID.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtProductDetailsID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtProductDetailsID.CustomButton.TabIndex = 1;
             this.txtProductDetailsID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -720,7 +776,7 @@
             this.txtProductDetailsID.Enabled = false;
             this.txtProductDetailsID.Lines = new string[0];
             this.txtProductDetailsID.Location = new System.Drawing.Point(156, 788);
-            this.txtProductDetailsID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProductDetailsID.Margin = new System.Windows.Forms.Padding(4);
             this.txtProductDetailsID.MaxLength = 32767;
             this.txtProductDetailsID.Name = "txtProductDetailsID";
             this.txtProductDetailsID.PasswordChar = '\0';
@@ -764,93 +820,13 @@
             // ClearColorAndSize
             // 
             this.ClearColorAndSize.Location = new System.Drawing.Point(726, 995);
-            this.ClearColorAndSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClearColorAndSize.Margin = new System.Windows.Forms.Padding(4);
             this.ClearColorAndSize.Name = "ClearColorAndSize";
             this.ClearColorAndSize.Size = new System.Drawing.Size(187, 28);
             this.ClearColorAndSize.TabIndex = 87;
             this.ClearColorAndSize.Text = "Clear Color and Size";
             this.ClearColorAndSize.UseSelectable = true;
             this.ClearColorAndSize.Click += new System.EventHandler(this.ClearColorAndSize_Click);
-            // 
-            // ProductDetailsID
-            // 
-            this.ProductDetailsID.HeaderText = "ID";
-            this.ProductDetailsID.MinimumWidth = 6;
-            this.ProductDetailsID.Name = "ProductDetailsID";
-            this.ProductDetailsID.ReadOnly = true;
-            this.ProductDetailsID.Width = 125;
-            // 
-            // gdName
-            // 
-            this.gdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.gdName.HeaderText = "Color";
-            this.gdName.MinimumWidth = 6;
-            this.gdName.Name = "gdName";
-            this.gdName.ReadOnly = true;
-            this.gdName.Width = 68;
-            // 
-            // ColorID
-            // 
-            this.ColorID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColorID.HeaderText = "ColorID";
-            this.ColorID.MinimumWidth = 6;
-            this.ColorID.Name = "ColorID";
-            this.ColorID.ReadOnly = true;
-            this.ColorID.Width = 81;
-            // 
-            // ProductSize
-            // 
-            this.ProductSize.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ProductSize.HeaderText = "Size";
-            this.ProductSize.MinimumWidth = 6;
-            this.ProductSize.Name = "ProductSize";
-            this.ProductSize.ReadOnly = true;
-            this.ProductSize.Width = 62;
-            // 
-            // SizeID
-            // 
-            this.SizeID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.SizeID.HeaderText = "SizeID";
-            this.SizeID.MinimumWidth = 6;
-            this.SizeID.Name = "SizeID";
-            this.SizeID.ReadOnly = true;
-            this.SizeID.Width = 75;
-            // 
-            // Minimum
-            // 
-            this.Minimum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Minimum.HeaderText = "Minimum";
-            this.Minimum.MinimumWidth = 6;
-            this.Minimum.Name = "Minimum";
-            this.Minimum.ReadOnly = true;
-            this.Minimum.Width = 89;
-            // 
-            // Length
-            // 
-            this.Length.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Length.HeaderText = "Length";
-            this.Length.MinimumWidth = 6;
-            this.Length.Name = "Length";
-            this.Length.ReadOnly = true;
-            this.Length.Width = 76;
-            // 
-            // Width
-            // 
-            this.Width.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Width.HeaderText = "Width";
-            this.Width.MinimumWidth = 6;
-            this.Width.Name = "Width";
-            this.Width.ReadOnly = true;
-            this.Width.Width = 70;
-            // 
-            // Height
-            // 
-            this.Height.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Height.HeaderText = "Height";
-            this.Height.MinimumWidth = 6;
-            this.Height.Name = "Height";
-            this.Height.ReadOnly = true;
-            this.Height.Width = 75;
             // 
             // AddProduct
             // 
@@ -896,8 +872,6 @@
             this.Controls.Add(this.cbProductTypes);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.cbCategories);
-            this.Controls.Add(this.metroLabel8);
-            this.Controls.Add(this.cbCharacteristic);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.metroLabel1);
@@ -921,8 +895,6 @@
         private MetroFramework.Controls.MetroTextBox txtProductName;
         private MetroFramework.Controls.MetroTextBox txtDescription;
         private MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroLabel metroLabel8;
-        private MetroFramework.Controls.MetroComboBox cbCharacteristic;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroComboBox cbCategories;
         private MetroFramework.Controls.MetroLabel metroLabel3;

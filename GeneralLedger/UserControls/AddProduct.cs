@@ -31,9 +31,9 @@ namespace GeneralLedger.UserControls
             InitializeComponent();
             ProductBAL productBAL = new ProductBAL();
             var productCharacteristicList = productBAL.getProductCharacteristic();
-            this.cbCharacteristic.DataSource = productCharacteristicList;
-            this.cbCharacteristic.ValueMember = "ID";
-            this.cbCharacteristic.DisplayMember = "Name";
+            //this.cbCharacteristic.DataSource = productCharacteristicList;
+            //this.cbCharacteristic.ValueMember = "ID";
+            //this.cbCharacteristic.DisplayMember = "Name";
 
 
             var locationList = productBAL.getLocation();
@@ -211,51 +211,51 @@ namespace GeneralLedger.UserControls
 
         private void cbCharacteristic_SelectedValueChanged(object sender, EventArgs e)
         {
-            string selectedValue = (this.cbCharacteristic.SelectedItem == null) ? string.Empty : ((ProductCharacteristic)this.cbCharacteristic.SelectedItem).Name;
-            this.dgProductColorAndProductSize.Columns[0].Visible = true;
-            this.dgProductColorAndProductSize.Columns[1].Visible = true;
-            this.dgProductColorAndProductSize.Columns[2].Visible = true;
-            this.dgProductColorAndProductSize.Columns[3].Visible = true;
-            this.dgProductColorAndProductSize.Columns[4].Visible = true;
-            this.dgProductColorAndProductSize.Columns[5].Visible = true;
-            this.dgProductColorAndProductSize.Columns[6].Visible = true;
-            this.dgProductColorAndProductSize.Columns[7].Visible = true;
-            this.dgProductColorAndProductSize.Columns[8].Visible = true;
-            //this.dgProductColorAndProductSize.Columns[9].Visible = true;
-            //this.dgProductColorAndProductSize.Columns[13].Visible = true;
-            this.dgProductColorAndProductSize.Rows.Clear();
+            //string selectedValue = (this.cbCharacteristic.SelectedItem == null) ? string.Empty : ((ProductCharacteristic)this.cbCharacteristic.SelectedItem).Name;
+            //this.dgProductColorAndProductSize.Columns[0].Visible = true;
+            //this.dgProductColorAndProductSize.Columns[1].Visible = true;
+            //this.dgProductColorAndProductSize.Columns[2].Visible = true;
+            //this.dgProductColorAndProductSize.Columns[3].Visible = true;
+            //this.dgProductColorAndProductSize.Columns[4].Visible = true;
+            //this.dgProductColorAndProductSize.Columns[5].Visible = true;
+            //this.dgProductColorAndProductSize.Columns[6].Visible = true;
+            //this.dgProductColorAndProductSize.Columns[7].Visible = true;
+            //this.dgProductColorAndProductSize.Columns[8].Visible = true;
+            ////this.dgProductColorAndProductSize.Columns[9].Visible = true;
+            ////this.dgProductColorAndProductSize.Columns[13].Visible = true;
+            //this.dgProductColorAndProductSize.Rows.Clear();
 
-            if (selectedValue.ToUpper().Equals("WITH COLOR AND SIZE"))
-            {
+            //if (selectedValue.ToUpper().Equals("WITH COLOR AND SIZE"))
+            //{
 
-                this.dgProductColorAndProductSize.Columns[0].Visible = false;
-                this.dgProductColorAndProductSize.Columns[2].Visible = false;
-                this.dgProductColorAndProductSize.Columns[4].Visible = false;
-                this.cbSize.Enabled = true;
-                this.cbColor.Enabled = true;
+            //    this.dgProductColorAndProductSize.Columns[0].Visible = false;
+            //    this.dgProductColorAndProductSize.Columns[2].Visible = false;
+            //    this.dgProductColorAndProductSize.Columns[4].Visible = false;
+            //    this.cbSize.Enabled = true;
+            //    this.cbColor.Enabled = true;
 
-            }
+            //}
 
-            if (selectedValue.ToUpper().Equals("WITH COLOR"))
-            {
+            //if (selectedValue.ToUpper().Equals("WITH COLOR"))
+            //{
 
-                this.dgProductColorAndProductSize.Columns[0].Visible = false;
-                this.dgProductColorAndProductSize.Columns[2].Visible = false;
-                this.dgProductColorAndProductSize.Columns[3].Visible = false;
-                this.dgProductColorAndProductSize.Columns[4].Visible = false;
-                this.cbSize.Enabled = false;
-            }
+            //    this.dgProductColorAndProductSize.Columns[0].Visible = false;
+            //    this.dgProductColorAndProductSize.Columns[2].Visible = false;
+            //    this.dgProductColorAndProductSize.Columns[3].Visible = false;
+            //    this.dgProductColorAndProductSize.Columns[4].Visible = false;
+            //    this.cbSize.Enabled = false;
+            //}
 
 
-            if (selectedValue.ToUpper().Equals("WITH SIZE"))
-            {
+            //if (selectedValue.ToUpper().Equals("WITH SIZE"))
+            //{
 
-                this.dgProductColorAndProductSize.Columns[0].Visible = false;
-                this.dgProductColorAndProductSize.Columns[1].Visible = false;
-                this.dgProductColorAndProductSize.Columns[2].Visible = false;
-                this.dgProductColorAndProductSize.Columns[4].Visible = false;
-                this.cbColor.Enabled = false;
-            }
+            //    this.dgProductColorAndProductSize.Columns[0].Visible = false;
+            //    this.dgProductColorAndProductSize.Columns[1].Visible = false;
+            //    this.dgProductColorAndProductSize.Columns[2].Visible = false;
+            //    this.dgProductColorAndProductSize.Columns[4].Visible = false;
+            //    this.cbColor.Enabled = false;
+            //}
 
         }
 
@@ -392,18 +392,18 @@ namespace GeneralLedger.UserControls
                 Product.ProductName = this.txtProductName.Text;
                 Product.Description = this.txtDescription.Text;
                 Product.PerPieceBox = decimal.TryParse(this.txtPerPiecePerBox.Text, out decimalParser) ? decimalParser : 0;
-                Product.ProductCharacteristicID = (this.cbCharacteristic.SelectedItem == null) ? 0 : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).ID;
+                //Product.ProductCharacteristicID = (this.cbCharacteristic.SelectedItem == null) ? 0 : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).ID;
                 Product.ProductCategoryID = (this.cbCategories.SelectedItem == null) ? 0 : ((Tier.BO.ProductCategory)this.cbCategories.SelectedItem).ID;
                 Product.ProductTypeID = (this.cbProductTypes.SelectedItem == null) ? 0 : ((Tier.BO.ProductType)this.cbProductTypes.SelectedItem).ID;
                 Product.ProductBrandID = (this.cbProductBrand.SelectedItem == null) ? 0 : ((Tier.BO.ProductBrand)this.cbProductBrand.SelectedItem).ID;
                 Product.LocationID = 1;
 
-                Product.ProductCharacteristic = new ProductCharacteristic
-                {
-                    ID = (this.cbCharacteristic.SelectedItem == null) ? 0 : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).ID,
-                    Name = (this.cbCharacteristic.SelectedItem == null) ? string.Empty : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).Name
+                //Product.ProductCharacteristic = new ProductCharacteristic
+                //{
+                //    ID = (this.cbCharacteristic.SelectedItem == null) ? 0 : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).ID,
+                //    Name = (this.cbCharacteristic.SelectedItem == null) ? string.Empty : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).Name
 
-                };
+                //};
 
                 Product.ProductCategory = new Tier.BO.ProductCategory
                 {
@@ -432,7 +432,7 @@ namespace GeneralLedger.UserControls
                 {
                     this.ID = Convert.ToInt32(result.Split(',')[0]);
                     this.txtID.Text = this.ID.ToString();
-                    this.cbCharacteristic.Enabled = false;
+                    //this.cbCharacteristic.Enabled = false;
                     MessageBox.Show("Successfully saved");
                    // return;
                 }
@@ -491,18 +491,11 @@ namespace GeneralLedger.UserControls
                 Product.ProductName = this.txtProductName.Text;
                 Product.Description = this.txtDescription.Text;
                 Product.PerPieceBox = decimal.TryParse(this.txtPerPiecePerBox.Text, out decimalParser) ? decimalParser : 0;
-                Product.ProductCharacteristicID = (this.cbCharacteristic.SelectedItem == null) ? 0 : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).ID;
+          
                 Product.ProductCategoryID = (this.cbCategories.SelectedItem == null) ? 0 : ((Tier.BO.ProductCategory)this.cbCategories.SelectedItem).ID;
                 Product.ProductTypeID = (this.cbProductTypes.SelectedItem == null) ? 0 : ((Tier.BO.ProductType)this.cbProductTypes.SelectedItem).ID;
                 Product.ProductBrandID = (this.cbProductBrand.SelectedItem == null) ? 0 : ((Tier.BO.ProductBrand)this.cbProductBrand.SelectedItem).ID;
 
-
-                Product.ProductCharacteristic = new ProductCharacteristic
-                {
-                    ID = (this.cbCharacteristic.SelectedItem == null) ? 0 : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).ID,
-                    Name = (this.cbCharacteristic.SelectedItem == null) ? string.Empty : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).Name
-
-                };
 
                 Product.ProductCategory = new Tier.BO.ProductCategory
                 {
@@ -556,15 +549,15 @@ namespace GeneralLedger.UserControls
                     this.txtID.Text = this.ID.ToString();
                     this.txtProductName.Text = sp.Product.ProductName;
                     this.txtDescription.Text = sp.Product.Description;
-                    this.cbCharacteristic.SelectedValue = sp.Product.ProductCharacteristic.ID;
+                  
                     this.cbCategories.SelectedValue = sp.Product.ProductCategory.ID;
                     this.cbProductTypes.SelectedValue = sp.Product.ProductType.ID;
                     this.cbProductBrand.SelectedValue = sp.Product.ProductBrand.ID;
                     this.txtPerPiecePerBox.Text = sp.Product.PerPieceBox.ToString();
                     this.cbLocation.SelectedValue = sp.Product.Location.ID;
 
-                    LoadProductDetail(this.ID);
-                    this.cbCharacteristic.Enabled = false;
+                    //LoadProductDetail(this.ID);
+
 
                 }
 
@@ -605,7 +598,6 @@ namespace GeneralLedger.UserControls
             this.txtWidth.Text = string.Empty;
             this.txtHeight.Text = string.Empty;
 
-            this.cbCharacteristic.Enabled = true;
             LoadProductDetail(0);
         }
 
