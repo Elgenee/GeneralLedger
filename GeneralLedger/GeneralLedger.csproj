@@ -413,6 +413,12 @@
     <Compile Include="UserControls\PriceType.Designer.cs">
       <DependentUpon>PriceType.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ProductUnit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProductUnit.Designer.cs">
+      <DependentUpon>ProductUnit.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ProductBrand.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -770,6 +776,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\PriceType.resx">
       <DependentUpon>PriceType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ProductUnit.resx">
+      <DependentUpon>ProductUnit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ProductBrand.resx">
       <DependentUpon>ProductBrand.cs</DependentUpon>

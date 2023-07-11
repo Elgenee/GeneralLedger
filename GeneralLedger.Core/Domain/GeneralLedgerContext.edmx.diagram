@@ -101,6 +101,8 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseCustomerLedger_AccountPayableAdjustments" />
         <AssociationConnector Association="GeneralLedgerModel.FK_tblGLTranHeader_AccountPayableAdjustments" />
         <AssociationConnector Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Suppliers" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Product_ProductColor" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Product_ProductSize" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

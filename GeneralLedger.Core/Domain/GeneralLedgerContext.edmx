@@ -197,15 +197,18 @@
           <Property Name="intIDProductCategory" Type="int" />
           <Property Name="intIDProductType" Type="int" />
           <Property Name="intIDProductBrands" Type="int" />
-          <Property Name="intDefaultMinimum" Type="int" />
+          <Property Name="intIDSize" Type="int" />
+          <Property Name="intIDColor" Type="int" />
+          <Property Name="strCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="strPR" Type="nvarchar" MaxLength="500" />
+          <Property Name="strPCD" Type="nvarchar" MaxLength="500" />
+          <Property Name="strMFLM" Type="nvarchar" MaxLength="500" />
+          <Property Name="strPattern" Type="nvarchar" MaxLength="500" />
+          <Property Name="strOffsetCenterBase" Type="nvarchar" MaxLength="500" />
+          <Property Name="strOrigin" Type="nvarchar" MaxLength="500" />
           <Property Name="intPerPiecePerBox" Type="int" />
           <Property Name="intIDLocation" Type="int" />
-          <Property Name="intDefaultLength" Type="int" />
-          <Property Name="intDefaultWidth" Type="int" />
-          <Property Name="intDefaultHeight" Type="int" />
-          <Property Name="intDefaultCargoCost" Type="int" />
           <Property Name="intTotal" Type="int" />
-          <Property Name="curDefaultCost" Type="money" />
           <Property Name="intIDPriceType" Type="int" />
           <Property Name="intIDProductCharacteristic" Type="int" />
         </EntityType>
@@ -657,6 +660,30 @@
             </Principal>
             <Dependent Role="Payment">
               <PropertyRef Name="PurchaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductColor">
+          <End Role="ProductColor" Type="Self.ProductColor" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductColor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDColor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductSize">
+          <End Role="ProductSize" Type="Self.ProductSize" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDSize" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1515,6 +1542,14 @@
             <End Role="Purchase" EntitySet="Purchase" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductColor" Association="Self.FK_Product_ProductColor">
+            <End Role="ProductColor" EntitySet="ProductColor" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductSize" Association="Self.FK_Product_ProductSize">
+            <End Role="ProductSize" EntitySet="ProductSize" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_Purchase_Suppliers" Association="Self.FK_Purchase_Suppliers">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Purchase" EntitySet="Purchase" />
@@ -1786,15 +1821,9 @@
           <Property Name="intIDProductCategory" Type="Int32" />
           <Property Name="intIDProductType" Type="Int32" />
           <Property Name="intIDProductBrands" Type="Int32" />
-          <Property Name="intDefaultMinimum" Type="Int32" />
           <Property Name="intPerPiecePerBox" Type="Int32" />
           <Property Name="intIDLocation" Type="Int32" />
-          <Property Name="intDefaultLength" Type="Int32" />
-          <Property Name="intDefaultWidth" Type="Int32" />
-          <Property Name="intDefaultHeight" Type="Int32" />
-          <Property Name="intDefaultCargoCost" Type="Int32" />
           <Property Name="intTotal" Type="Int32" />
-          <Property Name="curDefaultCost" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="intIDPriceType" Type="Int32" />
           <Property Name="intIDProductCharacteristic" Type="Int32" />
           <NavigationProperty Name="PriceType" Relationship="Self.FK_tblProduct_tblPriceType" FromRole="Product" ToRole="PriceType" />
@@ -1802,6 +1831,17 @@
           <NavigationProperty Name="ProductCategory" Relationship="Self.FK_tblProduct_tblProductCategory" FromRole="Product" ToRole="ProductCategory" />
           <NavigationProperty Name="ProductCharacteristic" Relationship="Self.FK_tblProduct_tblProductCharacteristic" FromRole="Product" ToRole="ProductCharacteristic" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_tblProduct_tblProductTypes" FromRole="Product" ToRole="ProductTypes" />
+          <Property Name="intIDSize" Type="Int32" />
+          <Property Name="intIDColor" Type="Int32" />
+          <Property Name="strCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strPR" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strPCD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strMFLM" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strPattern" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strOffsetCenterBase" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strOrigin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductColor" Relationship="GeneralLedgerModel.FK_Product_ProductColor" FromRole="Product" ToRole="ProductColor" />
+          <NavigationProperty Name="ProductSize" Relationship="GeneralLedgerModel.FK_Product_ProductSize" FromRole="Product" ToRole="ProductSize" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -1833,6 +1873,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="GeneralLedgerModel.FK_Product_ProductColor" FromRole="ProductColor" ToRole="Product" />
         </EntityType>
         <EntityType Name="ProductSize">
           <Key>
@@ -1840,6 +1881,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="GeneralLedgerModel.FK_Product_ProductSize" FromRole="ProductSize" ToRole="Product" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -2667,6 +2709,14 @@
           <AssociationSet Name="FK_AccountPayableAdjustments_Suppliers" Association="GeneralLedgerModel.FK_AccountPayableAdjustments_Suppliers">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="AccountPayableAdjustment" EntitySet="AccountPayableAdjustments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductColor" Association="GeneralLedgerModel.FK_Product_ProductColor">
+            <End Role="ProductColor" EntitySet="ProductColors" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductSize" Association="GeneralLedgerModel.FK_Product_ProductSize">
+            <End Role="ProductSize" EntitySet="ProductSizes" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
@@ -3927,6 +3977,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_ProductColor">
+          <End Type="GeneralLedgerModel.ProductColor" Role="ProductColor" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductColor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDColor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductSize">
+          <End Type="GeneralLedgerModel.ProductSize" Role="ProductSize" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4046,21 +4120,24 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="strOrigin" ColumnName="strOrigin" />
+                <ScalarProperty Name="strOffsetCenterBase" ColumnName="strOffsetCenterBase" />
+                <ScalarProperty Name="strPattern" ColumnName="strPattern" />
+                <ScalarProperty Name="strMFLM" ColumnName="strMFLM" />
+                <ScalarProperty Name="strPCD" ColumnName="strPCD" />
+                <ScalarProperty Name="strPR" ColumnName="strPR" />
+                <ScalarProperty Name="strCode" ColumnName="strCode" />
+                <ScalarProperty Name="intIDColor" ColumnName="intIDColor" />
+                <ScalarProperty Name="intIDSize" ColumnName="intIDSize" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="strProductName" ColumnName="strProductName" />
                 <ScalarProperty Name="strDescription" ColumnName="strDescription" />
                 <ScalarProperty Name="intIDProductCategory" ColumnName="intIDProductCategory" />
                 <ScalarProperty Name="intIDProductType" ColumnName="intIDProductType" />
                 <ScalarProperty Name="intIDProductBrands" ColumnName="intIDProductBrands" />
-                <ScalarProperty Name="intDefaultMinimum" ColumnName="intDefaultMinimum" />
                 <ScalarProperty Name="intPerPiecePerBox" ColumnName="intPerPiecePerBox" />
                 <ScalarProperty Name="intIDLocation" ColumnName="intIDLocation" />
-                <ScalarProperty Name="intDefaultLength" ColumnName="intDefaultLength" />
-                <ScalarProperty Name="intDefaultWidth" ColumnName="intDefaultWidth" />
-                <ScalarProperty Name="intDefaultHeight" ColumnName="intDefaultHeight" />
-                <ScalarProperty Name="intDefaultCargoCost" ColumnName="intDefaultCargoCost" />
                 <ScalarProperty Name="intTotal" ColumnName="intTotal" />
-                <ScalarProperty Name="curDefaultCost" ColumnName="curDefaultCost" />
                 <ScalarProperty Name="intIDPriceType" ColumnName="intIDPriceType" />
                 <ScalarProperty Name="intIDProductCharacteristic" ColumnName="intIDProductCharacteristic" />
               </MappingFragment>

@@ -20,22 +20,27 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intIDProductCategory { get; set; }
         public Nullable<int> intIDProductType { get; set; }
         public Nullable<int> intIDProductBrands { get; set; }
-        public Nullable<int> intDefaultMinimum { get; set; }
         public Nullable<int> intPerPiecePerBox { get; set; }
         public Nullable<int> intIDLocation { get; set; }
-        public Nullable<int> intDefaultLength { get; set; }
-        public Nullable<int> intDefaultWidth { get; set; }
-        public Nullable<int> intDefaultHeight { get; set; }
-        public Nullable<int> intDefaultCargoCost { get; set; }
         public Nullable<int> intTotal { get; set; }
-        public Nullable<decimal> curDefaultCost { get; set; }
         public Nullable<int> intIDPriceType { get; set; }
         public Nullable<int> intIDProductCharacteristic { get; set; }
+        public Nullable<int> intIDSize { get; set; }
+        public Nullable<int> intIDColor { get; set; }
+        public string strCode { get; set; }
+        public string strPR { get; set; }
+        public string strPCD { get; set; }
+        public string strMFLM { get; set; }
+        public string strPattern { get; set; }
+        public string strOffsetCenterBase { get; set; }
+        public string strOrigin { get; set; }
     
         public virtual PriceType PriceType { get; set; }
         public virtual ProductBrand ProductBrand { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual ProductCharacteristic ProductCharacteristic { get; set; }
         public virtual ProductType ProductType { get; set; }
+        public virtual ProductColor ProductColor { get; set; }
+        public virtual ProductSize ProductSize { get; set; }
     }
 }

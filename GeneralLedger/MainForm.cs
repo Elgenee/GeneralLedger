@@ -240,6 +240,14 @@ namespace GeneralLedger
                     // this.btnPostNew.Visible = true;
                 }
 
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "PRODUCT UNIT"))
+                {
+                    this.btnProductUnit.Enabled = true;
+                    this.btnProductUnit.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
             }
             else
             {
@@ -301,8 +309,10 @@ namespace GeneralLedger
                     this.btnReturnPurchase.Style = MetroFramework.MetroColorStyle.Blue;
                     this.btnAPDMCM.Enabled = true;
                     this.btnAPDMCM.Style = MetroFramework.MetroColorStyle.Blue;
-         
-                }
+                    this.btnProductUnit.Enabled = true;
+                    this.btnProductUnit.Style = MetroFramework.MetroColorStyle.Blue;
+
+            }
             }
 
 
@@ -1038,6 +1048,20 @@ namespace GeneralLedger
             frmAccountPayableAdjustmentDebitCreditMemo.MetroTabPage = metroTabPage;
             frmAccountPayableAdjustmentDebitCreditMemo.MetroTabControl = this.metroTabControlMain;
             metroTabPage.Controls.Add(frmAccountPayableAdjustmentDebitCreditMemo);
+            metroTabControlMain.TabPages.Add(metroTabPage);
+            metroTabControlMain.SelectedTab = metroTabPage;
+        }
+
+        private void btnProductUnit_Click(object sender, EventArgs e)
+        {
+
+            MetroTabPage metroTabPage = new MetroTabPage();
+            metroTabPage.Text = "Product Unit";
+            ProductUnit productBrand = new ProductUnit();
+            productBrand.Parent = metroTabPage;
+            productBrand.MetroTabPage = metroTabPage;
+            productBrand.MetroTabControl = this.metroTabControlMain;
+            metroTabPage.Controls.Add(productBrand);
             metroTabControlMain.TabPages.Add(metroTabPage);
             metroTabControlMain.SelectedTab = metroTabPage;
         }

@@ -60,6 +60,7 @@
     <Compile Include="BAL\LocationBAL.cs" />
     <Compile Include="BAL\PriceTypeBAL.cs" />
     <Compile Include="BAL\ProductBAL.cs" />
+    <Compile Include="BAL\ProductUnitBAL.cs" />
     <Compile Include="BAL\ProductBrandBAL.cs" />
     <Compile Include="BAL\ProductCategoryBAL.cs" />
     <Compile Include="BAL\ProductColorBAL.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="BO\Location.cs" />
     <Compile Include="BO\PriceType.cs" />
     <Compile Include="BO\Product.cs" />
+    <Compile Include="BO\ProductUnit.cs" />
     <Compile Include="BO\ProductBrand.cs" />
     <Compile Include="BO\ProductCategory.cs" />
     <Compile Include="BO\ProductCharacteristic.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="DAL\ProductDAL.cs" />
     <Compile Include="DAL\ProductSizeDAL.cs" />
     <Compile Include="DAL\ProductTypeDAL.cs" />
+    <Compile Include="DAL\ProductUnitDAL.cs" />
     <Compile Include="DAL\PurchaseOrderDAL.cs" />
     <Compile Include="DAL\PurchaseOrderReceivingDAL.cs" />
     <Compile Include="DAL\SupplierDAL.cs" />
