@@ -1485,6 +1485,14 @@
                                               <TablixMembers>
                                                 <TablixMember>
                                                   <Group Name="Details" />
+                                                  <SortExpressions>
+                                                    <SortExpression>
+                                                      <Value>=Fields!curCredit.Value</Value>
+                                                    </SortExpression>
+                                                    <SortExpression>
+                                                      <Value>=Fields!curDebit.Value</Value>
+                                                    </SortExpression>
+                                                  </SortExpressions>
                                                 </TablixMember>
                                               </TablixMembers>
                                             </TablixMember>
