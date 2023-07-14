@@ -204,13 +204,16 @@
           <Property Name="strPCD" Type="nvarchar" MaxLength="500" />
           <Property Name="strMFLM" Type="nvarchar" MaxLength="500" />
           <Property Name="strPattern" Type="nvarchar" MaxLength="500" />
-          <Property Name="strOffsetCenterBase" Type="nvarchar" MaxLength="500" />
+          <Property Name="strOffsetCenterBore" Type="nvarchar" MaxLength="500" />
           <Property Name="strOrigin" Type="nvarchar" MaxLength="500" />
           <Property Name="intPerPiecePerBox" Type="int" />
           <Property Name="intIDLocation" Type="int" />
           <Property Name="intTotal" Type="int" />
           <Property Name="intIDPriceType" Type="int" />
           <Property Name="intIDProductCharacteristic" Type="int" />
+          <Property Name="intIDProductUnit" Type="int" />
+          <Property Name="curUnitPrice" Type="money" />
+          <Property Name="intRemainingCount" Type="int" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -350,6 +353,25 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="500" />
           <Property Name="Code" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="StockTransactionTypeID" Type="int" />
+          <Property Name="QuantityIn" Type="int" />
+          <Property Name="QuantityOut" Type="int" />
+          <Property Name="PurchaseID" Type="int" />
+          <Property Name="SalesID" Type="int" />
+        </EntityType>
+        <EntityType Name="StockTransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="int" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -663,6 +685,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_ProductColor">
           <End Role="ProductColor" Type="Self.ProductColor" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -684,6 +718,18 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="intIDSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductUnit">
+          <End Role="ProductUnit" Type="Self.ProductUnit" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductUnit" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -840,6 +886,42 @@
             </Principal>
             <Dependent Role="SalesCustomerLedger">
               <PropertyRef Name="intIdSalesCustomerLedgerTransctionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Purchase">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="PurchaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Sales">
+          <End Role="Sales" Type="Self.Sales" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="SalesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_StockTransactionType">
+          <End Role="StockTransactionType" Type="Self.StockTransactionType" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockTransactionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="StockTransactionTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1044,30 +1126,6 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="intIDProductBrands" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProduct_tblProductCategory">
-          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="intIDProductCategory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblProduct_tblProductCharacteristic">
-          <End Role="ProductCharacteristic" Type="Self.ProductCharacteristic" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductCharacteristic">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="intIDProductCharacteristic" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1476,6 +1534,8 @@
           <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesCustomerLedger" EntityType="Self.SalesCustomerLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesCustomerLedgerTransactionType" EntityType="Self.SalesCustomerLedgerTransactionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockTransactionType" EntityType="Self.StockTransactionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblGLBookType" EntityType="Self.tblGLBookType" Schema="dbo" store:Type="Tables" />
@@ -1542,12 +1602,20 @@
             <End Role="Purchase" EntitySet="Purchase" />
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductCategory" Association="Self.FK_Product_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_ProductColor" Association="Self.FK_Product_ProductColor">
             <End Role="ProductColor" EntitySet="ProductColor" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_ProductSize" Association="Self.FK_Product_ProductSize">
             <End Role="ProductSize" EntitySet="ProductSize" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductUnit" Association="Self.FK_Product_ProductUnit">
+            <End Role="ProductUnit" EntitySet="ProductUnit" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Purchase_Suppliers" Association="Self.FK_Purchase_Suppliers">
@@ -1601,6 +1669,18 @@
           <AssociationSet Name="FK_SalesCustomerLedger_SalesCustomerLedgerTransactionType" Association="Self.FK_SalesCustomerLedger_SalesCustomerLedgerTransactionType">
             <End Role="SalesCustomerLedgerTransactionType" EntitySet="SalesCustomerLedgerTransactionType" />
             <End Role="SalesCustomerLedger" EntitySet="SalesCustomerLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Purchase" Association="Self.FK_Stock_Purchase">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Sales" Association="Self.FK_Stock_Sales">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_StockTransactionType" Association="Self.FK_Stock_StockTransactionType">
+            <End Role="StockTransactionType" EntitySet="StockTransactionType" />
+            <End Role="Stock" EntitySet="Stock" />
           </AssociationSet>
           <AssociationSet Name="FK_Suppliers_Bank" Association="Self.FK_Suppliers_Bank">
             <End Role="Bank" EntitySet="Bank" />
@@ -1668,14 +1748,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_tblProduct_tblProductBrand" Association="Self.FK_tblProduct_tblProductBrand">
             <End Role="ProductBrand" EntitySet="ProductBrand" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProduct_tblProductCategory" Association="Self.FK_tblProduct_tblProductCategory">
-            <End Role="ProductCategory" EntitySet="ProductCategory" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblProduct_tblProductCharacteristic" Association="Self.FK_tblProduct_tblProductCharacteristic">
-            <End Role="ProductCharacteristic" EntitySet="ProductCharacteristic" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <AssociationSet Name="FK_tblProduct_tblProductTypes" Association="Self.FK_tblProduct_tblProductTypes">
@@ -1838,10 +1910,14 @@
           <Property Name="strPCD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="strMFLM" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="strPattern" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="strOffsetCenterBase" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="strOrigin" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ProductColor" Relationship="GeneralLedgerModel.FK_Product_ProductColor" FromRole="Product" ToRole="ProductColor" />
           <NavigationProperty Name="ProductSize" Relationship="GeneralLedgerModel.FK_Product_ProductSize" FromRole="Product" ToRole="ProductSize" />
+          <Property Name="strOffsetCenterBore" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="intIDProductUnit" Type="Int32" />
+          <Property Name="curUnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="ProductUnit" Relationship="GeneralLedgerModel.FK_Product_ProductUnit" FromRole="Product" ToRole="ProductUnit" />
+          <Property Name="intRemainingCount" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -1897,6 +1973,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="GeneralLedgerModel.FK_Product_ProductUnit" FromRole="ProductUnit" ToRole="Product" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -2718,6 +2795,24 @@
             <End Role="ProductSize" EntitySet="ProductSizes" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductUnit" Association="GeneralLedgerModel.FK_Product_ProductUnit">
+            <End Role="ProductUnit" EntitySet="ProductUnits" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Stocks" EntityType="GeneralLedgerModel.Stock" />
+          <EntitySet Name="StockTransactionTypes" EntityType="GeneralLedgerModel.StockTransactionType" />
+          <AssociationSet Name="FK_Stock_Purchase" Association="GeneralLedgerModel.FK_Stock_Purchase">
+            <End Role="Purchase" EntitySet="Purchases" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Sales" Association="GeneralLedgerModel.FK_Stock_Sales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_StockTransactionType" Association="GeneralLedgerModel.FK_Stock_StockTransactionType">
+            <End Role="StockTransactionType" EntitySet="StockTransactionTypes" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -2927,6 +3022,7 @@
           <NavigationProperty Name="PurchaseSupplierLedgers" Relationship="GeneralLedgerModel.FK_PurchaseCustomerLedger_Purchase" FromRole="Purchase" ToRole="PurchaseSupplierLedger" />
           <Property Name="IsPurchaseReturn" Type="Boolean" />
           <NavigationProperty Name="AccountPayableAdjustments" Relationship="GeneralLedgerModel.FK_AccountPayableAdjustments_Purchase" FromRole="Purchase" ToRole="AccountPayableAdjustment" />
+          <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_Purchase" FromRole="Purchase" ToRole="Stock" />
         </EntityType>
         <Association Name="FK_Purchase_Suppliers">
           <End Type="GeneralLedgerModel.Supplier" Role="Supplier" Multiplicity="0..1" />
@@ -3788,6 +3884,7 @@
           <NavigationProperty Name="Customer" Relationship="GeneralLedgerModel.FK_Sales_Customer" FromRole="Sale" ToRole="Customer" />
           <NavigationProperty Name="SalesCustomerLedgers" Relationship="GeneralLedgerModel.FK_SalesCustomerLedger_Sales" FromRole="Sale" ToRole="SalesCustomerLedger" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Sales" FromRole="Sale" ToRole="tblGLTranHeader" />
+          <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_Sales" FromRole="Sale" ToRole="Stock" />
         </EntityType>
         <Association Name="FK_AccountReceivableAdjustments_Sales">
           <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
@@ -4001,6 +4098,77 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Product_ProductUnit">
+          <End Type="GeneralLedgerModel.ProductUnit" Role="ProductUnit" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductUnit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="intIDProductUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="StockTransactionTypeID" Type="Int32" />
+          <Property Name="QuantityIn" Type="Int32" />
+          <Property Name="QuantityOut" Type="Int32" />
+          <Property Name="PurchaseID" Type="Int32" />
+          <Property Name="SalesID" Type="Int32" />
+          <NavigationProperty Name="Purchase" Relationship="GeneralLedgerModel.FK_Stock_Purchase" FromRole="Stock" ToRole="Purchase" />
+          <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_Stock_Sales" FromRole="Stock" ToRole="Sale" />
+          <NavigationProperty Name="StockTransactionType" Relationship="GeneralLedgerModel.FK_Stock_StockTransactionType" FromRole="Stock" ToRole="StockTransactionType" />
+        </EntityType>
+        <EntityType Name="StockTransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="Int32" />
+          <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_StockTransactionType" FromRole="StockTransactionType" ToRole="Stock" />
+        </EntityType>
+        <Association Name="FK_Stock_Purchase">
+          <End Type="GeneralLedgerModel.Purchase" Role="Purchase" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="PurchaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Sales">
+          <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="SalesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_StockTransactionType">
+          <End Type="GeneralLedgerModel.StockTransactionType" Role="StockTransactionType" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockTransactionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="StockTransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4120,8 +4288,11 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="intRemainingCount" ColumnName="intRemainingCount" />
+                <ScalarProperty Name="curUnitPrice" ColumnName="curUnitPrice" />
+                <ScalarProperty Name="intIDProductUnit" ColumnName="intIDProductUnit" />
+                <ScalarProperty Name="strOffsetCenterBore" ColumnName="strOffsetCenterBore" />
                 <ScalarProperty Name="strOrigin" ColumnName="strOrigin" />
-                <ScalarProperty Name="strOffsetCenterBase" ColumnName="strOffsetCenterBase" />
                 <ScalarProperty Name="strPattern" ColumnName="strPattern" />
                 <ScalarProperty Name="strMFLM" ColumnName="strMFLM" />
                 <ScalarProperty Name="strPCD" ColumnName="strPCD" />
@@ -5307,6 +5478,27 @@
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
                 <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
                 <ScalarProperty Name="AccountsPayableAdjustmentTypeId" ColumnName="AccountsPayableAdjustmentTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+                <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+                <ScalarProperty Name="QuantityOut" ColumnName="QuantityOut" />
+                <ScalarProperty Name="QuantityIn" ColumnName="QuantityIn" />
+                <ScalarProperty Name="StockTransactionTypeID" ColumnName="StockTransactionTypeID" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockTransactionTypes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.StockTransactionType">
+              <MappingFragment StoreEntitySet="StockTransactionType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

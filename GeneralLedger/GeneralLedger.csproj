@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>41</ApplicationRevision>
+    <ApplicationRevision>44</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -412,6 +412,12 @@
     </Compile>
     <Compile Include="UserControls\PriceType.Designer.cs">
       <DependentUpon>PriceType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProducCrud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\ProducCrud.Designer.cs">
+      <DependentUpon>ProducCrud.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ProductUnit.cs">
       <SubType>UserControl</SubType>

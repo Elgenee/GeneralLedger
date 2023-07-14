@@ -12,18 +12,18 @@ namespace GeneralLedger.Core.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductUnit
+    public partial class Stock
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductUnit()
-        {
-            this.Products = new HashSet<Product>();
-        }
-    
         public int Id { get; set; }
-        public string strName { get; set; }
+        public Nullable<int> ProductId { get; set; }
+        public Nullable<int> StockTransactionTypeID { get; set; }
+        public Nullable<int> QuantityIn { get; set; }
+        public Nullable<int> QuantityOut { get; set; }
+        public Nullable<int> PurchaseID { get; set; }
+        public Nullable<int> SalesID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual Purchase Purchase { get; set; }
+        public virtual Sale Sale { get; set; }
+        public virtual StockTransactionType StockTransactionType { get; set; }
     }
 }

@@ -47,6 +47,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .Where(s => (s.PONo.ToLower().Contains(criteria.ToLower())
                 || s.TRANo.ToLower().Contains(criteria.ToLower())
                 || s.Customer.strName.ToLower().Contains(criteria.ToLower()))).ToList().Take(100);
+
         }
 
         public Sale GetSaleWithCustomerAgent(int Id)

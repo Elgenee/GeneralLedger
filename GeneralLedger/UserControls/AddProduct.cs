@@ -37,14 +37,14 @@ namespace GeneralLedger.UserControls
 
 
             var locationList = productBAL.getLocation();
-            this.cbLocation.DataSource = locationList;
-            this.cbLocation.ValueMember = "ID";
-            this.cbLocation.DisplayMember = "Name";
+            this.cbLocations.DataSource = locationList;
+            this.cbLocations.ValueMember = "ID";
+            this.cbLocations.DisplayMember = "Name";
 
 
             ProductCategoryBAL ProductCategoryBAL = new ProductCategoryBAL();
             List<GeneralLedger.Tier.BO.ProductCategory> productCategoryList = ProductCategoryBAL.getProductCategory();
-            productCategoryList.Insert(0, new Tier.BO.ProductCategory { ID = 0, Name = string.Empty });
+            //productCategoryList.Insert(0, new Tier.BO.ProductCategory { ID = 0, Name = string.Empty });
             this.cbCategories.DataSource = productCategoryList;
             this.cbCategories.ValueMember = "ID";
             this.cbCategories.DisplayMember =  "Name";
@@ -54,7 +54,7 @@ namespace GeneralLedger.UserControls
 
             ProductBrandBAL productBrandBAL = new ProductBrandBAL();
             List<GeneralLedger.Tier.BO.ProductBrand> productBrandList = productBrandBAL.getProductBrand();
-            productBrandList.Insert(0, new Tier.BO.ProductBrand { ID = 0, Name = string.Empty });
+            //productBrandList.Insert(0, new Tier.BO.ProductBrand { ID = 0, Name = string.Empty });
             this.cbProductBrand.DataSource = productBrandList;
             this.cbProductBrand.ValueMember = "ID";
             this.cbProductBrand.DisplayMember = "Name";
@@ -62,14 +62,14 @@ namespace GeneralLedger.UserControls
 
             ProductTypeBAL ProductTypeBAL = new ProductTypeBAL();
             List<GeneralLedger.Tier.BO.ProductType> ProductTypeList = ProductTypeBAL.getProductType();
-            ProductTypeList.Insert(0, new Tier.BO.ProductType { ID = 0, Name = string.Empty });
+            //ProductTypeList.Insert(0, new Tier.BO.ProductType { ID = 0, Name = string.Empty });
             this.cbProductTypes.DataSource = ProductTypeList;
             this.cbProductTypes.ValueMember = "ID";
             this.cbProductTypes.DisplayMember = "Name";
 
             ProductColorBAL productColorBAL = new ProductColorBAL();
             List<GeneralLedger.Tier.BO.ProductColor> ProductColorList = productColorBAL.getProductColor();
-            ProductColorList.Insert(0, new Tier.BO.ProductColor { ID = 0, Name = string.Empty });
+            //ProductColorList.Insert(0, new Tier.BO.ProductColor { ID = 0, Name = string.Empty });
             this.cbColor.DataSource = ProductColorList;
             this.cbColor.ValueMember = "ID";
             this.cbColor.DisplayMember = "Name";
@@ -77,14 +77,14 @@ namespace GeneralLedger.UserControls
 
             ProductSizeBAL productSizeBAL = new ProductSizeBAL();
             List<GeneralLedger.Tier.BO.ProductSize> ProductSizeList = productSizeBAL.getProductSize();
-            ProductSizeList.Insert(0, new Tier.BO.ProductSize { ID = 0, Name = string.Empty });
+            //ProductSizeList.Insert(0, new Tier.BO.ProductSize { ID = 0, Name = string.Empty });
             this.cbSize.DataSource = ProductSizeList;
             this.cbSize.ValueMember = "ID";
             this.cbSize.DisplayMember = "Name";
 
             ProductUnitBAL productUnitBAL = new ProductUnitBAL();
             List<GeneralLedger.Tier.BO.ProductUnit> ProductUnitList = productUnitBAL.getProductUnit();
-            ProductUnitList.Insert(0, new Tier.BO.ProductUnit { ID = 0, Name = string.Empty });
+           // ProductUnitList.Insert(0, new Tier.BO.ProductUnit { ID = 0, Name = string.Empty });
             this.cbProductUnit.DataSource = ProductUnitList;
             this.cbProductUnit.ValueMember = "ID";
             this.cbProductUnit.DisplayMember = "Name";
@@ -92,7 +92,7 @@ namespace GeneralLedger.UserControls
 
             PriceTypeBAL priceTypeBAL = new PriceTypeBAL();
             List<GeneralLedger.Tier.BO.PriceType> PriceTypeList = priceTypeBAL.getPriceType();
-            PriceTypeList.Insert(0, new Tier.BO.PriceType { ID = 0, Name = string.Empty });
+            //PriceTypeList.Insert(0, new Tier.BO.PriceType { ID = 0, Name = string.Empty });
             this.cbPriceType.DataSource = PriceTypeList;
             this.cbPriceType.ValueMember = "ID";
             this.cbPriceType.DisplayMember = "Name";
@@ -218,16 +218,16 @@ namespace GeneralLedger.UserControls
         }
         private void AddProduct_Load(object sender, EventArgs e)
         {
-            ProductColorBAL ProductColorBAL = new ProductColorBAL();
-            List<GeneralLedger.Tier.BO.ProductColor> ProductColorList = ProductColorBAL.getProductColor();
+            //ProductColorBAL ProductColorBAL = new ProductColorBAL();
+            //List<GeneralLedger.Tier.BO.ProductColor> ProductColorList = ProductColorBAL.getProductColor();
 
-            ProductColorList.Insert(0, new Tier.BO.ProductColor { ID = 0, Name = string.Empty });
+            //ProductColorList.Insert(0, new Tier.BO.ProductColor { ID = 0, Name = string.Empty });
             //this.cbColor.DataSource = ProductColorList;
             //this.cbColor.ValueMember = "ID";
             //this.cbColor.DisplayMember = "Name";
 
-            ProductSizeBAL ProductSizeBAL = new ProductSizeBAL();
-            List<GeneralLedger.Tier.BO.ProductSize> ProductSizeList = ProductSizeBAL.getProductSize();
+            //ProductSizeBAL ProductSizeBAL = new ProductSizeBAL();
+            //List<GeneralLedger.Tier.BO.ProductSize> ProductSizeList = ProductSizeBAL.getProductSize();
             //ProductSizeList.Insert(0, new Tier.BO.ProductSize { ID = 0, Name = string.Empty });
             //this.cbSize.DataSource = ProductSizeList;
             //this.cbSize.ValueMember = "ID";
@@ -382,39 +382,51 @@ namespace GeneralLedger.UserControls
         private void btnSave_Click(object sender, EventArgs e)
         {
         
-
             try
             {
                 int intParser;
                 decimal decimalParser;
-                //for (int i = 0; i < dgProductColorAndProductSize.Rows.Count; i++)
-                //{
+            
+                //validate combox boxes cbCategories, cbProductTypes, cbProductBrand, cbColor, cbSize, cbProductUnit, cbPriceType if not empty
+                if (this.cbCategories.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select category");
+                    return;
+                }
 
-                //    var searchProductAndColorAndSize = new SearchProductAndColorAndSize {
-                //         ID = int.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[0].Value.ToString() , out intParser) ? intParser : 0,
-                //         ProductColorID = int.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[2].Value.ToString(), out intParser) ? intParser : 0,
-                //         ProductSizeID = int.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[4].Value.ToString(), out intParser) ? intParser : 0,
-                //         ProductColor = new Tier.BO.ProductColor
-                //         {
-                //             ID = int.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[2].Value.ToString(), out intParser) ? intParser : 0,
-                //             Name = this.dgProductColorAndProductSize.Rows[i].Cells[1].Value.ToString()
-                //         },
-                //         ProductSize = new Tier.BO.ProductSize {
-                //             ID = int.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[4].Value.ToString(), out intParser) ? intParser : 0,
-                //             Name = this.dgProductColorAndProductSize.Rows[i].Cells[3].Value.ToString()
+                if (this.cbProductTypes.SelectedItem == null || ((int)this.cbProductTypes.SelectedValue) == 0)
+                {
+                    MessageBox.Show("Please select product type");
+                    return;
+                }
 
-                //         },
-                //          Mininum = decimal.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[4].Value.ToString(), out decimalParser) ? decimalParser : 0,
-                //          Length = decimal.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[5].Value.ToString(), out decimalParser) ? decimalParser : 0,
-                //          Width = decimal.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[6].Value.ToString(), out decimalParser) ? decimalParser : 0,
-                //          Height = decimal.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[7].Value.ToString(), out decimalParser) ? decimalParser : 0,
-                //          Cost = decimal.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[8].Value.ToString(), out decimalParser) ? decimalParser : 0,
-                //          Retail = decimal.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[9].Value.ToString(), out decimalParser) ? decimalParser : 0,
-                //          Wholesale = decimal.TryParse(this.dgProductColorAndProductSize.Rows[i].Cells[10].Value.ToString(), out decimalParser) ? decimalParser : 0,
-                //    };
+                if (this.cbProductBrand.SelectedItem == null || ((int)this.cbProductBrand.SelectedValue) == 0)
+                {
+                    MessageBox.Show("Please select product brand");
+                    return;
+                }
 
-                //    Product.ProductDetails.Add(searchProductAndColorAndSize);
-                //}
+                if (this.cbColor.SelectedItem == null || ((int)this.cbColor.SelectedValue) == 0)
+                {
+                    MessageBox.Show("Please select color");
+                    return;
+                }
+
+                if (this.cbSize.SelectedValue == null || ((int)this.cbSize.SelectedValue) == 0)
+                {
+                    MessageBox.Show("Please select size");
+                    return;
+                }
+                if (this.cbProductUnit.SelectedValue == null || ((int)this.cbProductUnit.SelectedValue) == 0)
+                {
+                    MessageBox.Show("Please select product unit");
+                    return;
+                }
+                if (this.cbPriceType.SelectedValue == null || ((int)this.cbPriceType.SelectedValue) == 0)
+                {
+                    MessageBox.Show("Please select price type");
+                    return;
+                }
 
                 string TransType = (this.ID == 0) ? "insert" : "update";
                 //int LoanPaymentMethodTypeID = (this.cbPaymentType.SelectedItem == null) ? 0 : ((LoanPaymentMethodType)this.cbPaymentType.SelectedItem).ID;
@@ -482,8 +494,8 @@ namespace GeneralLedger.UserControls
 
                 Product.Location = new Tier.BO.Location
                 {
-                    ID = (this.cbLocation.SelectedItem == null) ? 0 : ((Tier.BO.Location)this.cbLocation.SelectedItem).ID,
-                    Name = (this.cbLocation.SelectedItem == null) ? string.Empty : ((Tier.BO.Location)this.cbLocation.SelectedItem).Name
+                    ID = (this.cbLocations.SelectedItem == null) ? 0 : ((Tier.BO.Location)this.cbLocations.SelectedItem).ID,
+                    Name = (this.cbLocations.SelectedItem == null) ? string.Empty : ((Tier.BO.Location)this.cbLocations.SelectedItem).Name
                 };
 
                 Product.PriceType = new Tier.BO.PriceType
@@ -591,6 +603,7 @@ namespace GeneralLedger.UserControls
                 {
                     this.ID = Convert.ToInt32(result.Split(',')[0]);
                     this.txtID.Text = this.ID.ToString();
+                    ClearAllFields();
                     MessageBox.Show("Successfully deleted");
                 }
             }
@@ -611,6 +624,9 @@ namespace GeneralLedger.UserControls
                 DialogResult res = sp.ShowDialog(this);
                 if (res == DialogResult.OK)
                 {
+                 
+                    
+
                     this.ID = sp.Product.ID;
                     this.txtID.Text = this.ID.ToString();
                     this.txtProductName.Text = sp.Product.ProductName;
@@ -619,8 +635,26 @@ namespace GeneralLedger.UserControls
                     this.cbCategories.SelectedValue = sp.Product.ProductCategory.ID;
                     this.cbProductTypes.SelectedValue = sp.Product.ProductType.ID;
                     this.cbProductBrand.SelectedValue = sp.Product.ProductBrand.ID;
+                    this.cbColor.SelectedValue = sp.Product.ProductColor.ID;
+                    this.cbSize.SelectedValue = sp.Product.ProductSize.ID;
+                    this.cbProductUnit.SelectedValue = sp.Product.ProductUnit.ID;
+                    this.cbPriceType.SelectedValue = sp.Product.PriceType.ID;
+                    this.txtCode.Text = sp.Product.strCode;
+                    this.txtUnitPrice.Text = sp.Product.UnitPrice.ToString();
+                    this.txtPR.Text = sp.Product.strPR.ToString();
+                    this.txtPCD.Text = sp.Product.strPCD.ToString();
+                    this.txtMFLM.Text = sp.Product.strMFLM.ToString();
+                    this.txtPattern.Text = sp.Product.strPattern.ToString();
+                    this.txtOffsetCenterBore.Text = sp.Product.strOffsetCenterBase.ToString();
+                    this.txtOrigin.Text = sp.Product.strOrigin.ToString();
+                    this.txtUnitPrice.Text = sp.Product.UnitPrice.ToString();
+
+
+
+
+
                     //this.txtPerPiecePerBox.Text = sp.Product.PerPieceBox.ToString();
-                    this.cbLocation.SelectedValue = sp.Product.Location.ID;
+                    this.cbLocations.SelectedValue = sp.Product.Location.ID;
 
                     //LoadProductDetail(this.ID);
 
@@ -652,11 +686,34 @@ namespace GeneralLedger.UserControls
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            ClearAllFields();
+        }
+
+        public void ClearAllFields() {
+
             this.ID = 0;
             this.txtID.Text = this.ID.ToString();
             this.txtProductName.Text = string.Empty;
             this.txtDescription.Text = string.Empty;
-         
+
+            //clear all combobox and fields
+            this.cbCategories.SelectedIndex = -1;
+            this.cbProductTypes.SelectedIndex = -1;
+            this.cbProductBrand.SelectedIndex = -1;
+            this.cbColor.SelectedIndex = -1;
+            this.cbSize.SelectedIndex = -1;
+            this.cbProductUnit.SelectedIndex = -1;
+            this.cbPriceType.SelectedIndex = -1;
+            this.txtCode.Text = string.Empty;
+            this.txtUnitPrice.Text = string.Empty;
+            this.txtPR.Text = string.Empty;
+            this.txtPCD.Text = string.Empty;
+            this.txtMFLM.Text = string.Empty;
+            this.txtPattern.Text = string.Empty;
+            this.txtOffsetCenterBore.Text = string.Empty;
+            this.txtOrigin.Text = string.Empty;
+            this.txtUnitPrice.Text = string.Empty;
+            //this.cbLocations.SelectedIndex = -1;
 
             LoadProductDetail(0);
         }
@@ -723,15 +780,140 @@ namespace GeneralLedger.UserControls
 
         private void cbCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if cbCategories value is Tires move txtOriginLocation to right
-            //if (this.cbCategories.SelectedValue.ToString() == "3")
+            //if cbCategories value is tires then hide the following fields
+            //pcd, mflm, pattern, offsetcenterbore, origin
+            if (this.cbCategories.SelectedItem != null)
+            {
+                if (((GeneralLedger.Tier.BO.ProductCategory)this.cbCategories.SelectedItem).Name == "TIRES")
+                {
+                    this.txtPR.Visible = false;
+                    this.txtPR.Text = string.Empty;
+                    this.txtPCD.Visible = false;
+                    this.txtPCD.Text = string.Empty;
+                    this.txtMFLM.Visible = false;
+                    this.txtMFLM.Text = string.Empty;
+                    this.txtPattern.Visible = true;
+                    this.txtOffsetCenterBore.Visible = false;
+                    this.txtOffsetCenterBore.Text = string.Empty;
+                    this.txtOrigin.Visible = true;
+                    this.lblPR.Visible = false;
+                    this.lblPCD.Visible = false;
+                    this.lblMFLM.Visible = false;
+                    this.lblPattern.Visible = true;
+                    this.lblOrigin.Visible = true;
+                    this.lblOffsetCenterBore.Visible = false;
+
+
+                }
+
+                //if cbCategories value is MAGWHEELS then hide the following fields
+                //pattern, origin, mflm, pr
+               else if (((GeneralLedger.Tier.BO.ProductCategory)this.cbCategories.SelectedItem).Name == "MAGWHEELS")
+                {
+                    this.txtPR.Visible = false;
+                    this.txtPR.Text = string.Empty;
+                    this.txtPCD.Visible = true;
+                    this.txtMFLM.Visible = false;
+                    this.txtMFLM.Text = string.Empty;
+                    this.txtPattern.Visible = false;
+                    this.txtPattern.Text = string.Empty;
+                    this.txtOffsetCenterBore.Visible = true;
+                    this.txtOrigin.Visible = false;
+                    this.txtOrigin.Text = string.Empty;
+                    this.lblPR.Visible = false;
+                    this.lblPCD.Visible = true;
+                    this.lblMFLM.Visible = false;
+                    this.lblPattern.Visible = false;
+                    this.lblOrigin.Visible = false;
+                    this.lblOffsetCenterBore.Visible = true;
+                }
+
+                //if cbCategories value is BATTERY then hide the following fields
+                //pcd, offsetcenterbore, origin, pr, pattern, origin
+                else if (((GeneralLedger.Tier.BO.ProductCategory)this.cbCategories.SelectedItem).Name == "BATTERY")
+                {
+                    this.txtPR.Visible = false;
+                    this.txtPR.Text = string.Empty;
+                    this.txtPCD.Visible = false;
+                    this.txtPCD.Text = string.Empty;
+                    this.txtMFLM.Visible = true;
+                    this.txtPattern.Visible = false;
+                    this.txtPattern.Text = string.Empty;
+                    this.txtOffsetCenterBore.Visible = false;
+                    this.txtOffsetCenterBore.Text = string.Empty;
+                    this.txtOrigin.Visible = false;
+                    this.txtOrigin.Text = string.Empty;
+                    this.lblPR.Visible = false;
+                    this.lblPCD.Visible = false;
+                    this.lblMFLM.Visible = true;
+                    this.lblPattern.Visible = false;
+                    this.lblOrigin.Visible = false;
+                    this.lblOffsetCenterBore.Visible = false;
+                }
+                else
+                {
+                    this.txtPR.Visible = false;
+                    this.txtPR.Text = string.Empty;
+                    this.txtPCD.Visible = false;
+                    this.txtPCD.Text = string.Empty;
+                    this.txtMFLM.Visible = false;
+                    this.txtMFLM.Text = string.Empty;
+                    this.txtPattern.Visible = false;
+                    this.txtPattern.Text = string.Empty;
+                    this.txtOffsetCenterBore.Visible = false;
+                    this.txtOffsetCenterBore.Text = string.Empty;
+                    this.txtOrigin.Visible = false;
+                    this.txtOrigin.Text = string.Empty;
+                    this.lblPR.Visible = false;
+                    this.lblPCD.Visible = false;
+                    this.lblMFLM.Visible = false;
+                    this.lblPattern.Visible = false;
+                    this.lblOrigin.Visible = false;
+                    this.lblOffsetCenterBore.Visible = false;
+                }
+
+            }
+
+        }
+
+        private void txtPR_VisibleChanged(object sender, EventArgs e)
+        {
+
+            //Adjust the position and size of the control when it becomes hidden or visible 
+            //if txtPR is visible then move below controls down
+            //txtPCD, txtMFLM, txtPattern, txtOffsetCenterBore, txtOrigin
+            //lblPCD, lblMFLM, lblPattern, lblOffsetCenterBore, lblOrigin
+            //if (this.txtPR.Visible == true)
             //{
-            //    this.txtOrigin.Location = new Point(656, 311);
+            //    this.txtPCD.Location = new Point(this.txtPCD.Location.X, this.txtPR.Location.Y + 40);
+            //    this.txtMFLM.Location = new Point(this.txtMFLM.Location.X, this.txtPR.Location.Y + 60);
+            //    this.txtPattern.Location = new Point(this.txtPattern.Location.X, this.txtPR.Location.Y + 20);
+            //    this.txtOffsetCenterBore.Location = new Point(this.txtOffsetCenterBore.Location.X, this.txtPR.Location.Y + 80);
+            //    this.txtOrigin.Location = new Point(this.txtOrigin.Location.X, this.txtPR.Location.Y + 100);
+            //    this.lblPCD.Location = new Point(this.lblPCD.Location.X, this.txtPR.Location.Y + 40);
+            //    this.lblMFLM.Location = new Point(this.lblMFLM.Location.X, this.txtPR.Location.Y + 60);
+            //    this.lblPattern.Location = new Point(this.lblPattern.Location.X, this.txtPR.Location.Y + 20);
+            //    this.lblOffsetCenterBore.Location = new Point(this.lblOffsetCenterBore.Location.X, this.txtPR.Location.Y + 80);
+            //    this.lblOrigin.Location = new Point(this.lblOrigin.Location.X, this.txtPR.Location.Y + 100);
             //}
-            //else
+
+            //if txtPR is hidden then move below controls up
+            //txtPCD, txtMFLM, txtPattern, txtOffsetCenterBore, txtOrigin
+            //lblPCD, lblMFLM, lblPattern, lblOffsetCenterBore, lblOrigin
+            //if (this.txtPR.Visible == false)
             //{
-            //    this.txtOrigin.Location = new Point(500, 100);
+            //    this.txtPCD.Location = new Point(this.txtPCD.Location.X, this.txtPR.Location.Y + 20);
+            //    this.txtMFLM.Location = new Point(this.txtMFLM.Location.X, this.txtPR.Location.Y + 40);
+            //    this.txtPattern.Location = new Point(this.txtPattern.Location.X, this.txtPR.Location.Y);
+            //    this.txtOffsetCenterBore.Location = new Point(this.txtOffsetCenterBore.Location.X, this.txtPR.Location.Y + 60);
+            //    this.txtOrigin.Location = new Point(this.txtOrigin.Location.X, this.txtPR.Location.Y);
+            //    this.lblPCD.Location = new Point(this.lblPCD.Location.X, this.txtPR.Location.Y);
+            //    this.lblMFLM.Location = new Point(this.lblMFLM.Location.X, this.txtPR.Location.Y);
+            //    this.lblPattern.Location = new Point(this.lblPattern.Location.X, this.txtPR.Location.Y);
+            //    this.lblOffsetCenterBore.Location = new Point(this.lblOffsetCenterBore.Location.X, this.txtPR.Location.Y);
+            //    this.lblOrigin.Location = new Point(this.lblOrigin.Location.X, this.txtPR.Location.Y);
             //}
+
         }
     }
 }

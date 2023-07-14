@@ -224,6 +224,11 @@ namespace GeneralLedger.Tier.DAL
                                     ID = ReferenceEquals(reader["ProductColorID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductColorID"]),
                                     Name = ReferenceEquals(reader["ProductColor"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductColor"]),
                                 },
+                                ProductUnit = new ProductUnit
+                                {
+                                    ID = ReferenceEquals(reader["ProductUnitID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductUnitID"]),
+                                    Name = ReferenceEquals(reader["ProductUnit"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductUnit"]),
+                                },
                                 Location = new Location {
                                     ID = ReferenceEquals(reader["LocationID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["LocationID"]),
                                     Name = ReferenceEquals(reader["Location"], DBNull.Value) ? string.Empty : Convert.ToString(reader["Location"]),

@@ -347,6 +347,12 @@
     <Compile Include="Domain\sp_helpdiagrams_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Stock.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\StockTransactionType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\Supplier.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>

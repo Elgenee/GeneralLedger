@@ -32,8 +32,11 @@ namespace GeneralLedger.Core.Domain
         public string strPCD { get; set; }
         public string strMFLM { get; set; }
         public string strPattern { get; set; }
-        public string strOffsetCenterBase { get; set; }
         public string strOrigin { get; set; }
+        public string strOffsetCenterBore { get; set; }
+        public Nullable<int> intIDProductUnit { get; set; }
+        public Nullable<decimal> curUnitPrice { get; set; }
+        public Nullable<int> intRemainingCount { get; set; }
     
         public virtual PriceType PriceType { get; set; }
         public virtual ProductBrand ProductBrand { get; set; }
@@ -42,5 +45,6 @@ namespace GeneralLedger.Core.Domain
         public virtual ProductType ProductType { get; set; }
         public virtual ProductColor ProductColor { get; set; }
         public virtual ProductSize ProductSize { get; set; }
+        public virtual ProductUnit ProductUnit { get; set; }
     }
 }
