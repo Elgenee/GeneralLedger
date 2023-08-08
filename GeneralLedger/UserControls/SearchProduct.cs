@@ -48,7 +48,7 @@ namespace GeneralLedger.UserControls
 
                     //display all the data in productList to the dgProduct with the following columns
                     //id, productname, description, productcharacteristicid, productcharacteristicname, productcategoryid, productcategoryname, producttypeid, producttypename, productbrandid, productbrandname, perpiecebox, locationid, locationname, productcolorid, productcolorname, productsizeid, productsizename, productunitid, productunitname, code, productstatusid, productstatusname
-                    this.dgProduct.ColumnCount = 28;
+                    this.dgProduct.ColumnCount = 27;
                     this.dgProduct.Columns[0].Name = "ID";
                     this.dgProduct.Columns[0].Visible = false;
                     this.dgProduct.Columns[1].Name = "Product Name";
@@ -86,7 +86,7 @@ namespace GeneralLedger.UserControls
                     this.dgProduct.Columns[24].Name = "Pattern";
                     this.dgProduct.Columns[25].Name = "OffsetCenterBase";
                     this.dgProduct.Columns[26].Name = "Origin";
-                    this.dgProduct.Columns[27].Name = "UnitPrice";
+                    //this.dgProduct.Columns[27].Name = "UnitPrice";
 
                     //loop through the productList and display all the data in productList to the datagridview
                     //
@@ -121,7 +121,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[24].Value = product.strPattern;
                         this.dgProduct.Rows[i].Cells[25].Value = product.strOffsetCenterBase;
                         this.dgProduct.Rows[i].Cells[26].Value = product.strOrigin;
-                        this.dgProduct.Rows[i].Cells[27].Value = product.UnitPrice;
+                        //this.dgProduct.Rows[i].Cells[27].Value = product.UnitPrice;
                     }
 
                   
@@ -244,7 +244,7 @@ namespace GeneralLedger.UserControls
                         strPattern = this.dgProduct.Rows[e.RowIndex].Cells[24].Value.ToString(),
                         strOffsetCenterBase = this.dgProduct.Rows[e.RowIndex].Cells[25].Value.ToString(),
                         strOrigin = this.dgProduct.Rows[e.RowIndex].Cells[26].Value.ToString(),
-                        UnitPrice = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[27].Value.ToString()),      
+                        //UnitPrice = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[27].Value.ToString()),      
                         ProductBrand = new Tier.BO.ProductBrand {
                             ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[9].Value.ToString()),
                             Name = this.dgProduct.Rows[e.RowIndex].Cells[10].Value.ToString()

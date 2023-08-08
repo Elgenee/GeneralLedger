@@ -55,8 +55,6 @@
             this.cbPriceType = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
             this.cbProductUnit = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
-            this.txtUnitPrice = new DevComponents.Editors.DoubleInput();
             this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.txtCode = new MetroFramework.Controls.MetroTextBox();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
@@ -75,7 +73,6 @@
             this.txtOrigin = new MetroFramework.Controls.MetroTextBox();
             this.lblPattern = new MetroFramework.Controls.MetroLabel();
             this.txtPattern = new MetroFramework.Controls.MetroTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -423,38 +420,6 @@
             this.cbProductUnit.Size = new System.Drawing.Size(439, 30);
             this.cbProductUnit.TabIndex = 73;
             this.cbProductUnit.UseSelectable = true;
-            // 
-            // metroLabel13
-            // 
-            this.metroLabel13.AutoSize = true;
-            this.metroLabel13.Location = new System.Drawing.Point(8, 438);
-            this.metroLabel13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel13.Name = "metroLabel13";
-            this.metroLabel13.Size = new System.Drawing.Size(69, 20);
-            this.metroLabel13.TabIndex = 150;
-            this.metroLabel13.Text = "Unit Price";
-            // 
-            // txtUnitPrice
-            // 
-            // 
-            // 
-            // 
-            this.txtUnitPrice.BackgroundStyle.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtUnitPrice.BackgroundStyle.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.txtUnitPrice.BackgroundStyle.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtUnitPrice.BackgroundStyle.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtUnitPrice.BackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtUnitPrice.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtUnitPrice.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtUnitPrice.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtUnitPrice.Increment = 1D;
-            this.txtUnitPrice.Location = new System.Drawing.Point(203, 438);
-            this.txtUnitPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtUnitPrice.MinimumSize = new System.Drawing.Size(0, 28);
-            this.txtUnitPrice.Name = "txtUnitPrice";
-            this.txtUnitPrice.ShowUpDown = true;
-            this.txtUnitPrice.Size = new System.Drawing.Size(440, 28);
-            this.txtUnitPrice.TabIndex = 149;
             // 
             // metroLabel14
             // 
@@ -814,8 +779,6 @@
             this.Controls.Add(this.metroLabel20);
             this.Controls.Add(this.metroLabel14);
             this.Controls.Add(this.txtCode);
-            this.Controls.Add(this.metroLabel13);
-            this.Controls.Add(this.txtUnitPrice);
             this.Controls.Add(this.metroLabel9);
             this.Controls.Add(this.cbProductUnit);
             this.Controls.Add(this.metroLabel7);
@@ -847,7 +810,6 @@
             this.Name = "AddProduct";
             this.Size = new System.Drawing.Size(1864, 647);
             this.Load += new System.EventHandler(this.AddProduct_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -884,8 +846,6 @@
         private MetroFramework.Controls.MetroComboBox cbPriceType;
         private MetroFramework.Controls.MetroLabel metroLabel9;
         private MetroFramework.Controls.MetroComboBox cbProductUnit;
-        private MetroFramework.Controls.MetroLabel metroLabel13;
-        private DevComponents.Editors.DoubleInput txtUnitPrice;
         private MetroFramework.Controls.MetroLabel metroLabel14;
         private MetroFramework.Controls.MetroTextBox txtCode;
         private MetroFramework.Controls.MetroLabel metroLabel20;

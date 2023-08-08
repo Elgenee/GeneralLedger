@@ -187,7 +187,7 @@ namespace GeneralLedger.Tier.DAL
                                 strPattern = ReferenceEquals(reader["strPattern"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPattern"]),
                                 strOffsetCenterBase = ReferenceEquals(reader["strOffsetCenterBore"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strOffsetCenterBore"]),
                                 strOrigin = ReferenceEquals(reader["strOrigin"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strOrigin"]),
-                                UnitPrice = ReferenceEquals(reader["curUnitPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curUnitPrice"]),
+                                //UnitPrice = ReferenceEquals(reader["curUnitPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curUnitPrice"]),
                                 PerPieceBox = ReferenceEquals(reader["intPerPiecePerBox"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["intPerPiecePerBox"]),
                                 ProductBrand = new ProductBrand
                                 {

@@ -732,5 +732,20 @@ namespace GeneralLedger.UserControls
                 this.btnDeleteEntry.Enabled = true;
             }
         }
+
+        private void btnChooseProduct_Click(object sender, EventArgs e)
+        {
+            //open frmChooseProduct
+            frmChooseProduct frmChooseProduct = new frmChooseProduct();
+            frmChooseProduct.BringToFront();
+            frmChooseProduct.TopMost = true;
+            DialogResult res = frmChooseProduct.ShowDialog(this);
+
+            if (res == DialogResult.OK)
+            {
+
+            }
+
+        }
     }
 }

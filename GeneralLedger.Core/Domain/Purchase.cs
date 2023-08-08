@@ -22,6 +22,7 @@ namespace GeneralLedger.Core.Domain
             this.PurchaseSupplierLedgers = new HashSet<PurchaseSupplierLedger>();
             this.AccountPayableAdjustments = new HashSet<AccountPayableAdjustment>();
             this.Stocks = new HashSet<Stock>();
+            this.PurchaseDetails = new HashSet<PurchaseDetail>();
         }
     
         public int Id { get; set; }
@@ -48,5 +49,7 @@ namespace GeneralLedger.Core.Domain
         public virtual ICollection<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
     }
 }

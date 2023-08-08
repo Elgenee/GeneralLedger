@@ -13,6 +13,7 @@ using GeneralLedger.Tier.BAL;
 using System.Globalization;
 using GeneralLedger.Persistence.Services;
 using GeneralLedger.Core.Domain;
+using DevComponents.DotNetBar.Controls;
 
 namespace GeneralLedger.UserControls
 {
@@ -31,9 +32,9 @@ namespace GeneralLedger.UserControls
         public int GLTranHeader { get; set; }
         public int SupplierId { get; set; }
         public List<tblGLTranDetail> GLTranDetail { get; set; }
-
         public int IndexGrid { get; set; }
 
+        public List<PurchaseDetail> PurchaseDetailsList  { get; set; }
 
         public frmPurchase()
         {
@@ -41,6 +42,7 @@ namespace GeneralLedger.UserControls
             PurchaseServices = new PurchaseServices();
             GLTranDetail = new List<tblGLTranDetail>();
             GLTranServices = new GLTranServices();
+            PurchaseDetailsList = new List<PurchaseDetail>();
             GLTranHeader = 0;
             SupplierId = 0;
             this.Purchase = new Purchase();
@@ -593,6 +595,40 @@ namespace GeneralLedger.UserControls
         private void btnViewLedger_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+        
+            frmChooseProduct frmChooseProduct = new frmChooseProduct();
+            frmChooseProduct.BringToFront();
+            frmChooseProduct.TopMost = true;
+            DialogResult res = frmChooseProduct.ShowDialog(this);
+
+            if (res == DialogResult.OK)
+            {
+
+                var convertPurchaseDetail = new PurchaseDetail
+                {
+                     ProductId = frmChooseProduct.Product.Id,
+                     //assign frmChooseProduct.Product to Product
+                     Product = frmChooseProduct.Product,
+                     //UnitPrice = frmChooseProduct.Product.curUnitPrice,
+                     Quantity = frmChooseProduct.ProductQuantity,
+                     TotalPrice = frmChooseProduct.ProductTotalQuantityPrice
+                };
+
+                this.PurchaseDetailsList.Add(convertPurchaseDetail);
+
+                if (PurchaseDetailsList.Count > 0)
+                {
+
+                    this.dgInventory.Rows.Clear();
+                    this.dgInventory.Refresh();
+
+                }
+
+            }
         }
     }
 }

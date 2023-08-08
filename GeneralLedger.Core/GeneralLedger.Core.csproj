@@ -155,6 +155,9 @@
     <Compile Include="Domain\Purchase.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\PurchaseDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\PurchaseSupplierLedger.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>

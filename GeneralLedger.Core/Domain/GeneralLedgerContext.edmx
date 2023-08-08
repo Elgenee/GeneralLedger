@@ -212,7 +212,6 @@
           <Property Name="intIDPriceType" Type="int" />
           <Property Name="intIDProductCharacteristic" Type="int" />
           <Property Name="intIDProductUnit" Type="int" />
-          <Property Name="curUnitPrice" Type="money" />
           <Property Name="intRemainingCount" Type="int" />
         </EntityType>
         <EntityType Name="ProductBrand">
@@ -280,6 +279,17 @@
           <Property Name="IsFullyPaid" Type="bit" />
           <Property Name="LastPaymentDate" Type="date" />
           <Property Name="IsPurchaseReturn" Type="bit" />
+        </EntityType>
+        <EntityType Name="PurchaseDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PurchaseId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalPrice" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="PurchaseSupplierLedger">
           <Key>
@@ -790,6 +800,30 @@
             </Principal>
             <Dependent Role="PurchaseSupplierLedger">
               <PropertyRef Name="intIdPurchaseSupplierLedgerTransactionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetail_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetail_PurchaseDetail">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+          <End Role="PurchaseDetail" Type="Self.PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="PurchaseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1528,6 +1562,7 @@
           <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductUnit" EntityType="Self.ProductUnit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseDetail" EntityType="Self.PurchaseDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseSupplierLedger" EntityType="Self.PurchaseSupplierLedger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseSupplierLedgerTransactionType" EntityType="Self.PurchaseSupplierLedgerTransactionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -1637,6 +1672,14 @@
           <AssociationSet Name="FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType" Association="Self.FK_PurchaseCustomerLedger_PurchaseCustomerLedgerTransactionType">
             <End Role="PurchaseSupplierLedgerTransactionType" EntitySet="PurchaseSupplierLedgerTransactionType" />
             <End Role="PurchaseSupplierLedger" EntitySet="PurchaseSupplierLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetail_Product" Association="Self.FK_PurchaseDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetail_PurchaseDetail" Association="Self.FK_PurchaseDetail_PurchaseDetail">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_PurchaseSupplierLedger_Suppliers" Association="Self.FK_PurchaseSupplierLedger_Suppliers">
             <End Role="Suppliers" EntitySet="Suppliers" />
@@ -1915,9 +1958,9 @@
           <NavigationProperty Name="ProductSize" Relationship="GeneralLedgerModel.FK_Product_ProductSize" FromRole="Product" ToRole="ProductSize" />
           <Property Name="strOffsetCenterBore" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="intIDProductUnit" Type="Int32" />
-          <Property Name="curUnitPrice" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="ProductUnit" Relationship="GeneralLedgerModel.FK_Product_ProductUnit" FromRole="Product" ToRole="ProductUnit" />
           <Property Name="intRemainingCount" Type="Int32" />
+          <NavigationProperty Name="PurchaseDetails" Relationship="GeneralLedgerModel.FK_PurchaseDetail_Product" FromRole="Product" ToRole="PurchaseDetail" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -2813,6 +2856,15 @@
             <End Role="StockTransactionType" EntitySet="StockTransactionTypes" />
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
+          <EntitySet Name="PurchaseDetails" EntityType="GeneralLedgerModel.PurchaseDetail" />
+          <AssociationSet Name="FK_PurchaseDetail_Product" Association="GeneralLedgerModel.FK_PurchaseDetail_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseDetail_PurchaseDetail" Association="GeneralLedgerModel.FK_PurchaseDetail_PurchaseDetail">
+            <End Role="Purchase" EntitySet="Purchases" />
+            <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -3023,6 +3075,7 @@
           <Property Name="IsPurchaseReturn" Type="Boolean" />
           <NavigationProperty Name="AccountPayableAdjustments" Relationship="GeneralLedgerModel.FK_AccountPayableAdjustments_Purchase" FromRole="Purchase" ToRole="AccountPayableAdjustment" />
           <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_Purchase" FromRole="Purchase" ToRole="Stock" />
+          <NavigationProperty Name="PurchaseDetails" Relationship="GeneralLedgerModel.FK_PurchaseDetail_PurchaseDetail" FromRole="Purchase" ToRole="PurchaseDetail" />
         </EntityType>
         <Association Name="FK_Purchase_Suppliers">
           <End Type="GeneralLedgerModel.Supplier" Role="Supplier" Multiplicity="0..1" />
@@ -4169,6 +4222,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PurchaseDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product" Relationship="GeneralLedgerModel.FK_PurchaseDetail_Product" FromRole="PurchaseDetail" ToRole="Product" />
+          <NavigationProperty Name="Purchase" Relationship="GeneralLedgerModel.FK_PurchaseDetail_PurchaseDetail" FromRole="PurchaseDetail" ToRole="Purchase" />
+        </EntityType>
+        <Association Name="FK_PurchaseDetail_Product">
+          <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseDetail_PurchaseDetail">
+          <End Type="GeneralLedgerModel.Purchase" Role="Purchase" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.PurchaseDetail" Role="PurchaseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PurchaseDetail">
+              <PropertyRef Name="PurchaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4289,7 +4379,6 @@
             <EntityTypeMapping TypeName="GeneralLedgerModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="intRemainingCount" ColumnName="intRemainingCount" />
-                <ScalarProperty Name="curUnitPrice" ColumnName="curUnitPrice" />
                 <ScalarProperty Name="intIDProductUnit" ColumnName="intIDProductUnit" />
                 <ScalarProperty Name="strOffsetCenterBore" ColumnName="strOffsetCenterBore" />
                 <ScalarProperty Name="strOrigin" ColumnName="strOrigin" />
@@ -5499,6 +5588,18 @@
             <EntityTypeMapping TypeName="GeneralLedgerModel.StockTransactionType">
               <MappingFragment StoreEntitySet="StockTransactionType">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseDetail">
+              <MappingFragment StoreEntitySet="PurchaseDetail">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

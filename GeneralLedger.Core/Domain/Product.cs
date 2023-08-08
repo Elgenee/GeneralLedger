@@ -14,6 +14,12 @@ namespace GeneralLedger.Core.Domain
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.PurchaseDetails = new HashSet<PurchaseDetail>();
+        }
+    
         public int Id { get; set; }
         public string strProductName { get; set; }
         public string strDescription { get; set; }
@@ -35,7 +41,6 @@ namespace GeneralLedger.Core.Domain
         public string strOrigin { get; set; }
         public string strOffsetCenterBore { get; set; }
         public Nullable<int> intIDProductUnit { get; set; }
-        public Nullable<decimal> curUnitPrice { get; set; }
         public Nullable<int> intRemainingCount { get; set; }
     
         public virtual PriceType PriceType { get; set; }
@@ -46,5 +51,7 @@ namespace GeneralLedger.Core.Domain
         public virtual ProductColor ProductColor { get; set; }
         public virtual ProductSize ProductSize { get; set; }
         public virtual ProductUnit ProductUnit { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
     }
 }

@@ -209,6 +209,12 @@
     <Compile Include="UserControls\frmAgent.Designer.cs">
       <DependentUpon>frmAgent.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\frmChooseProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmChooseProduct.Designer.cs">
+      <DependentUpon>frmChooseProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\frmCollection.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -672,6 +678,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmAgent.resx">
       <DependentUpon>frmAgent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmChooseProduct.resx">
+      <DependentUpon>frmChooseProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmCollection.resx">
       <DependentUpon>frmCollection.cs</DependentUpon>

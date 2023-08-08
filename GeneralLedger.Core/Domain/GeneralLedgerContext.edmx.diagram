@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3fad5c0901894c42a26df00e09cb400a" Name="Diagram1" ZoomLevel="68">
+      <Diagram DiagramId="3fad5c0901894c42a26df00e09cb400a" Name="Diagram1" ZoomLevel="38">
         <EntityTypeShape EntityType="GeneralLedgerModel.Bank" Width="1.5" PointX="1.5" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Company" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GeneralLedgerModel.Currency" Width="1.5" PointX="1.5" PointY="16.75" IsExpanded="true" />
@@ -109,6 +109,9 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_Stock_Purchase" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Stock_Sales" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Stock_StockTransactionType" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.PurchaseDetail" Width="1.5" PointX="6.625" PointY="33.625" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseDetail_Product" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseDetail_PurchaseDetail" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -440,7 +440,7 @@ namespace GeneralLedger.UserControls
                 Product.ProductBrandID = (this.cbProductBrand.SelectedItem == null) ? 0 : ((Tier.BO.ProductBrand)this.cbProductBrand.SelectedItem).ID;
                 Product.LocationID = 1;
                 Product.strCode = this.txtCode.Text;
-                Product.UnitPrice = decimal.TryParse(this.txtUnitPrice.Text, out decimalParser) ? decimalParser : 0;
+                //Product.UnitPrice = decimal.TryParse(this.txtUnitPrice.Text, out decimalParser) ? decimalParser : 0;
                 Product.strPR = this.txtPR.Text;
                 Product.strPCD = this.txtPCD.Text;
                 Product.strMFLM = this.txtMFLM.Text;
@@ -625,13 +625,10 @@ namespace GeneralLedger.UserControls
                 if (res == DialogResult.OK)
                 {
                  
-                    
-
                     this.ID = sp.Product.ID;
                     this.txtID.Text = this.ID.ToString();
                     this.txtProductName.Text = sp.Product.ProductName;
                     this.txtDescription.Text = sp.Product.Description;
-                  
                     this.cbCategories.SelectedValue = sp.Product.ProductCategory.ID;
                     this.cbProductTypes.SelectedValue = sp.Product.ProductType.ID;
                     this.cbProductBrand.SelectedValue = sp.Product.ProductBrand.ID;
@@ -640,18 +637,14 @@ namespace GeneralLedger.UserControls
                     this.cbProductUnit.SelectedValue = sp.Product.ProductUnit.ID;
                     this.cbPriceType.SelectedValue = sp.Product.PriceType.ID;
                     this.txtCode.Text = sp.Product.strCode;
-                    this.txtUnitPrice.Text = sp.Product.UnitPrice.ToString();
+                    //this.txtUnitPrice.Text = sp.Product.UnitPrice.ToString();
                     this.txtPR.Text = sp.Product.strPR.ToString();
                     this.txtPCD.Text = sp.Product.strPCD.ToString();
                     this.txtMFLM.Text = sp.Product.strMFLM.ToString();
                     this.txtPattern.Text = sp.Product.strPattern.ToString();
                     this.txtOffsetCenterBore.Text = sp.Product.strOffsetCenterBase.ToString();
                     this.txtOrigin.Text = sp.Product.strOrigin.ToString();
-                    this.txtUnitPrice.Text = sp.Product.UnitPrice.ToString();
-
-
-
-
+                    //this.txtUnitPrice.Text = sp.Product.UnitPrice.ToString();
 
                     //this.txtPerPiecePerBox.Text = sp.Product.PerPieceBox.ToString();
                     this.cbLocations.SelectedValue = sp.Product.Location.ID;
@@ -705,14 +698,14 @@ namespace GeneralLedger.UserControls
             this.cbProductUnit.SelectedIndex = -1;
             this.cbPriceType.SelectedIndex = -1;
             this.txtCode.Text = string.Empty;
-            this.txtUnitPrice.Text = string.Empty;
+            //this.txtUnitPrice.Text = string.Empty;
             this.txtPR.Text = string.Empty;
             this.txtPCD.Text = string.Empty;
             this.txtMFLM.Text = string.Empty;
             this.txtPattern.Text = string.Empty;
             this.txtOffsetCenterBore.Text = string.Empty;
             this.txtOrigin.Text = string.Empty;
-            this.txtUnitPrice.Text = string.Empty;
+           //this.txtUnitPrice.Text = string.Empty;
             //this.cbLocations.SelectedIndex = -1;
 
             LoadProductDetail(0);
@@ -786,8 +779,8 @@ namespace GeneralLedger.UserControls
             {
                 if (((GeneralLedger.Tier.BO.ProductCategory)this.cbCategories.SelectedItem).Name == "TIRES")
                 {
-                    this.txtPR.Visible = false;
-                    this.txtPR.Text = string.Empty;
+                    this.txtPR.Visible = true;
+                    //this.txtPR.Text = string.Empty;
                     this.txtPCD.Visible = false;
                     this.txtPCD.Text = string.Empty;
                     this.txtMFLM.Visible = false;
@@ -796,7 +789,7 @@ namespace GeneralLedger.UserControls
                     this.txtOffsetCenterBore.Visible = false;
                     this.txtOffsetCenterBore.Text = string.Empty;
                     this.txtOrigin.Visible = true;
-                    this.lblPR.Visible = false;
+                    this.lblPR.Visible = true;
                     this.lblPCD.Visible = false;
                     this.lblMFLM.Visible = false;
                     this.lblPattern.Visible = true;
