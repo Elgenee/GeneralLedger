@@ -11,11 +11,26 @@ namespace GeneralLedger.Persistence.Services
 {
     public class PurchaseServices : IPurchaseServices
     {
-        public Purchase Add(Purchase purchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
+        public Purchase Add(Purchase purchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<PurchaseDetail> PurchaseDetailsList)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
+
+                foreach (var item in PurchaseDetailsList)
+                {
+                    purchase.PurchaseDetails.Add(item);
+                    purchase.Stocks.Add(new Stock
+                    {
+                        ProductId = item.ProductId,
+                        QuantityIn = item.Quantity,
+                        QuantityOut = 0,
+                        StockTransactionTypeID = 1, 
+                    });
+                }
+
                 unitOfWork.Purchase.Add(purchase);
+
+               
 
                 var purchaseCustomerLedger = new PurchaseSupplierLedger
                 {
@@ -28,11 +43,13 @@ namespace GeneralLedger.Persistence.Services
                     DateInserted = DateTime.Now
                 };
 
+
                 unitOfWork.PurchaseSupplierLedger.Add(purchaseCustomerLedger);
+
 
                 if (UseDefaultEntry)
                 {
-             
+
                     var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1071).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
                     var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1056).SingleOrDefault(); // SALES
 

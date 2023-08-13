@@ -74,8 +74,8 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
-        public virtual DbSet<StockTransactionType> StockTransactionTypes { get; set; }
         public virtual DbSet<PurchaseDetail> PurchaseDetails { get; set; }
+        public virtual DbSet<StockTransactionType> StockTransactionTypes { get; set; }
     
         public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
         {

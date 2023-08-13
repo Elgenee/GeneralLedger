@@ -26,6 +26,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .Include(s => s.tblGLTranHeaders.Select(h => h.tblGLTranDetails))
                 .Include(s => s.tblGLTranHeaders.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOA)))
                 .Include(s => s.tblGLTranHeaders.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOASub)))
+                .AsQueryable()
                 .Where(s => s.Id == Id)
                 .ToList();
         }
@@ -35,6 +36,7 @@ namespace GeneralLedger.Persistence.Repositories
             return GeneralLedgerContext.Purchases
                  .Include(p => p.Supplier)
                  .Include(p => p.tblGLTranHeaders)
+                 .AsQueryable()
                  .Where(p => (p.PONo.ToLower().Contains(criteria.ToLower())
                  || p.TRANo.ToLower().Contains(criteria.ToLower())
                  || p.Supplier.strName.ToLower().Contains(criteria.ToLower())
@@ -50,6 +52,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .Include(p => p.Supplier)
                 .Include(p => p.tblGLTranHeaders)
                 .Include(p => p.AccountPayableAdjustments)
+                .AsQueryable()
                 .Where(p => p.PONo.ToLower().Contains(criteria.ToLower())
                 || p.TRANo.ToLower().Contains(criteria.ToLower())
                 || p.Supplier.strName.ToLower().Contains(criteria.ToLower())
@@ -62,6 +65,7 @@ namespace GeneralLedger.Persistence.Repositories
             return GeneralLedgerContext.Purchases
              .Include(p => p.Supplier)
              .Include(p => p.tblGLTranHeaders)
+             .AsQueryable()
              .Where(p => p.Id == Id)
              .SingleOrDefault();
         }

@@ -381,7 +381,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -2843,17 +2843,12 @@
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <EntitySet Name="Stocks" EntityType="GeneralLedgerModel.Stock" />
-          <EntitySet Name="StockTransactionTypes" EntityType="GeneralLedgerModel.StockTransactionType" />
           <AssociationSet Name="FK_Stock_Purchase" Association="GeneralLedgerModel.FK_Stock_Purchase">
             <End Role="Purchase" EntitySet="Purchases" />
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
           <AssociationSet Name="FK_Stock_Sales" Association="GeneralLedgerModel.FK_Stock_Sales">
             <End Role="Sale" EntitySet="Sales" />
-            <End Role="Stock" EntitySet="Stocks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Stock_StockTransactionType" Association="GeneralLedgerModel.FK_Stock_StockTransactionType">
-            <End Role="StockTransactionType" EntitySet="StockTransactionTypes" />
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
           <EntitySet Name="PurchaseDetails" EntityType="GeneralLedgerModel.PurchaseDetail" />
@@ -2864,6 +2859,11 @@
           <AssociationSet Name="FK_PurchaseDetail_PurchaseDetail" Association="GeneralLedgerModel.FK_PurchaseDetail_PurchaseDetail">
             <End Role="Purchase" EntitySet="Purchases" />
             <End Role="PurchaseDetail" EntitySet="PurchaseDetails" />
+          </AssociationSet>
+          <EntitySet Name="StockTransactionTypes" EntityType="GeneralLedgerModel.StockTransactionType" />
+          <AssociationSet Name="FK_Stock_StockTransactionType" Association="GeneralLedgerModel.FK_Stock_StockTransactionType">
+            <End Role="StockTransactionType" EntitySet="StockTransactionTypes" />
+            <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
@@ -4178,14 +4178,6 @@
           <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_Stock_Sales" FromRole="Stock" ToRole="Sale" />
           <NavigationProperty Name="StockTransactionType" Relationship="GeneralLedgerModel.FK_Stock_StockTransactionType" FromRole="Stock" ToRole="StockTransactionType" />
         </EntityType>
-        <EntityType Name="StockTransactionType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="Int32" />
-          <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_StockTransactionType" FromRole="StockTransactionType" ToRole="Stock" />
-        </EntityType>
         <Association Name="FK_Stock_Purchase">
           <End Type="GeneralLedgerModel.Purchase" Role="Purchase" Multiplicity="0..1" />
           <End Type="GeneralLedgerModel.Stock" Role="Stock" Multiplicity="*" />
@@ -4207,18 +4199,6 @@
             </Principal>
             <Dependent Role="Stock">
               <PropertyRef Name="SalesID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Stock_StockTransactionType">
-          <End Type="GeneralLedgerModel.StockTransactionType" Role="StockTransactionType" Multiplicity="0..1" />
-          <End Type="GeneralLedgerModel.Stock" Role="Stock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StockTransactionType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Stock">
-              <PropertyRef Name="StockTransactionTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4256,6 +4236,26 @@
             </Principal>
             <Dependent Role="PurchaseDetail">
               <PropertyRef Name="PurchaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StockTransactionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_StockTransactionType" FromRole="StockTransactionType" ToRole="Stock" />
+        </EntityType>
+        <Association Name="FK_Stock_StockTransactionType">
+          <End Type="GeneralLedgerModel.StockTransactionType" Role="StockTransactionType" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockTransactionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="StockTransactionTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5584,14 +5584,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StockTransactionTypes">
-            <EntityTypeMapping TypeName="GeneralLedgerModel.StockTransactionType">
-              <MappingFragment StoreEntitySet="StockTransactionType">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PurchaseDetails">
             <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseDetail">
               <MappingFragment StoreEntitySet="PurchaseDetail">
@@ -5600,6 +5592,14 @@
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockTransactionTypes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.StockTransactionType">
+              <MappingFragment StoreEntitySet="StockTransactionType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

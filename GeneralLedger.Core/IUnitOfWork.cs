@@ -29,6 +29,9 @@ namespace GeneralLedger.Core
         ItblTBBatchHdrRepository tblTBBatchHdr { get; }
         IAccountsPayableAdjustmentsRepository AccountsPayableAdjustments { get; }
         IAccountsPayableAdjustmentsTypeRepository AccountsPayableAdjustmentsType { get; }
+        IProductRepository Products { get; }
+
+        IStockRepository StockRepository { get; }
         int Complete();
     }
 }

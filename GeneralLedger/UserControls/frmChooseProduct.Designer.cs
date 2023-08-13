@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.dgProduct = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnSelect = new MetroFramework.Controls.MetroButton();
@@ -38,7 +38,6 @@
             this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.txtCode = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
-            this.txtUnitPrice = new DevComponents.Editors.DoubleInput();
             this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
             this.cbProductUnit = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
@@ -58,8 +57,6 @@
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.txtProductName = new MetroFramework.Controls.MetroTextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblPR = new MetroFramework.Controls.MetroLabel();
-            this.txtPR = new MetroFramework.Controls.MetroTextBox();
             this.lblPCD = new MetroFramework.Controls.MetroLabel();
             this.txtPCD = new MetroFramework.Controls.MetroTextBox();
             this.lblMFLM = new MetroFramework.Controls.MetroLabel();
@@ -70,18 +67,24 @@
             this.txtOrigin = new MetroFramework.Controls.MetroTextBox();
             this.lblPattern = new MetroFramework.Controls.MetroLabel();
             this.txtPattern = new MetroFramework.Controls.MetroTextBox();
+            this.lblPR = new MetroFramework.Controls.MetroLabel();
+            this.txtPR = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.txtQuantity = new DevComponents.Editors.DoubleInput();
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
             this.txtTotalPrice = new DevComponents.Editors.DoubleInput();
             this.btnClearProduct = new MetroFramework.Controls.MetroButton();
             this.btnAddProduct = new MetroFramework.Controls.MetroButton();
+            this.txtRemainingCount = new DevComponents.Editors.DoubleInput();
+            this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
+            this.txtQuantity = new DevComponents.Editors.IntegerInput();
+            this.txtUnitPrice = new DevComponents.Editors.DoubleInput();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProduct)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemainingCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // metroPanel1
@@ -91,7 +94,7 @@
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 12;
             this.metroPanel1.Location = new System.Drawing.Point(13, 126);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(1541, 453);
             this.metroPanel1.TabIndex = 25;
@@ -107,14 +110,14 @@
             this.dgProduct.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgProduct.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgProduct.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgProduct.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgProduct.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgProduct.Location = new System.Drawing.Point(0, 0);
@@ -130,7 +133,7 @@
             // btnSelect
             // 
             this.btnSelect.Location = new System.Drawing.Point(664, 69);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(132, 28);
             this.btnSelect.TabIndex = 29;
@@ -141,7 +144,7 @@
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(524, 69);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(132, 28);
             this.btnSearch.TabIndex = 28;
@@ -165,10 +168,10 @@
             // 
             // 
             this.txtCriteria.CustomButton.Image = null;
-            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(321, 2);
-            this.txtCriteria.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(241, 2);
+            this.txtCriteria.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtCriteria.CustomButton.Name = "";
-            this.txtCriteria.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtCriteria.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtCriteria.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtCriteria.CustomButton.TabIndex = 1;
             this.txtCriteria.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -176,7 +179,7 @@
             this.txtCriteria.CustomButton.Visible = false;
             this.txtCriteria.Lines = new string[0];
             this.txtCriteria.Location = new System.Drawing.Point(251, 69);
-            this.txtCriteria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCriteria.Margin = new System.Windows.Forms.Padding(4);
             this.txtCriteria.MaxLength = 32767;
             this.txtCriteria.Name = "txtCriteria";
             this.txtCriteria.PasswordChar = '\0';
@@ -194,7 +197,7 @@
             // metroLabel14
             // 
             this.metroLabel14.AutoSize = true;
-            this.metroLabel14.Location = new System.Drawing.Point(20, 687);
+            this.metroLabel14.Location = new System.Drawing.Point(20, 683);
             this.metroLabel14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel14.Name = "metroLabel14";
             this.metroLabel14.Size = new System.Drawing.Size(42, 20);
@@ -207,10 +210,10 @@
             // 
             // 
             this.txtCode.CustomButton.Image = null;
-            this.txtCode.CustomButton.Location = new System.Drawing.Point(552, 2);
-            this.txtCode.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCode.CustomButton.Location = new System.Drawing.Point(414, 2);
+            this.txtCode.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtCode.CustomButton.Name = "";
-            this.txtCode.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtCode.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtCode.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtCode.CustomButton.TabIndex = 1;
             this.txtCode.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -218,8 +221,8 @@
             this.txtCode.CustomButton.Visible = false;
             this.txtCode.Enabled = false;
             this.txtCode.Lines = new string[0];
-            this.txtCode.Location = new System.Drawing.Point(216, 686);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCode.Location = new System.Drawing.Point(216, 683);
+            this.txtCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtCode.MaxLength = 32767;
             this.txtCode.Name = "txtCode";
             this.txtCode.PasswordChar = '\0';
@@ -237,39 +240,17 @@
             // metroLabel13
             // 
             this.metroLabel13.AutoSize = true;
-            this.metroLabel13.Location = new System.Drawing.Point(20, 816);
+            this.metroLabel13.Location = new System.Drawing.Point(21, 809);
             this.metroLabel13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel13.Name = "metroLabel13";
             this.metroLabel13.Size = new System.Drawing.Size(69, 20);
             this.metroLabel13.TabIndex = 190;
             this.metroLabel13.Text = "Unit Price";
             // 
-            // txtUnitPrice
-            // 
-            // 
-            // 
-            // 
-            this.txtUnitPrice.BackgroundStyle.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtUnitPrice.BackgroundStyle.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.txtUnitPrice.BackgroundStyle.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtUnitPrice.BackgroundStyle.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtUnitPrice.BackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtUnitPrice.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtUnitPrice.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtUnitPrice.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtUnitPrice.Increment = 1D;
-            this.txtUnitPrice.IsInputReadOnly = true;
-            this.txtUnitPrice.Location = new System.Drawing.Point(215, 816);
-            this.txtUnitPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtUnitPrice.MinimumSize = new System.Drawing.Size(0, 28);
-            this.txtUnitPrice.Name = "txtUnitPrice";
-            this.txtUnitPrice.Size = new System.Drawing.Size(440, 28);
-            this.txtUnitPrice.TabIndex = 189;
-            // 
             // metroLabel9
             // 
             this.metroLabel9.AutoSize = true;
-            this.metroLabel9.Location = new System.Drawing.Point(20, 773);
+            this.metroLabel9.Location = new System.Drawing.Point(21, 766);
             this.metroLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel9.Name = "metroLabel9";
             this.metroLabel9.Size = new System.Drawing.Size(86, 20);
@@ -281,8 +262,8 @@
             this.cbProductUnit.Enabled = false;
             this.cbProductUnit.FormattingEnabled = true;
             this.cbProductUnit.ItemHeight = 24;
-            this.cbProductUnit.Location = new System.Drawing.Point(216, 773);
-            this.cbProductUnit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbProductUnit.Location = new System.Drawing.Point(217, 766);
+            this.cbProductUnit.Margin = new System.Windows.Forms.Padding(4);
             this.cbProductUnit.Name = "cbProductUnit";
             this.cbProductUnit.Size = new System.Drawing.Size(439, 30);
             this.cbProductUnit.TabIndex = 187;
@@ -291,7 +272,7 @@
             // metroLabel7
             // 
             this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(20, 731);
+            this.metroLabel7.Location = new System.Drawing.Point(20, 722);
             this.metroLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel7.Name = "metroLabel7";
             this.metroLabel7.Size = new System.Drawing.Size(74, 20);
@@ -303,8 +284,8 @@
             this.cbPriceType.Enabled = false;
             this.cbPriceType.FormattingEnabled = true;
             this.cbPriceType.ItemHeight = 24;
-            this.cbPriceType.Location = new System.Drawing.Point(216, 730);
-            this.cbPriceType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbPriceType.Location = new System.Drawing.Point(217, 722);
+            this.cbPriceType.Margin = new System.Windows.Forms.Padding(4);
             this.cbPriceType.Name = "cbPriceType";
             this.cbPriceType.Size = new System.Drawing.Size(439, 30);
             this.cbPriceType.TabIndex = 185;
@@ -313,7 +294,7 @@
             // metroLabel8
             // 
             this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(669, 828);
+            this.metroLabel8.Location = new System.Drawing.Point(669, 815);
             this.metroLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel8.Name = "metroLabel8";
             this.metroLabel8.Size = new System.Drawing.Size(86, 20);
@@ -325,8 +306,8 @@
             this.cbSize.Enabled = false;
             this.cbSize.FormattingEnabled = true;
             this.cbSize.ItemHeight = 24;
-            this.cbSize.Location = new System.Drawing.Point(851, 828);
-            this.cbSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSize.Location = new System.Drawing.Point(851, 815);
+            this.cbSize.Margin = new System.Windows.Forms.Padding(4);
             this.cbSize.Name = "cbSize";
             this.cbSize.Size = new System.Drawing.Size(295, 30);
             this.cbSize.TabIndex = 183;
@@ -335,7 +316,7 @@
             // metroLabel10
             // 
             this.metroLabel10.AutoSize = true;
-            this.metroLabel10.Location = new System.Drawing.Point(669, 784);
+            this.metroLabel10.Location = new System.Drawing.Point(669, 772);
             this.metroLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(94, 20);
@@ -347,8 +328,8 @@
             this.cbColor.Enabled = false;
             this.cbColor.FormattingEnabled = true;
             this.cbColor.ItemHeight = 24;
-            this.cbColor.Location = new System.Drawing.Point(851, 784);
-            this.cbColor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbColor.Location = new System.Drawing.Point(851, 772);
+            this.cbColor.Margin = new System.Windows.Forms.Padding(4);
             this.cbColor.Name = "cbColor";
             this.cbColor.Size = new System.Drawing.Size(295, 30);
             this.cbColor.TabIndex = 181;
@@ -370,10 +351,10 @@
             // 
             // 
             this.txtID.CustomButton.Image = null;
-            this.txtID.CustomButton.Location = new System.Drawing.Point(552, 2);
-            this.txtID.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtID.CustomButton.Location = new System.Drawing.Point(414, 2);
+            this.txtID.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtID.CustomButton.Name = "";
-            this.txtID.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtID.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtID.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtID.CustomButton.TabIndex = 1;
             this.txtID.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -382,7 +363,7 @@
             this.txtID.Enabled = false;
             this.txtID.Lines = new string[0];
             this.txtID.Location = new System.Drawing.Point(216, 602);
-            this.txtID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtID.Margin = new System.Windows.Forms.Padding(4);
             this.txtID.MaxLength = 32767;
             this.txtID.Name = "txtID";
             this.txtID.PasswordChar = '\0';
@@ -402,7 +383,7 @@
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(669, 738);
+            this.metroLabel5.Location = new System.Drawing.Point(669, 728);
             this.metroLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(97, 20);
@@ -414,8 +395,8 @@
             this.cbProductBrand.Enabled = false;
             this.cbProductBrand.FormattingEnabled = true;
             this.cbProductBrand.ItemHeight = 24;
-            this.cbProductBrand.Location = new System.Drawing.Point(851, 738);
-            this.cbProductBrand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbProductBrand.Location = new System.Drawing.Point(851, 728);
+            this.cbProductBrand.Margin = new System.Windows.Forms.Padding(4);
             this.cbProductBrand.Name = "cbProductBrand";
             this.cbProductBrand.Size = new System.Drawing.Size(295, 30);
             this.cbProductBrand.TabIndex = 176;
@@ -424,7 +405,7 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(669, 688);
+            this.metroLabel3.Location = new System.Drawing.Point(669, 686);
             this.metroLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(97, 20);
@@ -436,8 +417,8 @@
             this.cbProductTypes.Enabled = false;
             this.cbProductTypes.FormattingEnabled = true;
             this.cbProductTypes.ItemHeight = 24;
-            this.cbProductTypes.Location = new System.Drawing.Point(851, 688);
-            this.cbProductTypes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbProductTypes.Location = new System.Drawing.Point(851, 686);
+            this.cbProductTypes.Margin = new System.Windows.Forms.Padding(4);
             this.cbProductTypes.Name = "cbProductTypes";
             this.cbProductTypes.Size = new System.Drawing.Size(295, 30);
             this.cbProductTypes.TabIndex = 174;
@@ -459,7 +440,7 @@
             this.cbCategories.FormattingEnabled = true;
             this.cbCategories.ItemHeight = 24;
             this.cbCategories.Location = new System.Drawing.Point(851, 641);
-            this.cbCategories.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCategories.Margin = new System.Windows.Forms.Padding(4);
             this.cbCategories.Name = "cbCategories";
             this.cbCategories.Size = new System.Drawing.Size(295, 30);
             this.cbCategories.TabIndex = 172;
@@ -469,7 +450,7 @@
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(20, 642);
+            this.metroLabel6.Location = new System.Drawing.Point(20, 644);
             this.metroLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel6.Name = "metroLabel6";
             this.metroLabel6.Size = new System.Drawing.Size(99, 20);
@@ -482,10 +463,10 @@
             // 
             // 
             this.txtProductName.CustomButton.Image = null;
-            this.txtProductName.CustomButton.Location = new System.Drawing.Point(552, 2);
-            this.txtProductName.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProductName.CustomButton.Location = new System.Drawing.Point(414, 2);
+            this.txtProductName.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtProductName.CustomButton.Name = "";
-            this.txtProductName.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtProductName.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtProductName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtProductName.CustomButton.TabIndex = 1;
             this.txtProductName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -493,8 +474,8 @@
             this.txtProductName.CustomButton.Visible = false;
             this.txtProductName.Enabled = false;
             this.txtProductName.Lines = new string[0];
-            this.txtProductName.Location = new System.Drawing.Point(216, 641);
-            this.txtProductName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtProductName.Location = new System.Drawing.Point(216, 643);
+            this.txtProductName.Margin = new System.Windows.Forms.Padding(4);
             this.txtProductName.MaxLength = 32767;
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.PasswordChar = '\0';
@@ -512,8 +493,6 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Window;
-            this.flowLayoutPanel1.Controls.Add(this.lblPR);
-            this.flowLayoutPanel1.Controls.Add(this.txtPR);
             this.flowLayoutPanel1.Controls.Add(this.lblPCD);
             this.flowLayoutPanel1.Controls.Add(this.txtPCD);
             this.flowLayoutPanel1.Controls.Add(this.lblMFLM);
@@ -524,58 +503,18 @@
             this.flowLayoutPanel1.Controls.Add(this.txtOrigin);
             this.flowLayoutPanel1.Controls.Add(this.lblPattern);
             this.flowLayoutPanel1.Controls.Add(this.txtPattern);
+            this.flowLayoutPanel1.Controls.Add(this.lblPR);
+            this.flowLayoutPanel1.Controls.Add(this.txtPR);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1169, 619);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1169, 618);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(343, 406);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(343, 407);
             this.flowLayoutPanel1.TabIndex = 193;
-            // 
-            // lblPR
-            // 
-            this.lblPR.Location = new System.Drawing.Point(4, 0);
-            this.lblPR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPR.Name = "lblPR";
-            this.lblPR.Size = new System.Drawing.Size(323, 28);
-            this.lblPR.TabIndex = 156;
-            this.lblPR.Text = "PR";
-            // 
-            // txtPR
-            // 
-            // 
-            // 
-            // 
-            this.txtPR.CustomButton.Image = null;
-            this.txtPR.CustomButton.Location = new System.Drawing.Point(396, 2);
-            this.txtPR.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPR.CustomButton.Name = "";
-            this.txtPR.CustomButton.Size = new System.Drawing.Size(31, 28);
-            this.txtPR.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtPR.CustomButton.TabIndex = 1;
-            this.txtPR.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtPR.CustomButton.UseSelectable = true;
-            this.txtPR.CustomButton.Visible = false;
-            this.txtPR.Enabled = false;
-            this.txtPR.Lines = new string[0];
-            this.txtPR.Location = new System.Drawing.Point(4, 32);
-            this.txtPR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtPR.MaxLength = 32767;
-            this.txtPR.Name = "txtPR";
-            this.txtPR.PasswordChar = '\0';
-            this.txtPR.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtPR.SelectedText = "";
-            this.txtPR.SelectionLength = 0;
-            this.txtPR.SelectionStart = 0;
-            this.txtPR.ShortcutsEnabled = true;
-            this.txtPR.Size = new System.Drawing.Size(323, 28);
-            this.txtPR.TabIndex = 155;
-            this.txtPR.UseSelectable = true;
-            this.txtPR.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtPR.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // lblPCD
             // 
-            this.lblPCD.Location = new System.Drawing.Point(4, 64);
+            this.lblPCD.Location = new System.Drawing.Point(4, 0);
             this.lblPCD.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPCD.Name = "lblPCD";
             this.lblPCD.Size = new System.Drawing.Size(323, 28);
@@ -588,10 +527,10 @@
             // 
             // 
             this.txtPCD.CustomButton.Image = null;
-            this.txtPCD.CustomButton.Location = new System.Drawing.Point(396, 2);
-            this.txtPCD.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPCD.CustomButton.Location = new System.Drawing.Point(297, 2);
+            this.txtPCD.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtPCD.CustomButton.Name = "";
-            this.txtPCD.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtPCD.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtPCD.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtPCD.CustomButton.TabIndex = 1;
             this.txtPCD.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -599,8 +538,8 @@
             this.txtPCD.CustomButton.Visible = false;
             this.txtPCD.Enabled = false;
             this.txtPCD.Lines = new string[0];
-            this.txtPCD.Location = new System.Drawing.Point(4, 96);
-            this.txtPCD.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPCD.Location = new System.Drawing.Point(4, 32);
+            this.txtPCD.Margin = new System.Windows.Forms.Padding(4);
             this.txtPCD.MaxLength = 32767;
             this.txtPCD.Name = "txtPCD";
             this.txtPCD.PasswordChar = '\0';
@@ -618,7 +557,7 @@
             // lblMFLM
             // 
             this.lblMFLM.AutoSize = true;
-            this.lblMFLM.Location = new System.Drawing.Point(4, 128);
+            this.lblMFLM.Location = new System.Drawing.Point(4, 64);
             this.lblMFLM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMFLM.Name = "lblMFLM";
             this.lblMFLM.Size = new System.Drawing.Size(52, 20);
@@ -631,10 +570,10 @@
             // 
             // 
             this.txtMFLM.CustomButton.Image = null;
-            this.txtMFLM.CustomButton.Location = new System.Drawing.Point(396, 2);
-            this.txtMFLM.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMFLM.CustomButton.Location = new System.Drawing.Point(297, 2);
+            this.txtMFLM.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtMFLM.CustomButton.Name = "";
-            this.txtMFLM.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtMFLM.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtMFLM.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtMFLM.CustomButton.TabIndex = 1;
             this.txtMFLM.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -642,8 +581,8 @@
             this.txtMFLM.CustomButton.Visible = false;
             this.txtMFLM.Enabled = false;
             this.txtMFLM.Lines = new string[0];
-            this.txtMFLM.Location = new System.Drawing.Point(4, 152);
-            this.txtMFLM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMFLM.Location = new System.Drawing.Point(4, 88);
+            this.txtMFLM.Margin = new System.Windows.Forms.Padding(4);
             this.txtMFLM.MaxLength = 32767;
             this.txtMFLM.Name = "txtMFLM";
             this.txtMFLM.PasswordChar = '\0';
@@ -660,7 +599,7 @@
             // 
             // lblOffsetCenterBore
             // 
-            this.lblOffsetCenterBore.Location = new System.Drawing.Point(4, 184);
+            this.lblOffsetCenterBore.Location = new System.Drawing.Point(4, 120);
             this.lblOffsetCenterBore.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOffsetCenterBore.Name = "lblOffsetCenterBore";
             this.lblOffsetCenterBore.Size = new System.Drawing.Size(323, 28);
@@ -673,10 +612,10 @@
             // 
             // 
             this.txtOffsetCenterBore.CustomButton.Image = null;
-            this.txtOffsetCenterBore.CustomButton.Location = new System.Drawing.Point(396, 2);
-            this.txtOffsetCenterBore.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtOffsetCenterBore.CustomButton.Location = new System.Drawing.Point(297, 2);
+            this.txtOffsetCenterBore.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtOffsetCenterBore.CustomButton.Name = "";
-            this.txtOffsetCenterBore.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtOffsetCenterBore.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtOffsetCenterBore.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtOffsetCenterBore.CustomButton.TabIndex = 1;
             this.txtOffsetCenterBore.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -684,8 +623,8 @@
             this.txtOffsetCenterBore.CustomButton.Visible = false;
             this.txtOffsetCenterBore.Enabled = false;
             this.txtOffsetCenterBore.Lines = new string[0];
-            this.txtOffsetCenterBore.Location = new System.Drawing.Point(4, 216);
-            this.txtOffsetCenterBore.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtOffsetCenterBore.Location = new System.Drawing.Point(4, 152);
+            this.txtOffsetCenterBore.Margin = new System.Windows.Forms.Padding(4);
             this.txtOffsetCenterBore.MaxLength = 32767;
             this.txtOffsetCenterBore.Name = "txtOffsetCenterBore";
             this.txtOffsetCenterBore.PasswordChar = '\0';
@@ -702,7 +641,7 @@
             // 
             // lblOrigin
             // 
-            this.lblOrigin.Location = new System.Drawing.Point(4, 248);
+            this.lblOrigin.Location = new System.Drawing.Point(4, 184);
             this.lblOrigin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOrigin.Name = "lblOrigin";
             this.lblOrigin.Size = new System.Drawing.Size(323, 28);
@@ -715,10 +654,10 @@
             // 
             // 
             this.txtOrigin.CustomButton.Image = null;
-            this.txtOrigin.CustomButton.Location = new System.Drawing.Point(396, 2);
-            this.txtOrigin.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtOrigin.CustomButton.Location = new System.Drawing.Point(297, 2);
+            this.txtOrigin.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrigin.CustomButton.Name = "";
-            this.txtOrigin.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtOrigin.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtOrigin.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtOrigin.CustomButton.TabIndex = 1;
             this.txtOrigin.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -726,8 +665,8 @@
             this.txtOrigin.CustomButton.Visible = false;
             this.txtOrigin.Enabled = false;
             this.txtOrigin.Lines = new string[0];
-            this.txtOrigin.Location = new System.Drawing.Point(4, 280);
-            this.txtOrigin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtOrigin.Location = new System.Drawing.Point(4, 216);
+            this.txtOrigin.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrigin.MaxLength = 32767;
             this.txtOrigin.Name = "txtOrigin";
             this.txtOrigin.PasswordChar = '\0';
@@ -744,7 +683,7 @@
             // 
             // lblPattern
             // 
-            this.lblPattern.Location = new System.Drawing.Point(4, 312);
+            this.lblPattern.Location = new System.Drawing.Point(4, 248);
             this.lblPattern.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPattern.Name = "lblPattern";
             this.lblPattern.Size = new System.Drawing.Size(323, 28);
@@ -757,10 +696,10 @@
             // 
             // 
             this.txtPattern.CustomButton.Image = null;
-            this.txtPattern.CustomButton.Location = new System.Drawing.Point(396, 2);
-            this.txtPattern.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPattern.CustomButton.Location = new System.Drawing.Point(297, 2);
+            this.txtPattern.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.txtPattern.CustomButton.Name = "";
-            this.txtPattern.CustomButton.Size = new System.Drawing.Size(31, 28);
+            this.txtPattern.CustomButton.Size = new System.Drawing.Size(23, 23);
             this.txtPattern.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtPattern.CustomButton.TabIndex = 1;
             this.txtPattern.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -768,8 +707,8 @@
             this.txtPattern.CustomButton.Visible = false;
             this.txtPattern.Enabled = false;
             this.txtPattern.Lines = new string[0];
-            this.txtPattern.Location = new System.Drawing.Point(4, 344);
-            this.txtPattern.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPattern.Location = new System.Drawing.Point(4, 280);
+            this.txtPattern.Margin = new System.Windows.Forms.Padding(4);
             this.txtPattern.MaxLength = 32767;
             this.txtPattern.Name = "txtPattern";
             this.txtPattern.PasswordChar = '\0';
@@ -784,46 +723,65 @@
             this.txtPattern.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPattern.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // lblPR
+            // 
+            this.lblPR.Location = new System.Drawing.Point(4, 312);
+            this.lblPR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPR.Name = "lblPR";
+            this.lblPR.Size = new System.Drawing.Size(323, 28);
+            this.lblPR.TabIndex = 170;
+            this.lblPR.Text = "PR";
+            // 
+            // txtPR
+            // 
+            // 
+            // 
+            // 
+            this.txtPR.CustomButton.Image = null;
+            this.txtPR.CustomButton.Location = new System.Drawing.Point(297, 2);
+            this.txtPR.CustomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPR.CustomButton.Name = "";
+            this.txtPR.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtPR.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtPR.CustomButton.TabIndex = 1;
+            this.txtPR.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtPR.CustomButton.UseSelectable = true;
+            this.txtPR.CustomButton.Visible = false;
+            this.txtPR.Enabled = false;
+            this.txtPR.Lines = new string[0];
+            this.txtPR.Location = new System.Drawing.Point(4, 344);
+            this.txtPR.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPR.MaxLength = 32767;
+            this.txtPR.Name = "txtPR";
+            this.txtPR.PasswordChar = '\0';
+            this.txtPR.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtPR.SelectedText = "";
+            this.txtPR.SelectionLength = 0;
+            this.txtPR.SelectionStart = 0;
+            this.txtPR.ShortcutsEnabled = true;
+            this.txtPR.Size = new System.Drawing.Size(323, 28);
+            this.txtPR.TabIndex = 169;
+            this.txtPR.UseSelectable = true;
+            this.txtPR.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtPR.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(20, 857);
+            this.metroLabel4.Location = new System.Drawing.Point(21, 850);
             this.metroLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(61, 20);
             this.metroLabel4.TabIndex = 195;
             this.metroLabel4.Text = "Quantity";
             // 
-            // txtQuantity
-            // 
-            // 
-            // 
-            // 
-            this.txtQuantity.BackgroundStyle.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtQuantity.BackgroundStyle.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.txtQuantity.BackgroundStyle.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtQuantity.BackgroundStyle.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtQuantity.BackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.txtQuantity.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtQuantity.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtQuantity.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtQuantity.Increment = 1D;
-            this.txtQuantity.Location = new System.Drawing.Point(216, 857);
-            this.txtQuantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtQuantity.MinimumSize = new System.Drawing.Size(0, 28);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.ShowUpDown = true;
-            this.txtQuantity.Size = new System.Drawing.Size(440, 28);
-            this.txtQuantity.TabIndex = 194;
-            this.txtQuantity.ValueChanged += new System.EventHandler(this.txtQuantity_ValueChanged);
-            // 
             // metroLabel11
             // 
             this.metroLabel11.AutoSize = true;
-            this.metroLabel11.Location = new System.Drawing.Point(20, 900);
+            this.metroLabel11.Location = new System.Drawing.Point(21, 893);
             this.metroLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel11.Name = "metroLabel11";
-            this.metroLabel11.Size = new System.Drawing.Size(90, 25);
+            this.metroLabel11.Size = new System.Drawing.Size(72, 20);
             this.metroLabel11.TabIndex = 197;
             this.metroLabel11.Text = "Total Price";
             // 
@@ -842,19 +800,19 @@
             this.txtTotalPrice.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtTotalPrice.Increment = 1D;
             this.txtTotalPrice.IsInputReadOnly = true;
-            this.txtTotalPrice.Location = new System.Drawing.Point(216, 900);
+            this.txtTotalPrice.Location = new System.Drawing.Point(217, 893);
             this.txtTotalPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTotalPrice.MinimumSize = new System.Drawing.Size(0, 28);
             this.txtTotalPrice.Name = "txtTotalPrice";
-            this.txtTotalPrice.Size = new System.Drawing.Size(440, 28);
+            this.txtTotalPrice.Size = new System.Drawing.Size(439, 28);
             this.txtTotalPrice.TabIndex = 196;
             // 
             // btnClearProduct
             // 
-            this.btnClearProduct.Location = new System.Drawing.Point(731, 985);
-            this.btnClearProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearProduct.Location = new System.Drawing.Point(706, 1005);
+            this.btnClearProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearProduct.Name = "btnClearProduct";
-            this.btnClearProduct.Size = new System.Drawing.Size(100, 28);
+            this.btnClearProduct.Size = new System.Drawing.Size(125, 28);
             this.btnClearProduct.TabIndex = 199;
             this.btnClearProduct.Text = "Clear Product";
             this.btnClearProduct.UseSelectable = true;
@@ -862,8 +820,8 @@
             // 
             // btnAddProduct
             // 
-            this.btnAddProduct.Location = new System.Drawing.Point(851, 985);
-            this.btnAddProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddProduct.Location = new System.Drawing.Point(851, 1005);
+            this.btnAddProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(100, 28);
             this.btnAddProduct.TabIndex = 198;
@@ -871,22 +829,94 @@
             this.btnAddProduct.UseSelectable = true;
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
             // 
+            // txtRemainingCount
+            // 
+            // 
+            // 
+            // 
+            this.txtRemainingCount.BackgroundStyle.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtRemainingCount.BackgroundStyle.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.txtRemainingCount.BackgroundStyle.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtRemainingCount.BackgroundStyle.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtRemainingCount.BackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtRemainingCount.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtRemainingCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtRemainingCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtRemainingCount.Increment = 1D;
+            this.txtRemainingCount.IsInputReadOnly = true;
+            this.txtRemainingCount.Location = new System.Drawing.Point(851, 858);
+            this.txtRemainingCount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtRemainingCount.MinimumSize = new System.Drawing.Size(0, 28);
+            this.txtRemainingCount.Name = "txtRemainingCount";
+            this.txtRemainingCount.Size = new System.Drawing.Size(295, 28);
+            this.txtRemainingCount.TabIndex = 202;
+            // 
+            // metroLabel15
+            // 
+            this.metroLabel15.AutoSize = true;
+            this.metroLabel15.Location = new System.Drawing.Point(669, 858);
+            this.metroLabel15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel15.Name = "metroLabel15";
+            this.metroLabel15.Size = new System.Drawing.Size(115, 20);
+            this.metroLabel15.TabIndex = 201;
+            this.metroLabel15.Text = "Remaining Count";
+            // 
+            // txtQuantity
+            // 
+            // 
+            // 
+            // 
+            this.txtQuantity.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtQuantity.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtQuantity.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtQuantity.Location = new System.Drawing.Point(217, 850);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.ShowUpDown = true;
+            this.txtQuantity.Size = new System.Drawing.Size(439, 22);
+            this.txtQuantity.TabIndex = 203;
+            this.txtQuantity.ValueChanged += new System.EventHandler(this.txtQuantity_ValueChanged_1);
+            // 
+            // txtUnitPrice
+            // 
+            // 
+            // 
+            // 
+            this.txtUnitPrice.BackgroundStyle.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtUnitPrice.BackgroundStyle.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.txtUnitPrice.BackgroundStyle.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtUnitPrice.BackgroundStyle.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtUnitPrice.BackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.txtUnitPrice.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtUnitPrice.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtUnitPrice.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtUnitPrice.Increment = 1D;
+            this.txtUnitPrice.Location = new System.Drawing.Point(216, 809);
+            this.txtUnitPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtUnitPrice.MinimumSize = new System.Drawing.Size(0, 28);
+            this.txtUnitPrice.Name = "txtUnitPrice";
+            this.txtUnitPrice.ShowUpDown = true;
+            this.txtUnitPrice.Size = new System.Drawing.Size(440, 28);
+            this.txtUnitPrice.TabIndex = 200;
+            this.txtUnitPrice.ValueChanged += new System.EventHandler(this.txtUnitPrice_ValueChanged_1);
+            // 
             // frmChooseProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1615, 1100);
+            this.Controls.Add(this.txtQuantity);
+            this.Controls.Add(this.txtRemainingCount);
+            this.Controls.Add(this.metroLabel15);
+            this.Controls.Add(this.txtUnitPrice);
             this.Controls.Add(this.btnClearProduct);
             this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(this.metroLabel11);
             this.Controls.Add(this.txtTotalPrice);
             this.Controls.Add(this.metroLabel4);
-            this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.metroLabel14);
             this.Controls.Add(this.txtCode);
             this.Controls.Add(this.metroLabel13);
-            this.Controls.Add(this.txtUnitPrice);
             this.Controls.Add(this.metroLabel9);
             this.Controls.Add(this.cbProductUnit);
             this.Controls.Add(this.metroLabel7);
@@ -917,11 +947,12 @@
             this.Load += new System.EventHandler(this.frmChooseProduct_Load);
             this.metroPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgProduct)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemainingCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUnitPrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -938,7 +969,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel14;
         private MetroFramework.Controls.MetroTextBox txtCode;
         private MetroFramework.Controls.MetroLabel metroLabel13;
-        private DevComponents.Editors.DoubleInput txtUnitPrice;
         private MetroFramework.Controls.MetroLabel metroLabel9;
         private MetroFramework.Controls.MetroComboBox cbProductUnit;
         private MetroFramework.Controls.MetroLabel metroLabel7;
@@ -959,13 +989,10 @@
         private MetroFramework.Controls.MetroTextBox txtProductName;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private MetroFramework.Controls.MetroLabel metroLabel4;
-        private DevComponents.Editors.DoubleInput txtQuantity;
         private DevComponents.Editors.DoubleInput txtTotalPrice;
         private MetroFramework.Controls.MetroLabel metroLabel11;
         private MetroFramework.Controls.MetroButton btnClearProduct;
         private MetroFramework.Controls.MetroButton btnAddProduct;
-        private MetroFramework.Controls.MetroLabel lblPR;
-        private MetroFramework.Controls.MetroTextBox txtPR;
         private MetroFramework.Controls.MetroLabel lblPCD;
         private MetroFramework.Controls.MetroTextBox txtPCD;
         private MetroFramework.Controls.MetroLabel lblMFLM;
@@ -976,5 +1003,11 @@
         private MetroFramework.Controls.MetroTextBox txtOrigin;
         private MetroFramework.Controls.MetroLabel lblPattern;
         private MetroFramework.Controls.MetroTextBox txtPattern;
+        private MetroFramework.Controls.MetroLabel lblPR;
+        private MetroFramework.Controls.MetroTextBox txtPR;
+        private DevComponents.Editors.DoubleInput txtRemainingCount;
+        private MetroFramework.Controls.MetroLabel metroLabel15;
+        private DevComponents.Editors.IntegerInput txtQuantity;
+        private DevComponents.Editors.DoubleInput txtUnitPrice;
     }
 }

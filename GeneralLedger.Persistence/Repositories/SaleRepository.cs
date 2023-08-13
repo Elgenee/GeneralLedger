@@ -27,6 +27,7 @@ namespace GeneralLedger.Persistence.Repositories
                .Include(s => s.Agent)
                .Include(s => s.tblGLTranHeaders)
                .Include(s => s.AccountReceivableAdjustments)
+               .AsQueryable()
                .Where(s => (s.PONo.ToLower().Contains(criteria.ToLower())
                || s.TRANo.ToLower().Contains(criteria.ToLower())
                || s.Customer.strName.ToLower().Contains(criteria.ToLower())
@@ -44,6 +45,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .Include(s => s.Agent)
                 .Include(s => s.tblGLTranHeaders)
                 .Include(s => s.AccountReceivableAdjustments)
+                .AsQueryable()
                 .Where(s => (s.PONo.ToLower().Contains(criteria.ToLower())
                 || s.TRANo.ToLower().Contains(criteria.ToLower())
                 || s.Customer.strName.ToLower().Contains(criteria.ToLower()))).ToList().Take(100);
@@ -56,6 +58,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .Include(s => s.Customer)
                 .Include(s => s.Agent)
                 .Include(s => s.tblGLTranHeaders)
+                .AsQueryable()
                 .Where(s => s.Id == Id)
                 .SingleOrDefault();
         }
@@ -67,6 +70,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .Include(s => s.tblGLTranHeaders.Select(h => h.tblGLTranDetails))
                 .Include(s => s.tblGLTranHeaders.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOA)))
                 .Include(s => s.tblGLTranHeaders.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOASub)))
+                .AsQueryable()
                 .Where(s => s.Id == Id)
                 .ToList();
 

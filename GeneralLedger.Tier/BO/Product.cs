@@ -29,8 +29,8 @@ namespace GeneralLedger.Tier.BO
         public string strPattern { get; set; }
         public string strOffsetCenterBase { get; set; }
         public string strOrigin { get; set; }
-
         public decimal UnitPrice { get; set; }
+        public int intRemainingCount { get; set; }
         public PriceType PriceType { get; set; }
         public ProductBrand ProductBrand { get; set; }
         public ProductCategory ProductCategory { get; set; }

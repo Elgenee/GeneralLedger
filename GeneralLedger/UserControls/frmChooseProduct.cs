@@ -22,7 +22,7 @@ namespace GeneralLedger.UserControls
         public Product Product { get; set; }
         public int ProductQuantity { get; set; }
         public decimal ProductTotalQuantityPrice{ get; set; }
-
+        public decimal ProductTotalUnitPrice { get; set; }
 
         public frmChooseProduct()
         {
@@ -183,6 +183,7 @@ namespace GeneralLedger.UserControls
                     product.strPattern = item.strPattern;
                     product.strOffsetCenterBore = item.strOffsetCenterBase;
                     product.strOrigin = item.strOrigin;
+                    product.intRemainingCount = item.intRemainingCount;
                     //product.curUnitPrice = item.UnitPrice;
      
                     //product.ProductStatusID = item.ProductStatusID;
@@ -206,19 +207,24 @@ namespace GeneralLedger.UserControls
                     this.dgProduct.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     this.dgProduct.Columns[2].Visible = false;
                     this.dgProduct.Columns[2].Name = "Description";
+                    this.dgProduct.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     this.dgProduct.Columns[3].Name = "Product Characteristic ID";
                     this.dgProduct.Columns[3].Visible = false;
                     this.dgProduct.Columns[4].Name = "Product Characteristic Name";
+                    this.dgProduct.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     this.dgProduct.Columns[4].Visible = false;
                     this.dgProduct.Columns[5].Name = "Product Category ID";
                     this.dgProduct.Columns[5].Visible = false;
                     this.dgProduct.Columns[6].Name = "Product Category Name";
+                    this.dgProduct.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     this.dgProduct.Columns[7].Name = "Product Type ID";
                     this.dgProduct.Columns[7].Visible = false;
                     this.dgProduct.Columns[8].Name = "Product Type Name";
+                    this.dgProduct.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     this.dgProduct.Columns[9].Name = "Product Brand ID";
                     this.dgProduct.Columns[9].Visible = false;
                     this.dgProduct.Columns[10].Name = "Product Brand Name";
+                    this.dgProduct.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     this.dgProduct.Columns[11].Name = "Per Piece Box";
                     this.dgProduct.Columns[11].Visible = false;
                     this.dgProduct.Columns[12].Name = "Location ID";
@@ -241,6 +247,7 @@ namespace GeneralLedger.UserControls
                     this.dgProduct.Columns[24].Name = "Pattern";
                     this.dgProduct.Columns[25].Name = "OffsetCenterBase";
                     this.dgProduct.Columns[26].Name = "Origin";
+                    this.dgProduct.Columns[27].Name = "Remaining Count";
                     //this.dgProduct.Columns[27].Name = "UnitPrice";
 
                     //loop through the productList and display all the data in productList to the datagridview
@@ -276,6 +283,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[24].Value = product.strPattern;
                         this.dgProduct.Rows[i].Cells[25].Value = product.strOffsetCenterBore;
                         this.dgProduct.Rows[i].Cells[26].Value = product.strOrigin;
+                        this.dgProduct.Rows[i].Cells[27].Value = product.intRemainingCount;
                         //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
                     }
 
@@ -390,14 +398,15 @@ namespace GeneralLedger.UserControls
                 product.strOffsetCenterBore = this.dgProduct.Rows[selectedRow].Cells[25].Value.ToString();
                 product.strOrigin = this.dgProduct.Rows[selectedRow].Cells[26].Value.ToString();
                 product.strPattern = this.dgProduct.Rows[selectedRow].Cells[24].Value.ToString();
+                product.intRemainingCount = Convert.ToInt32(this.dgProduct.Rows[selectedRow].Cells[27].Value);
                 //assign unit price to txtUnitPrice
                 //product.curUnitPrice = Convert.ToDecimal(this.dgProduct.Rows[selectedRow].Cells[27].Value);
 
-                this.ProductQuantity = Convert.ToInt32(this.dgProduct.Rows[selectedRow].Cells[28].Value);
-                this.ProductTotalQuantityPrice = Convert.ToDecimal(this.dgProduct.Rows[selectedRow].Cells[29].Value);
+                //this.ProductQuantity = Convert.ToInt32(this.dgProduct.Rows[selectedRow].Cells[28].Value);
+                //this.ProductTotalQuantityPrice = Convert.ToDecimal(this.dgProduct.Rows[selectedRow].Cells[29].Value);
 
             return product;
-            return new Product();
+          
         }
       
         
@@ -450,12 +459,11 @@ namespace GeneralLedger.UserControls
                     this.txtPattern.Text = this.Product.strPattern;
                     this.txtOffsetCenterBore.Text = this.Product.strOffsetCenterBore;
                     this.txtOrigin.Text = this.Product.strOrigin;
+                    this.txtRemainingCount.Text = this.Product.intRemainingCount.ToString();
                     //this.txtUnitPrice.Text = this.Product.curUnitPrice.ToString();
-                   
-                    //this.quantiy.Text = this.Product.Quantity.ToString();
-                    //this.txtTotalPrice.Text = this.Product.TotalPrice.ToString();
-                    //this.txtProductID.Focus();
-                    //this.Close();
+
+     
+       
                 }
 
             }
@@ -475,15 +483,14 @@ namespace GeneralLedger.UserControls
                     this.txtOrigin.Visible = true;
                     this.lblPattern.Visible = true;
                     this.txtPattern.Visible = true;
-                    this.txtPR.Visible = false;
-                    this.txtPR.Text = string.Empty;
+                    this.txtPR.Visible = true;
                     this.txtPCD.Visible = false;
                     this.txtPCD.Text = string.Empty;
                     this.txtMFLM.Visible = false;
                     this.txtMFLM.Text = string.Empty;
                     this.txtOffsetCenterBore.Visible = false;
                     this.txtOffsetCenterBore.Text = string.Empty;
-                    this.lblPR.Visible = false;
+                    this.lblPR.Visible = true;
                     this.lblPCD.Visible = false;
                     this.lblMFLM.Visible = false;
                     this.lblOffsetCenterBore.Visible = false;
@@ -567,8 +574,9 @@ namespace GeneralLedger.UserControls
 
         private void txtQuantity_ValueChanged(object sender, EventArgs e)
         {
-            var unitPrice = Convert.ToDecimal(this.txtUnitPrice.Text);
-            var quantity = Convert.ToDecimal(this.txtQuantity.Text);
+            var unitPrice = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToDecimal(this.txtQuantity.Text);
+            //var unitPrice = Convert.ToDecimal(this.txtUnitPrice.Text);
+            var quantity = string.IsNullOrEmpty(this.txtQuantity.Text)? 0: Convert.ToDecimal(this.txtQuantity.Text);
             var totalPrice = unitPrice * quantity;  
             this.txtTotalPrice.Text = totalPrice.ToString();
         }
@@ -588,6 +596,16 @@ namespace GeneralLedger.UserControls
         {
             try
             {
+                if (this.Product == null || Product.Id == 0)
+                {
+                    MessageBox.Show("Please Select Product");
+                    return;
+                }
+
+                this.ProductTotalUnitPrice = string.IsNullOrEmpty(this.txtUnitPrice.Text) ? 0 : Convert.ToDecimal(this.txtUnitPrice.Text);
+                this.ProductQuantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
+                this.ProductTotalQuantityPrice = this.ProductTotalUnitPrice * this.ProductQuantity;
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -599,6 +617,27 @@ namespace GeneralLedger.UserControls
 
         private void btnClearProduct_Click(object sender, EventArgs e)
         {
+
+        }
+
+
+        private void txtUnitPrice_ValueChanged_1(object sender, EventArgs e)
+        {
+            var unitPrice = string.IsNullOrEmpty(this.txtUnitPrice.Text) ? 0 : Convert.ToDecimal(this.txtUnitPrice.Text);
+            //var unitPrice = Convert.ToDecimal(this.txtUnitPrice.Text);
+            var quantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
+            var totalPrice = unitPrice * quantity;
+            this.txtTotalPrice.Text = totalPrice.ToString();
+
+        }
+
+        private void txtQuantity_ValueChanged_1(object sender, EventArgs e)
+        {
+            var unitPrice = string.IsNullOrEmpty(this.txtUnitPrice.Text) ? 0 : Convert.ToDecimal(this.txtUnitPrice.Text);
+            //var unitPrice = Convert.ToDecimal(this.txtUnitPrice.Text);
+            var quantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
+            var totalPrice = unitPrice * quantity;
+            this.txtTotalPrice.Text = totalPrice.ToString();
 
         }
     }

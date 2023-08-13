@@ -54,6 +54,11 @@ namespace GeneralLedger.Persistence
 
         public IAccountsPayableAdjustmentsRepository AccountsPayableAdjustments { get; set; }
 
+        //Products Repository
+        public IProductRepository Products { get; set; }
+
+        public IStockRepository StockRepository { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -77,6 +82,8 @@ namespace GeneralLedger.Persistence
             tblTBBatchHdr = new tblTBBatchHdrRepository(_generalLedgerContext);
             AccountsPayableAdjustments = new AccountsPayableAdjustmentsRepository(_generalLedgerContext);
             AccountsPayableAdjustmentsType = new AccountsPayableAdjustmentsTypeRepository(_generalLedgerContext);
+            Products = new ProductRepository(_generalLedgerContext);
+            StockRepository = new StockRepository(_generalLedgerContext);
 
         }
         public int Complete()

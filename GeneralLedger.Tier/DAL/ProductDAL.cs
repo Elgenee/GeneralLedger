@@ -189,6 +189,7 @@ namespace GeneralLedger.Tier.DAL
                                 strOrigin = ReferenceEquals(reader["strOrigin"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strOrigin"]),
                                 //UnitPrice = ReferenceEquals(reader["curUnitPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curUnitPrice"]),
                                 PerPieceBox = ReferenceEquals(reader["intPerPiecePerBox"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["intPerPiecePerBox"]),
+                                intRemainingCount = ReferenceEquals(reader["intRemainingCount"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intRemainingCount"]),
                                 ProductBrand = new ProductBrand
                                 {
                                     ID = ReferenceEquals(reader["ProductBrandID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductBrandID"]),
