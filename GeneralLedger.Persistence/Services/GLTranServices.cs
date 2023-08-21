@@ -19,5 +19,14 @@ namespace GeneralLedger.Persistence.Services
                 return unitOfWork.GLTran.GetGLEntryById(Id).ToList();
             }
         }
+
+        public List<tblGLTranHeader> GetGLEntryByPurchaseId(int PurchaseId)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.GLTran.GetGLEntryByPurchaseId(PurchaseId).ToList();
+
+            }
+        }
     }
 }

@@ -16,6 +16,14 @@ namespace GeneralLedger.Persistence.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Purchase> GetPurchaseDetailProductByPurchaseId(int Id)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.PurchaseDetail.GetPurchaseDetailProductByPurchaseId(Id);
+            }
+        }
+
         public List<PurchaseDetail> GetPurchaseDetails()
         {
             throw new NotImplementedException();

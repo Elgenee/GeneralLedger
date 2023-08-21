@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using GeneralLedger.Core.Repositories;
@@ -37,6 +38,11 @@ namespace GeneralLedger.Persistence.Repositories
             return Context.Set<TEntity>().Where(predicate);
         }
 
+        public IEnumerable<TEntity> FindLocal(Expression<Func<TEntity, bool>> predicate)
+        {
+            return Context.Set<TEntity>().Local.AsQueryable().Where(predicate); 
+        }
+
         public TEntity Get(int id)
         {
             //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
@@ -48,6 +54,16 @@ namespace GeneralLedger.Persistence.Repositories
             //Context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             return Context.Set<TEntity>().ToList();
         }
+
+        public IEnumerable<TEntity> GetAllLocal()
+        {
+            return Context.Set<TEntity>().Local.ToList();
+        }
+
+        //public EntityState GetEntityState<TEntity>(TEntity entity)
+        //{
+        //    return Context.Entry(entity).State;
+        //}
 
         public void Remove(TEntity entity)
         {

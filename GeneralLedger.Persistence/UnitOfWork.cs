@@ -7,6 +7,8 @@ using GeneralLedger.Core.Domain;
 using GeneralLedger.Core;
 using GeneralLedger.Core.Repositories;
 using GeneralLedger.Persistence.Repositories;
+using System.Data.Entity;
+using System.Runtime.Remoting.Contexts;
 
 namespace GeneralLedger.Persistence
 {
@@ -57,7 +59,9 @@ namespace GeneralLedger.Persistence
         //Products Repository
         public IProductRepository Products { get; set; }
 
-        public IStockRepository StockRepository { get; set; }
+        public IStockRepository Stock { get; set; }
+
+        public IPurchaseDetailRepository PurchaseDetail { get; set; }
 
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
@@ -83,7 +87,8 @@ namespace GeneralLedger.Persistence
             AccountsPayableAdjustments = new AccountsPayableAdjustmentsRepository(_generalLedgerContext);
             AccountsPayableAdjustmentsType = new AccountsPayableAdjustmentsTypeRepository(_generalLedgerContext);
             Products = new ProductRepository(_generalLedgerContext);
-            StockRepository = new StockRepository(_generalLedgerContext);
+            Stock = new StockRepository(_generalLedgerContext);
+            PurchaseDetail = new PurchaseDetailRepository(_generalLedgerContext);
 
         }
         public int Complete()
@@ -94,6 +99,11 @@ namespace GeneralLedger.Persistence
         public void Dispose()
         {
             _generalLedgerContext.Dispose();
+        }
+
+        public EntityState GetEntityState<TEntity>(TEntity entity) where TEntity : class
+        {
+            return _generalLedgerContext.Entry(entity).State;
         }
     }
 }

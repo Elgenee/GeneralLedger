@@ -10,7 +10,7 @@ namespace GeneralLedger.Core.Services
     public interface IPurchaseServices
     {
         Purchase Add(Purchase purchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<PurchaseDetail> PurchaseDetailsList);
-        Purchase Update(Purchase purchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
+        Purchase Update(Purchase purchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<PurchaseDetail> PurchaseDetailsList);
         void Remove(Purchase purchase);
         List<Purchase> GetAll();
         List<Purchase> GetPurchasesWithJournalEntry(int Id);

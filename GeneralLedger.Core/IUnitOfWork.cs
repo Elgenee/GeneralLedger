@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,10 @@ namespace GeneralLedger.Core
         IAccountsPayableAdjustmentsTypeRepository AccountsPayableAdjustmentsType { get; }
         IProductRepository Products { get; }
 
-        IStockRepository StockRepository { get; }
+        IPurchaseDetailRepository PurchaseDetail { get; }
+        EntityState GetEntityState<TEntity>(TEntity entity) where TEntity : class;
+
+        IStockRepository Stock { get; }
         int Complete();
     }
 }

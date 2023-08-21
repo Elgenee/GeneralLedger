@@ -25,5 +25,6 @@ namespace GeneralLedger.Core.Domain
         public virtual Purchase Purchase { get; set; }
         public virtual Sale Sale { get; set; }
         public virtual StockTransactionType StockTransactionType { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

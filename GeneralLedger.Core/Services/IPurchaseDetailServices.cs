@@ -18,5 +18,7 @@ namespace GeneralLedger.Core.Services
 
         List<PurchaseDetail> GetPurchaseDetails();
 
+        IEnumerable<Purchase> GetPurchaseDetailProductByPurchaseId(int Id);
+
     }
 }

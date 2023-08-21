@@ -25,8 +25,9 @@ namespace GeneralLedger.UserControls
         public MetroTabPage MetroTabPage { get; set; }
         public Purchase Purchase { get; set; }
         public PurchaseServices PurchaseServices { get; set; }
-        public GLTranServices GLTranServices { get; set; }
 
+        public PurchaseDetailServices PurchaseDetailServices { get; set; }
+        public GLTranServices GLTranServices { get; set; }
         public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
 
         public int ID { get; set; }
@@ -51,6 +52,7 @@ namespace GeneralLedger.UserControls
             SupplierId = 0;
             this.Purchase = new Purchase();
             tblTBBatchHdrServices = new tblTBBatchHdrServices();
+            PurchaseDetailServices = new PurchaseDetailServices();
 
         }
 
@@ -113,8 +115,8 @@ namespace GeneralLedger.UserControls
                     Purchase.intIDSupplier = this.SupplierId;
                     Purchase.Description = this.txtDescription.Text;
                     Purchase.Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
-                    Purchase.TransactionDate = this.dtTransactionDate.Value;
-                    Purchase = PurchaseServices.Update(Purchase, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
+                    Purchase.TransactionDate = this.dtTransactionDate.Value;       
+                    Purchase = PurchaseServices.Update(Purchase, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.PurchaseDetailsList);
 
                     if (Purchase != null)
                     {
@@ -122,8 +124,9 @@ namespace GeneralLedger.UserControls
                     }
 
                 }
-                GLTranHeader = Purchase.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
-                this.GLTranDetail = GLTranServices.GetGLEntryById(GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
+                //GLTranHeader = Purchase.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
+
+                this.GLTranDetail = GLTranServices.GetGLEntryByPurchaseId(Purchase.Id).SelectMany(h => h.tblGLTranDetails).ToList();
                 if (GLTranDetail.Count > 0)
                 {
 
@@ -423,7 +426,8 @@ namespace GeneralLedger.UserControls
                     this.GLTranHeader = sp.Purchase.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                     this.chkUseDefaultEntry.Checked = (bool)sp.Purchase.tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
                     this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
-
+                    this.PurchaseDetailsList = PurchaseDetailServices.GetPurchaseDetailProductByPurchaseId(this.ID).SelectMany(pr => pr.PurchaseDetails).ToList();
+                    //this.Purchase.PurchaseDetails.Concat(this.PurchaseDetailsList);
 
                     if (GLTranDetail.Count > 0)
                     {
@@ -486,6 +490,110 @@ namespace GeneralLedger.UserControls
                         this.GLTranDetail.Clear();
                         this.txtTotalDebit.Text = string.Empty;
                         this.txtTotalCredit.Text = string.Empty;
+                    }
+
+
+                    if (PurchaseDetailsList.Count > 0)
+                    {
+
+                        this.dgProduct.Rows.Clear();
+                        this.dgProduct.Refresh();
+                        //this.dgProduct.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                        this.dgProduct.RowCount = PurchaseDetailsList.Count;
+                        this.dgProduct.ColumnCount = 30;
+                        this.dgProduct.Columns[0].Name = "ID";
+                        this.dgProduct.Columns[0].Visible = false;
+                        this.dgProduct.Columns[1].Name = "Product Name";
+                        this.dgProduct.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[2].Visible = false;
+                        this.dgProduct.Columns[2].Name = "Description";
+                        this.dgProduct.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[3].Name = "Product Characteristic ID";
+                        this.dgProduct.Columns[3].Visible = false;
+                        this.dgProduct.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[4].Name = "Product Characteristic Name";
+                        this.dgProduct.Columns[4].Visible = false;
+                        this.dgProduct.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[5].Name = "Product Category ID";
+                        this.dgProduct.Columns[5].Visible = false;
+                        this.dgProduct.Columns[6].Name = "Product Category Name";
+                        this.dgProduct.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[7].Name = "Product Type ID";
+                        this.dgProduct.Columns[7].Visible = false;
+                        this.dgProduct.Columns[8].Name = "Product Type Name";
+                        this.dgProduct.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[9].Name = "Product Brand ID";
+                        this.dgProduct.Columns[9].Visible = false;
+                        this.dgProduct.Columns[10].Name = "Product Brand Name";
+                        this.dgProduct.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[11].Name = "Per Piece Box";
+                        this.dgProduct.Columns[11].Visible = false;
+                        this.dgProduct.Columns[12].Name = "Location ID";
+                        this.dgProduct.Columns[12].Visible = false;
+                        this.dgProduct.Columns[13].Name = "Location Name";
+                        this.dgProduct.Columns[13].Visible = false;
+                        this.dgProduct.Columns[14].Name = "Product Color ID";
+                        this.dgProduct.Columns[14].Visible = false;
+                        this.dgProduct.Columns[15].Name = "Product Color Name";
+                        this.dgProduct.Columns[16].Name = "Product Size ID";
+                        this.dgProduct.Columns[16].Visible = false;
+                        this.dgProduct.Columns[17].Name = "Product Size Name";
+                        this.dgProduct.Columns[18].Name = "Product Unit ID";
+                        this.dgProduct.Columns[18].Visible = false;
+                        this.dgProduct.Columns[19].Name = "Product Unit Name";
+                        this.dgProduct.Columns[20].Name = "Code";
+                        this.dgProduct.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[21].Name = "PR";
+                        this.dgProduct.Columns[22].Name = "PCD";
+                        this.dgProduct.Columns[23].Name = "MFLM";
+                        this.dgProduct.Columns[24].Name = "Pattern";
+                        this.dgProduct.Columns[25].Name = "OffsetCenterBase";
+                        this.dgProduct.Columns[25].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[26].Name = "Origin";
+                        this.dgProduct.Columns[27].Name = "Unit Price";
+                        this.dgProduct.Columns[28].Name = "Quantity";
+                        this.dgProduct.Columns[29].Name = "Total Quantity Price";
+
+                        for (int i = 0; i < PurchaseDetailsList.Count; i++)
+                        {
+                            //display all the data in productList to the datagridview
+                            PurchaseDetail purchaseDetail = PurchaseDetailsList[i];
+                            this.Purchase.PurchaseDetails.Add(purchaseDetail);
+                            this.dgProduct.Rows[i].Cells[0].Value = purchaseDetail.Id;
+                            this.dgProduct.Rows[i].Cells[1].Value = purchaseDetail.Product.strProductName;
+                            this.dgProduct.Rows[i].Cells[2].Value = purchaseDetail.Product.strDescription;
+                            this.dgProduct.Rows[i].Cells[3].Value = 0;
+                            this.dgProduct.Rows[i].Cells[4].Value = string.Empty;
+                            this.dgProduct.Rows[i].Cells[5].Value = purchaseDetail.Product.ProductCategory.Id;
+                            this.dgProduct.Rows[i].Cells[6].Value = purchaseDetail.Product.ProductCategory.strName;
+                            this.dgProduct.Rows[i].Cells[7].Value = purchaseDetail.Product.ProductType.Id;
+                            this.dgProduct.Rows[i].Cells[8].Value = purchaseDetail.Product.ProductType.strName;
+                            this.dgProduct.Rows[i].Cells[9].Value = purchaseDetail.Product.ProductBrand.Id;
+                            this.dgProduct.Rows[i].Cells[10].Value = purchaseDetail.Product.ProductBrand.strName;
+                            //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
+                            //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
+                            //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
+                            this.dgProduct.Rows[i].Cells[14].Value = purchaseDetail.Product.ProductColor.Id;
+                            this.dgProduct.Rows[i].Cells[15].Value = purchaseDetail.Product.ProductColor.strName;
+                            this.dgProduct.Rows[i].Cells[16].Value = purchaseDetail.Product.ProductSize.Id;
+                            this.dgProduct.Rows[i].Cells[17].Value = purchaseDetail.Product.ProductSize.strName;
+                            this.dgProduct.Rows[i].Cells[18].Value = purchaseDetail.Product.ProductUnit.Id;
+                            this.dgProduct.Rows[i].Cells[19].Value = purchaseDetail.Product.ProductUnit.strName;
+                            this.dgProduct.Rows[i].Cells[20].Value = purchaseDetail.Product.strCode;
+                            this.dgProduct.Rows[i].Cells[21].Value = purchaseDetail.Product.strPR;
+                            this.dgProduct.Rows[i].Cells[22].Value = purchaseDetail.Product.strPCD;
+                            this.dgProduct.Rows[i].Cells[23].Value = purchaseDetail.Product.strMFLM;
+                            this.dgProduct.Rows[i].Cells[24].Value = purchaseDetail.Product.strPattern;
+                            this.dgProduct.Rows[i].Cells[25].Value = purchaseDetail.Product.strOffsetCenterBore;
+                            this.dgProduct.Rows[i].Cells[26].Value = purchaseDetail.Product.strOrigin;
+                            this.dgProduct.Rows[i].Cells[27].Value = purchaseDetail.UnitPrice;
+                            this.dgProduct.Rows[i].Cells[28].Value = purchaseDetail.Quantity;
+                            this.dgProduct.Rows[i].Cells[29].Value = purchaseDetail.TotalPrice;
+                            //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
+                        }
+
+                        setRowNumber(this.dgJournalEntry);
+                        this.txtPurchaseTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice));
                     }
 
                 }

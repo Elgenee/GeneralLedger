@@ -11,5 +11,7 @@ namespace GeneralLedger.Core.Repositories
     {
         IEnumerable<tblGLTranHeader> GetGLEntryById(int Id);
 
+        List<tblGLTranHeader> GetGLEntryByPurchaseId(int PurchaseId);
+
     }
 }

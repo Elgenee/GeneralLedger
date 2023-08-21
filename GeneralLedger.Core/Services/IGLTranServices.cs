@@ -11,5 +11,7 @@ namespace GeneralLedger.Core.Services
     public interface IGLTranServices
     {
         List<tblGLTranHeader> GetGLEntryById(int Id);
+
+        List<tblGLTranHeader> GetGLEntryByPurchaseId(int PurchaseId);
     }
 }

@@ -112,6 +112,7 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_PurchaseDetail_PurchaseDetail" />
         <EntityTypeShape EntityType="GeneralLedgerModel.StockTransactionType" Width="1.5" PointX="3.375" PointY="7.875" />
         <AssociationConnector Association="GeneralLedgerModel.FK_Stock_StockTransactionType" />
+        <AssociationConnector Association="GeneralLedgerModel.FK_Stock_Product" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

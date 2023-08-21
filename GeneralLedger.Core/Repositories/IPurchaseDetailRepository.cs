@@ -9,6 +9,6 @@ namespace GeneralLedger.Core.Repositories
 {
     public interface IPurchaseDetailRepository : IRepository<PurchaseDetail>
     {
-
+        IEnumerable<Purchase> GetPurchaseDetailProductByPurchaseId(int Id);
     }
 }
