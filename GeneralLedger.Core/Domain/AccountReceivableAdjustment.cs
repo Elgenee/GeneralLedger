@@ -35,9 +35,9 @@ namespace GeneralLedger.Core.Domain
         public virtual Collection Collection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
         public virtual Sale Sale { get; set; }
         public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
     }
 }

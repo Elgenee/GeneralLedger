@@ -20,8 +20,9 @@ namespace GeneralLedger.Core.Domain
             this.AccountReceivableAdjustments = new HashSet<AccountReceivableAdjustment>();
             this.Collections = new HashSet<Collection>();
             this.SalesCustomerLedgers = new HashSet<SalesCustomerLedger>();
-            this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
             this.Stocks = new HashSet<Stock>();
+            this.SalesDetails = new HashSet<SalesDetail>();
+            this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
         }
     
         public int Id { get; set; }
@@ -49,8 +50,10 @@ namespace GeneralLedger.Core.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesCustomerLedger> SalesCustomerLedgers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalesDetail> SalesDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
     }
 }

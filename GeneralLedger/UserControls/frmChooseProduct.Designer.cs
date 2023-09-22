@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.dgProduct = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.btnSelect = new MetroFramework.Controls.MetroButton();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.txtCriteria = new MetroFramework.Controls.MetroTextBox();
@@ -78,6 +77,8 @@
             this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
             this.txtQuantity = new DevComponents.Editors.IntegerInput();
             this.txtUnitPrice = new DevComponents.Editors.DoubleInput();
+            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel17 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProduct)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -93,10 +94,10 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 12;
-            this.metroPanel1.Location = new System.Drawing.Point(13, 126);
+            this.metroPanel1.Location = new System.Drawing.Point(13, 112);
             this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1541, 453);
+            this.metroPanel1.Size = new System.Drawing.Size(1541, 341);
             this.metroPanel1.TabIndex = 25;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
@@ -110,14 +111,14 @@
             this.dgProduct.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgProduct.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgProduct.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgProduct.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgProduct.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgProduct.Location = new System.Drawing.Point(0, 0);
@@ -126,24 +127,13 @@
             this.dgProduct.ReadOnly = true;
             this.dgProduct.RowHeadersWidth = 51;
             this.dgProduct.RowTemplate.Height = 30;
-            this.dgProduct.Size = new System.Drawing.Size(1541, 453);
+            this.dgProduct.Size = new System.Drawing.Size(1541, 341);
             this.dgProduct.TabIndex = 64;
             this.dgProduct.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProduct_CellClick);
             // 
-            // btnSelect
-            // 
-            this.btnSelect.Location = new System.Drawing.Point(664, 69);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(132, 28);
-            this.btnSelect.TabIndex = 29;
-            this.btnSelect.Text = "Select";
-            this.btnSelect.UseSelectable = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
-            // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(524, 69);
+            this.btnSearch.Location = new System.Drawing.Point(524, 74);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(132, 28);
@@ -155,7 +145,7 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(76, 69);
+            this.metroLabel2.Location = new System.Drawing.Point(76, 74);
             this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(53, 20);
@@ -178,7 +168,7 @@
             this.txtCriteria.CustomButton.UseSelectable = true;
             this.txtCriteria.CustomButton.Visible = false;
             this.txtCriteria.Lines = new string[0];
-            this.txtCriteria.Location = new System.Drawing.Point(251, 69);
+            this.txtCriteria.Location = new System.Drawing.Point(251, 74);
             this.txtCriteria.Margin = new System.Windows.Forms.Padding(4);
             this.txtCriteria.MaxLength = 32767;
             this.txtCriteria.Name = "txtCriteria";
@@ -197,7 +187,7 @@
             // metroLabel14
             // 
             this.metroLabel14.AutoSize = true;
-            this.metroLabel14.Location = new System.Drawing.Point(20, 683);
+            this.metroLabel14.Location = new System.Drawing.Point(20, 554);
             this.metroLabel14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel14.Name = "metroLabel14";
             this.metroLabel14.Size = new System.Drawing.Size(42, 20);
@@ -221,7 +211,7 @@
             this.txtCode.CustomButton.Visible = false;
             this.txtCode.Enabled = false;
             this.txtCode.Lines = new string[0];
-            this.txtCode.Location = new System.Drawing.Point(216, 683);
+            this.txtCode.Location = new System.Drawing.Point(216, 554);
             this.txtCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtCode.MaxLength = 32767;
             this.txtCode.Name = "txtCode";
@@ -240,7 +230,7 @@
             // metroLabel13
             // 
             this.metroLabel13.AutoSize = true;
-            this.metroLabel13.Location = new System.Drawing.Point(21, 809);
+            this.metroLabel13.Location = new System.Drawing.Point(21, 680);
             this.metroLabel13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel13.Name = "metroLabel13";
             this.metroLabel13.Size = new System.Drawing.Size(69, 20);
@@ -250,7 +240,7 @@
             // metroLabel9
             // 
             this.metroLabel9.AutoSize = true;
-            this.metroLabel9.Location = new System.Drawing.Point(21, 766);
+            this.metroLabel9.Location = new System.Drawing.Point(21, 637);
             this.metroLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel9.Name = "metroLabel9";
             this.metroLabel9.Size = new System.Drawing.Size(86, 20);
@@ -262,7 +252,7 @@
             this.cbProductUnit.Enabled = false;
             this.cbProductUnit.FormattingEnabled = true;
             this.cbProductUnit.ItemHeight = 24;
-            this.cbProductUnit.Location = new System.Drawing.Point(217, 766);
+            this.cbProductUnit.Location = new System.Drawing.Point(217, 637);
             this.cbProductUnit.Margin = new System.Windows.Forms.Padding(4);
             this.cbProductUnit.Name = "cbProductUnit";
             this.cbProductUnit.Size = new System.Drawing.Size(439, 30);
@@ -272,7 +262,7 @@
             // metroLabel7
             // 
             this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(20, 722);
+            this.metroLabel7.Location = new System.Drawing.Point(20, 593);
             this.metroLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel7.Name = "metroLabel7";
             this.metroLabel7.Size = new System.Drawing.Size(74, 20);
@@ -284,7 +274,7 @@
             this.cbPriceType.Enabled = false;
             this.cbPriceType.FormattingEnabled = true;
             this.cbPriceType.ItemHeight = 24;
-            this.cbPriceType.Location = new System.Drawing.Point(217, 722);
+            this.cbPriceType.Location = new System.Drawing.Point(217, 593);
             this.cbPriceType.Margin = new System.Windows.Forms.Padding(4);
             this.cbPriceType.Name = "cbPriceType";
             this.cbPriceType.Size = new System.Drawing.Size(439, 30);
@@ -294,7 +284,7 @@
             // metroLabel8
             // 
             this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(669, 815);
+            this.metroLabel8.Location = new System.Drawing.Point(669, 686);
             this.metroLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel8.Name = "metroLabel8";
             this.metroLabel8.Size = new System.Drawing.Size(86, 20);
@@ -306,7 +296,7 @@
             this.cbSize.Enabled = false;
             this.cbSize.FormattingEnabled = true;
             this.cbSize.ItemHeight = 24;
-            this.cbSize.Location = new System.Drawing.Point(851, 815);
+            this.cbSize.Location = new System.Drawing.Point(851, 686);
             this.cbSize.Margin = new System.Windows.Forms.Padding(4);
             this.cbSize.Name = "cbSize";
             this.cbSize.Size = new System.Drawing.Size(295, 30);
@@ -316,7 +306,7 @@
             // metroLabel10
             // 
             this.metroLabel10.AutoSize = true;
-            this.metroLabel10.Location = new System.Drawing.Point(669, 772);
+            this.metroLabel10.Location = new System.Drawing.Point(669, 643);
             this.metroLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(94, 20);
@@ -328,7 +318,7 @@
             this.cbColor.Enabled = false;
             this.cbColor.FormattingEnabled = true;
             this.cbColor.ItemHeight = 24;
-            this.cbColor.Location = new System.Drawing.Point(851, 772);
+            this.cbColor.Location = new System.Drawing.Point(851, 643);
             this.cbColor.Margin = new System.Windows.Forms.Padding(4);
             this.cbColor.Name = "cbColor";
             this.cbColor.Size = new System.Drawing.Size(295, 30);
@@ -338,7 +328,7 @@
             // metroLabel12
             // 
             this.metroLabel12.AutoSize = true;
-            this.metroLabel12.Location = new System.Drawing.Point(20, 602);
+            this.metroLabel12.Location = new System.Drawing.Point(20, 473);
             this.metroLabel12.Name = "metroLabel12";
             this.metroLabel12.Size = new System.Drawing.Size(74, 20);
             this.metroLabel12.TabIndex = 180;
@@ -362,7 +352,7 @@
             this.txtID.CustomButton.Visible = false;
             this.txtID.Enabled = false;
             this.txtID.Lines = new string[0];
-            this.txtID.Location = new System.Drawing.Point(216, 602);
+            this.txtID.Location = new System.Drawing.Point(216, 473);
             this.txtID.Margin = new System.Windows.Forms.Padding(4);
             this.txtID.MaxLength = 32767;
             this.txtID.Name = "txtID";
@@ -383,7 +373,7 @@
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(669, 728);
+            this.metroLabel5.Location = new System.Drawing.Point(669, 599);
             this.metroLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(97, 20);
@@ -395,7 +385,7 @@
             this.cbProductBrand.Enabled = false;
             this.cbProductBrand.FormattingEnabled = true;
             this.cbProductBrand.ItemHeight = 24;
-            this.cbProductBrand.Location = new System.Drawing.Point(851, 728);
+            this.cbProductBrand.Location = new System.Drawing.Point(851, 599);
             this.cbProductBrand.Margin = new System.Windows.Forms.Padding(4);
             this.cbProductBrand.Name = "cbProductBrand";
             this.cbProductBrand.Size = new System.Drawing.Size(295, 30);
@@ -405,7 +395,7 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(669, 686);
+            this.metroLabel3.Location = new System.Drawing.Point(669, 557);
             this.metroLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(97, 20);
@@ -417,7 +407,7 @@
             this.cbProductTypes.Enabled = false;
             this.cbProductTypes.FormattingEnabled = true;
             this.cbProductTypes.ItemHeight = 24;
-            this.cbProductTypes.Location = new System.Drawing.Point(851, 686);
+            this.cbProductTypes.Location = new System.Drawing.Point(851, 557);
             this.cbProductTypes.Margin = new System.Windows.Forms.Padding(4);
             this.cbProductTypes.Name = "cbProductTypes";
             this.cbProductTypes.Size = new System.Drawing.Size(295, 30);
@@ -427,7 +417,7 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(669, 642);
+            this.metroLabel1.Location = new System.Drawing.Point(669, 513);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(127, 20);
@@ -439,7 +429,7 @@
             this.cbCategories.Enabled = false;
             this.cbCategories.FormattingEnabled = true;
             this.cbCategories.ItemHeight = 24;
-            this.cbCategories.Location = new System.Drawing.Point(851, 641);
+            this.cbCategories.Location = new System.Drawing.Point(851, 512);
             this.cbCategories.Margin = new System.Windows.Forms.Padding(4);
             this.cbCategories.Name = "cbCategories";
             this.cbCategories.Size = new System.Drawing.Size(295, 30);
@@ -450,7 +440,7 @@
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(20, 644);
+            this.metroLabel6.Location = new System.Drawing.Point(20, 515);
             this.metroLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel6.Name = "metroLabel6";
             this.metroLabel6.Size = new System.Drawing.Size(99, 20);
@@ -474,7 +464,7 @@
             this.txtProductName.CustomButton.Visible = false;
             this.txtProductName.Enabled = false;
             this.txtProductName.Lines = new string[0];
-            this.txtProductName.Location = new System.Drawing.Point(216, 643);
+            this.txtProductName.Location = new System.Drawing.Point(216, 514);
             this.txtProductName.Margin = new System.Windows.Forms.Padding(4);
             this.txtProductName.MaxLength = 32767;
             this.txtProductName.Name = "txtProductName";
@@ -506,7 +496,7 @@
             this.flowLayoutPanel1.Controls.Add(this.lblPR);
             this.flowLayoutPanel1.Controls.Add(this.txtPR);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1169, 618);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1169, 479);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(343, 407);
@@ -768,7 +758,7 @@
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(21, 850);
+            this.metroLabel4.Location = new System.Drawing.Point(21, 721);
             this.metroLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(61, 20);
@@ -778,7 +768,7 @@
             // metroLabel11
             // 
             this.metroLabel11.AutoSize = true;
-            this.metroLabel11.Location = new System.Drawing.Point(21, 893);
+            this.metroLabel11.Location = new System.Drawing.Point(21, 764);
             this.metroLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel11.Name = "metroLabel11";
             this.metroLabel11.Size = new System.Drawing.Size(72, 20);
@@ -800,7 +790,7 @@
             this.txtTotalPrice.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtTotalPrice.Increment = 1D;
             this.txtTotalPrice.IsInputReadOnly = true;
-            this.txtTotalPrice.Location = new System.Drawing.Point(217, 893);
+            this.txtTotalPrice.Location = new System.Drawing.Point(217, 764);
             this.txtTotalPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTotalPrice.MinimumSize = new System.Drawing.Size(0, 28);
             this.txtTotalPrice.Name = "txtTotalPrice";
@@ -809,7 +799,7 @@
             // 
             // btnClearProduct
             // 
-            this.btnClearProduct.Location = new System.Drawing.Point(706, 1005);
+            this.btnClearProduct.Location = new System.Drawing.Point(901, 779);
             this.btnClearProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearProduct.Name = "btnClearProduct";
             this.btnClearProduct.Size = new System.Drawing.Size(125, 28);
@@ -820,7 +810,7 @@
             // 
             // btnAddProduct
             // 
-            this.btnAddProduct.Location = new System.Drawing.Point(851, 1005);
+            this.btnAddProduct.Location = new System.Drawing.Point(1046, 779);
             this.btnAddProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddProduct.Name = "btnAddProduct";
             this.btnAddProduct.Size = new System.Drawing.Size(100, 28);
@@ -844,7 +834,7 @@
             this.txtRemainingCount.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtRemainingCount.Increment = 1D;
             this.txtRemainingCount.IsInputReadOnly = true;
-            this.txtRemainingCount.Location = new System.Drawing.Point(851, 858);
+            this.txtRemainingCount.Location = new System.Drawing.Point(851, 729);
             this.txtRemainingCount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtRemainingCount.MinimumSize = new System.Drawing.Size(0, 28);
             this.txtRemainingCount.Name = "txtRemainingCount";
@@ -854,7 +844,7 @@
             // metroLabel15
             // 
             this.metroLabel15.AutoSize = true;
-            this.metroLabel15.Location = new System.Drawing.Point(669, 858);
+            this.metroLabel15.Location = new System.Drawing.Point(669, 729);
             this.metroLabel15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel15.Name = "metroLabel15";
             this.metroLabel15.Size = new System.Drawing.Size(115, 20);
@@ -869,7 +859,7 @@
             this.txtQuantity.BackgroundStyle.Class = "DateTimeInputBackground";
             this.txtQuantity.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtQuantity.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtQuantity.Location = new System.Drawing.Point(217, 850);
+            this.txtQuantity.Location = new System.Drawing.Point(217, 721);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.ShowUpDown = true;
             this.txtQuantity.Size = new System.Drawing.Size(439, 22);
@@ -890,7 +880,7 @@
             this.txtUnitPrice.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtUnitPrice.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtUnitPrice.Increment = 1D;
-            this.txtUnitPrice.Location = new System.Drawing.Point(216, 809);
+            this.txtUnitPrice.Location = new System.Drawing.Point(216, 680);
             this.txtUnitPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUnitPrice.MinimumSize = new System.Drawing.Size(0, 28);
             this.txtUnitPrice.Name = "txtUnitPrice";
@@ -899,11 +889,34 @@
             this.txtUnitPrice.TabIndex = 200;
             this.txtUnitPrice.ValueChanged += new System.EventHandler(this.txtUnitPrice_ValueChanged_1);
             // 
+            // metroLabel16
+            // 
+            this.metroLabel16.Location = new System.Drawing.Point(541, 904);
+            this.metroLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel16.Name = "metroLabel16";
+            this.metroLabel16.Size = new System.Drawing.Size(115, 20);
+            this.metroLabel16.TabIndex = 204;
+            this.metroLabel16.Text = "...................";
+            // 
+            // metroLabel17
+            // 
+            this.metroLabel17.AutoSize = true;
+            this.metroLabel17.Location = new System.Drawing.Point(1630, 446);
+            this.metroLabel17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel17.Name = "metroLabel17";
+            this.metroLabel17.Size = new System.Drawing.Size(42, 20);
+            this.metroLabel17.TabIndex = 205;
+            this.metroLabel17.Text = "|||||||||||";
+            // 
             // frmChooseProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1615, 1100);
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1648, 931);
+            this.Controls.Add(this.metroLabel17);
+            this.Controls.Add(this.metroLabel16);
             this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.txtRemainingCount);
             this.Controls.Add(this.metroLabel15);
@@ -936,7 +949,6 @@
             this.Controls.Add(this.metroLabel6);
             this.Controls.Add(this.txtProductName);
             this.Controls.Add(this.metroPanel1);
-            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.txtCriteria);
@@ -962,7 +974,6 @@
 
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgProduct;
-        private MetroFramework.Controls.MetroButton btnSelect;
         private MetroFramework.Controls.MetroButton btnSearch;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroTextBox txtCriteria;
@@ -1009,5 +1020,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel15;
         private DevComponents.Editors.IntegerInput txtQuantity;
         private DevComponents.Editors.DoubleInput txtUnitPrice;
+        private MetroFramework.Controls.MetroLabel metroLabel16;
+        private MetroFramework.Controls.MetroLabel metroLabel17;
     }
 }

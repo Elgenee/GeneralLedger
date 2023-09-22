@@ -20,11 +20,11 @@ namespace GeneralLedger.Persistence.Services
             }
         }
 
-        public List<tblGLTranHeader> GetGLEntryByPurchaseId(int PurchaseId)
+        public List<tblGLTranHeader> GetGLEntryByPurchaseId(int PurchaseId, int BookTypeId)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
-                return unitOfWork.GLTran.GetGLEntryByPurchaseId(PurchaseId).ToList();
+                return unitOfWork.GLTran.GetGLEntryByPurchaseId(PurchaseId , BookTypeId).ToList();
 
             }
         }

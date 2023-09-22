@@ -31,14 +31,14 @@ namespace GeneralLedger.Persistence.Repositories
             //throw new System.NotImplementedException();
         }
 
-        public List<tblGLTranHeader> GetGLEntryByPurchaseId(int PurchaseId)
+        public List<tblGLTranHeader> GetGLEntryByPurchaseId(int PurchaseId , int BookTypeId)
         {
 
             return GeneralLedgerContext.tblGLTranHeaders
              .Include(j => j.tblGLTranDetails)
              .Include(j => j.tblGLTranDetails.Select(d => d.tblMasCOA))
              .Include(j => j.tblGLTranDetails.Select(d => d.tblMasCOASub))
-             .Where(j => j.intIdPurchase == PurchaseId)
+             .Where(j => j.intIdPurchase == PurchaseId && j.intIDGLBookType == BookTypeId)
              .ToList();
 
         }

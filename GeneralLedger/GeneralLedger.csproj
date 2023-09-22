@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>44</ApplicationRevision>
+    <ApplicationRevision>51</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -611,6 +611,12 @@
     <Compile Include="UserControls\SearchUser.Designer.cs">
       <DependentUpon>SearchUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\StockInquiry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\StockInquiry.Designer.cs">
+      <DependentUpon>StockInquiry.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\TrialBalancePosting.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -884,6 +890,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchUser.resx">
       <DependentUpon>SearchUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\StockInquiry.resx">
+      <DependentUpon>StockInquiry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\TrialBalancePosting.resx">
       <DependentUpon>TrialBalancePosting.cs</DependentUpon>

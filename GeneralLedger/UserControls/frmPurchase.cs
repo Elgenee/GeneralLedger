@@ -35,6 +35,8 @@ namespace GeneralLedger.UserControls
         public int SupplierId { get; set; }
         public List<tblGLTranDetail> GLTranDetail { get; set; }
 
+        public List<tblGLTranDetail> GLTranDetailInventoryEntry { get; set; }
+
         public int IndexGrid { get; set; }
 
         public int IndexGridInventory { get; set; }
@@ -120,13 +122,18 @@ namespace GeneralLedger.UserControls
 
                     if (Purchase != null)
                     {
+                        if (this.PurchaseDetailsList.Count <= 0)
+                        {
+                            this.txtPurchaseTotal.Text = string.Empty;
+                        }
                         MessageBox.Show("Successfully saved");
+                     
                     }
 
                 }
                 //GLTranHeader = Purchase.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
 
-                this.GLTranDetail = GLTranServices.GetGLEntryByPurchaseId(Purchase.Id).SelectMany(h => h.tblGLTranDetails).ToList();
+                this.GLTranDetail = GLTranServices.GetGLEntryByPurchaseId(Purchase.Id, 9).SelectMany(h => h.tblGLTranDetails).ToList();
                 if (GLTranDetail.Count > 0)
                 {
 
@@ -189,6 +196,63 @@ namespace GeneralLedger.UserControls
                     this.txtTotalDebit.Text = string.Empty;
                     this.txtTotalCredit.Text = string.Empty;
                 }
+
+                this.GLTranDetailInventoryEntry = GLTranServices.GetGLEntryByPurchaseId(Purchase.Id, 1011).SelectMany(h => h.tblGLTranDetails).ToList();
+                if (GLTranDetailInventoryEntry.Count > 0)
+                {
+                 
+                    this.dgInventoryEntry.ColumnCount = 6;
+                    this.dgInventoryEntry.RowCount = GLTranDetailInventoryEntry.Count;
+                    //this.dgChartOfAccountsSubsidiary.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    //this.dgChartOfAccountsSubsidiary.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgInventoryEntry.Columns[0].Name = "COA";
+                    this.dgInventoryEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgInventoryEntry.Columns[1].Name = "COA Code";
+                    this.dgInventoryEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[2].Name = "COA Subsidiary";
+                    this.dgInventoryEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[3].Name = "COA Subsidiary Code";
+                    this.dgInventoryEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[4].Name = "Debit";
+                    this.dgInventoryEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[5].Name = "Credit";
+                    this.dgInventoryEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgInventoryEntry.Columns[0].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[1].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[2].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[3].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[4].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[5].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[1].Visible = false;
+                    this.dgInventoryEntry.Columns[3].Visible = false;
+
+                    for (int i = 0; i < GLTranDetailInventoryEntry.Count; i++)
+                    {
+
+                        this.dgInventoryEntry.Rows[i].Cells[0].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strName;
+                        this.dgInventoryEntry.Rows[i].Cells[1].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strCode;
+                        this.dgInventoryEntry.Rows[i].Cells[2].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strName;
+                        this.dgInventoryEntry.Rows[i].Cells[3].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strCode;
+                        this.dgInventoryEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curDebit);
+                        this.dgInventoryEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curCredit);
+
+                        this.dgInventoryEntry.Rows[i].Cells[0].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[1].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[2].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[3].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[4].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[5].ReadOnly = true;
+                    }
+
+                    setRowNumber(this.dgInventoryEntry);
+
+                    this.txtTotalInventoryDebit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curDebit));
+                    this.txtTotalInventoryCredit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curCredit));
+                }
+
 
                 this.ID = Purchase.Id;
                 this.txtID.Text = Purchase.Id.ToString();
@@ -594,6 +658,7 @@ namespace GeneralLedger.UserControls
 
                         setRowNumber(this.dgJournalEntry);
                         this.txtPurchaseTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice));
+                        this.txtTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice));
                     }
 
                 }
@@ -641,7 +706,7 @@ namespace GeneralLedger.UserControls
                         Description = this.txtDescription.Text
                     };
 
-                   PurchaseServices.Remove(Purchase);
+                   PurchaseServices.Remove(Purchase, this.PurchaseDetailsList);
 
                     if (Purchase != null)
                     {
@@ -660,6 +725,9 @@ namespace GeneralLedger.UserControls
                         this.txtTotalDebit.Text = string.Empty;
                         this.txtTotalCredit.Text = string.Empty;
                         this.chkUseDefaultEntry.Checked = true;
+                        this.dgProduct.Rows.Clear();
+                        this.dgProduct.Refresh();
+                        this.PurchaseDetailsList = new List<PurchaseDetail>();
                         this.dgJournalEntry.Rows.Clear();
                         this.dgJournalEntry.Refresh();
                         this.GLTranDetail.Clear();
@@ -842,6 +910,7 @@ namespace GeneralLedger.UserControls
 
                     setRowNumber(this.dgJournalEntry);
                     this.txtPurchaseTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice));
+                    this.txtTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice));
                 }
             }
         }

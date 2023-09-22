@@ -17,9 +17,9 @@ namespace GeneralLedger.Core.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Payment()
         {
-            this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
             this.PurchaseSupplierLedgers = new HashSet<PurchaseSupplierLedger>();
             this.AccountPayableAdjustments = new HashSet<AccountPayableAdjustment>();
+            this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
         }
     
         public int Id { get; set; }
@@ -34,12 +34,12 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> PurchaseId { get; set; }
     
         public virtual Purchase Purchase { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
         public virtual Bank Bank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseSupplierLedger> PurchaseSupplierLedgers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountPayableAdjustment> AccountPayableAdjustments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
     }
 }

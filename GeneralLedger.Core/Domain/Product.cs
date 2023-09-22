@@ -19,6 +19,7 @@ namespace GeneralLedger.Core.Domain
         {
             this.PurchaseDetails = new HashSet<PurchaseDetail>();
             this.Stocks = new HashSet<Stock>();
+            this.SalesDetails = new HashSet<SalesDetail>();
         }
     
         public int Id { get; set; }
@@ -56,5 +57,7 @@ namespace GeneralLedger.Core.Domain
         public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stock> Stocks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalesDetail> SalesDetails { get; set; }
     }
 }

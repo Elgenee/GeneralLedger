@@ -206,6 +206,9 @@
     <Compile Include="Domain\SalesCustomerLedgerTransactionType.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\SalesDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\spBSCurrentAsset_Result.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>

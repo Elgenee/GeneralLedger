@@ -58,7 +58,6 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<tblJournalEntry> tblJournalEntries { get; set; }
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<tblGLBookType> tblGLBookTypes { get; set; }
-        public virtual DbSet<tblGLTranHeader> tblGLTranHeaders { get; set; }
         public virtual DbSet<Collection> Collections { get; set; }
         public virtual DbSet<SalesCustomerLedgerTransactionType> SalesCustomerLedgerTransactionTypes { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
@@ -76,6 +75,8 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<Stock> Stocks { get; set; }
         public virtual DbSet<PurchaseDetail> PurchaseDetails { get; set; }
         public virtual DbSet<StockTransactionType> StockTransactionTypes { get; set; }
+        public virtual DbSet<SalesDetail> SalesDetails { get; set; }
+        public virtual DbSet<tblGLTranHeader> tblGLTranHeaders { get; set; }
     
         public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
         {

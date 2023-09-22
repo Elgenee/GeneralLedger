@@ -30,6 +30,7 @@
         {
             this.metroTabControlMain = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPageHome = new MetroFramework.Controls.MetroTabPage();
+            this.btnStockInquiry = new MetroFramework.Controls.MetroTile();
             this.btnProductUnit = new MetroFramework.Controls.MetroTile();
             this.btnAPDMCM = new MetroFramework.Controls.MetroTile();
             this.btnReturnPayment = new MetroFramework.Controls.MetroTile();
@@ -75,11 +76,12 @@
             this.metroTabControlMain.Controls.Add(this.metroTabPageHome);
             this.metroTabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControlMain.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.metroTabControlMain.Location = new System.Drawing.Point(20, 60);
-            this.metroTabControlMain.MinimumSize = new System.Drawing.Size(1252, 0);
+            this.metroTabControlMain.Location = new System.Drawing.Point(27, 74);
+            this.metroTabControlMain.Margin = new System.Windows.Forms.Padding(4);
+            this.metroTabControlMain.MinimumSize = new System.Drawing.Size(1669, 0);
             this.metroTabControlMain.Name = "metroTabControlMain";
             this.metroTabControlMain.SelectedIndex = 0;
-            this.metroTabControlMain.Size = new System.Drawing.Size(2014, 746);
+            this.metroTabControlMain.Size = new System.Drawing.Size(2685, 918);
             this.metroTabControlMain.TabIndex = 0;
             this.metroTabControlMain.UseSelectable = true;
             this.metroTabControlMain.CustomPaint += new System.EventHandler<MetroFramework.Drawing.MetroPaintEventArgs>(this.metroTabControlMain_CustomPaint);
@@ -89,6 +91,7 @@
             // metroTabPageHome
             // 
             this.metroTabPageHome.AutoScroll = true;
+            this.metroTabPageHome.Controls.Add(this.btnStockInquiry);
             this.metroTabPageHome.Controls.Add(this.btnProductUnit);
             this.metroTabPageHome.Controls.Add(this.btnAPDMCM);
             this.metroTabPageHome.Controls.Add(this.btnReturnPayment);
@@ -127,11 +130,12 @@
             this.metroTabPageHome.HorizontalScrollbar = true;
             this.metroTabPageHome.HorizontalScrollbarBarColor = true;
             this.metroTabPageHome.HorizontalScrollbarHighlightOnWheel = true;
-            this.metroTabPageHome.HorizontalScrollbarSize = 10;
+            this.metroTabPageHome.HorizontalScrollbarSize = 12;
             this.metroTabPageHome.ImageKey = "(none)";
             this.metroTabPageHome.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPageHome.Margin = new System.Windows.Forms.Padding(4);
             this.metroTabPageHome.Name = "metroTabPageHome";
-            this.metroTabPageHome.Size = new System.Drawing.Size(2006, 704);
+            this.metroTabPageHome.Size = new System.Drawing.Size(2677, 876);
             this.metroTabPageHome.Style = MetroFramework.MetroColorStyle.Silver;
             this.metroTabPageHome.TabIndex = 0;
             this.metroTabPageHome.Text = "Home";
@@ -139,16 +143,34 @@
             this.metroTabPageHome.VerticalScrollbar = true;
             this.metroTabPageHome.VerticalScrollbarBarColor = true;
             this.metroTabPageHome.VerticalScrollbarHighlightOnWheel = true;
-            this.metroTabPageHome.VerticalScrollbarSize = 10;
+            this.metroTabPageHome.VerticalScrollbarSize = 13;
             this.metroTabPageHome.Click += new System.EventHandler(this.metroTabPageHome_Click);
+            // 
+            // btnStockInquiry
+            // 
+            this.btnStockInquiry.ActiveControl = null;
+            this.btnStockInquiry.Enabled = false;
+            this.btnStockInquiry.Location = new System.Drawing.Point(535, 52);
+            this.btnStockInquiry.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStockInquiry.Name = "btnStockInquiry";
+            this.btnStockInquiry.Size = new System.Drawing.Size(248, 86);
+            this.btnStockInquiry.Style = MetroFramework.MetroColorStyle.Silver;
+            this.btnStockInquiry.TabIndex = 38;
+            this.btnStockInquiry.Text = "Stock Inquiry";
+            this.btnStockInquiry.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnStockInquiry.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnStockInquiry.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.btnStockInquiry.UseSelectable = true;
+            this.btnStockInquiry.Click += new System.EventHandler(this.metroTile2_Click_2);
             // 
             // btnProductUnit
             // 
             this.btnProductUnit.ActiveControl = null;
             this.btnProductUnit.Enabled = false;
-            this.btnProductUnit.Location = new System.Drawing.Point(475, 315);
+            this.btnProductUnit.Location = new System.Drawing.Point(633, 388);
+            this.btnProductUnit.Margin = new System.Windows.Forms.Padding(4);
             this.btnProductUnit.Name = "btnProductUnit";
-            this.btnProductUnit.Size = new System.Drawing.Size(173, 69);
+            this.btnProductUnit.Size = new System.Drawing.Size(231, 85);
             this.btnProductUnit.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnProductUnit.TabIndex = 37;
             this.btnProductUnit.Text = "Product Unit";
@@ -162,9 +184,10 @@
             // 
             this.btnAPDMCM.ActiveControl = null;
             this.btnAPDMCM.Enabled = false;
-            this.btnAPDMCM.Location = new System.Drawing.Point(401, 728);
+            this.btnAPDMCM.Location = new System.Drawing.Point(535, 896);
+            this.btnAPDMCM.Margin = new System.Windows.Forms.Padding(4);
             this.btnAPDMCM.Name = "btnAPDMCM";
-            this.btnAPDMCM.Size = new System.Drawing.Size(186, 70);
+            this.btnAPDMCM.Size = new System.Drawing.Size(248, 86);
             this.btnAPDMCM.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnAPDMCM.TabIndex = 36;
             this.btnAPDMCM.Text = "AP DM/CM";
@@ -178,9 +201,10 @@
             // 
             this.btnReturnPayment.ActiveControl = null;
             this.btnReturnPayment.Enabled = false;
-            this.btnReturnPayment.Location = new System.Drawing.Point(209, 804);
+            this.btnReturnPayment.Location = new System.Drawing.Point(279, 990);
+            this.btnReturnPayment.Margin = new System.Windows.Forms.Padding(4);
             this.btnReturnPayment.Name = "btnReturnPayment";
-            this.btnReturnPayment.Size = new System.Drawing.Size(186, 70);
+            this.btnReturnPayment.Size = new System.Drawing.Size(248, 86);
             this.btnReturnPayment.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnReturnPayment.TabIndex = 35;
             this.btnReturnPayment.Text = "Return Payment";
@@ -194,9 +218,10 @@
             // 
             this.btnReturnPurchase.ActiveControl = null;
             this.btnReturnPurchase.Enabled = false;
-            this.btnReturnPurchase.Location = new System.Drawing.Point(209, 728);
+            this.btnReturnPurchase.Location = new System.Drawing.Point(279, 896);
+            this.btnReturnPurchase.Margin = new System.Windows.Forms.Padding(4);
             this.btnReturnPurchase.Name = "btnReturnPurchase";
-            this.btnReturnPurchase.Size = new System.Drawing.Size(186, 70);
+            this.btnReturnPurchase.Size = new System.Drawing.Size(248, 86);
             this.btnReturnPurchase.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnReturnPurchase.TabIndex = 34;
             this.btnReturnPurchase.Text = "Return Purchase";
@@ -210,9 +235,10 @@
             // 
             this.ARDMCM.ActiveControl = null;
             this.ARDMCM.Enabled = false;
-            this.ARDMCM.Location = new System.Drawing.Point(401, 520);
+            this.ARDMCM.Location = new System.Drawing.Point(535, 640);
+            this.ARDMCM.Margin = new System.Windows.Forms.Padding(4);
             this.ARDMCM.Name = "ARDMCM";
-            this.ARDMCM.Size = new System.Drawing.Size(186, 70);
+            this.ARDMCM.Size = new System.Drawing.Size(248, 86);
             this.ARDMCM.Style = MetroFramework.MetroColorStyle.Silver;
             this.ARDMCM.TabIndex = 33;
             this.ARDMCM.Text = "AR DM/CM";
@@ -226,9 +252,10 @@
             // 
             this.btnReturnSales.ActiveControl = null;
             this.btnReturnSales.Enabled = false;
-            this.btnReturnSales.Location = new System.Drawing.Point(209, 520);
+            this.btnReturnSales.Location = new System.Drawing.Point(279, 640);
+            this.btnReturnSales.Margin = new System.Windows.Forms.Padding(4);
             this.btnReturnSales.Name = "btnReturnSales";
-            this.btnReturnSales.Size = new System.Drawing.Size(186, 70);
+            this.btnReturnSales.Size = new System.Drawing.Size(248, 86);
             this.btnReturnSales.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnReturnSales.TabIndex = 32;
             this.btnReturnSales.Text = "Return Sales";
@@ -242,9 +269,10 @@
             // 
             this.btnReturnCheck.ActiveControl = null;
             this.btnReturnCheck.Enabled = false;
-            this.btnReturnCheck.Location = new System.Drawing.Point(209, 596);
+            this.btnReturnCheck.Location = new System.Drawing.Point(279, 734);
+            this.btnReturnCheck.Margin = new System.Windows.Forms.Padding(4);
             this.btnReturnCheck.Name = "btnReturnCheck";
-            this.btnReturnCheck.Size = new System.Drawing.Size(186, 70);
+            this.btnReturnCheck.Size = new System.Drawing.Size(248, 86);
             this.btnReturnCheck.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnReturnCheck.TabIndex = 31;
             this.btnReturnCheck.Text = "Return Check";
@@ -258,9 +286,10 @@
             // 
             this.btnPayment.ActiveControl = null;
             this.btnPayment.Enabled = false;
-            this.btnPayment.Location = new System.Drawing.Point(16, 804);
+            this.btnPayment.Location = new System.Drawing.Point(21, 990);
+            this.btnPayment.Margin = new System.Windows.Forms.Padding(4);
             this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(186, 70);
+            this.btnPayment.Size = new System.Drawing.Size(248, 86);
             this.btnPayment.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnPayment.TabIndex = 30;
             this.btnPayment.Text = "Payments";
@@ -274,9 +303,10 @@
             // 
             this.btnPurchase.ActiveControl = null;
             this.btnPurchase.Enabled = false;
-            this.btnPurchase.Location = new System.Drawing.Point(16, 728);
+            this.btnPurchase.Location = new System.Drawing.Point(21, 896);
+            this.btnPurchase.Margin = new System.Windows.Forms.Padding(4);
             this.btnPurchase.Name = "btnPurchase";
-            this.btnPurchase.Size = new System.Drawing.Size(186, 70);
+            this.btnPurchase.Size = new System.Drawing.Size(248, 86);
             this.btnPurchase.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnPurchase.TabIndex = 29;
             this.btnPurchase.Text = "Purchase";
@@ -289,10 +319,10 @@
             // metroLink4
             // 
             this.metroLink4.FontSize = MetroFramework.MetroLinkSize.Tall;
-            this.metroLink4.Location = new System.Drawing.Point(16, 690);
-            this.metroLink4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroLink4.Location = new System.Drawing.Point(21, 849);
+            this.metroLink4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.metroLink4.Name = "metroLink4";
-            this.metroLink4.Size = new System.Drawing.Size(504, 23);
+            this.metroLink4.Size = new System.Drawing.Size(672, 28);
             this.metroLink4.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLink4.TabIndex = 28;
             this.metroLink4.Text = "Accounts Payables";
@@ -303,9 +333,10 @@
             // 
             this.btnCollection.ActiveControl = null;
             this.btnCollection.Enabled = false;
-            this.btnCollection.Location = new System.Drawing.Point(18, 596);
+            this.btnCollection.Location = new System.Drawing.Point(24, 734);
+            this.btnCollection.Margin = new System.Windows.Forms.Padding(4);
             this.btnCollection.Name = "btnCollection";
-            this.btnCollection.Size = new System.Drawing.Size(186, 70);
+            this.btnCollection.Size = new System.Drawing.Size(248, 86);
             this.btnCollection.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnCollection.TabIndex = 27;
             this.btnCollection.Text = "Collection";
@@ -319,9 +350,10 @@
             // 
             this.btnSales.ActiveControl = null;
             this.btnSales.Enabled = false;
-            this.btnSales.Location = new System.Drawing.Point(18, 520);
+            this.btnSales.Location = new System.Drawing.Point(24, 640);
+            this.btnSales.Margin = new System.Windows.Forms.Padding(4);
             this.btnSales.Name = "btnSales";
-            this.btnSales.Size = new System.Drawing.Size(186, 70);
+            this.btnSales.Size = new System.Drawing.Size(248, 86);
             this.btnSales.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnSales.TabIndex = 26;
             this.btnSales.Text = "Sale";
@@ -334,10 +366,9 @@
             // lblOffset
             // 
             this.lblOffset.AutoSize = true;
-            this.lblOffset.Location = new System.Drawing.Point(26, 912);
-            this.lblOffset.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblOffset.Location = new System.Drawing.Point(35, 1122);
             this.lblOffset.Name = "lblOffset";
-            this.lblOffset.Size = new System.Drawing.Size(10, 13);
+            this.lblOffset.Size = new System.Drawing.Size(11, 16);
             this.lblOffset.TabIndex = 25;
             this.lblOffset.Text = "-";
             // 
@@ -345,9 +376,10 @@
             // 
             this.metroTile1.ActiveControl = null;
             this.metroTile1.Enabled = false;
-            this.metroTile1.Location = new System.Drawing.Point(401, 804);
+            this.metroTile1.Location = new System.Drawing.Point(535, 990);
+            this.metroTile1.Margin = new System.Windows.Forms.Padding(4);
             this.metroTile1.Name = "metroTile1";
-            this.metroTile1.Size = new System.Drawing.Size(186, 70);
+            this.metroTile1.Size = new System.Drawing.Size(248, 86);
             this.metroTile1.Style = MetroFramework.MetroColorStyle.Silver;
             this.metroTile1.TabIndex = 24;
             this.metroTile1.Text = "Purchase Order";
@@ -360,10 +392,10 @@
             // metroLink3
             // 
             this.metroLink3.FontSize = MetroFramework.MetroLinkSize.Tall;
-            this.metroLink3.Location = new System.Drawing.Point(18, 483);
-            this.metroLink3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroLink3.Location = new System.Drawing.Point(24, 594);
+            this.metroLink3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.metroLink3.Name = "metroLink3";
-            this.metroLink3.Size = new System.Drawing.Size(504, 23);
+            this.metroLink3.Size = new System.Drawing.Size(672, 28);
             this.metroLink3.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLink3.TabIndex = 23;
             this.metroLink3.Text = "Accounts Receivables";
@@ -375,9 +407,10 @@
             // 
             this.btnLocation.ActiveControl = null;
             this.btnLocation.Enabled = false;
-            this.btnLocation.Location = new System.Drawing.Point(316, 315);
+            this.btnLocation.Location = new System.Drawing.Point(421, 388);
+            this.btnLocation.Margin = new System.Windows.Forms.Padding(4);
             this.btnLocation.Name = "btnLocation";
-            this.btnLocation.Size = new System.Drawing.Size(153, 69);
+            this.btnLocation.Size = new System.Drawing.Size(204, 85);
             this.btnLocation.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnLocation.TabIndex = 22;
             this.btnLocation.Text = "Location";
@@ -391,9 +424,10 @@
             // 
             this.btnPriceType.ActiveControl = null;
             this.btnPriceType.Enabled = false;
-            this.btnPriceType.Location = new System.Drawing.Point(316, 391);
+            this.btnPriceType.Location = new System.Drawing.Point(421, 481);
+            this.btnPriceType.Margin = new System.Windows.Forms.Padding(4);
             this.btnPriceType.Name = "btnPriceType";
-            this.btnPriceType.Size = new System.Drawing.Size(153, 69);
+            this.btnPriceType.Size = new System.Drawing.Size(204, 85);
             this.btnPriceType.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnPriceType.TabIndex = 21;
             this.btnPriceType.Text = "Price Type";
@@ -407,9 +441,10 @@
             // 
             this.btnUser.ActiveControl = null;
             this.btnUser.Enabled = false;
-            this.btnUser.Location = new System.Drawing.Point(987, 240);
+            this.btnUser.Location = new System.Drawing.Point(1316, 295);
+            this.btnUser.Margin = new System.Windows.Forms.Padding(4);
             this.btnUser.Name = "btnUser";
-            this.btnUser.Size = new System.Drawing.Size(173, 69);
+            this.btnUser.Size = new System.Drawing.Size(231, 85);
             this.btnUser.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnUser.TabIndex = 20;
             this.btnUser.Text = "User";
@@ -423,9 +458,10 @@
             // 
             this.btnProductSize.ActiveControl = null;
             this.btnProductSize.Enabled = false;
-            this.btnProductSize.Location = new System.Drawing.Point(813, 315);
+            this.btnProductSize.Location = new System.Drawing.Point(1084, 388);
+            this.btnProductSize.Margin = new System.Windows.Forms.Padding(4);
             this.btnProductSize.Name = "btnProductSize";
-            this.btnProductSize.Size = new System.Drawing.Size(167, 69);
+            this.btnProductSize.Size = new System.Drawing.Size(223, 85);
             this.btnProductSize.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnProductSize.TabIndex = 19;
             this.btnProductSize.Text = "Product Size";
@@ -439,9 +475,10 @@
             // 
             this.btnAgents.ActiveControl = null;
             this.btnAgents.Enabled = false;
-            this.btnAgents.Location = new System.Drawing.Point(158, 391);
+            this.btnAgents.Location = new System.Drawing.Point(211, 481);
+            this.btnAgents.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgents.Name = "btnAgents";
-            this.btnAgents.Size = new System.Drawing.Size(153, 69);
+            this.btnAgents.Size = new System.Drawing.Size(204, 85);
             this.btnAgents.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnAgents.TabIndex = 18;
             this.btnAgents.Text = "Agents";
@@ -455,9 +492,10 @@
             // 
             this.btnProductColor.ActiveControl = null;
             this.btnProductColor.Enabled = false;
-            this.btnProductColor.Location = new System.Drawing.Point(652, 391);
+            this.btnProductColor.Location = new System.Drawing.Point(869, 481);
+            this.btnProductColor.Margin = new System.Windows.Forms.Padding(4);
             this.btnProductColor.Name = "btnProductColor";
-            this.btnProductColor.Size = new System.Drawing.Size(156, 69);
+            this.btnProductColor.Size = new System.Drawing.Size(208, 85);
             this.btnProductColor.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnProductColor.TabIndex = 17;
             this.btnProductColor.Text = "Product Color";
@@ -471,9 +509,10 @@
             // 
             this.btnProductBrand.ActiveControl = null;
             this.btnProductBrand.Enabled = false;
-            this.btnProductBrand.Location = new System.Drawing.Point(814, 391);
+            this.btnProductBrand.Location = new System.Drawing.Point(1085, 481);
+            this.btnProductBrand.Margin = new System.Windows.Forms.Padding(4);
             this.btnProductBrand.Name = "btnProductBrand";
-            this.btnProductBrand.Size = new System.Drawing.Size(166, 69);
+            this.btnProductBrand.Size = new System.Drawing.Size(221, 85);
             this.btnProductBrand.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnProductBrand.TabIndex = 16;
             this.btnProductBrand.Text = "Product Brand";
@@ -487,9 +526,10 @@
             // 
             this.btnProductType.ActiveControl = null;
             this.btnProductType.Enabled = false;
-            this.btnProductType.Location = new System.Drawing.Point(652, 315);
+            this.btnProductType.Location = new System.Drawing.Point(869, 388);
+            this.btnProductType.Margin = new System.Windows.Forms.Padding(4);
             this.btnProductType.Name = "btnProductType";
-            this.btnProductType.Size = new System.Drawing.Size(156, 69);
+            this.btnProductType.Size = new System.Drawing.Size(208, 85);
             this.btnProductType.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnProductType.TabIndex = 15;
             this.btnProductType.Text = "Product Types";
@@ -503,9 +543,10 @@
             // 
             this.btnProductCategory.ActiveControl = null;
             this.btnProductCategory.Enabled = false;
-            this.btnProductCategory.Location = new System.Drawing.Point(475, 391);
+            this.btnProductCategory.Location = new System.Drawing.Point(633, 481);
+            this.btnProductCategory.Margin = new System.Windows.Forms.Padding(4);
             this.btnProductCategory.Name = "btnProductCategory";
-            this.btnProductCategory.Size = new System.Drawing.Size(173, 69);
+            this.btnProductCategory.Size = new System.Drawing.Size(231, 85);
             this.btnProductCategory.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnProductCategory.TabIndex = 14;
             this.btnProductCategory.Text = "Product Category";
@@ -519,9 +560,10 @@
             // 
             this.btnProduct.ActiveControl = null;
             this.btnProduct.Enabled = false;
-            this.btnProduct.Location = new System.Drawing.Point(474, 240);
+            this.btnProduct.Location = new System.Drawing.Point(632, 295);
+            this.btnProduct.Margin = new System.Windows.Forms.Padding(4);
             this.btnProduct.Name = "btnProduct";
-            this.btnProduct.Size = new System.Drawing.Size(507, 69);
+            this.btnProduct.Size = new System.Drawing.Size(676, 85);
             this.btnProduct.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnProduct.TabIndex = 13;
             this.btnProduct.Text = "Product";
@@ -535,9 +577,10 @@
             // 
             this.btnBankAccounts.ActiveControl = null;
             this.btnBankAccounts.Enabled = false;
-            this.btnBankAccounts.Location = new System.Drawing.Point(158, 315);
+            this.btnBankAccounts.Location = new System.Drawing.Point(211, 388);
+            this.btnBankAccounts.Margin = new System.Windows.Forms.Padding(4);
             this.btnBankAccounts.Name = "btnBankAccounts";
-            this.btnBankAccounts.Size = new System.Drawing.Size(153, 69);
+            this.btnBankAccounts.Size = new System.Drawing.Size(204, 85);
             this.btnBankAccounts.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnBankAccounts.TabIndex = 12;
             this.btnBankAccounts.Text = "Bank Accounts";
@@ -551,9 +594,10 @@
             // 
             this.btnSupplier.ActiveControl = null;
             this.btnSupplier.Enabled = false;
-            this.btnSupplier.Location = new System.Drawing.Point(18, 391);
+            this.btnSupplier.Location = new System.Drawing.Point(24, 481);
+            this.btnSupplier.Margin = new System.Windows.Forms.Padding(4);
             this.btnSupplier.Name = "btnSupplier";
-            this.btnSupplier.Size = new System.Drawing.Size(135, 69);
+            this.btnSupplier.Size = new System.Drawing.Size(180, 85);
             this.btnSupplier.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnSupplier.TabIndex = 11;
             this.btnSupplier.Text = "Supplier";
@@ -567,9 +611,10 @@
             // 
             this.btnCompanies.ActiveControl = null;
             this.btnCompanies.Enabled = false;
-            this.btnCompanies.Location = new System.Drawing.Point(18, 315);
+            this.btnCompanies.Location = new System.Drawing.Point(24, 388);
+            this.btnCompanies.Margin = new System.Windows.Forms.Padding(4);
             this.btnCompanies.Name = "btnCompanies";
-            this.btnCompanies.Size = new System.Drawing.Size(135, 69);
+            this.btnCompanies.Size = new System.Drawing.Size(180, 85);
             this.btnCompanies.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnCompanies.TabIndex = 10;
             this.btnCompanies.Text = "Companies";
@@ -581,10 +626,10 @@
             // metroLink2
             // 
             this.metroLink2.FontSize = MetroFramework.MetroLinkSize.Tall;
-            this.metroLink2.Location = new System.Drawing.Point(16, 205);
-            this.metroLink2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroLink2.Location = new System.Drawing.Point(21, 252);
+            this.metroLink2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.metroLink2.Name = "metroLink2";
-            this.metroLink2.Size = new System.Drawing.Size(504, 23);
+            this.metroLink2.Size = new System.Drawing.Size(672, 28);
             this.metroLink2.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLink2.TabIndex = 9;
             this.metroLink2.Text = "Masterfile";
@@ -594,10 +639,10 @@
             // metroLink1
             // 
             this.metroLink1.FontSize = MetroFramework.MetroLinkSize.Tall;
-            this.metroLink1.Location = new System.Drawing.Point(18, 8);
-            this.metroLink1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroLink1.Location = new System.Drawing.Point(24, 10);
+            this.metroLink1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(515, 23);
+            this.metroLink1.Size = new System.Drawing.Size(687, 28);
             this.metroLink1.Style = MetroFramework.MetroColorStyle.Black;
             this.metroLink1.TabIndex = 8;
             this.metroLink1.Text = "Accounting";
@@ -608,9 +653,10 @@
             // 
             this.btnCustomer.ActiveControl = null;
             this.btnCustomer.Enabled = false;
-            this.btnCustomer.Location = new System.Drawing.Point(18, 240);
+            this.btnCustomer.Location = new System.Drawing.Point(24, 295);
+            this.btnCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(451, 69);
+            this.btnCustomer.Size = new System.Drawing.Size(601, 85);
             this.btnCustomer.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnCustomer.TabIndex = 6;
             this.btnCustomer.Text = "Customer";
@@ -624,9 +670,10 @@
             // 
             this.btnReports.ActiveControl = null;
             this.btnReports.Enabled = false;
-            this.btnReports.Location = new System.Drawing.Point(209, 42);
+            this.btnReports.Location = new System.Drawing.Point(279, 52);
+            this.btnReports.Margin = new System.Windows.Forms.Padding(4);
             this.btnReports.Name = "btnReports";
-            this.btnReports.Size = new System.Drawing.Size(186, 70);
+            this.btnReports.Size = new System.Drawing.Size(248, 86);
             this.btnReports.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnReports.TabIndex = 5;
             this.btnReports.Text = "Reports";
@@ -640,9 +687,10 @@
             // 
             this.btnTrialBalance.ActiveControl = null;
             this.btnTrialBalance.Enabled = false;
-            this.btnTrialBalance.Location = new System.Drawing.Point(18, 116);
+            this.btnTrialBalance.Location = new System.Drawing.Point(24, 143);
+            this.btnTrialBalance.Margin = new System.Windows.Forms.Padding(4);
             this.btnTrialBalance.Name = "btnTrialBalance";
-            this.btnTrialBalance.Size = new System.Drawing.Size(186, 70);
+            this.btnTrialBalance.Size = new System.Drawing.Size(248, 86);
             this.btnTrialBalance.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnTrialBalance.TabIndex = 4;
             this.btnTrialBalance.Text = "Trial Balance";
@@ -656,9 +704,10 @@
             // 
             this.btnChartOfAccounts.ActiveControl = null;
             this.btnChartOfAccounts.Enabled = false;
-            this.btnChartOfAccounts.Location = new System.Drawing.Point(209, 118);
+            this.btnChartOfAccounts.Location = new System.Drawing.Point(279, 145);
+            this.btnChartOfAccounts.Margin = new System.Windows.Forms.Padding(4);
             this.btnChartOfAccounts.Name = "btnChartOfAccounts";
-            this.btnChartOfAccounts.Size = new System.Drawing.Size(186, 69);
+            this.btnChartOfAccounts.Size = new System.Drawing.Size(248, 85);
             this.btnChartOfAccounts.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnChartOfAccounts.TabIndex = 3;
             this.btnChartOfAccounts.Text = "Chart of Accounts";
@@ -672,9 +721,10 @@
             // 
             this.btnJournalEntry.ActiveControl = null;
             this.btnJournalEntry.Enabled = false;
-            this.btnJournalEntry.Location = new System.Drawing.Point(18, 42);
+            this.btnJournalEntry.Location = new System.Drawing.Point(24, 52);
+            this.btnJournalEntry.Margin = new System.Windows.Forms.Padding(4);
             this.btnJournalEntry.Name = "btnJournalEntry";
-            this.btnJournalEntry.Size = new System.Drawing.Size(186, 70);
+            this.btnJournalEntry.Size = new System.Drawing.Size(248, 86);
             this.btnJournalEntry.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnJournalEntry.TabIndex = 2;
             this.btnJournalEntry.Text = "Journal Entry";
@@ -687,21 +737,24 @@
             // LoginUser
             // 
             this.LoginUser.AutoSize = true;
-            this.LoginUser.Location = new System.Drawing.Point(225, 28);
+            this.LoginUser.Location = new System.Drawing.Point(300, 34);
+            this.LoginUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LoginUser.Name = "LoginUser";
-            this.LoginUser.Size = new System.Drawing.Size(67, 19);
+            this.LoginUser.Size = new System.Drawing.Size(72, 20);
             this.LoginUser.TabIndex = 6;
             this.LoginUser.Text = "LoginUser";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2054, 826);
+            this.ClientSize = new System.Drawing.Size(2739, 1017);
             this.Controls.Add(this.LoginUser);
             this.Controls.Add(this.metroTabControlMain);
-            this.MinimumSize = new System.Drawing.Size(1023, 0);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(1364, 0);
             this.Name = "MainForm";
+            this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.Text = "Royal Marketing";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
@@ -754,5 +807,6 @@
         private MetroFramework.Controls.MetroTile btnReturnPurchase;
         private MetroFramework.Controls.MetroTile btnAPDMCM;
         private MetroFramework.Controls.MetroTile btnProductUnit;
+        private MetroFramework.Controls.MetroTile btnStockInquiry;
     }
 }

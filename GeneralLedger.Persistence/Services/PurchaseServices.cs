@@ -22,6 +22,7 @@ namespace GeneralLedger.Persistence.Services
                 UpdateRemainingCount(unitOfWork,purchase, PurchaseDetailsList);
                 AddPurchaseSupplierLedger(unitOfWork, purchase);
                 AddGLTran(unitOfWork, purchase, tblGLTranDetail, UseDefaultEntry);
+                AddGLTranInventory(unitOfWork, purchase);
                 unitOfWork.Complete();
                 return purchase;
             }
@@ -80,15 +81,6 @@ namespace GeneralLedger.Persistence.Services
                     PurchaseID = purchase.Id
                 });
 
-                //unitOfWork.Stock.Add(new Stock
-                //{
-                    
-                //    ProductId = item.ProductId,
-                //    QuantityIn = item.Quantity,
-                //    QuantityOut = 0,
-                //    StockTransactionTypeID = 1,
-                //    PurchaseID = purchase.Id
-                //});
             }
         }
 
@@ -107,6 +99,34 @@ namespace GeneralLedger.Persistence.Services
             unitOfWork.PurchaseSupplierLedger.Add(purchaseCustomerLedger);
         }
 
+        public void AddGLTranInventory(UnitOfWork unitOfWork, Purchase purchase) {
+
+            var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
+            var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1071).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+
+            var gLTranDetail = new List<tblGLTranDetail>
+            {
+                CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, 0, purchase.Total.Value),
+                CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, purchase.Total.Value, 0),
+            };
+
+            //AddGLTranHeader(unitOfWork, purchase, gLTranDetail);
+
+            var gLTranHeader = new tblGLTranHeader
+            {
+                curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
+                curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
+                intIDGLBookType = 1011,
+                strDescription = purchase.Description,
+                datBatchDate = purchase.TransactionDate,
+                datInsertedDate = DateTime.Now,
+                tblGLTranDetails = gLTranDetail,
+                intIdPurchase = purchase.Id,
+                blnUseDefaultEntry = true
+            };
+            unitOfWork.GLTran.Add(gLTranHeader);
+        }
+
         private void AddGLTran(UnitOfWork unitOfWork, Purchase purchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
         {
             if (UseDefaultEntry)
@@ -123,14 +143,16 @@ namespace GeneralLedger.Persistence.Services
         {
             var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1071).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
             var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1056).SingleOrDefault(); // SALES
+
+        
             var gLTranDetail = new List<tblGLTranDetail>
             {
 
                 CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, 0, purchase.Total.Value),
-                CreateGLTranDetail((int)journalEntry2.intIDMasCOA, journalEntry2.ID, purchase.Total.Value, 0)
+                CreateGLTranDetail((int)journalEntry2.intIDMasCOA, journalEntry2.ID, purchase.Total.Value, 0),
+              
             };
 
- 
               AddGLTranHeader(unitOfWork, purchase, gLTranDetail);
         }
 
@@ -229,11 +251,34 @@ namespace GeneralLedger.Persistence.Services
             throw new NotImplementedException();
         }
 
-        public void Remove(Purchase purchase)
+        public void Remove(Purchase purchase, List<PurchaseDetail> PurchaseDetailsList)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 var resultPurchase = unitOfWork.Purchase.GetPurchasesWithJournalEntry(purchase.Id).SingleOrDefault();
+
+                foreach (var detail in PurchaseDetailsList) {
+
+                    var purchaseDetailExist = unitOfWork.PurchaseDetail.Get(detail.Id);
+                    unitOfWork.PurchaseDetail.Remove(purchaseDetailExist);
+
+                    var existingStock = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId && s.PurchaseID == detail.PurchaseId).FirstOrDefault();
+
+                    if (existingStock != null)
+                    {
+                        unitOfWork.Stock.Remove(existingStock);
+                    }
+
+                    int productID = (detail.ProductId.HasValue) ? detail.ProductId.Value : 0;
+                    var product = unitOfWork.Products.Get(productID);
+                    var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId).ToList();
+                    existingStockList = existingStockList.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
+                    var totalStocks = (int)existingStockList.Sum(stock => stock.QuantityIn - stock.QuantityOut);
+                    product.intRemainingCount = totalStocks;
+                }
+
+                PurchaseDetailsList.Clear();
+
                 var tblGlTranDetails = resultPurchase.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList();
                 unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
                 var tblGLTranHeaders = resultPurchase.tblGLTranHeaders.ToList();
@@ -244,6 +289,42 @@ namespace GeneralLedger.Persistence.Services
                 unitOfWork.Complete();
             }
         }
+
+        //private void DeletePurchaseDetails(UnitOfWork unitOfWork, Purchase purchase)
+        //{
+        //    var purchaseDetails = purchase.PurchaseDetails.ToList();
+        //    foreach (var detail in purchaseDetails)
+        //    {
+        //        // Decrease the stock when deleting the purchase detail
+        //        var stock = unitOfWork.Stock.SingleOrDefault(s => s.PurchaseID == purchase.Id && s.ProductId == detail.ProductId);
+        //        if (stock != null)
+        //        {
+        //            stock.QuantityIn -= detail.Quantity;
+        //            unitOfWork.Stock.Update(stock);
+        //        }
+
+        //        // Remove the purchase detail
+        //        unitOfWork.PurchaseDetails.Remove(detail);
+        //    }
+        //}
+
+        //private void DeletePurchaseSupplierLedger(UnitOfWork unitOfWork, Purchase purchase)
+        //{
+        //    var purchaseSupplierLedger = unitOfWork.PurchaseSupplierLedger.SingleOrDefault(psl => psl.intIdPurchase == purchase.Id);
+        //    if (purchaseSupplierLedger != null)
+        //    {
+        //        unitOfWork.PurchaseSupplierLedger.Remove(purchaseSupplierLedger);
+        //    }
+        //}
+
+        //private void DeleteGLTran(UnitOfWork unitOfWork, Purchase purchase)
+        //{
+        //    var glTrans = unitOfWork.GLTran.Find(glt => glt.intIdPurchase == purchase.Id).ToList();
+        //    foreach (var tran in glTrans)
+        //    {
+        //        unitOfWork.GLTran.Remove(tran);
+        //    }
+        //}
 
         public Purchase Update(Purchase updatedPurchase, List<tblGLTranDetail> updatedTblGLTranDetail, bool UseDefaultEntry, List<PurchaseDetail> updatedPurchaseDetailsList)
         {
@@ -274,6 +355,9 @@ namespace GeneralLedger.Persistence.Services
 
                     //// 5. Update general ledger transaction records
                     UpdateGLTran(unitOfWork, updatedPurchase, updatedTblGLTranDetail, UseDefaultEntry);
+
+
+                    UpdateGLTranInventory(unitOfWork, updatedPurchase);
 
                     // 6. Commit changes to the database
                     unitOfWork.Complete();
@@ -363,10 +447,65 @@ namespace GeneralLedger.Persistence.Services
         }
 
 
+
+        private void UpdateGLTranInventory(UnitOfWork unitOfWork, Purchase updatedPurchase)
+        {
+            // Delete existing GLTran entries for the purchase
+            var existingGLTranHeader = unitOfWork.GLTran.Find(h => h.intIdPurchase == updatedPurchase.Id && h.intIDGLBookType == 1011).SingleOrDefault();
+            if (existingGLTranHeader != null)
+            {
+                var existingGLTranDetail = unitOfWork.GLTranDetail.Find(g => g.intIDGLTranHeader == existingGLTranHeader.ID);
+
+                if (existingGLTranDetail != null)
+                {
+                    unitOfWork.GLTranDetail.RemoveRange(existingGLTranDetail);
+                }
+                //unitOfWork.GLTran.Remove(existingGLTranHeader);
+            }
+
+            existingGLTranHeader.datBatchDate = updatedPurchase.TransactionDate;
+            existingGLTranHeader.strDescription = updatedPurchase.Description;
+            existingGLTranHeader.blnUseDefaultEntry = true;
+
+            // Re-insert the GLTran entries for the purchase
+
+            var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
+            var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1071).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+            var gLTranDetail = new List<tblGLTranDetail>
+                {
+                    new tblGLTranDetail
+                    {
+                        intIDMasCoa = (int)journalEntry1.intIDMasCOA,
+                        intIDMasCoaSub = journalEntry3.ID,
+                        curCredit = 0,
+                        curDebit = updatedPurchase.Total.Value,
+                        intIDGLTranHeader = existingGLTranHeader.ID
+                    },
+                  new tblGLTranDetail
+                    {
+                        intIDMasCoa = (int)journalEntry1.intIDMasCOA,
+                        intIDMasCoaSub = journalEntry1.ID,
+                        curCredit = updatedPurchase.Total.Value,
+                        curDebit = 0,
+                        intIDGLTranHeader = existingGLTranHeader.ID
+                    }
+
+                    //CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, 0, updatedPurchase.Total.Value),
+                    //CreateGLTranDetail((int)journalEntry2.intIDMasCOA, journalEntry2.ID, updatedPurchase.Total.Value, 0)
+                };
+
+                unitOfWork.GLTranDetail.AddRange(gLTranDetail);
+
+                existingGLTranHeader.curDebitAmount = gLTranDetail.Sum(c => c.curDebit);
+                existingGLTranHeader.curCreditAmount = gLTranDetail.Sum(c => c.curCredit);
+
+        }
+
+
         private void UpdateGLTran(UnitOfWork unitOfWork, Purchase updatedPurchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
         {
             // Delete existing GLTran entries for the purchase
-            var existingGLTranHeader = unitOfWork.GLTran.Find(h => h.intIdPurchase == updatedPurchase.Id).SingleOrDefault();
+            var existingGLTranHeader = unitOfWork.GLTran.Find(h => h.intIdPurchase == updatedPurchase.Id && h.intIDGLBookType == 9).SingleOrDefault();
             if (existingGLTranHeader != null)
             {
                 var existingGLTranDetail = unitOfWork.GLTranDetail.Find(g => g.intIDGLTranHeader == existingGLTranHeader.ID);

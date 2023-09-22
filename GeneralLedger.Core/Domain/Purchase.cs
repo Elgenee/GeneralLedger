@@ -17,12 +17,12 @@ namespace GeneralLedger.Core.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Purchase()
         {
-            this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
             this.Payments = new HashSet<Payment>();
             this.PurchaseSupplierLedgers = new HashSet<PurchaseSupplierLedger>();
             this.AccountPayableAdjustments = new HashSet<AccountPayableAdjustment>();
             this.Stocks = new HashSet<Stock>();
             this.PurchaseDetails = new HashSet<PurchaseDetail>();
+            this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
         }
     
         public int Id { get; set; }
@@ -40,8 +40,6 @@ namespace GeneralLedger.Core.Domain
     
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseSupplierLedger> PurchaseSupplierLedgers { get; set; }
@@ -51,5 +49,7 @@ namespace GeneralLedger.Core.Domain
         public virtual ICollection<Stock> Stocks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
     }
 }
