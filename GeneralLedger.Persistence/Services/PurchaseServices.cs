@@ -156,6 +156,34 @@ namespace GeneralLedger.Persistence.Services
               AddGLTranHeader(unitOfWork, purchase, gLTranDetail);
         }
 
+        private tblGLTranDetail CreateGLTranDetail(int intIDMasCoa, int intIDMasCoaSub, decimal curCredit, decimal curDebit)
+        {
+            return new tblGLTranDetail
+            {
+                intIDMasCoa = intIDMasCoa,
+                intIDMasCoaSub = intIDMasCoaSub,
+                curCredit = curCredit,
+                curDebit = curDebit
+            };
+        }
+
+        private void AddGLTranHeader(UnitOfWork unitOfWork, Purchase purchase, List<tblGLTranDetail> gLTranDetail)
+        {
+            var gLTranHeader = new tblGLTranHeader
+            {
+                curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
+                curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
+                intIDGLBookType = 9,
+                strDescription = purchase.Description,
+                datBatchDate = purchase.TransactionDate,
+                datInsertedDate = DateTime.Now,
+                tblGLTranDetails = gLTranDetail,
+                intIdPurchase = purchase.Id,
+                blnUseDefaultEntry = true
+            };
+            unitOfWork.GLTran.Add(gLTranHeader);
+        }
+
         private void AddCustomGLTran(UnitOfWork unitOfWork, Purchase purchase, List<tblGLTranDetail> tblGLTranDetail)
         {
             var gLTranHeader = new tblGLTranHeader
@@ -184,33 +212,7 @@ namespace GeneralLedger.Persistence.Services
         }
 
 
-        private tblGLTranDetail CreateGLTranDetail(int intIDMasCoa, int intIDMasCoaSub, decimal curCredit, decimal curDebit)
-        {
-            return new tblGLTranDetail
-            {
-                intIDMasCoa = intIDMasCoa,
-                intIDMasCoaSub = intIDMasCoaSub,
-                curCredit = curCredit,
-                curDebit = curDebit
-            };
-        }
-
-        private void AddGLTranHeader(UnitOfWork unitOfWork, Purchase purchase, List<tblGLTranDetail> gLTranDetail)
-        {
-            var gLTranHeader = new tblGLTranHeader
-            {
-                curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
-                curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
-                intIDGLBookType = 9,
-                strDescription = purchase.Description,
-                datBatchDate = purchase.TransactionDate,
-                datInsertedDate = DateTime.Now,
-                tblGLTranDetails = gLTranDetail,
-                intIdPurchase = purchase.Id,
-                blnUseDefaultEntry = true
-            };
-            unitOfWork.GLTran.Add(gLTranHeader);
-        }
+  
 
 
         public List<Purchase> GetAll()

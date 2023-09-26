@@ -38,7 +38,11 @@ namespace GeneralLedger.UserControls
 
         public List<tblGLTranDetail> GLTranDetail { get; set; }
 
+        public List<SalesDetail> SalesDetailsList { get; set; }
+
         public int IndexGrid { get; set; }
+
+        public int IndexGridInventory { get; set; }
 
         public frmSales()
         {
@@ -52,6 +56,7 @@ namespace GeneralLedger.UserControls
             this.Sale = new Sale();
             SalesCustomerLedgerServices = new SalesCustomerLedgerServices();
             tblTBBatchHdrServices = new tblTBBatchHdrServices();
+            SalesDetailsList = new List<SalesDetail>();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -170,7 +175,7 @@ namespace GeneralLedger.UserControls
                         return;
                     }
 
-                    Sale = SaleServices.Add(Sale, this.GLTranDetail , this.chkUseDefaultEntry.Checked);
+                    Sale = SaleServices.Add(Sale, this.GLTranDetail , this.chkUseDefaultEntry.Checked , this.SalesDetailsList);
                 
                     if (Sale != null)
                     {
@@ -192,7 +197,7 @@ namespace GeneralLedger.UserControls
                     Sale.COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0;
                     Sale.CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser:0;
                     Sale.Description = this.txtDescription.Text;
-                    Sale = SaleServices.Update(Sale, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
+                    Sale = SaleServices.Update(Sale, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.SalesDetailsList);
 
                     if (Sale.Total < (Sale.CFAmount + Sale.COMMAmount + Sale.SOPAmount))
                     {
@@ -735,7 +740,12 @@ namespace GeneralLedger.UserControls
 
         private void btnChooseProduct_Click(object sender, EventArgs e)
         {
-            //open frmChooseProduct
+
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+
             frmChooseProduct frmChooseProduct = new frmChooseProduct();
             frmChooseProduct.BringToFront();
             frmChooseProduct.TopMost = true;
@@ -743,9 +753,259 @@ namespace GeneralLedger.UserControls
 
             if (res == DialogResult.OK)
             {
+                var convertSaleDetail = new SalesDetail
+                {
+                    ProductId = frmChooseProduct.Product.Id,
+                    Product = frmChooseProduct.Product,
+                    UnitPrice = frmChooseProduct.ProductTotalUnitPrice,
+                    Quantity = frmChooseProduct.ProductQuantity,
+                    TotalPrice = frmChooseProduct.ProductTotalQuantityPrice,
+                };
+
+                if (!SalesDetailsList.Any(p => p.ProductId == convertSaleDetail.ProductId))
+                {
+                    this.SalesDetailsList.Add(convertSaleDetail);
+                }
+                else
+                {
+                    MessageBox.Show("Product already added");
+                    return;
+                }
+
+                if (SalesDetailsList.Count > 0)
+                {
+                    this.dgProduct.Rows.Clear();
+                    this.dgProduct.Refresh();
+                    this.dgProduct.RowCount = SalesDetailsList.Count;
+                    this.dgProduct.ColumnCount = 30;
+                    this.dgProduct.Columns[0].Name = "ID";
+                    this.dgProduct.Columns[0].Visible = false;
+                    this.dgProduct.Columns[1].Name = "Product Name";
+                    this.dgProduct.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[2].Visible = false;
+                    this.dgProduct.Columns[2].Name = "Description";
+                    this.dgProduct.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[3].Name = "Product Characteristic ID";
+                    this.dgProduct.Columns[3].Visible = false;
+                    this.dgProduct.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[4].Name = "Product Characteristic Name";
+                    this.dgProduct.Columns[4].Visible = false;
+                    this.dgProduct.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[5].Name = "Product Category ID";
+                    this.dgProduct.Columns[5].Visible = false;
+                    this.dgProduct.Columns[6].Name = "Product Category Name";
+                    this.dgProduct.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[7].Name = "Product Type ID";
+                    this.dgProduct.Columns[7].Visible = false;
+                    this.dgProduct.Columns[8].Name = "Product Type Name";
+                    this.dgProduct.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[9].Name = "Product Brand ID";
+                    this.dgProduct.Columns[9].Visible = false;
+                    this.dgProduct.Columns[10].Name = "Product Brand Name";
+                    this.dgProduct.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[11].Name = "Per Piece Box";
+                    this.dgProduct.Columns[11].Visible = false;
+                    this.dgProduct.Columns[12].Name = "Location ID";
+                    this.dgProduct.Columns[12].Visible = false;
+                    this.dgProduct.Columns[13].Name = "Location Name";
+                    this.dgProduct.Columns[13].Visible = false;
+                    this.dgProduct.Columns[14].Name = "Product Color ID";
+                    this.dgProduct.Columns[14].Visible = false;
+                    this.dgProduct.Columns[15].Name = "Product Color Name";
+                    this.dgProduct.Columns[16].Name = "Product Size ID";
+                    this.dgProduct.Columns[16].Visible = false;
+                    this.dgProduct.Columns[17].Name = "Product Size Name";
+                    this.dgProduct.Columns[18].Name = "Product Unit ID";
+                    this.dgProduct.Columns[18].Visible = false;
+                    this.dgProduct.Columns[19].Name = "Product Unit Name";
+                    this.dgProduct.Columns[20].Name = "Code";
+                    this.dgProduct.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[21].Name = "PR";
+                    this.dgProduct.Columns[22].Name = "PCD";
+                    this.dgProduct.Columns[23].Name = "MFLM";
+                    this.dgProduct.Columns[24].Name = "Pattern";
+                    this.dgProduct.Columns[25].Name = "OffsetCenterBase";
+                    this.dgProduct.Columns[25].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[26].Name = "Origin";
+                    this.dgProduct.Columns[27].Name = "Unit Price";
+                    this.dgProduct.Columns[28].Name = "Quantity";
+                    this.dgProduct.Columns[29].Name = "Total Quantity Price";
+
+                    for (int i = 0; i < SalesDetailsList.Count; i++)
+                    {
+                        SalesDetail saleDetail = SalesDetailsList[i];
+                        this.dgProduct.Rows[i].Cells[0].Value = saleDetail.Id;
+                        this.dgProduct.Rows[i].Cells[1].Value = saleDetail.Product.strProductName;
+                        this.dgProduct.Rows[i].Cells[2].Value = saleDetail.Product.strDescription;
+                        this.dgProduct.Rows[i].Cells[3].Value = saleDetail.Product.ProductCharacteristic.Id;
+                        this.dgProduct.Rows[i].Cells[4].Value = saleDetail.Product.ProductCharacteristic.strName;
+                        this.dgProduct.Rows[i].Cells[5].Value = saleDetail.Product.ProductCategory.Id;
+                        this.dgProduct.Rows[i].Cells[6].Value = saleDetail.Product.ProductCategory.strName;
+                        this.dgProduct.Rows[i].Cells[7].Value = saleDetail.Product.ProductType.Id;
+                        this.dgProduct.Rows[i].Cells[8].Value = saleDetail.Product.ProductType.strName;
+                        this.dgProduct.Rows[i].Cells[9].Value = saleDetail.Product.ProductBrand.Id;
+                        this.dgProduct.Rows[i].Cells[10].Value = saleDetail.Product.ProductBrand.strName;
+                        //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
+                        //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
+                        //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
+                        this.dgProduct.Rows[i].Cells[14].Value = saleDetail.Product.ProductColor.Id;
+                        this.dgProduct.Rows[i].Cells[15].Value = saleDetail.Product.ProductColor.strName;
+                        this.dgProduct.Rows[i].Cells[16].Value = saleDetail.Product.ProductSize.Id;
+                        this.dgProduct.Rows[i].Cells[17].Value = saleDetail.Product.ProductSize.strName;
+                        this.dgProduct.Rows[i].Cells[18].Value = saleDetail.Product.ProductUnit.Id;
+                        this.dgProduct.Rows[i].Cells[19].Value = saleDetail.Product.ProductUnit.strName;
+                        this.dgProduct.Rows[i].Cells[20].Value = saleDetail.Product.strCode;
+                        this.dgProduct.Rows[i].Cells[21].Value = saleDetail.Product.strPR;
+                        this.dgProduct.Rows[i].Cells[22].Value = saleDetail.Product.strPCD;
+                        this.dgProduct.Rows[i].Cells[23].Value = saleDetail.Product.strMFLM;
+                        this.dgProduct.Rows[i].Cells[24].Value = saleDetail.Product.strPattern;
+                        this.dgProduct.Rows[i].Cells[25].Value = saleDetail.Product.strOffsetCenterBore;
+                        this.dgProduct.Rows[i].Cells[26].Value = saleDetail.Product.strOrigin;
+                        this.dgProduct.Rows[i].Cells[27].Value = saleDetail.UnitPrice;
+                        this.dgProduct.Rows[i].Cells[28].Value = saleDetail.Quantity;
+                        this.dgProduct.Rows[i].Cells[29].Value = saleDetail.TotalPrice;
+                        //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
+                    }
+
+                    setRowNumber(this.dgJournalEntry);
+                    this.txtSalesTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
+                    this.txtTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
+                }
+            }
+        }
+
+        private void btnDeleteProduct_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+
+                if (SalesDetailsList.Count > 0)
+                {
+                    this.SalesDetailsList.RemoveAt(this.IndexGridInventory);
+                    this.dgProduct.Rows.Clear();
+                    this.dgProduct.Refresh();
+
+                    if (SalesDetailsList.Count == 0)
+                    {
+                        return;
+                    }
+                    //this.dgProduct.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    this.dgProduct.RowCount = SalesDetailsList.Count;
+                    this.dgProduct.ColumnCount = 30;
+                    this.dgProduct.Columns[0].Name = "ID";
+                    this.dgProduct.Columns[0].Visible = false;
+                    this.dgProduct.Columns[1].Name = "Product Name";
+                    this.dgProduct.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[2].Visible = false;
+                    this.dgProduct.Columns[2].Name = "Description";
+                    this.dgProduct.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[3].Name = "Product Characteristic ID";
+                    this.dgProduct.Columns[3].Visible = false;
+                    this.dgProduct.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[4].Name = "Product Characteristic Name";
+                    this.dgProduct.Columns[4].Visible = false;
+                    this.dgProduct.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[5].Name = "Product Category ID";
+                    this.dgProduct.Columns[5].Visible = false;
+                    this.dgProduct.Columns[6].Name = "Product Category Name";
+                    this.dgProduct.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[7].Name = "Product Type ID";
+                    this.dgProduct.Columns[7].Visible = false;
+                    this.dgProduct.Columns[8].Name = "Product Type Name";
+                    this.dgProduct.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[9].Name = "Product Brand ID";
+                    this.dgProduct.Columns[9].Visible = false;
+                    this.dgProduct.Columns[10].Name = "Product Brand Name";
+                    this.dgProduct.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[11].Name = "Per Piece Box";
+                    this.dgProduct.Columns[11].Visible = false;
+                    this.dgProduct.Columns[12].Name = "Location ID";
+                    this.dgProduct.Columns[12].Visible = false;
+                    this.dgProduct.Columns[13].Name = "Location Name";
+                    this.dgProduct.Columns[13].Visible = false;
+                    this.dgProduct.Columns[14].Name = "Product Color ID";
+                    this.dgProduct.Columns[14].Visible = false;
+                    this.dgProduct.Columns[15].Name = "Product Color Name";
+                    this.dgProduct.Columns[16].Name = "Product Size ID";
+                    this.dgProduct.Columns[16].Visible = false;
+                    this.dgProduct.Columns[17].Name = "Product Size Name";
+                    this.dgProduct.Columns[18].Name = "Product Unit ID";
+                    this.dgProduct.Columns[18].Visible = false;
+                    this.dgProduct.Columns[19].Name = "Product Unit Name";
+                    this.dgProduct.Columns[20].Name = "Code";
+                    this.dgProduct.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[21].Name = "PR";
+                    this.dgProduct.Columns[22].Name = "PCD";
+                    this.dgProduct.Columns[23].Name = "MFLM";
+                    this.dgProduct.Columns[24].Name = "Pattern";
+                    this.dgProduct.Columns[25].Name = "OffsetCenterBase";
+                    this.dgProduct.Columns[25].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[26].Name = "Origin";
+                    this.dgProduct.Columns[27].Name = "Unit Price";
+                    this.dgProduct.Columns[28].Name = "Quantity";
+                    this.dgProduct.Columns[29].Name = "Total Quantity Price";
+
+                    for (int i = 0; i < SalesDetailsList.Count; i++)
+                    {
+                        //display all the data in productList to the datagridview
+                        SalesDetail saleDetail = SalesDetailsList[i];
+                        this.dgProduct.Rows[i].Cells[0].Value = saleDetail.Id;
+                        this.dgProduct.Rows[i].Cells[1].Value = saleDetail.Product.strProductName;
+                        this.dgProduct.Rows[i].Cells[2].Value = saleDetail.Product.strDescription;
+                        this.dgProduct.Rows[i].Cells[3].Value = saleDetail.Product.ProductCharacteristic.Id;
+                        this.dgProduct.Rows[i].Cells[4].Value = saleDetail.Product.ProductCharacteristic.strName;
+                        this.dgProduct.Rows[i].Cells[5].Value = saleDetail.Product.ProductCategory.Id;
+                        this.dgProduct.Rows[i].Cells[6].Value = saleDetail.Product.ProductCategory.strName;
+                        this.dgProduct.Rows[i].Cells[7].Value = saleDetail.Product.ProductType.Id;
+                        this.dgProduct.Rows[i].Cells[8].Value = saleDetail.Product.ProductType.strName;
+                        this.dgProduct.Rows[i].Cells[9].Value = saleDetail.Product.ProductBrand.Id;
+                        this.dgProduct.Rows[i].Cells[10].Value = saleDetail.Product.ProductBrand.strName;
+                        //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
+                        //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
+                        //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
+                        this.dgProduct.Rows[i].Cells[14].Value = saleDetail.Product.ProductColor.Id;
+                        this.dgProduct.Rows[i].Cells[15].Value = saleDetail.Product.ProductColor.strName;
+                        this.dgProduct.Rows[i].Cells[16].Value = saleDetail.Product.ProductSize.Id;
+                        this.dgProduct.Rows[i].Cells[17].Value = saleDetail.Product.ProductSize.strName;
+                        this.dgProduct.Rows[i].Cells[18].Value = saleDetail.Product.ProductUnit.Id;
+                        this.dgProduct.Rows[i].Cells[19].Value = saleDetail.Product.ProductUnit.strName;
+                        this.dgProduct.Rows[i].Cells[20].Value = saleDetail.Product.strCode;
+                        this.dgProduct.Rows[i].Cells[21].Value = saleDetail.Product.strPR;
+                        this.dgProduct.Rows[i].Cells[22].Value = saleDetail.Product.strPCD;
+                        this.dgProduct.Rows[i].Cells[23].Value = saleDetail.Product.strMFLM;
+                        this.dgProduct.Rows[i].Cells[24].Value = saleDetail.Product.strPattern;
+                        this.dgProduct.Rows[i].Cells[25].Value = saleDetail.Product.strOffsetCenterBore;
+                        this.dgProduct.Rows[i].Cells[26].Value = saleDetail.Product.strOrigin;
+                        this.dgProduct.Rows[i].Cells[27].Value = saleDetail.UnitPrice;
+                        this.dgProduct.Rows[i].Cells[28].Value = saleDetail.Quantity;
+                        this.dgProduct.Rows[i].Cells[29].Value = saleDetail.TotalPrice;
+                        //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
+                    }
+
+                    setRowNumber(this.dgJournalEntry);
+                    this.txtSalesTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
+                }
 
             }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void dgProduct_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                this.IndexGridInventory = e.RowIndex;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
         }
     }
 }

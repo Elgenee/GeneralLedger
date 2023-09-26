@@ -10,8 +10,8 @@ namespace GeneralLedger.Core.Services
 {
     public interface ISaleServices
     {
-        Sale Add(Sale sale, List<tblGLTranDetail> tblGLTranDetail , bool UseDefaultEntry);
-        Sale Update(Sale sale, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
+        Sale Add(Sale sale, List<tblGLTranDetail> tblGLTranDetail , bool UseDefaultEntry, List<SalesDetail> salesDetails);
+        Sale Update(Sale sale, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<SalesDetail> salesDetails);
         void Remove(Sale sale);
         List<Sale> GetAll();
         List<Sale> GetSaleWithJournalEntry(int Id);
