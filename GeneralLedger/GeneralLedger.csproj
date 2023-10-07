@@ -136,6 +136,12 @@
     <Compile Include="Report\frmReportCollectionProoflist.Designer.cs">
       <DependentUpon>frmReportCollectionProoflist.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\frmReportInventoryProoflist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportInventoryProoflist.Designer.cs">
+      <DependentUpon>frmReportInventoryProoflist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\frmReportPurchseProoflist.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -640,6 +646,9 @@
     <EmbeddedResource Include="Report\frmReportCollectionProoflist.resx">
       <DependentUpon>frmReportCollectionProoflist.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportInventoryProoflist.resx">
+      <DependentUpon>frmReportInventoryProoflist.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\frmReportPurchseProoflist.resx">
       <DependentUpon>frmReportPurchseProoflist.cs</DependentUpon>
     </EmbeddedResource>
@@ -653,6 +662,7 @@
       <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\RDLC\PaymentProoflist.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\InventoryProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\PurchaseProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\SupplierLedgerOverall.rdlc" />
     <EmbeddedResource Include="Report\RDLC\CustomerLedgerOverall.rdlc" />

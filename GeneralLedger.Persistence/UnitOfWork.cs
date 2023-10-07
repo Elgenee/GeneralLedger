@@ -63,6 +63,10 @@ namespace GeneralLedger.Persistence
 
         public IPurchaseDetailRepository PurchaseDetail { get; set; }
 
+        public ISaleDetailRepository SaleDetail { get; set; }
+
+
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -89,6 +93,7 @@ namespace GeneralLedger.Persistence
             Products = new ProductRepository(_generalLedgerContext);
             Stock = new StockRepository(_generalLedgerContext);
             PurchaseDetail = new PurchaseDetailRepository(_generalLedgerContext);
+            SaleDetail = new SaleDetailRepository(_generalLedgerContext);
 
         }
         public int Complete()

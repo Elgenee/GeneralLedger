@@ -12,7 +12,7 @@ namespace GeneralLedger.Core.Services
     {
         Sale Add(Sale sale, List<tblGLTranDetail> tblGLTranDetail , bool UseDefaultEntry, List<SalesDetail> salesDetails);
         Sale Update(Sale sale, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<SalesDetail> salesDetails);
-        void Remove(Sale sale);
+        void Remove(Sale sale, List<SalesDetail> salesDetails);
         List<Sale> GetAll();
         List<Sale> GetSaleWithJournalEntry(int Id);
         List<Sale> GetSaleWithCustomerAgent(string criteria);

@@ -433,11 +433,11 @@
             this.txtTotal.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtTotal.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtTotal.Increment = 1D;
+            this.txtTotal.IsInputReadOnly = true;
             this.txtTotal.Location = new System.Drawing.Point(263, 244);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTotal.MinimumSize = new System.Drawing.Size(0, 28);
             this.txtTotal.Name = "txtTotal";
-            this.txtTotal.ShowUpDown = true;
             this.txtTotal.Size = new System.Drawing.Size(267, 28);
             this.txtTotal.TabIndex = 147;
             // 
@@ -615,7 +615,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(299, 2044);
+            this.btnDelete.Location = new System.Drawing.Point(301, 2044);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(132, 28);

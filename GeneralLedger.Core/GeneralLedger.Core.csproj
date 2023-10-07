@@ -421,6 +421,7 @@
     <Compile Include="Repositories\IPurchaseSupplierLedgerRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IRoleRepository.cs" />
+    <Compile Include="Repositories\ISaleDetailRepository.cs" />
     <Compile Include="Repositories\ISaleRepository.cs" />
     <Compile Include="Repositories\ISalesCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\IStockRepository.cs" />
@@ -440,6 +441,7 @@
     <Compile Include="Services\IPurchaseDetailServices.cs" />
     <Compile Include="Services\IPurchaseServices.cs" />
     <Compile Include="Services\IRoleServices.cs" />
+    <Compile Include="Services\ISaleDetailServices.cs" />
     <Compile Include="Services\ISalesCustomerLedgerServices.cs" />
     <Compile Include="Services\ISaleServices.cs" />
     <Compile Include="Services\IStockServices.cs" />

@@ -27,6 +27,8 @@ namespace GeneralLedger.UserControls
         public GLTranServices GLTranServices { get; set; }
         public SalesCustomerLedgerServices SalesCustomerLedgerServices { get; set; }
 
+        public SaleDetailServices SaleDetailServices { get; set; }
+
         public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
         public int ID { get; set; }
 
@@ -44,6 +46,8 @@ namespace GeneralLedger.UserControls
 
         public int IndexGridInventory { get; set; }
 
+        public List<tblGLTranDetail> GLTranDetailInventoryEntry { get; set; }
+
         public frmSales()
         {
             InitializeComponent();
@@ -57,6 +61,7 @@ namespace GeneralLedger.UserControls
             SalesCustomerLedgerServices = new SalesCustomerLedgerServices();
             tblTBBatchHdrServices = new tblTBBatchHdrServices();
             SalesDetailsList = new List<SalesDetail>();
+            SaleDetailServices = new SaleDetailServices();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -115,18 +120,251 @@ namespace GeneralLedger.UserControls
             }
         }
 
+        //private void btnSave_Click(object sender, EventArgs e)
+        //{
+
+        //    try
+        //    {
+        //        if (this.AgentId == 0)
+        //        { 
+        //            MessageBox.Show("Please select agent..." );
+        //            return;
+        //         }
+
+        //        if (this.CustomerId == 0) {
+        //            MessageBox.Show("Please select customer...");
+        //            return;
+        //        }
+
+        //        if (this.GLTranDetail.Sum(d => d.curCredit) != this.GLTranDetail.Sum(d => d.curDebit))
+        //        {
+        //            MessageBox.Show("Disbal journal entry");
+        //            return;
+        //        }
+
+        //        if (this.SalesDetailsList.Count <= 0)
+        //        {
+
+        //            MessageBox.Show("Please check the products");
+        //            return;
+        //        }
+
+
+        //        int intParser;
+        //        decimal decimalParser;
+
+        //        var isLock = tblTBBatchHdrServices.CheckIfLock(this.dtTransactionDate.Value);
+
+        //        if (isLock)
+        //        {
+        //            MessageBox.Show("Already lock...");
+        //            return;
+        //        }
+
+
+        //        string TransType = (this.ID == 0) ? "insert" : "update";
+        //        if (TransType.Equals("insert"))
+        //        {
+        //            Sale = new Sale
+        //            {
+        //                Id = this.ID,
+        //                PONo = this.txtPONo.Text,
+        //                TRANo = this.txtTransactionNo.Text,
+        //                intIdAgent = this.AgentId,
+        //                intIdCustomer = this.CustomerId,
+        //                Terms = int.TryParse(this.txtTerms.Text , out intParser) ? intParser : 0,
+        //                Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
+        //                TransactionDate = this.dtTransactionDate.Value,
+        //                SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0,
+        //                COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0,
+        //                CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0,
+        //                Description = this.txtDescription.Text
+        //            };
+
+        //            if (Sale.Total < (Sale.CFAmount + Sale.COMMAmount + Sale.SOPAmount))
+        //            {
+        //                MessageBox.Show("Please check amount");
+        //                return;
+        //            }
+
+        //            Sale = SaleServices.Add(Sale, this.GLTranDetail , this.chkUseDefaultEntry.Checked , this.SalesDetailsList);
+
+        //            if (Sale != null)
+        //            {
+        //                MessageBox.Show("Successfully saved");
+
+        //            }
+        //        }
+        //        else
+        //        {
+
+        //            Sale.PONo = this.txtPONo.Text;
+        //            Sale.TRANo = this.txtTransactionNo.Text;
+        //            Sale.intIdAgent = this.AgentId;
+        //            Sale.intIdCustomer = this.CustomerId;
+        //            Sale.Terms = int.TryParse(this.txtTerms.Text, out intParser) ? intParser : 0;
+        //            Sale.Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
+        //            Sale.TransactionDate = this.dtTransactionDate.Value;
+        //            Sale.SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0;
+        //            Sale.COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0;
+        //            Sale.CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser:0;
+        //            Sale.Description = this.txtDescription.Text;
+        //            Sale = SaleServices.Update(Sale, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.SalesDetailsList);
+
+        //            if (Sale.Total < (Sale.CFAmount + Sale.COMMAmount + Sale.SOPAmount))
+        //            {
+        //                MessageBox.Show("Please check amount");
+        //                return;
+        //            }
+        //            if (Sale != null)
+        //            {
+        //                MessageBox.Show("Successfully saved");
+        //            }
+        //        }
+
+        //        //GLTranHeader = Sale.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
+        //        this.GLTranDetail = GLTranServices.GetGLEntryBySalesId(Sale.Id , 6).SelectMany(h => h.tblGLTranDetails).ToList();
+        //        if (GLTranDetail.Count > 0)
+        //        {
+
+        //            this.dgJournalEntry.ColumnCount = 6;
+        //            this.dgJournalEntry.RowCount = GLTranDetail.Count;
+        //            //this.dgChartOfAccountsSubsidiary.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            //this.dgChartOfAccountsSubsidiary.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+        //            this.dgJournalEntry.Columns[0].Name = "COA";
+        //            this.dgJournalEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+        //            this.dgJournalEntry.Columns[1].Name = "COA Code";
+        //            this.dgJournalEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            this.dgJournalEntry.Columns[2].Name = "COA Subsidiary";
+        //            this.dgJournalEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            this.dgJournalEntry.Columns[3].Name = "COA Subsidiary Code";
+        //            this.dgJournalEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            this.dgJournalEntry.Columns[4].Name = "Debit";
+        //            this.dgJournalEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            this.dgJournalEntry.Columns[5].Name = "Credit";
+        //            this.dgJournalEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+        //            this.dgJournalEntry.Columns[0].ReadOnly = true;
+        //            this.dgJournalEntry.Columns[1].ReadOnly = true;
+        //            this.dgJournalEntry.Columns[2].ReadOnly = true;
+        //            this.dgJournalEntry.Columns[3].ReadOnly = true;
+        //            this.dgJournalEntry.Columns[4].ReadOnly = true;
+        //            this.dgJournalEntry.Columns[5].ReadOnly = true;
+        //            this.dgJournalEntry.Columns[1].Visible = false;
+        //            this.dgJournalEntry.Columns[3].Visible = false;
+
+        //            for (int i = 0; i < GLTranDetail.Count; i++)
+        //            {
+
+        //                this.dgJournalEntry.Rows[i].Cells[0].Value = GLTranDetail[i].tblMasCOA.strName;
+        //                this.dgJournalEntry.Rows[i].Cells[1].Value = GLTranDetail[i].tblMasCOA.strCode;
+        //                this.dgJournalEntry.Rows[i].Cells[2].Value = GLTranDetail[i].tblMasCOASub.strName;
+        //                this.dgJournalEntry.Rows[i].Cells[3].Value = GLTranDetail[i].tblMasCOASub.strCode;
+        //                this.dgJournalEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetail[i].curDebit);
+        //                this.dgJournalEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetail[i].curCredit);
+
+        //                this.dgJournalEntry.Rows[i].Cells[0].ReadOnly = true;
+        //                this.dgJournalEntry.Rows[i].Cells[1].ReadOnly = true;
+        //                this.dgJournalEntry.Rows[i].Cells[2].ReadOnly = true;
+        //                this.dgJournalEntry.Rows[i].Cells[3].ReadOnly = true;
+        //                this.dgJournalEntry.Rows[i].Cells[4].ReadOnly = true;
+        //                this.dgJournalEntry.Rows[i].Cells[5].ReadOnly = true;
+        //            }
+
+        //            setRowNumber(this.dgJournalEntry);
+
+        //            this.txtTotalDebit.Text = string.Format("{0:0.00}", GLTranDetail.Sum(g => g.curDebit));
+        //            this.txtTotalCredit.Text = string.Format("{0:0.00}", GLTranDetail.Sum(g => g.curCredit));
+        //        }
+        //        else
+        //        {
+        //            this.dgJournalEntry.Rows.Clear();
+        //            this.dgJournalEntry.Refresh();
+        //            this.GLTranDetail.Clear();
+        //            this.txtTotalDebit.Text = string.Empty;
+        //            this.txtTotalCredit.Text = string.Empty;
+        //        }
+
+
+        //        this.GLTranDetailInventoryEntry = GLTranServices.GetGLEntryBySalesId(Sale.Id, 1011).SelectMany(h => h.tblGLTranDetails).ToList();
+        //        if (GLTranDetailInventoryEntry.Count > 0)
+        //        {
+
+        //            this.dgInventoryEntry.ColumnCount = 6;
+        //            this.dgInventoryEntry.RowCount = GLTranDetailInventoryEntry.Count;
+        //            //this.dgChartOfAccountsSubsidiary.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            //this.dgChartOfAccountsSubsidiary.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+        //            this.dgInventoryEntry.Columns[0].Name = "COA";
+        //            this.dgInventoryEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+        //            this.dgInventoryEntry.Columns[1].Name = "COA Code";
+        //            this.dgInventoryEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            this.dgInventoryEntry.Columns[2].Name = "COA Subsidiary";
+        //            this.dgInventoryEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            this.dgInventoryEntry.Columns[3].Name = "COA Subsidiary Code";
+        //            this.dgInventoryEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            this.dgInventoryEntry.Columns[4].Name = "Debit";
+        //            this.dgInventoryEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        //            this.dgInventoryEntry.Columns[5].Name = "Credit";
+        //            this.dgInventoryEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+        //            this.dgInventoryEntry.Columns[0].ReadOnly = true;
+        //            this.dgInventoryEntry.Columns[1].ReadOnly = true;
+        //            this.dgInventoryEntry.Columns[2].ReadOnly = true;
+        //            this.dgInventoryEntry.Columns[3].ReadOnly = true;
+        //            this.dgInventoryEntry.Columns[4].ReadOnly = true;
+        //            this.dgInventoryEntry.Columns[5].ReadOnly = true;
+        //            this.dgInventoryEntry.Columns[1].Visible = false;
+        //            this.dgInventoryEntry.Columns[3].Visible = false;
+
+        //            for (int i = 0; i < GLTranDetailInventoryEntry.Count; i++)
+        //            {
+
+        //                this.dgInventoryEntry.Rows[i].Cells[0].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strName;
+        //                this.dgInventoryEntry.Rows[i].Cells[1].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strCode;
+        //                this.dgInventoryEntry.Rows[i].Cells[2].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strName;
+        //                this.dgInventoryEntry.Rows[i].Cells[3].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strCode;
+        //                this.dgInventoryEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curDebit);
+        //                this.dgInventoryEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curCredit);
+
+        //                this.dgInventoryEntry.Rows[i].Cells[0].ReadOnly = true;
+        //                this.dgInventoryEntry.Rows[i].Cells[1].ReadOnly = true;
+        //                this.dgInventoryEntry.Rows[i].Cells[2].ReadOnly = true;
+        //                this.dgInventoryEntry.Rows[i].Cells[3].ReadOnly = true;
+        //                this.dgInventoryEntry.Rows[i].Cells[4].ReadOnly = true;
+        //                this.dgInventoryEntry.Rows[i].Cells[5].ReadOnly = true;
+        //            }
+        //            setRowNumber(this.dgJournalEntry);
+        //            this.txtTotalInventoryDebit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curDebit));
+        //            this.txtTotalCredit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curCredit));
+        //        }
+
+        //        this.ID = Sale.Id;
+        //        this.txtID.Text = Sale.Id.ToString();
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        MessageBox.Show("Error:" + ex.Message);
+        //    }
+        //}
+
         private void btnSave_Click(object sender, EventArgs e)
         {
 
             try
             {
                 if (this.AgentId == 0)
-                { 
-                    MessageBox.Show("Please select agent..." );
+                {
+                    MessageBox.Show("Please select agent...");
                     return;
-                 }
+                }
 
-                if (this.CustomerId == 0) {
+                if (this.CustomerId == 0)
+                {
                     MessageBox.Show("Please select customer...");
                     return;
                 }
@@ -136,7 +374,14 @@ namespace GeneralLedger.UserControls
                     MessageBox.Show("Disbal journal entry");
                     return;
                 }
-               
+
+                if (this.SalesDetailsList.Count <= 0)
+                {
+
+                    MessageBox.Show("Please check the products");
+                    return;
+                }
+
 
                 int intParser;
                 decimal decimalParser;
@@ -160,7 +405,7 @@ namespace GeneralLedger.UserControls
                         TRANo = this.txtTransactionNo.Text,
                         intIdAgent = this.AgentId,
                         intIdCustomer = this.CustomerId,
-                        Terms = int.TryParse(this.txtTerms.Text , out intParser) ? intParser : 0,
+                        Terms = int.TryParse(this.txtTerms.Text, out intParser) ? intParser : 0,
                         Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
                         TransactionDate = this.dtTransactionDate.Value,
                         SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0,
@@ -175,17 +420,18 @@ namespace GeneralLedger.UserControls
                         return;
                     }
 
-                    Sale = SaleServices.Add(Sale, this.GLTranDetail , this.chkUseDefaultEntry.Checked , this.SalesDetailsList);
-                
+                    Sale = SaleServices.Add(Sale, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.SalesDetailsList);
+                    this.SalesDetailsList = Sale.SalesDetails.ToList();
+
                     if (Sale != null)
                     {
                         MessageBox.Show("Successfully saved");
-                       
+
                     }
                 }
                 else
                 {
-                   
+
                     Sale.PONo = this.txtPONo.Text;
                     Sale.TRANo = this.txtTransactionNo.Text;
                     Sale.intIdAgent = this.AgentId;
@@ -195,9 +441,10 @@ namespace GeneralLedger.UserControls
                     Sale.TransactionDate = this.dtTransactionDate.Value;
                     Sale.SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0;
                     Sale.COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0;
-                    Sale.CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser:0;
+                    Sale.CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0;
                     Sale.Description = this.txtDescription.Text;
                     Sale = SaleServices.Update(Sale, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.SalesDetailsList);
+                    this.SalesDetailsList = Sale.SalesDetails.ToList();
 
                     if (Sale.Total < (Sale.CFAmount + Sale.COMMAmount + Sale.SOPAmount))
                     {
@@ -210,8 +457,8 @@ namespace GeneralLedger.UserControls
                     }
                 }
 
-                GLTranHeader = Sale.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
-                this.GLTranDetail = GLTranServices.GetGLEntryById(GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
+                //GLTranHeader = Sale.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
+                this.GLTranDetail = GLTranServices.GetGLEntryBySalesId(Sale.Id, 6).SelectMany(h => h.tblGLTranDetails).ToList();
                 if (GLTranDetail.Count > 0)
                 {
 
@@ -275,6 +522,61 @@ namespace GeneralLedger.UserControls
                     this.txtTotalCredit.Text = string.Empty;
                 }
 
+
+                this.GLTranDetailInventoryEntry = GLTranServices.GetGLEntryBySalesId(Sale.Id, 1011).SelectMany(h => h.tblGLTranDetails).ToList();
+                if (GLTranDetailInventoryEntry.Count > 0)
+                {
+
+                    this.dgInventoryEntry.ColumnCount = 6;
+                    this.dgInventoryEntry.RowCount = GLTranDetailInventoryEntry.Count;
+                    //this.dgChartOfAccountsSubsidiary.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    //this.dgChartOfAccountsSubsidiary.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgInventoryEntry.Columns[0].Name = "COA";
+                    this.dgInventoryEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgInventoryEntry.Columns[1].Name = "COA Code";
+                    this.dgInventoryEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[2].Name = "COA Subsidiary";
+                    this.dgInventoryEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[3].Name = "COA Subsidiary Code";
+                    this.dgInventoryEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[4].Name = "Debit";
+                    this.dgInventoryEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[5].Name = "Credit";
+                    this.dgInventoryEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgInventoryEntry.Columns[0].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[1].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[2].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[3].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[4].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[5].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[1].Visible = false;
+                    this.dgInventoryEntry.Columns[3].Visible = false;
+
+                    for (int i = 0; i < GLTranDetailInventoryEntry.Count; i++)
+                    {
+
+                        this.dgInventoryEntry.Rows[i].Cells[0].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strName;
+                        this.dgInventoryEntry.Rows[i].Cells[1].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strCode;
+                        this.dgInventoryEntry.Rows[i].Cells[2].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strName;
+                        this.dgInventoryEntry.Rows[i].Cells[3].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strCode;
+                        this.dgInventoryEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curDebit);
+                        this.dgInventoryEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curCredit);
+
+                        this.dgInventoryEntry.Rows[i].Cells[0].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[1].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[2].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[3].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[4].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[5].ReadOnly = true;
+                    }
+                    setRowNumber(this.dgJournalEntry);
+                    this.txtTotalInventoryDebit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curDebit));
+                    this.txtTotalInventoryCredit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curCredit));
+                }
+
                 this.ID = Sale.Id;
                 this.txtID.Text = Sale.Id.ToString();
             }
@@ -284,6 +586,9 @@ namespace GeneralLedger.UserControls
                 MessageBox.Show("Error:" + ex.Message);
             }
         }
+
+
+   
 
         private void setRowNumber(DataGridView dgv)
         {
@@ -337,6 +642,8 @@ namespace GeneralLedger.UserControls
                     this.txtSOPAmount.Text = sje.Sale.SOPAmount.ToString();
                     this.txtCFAmount.Text = sje.Sale.CFAmount.ToString();
                     this.txtCOMMAmount.Text = sje.Sale.COMMAmount.ToString();
+                    this.SalesDetailsList = SaleDetailServices.GetSalesDetailProductBySalesId(this.ID).SelectMany(pr => pr.SalesDetails).ToList();
+                
 
                     if (GLTranDetail.Count > 0)
                     {
@@ -400,7 +707,167 @@ namespace GeneralLedger.UserControls
                         this.txtTotalDebit.Text = string.Empty;
                         this.txtTotalCredit.Text = string.Empty;
                     }
-               
+
+                    if (SalesDetailsList.Count > 0)
+                    {
+                        this.dgProduct.Rows.Clear();
+                        this.dgProduct.Refresh();
+                        //this.dgProduct.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                        this.dgProduct.RowCount = SalesDetailsList.Count;
+                        this.dgProduct.ColumnCount = 30;
+                        this.dgProduct.Columns[0].Name = "ID";
+                        this.dgProduct.Columns[0].Visible = false;
+                        this.dgProduct.Columns[1].Name = "Product Name";
+                        this.dgProduct.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[2].Visible = false;
+                        this.dgProduct.Columns[2].Name = "Description";
+                        this.dgProduct.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[3].Name = "Product Characteristic ID";
+                        this.dgProduct.Columns[3].Visible = false;
+                        this.dgProduct.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[4].Name = "Product Characteristic Name";
+                        this.dgProduct.Columns[4].Visible = false;
+                        this.dgProduct.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[5].Name = "Product Category ID";
+                        this.dgProduct.Columns[5].Visible = false;
+                        this.dgProduct.Columns[6].Name = "Product Category Name";
+                        this.dgProduct.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[7].Name = "Product Type ID";
+                        this.dgProduct.Columns[7].Visible = false;
+                        this.dgProduct.Columns[8].Name = "Product Type Name";
+                        this.dgProduct.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[9].Name = "Product Brand ID";
+                        this.dgProduct.Columns[9].Visible = false;
+                        this.dgProduct.Columns[10].Name = "Product Brand Name";
+                        this.dgProduct.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[11].Name = "Per Piece Box";
+                        this.dgProduct.Columns[11].Visible = false;
+                        this.dgProduct.Columns[12].Name = "Location ID";
+                        this.dgProduct.Columns[12].Visible = false;
+                        this.dgProduct.Columns[13].Name = "Location Name";
+                        this.dgProduct.Columns[13].Visible = false;
+                        this.dgProduct.Columns[14].Name = "Product Color ID";
+                        this.dgProduct.Columns[14].Visible = false;
+                        this.dgProduct.Columns[15].Name = "Product Color Name";
+                        this.dgProduct.Columns[16].Name = "Product Size ID";
+                        this.dgProduct.Columns[16].Visible = false;
+                        this.dgProduct.Columns[17].Name = "Product Size Name";
+                        this.dgProduct.Columns[18].Name = "Product Unit ID";
+                        this.dgProduct.Columns[18].Visible = false;
+                        this.dgProduct.Columns[19].Name = "Product Unit Name";
+                        this.dgProduct.Columns[20].Name = "Code";
+                        this.dgProduct.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[21].Name = "PR";
+                        this.dgProduct.Columns[22].Name = "PCD";
+                        this.dgProduct.Columns[23].Name = "MFLM";
+                        this.dgProduct.Columns[24].Name = "Pattern";
+                        this.dgProduct.Columns[25].Name = "OffsetCenterBase";
+                        this.dgProduct.Columns[25].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[26].Name = "Origin";
+                        this.dgProduct.Columns[27].Name = "Unit Price";
+                        this.dgProduct.Columns[28].Name = "Quantity";
+                        this.dgProduct.Columns[29].Name = "Total Quantity Price";
+
+                        for (int i = 0; i < SalesDetailsList.Count; i++)
+                        {
+                            //display all the data in productList to the datagridview
+                            SalesDetail SalesDetail = SalesDetailsList[i];
+                            this.Sale.SalesDetails.Add(SalesDetail);
+                            this.dgProduct.Rows[i].Cells[0].Value = SalesDetail.Id;
+                            this.dgProduct.Rows[i].Cells[1].Value = SalesDetail.Product.strProductName;
+                            this.dgProduct.Rows[i].Cells[2].Value = SalesDetail.Product.strDescription;
+                            this.dgProduct.Rows[i].Cells[3].Value = 0;
+                            this.dgProduct.Rows[i].Cells[4].Value = string.Empty;
+                            this.dgProduct.Rows[i].Cells[5].Value = SalesDetail.Product.ProductCategory.Id;
+                            this.dgProduct.Rows[i].Cells[6].Value = SalesDetail.Product.ProductCategory.strName;
+                            this.dgProduct.Rows[i].Cells[7].Value = SalesDetail.Product.ProductType.Id;
+                            this.dgProduct.Rows[i].Cells[8].Value = SalesDetail.Product.ProductType.strName;
+                            this.dgProduct.Rows[i].Cells[9].Value = SalesDetail.Product.ProductBrand.Id;
+                            this.dgProduct.Rows[i].Cells[10].Value = SalesDetail.Product.ProductBrand.strName;
+                            //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
+                            //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
+                            //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
+                            this.dgProduct.Rows[i].Cells[14].Value = SalesDetail.Product.ProductColor.Id;
+                            this.dgProduct.Rows[i].Cells[15].Value = SalesDetail.Product.ProductColor.strName;
+                            this.dgProduct.Rows[i].Cells[16].Value = SalesDetail.Product.ProductSize.Id;
+                            this.dgProduct.Rows[i].Cells[17].Value = SalesDetail.Product.ProductSize.strName;
+                            this.dgProduct.Rows[i].Cells[18].Value = SalesDetail.Product.ProductUnit.Id;
+                            this.dgProduct.Rows[i].Cells[19].Value = SalesDetail.Product.ProductUnit.strName;
+                            this.dgProduct.Rows[i].Cells[20].Value = SalesDetail.Product.strCode;
+                            this.dgProduct.Rows[i].Cells[21].Value = SalesDetail.Product.strPR;
+                            this.dgProduct.Rows[i].Cells[22].Value = SalesDetail.Product.strPCD;
+                            this.dgProduct.Rows[i].Cells[23].Value = SalesDetail.Product.strMFLM;
+                            this.dgProduct.Rows[i].Cells[24].Value = SalesDetail.Product.strPattern;
+                            this.dgProduct.Rows[i].Cells[25].Value = SalesDetail.Product.strOffsetCenterBore;
+                            this.dgProduct.Rows[i].Cells[26].Value = SalesDetail.Product.strOrigin;
+                            this.dgProduct.Rows[i].Cells[27].Value = SalesDetail.UnitPrice;
+                            this.dgProduct.Rows[i].Cells[28].Value = SalesDetail.Quantity;
+                            this.dgProduct.Rows[i].Cells[29].Value = SalesDetail.TotalPrice;
+                            //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
+                        }
+
+                        setRowNumber(this.dgJournalEntry);
+                        this.txtSalesTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
+                        this.txtTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
+                    }
+
+
+                    this.GLTranDetailInventoryEntry = GLTranServices.GetGLEntryBySalesId(Sale.Id, 1011).SelectMany(h => h.tblGLTranDetails).ToList();
+                    if (GLTranDetailInventoryEntry.Count > 0)
+                    {
+
+                        this.dgInventoryEntry.ColumnCount = 6;
+                        this.dgInventoryEntry.RowCount = GLTranDetailInventoryEntry.Count;
+                        //this.dgChartOfAccountsSubsidiary.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        //this.dgChartOfAccountsSubsidiary.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        this.dgInventoryEntry.Columns[0].Name = "COA";
+                        this.dgInventoryEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        this.dgInventoryEntry.Columns[1].Name = "COA Code";
+                        this.dgInventoryEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgInventoryEntry.Columns[2].Name = "COA Subsidiary";
+                        this.dgInventoryEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgInventoryEntry.Columns[3].Name = "COA Subsidiary Code";
+                        this.dgInventoryEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgInventoryEntry.Columns[4].Name = "Debit";
+                        this.dgInventoryEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgInventoryEntry.Columns[5].Name = "Credit";
+                        this.dgInventoryEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        this.dgInventoryEntry.Columns[0].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[1].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[2].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[3].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[4].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[5].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[1].Visible = false;
+                        this.dgInventoryEntry.Columns[3].Visible = false;
+
+                        for (int i = 0; i < GLTranDetailInventoryEntry.Count; i++)
+                        {
+
+                            this.dgInventoryEntry.Rows[i].Cells[0].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strName;
+                            this.dgInventoryEntry.Rows[i].Cells[1].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strCode;
+                            this.dgInventoryEntry.Rows[i].Cells[2].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strName;
+                            this.dgInventoryEntry.Rows[i].Cells[3].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strCode;
+                            this.dgInventoryEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curDebit);
+                            this.dgInventoryEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curCredit);
+
+                            this.dgInventoryEntry.Rows[i].Cells[0].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[1].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[2].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[3].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[4].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[5].ReadOnly = true;
+                        }
+
+                        setRowNumber(this.dgInventoryEntry);
+
+                        this.txtTotalInventoryDebit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curDebit));
+                        this.txtTotalInventoryCredit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curCredit));
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -604,7 +1071,7 @@ namespace GeneralLedger.UserControls
                         Description = this.txtDescription.Text
                     };
 
-                    SaleServices.Remove(Sale);
+                    SaleServices.Remove(Sale, this.SalesDetailsList);
 
                     if (Sale != null)
                     {
@@ -619,6 +1086,12 @@ namespace GeneralLedger.UserControls
                         this.txtAgentID.Text = string.Empty;
                         this.txtCustomerName.Text = string.Empty;
                         this.txtTerms.Text = string.Empty;
+                        this.dgProduct.Rows.Clear();
+                        this.dgProduct.Refresh();
+                        this.SalesDetailsList = new List<SalesDetail>();
+                        this.GLTranDetailInventoryEntry.Clear();
+                        this.dgInventoryEntry.Rows.Clear();
+                        this.dgInventoryEntry.Refresh();
                         this.dgJournalEntry.Rows.Clear();
                         this.dgJournalEntry.Refresh();
                         this.GLTranDetail.Clear();
@@ -630,6 +1103,9 @@ namespace GeneralLedger.UserControls
                         this.txtCFAmount.Text = String.Empty;
                         this.txtCOMMAmount.Text = String.Empty;
                         this.txtSOPAmount.Text = String.Empty;
+                        this.txtTotalInventoryCredit.Text = string.Empty;
+                        this.txtTotalInventoryDebit.Text = string.Empty;
+                        this.txtSalesTotal.Text = string.Empty;
                         GLTranDetail = new List<tblGLTranDetail>();
                         MessageBox.Show("Successfully deleted");
 
@@ -656,6 +1132,12 @@ namespace GeneralLedger.UserControls
             this.txtAgentID.Text = string.Empty;
             this.txtCustomerName.Text = string.Empty;
             this.txtTerms.Text = string.Empty;
+            this.dgProduct.Rows.Clear();
+            this.dgProduct.Refresh();
+            this.SalesDetailsList = new List<SalesDetail>();
+            this.GLTranDetailInventoryEntry.Clear();
+            this.dgInventoryEntry.Rows.Clear();
+            this.dgInventoryEntry.Refresh();
             this.dgJournalEntry.Rows.Clear();
             this.dgJournalEntry.Refresh();
             this.GLTranDetail.Clear();
@@ -667,7 +1149,11 @@ namespace GeneralLedger.UserControls
             this.txtCFAmount.Text = String.Empty;
             this.txtCOMMAmount.Text = String.Empty;
             this.txtSOPAmount.Text = String.Empty;
+            this.txtTotalInventoryCredit.Text = string.Empty;
+            this.txtTotalInventoryDebit.Text = string.Empty;
+            this.txtSalesTotal.Text = string.Empty;
             GLTranDetail = new List<tblGLTranDetail>();
+           
 
         }
 
@@ -837,8 +1323,8 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[0].Value = saleDetail.Id;
                         this.dgProduct.Rows[i].Cells[1].Value = saleDetail.Product.strProductName;
                         this.dgProduct.Rows[i].Cells[2].Value = saleDetail.Product.strDescription;
-                        this.dgProduct.Rows[i].Cells[3].Value = saleDetail.Product.ProductCharacteristic.Id;
-                        this.dgProduct.Rows[i].Cells[4].Value = saleDetail.Product.ProductCharacteristic.strName;
+                        //this.dgProduct.Rows[i].Cells[3].Value = saleDetail.Product.ProductCharacteristic.Id;
+                        //this.dgProduct.Rows[i].Cells[4].Value = saleDetail.Product.ProductCharacteristic.strName;
                         this.dgProduct.Rows[i].Cells[5].Value = saleDetail.Product.ProductCategory.Id;
                         this.dgProduct.Rows[i].Cells[6].Value = saleDetail.Product.ProductCategory.strName;
                         this.dgProduct.Rows[i].Cells[7].Value = saleDetail.Product.ProductType.Id;
@@ -953,8 +1439,8 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[0].Value = saleDetail.Id;
                         this.dgProduct.Rows[i].Cells[1].Value = saleDetail.Product.strProductName;
                         this.dgProduct.Rows[i].Cells[2].Value = saleDetail.Product.strDescription;
-                        this.dgProduct.Rows[i].Cells[3].Value = saleDetail.Product.ProductCharacteristic.Id;
-                        this.dgProduct.Rows[i].Cells[4].Value = saleDetail.Product.ProductCharacteristic.strName;
+                        //this.dgProduct.Rows[i].Cells[3].Value = saleDetail.Product.ProductCharacteristic.Id;
+                        //this.dgProduct.Rows[i].Cells[4].Value = saleDetail.Product.ProductCharacteristic.strName;
                         this.dgProduct.Rows[i].Cells[5].Value = saleDetail.Product.ProductCategory.Id;
                         this.dgProduct.Rows[i].Cells[6].Value = saleDetail.Product.ProductCategory.strName;
                         this.dgProduct.Rows[i].Cells[7].Value = saleDetail.Product.ProductType.Id;

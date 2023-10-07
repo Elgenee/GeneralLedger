@@ -28,5 +28,14 @@ namespace GeneralLedger.Persistence.Services
 
             }
         }
+
+        public List<tblGLTranHeader> GetGLEntryBySalesId(int SalesId, int BookTypeId)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.GLTran.GetGLEntryBySalesId(SalesId, BookTypeId).ToList();
+
+            }
+        }
     }
 }

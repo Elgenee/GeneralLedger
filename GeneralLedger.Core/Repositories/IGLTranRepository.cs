@@ -13,5 +13,7 @@ namespace GeneralLedger.Core.Repositories
 
         List<tblGLTranHeader> GetGLEntryByPurchaseId(int PurchaseId, int BookTypeId);
 
+        List<tblGLTranHeader> GetGLEntryBySalesId(int SalesId, int BookTypeId);
+
     }
 }

@@ -253,44 +253,119 @@ namespace GeneralLedger.Persistence.Services
             throw new NotImplementedException();
         }
 
+        //public void Remove(Purchase purchase, List<PurchaseDetail> PurchaseDetailsList)
+        //{
+        //    using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+        //    {
+        //        var resultPurchase = unitOfWork.Purchase.GetPurchasesWithJournalEntry(purchase.Id).SingleOrDefault();
+
+        //        foreach (var detail in PurchaseDetailsList) {
+
+        //            var purchaseDetailExist = unitOfWork.PurchaseDetail.Get(detail.Id);
+        //            unitOfWork.PurchaseDetail.Remove(purchaseDetailExist);
+
+        //            var existingStock = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId && s.PurchaseID == detail.PurchaseId).FirstOrDefault();
+
+        //            if (existingStock != null)
+        //            {
+        //                unitOfWork.Stock.Remove(existingStock);
+        //            }
+
+        //            int productID = (detail.ProductId.HasValue) ? detail.ProductId.Value : 0;
+        //            var product = unitOfWork.Products.Get(productID);
+        //            var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId).ToList();
+        //            existingStockList = existingStockList.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
+        //            var totalStocks = (int)existingStockList.Sum(stock => stock.QuantityIn - stock.QuantityOut);
+        //            product.intRemainingCount = totalStocks;
+        //        }
+
+        //        PurchaseDetailsList.Clear();
+
+        //        var tblGlTranDetails = resultPurchase.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList();
+        //        unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
+        //        var tblGLTranHeaders = resultPurchase.tblGLTranHeaders.ToList();
+        //        unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
+        //        var purchaseLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdPurchase == purchase.Id && p.intIdPurchaseSupplierLedgerTransactionType == 1).SingleOrDefault();
+        //        unitOfWork.PurchaseSupplierLedger.Remove(purchaseLedger);
+        //        unitOfWork.Purchase.Remove(resultPurchase);
+        //        unitOfWork.Complete();
+        //    }
+        //}
+
         public void Remove(Purchase purchase, List<PurchaseDetail> PurchaseDetailsList)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 var resultPurchase = unitOfWork.Purchase.GetPurchasesWithJournalEntry(purchase.Id).SingleOrDefault();
-
-                foreach (var detail in PurchaseDetailsList) {
-
-                    var purchaseDetailExist = unitOfWork.PurchaseDetail.Get(detail.Id);
-                    unitOfWork.PurchaseDetail.Remove(purchaseDetailExist);
-
-                    var existingStock = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId && s.PurchaseID == detail.PurchaseId).FirstOrDefault();
-
-                    if (existingStock != null)
-                    {
-                        unitOfWork.Stock.Remove(existingStock);
-                    }
-
-                    int productID = (detail.ProductId.HasValue) ? detail.ProductId.Value : 0;
-                    var product = unitOfWork.Products.Get(productID);
-                    var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId).ToList();
-                    existingStockList = existingStockList.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
-                    var totalStocks = (int)existingStockList.Sum(stock => stock.QuantityIn - stock.QuantityOut);
-                    product.intRemainingCount = totalStocks;
+                if (resultPurchase == null)
+                {
+                    throw new Exception("Purchase not found!");
                 }
 
-                PurchaseDetailsList.Clear();
-
-                var tblGlTranDetails = resultPurchase.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList();
-                unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
-                var tblGLTranHeaders = resultPurchase.tblGLTranHeaders.ToList();
-                unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
-                var purchaseLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdPurchase == purchase.Id && p.intIdPurchaseSupplierLedgerTransactionType == 1).SingleOrDefault();
-                unitOfWork.PurchaseSupplierLedger.Remove(purchaseLedger);
+                RemovePurchaseDetails(unitOfWork, PurchaseDetailsList);
+                RemoveGLTran(unitOfWork, resultPurchase);
+                RemovePurchaseSupplierLedger(unitOfWork, purchase);
                 unitOfWork.Purchase.Remove(resultPurchase);
+
                 unitOfWork.Complete();
             }
         }
+
+        private void RemovePurchaseDetails(UnitOfWork unitOfWork, List<PurchaseDetail> PurchaseDetailsList)
+        {
+            foreach (var detail in PurchaseDetailsList)
+            {
+                RemovePurchaseDetail(unitOfWork, detail);
+                UpdateRemainingStock(unitOfWork, detail);
+            }
+            PurchaseDetailsList.Clear();
+        }
+
+        private void RemovePurchaseDetail(UnitOfWork unitOfWork, PurchaseDetail detail)
+        {
+            var purchaseDetailExist = unitOfWork.PurchaseDetail.Get(detail.Id);
+            if (purchaseDetailExist != null)
+            {
+                unitOfWork.PurchaseDetail.Remove(purchaseDetailExist);
+            }
+
+            var existingStock = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId && s.PurchaseID == detail.PurchaseId).FirstOrDefault();
+            if (existingStock != null)
+            {
+                unitOfWork.Stock.Remove(existingStock);
+            }
+        }
+
+        private void UpdateRemainingStock(UnitOfWork unitOfWork, PurchaseDetail detail)
+        {
+            int productID = (detail.ProductId.HasValue) ? detail.ProductId.Value : 0;
+            var product = unitOfWork.Products.Get(productID);
+            var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId).ToList();
+            existingStockList = existingStockList.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
+            var totalStocks = (int)existingStockList.Sum(stock => stock.QuantityIn - stock.QuantityOut);
+            product.intRemainingCount = totalStocks;
+        }
+
+        private void RemoveGLTran(UnitOfWork unitOfWork, Purchase purchase)
+        {
+            var tblGLTranHeaders = purchase.tblGLTranHeaders.ToList();
+            foreach (var header in tblGLTranHeaders)
+            {
+                var tblGlTranDetails = header.tblGLTranDetails.ToList();
+                unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
+            }
+            unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
+        }
+
+        private void RemovePurchaseSupplierLedger(UnitOfWork unitOfWork, Purchase purchase)
+        {
+            var purchaseLedger = unitOfWork.PurchaseSupplierLedger.Find(p => p.intIdPurchase == purchase.Id && p.intIdPurchaseSupplierLedgerTransactionType == 1).SingleOrDefault();
+            if (purchaseLedger != null)
+            {
+                unitOfWork.PurchaseSupplierLedger.Remove(purchaseLedger);
+            }
+        }
+
 
         //private void DeletePurchaseDetails(UnitOfWork unitOfWork, Purchase purchase)
         //{
@@ -419,8 +494,8 @@ namespace GeneralLedger.Persistence.Services
                     ProductId = updatedDetail.ProductId,
                     QuantityIn = updatedDetail.Quantity,
                     QuantityOut = 0,
-                    StockTransactionTypeID = 1
-                    //PurchaseID = updatedPurchase.Id
+                    StockTransactionTypeID = 1,
+                    PurchaseID = updatedPurchase.Id
                 });
             }
         }

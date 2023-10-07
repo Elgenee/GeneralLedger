@@ -4,6 +4,10 @@
 
     partial class GeneralLedgerDataSet
     {
+        partial class spRPTInventoryProoflistDataTable
+        {
+        }
+
         partial class spRPTSalesProoflistDataTable
         {
         }

@@ -608,7 +608,57 @@ namespace GeneralLedger.Tier.DAL
                     }
                 }
             }
+
+
         }
+
+
+        public List<rptInventoryProoflist> getInventoryProoflist(string datDateFrom, string datDateTo)
+        {
+            var dbUtil = new DatabaseManager();
+            var rptInventoryProoflistList = new List<rptInventoryProoflist>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spRPTInventoryProoflist";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@datDateFrom", datDateFrom);
+                    cmd.Parameters.AddWithValue("@datDateTo", datDateTo);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rptInventoryProoflist = new rptInventoryProoflist
+                            {
+                                strTransactionNumber = ReferenceEquals(reader["strTransactionNumber"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionNumber"]),
+                                TransactionType = ReferenceEquals(reader["TransactionType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["TransactionType"]),
+                                datBatchDate = ReferenceEquals(reader["datBatchDate"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datBatchDate"]),
+                                strTransactionCode = ReferenceEquals(reader["strTransactionCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionCode"]),
+                                COA = ReferenceEquals(reader["COA"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COA"]),
+                                COASub = ReferenceEquals(reader["COASub"], DBNull.Value) ? string.Empty : Convert.ToString(reader["COASub"]),
+                                curDebit = ReferenceEquals(reader["curDebit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curDebit"]),
+                                curCredit = ReferenceEquals(reader["curCredit"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curCredit"]),
+                                strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
+                                strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"]),
+                                strSupplier = ReferenceEquals(reader["strSupplier"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strSupplier"]),
+
+                            };
+
+                            rptInventoryProoflistList.Add(rptInventoryProoflist);
+                        }
+                        return rptInventoryProoflistList;
+                    }
+                }
+            }
+        }
+
 
         public List<rptJournalProoflist> getCollectionEntryProoflist(string datDateFrom, string datDateTo)
         {

@@ -134,7 +134,7 @@ namespace GeneralLedger.Persistence.Services
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
-                AddSaleDetails(sale, saleDetailsList,unitOfWork);
+                AddSaleDetails(sale, saleDetailsList, unitOfWork);
                 unitOfWork.Sale.Add(sale);
                 UpdateSaleCount(unitOfWork, sale, saleDetailsList);
                 AddSalesCustomerLedger(unitOfWork, sale);
@@ -162,7 +162,7 @@ namespace GeneralLedger.Persistence.Services
                     ProductId = item.ProductId,
                     QuantityIn = 0,
                     QuantityOut = item.Quantity,
-                    StockTransactionTypeID = 2, 
+                    StockTransactionTypeID = 2, // Assuming 2 is the ID for sale transaction
                     SalesID = sale.Id
                 });
             }
@@ -183,7 +183,15 @@ namespace GeneralLedger.Persistence.Services
                     continue; // Skip the iteration if no product is found for the given ID
 
                 var newStocksOut = sale.Stocks.ToList();
-                product.intRemainingCount = GetTotalRemainingStock(unitOfWork, productID, newStocksOut);
+                var intRemainingCount = GetTotalRemainingStock(unitOfWork, productID, newStocksOut);
+
+                if (intRemainingCount < 0)
+                {
+
+                    throw new Exception($"Product " + product.strProductName + " " + product.ProductBrand.strName + " has no remaing count");
+                    return;
+                }
+                product.intRemainingCount = intRemainingCount;
 
             }
         }
@@ -239,9 +247,9 @@ namespace GeneralLedger.Persistence.Services
             {
                 CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, 0, sale.Total.Value),
                 CreateGLTranDetail((int)journalEntry2.intIDMasCOA, journalEntry2.ID, sale.SOPAmount.Value, 0),
-                CreateGLTranDetail((int)journalEntry2.intIDMasCOA, journalEntry2.ID, sale.COMMAmount.Value, 0),
-                CreateGLTranDetail((int)journalEntry2.intIDMasCOA, journalEntry2.ID, sale.CFAmount.Value, 0),
-                CreateGLTranDetail((int)journalEntry2.intIDMasCOA, journalEntry2.ID, sale.Total.Value - (sale.COMMAmount.Value + sale.SOPAmount.Value + sale.CFAmount.Value), 0),
+                CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, sale.COMMAmount.Value, 0),
+                CreateGLTranDetail((int)journalEntry4.intIDMasCOA, journalEntry4.ID, sale.CFAmount.Value, 0),
+                CreateGLTranDetail((int)journalEntry5.intIDMasCOA, journalEntry5.ID, sale.Total.Value - (sale.COMMAmount.Value + sale.SOPAmount.Value + sale.CFAmount.Value), 0),
             };
 
             AddGLTranHeaderForSale(unitOfWork, sale, gLTranDetail);
@@ -384,136 +392,402 @@ namespace GeneralLedger.Persistence.Services
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 return unitOfWork.Sale.GetSaleWithJournalEntry(Id).ToList();
-    
+
             }
         }
 
-        public void Remove(Sale sale)
+        //public void Remove(Sale sale, List<SalesDetail> salesDetails)
+        //{
+        //    using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+        //    {
+        //        var resultSale = unitOfWork.Sale.GetSaleWithJournalEntry(sale.Id).SingleOrDefault();
+        //        var tblGlTranDetails = resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList();
+        //        unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
+        //        var tblGLTranHeaders = resultSale.tblGLTranHeaders.ToList();
+        //        unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
+        //        var salesLedger = unitOfWork.SalesCustomerLedger.Find(s => s.intIdSales == sale.Id && s.intIdSalesCustomerLedgerTransctionType == 1).SingleOrDefault();
+        //        unitOfWork.SalesCustomerLedger.Remove(salesLedger);
+        //        unitOfWork.Sale.Remove(resultSale);
+        //        unitOfWork.Complete();
+        //    }
+        //}
+
+        public void Remove(Sale sale, List<SalesDetail> salesDetails)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 var resultSale = unitOfWork.Sale.GetSaleWithJournalEntry(sale.Id).SingleOrDefault();
-                var tblGlTranDetails = resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList();
-                unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
-                var tblGLTranHeaders = resultSale.tblGLTranHeaders.ToList();
-                unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
-                var salesLedger = unitOfWork.SalesCustomerLedger.Find(s => s.intIdSales == sale.Id && s.intIdSalesCustomerLedgerTransctionType == 1).SingleOrDefault();
-                unitOfWork.SalesCustomerLedger.Remove(salesLedger);
+                if (resultSale == null)
+                {
+                    throw new Exception("Sale not found!");
+                }
+
+                RemoveSaleDetails(unitOfWork, salesDetails);
+                RemoveGLTranForSale(unitOfWork, resultSale);
+                RemoveSaleCustomerLedger(unitOfWork, sale);
                 unitOfWork.Sale.Remove(resultSale);
+
                 unitOfWork.Complete();
             }
         }
 
-        public Sale Update(Sale sale, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<SalesDetail> salesDetails)
+
+        private void RemoveSaleDetails(UnitOfWork unitOfWork, List<SalesDetail> SaleDetailsList)
+        {
+            foreach (var detail in SaleDetailsList)
+            {
+                RemoveSaleDetail(unitOfWork, detail);
+                UpdateRemainingStockForSale(unitOfWork, detail);
+            }
+            SaleDetailsList.Clear();
+        }
+
+        private void RemoveSaleDetail(UnitOfWork unitOfWork, SalesDetail detail)
+        {
+            var saleDetailExist = unitOfWork.SaleDetail.Get(detail.Id);
+            if (saleDetailExist != null)
+            {
+                unitOfWork.SaleDetail.Remove(saleDetailExist);
+            }
+
+            var existingStock = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId && s.SalesID == detail.SalesId).FirstOrDefault();
+            if (existingStock != null)
+            {
+                unitOfWork.Stock.Remove(existingStock);
+            }
+        }
+
+        private void UpdateRemainingStockForSale(UnitOfWork unitOfWork, SalesDetail detail)
+        {
+            int productID = (detail.ProductId.HasValue) ? detail.ProductId.Value : 0;
+            var product = unitOfWork.Products.Get(productID);
+            var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId).ToList();
+            existingStockList = existingStockList.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
+            var totalStocks = (int)existingStockList.Sum(stock => stock.QuantityIn - stock.QuantityOut);
+            product.intRemainingCount = totalStocks;
+        }
+
+
+        private void RemoveGLTranForSale(UnitOfWork unitOfWork, Sale sale)
+        {
+            var tblGLTranHeaders = sale.tblGLTranHeaders.ToList();
+            foreach (var header in tblGLTranHeaders)
+            {
+                var tblGlTranDetails = header.tblGLTranDetails.ToList();
+                unitOfWork.GLTranDetail.RemoveRange(tblGlTranDetails);
+            }
+            unitOfWork.GLTran.RemoveRange(tblGLTranHeaders);
+        }
+
+        private void RemoveSaleCustomerLedger(UnitOfWork unitOfWork, Sale sale)
+        {
+            var saleLedger = unitOfWork.SalesCustomerLedger.Find(s => s.intIdSales == sale.Id).SingleOrDefault();
+            if (saleLedger != null)
+            {
+                unitOfWork.SalesCustomerLedger.Remove(saleLedger);
+            }
+        }
+
+
+
+        public Sale Update(Sale updatedSale, List<tblGLTranDetail> updatedTblGLTranDetail, bool UseDefaultEntry, List<SalesDetail> updatedSalesDetailsList)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
-                //Update ledger if sale is updated
-                var resultSale = unitOfWork.Sale.GetSaleWithJournalEntry(sale.Id).SingleOrDefault();
-                resultSale.PONo = sale.PONo;
-                resultSale.TRANo = sale.TRANo;
-                resultSale.Total = sale.Total;
-                resultSale.TransactionDate = sale.TransactionDate;
-                resultSale.intIdCustomer = sale.intIdCustomer;
-                resultSale.intIdAgent = sale.intIdAgent;
-                resultSale.Terms = sale.Terms;
-                resultSale.Description = sale.Description;
-                resultSale.tblGLTranHeaders.ToList()[0].strDescription = sale.Description;
-                resultSale.tblGLTranHeaders.ToList()[0].datBatchDate = sale.TransactionDate;
+                // 1. Update sale details and associated stock records
+                UpdateSaleDetails(updatedSale, updatedSalesDetailsList, unitOfWork);
 
-                var salesLedger = unitOfWork.SalesCustomerLedger.Find(s => s.intIdSales == sale.Id && s.intIdSalesCustomerLedgerTransctionType == 1).SingleOrDefault();
-                salesLedger.TotalAmount = sale.Total;
-                salesLedger.TransactionDate = sale.TransactionDate;
-                salesLedger.TransactionNo = sale.TRANo;
-                salesLedger.intIdCustomer = sale.intIdCustomer;
-                //resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList().Clear();
-                unitOfWork.GLTranDetail.RemoveRange(resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList());
+                // 2. Update sale record in the repository
+                var saleInDb = unitOfWork.Sale.Get(updatedSale.Id);
+                saleInDb.PONo = updatedSale.PONo; // Assuming Sale has a SaleNo similar to PONo
+                saleInDb.TRANo = updatedSale.TRANo; // Assuming there's an invoice number for Sale
+                saleInDb.intIdCustomer = updatedSale.intIdCustomer; // Assuming there's a customer linked to a sale
+                saleInDb.intIdAgent = updatedSale.intIdAgent;
+                saleInDb.SOPAmount = updatedSale.SOPAmount;
+                saleInDb.COMMAmount = updatedSale.COMMAmount;
+                saleInDb.CFAmount = updatedSale.CFAmount;
+                saleInDb.Total = updatedSale.Total;
+                saleInDb.TransactionDate = updatedSale.TransactionDate;
+                saleInDb.Description = updatedSale.Description;
 
-                if (UseDefaultEntry)
-                {
+                saleInDb.SalesDetails = updatedSale.SalesDetails;
+                saleInDb.Stocks = updatedSale.Stocks;
 
-                    var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1029).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
-                    var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1055).SingleOrDefault(); // SOP
-                    var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1053).SingleOrDefault(); // COMM
-                    var journalEntry4 = unitOfWork.CoaSub.Find(c => c.ID == 2119).SingleOrDefault(); // CFA
-                    var journalEntry5 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
+                // 3. Update remaining stock count for products in sale details
+                UpdateRemainingCountForSale(unitOfWork, updatedSale, updatedSalesDetailsList); // Assuming there's an equivalent function for sale
 
-                    var gLTranDetailDefault = new List<tblGLTranDetail>
-                    {
+                // 4. Update sale customer ledger record
+                UpdateSalesCustomerLedger(unitOfWork, updatedSale);
 
-                         new tblGLTranDetail
-                         {
-                             intIDMasCoa = (int)journalEntry1.intIDMasCOA ,
-                             intIDMasCoaSub = journalEntry1.ID,
-                             curCredit = 0,
-                             curDebit = sale.Total 
-                         },
-                         new tblGLTranDetail
-                         {
-                             intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
-                             intIDMasCoaSub = journalEntry2.ID,
-                             curCredit = sale.SOPAmount,
-                             curDebit = 0
-                         },
-                         new tblGLTranDetail
-                         {
-                             intIDMasCoa = (int)journalEntry3.intIDMasCOA ,
-                             intIDMasCoaSub = journalEntry3.ID,
-                             curCredit = sale.COMMAmount,
-                             curDebit = 0
-                         },
-                         new tblGLTranDetail
-                         {
-                             intIDMasCoa = (int)journalEntry4.intIDMasCOA ,
-                             intIDMasCoaSub = journalEntry4.ID,
-                             curCredit = sale.CFAmount,
-                             curDebit = 0
-                         },
-                         new tblGLTranDetail
-                         {
-                             intIDMasCoa = (int)journalEntry5.intIDMasCOA ,
-                             intIDMasCoaSub = journalEntry5.ID,
-                             curCredit = sale.Total - (sale.COMMAmount + sale.SOPAmount + sale.CFAmount),
-                             curDebit = 0
-                         }
-                    };
+                // 5. Update general ledger transaction records for sale
+                UpdateGLTranForSale(unitOfWork, updatedSale, updatedTblGLTranDetail, UseDefaultEntry);
 
-                    foreach (var item in gLTranDetailDefault)
-                    {
-                        resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
-                        {
-                            curCredit = item.curCredit,
-                            curDebit = item.curDebit,
-                            intIDGLTranHeader = item.intIDGLTranHeader,
-                            intIDMasCoa = item.intIDMasCoa,
-                            intIDMasCoaSub = item.intIDMasCoaSub
+                // 6. Update inventory general ledger transactions related to the sale
+                UpdateGLTranInventoryForSale(unitOfWork, updatedSale);
 
-                        });
-                    }
-                }
-                else
-                {
-                    foreach (var item in tblGLTranDetail)
-                    {
-                        resultSale.tblGLTranHeaders.ToList()[0].tblGLTranDetails.Add(new tblGLTranDetail
-                        {
-                            curCredit = item.curCredit,
-                            curDebit = item.curDebit,
-                            intIDGLTranHeader = item.intIDGLTranHeader,
-                            intIDMasCoa = item.intIDMasCoa,
-                            intIDMasCoaSub = item.intIDMasCoaSub
-                       });
-                    }
-                }
-
-                resultSale.tblGLTranHeaders.ToList()[0].blnUseDefaultEntry = UseDefaultEntry;
-                resultSale.tblGLTranHeaders.ToList()[0].strDescription = resultSale.Description;
-                resultSale.tblGLTranHeaders.ToList()[0].curCreditAmount = resultSale.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curCredit);
-                resultSale.tblGLTranHeaders.ToList()[0].curDebitAmount = resultSale.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curDebit);
+                // 7. Commit changes to the database
                 unitOfWork.Complete();
-                return resultSale;
+
+                return updatedSale;
             }
         }
+
+        private void UpdateSaleDetails(Sale updatedSale, List<SalesDetail> updatedSalesDetailsList, UnitOfWork unitOfWork)
+        {
+            // Delete existing sales details and stock records
+            foreach (var existingDetail in updatedSale.SalesDetails.ToList())
+            {
+                var salesDetailExist = unitOfWork.SaleDetail.Get(existingDetail.Id);
+                unitOfWork.SaleDetail.Remove(salesDetailExist);
+
+                // We assume that the stock decreases when a sale is made. 
+                var existingStock = unitOfWork.Stock.Find(s => s.ProductId == existingDetail.ProductId && s.SalesID == existingDetail.SalesId).FirstOrDefault();
+                if (existingStock != null)
+                {
+                    unitOfWork.Stock.Remove(existingStock);
+                }
+
+                int productID = (existingDetail.ProductId.HasValue) ? existingDetail.ProductId.Value : 0;
+                var product = unitOfWork.Products.Get(productID);
+                var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == existingDetail.ProductId).ToList();
+                existingStockList = existingStockList.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
+                var totalStocks = (int)existingStockList.Sum(stock => stock.QuantityIn - stock.QuantityOut);
+                product.intRemainingCount = totalStocks;
+            }
+            updatedSale.SalesDetails.Clear();
+            updatedSale.Stocks.Clear();
+
+            // Add new sales details and stock records
+            foreach (var updatedDetail in updatedSalesDetailsList)
+            {
+                updatedSale.SalesDetails.Add(new SalesDetail
+                {
+                    //SaleId = updatedDetail.Id, 
+                    ProductId = updatedDetail.ProductId,
+                    Quantity = updatedDetail.Quantity,
+                    TotalPrice = updatedDetail.TotalPrice,
+                    UnitPrice = updatedDetail.UnitPrice
+                });
+
+                updatedSale.Stocks.Add(new Stock
+                {
+                    ProductId = updatedDetail.ProductId,
+                    QuantityIn = 0,  // For sales, there's no incoming stock
+                    QuantityOut = updatedDetail.Quantity,
+                    StockTransactionTypeID = 2,  // Assuming '2' indicates a sales transaction. Adjust if needed.
+                    SalesID = updatedSale.Id
+                });
+            }
+        }
+
+        public void UpdateRemainingCountForSale(UnitOfWork unitOfWork, Sale sale, List<SalesDetail> SalesDetailsList)
+        {
+            foreach (var detail in SalesDetailsList)
+            {
+                int productID = (detail.ProductId.HasValue) ? detail.ProductId.Value : 0;
+
+                var product = unitOfWork.Products.Get(productID);
+
+                // Part 1: Your implementation start here...
+                // You might want to get the stock list specific to the product
+                //var stocks = unitOfWork.Stock.FindLocal(s => s.ProductId == detail.ProductId).ToList();
+
+                var newStocks = sale.Stocks.ToList();
+                //TODO: here minus the last updated Product
+                var intRemainingCount =  GetTotalRemainingStockAfterSale(unitOfWork, productID, newStocks);
+
+                if (intRemainingCount < 0)
+                {
+
+                    throw new Exception($"Product " + product.strProductName + " " + product.ProductBrand.strName + " has no remaing count");
+                    return;
+                }
+
+                product.intRemainingCount = intRemainingCount;
+            }
+        }
+
+        public int GetTotalRemainingStockAfterSale(UnitOfWork unitOfWork, int productId, List<Stock> newStocks)
+        {
+            var stocks = unitOfWork.Stock.Find(x => x.ProductId == productId).ToList();
+            stocks = stocks.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
+            var totalStocks = stocks.Concat(newStocks.Where(x => x.ProductId == productId)); // Include new stocks
+
+            // Adjusting for sales, which reduce the stock count
+            return (int)totalStocks.Sum(stock => stock.QuantityIn - stock.QuantityOut);
+        }
+
+        private void UpdateSalesCustomerLedger(UnitOfWork unitOfWork, Sale updatedSale)
+        {
+            // Find and delete existing sales customer ledger record
+            var existingSalesCustomerLedger = unitOfWork.SalesCustomerLedger.Find(scl => scl.intIdSales == updatedSale.Id).SingleOrDefault();
+            if (existingSalesCustomerLedger != null)
+            {
+                unitOfWork.SalesCustomerLedger.Remove(existingSalesCustomerLedger);
+            }
+
+            // Add new sales customer ledger record
+            var salesCustomerLedger = new SalesCustomerLedger
+            {
+                intIdSales = updatedSale.Id,
+                intIdCustomer = updatedSale.intIdCustomer, // I'm assuming the Sale model has a similar property to the Purchase's intIDSupplier
+                intIdSalesCustomerLedgerTransctionType = 1, // Assuming a transaction type exists similar to the Purchase's
+                TotalAmount = updatedSale.Total,
+                TransactionDate = updatedSale.TransactionDate,
+                TransactionNo = updatedSale.TRANo, // Assuming the Sale model has a TRANo property similar to Purchase
+                DateInserted = DateTime.Now
+            };
+            unitOfWork.SalesCustomerLedger.Add(salesCustomerLedger);
+        }
+
+
+        private void UpdateGLTranForSale(UnitOfWork unitOfWork, Sale updatedSale, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry)
+        {
+            // Delete existing GLTran entries for the sale
+            var existingGLTranHeader = unitOfWork.GLTran.Find(h => h.intIdSales == updatedSale.Id && h.intIDGLBookType == 6).SingleOrDefault();
+            if (existingGLTranHeader != null)
+            {
+                var existingGLTranDetail = unitOfWork.GLTranDetail.Find(g => g.intIDGLTranHeader == existingGLTranHeader.ID);
+
+                if (existingGLTranDetail != null)
+                {
+                    unitOfWork.GLTranDetail.RemoveRange(existingGLTranDetail);
+                }
+            }
+
+            existingGLTranHeader.datBatchDate = updatedSale.TransactionDate;
+            existingGLTranHeader.strDescription = updatedSale.Description;
+            existingGLTranHeader.blnUseDefaultEntry = UseDefaultEntry;
+
+            // Re-insert the GLTran entries for the sale
+            if (UseDefaultEntry)
+            {
+                // Using example journal entries; you'll need to adjust based on your Sale's ledger details
+                var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1029).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+                var journalEntry2 = unitOfWork.CoaSub.Find(c => c.ID == 1055).SingleOrDefault(); // ACCOUNTS PAYABLE- COMMISSIONS
+                var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1053).SingleOrDefault(); // ACCOUNTS PAYABLE- SOP
+                var journalEntry4 = unitOfWork.CoaSub.Find(c => c.ID == 2119).SingleOrDefault(); // ACCOUNTS PAYABLE- COMMON FUND
+                var journalEntry5 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // SALES
+
+
+                var gLTranDetail = new List<tblGLTranDetail>
+                {
+                    new tblGLTranDetail
+                    {
+                        intIDMasCoa = (int)journalEntry1.intIDMasCOA,
+                        intIDMasCoaSub = journalEntry1.ID,
+                        curCredit = 0,
+                        curDebit = updatedSale.Total.Value,
+                        intIDGLTranHeader = existingGLTranHeader.ID
+                    },
+                    new tblGLTranDetail
+                    {
+                        intIDMasCoa = (int)journalEntry2.intIDMasCOA,
+                        intIDMasCoaSub = journalEntry2.ID,
+                        curCredit = updatedSale.SOPAmount,
+                        curDebit = 0,
+                        intIDGLTranHeader = existingGLTranHeader.ID
+                    },
+                    new tblGLTranDetail
+                    {
+                        intIDMasCoa = (int)journalEntry3.intIDMasCOA,
+                        intIDMasCoaSub = journalEntry3.ID,
+                        curCredit = updatedSale.COMMAmount,
+                        curDebit = 0,
+                        intIDGLTranHeader = existingGLTranHeader.ID
+                    },
+                    new tblGLTranDetail
+                    {
+                        intIDMasCoa = (int)journalEntry4.intIDMasCOA,
+                        intIDMasCoaSub = journalEntry4.ID,
+                        curCredit = updatedSale.CFAmount,
+                        curDebit = 0,
+                        intIDGLTranHeader = existingGLTranHeader.ID
+                    },
+                    new tblGLTranDetail
+                    {
+                        intIDMasCoa = (int)journalEntry5.intIDMasCOA,
+                        intIDMasCoaSub = journalEntry5.ID,
+                        curCredit = updatedSale.Total.Value - (updatedSale.SOPAmount + updatedSale.COMMAmount + updatedSale.CFAmount),
+                        curDebit = 0,
+                        intIDGLTranHeader = existingGLTranHeader.ID
+                    }
+                };
+
+                unitOfWork.GLTranDetail.AddRange(gLTranDetail);
+                existingGLTranHeader.curDebitAmount = gLTranDetail.Sum(c => c.curDebit);
+                existingGLTranHeader.curCreditAmount = gLTranDetail.Sum(c => c.curCredit);
+            }
+            else
+            {
+                foreach (var item in tblGLTranDetail)
+                {
+                    existingGLTranHeader.tblGLTranDetails.Add(new tblGLTranDetail
+                    {
+                        intIDMasCoa = item.intIDMasCoa,
+                        intIDMasCoaSub = item.intIDMasCoaSub,
+                        curCredit = item.curCredit,
+                        curDebit = item.curDebit,
+                        intIDGLTranHeader = existingGLTranHeader.ID
+                    });
+                }
+
+                unitOfWork.GLTranDetail.AddRange(existingGLTranHeader.tblGLTranDetails);
+                existingGLTranHeader.curDebitAmount = existingGLTranHeader.tblGLTranDetails.Sum(c => c.curDebit);
+                existingGLTranHeader.curCreditAmount = existingGLTranHeader.tblGLTranDetails.Sum(c => c.curCredit);
+            }
+        }
+
+        private void UpdateGLTranInventoryForSale(UnitOfWork unitOfWork, Sale updatedSale)
+        {
+            // Delete existing GLTran entries for the sale
+            var existingGLTranHeader = unitOfWork.GLTran.Find(h => h.intIdSales == updatedSale.Id && h.intIDGLBookType == 1011).SingleOrDefault();
+            if (existingGLTranHeader != null)
+            {
+                var existingGLTranDetail = unitOfWork.GLTranDetail.Find(g => g.intIDGLTranHeader == existingGLTranHeader.ID);
+
+                if (existingGLTranDetail != null)
+                {
+                    unitOfWork.GLTranDetail.RemoveRange(existingGLTranDetail);
+                }
+                // If you wish to delete the GLTran header, you can uncomment the line below.
+                //unitOfWork.GLTran.Remove(existingGLTranHeader);
+            }
+
+            existingGLTranHeader.datBatchDate = updatedSale.TransactionDate;
+            existingGLTranHeader.strDescription = updatedSale.Description;
+            existingGLTranHeader.blnUseDefaultEntry = true;
+
+            // Re-insert the GLTran entries for the sale
+            var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1072).SingleOrDefault(); // Example: COST OF GOODS SOLD
+            var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
+       
+            var gLTranDetail = new List<tblGLTranDetail>
+            {
+                 new tblGLTranDetail
+                {
+                    intIDMasCoa = (int)journalEntry1.intIDMasCOA,
+                    intIDMasCoaSub = journalEntry1.ID,
+                    curCredit = 0,
+                    curDebit = updatedSale.Total.Value,
+                    intIDGLTranHeader = existingGLTranHeader.ID
+                },
+                new tblGLTranDetail
+                {
+                    intIDMasCoa = (int)journalEntry1.intIDMasCOA,
+                    intIDMasCoaSub = journalEntry3.ID,
+                    curCredit =  updatedSale.Total.Value,
+                    curDebit = 0,
+                    intIDGLTranHeader = existingGLTranHeader.ID
+                }
+              
+            };
+
+            unitOfWork.GLTranDetail.AddRange(gLTranDetail);
+            existingGLTranHeader.curDebitAmount = gLTranDetail.Sum(c => c.curDebit);
+            existingGLTranHeader.curCreditAmount = gLTranDetail.Sum(c => c.curCredit);
+        }
+
 
     }
 }

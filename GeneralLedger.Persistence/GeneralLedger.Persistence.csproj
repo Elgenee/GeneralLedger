@@ -84,6 +84,7 @@
     <Compile Include="Repositories\PurchaseSupplierLedgerRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\SaleDetailRepository.cs" />
     <Compile Include="Repositories\SaleRepository.cs" />
     <Compile Include="Repositories\SalesCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\StockRepository.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Services\PurchaseDetailServices.cs" />
     <Compile Include="Services\PurchaseServices.cs" />
     <Compile Include="Services\RoleServices.cs" />
+    <Compile Include="Services\SaleDetailServices.cs" />
     <Compile Include="Services\SalesCustomerLedgerServices.cs" />
     <Compile Include="Services\SaleServices.cs" />
     <Compile Include="Services\StockServices.cs" />

@@ -134,6 +134,12 @@ namespace GeneralLedger.UserControls
                     frmReportPaymentProoflist frmReportPaymentProoflist = new frmReportPaymentProoflist();
                     frmReportPaymentProoflist.Show();
                 }
+
+                if (item.ToUpper().Equals("INVENTORY PROOFLIST"))
+                {
+                    frmReportInventoryProoflist frmReportInventoryProoflist = new frmReportInventoryProoflist();
+                    frmReportInventoryProoflist.Show();
+                }
                 //rest of your logic 
             }
         }

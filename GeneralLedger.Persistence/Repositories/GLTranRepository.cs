@@ -42,5 +42,15 @@ namespace GeneralLedger.Persistence.Repositories
              .ToList();
 
         }
+
+        public List<tblGLTranHeader> GetGLEntryBySalesId(int SalesId, int BookTypeId)
+        {
+            return GeneralLedgerContext.tblGLTranHeaders
+             .Include(j => j.tblGLTranDetails)
+             .Include(j => j.tblGLTranDetails.Select(d => d.tblMasCOA))
+             .Include(j => j.tblGLTranDetails.Select(d => d.tblMasCOASub))
+             .Where(j => j.intIdSales == SalesId && j.intIDGLBookType == BookTypeId)
+             .ToList();
+        }
     }
 }

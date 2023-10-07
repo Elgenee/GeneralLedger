@@ -56,6 +56,13 @@ namespace GeneralLedger.Tier.BAL
 
         }
 
+        public List<rptInventoryProoflist> getInventoryProoflist(string datDateFrom, string datDateTo)
+        {
+            GLDAL gltb = new GLDAL();
+            return gltb.getInventoryProoflist(datDateFrom, datDateTo);
+
+        }
+
         public List<rptJournalProoflist> getCollectionEntryProoflist(string datDateFrom, string datDateTo)
         {
             GLDAL gltb = new GLDAL();
