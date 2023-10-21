@@ -17,13 +17,17 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="strBookType">
+          <DataField>strBookType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="strTransactionNumber">
           <DataField>strTransactionNumber</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="datBatchDate">
           <DataField>datBatchDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="strTransactionCode">
           <DataField>strTransactionCode</DataField>
@@ -49,22 +53,26 @@
           <DataField>strDescription</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="strBookType">
-          <DataField>strBookType</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="strCustomer">
           <DataField>strCustomer</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="intSalesId">
+          <DataField>intSalesId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="strProduct">
+          <DataField>strProduct</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>GeneralLedgerDataSet</rd:DataSetName>
         <rd:SchemaPath>C:\Users\Elgene\Documents\RoyalMarketing\GeneralLedger\GeneralLedger\GeneralLedgerDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>spRPTJournalProoflist</rd:TableName>
+        <rd:TableName>spRPTSalesProoflist</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>spRPTJournalProoflistTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>spRPTSalesProoflistTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -76,7 +84,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.5in</Width>
+                  <Width>2.39167in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1in</Width>
@@ -1123,9 +1131,9 @@
                                       <TablixMembers>
                                         <TablixMember>
                                           <TablixHeader>
-                                            <Size>3.01389in</Size>
+                                            <Size>1.65in</Size>
                                             <CellContents>
-                                              <Textbox Name="Textbox1">
+                                              <Textbox Name="Textbox4">
                                                 <CanGrow>true</CanGrow>
                                                 <KeepTogether>true</KeepTogether>
                                                 <Paragraphs>
@@ -1142,21 +1150,8 @@
                                                       <TextAlign>Center</TextAlign>
                                                     </Style>
                                                   </Paragraph>
-                                                  <Paragraph>
-                                                    <TextRuns>
-                                                      <TextRun>
-                                                        <Value />
-                                                        <Style>
-                                                          <FontSize>8pt</FontSize>
-                                                        </Style>
-                                                      </TextRun>
-                                                    </TextRuns>
-                                                    <Style>
-                                                      <TextAlign>Center</TextAlign>
-                                                    </Style>
-                                                  </Paragraph>
                                                 </Paragraphs>
-                                                <rd:DefaultName>Textbox1</rd:DefaultName>
+                                                <rd:DefaultName>Textbox4</rd:DefaultName>
                                                 <Style>
                                                   <Border>
                                                     <Color>LightGrey</Color>
@@ -1173,8 +1168,61 @@
                                           </TablixHeader>
                                           <TablixMembers>
                                             <TablixMember>
-                                              <RepeatOnNewPage>true</RepeatOnNewPage>
-                                              <KeepTogether>true</KeepTogether>
+                                              <TablixHeader>
+                                                <Size>3.01389in</Size>
+                                                <CellContents>
+                                                  <Textbox Name="Textbox1">
+                                                    <CanGrow>true</CanGrow>
+                                                    <KeepTogether>true</KeepTogether>
+                                                    <Paragraphs>
+                                                      <Paragraph>
+                                                        <TextRuns>
+                                                          <TextRun>
+                                                            <Value>Product</Value>
+                                                            <Style>
+                                                              <FontSize>8pt</FontSize>
+                                                            </Style>
+                                                          </TextRun>
+                                                        </TextRuns>
+                                                        <Style>
+                                                          <TextAlign>Center</TextAlign>
+                                                        </Style>
+                                                      </Paragraph>
+                                                      <Paragraph>
+                                                        <TextRuns>
+                                                          <TextRun>
+                                                            <Value />
+                                                            <Style>
+                                                              <FontSize>8pt</FontSize>
+                                                            </Style>
+                                                          </TextRun>
+                                                        </TextRuns>
+                                                        <Style>
+                                                          <TextAlign>Center</TextAlign>
+                                                        </Style>
+                                                      </Paragraph>
+                                                    </Paragraphs>
+                                                    <rd:DefaultName>Textbox1</rd:DefaultName>
+                                                    <Style>
+                                                      <Border>
+                                                        <Color>LightGrey</Color>
+                                                        <Style>Solid</Style>
+                                                      </Border>
+                                                      <VerticalAlign>Middle</VerticalAlign>
+                                                      <PaddingLeft>2pt</PaddingLeft>
+                                                      <PaddingRight>2pt</PaddingRight>
+                                                      <PaddingTop>2pt</PaddingTop>
+                                                      <PaddingBottom>2pt</PaddingBottom>
+                                                    </Style>
+                                                  </Textbox>
+                                                </CellContents>
+                                              </TablixHeader>
+                                              <TablixMembers>
+                                                <TablixMember>
+                                                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                                                  <KeepTogether>true</KeepTogether>
+                                                </TablixMember>
+                                              </TablixMembers>
                                             </TablixMember>
                                           </TablixMembers>
                                         </TablixMember>
@@ -1439,9 +1487,9 @@
                                       <TablixMembers>
                                         <TablixMember>
                                           <TablixHeader>
-                                            <Size>3.01389in</Size>
+                                            <Size>1.65in</Size>
                                             <CellContents>
-                                              <Textbox Name="strDescription1">
+                                              <Textbox Name="strDescription">
                                                 <CanGrow>true</CanGrow>
                                                 <KeepTogether>true</KeepTogether>
                                                 <Paragraphs>
@@ -1459,7 +1507,7 @@
                                                     </Style>
                                                   </Paragraph>
                                                 </Paragraphs>
-                                                <rd:DefaultName>strDescription1</rd:DefaultName>
+                                                <rd:DefaultName>strDescription</rd:DefaultName>
                                                 <Style>
                                                   <Border>
                                                     <Color>LightGrey</Color>
@@ -1475,20 +1523,60 @@
                                             </CellContents>
                                           </TablixHeader>
                                           <TablixMembers>
-                                            <TablixMember />
                                             <TablixMember>
-                                              <Group Name="strDescription">
-                                                <GroupExpressions>
-                                                  <GroupExpression>=Fields!strDescription.Value</GroupExpression>
-                                                </GroupExpressions>
-                                              </Group>
+                                              <TablixHeader>
+                                                <Size>3.01389in</Size>
+                                                <CellContents>
+                                                  <Textbox Name="strProduct">
+                                                    <CanGrow>true</CanGrow>
+                                                    <KeepTogether>true</KeepTogether>
+                                                    <Paragraphs>
+                                                      <Paragraph>
+                                                        <TextRuns>
+                                                          <TextRun>
+                                                            <Value>=Fields!strProduct.Value</Value>
+                                                            <Style>
+                                                              <FontSize>8pt</FontSize>
+                                                            </Style>
+                                                          </TextRun>
+                                                        </TextRuns>
+                                                        <Style>
+                                                          <TextAlign>Center</TextAlign>
+                                                        </Style>
+                                                      </Paragraph>
+                                                    </Paragraphs>
+                                                    <rd:DefaultName>strProduct</rd:DefaultName>
+                                                    <Style>
+                                                      <Border>
+                                                        <Color>LightGrey</Color>
+                                                        <Style>Solid</Style>
+                                                      </Border>
+                                                      <VerticalAlign>Middle</VerticalAlign>
+                                                      <PaddingLeft>2pt</PaddingLeft>
+                                                      <PaddingRight>2pt</PaddingRight>
+                                                      <PaddingTop>2pt</PaddingTop>
+                                                      <PaddingBottom>2pt</PaddingBottom>
+                                                    </Style>
+                                                  </Textbox>
+                                                </CellContents>
+                                              </TablixHeader>
                                               <TablixMembers>
+                                                <TablixMember />
                                                 <TablixMember>
-                                                  <Group Name="Details" />
+                                                  <Group Name="strDescription">
+                                                    <GroupExpressions>
+                                                      <GroupExpression>=Fields!strDescription.Value</GroupExpression>
+                                                    </GroupExpressions>
+                                                  </Group>
+                                                  <TablixMembers>
+                                                    <TablixMember>
+                                                      <Group Name="Details" />
+                                                    </TablixMember>
+                                                  </TablixMembers>
                                                 </TablixMember>
+                                                <TablixMember />
                                               </TablixMembers>
                                             </TablixMember>
-                                            <TablixMember />
                                           </TablixMembers>
                                         </TablixMember>
                                       </TablixMembers>
@@ -1694,9 +1782,9 @@
                                       <TablixMembers>
                                         <TablixMember>
                                           <TablixHeader>
-                                            <Size>3.01389in</Size>
+                                            <Size>1.65in</Size>
                                             <CellContents>
-                                              <Textbox Name="Textbox340">
+                                              <Textbox Name="Textbox16">
                                                 <CanGrow>true</CanGrow>
                                                 <KeepTogether>true</KeepTogether>
                                                 <Paragraphs>
@@ -1714,7 +1802,7 @@
                                                     </Style>
                                                   </Paragraph>
                                                 </Paragraphs>
-                                                <rd:DefaultName>Textbox340</rd:DefaultName>
+                                                <rd:DefaultName>Textbox16</rd:DefaultName>
                                                 <Style>
                                                   <Border>
                                                     <Color>LightGrey</Color>
@@ -1729,6 +1817,46 @@
                                               </Textbox>
                                             </CellContents>
                                           </TablixHeader>
+                                          <TablixMembers>
+                                            <TablixMember>
+                                              <TablixHeader>
+                                                <Size>3.01389in</Size>
+                                                <CellContents>
+                                                  <Textbox Name="Textbox340">
+                                                    <CanGrow>true</CanGrow>
+                                                    <KeepTogether>true</KeepTogether>
+                                                    <Paragraphs>
+                                                      <Paragraph>
+                                                        <TextRuns>
+                                                          <TextRun>
+                                                            <Value />
+                                                            <Style>
+                                                              <FontSize>8pt</FontSize>
+                                                            </Style>
+                                                          </TextRun>
+                                                        </TextRuns>
+                                                        <Style>
+                                                          <TextAlign>Center</TextAlign>
+                                                        </Style>
+                                                      </Paragraph>
+                                                    </Paragraphs>
+                                                    <rd:DefaultName>Textbox340</rd:DefaultName>
+                                                    <Style>
+                                                      <Border>
+                                                        <Color>LightGrey</Color>
+                                                        <Style>Solid</Style>
+                                                      </Border>
+                                                      <VerticalAlign>Middle</VerticalAlign>
+                                                      <PaddingLeft>2pt</PaddingLeft>
+                                                      <PaddingRight>2pt</PaddingRight>
+                                                      <PaddingTop>2pt</PaddingTop>
+                                                      <PaddingBottom>2pt</PaddingBottom>
+                                                    </Style>
+                                                  </Textbox>
+                                                </CellContents>
+                                              </TablixHeader>
+                                            </TablixMember>
+                                          </TablixMembers>
                                         </TablixMember>
                                       </TablixMembers>
                                     </TablixMember>
@@ -1934,9 +2062,9 @@
                                       <TablixMembers>
                                         <TablixMember>
                                           <TablixHeader>
-                                            <Size>3.01389in</Size>
+                                            <Size>1.65in</Size>
                                             <CellContents>
-                                              <Textbox Name="Textbox376">
+                                              <Textbox Name="Textbox17">
                                                 <CanGrow>true</CanGrow>
                                                 <KeepTogether>true</KeepTogether>
                                                 <Paragraphs>
@@ -1954,7 +2082,7 @@
                                                     </Style>
                                                   </Paragraph>
                                                 </Paragraphs>
-                                                <rd:DefaultName>Textbox376</rd:DefaultName>
+                                                <rd:DefaultName>Textbox17</rd:DefaultName>
                                                 <Style>
                                                   <Border>
                                                     <Color>LightGrey</Color>
@@ -1969,6 +2097,46 @@
                                               </Textbox>
                                             </CellContents>
                                           </TablixHeader>
+                                          <TablixMembers>
+                                            <TablixMember>
+                                              <TablixHeader>
+                                                <Size>3.01389in</Size>
+                                                <CellContents>
+                                                  <Textbox Name="Textbox376">
+                                                    <CanGrow>true</CanGrow>
+                                                    <KeepTogether>true</KeepTogether>
+                                                    <Paragraphs>
+                                                      <Paragraph>
+                                                        <TextRuns>
+                                                          <TextRun>
+                                                            <Value />
+                                                            <Style>
+                                                              <FontSize>8pt</FontSize>
+                                                            </Style>
+                                                          </TextRun>
+                                                        </TextRuns>
+                                                        <Style>
+                                                          <TextAlign>Center</TextAlign>
+                                                        </Style>
+                                                      </Paragraph>
+                                                    </Paragraphs>
+                                                    <rd:DefaultName>Textbox376</rd:DefaultName>
+                                                    <Style>
+                                                      <Border>
+                                                        <Color>LightGrey</Color>
+                                                        <Style>Solid</Style>
+                                                      </Border>
+                                                      <VerticalAlign>Middle</VerticalAlign>
+                                                      <PaddingLeft>2pt</PaddingLeft>
+                                                      <PaddingRight>2pt</PaddingRight>
+                                                      <PaddingTop>2pt</PaddingTop>
+                                                      <PaddingBottom>2pt</PaddingBottom>
+                                                    </Style>
+                                                  </Textbox>
+                                                </CellContents>
+                                              </TablixHeader>
+                                            </TablixMember>
+                                          </TablixMembers>
                                         </TablixMember>
                                       </TablixMembers>
                                     </TablixMember>
@@ -2214,9 +2382,9 @@
                                       <TablixMembers>
                                         <TablixMember>
                                           <TablixHeader>
-                                            <Size>3.01389in</Size>
+                                            <Size>1.65in</Size>
                                             <CellContents>
-                                              <Textbox Name="Textbox355">
+                                              <Textbox Name="Textbox18">
                                                 <CanGrow>true</CanGrow>
                                                 <KeepTogether>true</KeepTogether>
                                                 <Paragraphs>
@@ -2234,7 +2402,7 @@
                                                     </Style>
                                                   </Paragraph>
                                                 </Paragraphs>
-                                                <rd:DefaultName>Textbox355</rd:DefaultName>
+                                                <rd:DefaultName>Textbox18</rd:DefaultName>
                                                 <Style>
                                                   <Border>
                                                     <Color>LightGrey</Color>
@@ -2249,6 +2417,46 @@
                                               </Textbox>
                                             </CellContents>
                                           </TablixHeader>
+                                          <TablixMembers>
+                                            <TablixMember>
+                                              <TablixHeader>
+                                                <Size>3.01389in</Size>
+                                                <CellContents>
+                                                  <Textbox Name="Textbox355">
+                                                    <CanGrow>true</CanGrow>
+                                                    <KeepTogether>true</KeepTogether>
+                                                    <Paragraphs>
+                                                      <Paragraph>
+                                                        <TextRuns>
+                                                          <TextRun>
+                                                            <Value />
+                                                            <Style>
+                                                              <FontSize>8pt</FontSize>
+                                                            </Style>
+                                                          </TextRun>
+                                                        </TextRuns>
+                                                        <Style>
+                                                          <TextAlign>Center</TextAlign>
+                                                        </Style>
+                                                      </Paragraph>
+                                                    </Paragraphs>
+                                                    <rd:DefaultName>Textbox355</rd:DefaultName>
+                                                    <Style>
+                                                      <Border>
+                                                        <Color>LightGrey</Color>
+                                                        <Style>Solid</Style>
+                                                      </Border>
+                                                      <VerticalAlign>Middle</VerticalAlign>
+                                                      <PaddingLeft>2pt</PaddingLeft>
+                                                      <PaddingRight>2pt</PaddingRight>
+                                                      <PaddingTop>2pt</PaddingTop>
+                                                      <PaddingBottom>2pt</PaddingBottom>
+                                                    </Style>
+                                                  </Textbox>
+                                                </CellContents>
+                                              </TablixHeader>
+                                            </TablixMember>
+                                          </TablixMembers>
                                         </TablixMember>
                                       </TablixMembers>
                                     </TablixMember>
@@ -2273,7 +2481,7 @@
             <Top>0.18278in</Top>
             <Left>0.01215in</Left>
             <Height>1.75in</Height>
-            <Width>11.84722in</Width>
+            <Width>14.38889in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2284,7 +2492,7 @@
         <Height>1.93278in</Height>
         <Style />
       </Body>
-      <Width>11.85937in</Width>
+      <Width>14.40104in</Width>
       <Page>
         <PageHeader>
           <Height>1.25in</Height>

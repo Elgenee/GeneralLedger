@@ -213,6 +213,8 @@
           <Property Name="intIDProductCharacteristic" Type="int" />
           <Property Name="intIDProductUnit" Type="int" />
           <Property Name="intRemainingCount" Type="int" />
+          <Property Name="curUnitPrice" Type="money" />
+          <Property Name="curSellingPrice" Type="money" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -2023,6 +2025,8 @@
           <NavigationProperty Name="PurchaseDetails" Relationship="GeneralLedgerModel.FK_PurchaseDetail_Product" FromRole="Product" ToRole="PurchaseDetail" />
           <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_Product" FromRole="Product" ToRole="Stock" />
           <NavigationProperty Name="SalesDetails" Relationship="GeneralLedgerModel.FK_SalesDetail_Product" FromRole="Product" ToRole="SalesDetail" />
+          <Property Name="curUnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="curSellingPrice" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -4486,6 +4490,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="curSellingPrice" ColumnName="curSellingPrice" />
+                <ScalarProperty Name="curUnitPrice" ColumnName="curUnitPrice" />
                 <ScalarProperty Name="intRemainingCount" ColumnName="intRemainingCount" />
                 <ScalarProperty Name="intIDProductUnit" ColumnName="intIDProductUnit" />
                 <ScalarProperty Name="strOffsetCenterBore" ColumnName="strOffsetCenterBore" />

@@ -19,6 +19,8 @@ namespace GeneralLedger.Tier.BO
 
         public string strDescription { get; set; }
 
+        public string strProduct { get; set; }
+
         public Decimal curDebit { get; set; }
         public Decimal curCredit { get; set; }
 

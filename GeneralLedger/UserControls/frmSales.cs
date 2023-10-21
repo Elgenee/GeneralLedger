@@ -1235,6 +1235,7 @@ namespace GeneralLedger.UserControls
             frmChooseProduct frmChooseProduct = new frmChooseProduct();
             frmChooseProduct.BringToFront();
             frmChooseProduct.TopMost = true;
+            frmChooseProduct.IsSales = true;
             DialogResult res = frmChooseProduct.ShowDialog(this);
 
             if (res == DialogResult.OK)
@@ -1313,7 +1314,7 @@ namespace GeneralLedger.UserControls
                     this.dgProduct.Columns[25].Name = "OffsetCenterBase";
                     this.dgProduct.Columns[25].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     this.dgProduct.Columns[26].Name = "Origin";
-                    this.dgProduct.Columns[27].Name = "Unit Price";
+                    this.dgProduct.Columns[27].Name = "Selling Price";
                     this.dgProduct.Columns[28].Name = "Quantity";
                     this.dgProduct.Columns[29].Name = "Total Quantity Price";
 
@@ -1325,8 +1326,8 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[2].Value = saleDetail.Product.strDescription;
                         //this.dgProduct.Rows[i].Cells[3].Value = saleDetail.Product.ProductCharacteristic.Id;
                         //this.dgProduct.Rows[i].Cells[4].Value = saleDetail.Product.ProductCharacteristic.strName;
-                        this.dgProduct.Rows[i].Cells[5].Value = saleDetail.Product.ProductCategory.Id;
-                        this.dgProduct.Rows[i].Cells[6].Value = saleDetail.Product.ProductCategory.strName;
+                        //this.dgProduct.Rows[i].Cells[5].Value = saleDetail.Product.ProductCategory.Id;
+                        //this.dgProduct.Rows[i].Cells[6].Value = saleDetail.Product.ProductCategory.strName;
                         this.dgProduct.Rows[i].Cells[7].Value = saleDetail.Product.ProductType.Id;
                         this.dgProduct.Rows[i].Cells[8].Value = saleDetail.Product.ProductType.strName;
                         this.dgProduct.Rows[i].Cells[9].Value = saleDetail.Product.ProductBrand.Id;
@@ -1347,7 +1348,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[24].Value = saleDetail.Product.strPattern;
                         this.dgProduct.Rows[i].Cells[25].Value = saleDetail.Product.strOffsetCenterBore;
                         this.dgProduct.Rows[i].Cells[26].Value = saleDetail.Product.strOrigin;
-                        this.dgProduct.Rows[i].Cells[27].Value = saleDetail.UnitPrice;
+                        this.dgProduct.Rows[i].Cells[27].Value = saleDetail.Product.curSellingPrice;
                         this.dgProduct.Rows[i].Cells[28].Value = saleDetail.Quantity;
                         this.dgProduct.Rows[i].Cells[29].Value = saleDetail.TotalPrice;
                         //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;

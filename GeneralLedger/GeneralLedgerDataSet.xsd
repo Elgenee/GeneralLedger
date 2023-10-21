@@ -356,7 +356,7 @@
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="spRPTSalesProoflistTableAdapter" GeneratorDataComponentClassName="spRPTSalesProoflistTableAdapter" Name="spRPTSalesProoflist" UserDataComponentName="spRPTSalesProoflistTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="GeneralLedgerConnectionString (Settings)" DbObjectName="GeneralLedger.dbo.spRPTSalesProoflist" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="GeneralLedgerConnectionString (Settings)" DbObjectName="GeneralLedger.dbo.spRPTSalesProoflist" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.spRPTSalesProoflist</CommandText>
@@ -380,6 +380,8 @@
               <Mapping SourceColumn="curCredit" DataSetColumn="curCredit" />
               <Mapping SourceColumn="strDescription" DataSetColumn="strDescription" />
               <Mapping SourceColumn="strCustomer" DataSetColumn="strCustomer" />
+              <Mapping SourceColumn="intSalesId" DataSetColumn="intSalesId" />
+              <Mapping SourceColumn="strProduct" DataSetColumn="strProduct" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -442,7 +444,7 @@
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="spRPTPurchaseProoflistTableAdapter" GeneratorDataComponentClassName="spRPTPurchaseProoflistTableAdapter" Name="spRPTPurchaseProoflist" UserDataComponentName="spRPTPurchaseProoflistTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="GeneralLedgerConnectionString (Settings)" DbObjectName="GeneralLedger.dbo.spRPTPurchaseProoflist" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="GeneralLedgerConnectionString (Settings)" DbObjectName="GeneralLedger.dbo.spRPTPurchaseProoflist" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.spRPTPurchaseProoflist</CommandText>
@@ -466,6 +468,7 @@
               <Mapping SourceColumn="curCredit" DataSetColumn="curCredit" />
               <Mapping SourceColumn="strDescription" DataSetColumn="strDescription" />
               <Mapping SourceColumn="strSupplier" DataSetColumn="strSupplier" />
+              <Mapping SourceColumn="strProduct" DataSetColumn="strProduct" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -525,6 +528,37 @@
               <Mapping SourceColumn="strDescription" DataSetColumn="strDescription" />
               <Mapping SourceColumn="strSupplier" DataSetColumn="strSupplier" />
               <Mapping SourceColumn="TransactionType" DataSetColumn="TransactionType" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="spRPTSalesProoflist1TableAdapter" GeneratorDataComponentClassName="spRPTSalesProoflist1TableAdapter" Name="spRPTSalesProoflist1" UserDataComponentName="spRPTSalesProoflist1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="GeneralLedgerConnectionString (Settings)" DbObjectName="GeneralLedger.dbo.spRPTSalesProoflist" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.spRPTSalesProoflist</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@datDateFrom" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="date" DbType="Date" Direction="Input" ParameterName="@datDateTo" Precision="10" ProviderType="Date" Scale="0" Size="3" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="intSalesId" DataSetColumn="intSalesId" />
+              <Mapping SourceColumn="strBookType" DataSetColumn="strBookType" />
+              <Mapping SourceColumn="strTransactionNumber" DataSetColumn="strTransactionNumber" />
+              <Mapping SourceColumn="datBatchDate" DataSetColumn="datBatchDate" />
+              <Mapping SourceColumn="strTransactionCode" DataSetColumn="strTransactionCode" />
+              <Mapping SourceColumn="COA" DataSetColumn="COA" />
+              <Mapping SourceColumn="COASub" DataSetColumn="COASub" />
+              <Mapping SourceColumn="curDebit" DataSetColumn="curDebit" />
+              <Mapping SourceColumn="curCredit" DataSetColumn="curCredit" />
+              <Mapping SourceColumn="strDescription" DataSetColumn="strDescription" />
+              <Mapping SourceColumn="strCustomer" DataSetColumn="strCustomer" />
+              <Mapping SourceColumn="strProduct" DataSetColumn="strProduct" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -994,6 +1028,14 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="intSalesId" msprop:Generator_ColumnPropNameInRow="intSalesId" msprop:Generator_ColumnPropNameInTable="intSalesIdColumn" msprop:Generator_ColumnVarNameInTable="columnintSalesId" msprop:Generator_UserColumnName="intSalesId" type="xs:int" minOccurs="0" />
+              <xs:element name="strProduct" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="strProduct" msprop:Generator_ColumnPropNameInTable="strProductColumn" msprop:Generator_ColumnVarNameInTable="columnstrProduct" msprop:Generator_UserColumnName="strProduct" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1144,10 +1186,81 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="strProduct" msprop:Generator_ColumnPropNameInRow="strProduct" msprop:Generator_ColumnPropNameInTable="strProductColumn" msprop:Generator_ColumnVarNameInTable="columnstrProduct" msprop:Generator_UserColumnName="strProduct" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="spRPTPaymentProoflist" msprop:Generator_RowClassName="spRPTPaymentProoflistRow" msprop:Generator_RowEvHandlerName="spRPTPaymentProoflistRowChangeEventHandler" msprop:Generator_RowDeletedName="spRPTPaymentProoflistRowDeleted" msprop:Generator_RowDeletingName="spRPTPaymentProoflistRowDeleting" msprop:Generator_RowEvArgName="spRPTPaymentProoflistRowChangeEvent" msprop:Generator_TablePropName="spRPTPaymentProoflist" msprop:Generator_RowChangedName="spRPTPaymentProoflistRowChanged" msprop:Generator_UserTableName="spRPTPaymentProoflist" msprop:Generator_RowChangingName="spRPTPaymentProoflistRowChanging" msprop:Generator_TableClassName="spRPTPaymentProoflistDataTable" msprop:Generator_TableVarName="tablespRPTPaymentProoflist">
+        <xs:element name="spRPTPaymentProoflist" msprop:Generator_RowEvHandlerName="spRPTPaymentProoflistRowChangeEventHandler" msprop:Generator_RowDeletedName="spRPTPaymentProoflistRowDeleted" msprop:Generator_RowDeletingName="spRPTPaymentProoflistRowDeleting" msprop:Generator_RowEvArgName="spRPTPaymentProoflistRowChangeEvent" msprop:Generator_TablePropName="spRPTPaymentProoflist" msprop:Generator_RowChangedName="spRPTPaymentProoflistRowChanged" msprop:Generator_UserTableName="spRPTPaymentProoflist" msprop:Generator_RowChangingName="spRPTPaymentProoflistRowChanging" msprop:Generator_RowClassName="spRPTPaymentProoflistRow" msprop:Generator_TableClassName="spRPTPaymentProoflistDataTable" msprop:Generator_TableVarName="tablespRPTPaymentProoflist">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="strBookType" msprop:Generator_ColumnPropNameInTable="strBookTypeColumn" msprop:Generator_ColumnPropNameInRow="strBookType" msprop:Generator_UserColumnName="strBookType" msprop:Generator_ColumnVarNameInTable="columnstrBookType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="strTransactionNumber" msprop:Generator_ColumnPropNameInTable="strTransactionNumberColumn" msprop:Generator_ColumnPropNameInRow="strTransactionNumber" msprop:Generator_UserColumnName="strTransactionNumber" msprop:Generator_ColumnVarNameInTable="columnstrTransactionNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="datBatchDate" msprop:Generator_ColumnPropNameInTable="datBatchDateColumn" msprop:Generator_ColumnPropNameInRow="datBatchDate" msprop:Generator_UserColumnName="datBatchDate" msprop:Generator_ColumnVarNameInTable="columndatBatchDate" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="strTransactionCode" msprop:Generator_ColumnPropNameInTable="strTransactionCodeColumn" msprop:Generator_ColumnPropNameInRow="strTransactionCode" msprop:Generator_UserColumnName="strTransactionCode" msprop:Generator_ColumnVarNameInTable="columnstrTransactionCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COA" msprop:Generator_ColumnPropNameInTable="COAColumn" msprop:Generator_ColumnPropNameInRow="COA" msprop:Generator_UserColumnName="COA" msprop:Generator_ColumnVarNameInTable="columnCOA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COASub" msprop:Generator_ColumnPropNameInTable="COASubColumn" msprop:Generator_ColumnPropNameInRow="COASub" msprop:Generator_UserColumnName="COASub" msprop:Generator_ColumnVarNameInTable="columnCOASub" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="curDebit" msprop:Generator_ColumnPropNameInTable="curDebitColumn" msprop:Generator_ColumnPropNameInRow="curDebit" msprop:Generator_UserColumnName="curDebit" msprop:Generator_ColumnVarNameInTable="columncurDebit" type="xs:decimal" minOccurs="0" />
+              <xs:element name="curCredit" msprop:Generator_ColumnPropNameInTable="curCreditColumn" msprop:Generator_ColumnPropNameInRow="curCredit" msprop:Generator_UserColumnName="curCredit" msprop:Generator_ColumnVarNameInTable="columncurCredit" type="xs:decimal" minOccurs="0" />
+              <xs:element name="strDescription" msprop:Generator_ColumnPropNameInTable="strDescriptionColumn" msprop:Generator_ColumnPropNameInRow="strDescription" msprop:Generator_UserColumnName="strDescription" msprop:Generator_ColumnVarNameInTable="columnstrDescription" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="strSupplier" msprop:Generator_ColumnPropNameInTable="strSupplierColumn" msprop:Generator_ColumnPropNameInRow="strSupplier" msprop:Generator_UserColumnName="strSupplier" msprop:Generator_ColumnVarNameInTable="columnstrSupplier" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="spRPTInventoryProoflist" msprop:Generator_RowClassName="spRPTInventoryProoflistRow" msprop:Generator_RowEvHandlerName="spRPTInventoryProoflistRowChangeEventHandler" msprop:Generator_RowDeletedName="spRPTInventoryProoflistRowDeleted" msprop:Generator_RowDeletingName="spRPTInventoryProoflistRowDeleting" msprop:Generator_RowEvArgName="spRPTInventoryProoflistRowChangeEvent" msprop:Generator_TablePropName="spRPTInventoryProoflist" msprop:Generator_RowChangedName="spRPTInventoryProoflistRowChanged" msprop:Generator_UserTableName="spRPTInventoryProoflist" msprop:Generator_RowChangingName="spRPTInventoryProoflistRowChanging" msprop:Generator_TableClassName="spRPTInventoryProoflistDataTable" msprop:Generator_TableVarName="tablespRPTInventoryProoflist">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="strBookType" msprop:Generator_UserColumnName="strBookType" msprop:Generator_ColumnPropNameInTable="strBookTypeColumn" msprop:Generator_ColumnPropNameInRow="strBookType" msprop:Generator_ColumnVarNameInTable="columnstrBookType" minOccurs="0">
@@ -1208,12 +1321,20 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="TransactionType" msprop:Generator_UserColumnName="TransactionType" msprop:Generator_ColumnPropNameInTable="TransactionTypeColumn" msprop:Generator_ColumnPropNameInRow="TransactionType" msprop:Generator_ColumnVarNameInTable="columnTransactionType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="spRPTInventoryProoflist" msprop:Generator_RowEvHandlerName="spRPTInventoryProoflistRowChangeEventHandler" msprop:Generator_RowDeletedName="spRPTInventoryProoflistRowDeleted" msprop:Generator_RowDeletingName="spRPTInventoryProoflistRowDeleting" msprop:Generator_RowEvArgName="spRPTInventoryProoflistRowChangeEvent" msprop:Generator_TablePropName="spRPTInventoryProoflist" msprop:Generator_RowChangedName="spRPTInventoryProoflistRowChanged" msprop:Generator_RowChangingName="spRPTInventoryProoflistRowChanging" msprop:Generator_TableClassName="spRPTInventoryProoflistDataTable" msprop:Generator_RowClassName="spRPTInventoryProoflistRow" msprop:Generator_TableVarName="tablespRPTInventoryProoflist" msprop:Generator_UserTableName="spRPTInventoryProoflist">
+        <xs:element name="spRPTSalesProoflist1" msprop:Generator_RowEvHandlerName="spRPTSalesProoflist1RowChangeEventHandler" msprop:Generator_RowDeletedName="spRPTSalesProoflist1RowDeleted" msprop:Generator_RowDeletingName="spRPTSalesProoflist1RowDeleting" msprop:Generator_RowEvArgName="spRPTSalesProoflist1RowChangeEvent" msprop:Generator_TablePropName="spRPTSalesProoflist1" msprop:Generator_RowChangedName="spRPTSalesProoflist1RowChanged" msprop:Generator_RowChangingName="spRPTSalesProoflist1RowChanging" msprop:Generator_TableClassName="spRPTSalesProoflist1DataTable" msprop:Generator_RowClassName="spRPTSalesProoflist1Row" msprop:Generator_TableVarName="tablespRPTSalesProoflist1" msprop:Generator_UserTableName="spRPTSalesProoflist1">
           <xs:complexType>
             <xs:sequence>
+              <xs:element name="intSalesId" msprop:Generator_ColumnPropNameInRow="intSalesId" msprop:Generator_ColumnPropNameInTable="intSalesIdColumn" msprop:Generator_ColumnVarNameInTable="columnintSalesId" msprop:Generator_UserColumnName="intSalesId" type="xs:int" minOccurs="0" />
               <xs:element name="strBookType" msprop:Generator_ColumnPropNameInRow="strBookType" msprop:Generator_ColumnPropNameInTable="strBookTypeColumn" msprop:Generator_ColumnVarNameInTable="columnstrBookType" msprop:Generator_UserColumnName="strBookType" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -1265,17 +1386,17 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="strSupplier" msprop:Generator_ColumnPropNameInRow="strSupplier" msprop:Generator_ColumnPropNameInTable="strSupplierColumn" msprop:Generator_ColumnVarNameInTable="columnstrSupplier" msprop:Generator_UserColumnName="strSupplier" minOccurs="0">
+              <xs:element name="strCustomer" msprop:Generator_ColumnPropNameInRow="strCustomer" msprop:Generator_ColumnPropNameInTable="strCustomerColumn" msprop:Generator_ColumnVarNameInTable="columnstrCustomer" msprop:Generator_UserColumnName="strCustomer" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2147483647" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="TransactionType" msprop:Generator_ColumnPropNameInRow="TransactionType" msprop:Generator_ColumnPropNameInTable="TransactionTypeColumn" msprop:Generator_ColumnVarNameInTable="columnTransactionType" msprop:Generator_UserColumnName="TransactionType" minOccurs="0">
+              <xs:element name="strProduct" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="strProduct" msprop:Generator_ColumnPropNameInTable="strProductColumn" msprop:Generator_ColumnVarNameInTable="columnstrProduct" msprop:Generator_UserColumnName="strProduct" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
+                    <xs:maxLength value="4000" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

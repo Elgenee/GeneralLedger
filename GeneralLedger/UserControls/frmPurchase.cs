@@ -861,6 +861,7 @@ namespace GeneralLedger.UserControls
             frmChooseProduct frmChooseProduct = new frmChooseProduct();
             frmChooseProduct.BringToFront();
             frmChooseProduct.TopMost = true;
+            frmChooseProduct.IsPurchase = true;
             DialogResult res = frmChooseProduct.ShowDialog(this);
 
             if (res == DialogResult.OK)

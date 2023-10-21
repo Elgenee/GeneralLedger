@@ -554,6 +554,8 @@ namespace GeneralLedger.Tier.DAL
                                 strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
                                 strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"]),
                                 strCustomer = ReferenceEquals(reader["strCustomer"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strCustomer"]),
+                                strProduct = ReferenceEquals(reader["strProduct"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strProduct"])
+
 
                             };
 
@@ -599,6 +601,8 @@ namespace GeneralLedger.Tier.DAL
                                 strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
                                 strBookType = ReferenceEquals(reader["strBookType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBookType"]),
                                 strSupplier = ReferenceEquals(reader["strSupplier"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strSupplier"]),
+                                strProduct = ReferenceEquals(reader["strProduct"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strProduct"])
+
 
                             };
 

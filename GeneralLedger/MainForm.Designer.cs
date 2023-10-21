@@ -67,7 +67,6 @@
             this.btnChartOfAccounts = new MetroFramework.Controls.MetroTile();
             this.btnJournalEntry = new MetroFramework.Controls.MetroTile();
             this.LoginUser = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControlMain.SuspendLayout();
             this.metroTabPageHome.SuspendLayout();
             this.SuspendLayout();
@@ -745,22 +744,11 @@
             this.LoginUser.TabIndex = 6;
             this.LoginUser.Text = "LoginUser";
             // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(1327, 498);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(84, 20);
-            this.metroLabel1.TabIndex = 7;
-            this.metroLabel1.Text = "metroLabel1";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2739, 1017);
-            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.LoginUser);
             this.Controls.Add(this.metroTabControlMain);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -820,6 +808,5 @@
         private MetroFramework.Controls.MetroTile btnAPDMCM;
         private MetroFramework.Controls.MetroTile btnProductUnit;
         private MetroFramework.Controls.MetroTile btnStockInquiry;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }

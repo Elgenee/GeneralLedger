@@ -14,6 +14,8 @@ namespace GeneralLedger.Tier.BO
         public string strTransactionCode { get; set; }
         public string strCustomer { get; set; }
 
+        public string strProduct { get; set; }
+
         public string COA { get; set; }
         public string COASub { get; set; }
 

@@ -440,13 +440,15 @@ namespace GeneralLedger.UserControls
                 Product.ProductBrandID = (this.cbProductBrand.SelectedItem == null) ? 0 : ((Tier.BO.ProductBrand)this.cbProductBrand.SelectedItem).ID;
                 Product.LocationID = 1;
                 Product.strCode = this.txtCode.Text;
-                //Product.UnitPrice = decimal.TryParse(this.txtUnitPrice.Text, out decimalParser) ? decimalParser : 0;
+               
                 Product.strPR = this.txtPR.Text;
                 Product.strPCD = this.txtPCD.Text;
                 Product.strMFLM = this.txtMFLM.Text;
                 Product.strOffsetCenterBase = this.txtOffsetCenterBore.Text;
                 Product.strOrigin = this.txtOrigin.Text;
                 Product.strPattern = this.txtPattern.Text;
+                Product.UnitPrice = decimal.TryParse(this.txtUnitPrice.Text, out decimalParser) ? decimalParser : 0;
+                Product.SellingPrice = decimal.TryParse(this.txtSellingPrice.Text, out decimalParser) ? decimalParser : 0;
                 //Product.ProductCharacteristic = new ProductCharacteristic
                 //{
                 //    ID = (this.cbCharacteristic.SelectedItem == null) ? 0 : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).ID,
@@ -644,7 +646,8 @@ namespace GeneralLedger.UserControls
                     this.txtPattern.Text = sp.Product.strPattern.ToString();
                     this.txtOffsetCenterBore.Text = sp.Product.strOffsetCenterBase.ToString();
                     this.txtOrigin.Text = sp.Product.strOrigin.ToString();
-                    //this.txtUnitPrice.Text = sp.Product.UnitPrice.ToString();
+                    this.txtUnitPrice.Text = sp.Product.UnitPrice.ToString();
+                    this.txtSellingPrice.Text = sp.Product.SellingPrice.ToString();
 
                     //this.txtPerPiecePerBox.Text = sp.Product.PerPieceBox.ToString();
                     this.cbLocations.SelectedValue = sp.Product.Location.ID;
@@ -698,7 +701,8 @@ namespace GeneralLedger.UserControls
             this.cbProductUnit.SelectedIndex = -1;
             this.cbPriceType.SelectedIndex = -1;
             this.txtCode.Text = string.Empty;
-            //this.txtUnitPrice.Text = string.Empty;
+            this.txtUnitPrice.Text = string.Empty;
+            this.txtSellingPrice.Text = string.Empty;
             this.txtPR.Text = string.Empty;
             this.txtPCD.Text = string.Empty;
             this.txtMFLM.Text = string.Empty;

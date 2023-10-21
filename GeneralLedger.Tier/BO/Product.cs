@@ -30,6 +30,7 @@ namespace GeneralLedger.Tier.BO
         public string strOffsetCenterBase { get; set; }
         public string strOrigin { get; set; }
         public decimal UnitPrice { get; set; }
+        public decimal SellingPrice { get; set; }
         public int intRemainingCount { get; set; }
         public PriceType PriceType { get; set; }
         public ProductBrand ProductBrand { get; set; }
