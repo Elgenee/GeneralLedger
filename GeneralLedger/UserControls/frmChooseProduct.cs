@@ -187,7 +187,7 @@ namespace GeneralLedger.UserControls
                     product.strOrigin = item.strOrigin;
                     product.intRemainingCount = item.intRemainingCount;
                     product.curUnitPrice = item.UnitPrice;
-                    product.curSellingPrice = item.SellingPrice;
+                    //product.curSellingPrice = item.SellingPrice;
 
      
                     //product.ProductStatusID = item.ProductStatusID;
@@ -204,7 +204,7 @@ namespace GeneralLedger.UserControls
 
                     //display all the data in productList to the dgProduct with the following columns
                     //id, productname, description, productcharacteristicid, productcharacteristicname, productcategoryid, productcategoryname, producttypeid, producttypename, productbrandid, productbrandname, perpiecebox, locationid, locationname, productcolorid, productcolorname, productsizeid, productsizename, productunitid, productunitname, code, productstatusid, productstatusname
-                    this.dgProduct.ColumnCount = 30;
+                    this.dgProduct.ColumnCount = 29;
                     this.dgProduct.Columns[0].Name = "ID";
                     this.dgProduct.Columns[0].Visible = false;
                     this.dgProduct.Columns[1].Name = "Product Name";
@@ -253,7 +253,7 @@ namespace GeneralLedger.UserControls
                     this.dgProduct.Columns[26].Name = "Origin";
                     this.dgProduct.Columns[27].Name = "Remaining Count";
                     this.dgProduct.Columns[28].Name = "UnitPrice";
-                    this.dgProduct.Columns[29].Name = "SellingPrice";
+                   // this.dgProduct.Columns[29].Name = "SellingPrice";
 
                     //loop through the productList and display all the data in productList to the datagridview
                     //
@@ -290,7 +290,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[26].Value = product.strOrigin;
                         this.dgProduct.Rows[i].Cells[27].Value = product.intRemainingCount;
                         this.dgProduct.Rows[i].Cells[28].Value = Math.Round(product.curUnitPrice.Value,2);
-                        this.dgProduct.Rows[i].Cells[29].Value = Math.Round(product.curSellingPrice.Value,2);
+                       // this.dgProduct.Rows[i].Cells[29].Value = Math.Round(product.curSellingPrice.Value,2);
                     }
                     setRowNumber(this.dgProduct);
 
@@ -405,7 +405,7 @@ namespace GeneralLedger.UserControls
                 product.intRemainingCount = Convert.ToInt32(this.dgProduct.Rows[selectedRow].Cells[27].Value);
                 //assign unit price to txtUnitPrice
                 product.curUnitPrice = Convert.ToDecimal(this.dgProduct.Rows[selectedRow].Cells[28].Value);
-                product.curSellingPrice = Convert.ToDecimal(this.dgProduct.Rows[selectedRow].Cells[29].Value);
+                //product.curSellingPrice = Convert.ToDecimal(this.dgProduct.Rows[selectedRow].Cells[29].Value);
 
                 //this.ProductQuantity = Convert.ToInt32(this.dgProduct.Rows[selectedRow].Cells[28].Value);
                 //this.ProductTotalQuantityPrice = Convert.ToDecimal(this.dgProduct.Rows[selectedRow].Cells[29].Value);
@@ -466,7 +466,7 @@ namespace GeneralLedger.UserControls
                     this.txtOrigin.Text = this.Product.strOrigin;
                     this.txtRemainingCount.Text = this.Product.intRemainingCount.ToString();
                     this.txtUnitPrice.Text = this.Product.curUnitPrice.ToString();
-                    this.txtSellingPrice.Text = this.Product.curSellingPrice.ToString();
+                    //this.txtSellingPrice.Text = this.Product.curSellingPrice.ToString();
 
                 }
 
@@ -593,17 +593,20 @@ namespace GeneralLedger.UserControls
 
         private void frmChooseProduct_Load(object sender, EventArgs e)
         {
-            if (IsPurchase)
-            {
-                this.metroLabel18.Visible = false;
-                this.txtSellingPrice.Visible = false;
-            }
 
-            if (IsSales)
-            {
-                this.metroLabel13.Visible = false;
-                this.txtUnitPrice.Visible = false;
-            }
+            this.metroLabel18.Visible = false;
+            this.txtSellingPrice.Visible = false;
+            //if (IsPurchase)
+            //{
+            //    this.metroLabel18.Visible = false;
+            //    this.txtSellingPrice.Visible = false;
+            //}
+
+            //if (IsSales)
+            //{
+            //    this.metroLabel13.Visible = false;
+            //    this.txtUnitPrice.Visible = false;
+            //}
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)
@@ -616,19 +619,38 @@ namespace GeneralLedger.UserControls
                     return;
                 }
 
+
                 if (IsSales)
                 {
-                    this.ProductTotalUnitPrice = string.IsNullOrEmpty(this.txtSellingPrice.Text) ? 0 : Convert.ToDecimal(this.txtSellingPrice.Text);
-                    this.ProductQuantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
-                    this.ProductTotalQuantityPrice = this.ProductTotalUnitPrice * this.ProductQuantity;
-                }
+                    var remainingCount = Convert.ToInt32(this.txtRemainingCount.Value);
+                    var quantity = Convert.ToInt32(this.txtQuantity.Value);
 
-                if (IsPurchase)
-                {
-                    this.ProductTotalUnitPrice = string.IsNullOrEmpty(this.txtUnitPrice.Text) ? 0 : Convert.ToDecimal(this.txtUnitPrice.Text);
-                    this.ProductQuantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
-                    this.ProductTotalQuantityPrice = this.ProductTotalUnitPrice * this.ProductQuantity;
+                    if (remainingCount < quantity)
+                    {
+                        MessageBox.Show("Remaining count is not enough");
+                        return;
+                    }
+
                 }
+              
+
+                //if (IsSales)
+                //{
+                //    this.ProductTotalUnitPrice = string.IsNullOrEmpty(this.txtSellingPrice.Text) ? 0 : Convert.ToDecimal(this.txtSellingPrice.Text);
+                //    this.ProductQuantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
+                //    this.ProductTotalQuantityPrice = this.ProductTotalUnitPrice * this.ProductQuantity;
+                //}
+
+                //if (IsPurchase)
+                //{
+                //    this.ProductTotalUnitPrice = string.IsNullOrEmpty(this.txtUnitPrice.Text) ? 0 : Convert.ToDecimal(this.txtUnitPrice.Text);
+                //    this.ProductQuantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
+                //    this.ProductTotalQuantityPrice = this.ProductTotalUnitPrice * this.ProductQuantity;
+                //}
+
+                this.ProductTotalUnitPrice = string.IsNullOrEmpty(this.txtUnitPrice.Text) ? 0 : Convert.ToDecimal(this.txtUnitPrice.Text);
+                this.ProductQuantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
+                this.ProductTotalQuantityPrice = this.ProductTotalUnitPrice * this.ProductQuantity;
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -658,23 +680,29 @@ namespace GeneralLedger.UserControls
         private void txtQuantity_ValueChanged_1(object sender, EventArgs e)
         {
 
-            if (IsPurchase)
-            {
-                var unitPrice = string.IsNullOrEmpty(this.txtUnitPrice.Text) ? 0 : Convert.ToDecimal(this.txtUnitPrice.Text);
-                //var unitPrice = Convert.ToDecimal(this.txtUnitPrice.Text);
-                var quantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
-                var totalPrice = unitPrice * quantity;
-                this.txtTotalPrice.Text = totalPrice.ToString();
-            }
+            var unitPrice = string.IsNullOrEmpty(this.txtUnitPrice.Text) ? 0 : Convert.ToDecimal(this.txtUnitPrice.Text);
+            //var unitPrice = Convert.ToDecimal(this.txtUnitPrice.Text);
+            var quantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
+            var totalPrice = unitPrice * quantity;
+            this.txtTotalPrice.Text = totalPrice.ToString();
 
-            if (IsSales)
-            {
-                var sellingPrice = string.IsNullOrEmpty(this.txtSellingPrice.Text) ? 0 : Convert.ToDecimal(this.txtSellingPrice.Text);
-                //var unitPrice = Convert.ToDecimal(this.txtUnitPrice.Text);
-                var quantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
-                var totalPrice = sellingPrice * quantity;
-                this.txtTotalPrice.Text = totalPrice.ToString();
-            }
+            //if (IsPurchase)
+            //{
+            //    var unitPrice = string.IsNullOrEmpty(this.txtUnitPrice.Text) ? 0 : Convert.ToDecimal(this.txtUnitPrice.Text);
+            //    //var unitPrice = Convert.ToDecimal(this.txtUnitPrice.Text);
+            //    var quantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
+            //    var totalPrice = unitPrice * quantity;
+            //    this.txtTotalPrice.Text = totalPrice.ToString();
+            //}
+
+            //if (IsSales)
+            //{
+            //    var sellingPrice = string.IsNullOrEmpty(this.txtSellingPrice.Text) ? 0 : Convert.ToDecimal(this.txtSellingPrice.Text);
+            //    //var unitPrice = Convert.ToDecimal(this.txtUnitPrice.Text);
+            //    var quantity = string.IsNullOrEmpty(this.txtQuantity.Text) ? 0 : Convert.ToInt32(this.txtQuantity.Text);
+            //    var totalPrice = sellingPrice * quantity;
+            //    this.txtTotalPrice.Text = totalPrice.ToString();
+            //}
 
 
         }

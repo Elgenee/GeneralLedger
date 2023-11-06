@@ -45,7 +45,6 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> intIDProductUnit { get; set; }
         public Nullable<int> intRemainingCount { get; set; }
         public Nullable<decimal> curUnitPrice { get; set; }
-        public Nullable<decimal> curSellingPrice { get; set; }
     
         public virtual PriceType PriceType { get; set; }
         public virtual ProductBrand ProductBrand { get; set; }

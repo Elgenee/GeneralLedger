@@ -14,7 +14,7 @@ namespace GeneralLedger.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private GeneralLedgerContext _generalLedgerContext { get; set; }
+        public GeneralLedgerContext _generalLedgerContext { get; set; }
 
         public ISaleRepository Sale { get; set; }
 

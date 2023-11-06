@@ -48,7 +48,7 @@ namespace GeneralLedger.UserControls
 
                     //display all the data in productList to the dgProduct with the following columns
                     //id, productname, description, productcharacteristicid, productcharacteristicname, productcategoryid, productcategoryname, producttypeid, producttypename, productbrandid, productbrandname, perpiecebox, locationid, locationname, productcolorid, productcolorname, productsizeid, productsizename, productunitid, productunitname, code, productstatusid, productstatusname
-                    this.dgProduct.ColumnCount = 29;
+                    this.dgProduct.ColumnCount = 28;
                     this.dgProduct.Columns[0].Name = "ID";
                     this.dgProduct.Columns[0].Visible = false;
                     this.dgProduct.Columns[1].Name = "Product Name";
@@ -87,7 +87,7 @@ namespace GeneralLedger.UserControls
                     this.dgProduct.Columns[25].Name = "OffsetCenterBase";
                     this.dgProduct.Columns[26].Name = "Origin";
                     this.dgProduct.Columns[27].Name = "UnitPrice";
-                    this.dgProduct.Columns[28].Name = "SellingPrice";
+                    //this.dgProduct.Columns[28].Name = "SellingPrice";
 
                     //loop through the productList and display all the data in productList to the datagridview
                     //
@@ -123,61 +123,10 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[25].Value = product.strOffsetCenterBase;
                         this.dgProduct.Rows[i].Cells[26].Value = product.strOrigin;
                         this.dgProduct.Rows[i].Cells[27].Value = string.Format("{0:0.00}", product.UnitPrice);
-                        this.dgProduct.Rows[i].Cells[28].Value = string.Format("{0:0.00}", product.SellingPrice);  
+                        //this.dgProduct.Rows[i].Cells[28].Value = string.Format("{0:0.00}", product.SellingPrice);  
                     }
 
-                  
-
-
-
-
-                    //for (int i = 0; i < productList.Count; i++)
-                    //{
-                    //    //display all the data in productList to the datagridview
-                    //    Product product = productList[i];
-                    //    this.dgProduct.Rows[i].Cells[0].Value = product.ID;
-                    //    this.dgProduct.Rows[i].Cells[1].Value = product.ProductName;
-                    //    this.dgProduct.Rows[i].Cells[2].Value = product.Description;
-                    //    this.dgProduct.Rows[i].Cells[3].Value = product.ProductCharacteristic.ID;
-                    //    this.dgProduct.Rows[i].Cells[4].Value = product.ProductCharacteristic.Name;
-                    //    this.dgProduct.Rows[i].Cells[5].Value = product.ProductCategory.ID;
-                    //    this.dgProduct.Rows[i].Cells[6].Value = product.ProductCategory.Name;
-                    //    this.dgProduct.Rows[i].Cells[7].Value = product.ProductType.ID;
-                    //    this.dgProduct.Rows[i].Cells[8].Value = product.ProductType.Name;
-                    //    this.dgProduct.Rows[i].Cells[9].Value = product.ProductBrand.ID;
-                    //    this.dgProduct.Rows[i].Cells[10].Value = product.ProductBrand.Name;
-                    //    this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
-                    //    this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
-                    //    this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
-                    //    this.dgProduct.Rows[i].Cells[14].Value = product.ProductColor.ID;
-                    //    this.dgProduct.Rows[i].Cells[15].Value = product.ProductColor.Name;
-                    //    this.dgProduct.Rows[i].Cells[16].Value = product.ProductSize.ID;
-                    //    this.dgProduct.Rows[i].Cells[17].Value = product.ProductSize.Name;
-                    //    this.dgProduct.Rows[i].Cells[18].Value = product.ProductUnit.ID;
-                    //    this.dgProduct.Rows[i].Cells[19].Value = product.ProductUnit.Name;
-                    //    this.dgProduct.Rows[i].Cells[20].Value = product.strCode;
-
-                    //    //this.dgProduct.Rows[i].Cells[22].Value = product.ProductStatus.Name;
-                    //    //
-
-                    //    this.dgProduct.Rows[i].Cells[0].Value = productList[i].ID;
-                    //    this.dgProduct.Rows[i].Cells[1].Value = productList[i].ProductName;
-                    //    this.dgProduct.Rows[i].Cells[2].Value = productList[i].Description;
-                    //    this.dgProduct.Rows[i].Cells[3].Value = productList[i].ProductCharacteristic.ID;
-                    //    this.dgProduct.Rows[i].Cells[4].Value = productList[i].ProductCharacteristic.Name;
-                    //    this.dgProduct.Rows[i].Cells[5].Value = productList[i].ProductCategory.ID;
-                    //    this.dgProduct.Rows[i].Cells[6].Value = productList[i].ProductCategory.Name;
-                    //    this.dgProduct.Rows[i].Cells[7].Value = productList[i].ProductType.ID;
-                    //    this.dgProduct.Rows[i].Cells[8].Value = productList[i].ProductType.Name;
-                    //    this.dgProduct.Rows[i].Cells[9].Value = productList[i].ProductBrand.ID;
-                    //    this.dgProduct.Rows[i].Cells[10].Value = productList[i].ProductBrand.Name;
-                    //    this.dgProduct.Rows[i].Cells[11].Value = productList[i].PerPieceBox;
-                    //    this.dgProduct.Rows[i].Cells[12].Value = productList[i].Location.ID;
-                    //    this.dgProduct.Rows[i].Cells[13].Value = productList[i].Location.Name;
-
-                    //}
                     setRowNumber(this.dgProduct);
-
                 }
 
             }
@@ -247,7 +196,7 @@ namespace GeneralLedger.UserControls
                         strOffsetCenterBase = this.dgProduct.Rows[e.RowIndex].Cells[25].Value.ToString(),
                         strOrigin = this.dgProduct.Rows[e.RowIndex].Cells[26].Value.ToString(),
                         UnitPrice = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[27].Value.ToString()),      
-                        SellingPrice = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[28].Value.ToString()),
+                        //SellingPrice = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[28].Value.ToString()),
                         ProductBrand = new Tier.BO.ProductBrand {
                             ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[9].Value.ToString()),
                             Name = this.dgProduct.Rows[e.RowIndex].Cells[10].Value.ToString()

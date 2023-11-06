@@ -320,10 +320,12 @@ namespace GeneralLedger.Persistence.Services
             var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1072).SingleOrDefault(); // COST OF GOODS SOLD
             var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
 
+            var inventorySaleTotal = sale.SalesDetails.Sum(i => i.TotalPrice).Value;
+
             var gLTranDetail = new List<tblGLTranDetail>
             {
-                CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, 0, sale.Total.Value),
-                CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, sale.Total.Value, 0),
+                CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, 0, inventorySaleTotal),
+                CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, inventorySaleTotal, 0),
             };
 
             //AddGLTranHeader(unitOfWork, purchase, gLTranDetail);
@@ -560,13 +562,19 @@ namespace GeneralLedger.Persistence.Services
             // Add new sales details and stock records
             foreach (var updatedDetail in updatedSalesDetailsList)
             {
+
+                int productID = (updatedDetail.ProductId.HasValue) ? updatedDetail.ProductId.Value : 0;
+                var product = unitOfWork.Products.GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(productID);
+
                 updatedSale.SalesDetails.Add(new SalesDetail
                 {
                     //SaleId = updatedDetail.Id, 
                     ProductId = updatedDetail.ProductId,
                     Quantity = updatedDetail.Quantity,
                     TotalPrice = updatedDetail.TotalPrice,
-                    UnitPrice = updatedDetail.UnitPrice
+                    UnitPrice = updatedDetail.UnitPrice,
+                    Product = product
+
                 });
 
                 updatedSale.Stocks.Add(new Stock
@@ -761,7 +769,11 @@ namespace GeneralLedger.Persistence.Services
             // Re-insert the GLTran entries for the sale
             var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1072).SingleOrDefault(); // Example: COST OF GOODS SOLD
             var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
-       
+
+
+            var inventorySaleTotal = updatedSale.SalesDetails.Sum(i => i.TotalPrice).Value;
+
+
             var gLTranDetail = new List<tblGLTranDetail>
             {
                  new tblGLTranDetail
@@ -769,14 +781,14 @@ namespace GeneralLedger.Persistence.Services
                     intIDMasCoa = (int)journalEntry1.intIDMasCOA,
                     intIDMasCoaSub = journalEntry1.ID,
                     curCredit = 0,
-                    curDebit = updatedSale.Total.Value,
+                    curDebit = inventorySaleTotal,
                     intIDGLTranHeader = existingGLTranHeader.ID
                 },
                 new tblGLTranDetail
                 {
                     intIDMasCoa = (int)journalEntry1.intIDMasCOA,
                     intIDMasCoaSub = journalEntry3.ID,
-                    curCredit =  updatedSale.Total.Value,
+                    curCredit =  inventorySaleTotal,
                     curDebit = 0,
                     intIDGLTranHeader = existingGLTranHeader.ID
                 }

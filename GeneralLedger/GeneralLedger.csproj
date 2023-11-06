@@ -55,10 +55,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>B54E76088AFED675E84FF0D1BD69BD2EDEC376CC</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>4C19A626D38B28794E191A991AE8BDB409491BE4</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GeneralLedger_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>GeneralLedger_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -932,6 +932,7 @@
     <None Include="GeneralLedgerDataSet1.xss">
       <DependentUpon>GeneralLedgerDataSet1.xsd</DependentUpon>
     </None>
+    <None Include="GeneralLedger_1_TemporaryKey.pfx" />
     <None Include="GeneralLedger_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\GeneralLedger.GeneralLedgerDataSet1TableAdapters.rptISExpenseTableAdapter.datasource" />

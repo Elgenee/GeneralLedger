@@ -19,6 +19,8 @@ namespace GeneralLedger.Core.Services
 
         List<Product> GetProduct();
 
+        Product GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(int id);
+
 
     }
 }

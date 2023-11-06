@@ -31,6 +31,14 @@ namespace GeneralLedger.Persistence.Services
             }
         }
 
+        public Product GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(int id)
+        {
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.Products.GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(id);
+            }
+        }
+
         public void Remove(Product product)
         {
 

@@ -480,13 +480,18 @@ namespace GeneralLedger.Persistence.Services
             // Add new purchase details and stock records
             foreach (var updatedDetail in updatedPurchaseDetailsList)
             {
+
+                int productID = (updatedDetail.ProductId.HasValue) ? updatedDetail.ProductId.Value : 0;
+                var product = unitOfWork.Products.GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(productID);
+
                 updatedPurchase.PurchaseDetails.Add(new PurchaseDetail
                 {
                     //PurchaseId = updatedDetail.Id,
                     ProductId = updatedDetail.ProductId,
                     Quantity = updatedDetail.Quantity,
                     TotalPrice = updatedDetail.TotalPrice,
-                    UnitPrice = updatedDetail.UnitPrice
+                    UnitPrice = updatedDetail.UnitPrice,
+                    Product = product
                 });
 
                 updatedPurchase.Stocks.Add(new Stock

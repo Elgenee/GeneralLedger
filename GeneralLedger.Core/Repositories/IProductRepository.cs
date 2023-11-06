@@ -12,7 +12,7 @@ namespace GeneralLedger.Core.Repositories
     {
         //add additional methods here
         //for example
-        //Product GetProductWithCategory(int id);
+        Product GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(int id);
     }
  
 }

@@ -126,7 +126,8 @@ namespace GeneralLedger.UserControls
                     product.strOffsetCenterBore = item.strOffsetCenterBase;
                     product.strOrigin = item.strOrigin;
                     product.intRemainingCount = item.intRemainingCount;
-                    //product.curUnitPrice = item.UnitPrice;
+                    product.curUnitPrice = item.UnitPrice;
+                    product.intRemainingCount = item.intRemainingCount;
 
                     //product.ProductStatusID = item.ProductStatusID;
                     //product.ProductStatusName = item.ProductStatusName;
@@ -142,7 +143,7 @@ namespace GeneralLedger.UserControls
 
                     //display all the data in productList to the dgProduct with the following columns
                     //id, productname, description, productcharacteristicid, productcharacteristicname, productcategoryid, productcategoryname, producttypeid, producttypename, productbrandid, productbrandname, perpiecebox, locationid, locationname, productcolorid, productcolorname, productsizeid, productsizename, productunitid, productunitname, code, productstatusid, productstatusname
-                    this.dgProduct.ColumnCount = 28;
+                    this.dgProduct.ColumnCount = 30;
                     this.dgProduct.Columns[0].Name = "ID";
                     this.dgProduct.Columns[0].Visible = false;
                     this.dgProduct.Columns[1].Name = "Product Name";
@@ -190,14 +191,17 @@ namespace GeneralLedger.UserControls
                     this.dgProduct.Columns[25].Name = "OffsetCenterBase";
                     this.dgProduct.Columns[26].Name = "Origin";
                     this.dgProduct.Columns[27].Name = "Remaining Count";
-                    //this.dgProduct.Columns[27].Name = "UnitPrice";
+                    this.dgProduct.Columns[28].Name = "UnitPrice";
+                    this.dgProduct.Columns[29].Name = "Total";
 
                     //loop through the productList and display all the data in productList to the datagridview
                     //
                     for (int i = 0; i < productsListDomain.Count; i++)
                     {
-                        //display all the data in productList to the datagridview
+                    
+                      //display all the data in productList to the datagridview
                         Product product = productsListDomain[i];
+                        var total = product.intRemainingCount.Value * product.curUnitPrice.Value;
                         this.dgProduct.Rows[i].Cells[0].Value = product.Id;
                         this.dgProduct.Rows[i].Cells[1].Value = product.strProductName;
                         this.dgProduct.Rows[i].Cells[2].Value = product.strDescription;
@@ -226,7 +230,8 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[25].Value = product.strOffsetCenterBore;
                         this.dgProduct.Rows[i].Cells[26].Value = product.strOrigin;
                         this.dgProduct.Rows[i].Cells[27].Value = product.intRemainingCount;
-                        //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
+                        this.dgProduct.Rows[i].Cells[28].Value = string.Format("{0:0.00}", product.curUnitPrice);
+                        this.dgProduct.Rows[i].Cells[29].Value = string.Format("{0:0.00}", total);
                     }
                     setRowNumber(this.dgProduct);
                 }
