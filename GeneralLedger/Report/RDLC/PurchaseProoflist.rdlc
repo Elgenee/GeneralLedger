@@ -487,6 +487,10 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </TopBorder>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -523,6 +527,10 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </TopBorder>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1554,6 +1562,16 @@
                                                   <TablixMembers>
                                                     <TablixMember>
                                                       <Group Name="Details" />
+                                                      <SortExpressions>
+                                                        <SortExpression>
+                                                          <Value>=Fields!curDebit.Value</Value>
+                                                          <Direction>Descending</Direction>
+                                                        </SortExpression>
+                                                        <SortExpression>
+                                                          <Value>=Fields!curCredit.Value</Value>
+                                                          <Direction>Descending</Direction>
+                                                        </SortExpression>
+                                                      </SortExpressions>
                                                     </TablixMember>
                                                   </TablixMembers>
                                                 </TablixMember>

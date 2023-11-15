@@ -7376,6 +7376,8 @@ namespace GeneralLedger {
             
             private global::System.Data.DataColumn columnTransactionType;
             
+            private global::System.Data.DataColumn columnstrProduct;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public spRPTInventoryProoflistDataTable() {
@@ -7499,6 +7501,14 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strProductColumn {
+                get {
+                    return this.columnstrProduct;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -7534,7 +7544,7 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spRPTInventoryProoflistRow AddspRPTInventoryProoflistRow(string strBookType, string strTransactionNumber, string datBatchDate, string strTransactionCode, string COA, string COASub, decimal curDebit, decimal curCredit, string strDescription, string strSupplier, string TransactionType) {
+            public spRPTInventoryProoflistRow AddspRPTInventoryProoflistRow(string strBookType, string strTransactionNumber, string datBatchDate, string strTransactionCode, string COA, string COASub, decimal curDebit, decimal curCredit, string strDescription, string strSupplier, string TransactionType, string strProduct) {
                 spRPTInventoryProoflistRow rowspRPTInventoryProoflistRow = ((spRPTInventoryProoflistRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         strBookType,
@@ -7547,7 +7557,8 @@ namespace GeneralLedger {
                         curCredit,
                         strDescription,
                         strSupplier,
-                        TransactionType};
+                        TransactionType,
+                        strProduct};
                 rowspRPTInventoryProoflistRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowspRPTInventoryProoflistRow);
                 return rowspRPTInventoryProoflistRow;
@@ -7581,6 +7592,7 @@ namespace GeneralLedger {
                 this.columnstrDescription = base.Columns["strDescription"];
                 this.columnstrSupplier = base.Columns["strSupplier"];
                 this.columnTransactionType = base.Columns["TransactionType"];
+                this.columnstrProduct = base.Columns["strProduct"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7608,6 +7620,8 @@ namespace GeneralLedger {
                 base.Columns.Add(this.columnstrSupplier);
                 this.columnTransactionType = new global::System.Data.DataColumn("TransactionType", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTransactionType);
+                this.columnstrProduct = new global::System.Data.DataColumn("strProduct", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrProduct);
                 this.columnstrBookType.MaxLength = 2147483647;
                 this.columnstrTransactionNumber.MaxLength = 500;
                 this.columndatBatchDate.MaxLength = 12;
@@ -12340,6 +12354,22 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strProduct {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryProoflist.strProductColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strProduct\' in table \'spRPTInventoryProoflist\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryProoflist.strProductColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsstrBookTypeNull() {
                 return this.IsNull(this.tablespRPTInventoryProoflist.strBookTypeColumn);
             }
@@ -12468,6 +12498,18 @@ namespace GeneralLedger {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetTransactionTypeNull() {
                 this[this.tablespRPTInventoryProoflist.TransactionTypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrProductNull() {
+                return this.IsNull(this.tablespRPTInventoryProoflist.strProductColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrProductNull() {
+                this[this.tablespRPTInventoryProoflist.strProductColumn] = global::System.Convert.DBNull;
             }
         }
         
