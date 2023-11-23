@@ -40,6 +40,7 @@ namespace GeneralLedger.Core.Domain
         public Nullable<decimal> COMMAmount { get; set; }
         public Nullable<decimal> CFAmount { get; set; }
         public Nullable<bool> IsSalesReturn { get; set; }
+        public string AdditionalDescription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountReceivableAdjustment> AccountReceivableAdjustments { get; set; }

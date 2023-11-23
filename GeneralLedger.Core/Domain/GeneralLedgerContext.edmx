@@ -276,6 +276,7 @@
           <Property Name="SIDR" Type="nvarchar" MaxLength="500" />
           <Property Name="Total" Type="money" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="AdditionalDescription" Type="nvarchar(max)" />
           <Property Name="Terms" Type="int" />
           <Property Name="IsFullyPaid" Type="bit" />
           <Property Name="LastPaymentDate" Type="date" />
@@ -334,6 +335,7 @@
           <Property Name="intIdAgent" Type="int" />
           <Property Name="TransactionDate" Type="date" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="AdditionalDescription" Type="nvarchar(max)" />
           <Property Name="Terms" Type="int" />
           <Property Name="IsFullyPaid" Type="bit" />
           <Property Name="LastPaymentDate" Type="date" />
@@ -3069,6 +3071,7 @@
           <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_Purchase" FromRole="Purchase" ToRole="Stock" />
           <NavigationProperty Name="PurchaseDetails" Relationship="GeneralLedgerModel.FK_PurchaseDetail_PurchaseDetail" FromRole="Purchase" ToRole="PurchaseDetail" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Purchase" FromRole="Purchase" ToRole="tblGLTranHeader" />
+          <Property Name="AdditionalDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Purchase_Suppliers">
           <End Type="GeneralLedgerModel.Supplier" Role="Supplier" Multiplicity="0..1" />
@@ -3884,6 +3887,7 @@
           <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_Sales" FromRole="Sale" ToRole="Stock" />
           <NavigationProperty Name="SalesDetails" Relationship="GeneralLedgerModel.FK_SalesDetail_Sales" FromRole="Sale" ToRole="SalesDetail" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_Sales" FromRole="Sale" ToRole="tblGLTranHeader" />
+          <Property Name="AdditionalDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_AccountReceivableAdjustments_Sales">
           <End Type="GeneralLedgerModel.Sale" Role="Sale" Multiplicity="0..1" />
@@ -4748,6 +4752,7 @@
           <EntitySetMapping Name="Purchases">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Purchase">
               <MappingFragment StoreEntitySet="Purchase">
+                <ScalarProperty Name="AdditionalDescription" ColumnName="AdditionalDescription" />
                 <ScalarProperty Name="IsPurchaseReturn" ColumnName="IsPurchaseReturn" />
                 <ScalarProperty Name="LastPaymentDate" ColumnName="LastPaymentDate" />
                 <ScalarProperty Name="IsFullyPaid" ColumnName="IsFullyPaid" />
@@ -5627,6 +5632,7 @@
           <EntitySetMapping Name="Sales">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Sale">
               <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="AdditionalDescription" ColumnName="AdditionalDescription" />
                 <ScalarProperty Name="IsSalesReturn" ColumnName="IsSalesReturn" />
                 <ScalarProperty Name="CFAmount" ColumnName="CFAmount" />
                 <ScalarProperty Name="COMMAmount" ColumnName="COMMAmount" />

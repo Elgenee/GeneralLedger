@@ -105,6 +105,7 @@ namespace GeneralLedger.UserControls
                      intIDSupplier = this.SupplierId,
                      Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
                      TransactionDate = this.dtTransactionDate.Value,
+                     AdditionalDescription = this.txtAdditionalDescription.Text,
                      Description = this.txtDescription.Text
                     };
 
@@ -114,6 +115,7 @@ namespace GeneralLedger.UserControls
                     if (Purchase != null)
                     {
                         MessageBox.Show("Successfully saved");
+                        this.txtDescription.Text = Purchase.Description;
                     }
                 }
                 else {
@@ -122,6 +124,7 @@ namespace GeneralLedger.UserControls
                     Purchase.SIDR = this.txtSIDR.Text;
                     Purchase.TRANo = this.txtTransactionNo.Text;
                     Purchase.intIDSupplier = this.SupplierId;
+                    Purchase.AdditionalDescription = this.txtAdditionalDescription.Text;
                     Purchase.Description = this.txtDescription.Text;
                     Purchase.Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
                     Purchase.TransactionDate = this.dtTransactionDate.Value;       
@@ -134,7 +137,8 @@ namespace GeneralLedger.UserControls
                             this.txtPurchaseTotal.Text = string.Empty;
                         }
                         MessageBox.Show("Successfully saved");
-                     
+                        this.txtDescription.Text = Purchase.Description;
+
                     }
 
                 }
@@ -489,6 +493,7 @@ namespace GeneralLedger.UserControls
                     this.txtPONo.Text = sp.Purchase.PONo;
                     this.dtTransactionDate.Value = (DateTime)sp.Purchase.TransactionDate;
                     this.txtTotal.Text = sp.Purchase.Total.ToString();
+                    this.txtAdditionalDescription.Text = sp.Purchase.AdditionalDescription.ToString();
                     this.txtDescription.Text = sp.Purchase.Description.ToString();
                     this.txtSIDR.Text = sp.Purchase.SIDR.ToString();
                     this.txtSupplierID.Text = sp.Purchase.intIDSupplier.ToString();
@@ -800,6 +805,7 @@ namespace GeneralLedger.UserControls
                         this.txtPurchaseTotal.Text = string.Empty;
                         this.txtTotalInventoryCredit.Text = string.Empty;
                         this.txtTotalInventoryDebit.Text = string.Empty;
+                        this.txtAdditionalDescription.Text = string.Empty;
                         GLTranDetail = new List<tblGLTranDetail>();
                         MessageBox.Show("Successfully deleted");
 
@@ -844,6 +850,7 @@ namespace GeneralLedger.UserControls
             this.dgJournalEntry.Refresh();
             this.GLTranDetail.Clear();
             this.txtPurchaseTotal.Text = string.Empty;
+            this.txtAdditionalDescription.Text = string.Empty;
             GLTranDetail = new List<tblGLTranDetail>();
     
 

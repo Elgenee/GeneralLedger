@@ -135,6 +135,22 @@ namespace GeneralLedger.Persistence.Services
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 AddSaleDetails(sale, saleDetailsList, unitOfWork);
+
+                StringBuilder productDetailsBuilder = new StringBuilder();
+                foreach (var detail in saleDetailsList)
+                {
+                    var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
+                    var size = product.ProductSize; // Assuming Product has a Size property
+                    var color = product.ProductColor; // Assuming Product has a Color property
+
+                    productDetailsBuilder.AppendLine("# " + product.strProductName +
+                                                     "; Size: " + size.strName +
+                                                     "; Color: " + color.strName +
+                                                     "; Qty: " + detail.Quantity.ToString());
+                }
+
+          
+                sale.Description = productDetailsBuilder.ToString();
                 unitOfWork.Sale.Add(sale);
                 UpdateSaleCount(unitOfWork, sale, saleDetailsList);
                 AddSalesCustomerLedger(unitOfWork, sale);
@@ -147,14 +163,18 @@ namespace GeneralLedger.Persistence.Services
 
         private void AddSaleDetails(Sale sale, List<SalesDetail> saleDetailsList, UnitOfWork unitOfWork)
         {
+            
             foreach (var item in saleDetailsList)
             {
+         
+                var product = unitOfWork.Products.GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(item.ProductId ?? 0);
                 sale.SalesDetails.Add(new SalesDetail
                 {
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
                     TotalPrice = item.TotalPrice,
-                    UnitPrice = item.UnitPrice
+                    UnitPrice = item.UnitPrice,
+                    Product = product
                 });
 
                 sale.Stocks.Add(new Stock
@@ -163,7 +183,8 @@ namespace GeneralLedger.Persistence.Services
                     QuantityIn = 0,
                     QuantityOut = item.Quantity,
                     StockTransactionTypeID = 2, // Assuming 2 is the ID for sale transaction
-                    SalesID = sale.Id
+                    SalesID = sale.Id,
+                    Product = product
                 });
             }
         }
@@ -257,12 +278,20 @@ namespace GeneralLedger.Persistence.Services
 
         private void AddCustomGLTranForSale(UnitOfWork unitOfWork, Sale sale, List<tblGLTranDetail> tblGLTranDetail)
         {
+
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(sale.Description);
+            productDetailsBuilder.AppendLine("( " + sale.AdditionalDescription + " )");
+
             var gLTranHeader = new tblGLTranHeader
             {
                 curCreditAmount = tblGLTranDetail.Sum(d => d.curCredit),
                 curDebitAmount = tblGLTranDetail.Sum(d => d.curDebit),
                 intIDGLBookType = 6, // Update this ID based on your system configuration for sales
-                strDescription = sale.Description,
+                strDescription = productDetailsBuilder.ToString(),
+                strTransactionCode = sale.TRANo,
+                //strDescription = sale.Description,
                 datBatchDate = sale.TransactionDate,
                 datInsertedDate = DateTime.Now,
                 intIdSales = sale.Id,
@@ -285,13 +314,19 @@ namespace GeneralLedger.Persistence.Services
 
         private void AddGLTranHeaderForSale(UnitOfWork unitOfWork, Sale sale, List<tblGLTranDetail> gLTranDetail)
         {
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(sale.Description);
+            productDetailsBuilder.AppendLine("( " + sale.AdditionalDescription + " )");
+
             var gLTranHeader = new tblGLTranHeader
             {
                 curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
                 curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                 intIDGLBookType = 6, // Update if necessary
-                strDescription = sale.Description,
+                strDescription = productDetailsBuilder.ToString(),
                 datBatchDate = sale.TransactionDate,
+                strTransactionCode = sale.TRANo,
                 datInsertedDate = DateTime.Now,
                 tblGLTranDetails = gLTranDetail,
                 intIdSales = sale.Id,
@@ -509,11 +544,26 @@ namespace GeneralLedger.Persistence.Services
                 saleInDb.COMMAmount = updatedSale.COMMAmount;
                 saleInDb.CFAmount = updatedSale.CFAmount;
                 saleInDb.Total = updatedSale.Total;
+                saleInDb.AdditionalDescription = updatedSale.AdditionalDescription;
                 saleInDb.TransactionDate = updatedSale.TransactionDate;
-                saleInDb.Description = updatedSale.Description;
+
+                StringBuilder productDetailsBuilder = new StringBuilder();
+                foreach (var detail in updatedSalesDetailsList)
+                {
+                    var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
+                    var size = product.ProductSize; // Assuming Product has a Size property
+                    var color = product.ProductColor; // Assuming Product has a Color property
+
+                    productDetailsBuilder.AppendLine("# " + product.strProductName +
+                                                     "; Size: " + size.strName +
+                                                     "; Color: " + color.strName +
+                                                     "; Qty: " + detail.Quantity.ToString());
+                }
+                saleInDb.Description = string.Concat(productDetailsBuilder.ToString());
 
                 saleInDb.SalesDetails = updatedSale.SalesDetails;
                 saleInDb.Stocks = updatedSale.Stocks;
+                updatedSale.Description = saleInDb.Description;
 
                 // 3. Update remaining stock count for products in sale details
                 UpdateRemainingCountForSale(unitOfWork, updatedSale, updatedSalesDetailsList); // Assuming there's an equivalent function for sale
@@ -529,6 +579,8 @@ namespace GeneralLedger.Persistence.Services
 
                 // 7. Commit changes to the database
                 unitOfWork.Complete();
+
+         
 
                 return updatedSale;
             }
@@ -663,9 +715,15 @@ namespace GeneralLedger.Persistence.Services
                 }
             }
 
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(updatedSale.Description);
+            productDetailsBuilder.AppendLine("( " + updatedSale.AdditionalDescription + " )");
+
             existingGLTranHeader.datBatchDate = updatedSale.TransactionDate;
-            existingGLTranHeader.strDescription = updatedSale.Description;
+            existingGLTranHeader.strDescription = productDetailsBuilder.ToString();
             existingGLTranHeader.blnUseDefaultEntry = UseDefaultEntry;
+            existingGLTranHeader.strTransactionCode = updatedSale.TRANo;
 
             // Re-insert the GLTran entries for the sale
             if (UseDefaultEntry)
@@ -762,8 +820,14 @@ namespace GeneralLedger.Persistence.Services
                 //unitOfWork.GLTran.Remove(existingGLTranHeader);
             }
 
+
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(updatedSale.Description);
+            productDetailsBuilder.AppendLine("( " + updatedSale.AdditionalDescription + " )");
+
             existingGLTranHeader.datBatchDate = updatedSale.TransactionDate;
-            existingGLTranHeader.strDescription = updatedSale.Description;
+            existingGLTranHeader.strDescription = productDetailsBuilder.ToString();
             existingGLTranHeader.blnUseDefaultEntry = true;
 
             // Re-insert the GLTran entries for the sale

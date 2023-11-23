@@ -37,6 +37,7 @@ namespace GeneralLedger.Core.Domain
         public Nullable<bool> IsFullyPaid { get; set; }
         public Nullable<System.DateTime> LastPaymentDate { get; set; }
         public Nullable<bool> IsPurchaseReturn { get; set; }
+        public string AdditionalDescription { get; set; }
     
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

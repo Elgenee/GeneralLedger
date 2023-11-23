@@ -411,6 +411,7 @@ namespace GeneralLedger.UserControls
                         SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0,
                         COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0,
                         CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0,
+                        AdditionalDescription = this.txtAdditionalDescription.Text,
                         Description = this.txtDescription.Text
                     };
 
@@ -426,6 +427,7 @@ namespace GeneralLedger.UserControls
                     if (Sale != null)
                     {
                         MessageBox.Show("Successfully saved");
+                        this.txtDescription.Text = Sale.Description;
 
                     }
                 }
@@ -443,6 +445,7 @@ namespace GeneralLedger.UserControls
                     Sale.COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0;
                     Sale.CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0;
                     Sale.Description = this.txtDescription.Text;
+                    Sale.AdditionalDescription = this.txtAdditionalDescription.Text;
                     Sale = SaleServices.Update(Sale, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.SalesDetailsList);
                     this.SalesDetailsList = Sale.SalesDetails.ToList();
 
@@ -454,6 +457,7 @@ namespace GeneralLedger.UserControls
                     if (Sale != null)
                     {
                         MessageBox.Show("Successfully saved");
+                        this.txtDescription.Text = Sale.Description;
                     }
                 }
 
@@ -630,6 +634,7 @@ namespace GeneralLedger.UserControls
                     this.txtTransactionNo.Text = sje.Sale.TRANo;
                     this.dtTransactionDate.Value = (DateTime)sje.Sale.TransactionDate;
                     this.txtDescription.Text = sje.Sale.Description;
+                    this.txtAdditionalDescription.Text = sje.Sale.AdditionalDescription;
                     this.txtTotal.Text = sje.Sale.Total.ToString();
                     this.txtCustomerID.Text = sje.Sale.Customer.Id.ToString();
                     this.txtCustomerName.Text = sje.Sale.Customer.strName;
@@ -1106,6 +1111,7 @@ namespace GeneralLedger.UserControls
                         this.txtTotalInventoryCredit.Text = string.Empty;
                         this.txtTotalInventoryDebit.Text = string.Empty;
                         this.txtSalesTotal.Text = string.Empty;
+                        this.txtAdditionalDescription.Text = string.Empty;
                         GLTranDetail = new List<tblGLTranDetail>();
                         MessageBox.Show("Successfully deleted");
 
@@ -1152,6 +1158,7 @@ namespace GeneralLedger.UserControls
             this.txtTotalInventoryCredit.Text = string.Empty;
             this.txtTotalInventoryDebit.Text = string.Empty;
             this.txtSalesTotal.Text = string.Empty;
+            this.txtAdditionalDescription.Text = string.Empty;
             GLTranDetail = new List<tblGLTranDetail>();
            
 
@@ -1492,6 +1499,15 @@ namespace GeneralLedger.UserControls
             {
 
                 MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void txtDescription_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (e.KeyChar == '/')
+            {
+                e.Handled = true; // Suppress the '/' character
             }
         }
     }

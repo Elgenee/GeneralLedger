@@ -73,6 +73,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchSale.Rows[i].Cells["AgentId"].Value = saleResult[i].Agent.Id;
                         this.dgSearchSale.Rows[i].Cells["Agent"].Value = saleResult[i].Agent.Name;
                         this.dgSearchSale.Rows[i].Cells["Description"].Value = saleResult[i].Description;
+                        this.dgSearchSale.Rows[i].Cells["AdditionalDescription"].Value = saleResult[i].AdditionalDescription;
                         this.dgSearchSale.Rows[i].Cells["GLTranHeaderID"].Value = saleResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                         this.dgSearchSale.Rows[i].Cells["UseDefaultEntry"].Value = saleResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
                         this.dgSearchSale.Rows[i].Cells["SOPAmount"].Value = saleResult[i].SOPAmount;
@@ -117,7 +118,8 @@ namespace GeneralLedger.UserControls
                     var Total = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Total"].Value, DBNull.Value) ? 0 : Convert.ToDecimal(this.dgSearchSale.Rows[this.Index].Cells["Total"].Value); 
                     var intIdCustomer = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["CustomerId"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["CustomerId"].Value);  
                     var intIdAgent = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value);  
-                    var Description = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Description"].Value, DBNull.Value) ? string.Empty : Convert.ToString(this.dgSearchSale.Rows[this.Index].Cells["Description"].Value);  
+                    var Description = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Description"].Value, DBNull.Value) ? string.Empty : Convert.ToString(this.dgSearchSale.Rows[this.Index].Cells["Description"].Value);
+                    var AdditionalDescription = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["AdditionalDescription"].Value, DBNull.Value) ? string.Empty : Convert.ToString(this.dgSearchSale.Rows[this.Index].Cells["AdditionalDescription"].Value);
                     var Terms = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value , DBNull.Value) ? 0: Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["Terms"].Value);
                     var AgentId = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value, DBNull.Value) ? 0 : Convert.ToInt32(this.dgSearchSale.Rows[this.Index].Cells["AgentId"].Value);
                     var AgentName = ReferenceEquals(this.dgSearchSale.Rows[this.Index].Cells["Agent"].Value, DBNull.Value) ? string.Empty : Convert.ToString(this.dgSearchSale.Rows[this.Index].Cells["Agent"].Value);
@@ -144,6 +146,7 @@ namespace GeneralLedger.UserControls
                          CFAmount = CFAmount,
                          COMMAmount = COMMAmount,
                          IsFullyPaid = IsFullyPaid,
+                         AdditionalDescription = AdditionalDescription,
                         Agent = new Agent
                         {
                             Id = AgentId,

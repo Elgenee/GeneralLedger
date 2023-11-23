@@ -18,6 +18,21 @@ namespace GeneralLedger.Persistence.Services
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 AddPurchaseDetails(purchase, PurchaseDetailsList, unitOfWork);
+
+                StringBuilder productDetailsBuilder = new StringBuilder();
+                foreach (var detail in PurchaseDetailsList)
+                {
+                    var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
+                    var size = product.ProductSize; // Assuming Product has a Size property
+                    var color = product.ProductColor; // Assuming Product has a Color property
+
+                    productDetailsBuilder.AppendLine("# " + product.strProductName +
+                                                     "; Size: " + size.strName +
+                                                     "; Color: " + color.strName +
+                                                     "; Qty: " + detail.Quantity.ToString());
+                }
+
+                purchase.Description = productDetailsBuilder.ToString();
                 unitOfWork.Purchase.Add(purchase);
                 UpdateRemainingCount(unitOfWork,purchase, PurchaseDetailsList);
                 AddPurchaseSupplierLedger(unitOfWork, purchase);
@@ -62,12 +77,16 @@ namespace GeneralLedger.Persistence.Services
         {
             foreach (var item in PurchaseDetailsList)
             {
+
+             
+                var product = unitOfWork.Products.GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(item.ProductId ?? 0);
                 purchase.PurchaseDetails.Add(new PurchaseDetail
                 {
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
                     TotalPrice = item.TotalPrice,
-                    UnitPrice = item.UnitPrice
+                    UnitPrice = item.UnitPrice,
+                    Product = product
               
                 });
 
@@ -78,7 +97,8 @@ namespace GeneralLedger.Persistence.Services
                     QuantityIn = item.Quantity,
                     QuantityOut = 0,
                     StockTransactionTypeID = 1,
-                    PurchaseID = purchase.Id
+                    PurchaseID = purchase.Id,
+                    Product = product
                 });
 
             }
@@ -112,12 +132,17 @@ namespace GeneralLedger.Persistence.Services
 
             //AddGLTranHeader(unitOfWork, purchase, gLTranDetail);
 
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(purchase.Description);
+            productDetailsBuilder.AppendLine("( " + purchase.AdditionalDescription + " )");
+
             var gLTranHeader = new tblGLTranHeader
             {
                 curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
                 curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                 intIDGLBookType = 1011,
-                strDescription = purchase.Description,
+                strDescription = productDetailsBuilder.ToString(),
                 datBatchDate = purchase.TransactionDate,
                 datInsertedDate = DateTime.Now,
                 tblGLTranDetails = gLTranDetail,
@@ -169,13 +194,19 @@ namespace GeneralLedger.Persistence.Services
 
         private void AddGLTranHeader(UnitOfWork unitOfWork, Purchase purchase, List<tblGLTranDetail> gLTranDetail)
         {
+
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(purchase.Description);
+            productDetailsBuilder.AppendLine("( " + purchase.AdditionalDescription + " )");
             var gLTranHeader = new tblGLTranHeader
             {
                 curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
                 curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                 intIDGLBookType = 9,
-                strDescription = purchase.Description,
+                strDescription =  productDetailsBuilder.ToString(),
                 datBatchDate = purchase.TransactionDate,
+                strTransactionCode = purchase.TRANo,
                 datInsertedDate = DateTime.Now,
                 tblGLTranDetails = gLTranDetail,
                 intIdPurchase = purchase.Id,
@@ -186,13 +217,21 @@ namespace GeneralLedger.Persistence.Services
 
         private void AddCustomGLTran(UnitOfWork unitOfWork, Purchase purchase, List<tblGLTranDetail> tblGLTranDetail)
         {
+
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(purchase.Description);
+            productDetailsBuilder.AppendLine("( " + purchase.AdditionalDescription + " )");
+
+
             var gLTranHeader = new tblGLTranHeader
             {
                 curCreditAmount = tblGLTranDetail.Sum(d => d.curCredit),
                 curDebitAmount = tblGLTranDetail.Sum(d => d.curDebit),
                 intIDGLBookType = 9,
-                strDescription = purchase.Description,
+                strDescription = productDetailsBuilder.ToString(),
                 datBatchDate = purchase.TransactionDate,
+                strTransactionCode = purchase.TRANo,
                 datInsertedDate = DateTime.Now,
                 intIdPurchase = purchase.Id,
                 blnUseDefaultEntry = false
@@ -420,10 +459,24 @@ namespace GeneralLedger.Persistence.Services
                     pur.intIDSupplier = updatedPurchase.intIDSupplier;
                     pur.Total = updatedPurchase.Total;
                     pur.TransactionDate = updatedPurchase.TransactionDate;
-                    pur.Description = updatedPurchase.Description;
+
+                    StringBuilder productDetailsBuilder = new StringBuilder();
+                    foreach (var detail in updatedPurchaseDetailsList)
+                    {
+                        var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
+                        var size = product.ProductSize; // Assuming Product has a Size property
+                        var color = product.ProductColor; // Assuming Product has a Color property
+
+                        productDetailsBuilder.AppendLine("# " + product.strProductName +
+                                                         "; Size: " + size.strName +
+                                                         "; Color: " + color.strName +
+                                                         "; Qty: " + detail.Quantity.ToString());
+                    }
+                    pur.Description = string.Concat(productDetailsBuilder.ToString());
 
                     pur.PurchaseDetails = updatedPurchase.PurchaseDetails;
                     pur.Stocks = updatedPurchase.Stocks;
+                    updatedPurchase.Description = pur.Description;
                     // 3. Update remaining stock count for products in purchase details
                     UpdateRemainingCount(unitOfWork, updatedPurchase, updatedPurchaseDetailsList);
 
@@ -438,7 +491,7 @@ namespace GeneralLedger.Persistence.Services
 
                     // 6. Commit changes to the database
                     unitOfWork.Complete();
-
+                
                     return updatedPurchase;
                 }
             }
@@ -546,7 +599,12 @@ namespace GeneralLedger.Persistence.Services
             }
 
             existingGLTranHeader.datBatchDate = updatedPurchase.TransactionDate;
-            existingGLTranHeader.strDescription = updatedPurchase.Description;
+
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(updatedPurchase.Description);
+            productDetailsBuilder.AppendLine("( " + updatedPurchase.AdditionalDescription + " )");
+            existingGLTranHeader.strDescription = productDetailsBuilder.ToString();
             existingGLTranHeader.blnUseDefaultEntry = true;
 
             // Re-insert the GLTran entries for the purchase
@@ -600,8 +658,15 @@ namespace GeneralLedger.Persistence.Services
             }
 
             existingGLTranHeader.datBatchDate = updatedPurchase.TransactionDate;
-            existingGLTranHeader.strDescription = updatedPurchase.Description;
+
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(updatedPurchase.Description);
+            productDetailsBuilder.AppendLine("( " + updatedPurchase.AdditionalDescription + " )");
+
+            existingGLTranHeader.strDescription = productDetailsBuilder.ToString();
             existingGLTranHeader.blnUseDefaultEntry = UseDefaultEntry;
+            existingGLTranHeader.strTransactionCode = updatedPurchase.TRANo;
 
             // Re-insert the GLTran entries for the purchase
             if (UseDefaultEntry)

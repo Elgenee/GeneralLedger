@@ -44,6 +44,7 @@
             this.SIDR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Terms = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdditionalDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,15 +57,14 @@
             this.metroPanel1.Controls.Add(this.dgSearchPurchase);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 12;
-            this.metroPanel1.Location = new System.Drawing.Point(39, 140);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(29, 114);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1285, 478);
+            this.metroPanel1.Size = new System.Drawing.Size(964, 388);
             this.metroPanel1.TabIndex = 35;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 13;
+            this.metroPanel1.VerticalScrollbarSize = 10;
             // 
             // dgSearchPurchase
             // 
@@ -82,6 +82,7 @@
             this.SIDR,
             this.Total,
             this.Terms,
+            this.AdditionalDescription,
             this.Description,
             this.GLTranHeaderID,
             this.UseDefaultEntry});
@@ -96,20 +97,19 @@
             this.dgSearchPurchase.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgSearchPurchase.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgSearchPurchase.Location = new System.Drawing.Point(0, 0);
-            this.dgSearchPurchase.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgSearchPurchase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgSearchPurchase.Name = "dgSearchPurchase";
             this.dgSearchPurchase.ReadOnly = true;
             this.dgSearchPurchase.RowHeadersWidth = 51;
             this.dgSearchPurchase.RowTemplate.Height = 30;
-            this.dgSearchPurchase.Size = new System.Drawing.Size(1285, 478);
+            this.dgSearchPurchase.Size = new System.Drawing.Size(964, 388);
             this.dgSearchPurchase.TabIndex = 66;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(496, 74);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearch.Location = new System.Drawing.Point(372, 60);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(132, 28);
+            this.btnSearch.Size = new System.Drawing.Size(99, 23);
             this.btnSearch.TabIndex = 38;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseSelectable = true;
@@ -121,18 +121,16 @@
             // 
             // 
             this.txtCriteria.CustomButton.Image = null;
-            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(241, 2);
-            this.txtCriteria.CustomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCriteria.CustomButton.Location = new System.Drawing.Point(134, 1);
             this.txtCriteria.CustomButton.Name = "";
-            this.txtCriteria.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.txtCriteria.CustomButton.Size = new System.Drawing.Size(16, 17);
             this.txtCriteria.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtCriteria.CustomButton.TabIndex = 1;
             this.txtCriteria.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtCriteria.CustomButton.UseSelectable = true;
             this.txtCriteria.CustomButton.Visible = false;
             this.txtCriteria.Lines = new string[0];
-            this.txtCriteria.Location = new System.Drawing.Point(221, 74);
-            this.txtCriteria.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCriteria.Location = new System.Drawing.Point(166, 60);
             this.txtCriteria.MaxLength = 32767;
             this.txtCriteria.Name = "txtCriteria";
             this.txtCriteria.PasswordChar = '\0';
@@ -141,7 +139,7 @@
             this.txtCriteria.SelectionLength = 0;
             this.txtCriteria.SelectionStart = 0;
             this.txtCriteria.ShortcutsEnabled = true;
-            this.txtCriteria.Size = new System.Drawing.Size(267, 28);
+            this.txtCriteria.Size = new System.Drawing.Size(200, 23);
             this.txtCriteria.TabIndex = 36;
             this.txtCriteria.UseSelectable = true;
             this.txtCriteria.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -150,19 +148,17 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(48, 74);
-            this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel2.Location = new System.Drawing.Point(36, 60);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(53, 20);
+            this.metroLabel2.Size = new System.Drawing.Size(52, 19);
             this.metroLabel2.TabIndex = 37;
             this.metroLabel2.Text = "Criteria";
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(636, 74);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSelect.Location = new System.Drawing.Point(477, 60);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(132, 28);
+            this.btnSelect.Size = new System.Drawing.Size(99, 23);
             this.btnSelect.TabIndex = 39;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseSelectable = true;
@@ -183,7 +179,7 @@
             this.PONo.MinimumWidth = 6;
             this.PONo.Name = "PONo";
             this.PONo.ReadOnly = true;
-            this.PONo.Width = 73;
+            this.PONo.Width = 61;
             // 
             // TRANo
             // 
@@ -192,7 +188,7 @@
             this.TRANo.MinimumWidth = 6;
             this.TRANo.Name = "TRANo";
             this.TRANo.ReadOnly = true;
-            this.TRANo.Width = 82;
+            this.TRANo.Width = 68;
             // 
             // TransactionDate
             // 
@@ -217,7 +213,7 @@
             this.Supplier.MinimumWidth = 6;
             this.Supplier.Name = "Supplier";
             this.Supplier.ReadOnly = true;
-            this.Supplier.Width = 86;
+            this.Supplier.Width = 70;
             // 
             // SIDR
             // 
@@ -226,7 +222,7 @@
             this.SIDR.MinimumWidth = 6;
             this.SIDR.Name = "SIDR";
             this.SIDR.ReadOnly = true;
-            this.SIDR.Width = 68;
+            this.SIDR.Width = 58;
             // 
             // Total
             // 
@@ -235,7 +231,7 @@
             this.Total.MinimumWidth = 6;
             this.Total.Name = "Total";
             this.Total.ReadOnly = true;
-            this.Total.Width = 67;
+            this.Total.Width = 56;
             // 
             // Terms
             // 
@@ -244,7 +240,14 @@
             this.Terms.MinimumWidth = 6;
             this.Terms.Name = "Terms";
             this.Terms.ReadOnly = true;
-            this.Terms.Width = 75;
+            this.Terms.Width = 61;
+            // 
+            // AdditionalDescription
+            // 
+            this.AdditionalDescription.HeaderText = "AdditionalDescription";
+            this.AdditionalDescription.Name = "AdditionalDescription";
+            this.AdditionalDescription.ReadOnly = true;
+            this.AdditionalDescription.Visible = false;
             // 
             // Description
             // 
@@ -254,7 +257,7 @@
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
             this.Description.Visible = false;
-            this.Description.Width = 104;
+            this.Description.Width = 85;
             // 
             // GLTranHeaderID
             // 
@@ -275,15 +278,17 @@
             // 
             // SearchPurchase
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1362, 645);
+            this.ClientSize = new System.Drawing.Size(1022, 524);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtCriteria);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.btnSelect);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SearchPurchase";
+            this.Padding = new System.Windows.Forms.Padding(15, 49, 15, 16);
             this.Text = "SearchPurchase";
             this.metroPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchPurchase)).EndInit();
@@ -296,6 +301,10 @@
 
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private DevComponents.DotNetBar.Controls.DataGridViewX dgSearchPurchase;
+        private MetroFramework.Controls.MetroButton btnSearch;
+        private MetroFramework.Controls.MetroTextBox txtCriteria;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroButton btnSelect;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn PONo;
         private System.Windows.Forms.DataGridViewTextBoxColumn TRANo;
@@ -305,12 +314,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SIDR;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn Terms;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdditionalDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLTranHeaderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn UseDefaultEntry;
-        private MetroFramework.Controls.MetroButton btnSearch;
-        private MetroFramework.Controls.MetroTextBox txtCriteria;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroButton btnSelect;
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSelect = new MetroFramework.Controls.MetroButton();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.txtCriteria = new MetroFramework.Controls.MetroTextBox();
@@ -46,6 +46,7 @@
             this.AgentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Agent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdditionalDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsFullyPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GLTranHeaderID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UseDefaultEntry = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -138,20 +139,21 @@
             this.AgentId,
             this.Agent,
             this.Description,
+            this.AdditionalDescription,
             this.IsFullyPaid,
             this.GLTranHeaderID,
             this.UseDefaultEntry,
             this.SOPAmount,
             this.CFAmount,
             this.COMMAmount});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgSearchSale.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgSearchSale.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgSearchSale.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgSearchSale.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgSearchSale.Location = new System.Drawing.Point(0, 0);
@@ -275,6 +277,15 @@
             this.Description.Visible = false;
             this.Description.Width = 104;
             // 
+            // AdditionalDescription
+            // 
+            this.AdditionalDescription.HeaderText = "AdditionalDescription";
+            this.AdditionalDescription.MinimumWidth = 6;
+            this.AdditionalDescription.Name = "AdditionalDescription";
+            this.AdditionalDescription.ReadOnly = true;
+            this.AdditionalDescription.Visible = false;
+            this.AdditionalDescription.Width = 125;
+            // 
             // IsFullyPaid
             // 
             this.IsFullyPaid.HeaderText = "IsFullyPaid";
@@ -362,6 +373,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AgentId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Agent;
         private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdditionalDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsFullyPaid;
         private System.Windows.Forms.DataGridViewTextBoxColumn GLTranHeaderID;
         private System.Windows.Forms.DataGridViewTextBoxColumn UseDefaultEntry;

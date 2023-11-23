@@ -70,6 +70,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchPurchase.Rows[i].Cells["SIDR"].Value = purchaseResult[i].SIDR;
                         this.dgSearchPurchase.Rows[i].Cells["Total"].Value = string.Format("{0:0.00}", purchaseResult[i].Total);
                         this.dgSearchPurchase.Rows[i].Cells["Terms"].Value = purchaseResult[i].Terms;
+                        this.dgSearchPurchase.Rows[i].Cells["AdditionalDescription"].Value = purchaseResult[i].AdditionalDescription;
                         this.dgSearchPurchase.Rows[i].Cells["Description"].Value = purchaseResult[i].Description;
                         this.dgSearchPurchase.Rows[i].Cells["GLTranHeaderID"].Value = purchaseResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                         this.dgSearchPurchase.Rows[i].Cells["UseDefaultEntry"].Value = purchaseResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
@@ -112,6 +113,7 @@ namespace GeneralLedger.UserControls
                         },
                         SIDR = this.dgSearchPurchase.Rows[this.Index].Cells["SIDR"].Value.ToString(),
                         Total = Convert.ToDecimal(this.dgSearchPurchase.Rows[this.Index].Cells["Total"].Value.ToString()),
+                        AdditionalDescription = this.dgSearchPurchase.Rows[this.Index].Cells["AdditionalDescription"].Value.ToString(),
                         Description = this.dgSearchPurchase.Rows[this.Index].Cells["Description"].Value.ToString(),
                         tblGLTranHeaders = new List<tblGLTranHeader> {
                             new tblGLTranHeader {
