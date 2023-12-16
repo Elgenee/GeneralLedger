@@ -363,6 +363,11 @@ namespace GeneralLedger.Persistence.Services
                 CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, inventorySaleTotal, 0),
             };
 
+            StringBuilder productDetailsBuilder = new StringBuilder();
+
+            productDetailsBuilder.AppendLine(sale.Description);
+            productDetailsBuilder.AppendLine("( " + sale.AdditionalDescription + " )");
+
             //AddGLTranHeader(unitOfWork, purchase, gLTranDetail);
 
             var gLTranHeader = new tblGLTranHeader
@@ -370,7 +375,7 @@ namespace GeneralLedger.Persistence.Services
                 curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
                 curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                 intIDGLBookType = 1011,
-                strDescription = sale.Description,
+                strDescription = productDetailsBuilder.ToString(),
                 datBatchDate = sale.TransactionDate,
                 datInsertedDate = DateTime.Now,
                 tblGLTranDetails = gLTranDetail,
