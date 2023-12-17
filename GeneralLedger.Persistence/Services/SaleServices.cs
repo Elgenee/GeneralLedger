@@ -376,6 +376,7 @@ namespace GeneralLedger.Persistence.Services
                 curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                 intIDGLBookType = 1011,
                 strDescription = productDetailsBuilder.ToString(),
+                strTransactionCode = sale.PONo,
                 datBatchDate = sale.TransactionDate,
                 datInsertedDate = DateTime.Now,
                 tblGLTranDetails = gLTranDetail,
@@ -833,6 +834,7 @@ namespace GeneralLedger.Persistence.Services
 
             existingGLTranHeader.datBatchDate = updatedSale.TransactionDate;
             existingGLTranHeader.strDescription = productDetailsBuilder.ToString();
+            existingGLTranHeader.strTransactionCode = updatedSale.PONo;
             existingGLTranHeader.blnUseDefaultEntry = true;
 
             // Re-insert the GLTran entries for the sale
@@ -855,7 +857,7 @@ namespace GeneralLedger.Persistence.Services
                 },
                 new tblGLTranDetail
                 {
-                    intIDMasCoa = (int)journalEntry1.intIDMasCOA,
+                    intIDMasCoa = (int)journalEntry3.intIDMasCOA,
                     intIDMasCoaSub = journalEntry3.ID,
                     curCredit =  inventorySaleTotal,
                     curDebit = 0,

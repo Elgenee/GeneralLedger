@@ -142,6 +142,7 @@ namespace GeneralLedger.Persistence.Services
                 curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
                 curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                 intIDGLBookType = 1011,
+                strTransactionCode = purchase.PONo,
                 strDescription = productDetailsBuilder.ToString(),
                 datBatchDate = purchase.TransactionDate,
                 datInsertedDate = DateTime.Now,
@@ -605,6 +606,7 @@ namespace GeneralLedger.Persistence.Services
             productDetailsBuilder.AppendLine(updatedPurchase.Description);
             productDetailsBuilder.AppendLine("( " + updatedPurchase.AdditionalDescription + " )");
             existingGLTranHeader.strDescription = productDetailsBuilder.ToString();
+            existingGLTranHeader.strTransactionCode = updatedPurchase.PONo;
             existingGLTranHeader.blnUseDefaultEntry = true;
 
             // Re-insert the GLTran entries for the purchase
@@ -615,7 +617,7 @@ namespace GeneralLedger.Persistence.Services
                 {
                     new tblGLTranDetail
                     {
-                        intIDMasCoa = (int)journalEntry1.intIDMasCOA,
+                        intIDMasCoa = (int)journalEntry3.intIDMasCOA,
                         intIDMasCoaSub = journalEntry3.ID,
                         curCredit = 0,
                         curDebit = updatedPurchase.Total.Value,
