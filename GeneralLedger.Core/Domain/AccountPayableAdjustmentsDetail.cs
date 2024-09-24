@@ -12,17 +12,16 @@ namespace GeneralLedger.Core.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class SalesDetail
+    public partial class AccountPayableAdjustmentsDetail
     {
         public int Id { get; set; }
-        public Nullable<int> SalesId { get; set; }
+        public Nullable<int> AccountsPayableAdjustmentID { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<decimal> TotalPrice { get; set; }
-        public Nullable<int> ReturnedQuantity { get; set; }
     
+        public virtual AccountPayableAdjustment AccountPayableAdjustment { get; set; }
         public virtual Product Product { get; set; }
-        public virtual Sale Sale { get; set; }
     }
 }

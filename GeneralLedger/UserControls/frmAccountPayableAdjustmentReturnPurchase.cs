@@ -22,24 +22,32 @@ namespace GeneralLedger.UserControls
         public MetroTabPage MetroTabPage { get; set; }
         public AccountPayableAdjustment AccountPayableAdjustment { get; set; }
         public AccountsPayableAdjustmentsServices AccountsPayableAdjustmentsServices { get; set; }
+        public AccountsPayableAdjustmentsDetailServices AccountsPayableAdjustmentsDetailServices { get; set; }
         public AccountsPayableAdjustmentsTypeServices AccountsPayableAdjustmentsTypeServices { get; set; }
 
         public tblTBBatchHdrServices tblTBBatchHdrServices { get; set; }
         public GLTranServices GLTranServices { get; set; }
         public List<tblGLTranDetail> GLTranDetail { get; set; }
+        public List<tblGLTranDetail> GLTranDetailInventoryEntry { get; set; }
         public int ID { get; set; }
         public int PaymentId { get; set; }
         public int PurchaseId { get; set; }
         public int IndexGrid { get; set; }
+
+        public int IndexGridInventory { get; set; }
         public int GLTranHeader { get; set; }
+
+        public List<AccountPayableAdjustmentsDetail> AccountPayableAdjustmentsDetailList { get; set; }
 
         public frmAccountPayableAdjustmentReturnPurchase()
         {
 
             AccountsPayableAdjustmentsTypeServices = new AccountsPayableAdjustmentsTypeServices();
             AccountsPayableAdjustmentsServices = new AccountsPayableAdjustmentsServices();
+            AccountsPayableAdjustmentsDetailServices = new AccountsPayableAdjustmentsDetailServices();
             GLTranServices = new GLTranServices();
             GLTranDetail = new List<tblGLTranDetail>();
+            AccountPayableAdjustmentsDetailList = new List<AccountPayableAdjustmentsDetail>();
             AccountPayableAdjustment = new AccountPayableAdjustment();
             tblTBBatchHdrServices = new tblTBBatchHdrServices();
             InitializeComponent();
@@ -153,13 +161,17 @@ namespace GeneralLedger.UserControls
                     return;
                 }
 
+
+                if (AccountPayableAdjustmentsDetailList.Count == 0)
+                {
+                    MessageBox.Show("Please enter inventory");
+                    return;
+                }
+
                 string TransType = (this.ID == 0) ? "insert" : "update";
                 int? bankId = null;
 
-                //if (this.chkIsCash.Checked == false)
-                //{
-                //    bankId = (this.cbBank.SelectedItem == null) ? 0 : ((Tier.BO.Bank)this.cbBank.SelectedItem).ID;
-                //}
+ 
 
                 var adjustmentType = (this.cbAdjustmentType.SelectedItem == null) ? 0 : ((AccountsPayableAdjustmentsType)this.cbAdjustmentType.SelectedItem).Id;
                 if (TransType.Equals("insert"))
@@ -175,9 +187,11 @@ namespace GeneralLedger.UserControls
                          PurchaseId = this.PurchaseId
                     };
 
-                    AccountPayableAdjustment = AccountsPayableAdjustmentsServices.AddReturnPurchases(AccountPayableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
+                    AccountPayableAdjustment = AccountsPayableAdjustmentsServices.AddReturnPurchases(AccountPayableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.AccountPayableAdjustmentsDetailList);
                     if (AccountPayableAdjustment != null)
                     {
+                        this.AccountPayableAdjustmentsDetailList = AccountPayableAdjustment.AccountPayableAdjustmentsDetails.ToList();
+                        this.txtDescription.Text = AccountPayableAdjustment.Description;
                         MessageBox.Show("Successfully saved");
                     }
                 }
@@ -191,16 +205,21 @@ namespace GeneralLedger.UserControls
                     AccountPayableAdjustment.PurchaseId = this.PurchaseId;
                     AccountPayableAdjustment.TotalAmount = decimal.TryParse(this.txtPurchaseTotal.Text, out decimalParser) ? decimalParser : 0;
 
-                    AccountPayableAdjustment = AccountsPayableAdjustmentsServices.UpdateReturnPurchases(AccountPayableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked);
+                    AccountPayableAdjustment = AccountsPayableAdjustmentsServices.UpdateReturnPurchases(AccountPayableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.AccountPayableAdjustmentsDetailList);
+                  
                     if (AccountPayableAdjustment != null)
                     {
+                        this.AccountPayableAdjustmentsDetailList = AccountPayableAdjustment.AccountPayableAdjustmentsDetails.ToList();
+                        this.txtDescription.Text = AccountPayableAdjustment.Description;
                         MessageBox.Show("Successfully saved");
                     }
 
                 }
 
-                GLTranHeader = AccountPayableAdjustment.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
-                this.GLTranDetail = GLTranServices.GetGLEntryById(GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
+                //GLTranHeader = AccountPayableAdjustment.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
+                //this.GLTranDetail = GLTranServices.GetGLEntryById(GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
+                this.GLTranDetail = GLTranServices.GetGLEntryByAdjustmentReturnPurchaseId(AccountPayableAdjustment.Id, 11).SelectMany(h => h.tblGLTranDetails).ToList();
+
                 if (GLTranDetail.Count > 0)
                 {
 
@@ -264,6 +283,62 @@ namespace GeneralLedger.UserControls
                     this.txtTotalCredit.Text = string.Empty;
                 }
 
+                this.GLTranDetailInventoryEntry = GLTranServices.GetGLEntryByAdjustmentReturnPurchaseId(AccountPayableAdjustment.Id, 1011).SelectMany(h => h.tblGLTranDetails).ToList();
+                if (GLTranDetailInventoryEntry.Count > 0)
+                {
+
+                    this.dgInventoryEntry.ColumnCount = 6;
+                    this.dgInventoryEntry.RowCount = GLTranDetailInventoryEntry.Count;
+                    //this.dgChartOfAccountsSubsidiary.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    //this.dgChartOfAccountsSubsidiary.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgInventoryEntry.Columns[0].Name = "COA";
+                    this.dgInventoryEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgInventoryEntry.Columns[1].Name = "COA Code";
+                    this.dgInventoryEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[2].Name = "COA Subsidiary";
+                    this.dgInventoryEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[3].Name = "COA Subsidiary Code";
+                    this.dgInventoryEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[4].Name = "Debit";
+                    this.dgInventoryEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    this.dgInventoryEntry.Columns[5].Name = "Credit";
+                    this.dgInventoryEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    this.dgInventoryEntry.Columns[0].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[1].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[2].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[3].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[4].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[5].ReadOnly = true;
+                    this.dgInventoryEntry.Columns[1].Visible = false;
+                    this.dgInventoryEntry.Columns[3].Visible = false;
+
+                    for (int i = 0; i < GLTranDetailInventoryEntry.Count; i++)
+                    {
+
+                        this.dgInventoryEntry.Rows[i].Cells[0].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strName;
+                        this.dgInventoryEntry.Rows[i].Cells[1].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strCode;
+                        this.dgInventoryEntry.Rows[i].Cells[2].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strName;
+                        this.dgInventoryEntry.Rows[i].Cells[3].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strCode;
+                        this.dgInventoryEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curDebit);
+                        this.dgInventoryEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curCredit);
+
+                        this.dgInventoryEntry.Rows[i].Cells[0].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[1].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[2].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[3].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[4].ReadOnly = true;
+                        this.dgInventoryEntry.Rows[i].Cells[5].ReadOnly = true;
+                    }
+
+                    setRowNumber(this.dgInventoryEntry);
+
+                    this.txtTotalInventoryDebit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curDebit));
+                    this.txtTotalInventoryCredit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curCredit));
+                }
+
                 this.ID = AccountPayableAdjustment.Id;
                 this.txtAdjustmentId.Text = AccountPayableAdjustment.Id.ToString();
 
@@ -308,6 +383,9 @@ namespace GeneralLedger.UserControls
                     this.txtDescription.Text = spe.AccountPayableAdjustment.Description;
                     this.GLTranHeader = spe.AccountPayableAdjustment.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                     this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
+                    this.AccountPayableAdjustmentsDetailList = AccountsPayableAdjustmentsDetailServices.GetAccountPayableAdjustmentsDetailProductByAccountPayableAdjustmentId(this.ID).SelectMany(ar => ar.AccountPayableAdjustmentsDetails).ToList();
+                  
+
                     this.chkUseDefaultEntry.Checked = (bool)spe.AccountPayableAdjustment.tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
            
                     if (GLTranDetail.Count > 0)
@@ -372,6 +450,168 @@ namespace GeneralLedger.UserControls
                         this.txtTotalDebit.Text = string.Empty;
                         this.txtTotalCredit.Text = string.Empty;
                     }
+
+                    if (AccountPayableAdjustmentsDetailList.Count > 0)
+                    {
+
+                        this.dgProduct.Rows.Clear();
+                        this.dgProduct.Refresh();
+                        //this.dgProduct.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                        this.dgProduct.RowCount = AccountPayableAdjustmentsDetailList.Count;
+                        this.dgProduct.ColumnCount = 30;
+                        this.dgProduct.Columns[0].Name = "ID";
+                        this.dgProduct.Columns[0].Visible = false;
+                        this.dgProduct.Columns[1].Name = "Product Name";
+                        this.dgProduct.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[2].Visible = false;
+                        this.dgProduct.Columns[2].Name = "Description";
+                        this.dgProduct.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[3].Name = "Product Characteristic ID";
+                        this.dgProduct.Columns[3].Visible = false;
+                        this.dgProduct.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[4].Name = "Product Characteristic Name";
+                        this.dgProduct.Columns[4].Visible = false;
+                        this.dgProduct.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[5].Name = "Product Category ID";
+                        this.dgProduct.Columns[5].Visible = false;
+                        this.dgProduct.Columns[6].Name = "Product Category Name";
+                        this.dgProduct.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[7].Name = "Product Type ID";
+                        this.dgProduct.Columns[7].Visible = false;
+                        this.dgProduct.Columns[8].Name = "Product Type Name";
+                        this.dgProduct.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[9].Name = "Product Brand ID";
+                        this.dgProduct.Columns[9].Visible = false;
+                        this.dgProduct.Columns[10].Name = "Product Brand Name";
+                        this.dgProduct.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[11].Name = "Per Piece Box";
+                        this.dgProduct.Columns[11].Visible = false;
+                        this.dgProduct.Columns[12].Name = "Location ID";
+                        this.dgProduct.Columns[12].Visible = false;
+                        this.dgProduct.Columns[13].Name = "Location Name";
+                        this.dgProduct.Columns[13].Visible = false;
+                        this.dgProduct.Columns[14].Name = "Product Color ID";
+                        this.dgProduct.Columns[14].Visible = false;
+                        this.dgProduct.Columns[15].Name = "Product Color Name";
+                        this.dgProduct.Columns[16].Name = "Product Size ID";
+                        this.dgProduct.Columns[16].Visible = false;
+                        this.dgProduct.Columns[17].Name = "Product Size Name";
+                        this.dgProduct.Columns[18].Name = "Product Unit ID";
+                        this.dgProduct.Columns[18].Visible = false;
+                        this.dgProduct.Columns[19].Name = "Product Unit Name";
+                        this.dgProduct.Columns[20].Name = "Code";
+                        this.dgProduct.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[21].Name = "PR";
+                        this.dgProduct.Columns[22].Name = "PCD";
+                        this.dgProduct.Columns[23].Name = "MFLM";
+                        this.dgProduct.Columns[24].Name = "Pattern";
+                        this.dgProduct.Columns[25].Name = "OffsetCenterBase";
+                        this.dgProduct.Columns[25].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        this.dgProduct.Columns[26].Name = "Origin";
+                        this.dgProduct.Columns[27].Name = "Unit Price";
+                        this.dgProduct.Columns[28].Name = "Quantity";
+                        this.dgProduct.Columns[29].Name = "Total Quantity Price";
+
+                        for (int i = 0; i < AccountPayableAdjustmentsDetailList.Count; i++)
+                        {
+                            //display all the data in productList to the datagridview
+                            AccountPayableAdjustmentsDetail accountPayableAdjustmentsDetail = AccountPayableAdjustmentsDetailList[i];
+                            this.AccountPayableAdjustment.AccountPayableAdjustmentsDetails.Add(accountPayableAdjustmentsDetail);
+                            this.dgProduct.Rows[i].Cells[0].Value = accountPayableAdjustmentsDetail.Id;
+                            this.dgProduct.Rows[i].Cells[1].Value = accountPayableAdjustmentsDetail.Product.strProductName;
+                            this.dgProduct.Rows[i].Cells[2].Value = accountPayableAdjustmentsDetail.Product.strDescription;
+                            this.dgProduct.Rows[i].Cells[3].Value = 0;
+                            this.dgProduct.Rows[i].Cells[4].Value = string.Empty;
+                            this.dgProduct.Rows[i].Cells[5].Value = accountPayableAdjustmentsDetail.Product.ProductCategory.Id;
+                            this.dgProduct.Rows[i].Cells[6].Value = accountPayableAdjustmentsDetail.Product.ProductCategory.strName;
+                            this.dgProduct.Rows[i].Cells[7].Value = accountPayableAdjustmentsDetail.Product.ProductType.Id;
+                            this.dgProduct.Rows[i].Cells[8].Value = accountPayableAdjustmentsDetail.Product.ProductType.strName;
+                            this.dgProduct.Rows[i].Cells[9].Value = accountPayableAdjustmentsDetail.Product.ProductBrand.Id;
+                            this.dgProduct.Rows[i].Cells[10].Value = accountPayableAdjustmentsDetail.Product.ProductBrand.strName;
+                            //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
+                            //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
+                            //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
+                            this.dgProduct.Rows[i].Cells[14].Value = accountPayableAdjustmentsDetail.Product.ProductColor.Id;
+                            this.dgProduct.Rows[i].Cells[15].Value = accountPayableAdjustmentsDetail.Product.ProductColor.strName;
+                            this.dgProduct.Rows[i].Cells[16].Value = accountPayableAdjustmentsDetail.Product.ProductSize.Id;
+                            this.dgProduct.Rows[i].Cells[17].Value = accountPayableAdjustmentsDetail.Product.ProductSize.strName;
+                            this.dgProduct.Rows[i].Cells[18].Value = accountPayableAdjustmentsDetail.Product.ProductUnit.Id;
+                            this.dgProduct.Rows[i].Cells[19].Value = accountPayableAdjustmentsDetail.Product.ProductUnit.strName;
+                            this.dgProduct.Rows[i].Cells[20].Value = accountPayableAdjustmentsDetail.Product.strCode;
+                            this.dgProduct.Rows[i].Cells[21].Value = accountPayableAdjustmentsDetail.Product.strPR;
+                            this.dgProduct.Rows[i].Cells[22].Value = accountPayableAdjustmentsDetail.Product.strPCD;
+                            this.dgProduct.Rows[i].Cells[23].Value = accountPayableAdjustmentsDetail.Product.strMFLM;
+                            this.dgProduct.Rows[i].Cells[24].Value = accountPayableAdjustmentsDetail.Product.strPattern;
+                            this.dgProduct.Rows[i].Cells[25].Value = accountPayableAdjustmentsDetail.Product.strOffsetCenterBore;
+                            this.dgProduct.Rows[i].Cells[26].Value = accountPayableAdjustmentsDetail.Product.strOrigin;
+                            this.dgProduct.Rows[i].Cells[27].Value = accountPayableAdjustmentsDetail.UnitPrice;
+                            this.dgProduct.Rows[i].Cells[28].Value = accountPayableAdjustmentsDetail.Quantity;
+                            this.dgProduct.Rows[i].Cells[29].Value = accountPayableAdjustmentsDetail.TotalPrice;
+                            //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
+                        }
+
+                        setRowNumber(this.dgJournalEntry);
+                        this.txtInventoryPurchaseTotal.Text = string.Format("{0:0.00}", AccountPayableAdjustmentsDetailList.Sum(g => g.TotalPrice));
+                       // this.txtTotal.Text = string.Format("{0:0.00}", AccountPayableAdjustmentsDetailList.Sum(g => g.TotalPrice));
+                    }
+
+
+                    this.GLTranDetailInventoryEntry = GLTranServices.GetGLEntryByAdjustmentReturnPurchaseId(this.ID, 1011).SelectMany(h => h.tblGLTranDetails).ToList();
+                    if (GLTranDetailInventoryEntry.Count > 0)
+                    {
+
+                        this.dgInventoryEntry.ColumnCount = 6;
+                        this.dgInventoryEntry.RowCount = GLTranDetailInventoryEntry.Count;
+                        //this.dgChartOfAccountsSubsidiary.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        //this.dgChartOfAccountsSubsidiary.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        this.dgInventoryEntry.Columns[0].Name = "COA";
+                        this.dgInventoryEntry.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        this.dgInventoryEntry.Columns[1].Name = "COA Code";
+                        this.dgInventoryEntry.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgInventoryEntry.Columns[2].Name = "COA Subsidiary";
+                        this.dgInventoryEntry.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgInventoryEntry.Columns[3].Name = "COA Subsidiary Code";
+                        this.dgInventoryEntry.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgInventoryEntry.Columns[4].Name = "Debit";
+                        this.dgInventoryEntry.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        this.dgInventoryEntry.Columns[5].Name = "Credit";
+                        this.dgInventoryEntry.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                        this.dgInventoryEntry.Columns[0].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[1].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[2].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[3].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[4].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[5].ReadOnly = true;
+                        this.dgInventoryEntry.Columns[1].Visible = false;
+                        this.dgInventoryEntry.Columns[3].Visible = false;
+
+                        for (int i = 0; i < GLTranDetailInventoryEntry.Count; i++)
+                        {
+
+                            this.dgInventoryEntry.Rows[i].Cells[0].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strName;
+                            this.dgInventoryEntry.Rows[i].Cells[1].Value = GLTranDetailInventoryEntry[i].tblMasCOA.strCode;
+                            this.dgInventoryEntry.Rows[i].Cells[2].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strName;
+                            this.dgInventoryEntry.Rows[i].Cells[3].Value = GLTranDetailInventoryEntry[i].tblMasCOASub.strCode;
+                            this.dgInventoryEntry.Rows[i].Cells[4].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curDebit);
+                            this.dgInventoryEntry.Rows[i].Cells[5].Value = string.Format("{0:0.00}", GLTranDetailInventoryEntry[i].curCredit);
+
+                            this.dgInventoryEntry.Rows[i].Cells[0].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[1].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[2].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[3].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[4].ReadOnly = true;
+                            this.dgInventoryEntry.Rows[i].Cells[5].ReadOnly = true;
+                        }
+
+                        setRowNumber(this.dgInventoryEntry);
+
+                        this.txtTotalInventoryDebit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curDebit));
+                        this.txtTotalInventoryCredit.Text = string.Format("{0:0.00}", GLTranDetailInventoryEntry.Sum(g => g.curCredit));
+                    }
+
 
                 }
 
@@ -553,7 +793,7 @@ namespace GeneralLedger.UserControls
                         PurchaseId = this.PurchaseId
                     };
 
-                    AccountsPayableAdjustmentsServices.RemoveReturnPurchases(AccountPayableAdjustment);
+                    AccountsPayableAdjustmentsServices.RemoveReturnPurchases(AccountPayableAdjustment ,  this.AccountPayableAdjustmentsDetailList);
 
                     if (AccountPayableAdjustment != null)
                     {
@@ -573,6 +813,7 @@ namespace GeneralLedger.UserControls
                         //this.txtCheckDetails.Text = String.Empty;
                         //this.txtTotal.Text = String.Empty;
                         this.txtDescription.Text = String.Empty;
+                        this.txtInventoryPurchaseTotal.Text = string.Empty;
                         //this.txtPaymentSIDR.Text = String.Empty;
                         //this.cbBank.Text = String.Empty;
                         //this.cbBank.SelectedText = String.Empty;
@@ -580,9 +821,18 @@ namespace GeneralLedger.UserControls
 
                         this.dgJournalEntry.Rows.Clear();
                         this.dgJournalEntry.Refresh();
+                        this.dgProduct.Rows.Clear();
+                        this.dgProduct.Refresh();
+                        this.AccountPayableAdjustmentsDetailList = new List<AccountPayableAdjustmentsDetail>();
+                        this.dgInventoryEntry.Rows.Clear();
+                        this.dgInventoryEntry.Refresh();
+
+
                         this.GLTranDetail.Clear();
                         this.GLTranHeader = 0;
 
+                        this.txtTotalInventoryCredit.Text = string.Empty;
+                        this.txtTotalInventoryDebit.Text = string.Empty;
                         this.txtTotalDebit.Text = string.Empty;
                         this.txtTotalCredit.Text = string.Empty;
                         this.txtDescription.Text = string.Empty;
@@ -650,10 +900,282 @@ namespace GeneralLedger.UserControls
                     this.txtSupplier.Text = sp.Purchase.Supplier.strName;
                     this.txtPurchasePONo.Text = sp.Purchase.PONo;
                     this.txtPurchaseSIDR.Text = sp.Purchase.SIDR;
-                    this.txtPurchaseTotal.Text = sp.Purchase.Total.ToString();
+                    //this.txtPurchaseTotal.Text = sp.Purchase.Total.ToString();
 
                 }
 
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+
+            frmChooseReturnPurchaseProduct frmChooseReturnProduct = new frmChooseReturnPurchaseProduct();
+            frmChooseReturnProduct.BringToFront();
+            frmChooseReturnProduct.TopMost = true;
+            frmChooseReturnProduct.IsPurchaseReturn = true;
+            frmChooseReturnProduct.PurchaseID = this.PurchaseId;
+            DialogResult res = frmChooseReturnProduct.ShowDialog(this);
+
+            if (res == DialogResult.OK)
+            {
+                
+                var convertPurchaseDetail = new AccountPayableAdjustmentsDetail
+                {
+                    ProductId = frmChooseReturnProduct.Product.Id,
+                    //assign frmChooseProduct.Product to Product
+                     
+                    Product = frmChooseReturnProduct.Product,
+                    //UnitPrice = frmChooseProduct.Product.curUnitPrice,
+                    UnitPrice = frmChooseReturnProduct.ProductTotalUnitPrice,
+                    Quantity = frmChooseReturnProduct.ProductQuantity,
+                    TotalPrice = frmChooseReturnProduct.ProductTotalQuantityPrice,
+                };
+
+                if (!(AccountPayableAdjustmentsDetailList.Any(p => p.ProductId == convertPurchaseDetail.ProductId)))
+                {
+                   this.AccountPayableAdjustmentsDetailList.Add(convertPurchaseDetail);
+                }
+                else
+                {
+                    MessageBox.Show("Please product already added");
+                    return;
+                }
+
+                if (AccountPayableAdjustmentsDetailList.Count > 0)
+                {
+
+                    this.dgProduct.Rows.Clear();
+                    this.dgProduct.Refresh();
+                    //this.dgProduct.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    this.dgProduct.RowCount = AccountPayableAdjustmentsDetailList.Count;
+                    this.dgProduct.ColumnCount = 30;
+                    this.dgProduct.Columns[0].Name = "ID";
+                    this.dgProduct.Columns[0].Visible = false;
+                    this.dgProduct.Columns[1].Name = "Product Name";
+                    this.dgProduct.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[2].Visible = false;
+                    this.dgProduct.Columns[2].Name = "Description";
+                    this.dgProduct.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[3].Name = "Product Characteristic ID";
+                    this.dgProduct.Columns[3].Visible = false;
+                    this.dgProduct.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[4].Name = "Product Characteristic Name";
+                    this.dgProduct.Columns[4].Visible = false;
+                    this.dgProduct.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[5].Name = "Product Category ID";
+                    this.dgProduct.Columns[5].Visible = false;
+                    this.dgProduct.Columns[6].Name = "Product Category Name";
+                    this.dgProduct.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[7].Name = "Product Type ID";
+                    this.dgProduct.Columns[7].Visible = false;
+                    this.dgProduct.Columns[8].Name = "Product Type Name";
+                    this.dgProduct.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[9].Name = "Product Brand ID";
+                    this.dgProduct.Columns[9].Visible = false;
+                    this.dgProduct.Columns[10].Name = "Product Brand Name";
+                    this.dgProduct.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[11].Name = "Per Piece Box";
+                    this.dgProduct.Columns[11].Visible = false;
+                    this.dgProduct.Columns[12].Name = "Location ID";
+                    this.dgProduct.Columns[12].Visible = false;
+                    this.dgProduct.Columns[13].Name = "Location Name";
+                    this.dgProduct.Columns[13].Visible = false;
+                    this.dgProduct.Columns[14].Name = "Product Color ID";
+                    this.dgProduct.Columns[14].Visible = false;
+                    this.dgProduct.Columns[15].Name = "Product Color Name";
+                    this.dgProduct.Columns[16].Name = "Product Size ID";
+                    this.dgProduct.Columns[16].Visible = false;
+                    this.dgProduct.Columns[17].Name = "Product Size Name";
+                    this.dgProduct.Columns[18].Name = "Product Unit ID";
+                    this.dgProduct.Columns[18].Visible = false;
+                    this.dgProduct.Columns[19].Name = "Product Unit Name";
+                    this.dgProduct.Columns[20].Name = "Code";
+                    this.dgProduct.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[21].Name = "PR";
+                    this.dgProduct.Columns[22].Name = "PCD";
+                    this.dgProduct.Columns[23].Name = "MFLM";
+                    this.dgProduct.Columns[24].Name = "Pattern";
+                    this.dgProduct.Columns[25].Name = "OffsetCenterBase";
+                    this.dgProduct.Columns[25].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[26].Name = "Origin";
+                    this.dgProduct.Columns[27].Name = "Unit Price";
+                    this.dgProduct.Columns[28].Name = "Quantity";
+                    this.dgProduct.Columns[29].Name = "Total Quantity Price";
+
+                    for (int i = 0; i < AccountPayableAdjustmentsDetailList.Count; i++)
+                    {
+                        //display all the data in productList to the datagridview
+                        AccountPayableAdjustmentsDetail accountPayableAdjustmentsDetail = AccountPayableAdjustmentsDetailList[i];
+                        this.dgProduct.Rows[i].Cells[0].Value = accountPayableAdjustmentsDetail.Id;
+                        this.dgProduct.Rows[i].Cells[1].Value = accountPayableAdjustmentsDetail.Product.strProductName;
+                        this.dgProduct.Rows[i].Cells[2].Value = accountPayableAdjustmentsDetail.Product.strDescription;
+                       
+                        this.dgProduct.Rows[i].Cells[5].Value = accountPayableAdjustmentsDetail.Product.ProductCategory.Id;
+                        this.dgProduct.Rows[i].Cells[6].Value = accountPayableAdjustmentsDetail.Product.ProductCategory.strName;
+                        this.dgProduct.Rows[i].Cells[7].Value = accountPayableAdjustmentsDetail.Product.ProductType.Id;
+                        this.dgProduct.Rows[i].Cells[8].Value = accountPayableAdjustmentsDetail.Product.ProductType.strName;
+                        this.dgProduct.Rows[i].Cells[9].Value = accountPayableAdjustmentsDetail.Product.ProductBrand.Id;
+                        this.dgProduct.Rows[i].Cells[10].Value = accountPayableAdjustmentsDetail.Product.ProductBrand.strName;
+                
+                        this.dgProduct.Rows[i].Cells[14].Value = accountPayableAdjustmentsDetail.Product.ProductColor.Id;
+                        this.dgProduct.Rows[i].Cells[15].Value = accountPayableAdjustmentsDetail.Product.ProductColor.strName;
+                        this.dgProduct.Rows[i].Cells[16].Value = accountPayableAdjustmentsDetail.Product.ProductSize.Id;
+                        this.dgProduct.Rows[i].Cells[17].Value = accountPayableAdjustmentsDetail.Product.ProductSize.strName;
+                        this.dgProduct.Rows[i].Cells[18].Value = accountPayableAdjustmentsDetail.Product.ProductUnit.Id;
+                        this.dgProduct.Rows[i].Cells[19].Value = accountPayableAdjustmentsDetail.Product.ProductUnit.strName;
+                        this.dgProduct.Rows[i].Cells[20].Value = accountPayableAdjustmentsDetail.Product.strCode;
+                        this.dgProduct.Rows[i].Cells[21].Value = accountPayableAdjustmentsDetail.Product.strPR;
+                        this.dgProduct.Rows[i].Cells[22].Value = accountPayableAdjustmentsDetail.Product.strPCD;
+                        this.dgProduct.Rows[i].Cells[23].Value = accountPayableAdjustmentsDetail.Product.strMFLM;
+                        this.dgProduct.Rows[i].Cells[24].Value = accountPayableAdjustmentsDetail.Product.strPattern;
+                        this.dgProduct.Rows[i].Cells[25].Value = accountPayableAdjustmentsDetail.Product.strOffsetCenterBore;
+                        this.dgProduct.Rows[i].Cells[26].Value = accountPayableAdjustmentsDetail.Product.strOrigin;
+                        this.dgProduct.Rows[i].Cells[27].Value = accountPayableAdjustmentsDetail.UnitPrice;
+                        this.dgProduct.Rows[i].Cells[28].Value = accountPayableAdjustmentsDetail.Quantity;
+                        this.dgProduct.Rows[i].Cells[29].Value = accountPayableAdjustmentsDetail.TotalPrice;
+                 
+                    }
+
+                    setRowNumber(this.dgJournalEntry);
+                    this.txtPurchaseTotal.Text = string.Format("{0:0.00}", AccountPayableAdjustmentsDetailList.Sum(g => g.TotalPrice));
+                    this.txtInventoryPurchaseTotal.Text = string.Format("{0:0.00}", AccountPayableAdjustmentsDetailList.Sum(g => g.TotalPrice));
+                    //this.txtTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice));
+                }
+
+            }
+
+        }
+
+        private void btnDeleteProduct_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (AccountPayableAdjustmentsDetailList.Count > 0)
+                {
+                    this.AccountPayableAdjustmentsDetailList.RemoveAt(this.IndexGridInventory);
+                    this.dgProduct.Rows.Clear();
+                    this.dgProduct.Refresh();
+
+                    if (AccountPayableAdjustmentsDetailList.Count == 0)
+                    {
+                        this.txtPurchaseTotal.Text = string.Format("{0:0.00}", AccountPayableAdjustmentsDetailList.Sum(g => g.TotalPrice));
+                        this.txtInventoryPurchaseTotal.Text = string.Format("{0:0.00}", AccountPayableAdjustmentsDetailList.Sum(g => g.TotalPrice));
+                        return;
+                    }
+                    //this.dgProduct.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    this.dgProduct.RowCount = AccountPayableAdjustmentsDetailList.Count;
+                    this.dgProduct.ColumnCount = 30;
+                    this.dgProduct.Columns[0].Name = "ID";
+                    this.dgProduct.Columns[0].Visible = false;
+                    this.dgProduct.Columns[1].Name = "Product Name";
+                    this.dgProduct.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[2].Visible = false;
+                    this.dgProduct.Columns[2].Name = "Description";
+                    this.dgProduct.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[3].Name = "Product Characteristic ID";
+                    this.dgProduct.Columns[3].Visible = false;
+                    this.dgProduct.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[4].Name = "Product Characteristic Name";
+                    this.dgProduct.Columns[4].Visible = false;
+                    this.dgProduct.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[5].Name = "Product Category ID";
+                    this.dgProduct.Columns[5].Visible = false;
+                    this.dgProduct.Columns[6].Name = "Product Category Name";
+                    this.dgProduct.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[7].Name = "Product Type ID";
+                    this.dgProduct.Columns[7].Visible = false;
+                    this.dgProduct.Columns[8].Name = "Product Type Name";
+                    this.dgProduct.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[9].Name = "Product Brand ID";
+                    this.dgProduct.Columns[9].Visible = false;
+                    this.dgProduct.Columns[10].Name = "Product Brand Name";
+                    this.dgProduct.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[11].Name = "Per Piece Box";
+                    this.dgProduct.Columns[11].Visible = false;
+                    this.dgProduct.Columns[12].Name = "Location ID";
+                    this.dgProduct.Columns[12].Visible = false;
+                    this.dgProduct.Columns[13].Name = "Location Name";
+                    this.dgProduct.Columns[13].Visible = false;
+                    this.dgProduct.Columns[14].Name = "Product Color ID";
+                    this.dgProduct.Columns[14].Visible = false;
+                    this.dgProduct.Columns[15].Name = "Product Color Name";
+                    this.dgProduct.Columns[16].Name = "Product Size ID";
+                    this.dgProduct.Columns[16].Visible = false;
+                    this.dgProduct.Columns[17].Name = "Product Size Name";
+                    this.dgProduct.Columns[18].Name = "Product Unit ID";
+                    this.dgProduct.Columns[18].Visible = false;
+                    this.dgProduct.Columns[19].Name = "Product Unit Name";
+                    this.dgProduct.Columns[20].Name = "Code";
+                    this.dgProduct.Columns[20].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[21].Name = "PR";
+                    this.dgProduct.Columns[22].Name = "PCD";
+                    this.dgProduct.Columns[23].Name = "MFLM";
+                    this.dgProduct.Columns[24].Name = "Pattern";
+                    this.dgProduct.Columns[25].Name = "OffsetCenterBase";
+                    this.dgProduct.Columns[25].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    this.dgProduct.Columns[26].Name = "Origin";
+                    this.dgProduct.Columns[27].Name = "Unit Price";
+                    this.dgProduct.Columns[28].Name = "Quantity";
+                    this.dgProduct.Columns[29].Name = "Total Quantity Price";
+
+                    for (int i = 0; i < AccountPayableAdjustmentsDetailList.Count; i++)
+                    {
+                        //display all the data in productList to the datagridview
+                        AccountPayableAdjustmentsDetail accountPayableAdjustmentsDetail = AccountPayableAdjustmentsDetailList[i];
+                        this.dgProduct.Rows[i].Cells[0].Value = accountPayableAdjustmentsDetail.Id;
+                        this.dgProduct.Rows[i].Cells[1].Value = accountPayableAdjustmentsDetail.Product.strProductName;
+                        this.dgProduct.Rows[i].Cells[2].Value = accountPayableAdjustmentsDetail.Product.strDescription;
+
+                        this.dgProduct.Rows[i].Cells[5].Value = accountPayableAdjustmentsDetail.Product.ProductCategory.Id;
+                        this.dgProduct.Rows[i].Cells[6].Value = accountPayableAdjustmentsDetail.Product.ProductCategory.strName;
+                        this.dgProduct.Rows[i].Cells[7].Value = accountPayableAdjustmentsDetail.Product.ProductType.Id;
+                        this.dgProduct.Rows[i].Cells[8].Value = accountPayableAdjustmentsDetail.Product.ProductType.strName;
+                        this.dgProduct.Rows[i].Cells[9].Value = accountPayableAdjustmentsDetail.Product.ProductBrand.Id;
+                        this.dgProduct.Rows[i].Cells[10].Value = accountPayableAdjustmentsDetail.Product.ProductBrand.strName;
+
+                        this.dgProduct.Rows[i].Cells[14].Value = accountPayableAdjustmentsDetail.Product.ProductColor.Id;
+                        this.dgProduct.Rows[i].Cells[15].Value = accountPayableAdjustmentsDetail.Product.ProductColor.strName;
+                        this.dgProduct.Rows[i].Cells[16].Value = accountPayableAdjustmentsDetail.Product.ProductSize.Id;
+                        this.dgProduct.Rows[i].Cells[17].Value = accountPayableAdjustmentsDetail.Product.ProductSize.strName;
+                        this.dgProduct.Rows[i].Cells[18].Value = accountPayableAdjustmentsDetail.Product.ProductUnit.Id;
+                        this.dgProduct.Rows[i].Cells[19].Value = accountPayableAdjustmentsDetail.Product.ProductUnit.strName;
+                        this.dgProduct.Rows[i].Cells[20].Value = accountPayableAdjustmentsDetail.Product.strCode;
+                        this.dgProduct.Rows[i].Cells[21].Value = accountPayableAdjustmentsDetail.Product.strPR;
+                        this.dgProduct.Rows[i].Cells[22].Value = accountPayableAdjustmentsDetail.Product.strPCD;
+                        this.dgProduct.Rows[i].Cells[23].Value = accountPayableAdjustmentsDetail.Product.strMFLM;
+                        this.dgProduct.Rows[i].Cells[24].Value = accountPayableAdjustmentsDetail.Product.strPattern;
+                        this.dgProduct.Rows[i].Cells[25].Value = accountPayableAdjustmentsDetail.Product.strOffsetCenterBore;
+                        this.dgProduct.Rows[i].Cells[26].Value = accountPayableAdjustmentsDetail.Product.strOrigin;
+                        this.dgProduct.Rows[i].Cells[27].Value = accountPayableAdjustmentsDetail.UnitPrice;
+                        this.dgProduct.Rows[i].Cells[28].Value = accountPayableAdjustmentsDetail.Quantity;
+                        this.dgProduct.Rows[i].Cells[29].Value = accountPayableAdjustmentsDetail.TotalPrice;
+
+                    }
+                    setRowNumber(this.dgJournalEntry);
+                    this.txtPurchaseTotal.Text = string.Format("{0:0.00}", AccountPayableAdjustmentsDetailList.Sum(g => g.TotalPrice));
+                    this.txtInventoryPurchaseTotal.Text = string.Format("{0:0.00}", AccountPayableAdjustmentsDetailList.Sum(g => g.TotalPrice));
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void dgProduct_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                this.IndexGridInventory = e.RowIndex;
             }
             catch (Exception ex)
             {

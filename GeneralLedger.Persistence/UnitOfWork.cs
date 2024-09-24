@@ -56,6 +56,7 @@ namespace GeneralLedger.Persistence
 
         public IAccountsPayableAdjustmentsRepository AccountsPayableAdjustments { get; set; }
 
+        public IAccountsPayableAdjustmentsDetailRepository AccountsPayableAdjustmentsDetail { get; set; }
         //Products Repository
         public IProductRepository Products { get; set; }
 
@@ -65,7 +66,7 @@ namespace GeneralLedger.Persistence
 
         public ISaleDetailRepository SaleDetail { get; set; }
 
-
+        public IAccountsReceivableAdjustmentsDetailRepository AccountsReceivableAdjustmentsDetail { get; set; }
 
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
@@ -82,6 +83,7 @@ namespace GeneralLedger.Persistence
             Purchase = new PurchaseRepository(_generalLedgerContext);
             PurchaseSupplierLedger = new PurchaseCustomerLedgerRepository(_generalLedgerContext);
             AccountsReceivableAdjustmentsType = new AccountsReceivableAdjustmentsTypeRepository(_generalLedgerContext);
+            AccountsReceivableAdjustmentsDetail = new AccountReceivableAdjustmentsDetailRepository(_generalLedgerContext);
             AccountsReceivableAdjustments = new AccountReceivableAdjustmentsRepository(_generalLedgerContext);
             Payment = new PaymentRepository(_generalLedgerContext);
             User = new UserRepository(_generalLedgerContext);
@@ -89,11 +91,13 @@ namespace GeneralLedger.Persistence
             UserRole = new UserRoleRepository(_generalLedgerContext);
             tblTBBatchHdr = new tblTBBatchHdrRepository(_generalLedgerContext);
             AccountsPayableAdjustments = new AccountsPayableAdjustmentsRepository(_generalLedgerContext);
+            AccountsPayableAdjustmentsDetail = new AccountsPayableAdjustmentsDetailRepository(_generalLedgerContext);
             AccountsPayableAdjustmentsType = new AccountsPayableAdjustmentsTypeRepository(_generalLedgerContext);
             Products = new ProductRepository(_generalLedgerContext);
             Stock = new StockRepository(_generalLedgerContext);
             PurchaseDetail = new PurchaseDetailRepository(_generalLedgerContext);
             SaleDetail = new SaleDetailRepository(_generalLedgerContext);
+    
 
         }
         public int Complete()

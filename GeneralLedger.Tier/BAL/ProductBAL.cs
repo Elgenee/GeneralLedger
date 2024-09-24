@@ -44,6 +44,20 @@ namespace GeneralLedger.Tier.BAL
         }
 
 
+        public List<Product> getReturnPurchaseProductSearch(string criteria , int purchaseId)
+        {
+
+            ProductDAL pbDAL = new ProductDAL();
+            return pbDAL.getReturnPurchaseProductSearch(criteria , purchaseId);
+        }
+
+        public List<Product> getReturnSalesProductSearch(string criteria, int salesId)
+        {
+
+            ProductDAL pbDAL = new ProductDAL();
+            return pbDAL.getReturnSalesProductSearch(criteria, salesId);
+        }
+
 
         public string Manage(Product product, string transactionType)
         {

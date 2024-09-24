@@ -65,7 +65,13 @@
     <Compile Include="Domain\AccountPayableAdjustment.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\AccountPayableAdjustmentsDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\AccountReceivableAdjustment.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\AccountReceivableAdjustmentsDetail.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\AccountsPayableAdjustmentsType.cs">
@@ -405,7 +411,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAccountReceivableAdjustmentsRepository.cs" />
     <Compile Include="Repositories\IAccountsPayableAdjustmentsRepository.cs" />
+    <Compile Include="Repositories\IAccountsPayableAdjustmentsDetailRepository.cs" />
     <Compile Include="Repositories\IAccountsPayableAdjustmentsType.cs" />
+    <Compile Include="Repositories\IAccountsReceivableAdjustmentsDetailRepository.cs" />
     <Compile Include="Repositories\IAccountsReceivableAdjustmentsTypeRepository.cs" />
     <Compile Include="Repositories\IAgentRepository.cs" />
     <Compile Include="Repositories\ICoaRepository.cs" />
@@ -428,6 +436,8 @@
     <Compile Include="Repositories\ItblTBBatchHdrRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\IUserRoleRepository.cs" />
+    <Compile Include="Services\IAccountPayableAdjustmentsDetailsServices.cs" />
+    <Compile Include="Services\IAccountReceivableAdjustmentsDetailsServices.cs" />
     <Compile Include="Services\IAccountReceivableAdjustmentsServices.cs" />
     <Compile Include="Services\IAccountsPayableAdjustmentsServices.cs" />
     <Compile Include="Services\IAccountsPayableAdjustmentsTypeServices.cs" />

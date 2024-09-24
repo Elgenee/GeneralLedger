@@ -66,7 +66,6 @@ namespace GeneralLedger.Persistence.Services
                 //var stocks = unitOfWork.Stock.FindLocal(s => s.ProductId == detail.ProductId).ToList();
 
                     var newStocks = purchase.Stocks.ToList();
-                //TODO: here minus the last updated Product
                     product.intRemainingCount = GetTotalRemainingStock(unitOfWork , productID, newStocks);
                    
                    

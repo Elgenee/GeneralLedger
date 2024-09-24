@@ -18,6 +18,18 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="TotalAmount" Type="money" />
           <Property Name="SupplierId" Type="int" />
+          <Property Name="AdditionalDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AccountPayableAdjustmentsDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountsPayableAdjustmentID" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalPrice" Type="money" />
         </EntityType>
         <EntityType Name="AccountReceivableAdjustments">
           <Key>
@@ -32,6 +44,17 @@
           <Property Name="Descrpition" Type="nvarchar(max)" />
           <Property Name="TotalAmount" Type="money" />
           <Property Name="CustomerId" Type="int" />
+        </EntityType>
+        <EntityType Name="AccountReceivableAdjustmentsDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountsReceivableAdjustmentsID" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalPrice" Type="money" />
         </EntityType>
         <EntityType Name="AccountsPayableAdjustmentsType">
           <Key>
@@ -292,6 +315,7 @@
           <Property Name="UnitPrice" Type="money" />
           <Property Name="Quantity" Type="int" />
           <Property Name="TotalPrice" Type="money" Nullable="false" />
+          <Property Name="ReturnedQuantity" Type="int" />
         </EntityType>
         <EntityType Name="PurchaseSupplierLedger">
           <Key>
@@ -377,6 +401,7 @@
           <Property Name="UnitPrice" Type="money" />
           <Property Name="Quantity" Type="int" />
           <Property Name="TotalPrice" Type="money" />
+          <Property Name="ReturnedQuantity" Type="int" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -389,6 +414,8 @@
           <Property Name="QuantityOut" Type="int" />
           <Property Name="PurchaseID" Type="int" />
           <Property Name="SalesID" Type="int" />
+          <Property Name="AccountsPayablePurchaseReturnID" Type="int" />
+          <Property Name="AccountsReceivableSaleReturnID" Type="int" />
         </EntityType>
         <EntityType Name="StockTransactionType">
           <Key>
@@ -601,6 +628,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AccountPayableAdjustmentsDetail_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="AccountPayableAdjustmentsDetail" Type="Self.AccountPayableAdjustmentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountPayableAdjustmentsDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AccountReceivableAdjustments_AccountsReceivableAdjustmentsType">
           <End Role="AccountsReceivableAdjustmentsType" Type="Self.AccountsReceivableAdjustmentsType" Multiplicity="0..1" />
           <End Role="AccountReceivableAdjustments" Type="Self.AccountReceivableAdjustments" Multiplicity="*" />
@@ -646,6 +685,42 @@
             </Principal>
             <Dependent Role="AccountReceivableAdjustments">
               <PropertyRef Name="SalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments">
+          <End Role="AccountReceivableAdjustments" Type="Self.AccountReceivableAdjustments" Multiplicity="0..1" />
+          <End Role="AccountReceivableAdjustmentsDetail" Type="Self.AccountReceivableAdjustmentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountReceivableAdjustments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountReceivableAdjustmentsDetail">
+              <PropertyRef Name="AccountsReceivableAdjustmentsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountReceivableAdjustmentsDetail_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="AccountReceivableAdjustmentsDetail" Type="Self.AccountReceivableAdjustmentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountReceivableAdjustmentsDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountsPayableAdjustmentDetail_AccountsPayableAdjustmentDetail">
+          <End Role="AccountPayableAdjustments" Type="Self.AccountPayableAdjustments" Multiplicity="0..1" />
+          <End Role="AccountPayableAdjustmentsDetail" Type="Self.AccountPayableAdjustmentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountPayableAdjustments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountPayableAdjustmentsDetail">
+              <PropertyRef Name="AccountsPayableAdjustmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -958,6 +1033,30 @@
             </Principal>
             <Dependent Role="SalesDetail">
               <PropertyRef Name="SalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_AccountPayableAdjustments">
+          <End Role="AccountPayableAdjustments" Type="Self.AccountPayableAdjustments" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountPayableAdjustments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="AccountsPayablePurchaseReturnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_AccountReceivableAdjustments">
+          <End Role="AccountReceivableAdjustments" Type="Self.AccountReceivableAdjustments" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountReceivableAdjustments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="AccountsReceivableSaleReturnID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1587,7 +1686,9 @@
         </Function>
         <EntityContainer Name="GeneralLedgerModelStoreContainer">
           <EntitySet Name="AccountPayableAdjustments" EntityType="Self.AccountPayableAdjustments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountPayableAdjustmentsDetail" EntityType="Self.AccountPayableAdjustmentsDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountReceivableAdjustments" EntityType="Self.AccountReceivableAdjustments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountReceivableAdjustmentsDetail" EntityType="Self.AccountReceivableAdjustmentsDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountsPayableAdjustmentsType" EntityType="Self.AccountsPayableAdjustmentsType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountsReceivableAdjustmentsType" EntityType="Self.AccountsReceivableAdjustmentsType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
@@ -1652,6 +1753,10 @@
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="AccountPayableAdjustments" EntitySet="AccountPayableAdjustments" />
           </AssociationSet>
+          <AssociationSet Name="FK_AccountPayableAdjustmentsDetail_Product" Association="Self.FK_AccountPayableAdjustmentsDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="AccountPayableAdjustmentsDetail" EntitySet="AccountPayableAdjustmentsDetail" />
+          </AssociationSet>
           <AssociationSet Name="FK_AccountReceivableAdjustments_AccountsReceivableAdjustmentsType" Association="Self.FK_AccountReceivableAdjustments_AccountsReceivableAdjustmentsType">
             <End Role="AccountsReceivableAdjustmentsType" EntitySet="AccountsReceivableAdjustmentsType" />
             <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
@@ -1667,6 +1772,18 @@
           <AssociationSet Name="FK_AccountReceivableAdjustments_Sales" Association="Self.FK_AccountReceivableAdjustments_Sales">
             <End Role="Sales" EntitySet="Sales" />
             <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments" Association="Self.FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments">
+            <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
+            <End Role="AccountReceivableAdjustmentsDetail" EntitySet="AccountReceivableAdjustmentsDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountReceivableAdjustmentsDetail_Product" Association="Self.FK_AccountReceivableAdjustmentsDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="AccountReceivableAdjustmentsDetail" EntitySet="AccountReceivableAdjustmentsDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountsPayableAdjustmentDetail_AccountsPayableAdjustmentDetail" Association="Self.FK_AccountsPayableAdjustmentDetail_AccountsPayableAdjustmentDetail">
+            <End Role="AccountPayableAdjustments" EntitySet="AccountPayableAdjustments" />
+            <End Role="AccountPayableAdjustmentsDetail" EntitySet="AccountPayableAdjustmentsDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_Bank_Currency" Association="Self.FK_Bank_Currency">
             <End Role="Currency" EntitySet="Currency" />
@@ -1771,6 +1888,14 @@
           <AssociationSet Name="FK_SalesDetail_Sales" Association="Self.FK_SalesDetail_Sales">
             <End Role="Sales" EntitySet="Sales" />
             <End Role="SalesDetail" EntitySet="SalesDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_AccountPayableAdjustments" Association="Self.FK_Stock_AccountPayableAdjustments">
+            <End Role="AccountPayableAdjustments" EntitySet="AccountPayableAdjustments" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_AccountReceivableAdjustments" Association="Self.FK_Stock_AccountReceivableAdjustments">
+            <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
+            <End Role="Stock" EntitySet="Stock" />
           </AssociationSet>
           <AssociationSet Name="FK_Stock_Product" Association="Self.FK_Stock_Product">
             <End Role="Product" EntitySet="Product" />
@@ -2027,6 +2152,8 @@
           <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_Product" FromRole="Product" ToRole="Stock" />
           <NavigationProperty Name="SalesDetails" Relationship="GeneralLedgerModel.FK_SalesDetail_Product" FromRole="Product" ToRole="SalesDetail" />
           <Property Name="curUnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="AccountPayableAdjustmentsDetails" Relationship="GeneralLedgerModel.FK_AccountPayableAdjustmentsDetail_Product" FromRole="Product" ToRole="AccountPayableAdjustmentsDetail" />
+          <NavigationProperty Name="AccountReceivableAdjustmentsDetails" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustmentsDetail_Product" FromRole="Product" ToRole="AccountReceivableAdjustmentsDetail" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -2940,6 +3067,32 @@
             <End Role="tblJournalEntry" EntitySet="tblJournalEntries" />
             <End Role="tblGLTranHeader" EntitySet="tblGLTranHeaders" />
           </AssociationSet>
+          <EntitySet Name="AccountPayableAdjustmentsDetails" EntityType="GeneralLedgerModel.AccountPayableAdjustmentsDetail" />
+          <AssociationSet Name="FK_AccountsPayableAdjustmentDetail_AccountsPayableAdjustmentDetail" Association="GeneralLedgerModel.FK_AccountsPayableAdjustmentDetail_AccountsPayableAdjustmentDetail">
+            <End Role="AccountPayableAdjustment" EntitySet="AccountPayableAdjustments" />
+            <End Role="AccountPayableAdjustmentsDetail" EntitySet="AccountPayableAdjustmentsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountPayableAdjustmentsDetail_Product" Association="GeneralLedgerModel.FK_AccountPayableAdjustmentsDetail_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="AccountPayableAdjustmentsDetail" EntitySet="AccountPayableAdjustmentsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_AccountPayableAdjustments" Association="GeneralLedgerModel.FK_Stock_AccountPayableAdjustments">
+            <End Role="AccountPayableAdjustment" EntitySet="AccountPayableAdjustments" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <EntitySet Name="AccountReceivableAdjustmentsDetails" EntityType="GeneralLedgerModel.AccountReceivableAdjustmentsDetail" />
+          <AssociationSet Name="FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments" Association="GeneralLedgerModel.FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments">
+            <End Role="AccountReceivableAdjustment" EntitySet="AccountReceivableAdjustments" />
+            <End Role="AccountReceivableAdjustmentsDetail" EntitySet="AccountReceivableAdjustmentsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountReceivableAdjustmentsDetail_Product" Association="GeneralLedgerModel.FK_AccountReceivableAdjustmentsDetail_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="AccountReceivableAdjustmentsDetail" EntitySet="AccountReceivableAdjustmentsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_AccountReceivableAdjustments" Association="GeneralLedgerModel.FK_Stock_AccountReceivableAdjustments">
+            <End Role="AccountReceivableAdjustment" EntitySet="AccountReceivableAdjustments" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -3104,6 +3257,8 @@
           <Property Name="CustomerId" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustments_Customer" FromRole="AccountReceivableAdjustment" ToRole="Customer" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="tblGLTranHeader" />
+          <NavigationProperty Name="AccountReceivableAdjustmentsDetails" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="AccountReceivableAdjustmentsDetail" />
+          <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="Stock" />
         </EntityType>
         <EntityType Name="AccountsReceivableAdjustmentsType">
           <Key>
@@ -3992,6 +4147,9 @@
           <Property Name="SupplierId" Type="Int32" />
           <NavigationProperty Name="Supplier" Relationship="GeneralLedgerModel.FK_AccountPayableAdjustments_Suppliers" FromRole="AccountPayableAdjustment" ToRole="Supplier" />
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_AccountPayableAdjustments" FromRole="AccountPayableAdjustment" ToRole="tblGLTranHeader" />
+          <NavigationProperty Name="AccountPayableAdjustmentsDetails" Relationship="GeneralLedgerModel.FK_AccountsPayableAdjustmentDetail_AccountsPayableAdjustmentDetail" FromRole="AccountPayableAdjustment" ToRole="AccountPayableAdjustmentsDetail" />
+          <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_AccountPayableAdjustments" FromRole="AccountPayableAdjustment" ToRole="Stock" />
+          <Property Name="AdditionalDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_AccountPayableAdjustments_AccountsPayableAdjustmentsType">
           <End Type="GeneralLedgerModel.AccountsPayableAdjustmentsType" Role="AccountsPayableAdjustmentsType" Multiplicity="0..1" />
@@ -4104,6 +4262,10 @@
           <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_Stock_Sales" FromRole="Stock" ToRole="Sale" />
           <NavigationProperty Name="StockTransactionType" Relationship="GeneralLedgerModel.FK_Stock_StockTransactionType" FromRole="Stock" ToRole="StockTransactionType" />
           <NavigationProperty Name="Product" Relationship="GeneralLedgerModel.FK_Stock_Product" FromRole="Stock" ToRole="Product" />
+          <Property Name="AccountsPayablePurchaseReturnID" Type="Int32" />
+          <NavigationProperty Name="AccountPayableAdjustment" Relationship="GeneralLedgerModel.FK_Stock_AccountPayableAdjustments" FromRole="Stock" ToRole="AccountPayableAdjustment" />
+          <Property Name="AccountsReceivableSaleReturnID" Type="Int32" />
+          <NavigationProperty Name="AccountReceivableAdjustment" Relationship="GeneralLedgerModel.FK_Stock_AccountReceivableAdjustments" FromRole="Stock" ToRole="AccountReceivableAdjustment" />
         </EntityType>
         <Association Name="FK_Stock_Purchase">
           <End Type="GeneralLedgerModel.Purchase" Role="Purchase" Multiplicity="0..1" />
@@ -4141,6 +4303,7 @@
           <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <NavigationProperty Name="Product" Relationship="GeneralLedgerModel.FK_PurchaseDetail_Product" FromRole="PurchaseDetail" ToRole="Product" />
           <NavigationProperty Name="Purchase" Relationship="GeneralLedgerModel.FK_PurchaseDetail_PurchaseDetail" FromRole="PurchaseDetail" ToRole="Purchase" />
+          <Property Name="ReturnedQuantity" Type="Int32" />
         </EntityType>
         <Association Name="FK_PurchaseDetail_Product">
           <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="0..1" />
@@ -4210,6 +4373,7 @@
           <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="Product" Relationship="GeneralLedgerModel.FK_SalesDetail_Product" FromRole="SalesDetail" ToRole="Product" />
           <NavigationProperty Name="Sale" Relationship="GeneralLedgerModel.FK_SalesDetail_Sales" FromRole="SalesDetail" ToRole="Sale" />
+          <Property Name="ReturnedQuantity" Type="Int32" />
         </EntityType>
         <Association Name="FK_SalesDetail_Product">
           <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="0..1" />
@@ -4370,6 +4534,104 @@
             </Principal>
             <Dependent Role="tblGLTranHeader">
               <PropertyRef Name="intIDReference" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccountPayableAdjustmentsDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountsPayableAdjustmentID" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="AccountPayableAdjustment" Relationship="GeneralLedgerModel.FK_AccountsPayableAdjustmentDetail_AccountsPayableAdjustmentDetail" FromRole="AccountPayableAdjustmentsDetail" ToRole="AccountPayableAdjustment" />
+          <NavigationProperty Name="Product" Relationship="GeneralLedgerModel.FK_AccountPayableAdjustmentsDetail_Product" FromRole="AccountPayableAdjustmentsDetail" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_AccountsPayableAdjustmentDetail_AccountsPayableAdjustmentDetail">
+          <End Type="GeneralLedgerModel.AccountPayableAdjustment" Role="AccountPayableAdjustment" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.AccountPayableAdjustmentsDetail" Role="AccountPayableAdjustmentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountPayableAdjustment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountPayableAdjustmentsDetail">
+              <PropertyRef Name="AccountsPayableAdjustmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountPayableAdjustmentsDetail_Product">
+          <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.AccountPayableAdjustmentsDetail" Role="AccountPayableAdjustmentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountPayableAdjustmentsDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_AccountPayableAdjustments">
+          <End Type="GeneralLedgerModel.AccountPayableAdjustment" Role="AccountPayableAdjustment" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountPayableAdjustment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="AccountsPayablePurchaseReturnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccountReceivableAdjustmentsDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountsReceivableAdjustmentsID" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="AccountReceivableAdjustment" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustmentsDetail" ToRole="AccountReceivableAdjustment" />
+          <NavigationProperty Name="Product" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustmentsDetail_Product" FromRole="AccountReceivableAdjustmentsDetail" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments">
+          <End Type="GeneralLedgerModel.AccountReceivableAdjustment" Role="AccountReceivableAdjustment" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.AccountReceivableAdjustmentsDetail" Role="AccountReceivableAdjustmentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountReceivableAdjustment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountReceivableAdjustmentsDetail">
+              <PropertyRef Name="AccountsReceivableAdjustmentsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountReceivableAdjustmentsDetail_Product">
+          <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.AccountReceivableAdjustmentsDetail" Role="AccountReceivableAdjustmentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountReceivableAdjustmentsDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_AccountReceivableAdjustments">
+          <End Type="GeneralLedgerModel.AccountReceivableAdjustment" Role="AccountReceivableAdjustment" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountReceivableAdjustment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="AccountsReceivableSaleReturnID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5654,6 +5916,7 @@
           <EntitySetMapping Name="AccountPayableAdjustments">
             <EntityTypeMapping TypeName="GeneralLedgerModel.AccountPayableAdjustment">
               <MappingFragment StoreEntitySet="AccountPayableAdjustments">
+                <ScalarProperty Name="AdditionalDescription" ColumnName="AdditionalDescription" />
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -5669,6 +5932,8 @@
           <EntitySetMapping Name="Stocks">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Stock">
               <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="AccountsReceivableSaleReturnID" ColumnName="AccountsReceivableSaleReturnID" />
+                <ScalarProperty Name="AccountsPayablePurchaseReturnID" ColumnName="AccountsPayablePurchaseReturnID" />
                 <ScalarProperty Name="SalesID" ColumnName="SalesID" />
                 <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
                 <ScalarProperty Name="QuantityOut" ColumnName="QuantityOut" />
@@ -5682,6 +5947,7 @@
           <EntitySetMapping Name="PurchaseDetails">
             <EntityTypeMapping TypeName="GeneralLedgerModel.PurchaseDetail">
               <MappingFragment StoreEntitySet="PurchaseDetail">
+                <ScalarProperty Name="ReturnedQuantity" ColumnName="ReturnedQuantity" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
@@ -5702,6 +5968,7 @@
           <EntitySetMapping Name="SalesDetails">
             <EntityTypeMapping TypeName="GeneralLedgerModel.SalesDetail">
               <MappingFragment StoreEntitySet="SalesDetail">
+                <ScalarProperty Name="ReturnedQuantity" ColumnName="ReturnedQuantity" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
@@ -5730,6 +5997,30 @@
                 <ScalarProperty Name="datBatchDate" ColumnName="datBatchDate" />
                 <ScalarProperty Name="intIDGLBookType" ColumnName="intIDGLBookType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountPayableAdjustmentsDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.AccountPayableAdjustmentsDetail">
+              <MappingFragment StoreEntitySet="AccountPayableAdjustmentsDetail">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="AccountsPayableAdjustmentID" ColumnName="AccountsPayableAdjustmentID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountReceivableAdjustmentsDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.AccountReceivableAdjustmentsDetail">
+              <MappingFragment StoreEntitySet="AccountReceivableAdjustmentsDetail">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="AccountsReceivableAdjustmentsID" ColumnName="AccountsReceivableAdjustmentsID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

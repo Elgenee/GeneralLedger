@@ -215,6 +215,18 @@
     <Compile Include="UserControls\frmAgent.Designer.cs">
       <DependentUpon>frmAgent.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\frmChooseReturnSaleProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmChooseReturnSaleProduct.Designer.cs">
+      <DependentUpon>frmChooseReturnSaleProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmChooseReturnPurchaseProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmChooseReturnPurchaseProduct.Designer.cs">
+      <DependentUpon>frmChooseReturnPurchaseProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\frmChooseProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -694,6 +706,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmAgent.resx">
       <DependentUpon>frmAgent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmChooseReturnSaleProduct.resx">
+      <DependentUpon>frmChooseReturnSaleProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmChooseReturnPurchaseProduct.resx">
+      <DependentUpon>frmChooseReturnPurchaseProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmChooseProduct.resx">
       <DependentUpon>frmChooseProduct.cs</DependentUpon>

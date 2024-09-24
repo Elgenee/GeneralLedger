@@ -12,9 +12,9 @@ namespace GeneralLedger.Core.Services
         AccountReceivableAdjustment AddReturnCheck(AccountReceivableAdjustment accountReceivableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
         AccountReceivableAdjustment UpdateReturnCheck(AccountReceivableAdjustment accountReceivableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
         void RemoveReturnCheck(AccountReceivableAdjustment accountReceivableAdjustment);
-        AccountReceivableAdjustment AddReturnSales(AccountReceivableAdjustment accountReceivableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
-        AccountReceivableAdjustment UpdateReturnSales(AccountReceivableAdjustment accountReceivableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
-        void RemoveReturnSales(AccountReceivableAdjustment accountReceivableAdjustment);
+        AccountReceivableAdjustment AddReturnSales(AccountReceivableAdjustment accountReceivableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<AccountReceivableAdjustmentsDetail> accountReceivableAdjustmentsDetailList);
+        AccountReceivableAdjustment UpdateReturnSales(AccountReceivableAdjustment accountReceivableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<AccountReceivableAdjustmentsDetail> accountReceivableAdjustmentsDetailList);
+        void RemoveReturnSales(AccountReceivableAdjustment accountReceivableAdjustment, List<AccountReceivableAdjustmentsDetail> accountReceivableAdjustmentsDetailList);
 
         AccountReceivableAdjustment AddDebitCreditMemo(AccountReceivableAdjustment accountReceivableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
         AccountReceivableAdjustment UpdateDebitCreditMemo(AccountReceivableAdjustment accountReceivableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);

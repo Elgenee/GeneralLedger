@@ -144,7 +144,7 @@ namespace GeneralLedger.UserControls
                 }
                 //GLTranHeader = Purchase.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
 
-                this.GLTranDetail = GLTranServices.GetGLEntryByPurchaseId(Purchase.Id, 9).SelectMany(h => h.tblGLTranDetails).ToList();
+                this.GLTranDetail = GLTranServices.GetGLEntryByPurchaseId(Purchase.Id, 11).SelectMany(h => h.tblGLTranDetails).ToList();
                 if (GLTranDetail.Count > 0)
                 {
 
@@ -974,7 +974,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[10].Value = purchaseDetail.Product.ProductBrand.strName;
                         //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
                         //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
-                        //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
+                        //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;pl
                         this.dgProduct.Rows[i].Cells[14].Value = purchaseDetail.Product.ProductColor.Id;
                         this.dgProduct.Rows[i].Cells[15].Value = purchaseDetail.Product.ProductColor.strName;
                         this.dgProduct.Rows[i].Cells[16].Value = purchaseDetail.Product.ProductSize.Id;

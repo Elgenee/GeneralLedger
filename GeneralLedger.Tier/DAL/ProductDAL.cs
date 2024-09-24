@@ -248,6 +248,202 @@ namespace GeneralLedger.Tier.DAL
 
         }
 
+        public List<Product> getReturnPurchaseProductSearch(string criteria , int purchaseId)
+        {
+
+            var dbUtil = new DatabaseManager();
+            var ProductList = new List<Product>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spReturnPurchaseProductSearch";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@strCriteria", criteria);
+                    cmd.Parameters.AddWithValue("@intPurchaseID", purchaseId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            var product = new Product
+                            {
+                                ID = ReferenceEquals(reader["Id"], DBNull.Value) ? 0 : Convert.ToInt32(reader["Id"]),
+                                ProductName = ReferenceEquals(reader["strProductName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strProductName"]),
+                                Description = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
+                                strCode = ReferenceEquals(reader["strCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strCode"]),
+                                strPR = ReferenceEquals(reader["strPR"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPR"]),
+                                strPCD = ReferenceEquals(reader["strPCD"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPCD"]),
+                                strMFLM = ReferenceEquals(reader["strMFLM"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strMFLM"]),
+                                strPattern = ReferenceEquals(reader["strPattern"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPattern"]),
+                                strOffsetCenterBase = ReferenceEquals(reader["strOffsetCenterBore"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strOffsetCenterBore"]),
+                                strOrigin = ReferenceEquals(reader["strOrigin"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strOrigin"]),
+                                UnitPrice = ReferenceEquals(reader["curUnitPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curUnitPrice"]),
+                                //SellingPrice = ReferenceEquals(reader["curSellingPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curSellingPrice"]),
+                                PerPieceBox = ReferenceEquals(reader["intPerPiecePerBox"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["intPerPiecePerBox"]),
+                                intRemainingCount = ReferenceEquals(reader["intRemainingCount"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intRemainingCount"]),
+
+                                ProductBrand = new ProductBrand
+                                {
+                                    ID = ReferenceEquals(reader["ProductBrandID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductBrandID"]),
+                                    Name = ReferenceEquals(reader["ProductBrand"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductBrand"]),
+                                },
+                                ProductCategory = new ProductCategory
+                                {
+                                    ID = ReferenceEquals(reader["ProductCategoryID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductCategoryID"]),
+                                    Name = ReferenceEquals(reader["ProductCategory"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductCategory"]),
+                                },
+                                PriceType = new PriceType
+                                {
+                                    ID = ReferenceEquals(reader["PriceTypeID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["PriceTypeID"]),
+                                    Name = ReferenceEquals(reader["PriceType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["PriceType"]),
+                                },
+                                ProductType = new ProductType
+                                {
+                                    ID = ReferenceEquals(reader["ProductTypesID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductTypesID"]),
+                                    Name = ReferenceEquals(reader["ProductTypes"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductTypes"]),
+                                },
+                                ProductCharacteristic = new ProductCharacteristic
+                                {
+                                    ID = ReferenceEquals(reader["ProductCharacteristicID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductCharacteristicID"]),
+                                    Name = ReferenceEquals(reader["ProductCharacteristic"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductCharacteristic"]),
+
+                                },
+                                ProductSize = new ProductSize
+                                {
+                                    ID = ReferenceEquals(reader["ProductSizeID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductSizeID"]),
+                                    Name = ReferenceEquals(reader["ProductSize"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductSize"]),
+                                },
+                                ProductColor = new ProductColor
+                                {
+                                    ID = ReferenceEquals(reader["ProductColorID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductColorID"]),
+                                    Name = ReferenceEquals(reader["ProductColor"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductColor"]),
+                                },
+                                ProductUnit = new ProductUnit
+                                {
+                                    ID = ReferenceEquals(reader["ProductUnitID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductUnitID"]),
+                                    Name = ReferenceEquals(reader["ProductUnit"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductUnit"]),
+                                },
+                                Location = new Location
+                                {
+                                    ID = ReferenceEquals(reader["LocationID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["LocationID"]),
+                                    Name = ReferenceEquals(reader["Location"], DBNull.Value) ? string.Empty : Convert.ToString(reader["Location"]),
+                                }
+                            };
+
+
+                            ProductList.Add(product);
+                        }
+                        return ProductList;
+                    }
+                }
+            }
+
+        }
+
+        public List<Product> getReturnSalesProductSearch(string criteria, int salesId)
+        {
+
+            var dbUtil = new DatabaseManager();
+            var ProductList = new List<Product>();
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spReturnSalesProductSearch";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@strCriteria", criteria);
+                    cmd.Parameters.AddWithValue("@intSalesID", salesId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            var product = new Product
+                            {
+                                ID = ReferenceEquals(reader["Id"], DBNull.Value) ? 0 : Convert.ToInt32(reader["Id"]),
+                                ProductName = ReferenceEquals(reader["strProductName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strProductName"]),
+                                Description = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
+                                strCode = ReferenceEquals(reader["strCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strCode"]),
+                                strPR = ReferenceEquals(reader["strPR"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPR"]),
+                                strPCD = ReferenceEquals(reader["strPCD"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPCD"]),
+                                strMFLM = ReferenceEquals(reader["strMFLM"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strMFLM"]),
+                                strPattern = ReferenceEquals(reader["strPattern"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPattern"]),
+                                strOffsetCenterBase = ReferenceEquals(reader["strOffsetCenterBore"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strOffsetCenterBore"]),
+                                strOrigin = ReferenceEquals(reader["strOrigin"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strOrigin"]),
+                                UnitPrice = ReferenceEquals(reader["curUnitPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curUnitPrice"]),
+                                //SellingPrice = ReferenceEquals(reader["curSellingPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curSellingPrice"]),
+                                PerPieceBox = ReferenceEquals(reader["intPerPiecePerBox"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["intPerPiecePerBox"]),
+                                intRemainingCount = ReferenceEquals(reader["intRemainingCount"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intRemainingCount"]),
+
+                                ProductBrand = new ProductBrand
+                                {
+                                    ID = ReferenceEquals(reader["ProductBrandID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductBrandID"]),
+                                    Name = ReferenceEquals(reader["ProductBrand"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductBrand"]),
+                                },
+                                ProductCategory = new ProductCategory
+                                {
+                                    ID = ReferenceEquals(reader["ProductCategoryID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductCategoryID"]),
+                                    Name = ReferenceEquals(reader["ProductCategory"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductCategory"]),
+                                },
+                                PriceType = new PriceType
+                                {
+                                    ID = ReferenceEquals(reader["PriceTypeID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["PriceTypeID"]),
+                                    Name = ReferenceEquals(reader["PriceType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["PriceType"]),
+                                },
+                                ProductType = new ProductType
+                                {
+                                    ID = ReferenceEquals(reader["ProductTypesID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductTypesID"]),
+                                    Name = ReferenceEquals(reader["ProductTypes"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductTypes"]),
+                                },
+                                ProductCharacteristic = new ProductCharacteristic
+                                {
+                                    ID = ReferenceEquals(reader["ProductCharacteristicID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductCharacteristicID"]),
+                                    Name = ReferenceEquals(reader["ProductCharacteristic"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductCharacteristic"]),
+
+                                },
+                                ProductSize = new ProductSize
+                                {
+                                    ID = ReferenceEquals(reader["ProductSizeID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductSizeID"]),
+                                    Name = ReferenceEquals(reader["ProductSize"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductSize"]),
+                                },
+                                ProductColor = new ProductColor
+                                {
+                                    ID = ReferenceEquals(reader["ProductColorID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductColorID"]),
+                                    Name = ReferenceEquals(reader["ProductColor"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductColor"]),
+                                },
+                                ProductUnit = new ProductUnit
+                                {
+                                    ID = ReferenceEquals(reader["ProductUnitID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductUnitID"]),
+                                    Name = ReferenceEquals(reader["ProductUnit"], DBNull.Value) ? string.Empty : Convert.ToString(reader["ProductUnit"]),
+                                },
+                                Location = new Location
+                                {
+                                    ID = ReferenceEquals(reader["LocationID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["LocationID"]),
+                                    Name = ReferenceEquals(reader["Location"], DBNull.Value) ? string.Empty : Convert.ToString(reader["Location"]),
+                                }
+                            };
+
+
+                            ProductList.Add(product);
+                        }
+                        return ProductList;
+                    }
+                }
+            }
+
+        }
+
 
         public List<SearchProductAndColorAndSize> getProductDetails(int ProductID)
         {
