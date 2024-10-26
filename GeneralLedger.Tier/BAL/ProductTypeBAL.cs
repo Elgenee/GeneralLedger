@@ -38,5 +38,12 @@ namespace GeneralLedger.Tier.BAL
             return ptDAL.getProductType();
         }
 
+
+        public List<ProductType> getProductTypeByCriteria(string criteria)
+        {
+            ProductTypeDAL ptDAL = new ProductTypeDAL();
+            return ptDAL.getProductTypeByCriteria(criteria);
+        }
+
     }
 }

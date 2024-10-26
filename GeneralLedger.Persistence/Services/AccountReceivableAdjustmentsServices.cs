@@ -230,8 +230,8 @@ namespace GeneralLedger.Persistence.Services
 
             var gLTranDetail = new List<tblGLTranDetail>
             {
-                CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, accountReceivableAdjustment.TotalAmount.Value,0),
-                CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, 0, accountReceivableAdjustment.TotalAmount.Value),
+                CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, accountReceivableAdjustment.TotalInventoryAmount.Value,0),
+                CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, 0, accountReceivableAdjustment.TotalInventoryAmount.Value),
             };
 
             //AddGLTranHeader(unitOfWork, purchase, gLTranDetail);
@@ -294,7 +294,7 @@ namespace GeneralLedger.Persistence.Services
                 accountReceivableAdjustment.Descrpition = productDetailsBuilder.ToString();
                 unitOfWork.AccountsReceivableAdjustments.Add(accountReceivableAdjustment);
                 UpdateRemainingCount(unitOfWork, accountReceivableAdjustment, accountReceivableAdjustmentsDetail);
-            
+
                 var salesCustomerLedger = new SalesCustomerLedger
                 {
                     intIdSales = accountReceivableAdjustment.SalesId,
@@ -330,28 +330,28 @@ namespace GeneralLedger.Persistence.Services
                              intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry2.ID,
                              curCredit = 0,
-                             curDebit = sales.SOPAmount
+                             curDebit = accountReceivableAdjustment.Sale.SOPAmount.Value,
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry3.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry3.ID,
                              curCredit = 0,
-                             curDebit = sales.COMMAmount
+                             curDebit = accountReceivableAdjustment.Sale.COMMAmount.Value,
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry4.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry4.ID,
                              curCredit = 0,
-                             curDebit =  sales.CFAmount
+                             curDebit =  accountReceivableAdjustment.Sale.CFAmount.Value,
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry5.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry5.ID,
                              curCredit = 0,
-                             curDebit = accountReceivableAdjustment.TotalAmount.Value - (sales.COMMAmount + sales.SOPAmount + sales.CFAmount)
+                             curDebit = accountReceivableAdjustment.TotalAmount.Value - (accountReceivableAdjustment.Sale.COMMAmount.Value + accountReceivableAdjustment.Sale.SOPAmount.Value + accountReceivableAdjustment.Sale.CFAmount.Value)
                          }
                     };
 
@@ -517,11 +517,12 @@ namespace GeneralLedger.Persistence.Services
                 resultAdjustmentReceivableAdjusment.TransactionNo = accountReceivableAdjustment.TransactionNo;
                 resultAdjustmentReceivableAdjusment.TransactionDate = accountReceivableAdjustment.TransactionDate;
                 //resultAdjustmentReceivableAdjusment.CollectionId = accountReceivableAdjustment.CollectionId;
-           
+
                 resultAdjustmentReceivableAdjusment.SalesId = accountReceivableAdjustment.SalesId;
                 resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].strDescription = accountReceivableAdjustment.Descrpition;
                 resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].datBatchDate = accountReceivableAdjustment.TransactionDate;
                 resultAdjustmentReceivableAdjusment.TotalAmount = accountReceivableAdjustment.TotalAmount;
+                resultAdjustmentReceivableAdjusment.TotalInventoryAmount = accountReceivableAdjustment.TotalInventoryAmount;
 
                 var sales = unitOfWork.Sale.Get((int)accountReceivableAdjustment.SalesId);
                 var salesDetails = unitOfWork.SaleDetail.Find(d => d.SalesId == sales.Id);
@@ -551,11 +552,13 @@ namespace GeneralLedger.Persistence.Services
 
                 var salesCustomerLedgerExisting = unitOfWork.SalesCustomerLedger.Find(s => s.intIdAccountReceivableAdjustment == accountReceivableAdjustment.Id && s.intIdSalesCustomerLedgerTransctionType == 3).SingleOrDefault();
 
-                if (salesCustomerLedgerExisting != null) {
+                if (salesCustomerLedgerExisting != null)
+                {
                     unitOfWork.SalesCustomerLedger.Remove(salesCustomerLedgerExisting);
                 }
 
-                var salesCustomerLedger = new SalesCustomerLedger { 
+                var salesCustomerLedger = new SalesCustomerLedger
+                {
                     intIdSales = resultAdjustmentReceivableAdjusment.SalesId,
                     intIdCustomer = sales.intIdCustomer,
                     intIdSalesCustomerLedgerTransctionType = 3,
@@ -601,28 +604,28 @@ namespace GeneralLedger.Persistence.Services
                              intIDMasCoa = (int)journalEntry2Inv.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry2Inv.ID,
                              curCredit = 0,
-                             curDebit = sales.SOPAmount
+                             curDebit = accountReceivableAdjustment.Sale.SOPAmount.Value
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry3Inv.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry3Inv.ID,
                              curCredit = 0,
-                             curDebit = sales.COMMAmount
+                             curDebit = accountReceivableAdjustment.Sale.COMMAmount.Value
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry4Inv.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry4Inv.ID,
                              curCredit = 0,
-                             curDebit =  sales.CFAmount
+                             curDebit =  accountReceivableAdjustment.Sale.CFAmount.Value
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry5Inv.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry5Inv.ID,
                              curCredit = 0,
-                             curDebit = accountReceivableAdjustment.TotalAmount - (sales.COMMAmount + sales.SOPAmount + sales.CFAmount)
+                             curDebit = accountReceivableAdjustment.TotalAmount - (accountReceivableAdjustment.Sale.COMMAmount.Value + accountReceivableAdjustment.Sale.SOPAmount.Value + accountReceivableAdjustment.Sale.CFAmount.Value)
                          }
                     };
 
@@ -659,8 +662,18 @@ namespace GeneralLedger.Persistence.Services
 
                 resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].blnUseDefaultEntry = UseDefaultEntry;
                 resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].strDescription = productDetailsBuilder.ToString();
-                resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].curCreditAmount = resultAdjustmentReceivableAdjusment.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curCredit);
-                resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].curDebitAmount = resultAdjustmentReceivableAdjusment.tblGLTranHeaders.SelectMany(h => h.tblGLTranDetails).Sum(d => d.curDebit);
+                //object test = resultAdjustmentReceivableAdjusment.tblGLTranHeaders.Where(t => t.intIDGLBookType == 8).SelectMany(h => h.tblGLTranDetails).ToList();
+                resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].curCreditAmount = resultAdjustmentReceivableAdjusment
+                    .tblGLTranHeaders
+                    .Where(t => t.intIDGLBookType == 8)
+                    .SelectMany(h => h.tblGLTranDetails)
+                    .Sum(d => d.curCredit);
+
+                resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].curDebitAmount = resultAdjustmentReceivableAdjusment
+                    .tblGLTranHeaders
+                    .Where(t => t.intIDGLBookType == 8)
+                    .SelectMany(h => h.tblGLTranDetails)
+                    .Sum(d => d.curDebit);
 
                 var existingGLTranHeaderInventory = unitOfWork.GLTran.Find(h => h.intIdAccountReceivableAdjustment == resultAdjustmentReceivableAdjusment.Id && h.intIDGLBookType == 1011).SingleOrDefault();
 
@@ -693,7 +706,7 @@ namespace GeneralLedger.Persistence.Services
                      {
                          intIDMasCoa = (int)journalEntry3.intIDMasCOA,
                          intIDMasCoaSub = journalEntry3.ID,
-                         curCredit = accountReceivableAdjustment.TotalAmount.Value,
+                         curCredit = accountReceivableAdjustment.TotalInventoryAmount.Value,
                          curDebit = 0,
                          intIDGLTranHeader = existingGLTranHeaderInventory.ID
                      },
@@ -702,7 +715,7 @@ namespace GeneralLedger.Persistence.Services
                          intIDMasCoa = (int)journalEntry1.intIDMasCOA,
                          intIDMasCoaSub = journalEntry1.ID,
                          curCredit = 0,
-                         curDebit = accountReceivableAdjustment.TotalAmount.Value,
+                         curDebit = accountReceivableAdjustment.TotalInventoryAmount.Value,
                          intIDGLTranHeader = existingGLTranHeaderInventory.ID
                      }
 
@@ -717,8 +730,8 @@ namespace GeneralLedger.Persistence.Services
                 return resultAdjustmentReceivableAdjusment;
             }
         }
-    
-        public List<AccountReceivableAdjustment> GetAccountReceivableAdjustmentsWithCollectionSales(string criteria , int intIdAccountsReceivableAdjustmentsType )
+
+        public List<AccountReceivableAdjustment> GetAccountReceivableAdjustmentsWithCollectionSales(string criteria, int intIdAccountsReceivableAdjustmentsType)
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
@@ -787,7 +800,7 @@ namespace GeneralLedger.Persistence.Services
                     var accountsReceivableAdjustmentDetailExist = unitOfWork.AccountsReceivableAdjustmentsDetail.Get(existingDetail.Id);
                     unitOfWork.AccountsReceivableAdjustmentsDetail.Remove(accountsReceivableAdjustmentDetailExist);
 
-                    var existingStock = unitOfWork.Stock.Find(s => s.ProductId == existingDetail.ProductId && s.AccountsReceivableSaleReturnID == existingDetail.AccountsReceivableAdjustmentsID ).FirstOrDefault();
+                    var existingStock = unitOfWork.Stock.Find(s => s.ProductId == existingDetail.ProductId && s.AccountsReceivableSaleReturnID == existingDetail.AccountsReceivableAdjustmentsID).FirstOrDefault();
 
                     if (existingStock != null)
                     {
@@ -863,7 +876,7 @@ namespace GeneralLedger.Persistence.Services
                 var salesCustomerLedger = unitOfWork.SalesCustomerLedger.Find(s => s.intIdAccountReceivableAdjustment == accountReceivableAdjustment.Id && s.intIdSalesCustomerLedgerTransctionType == 3).SingleOrDefault();
                 salesCustomerLedger.intIdSales = accountReceivableAdjustment.SalesId;
                 salesCustomerLedger.intIdAccountReceivableAdjustment = accountReceivableAdjustment.Id;
-                salesCustomerLedger.TotalAmount = accountReceivableAdjustment.TotalAmount; 
+                salesCustomerLedger.TotalAmount = accountReceivableAdjustment.TotalAmount;
                 salesCustomerLedger.TransactionDate = accountReceivableAdjustment.TransactionDate;
                 salesCustomerLedger.TransactionNo = accountReceivableAdjustment.TransactionNo;
                 salesCustomerLedger.DateInserted = DateTime.Now;
@@ -973,7 +986,7 @@ namespace GeneralLedger.Persistence.Services
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
-              
+
                 unitOfWork.AccountsReceivableAdjustments.Add(accountReceivableAdjustment);
 
                 var salesCustomerLedger = new SalesCustomerLedger
@@ -991,7 +1004,7 @@ namespace GeneralLedger.Persistence.Services
 
                 if (UseDefaultEntry)
                 {
-             
+
                     var gLTranDetail = new List<tblGLTranDetail>();
                     var gLTranHeader = new tblGLTranHeader
                     {
@@ -1081,7 +1094,7 @@ namespace GeneralLedger.Persistence.Services
                 salesCustomerLedger.TransactionDate = accountReceivableAdjustment.TransactionDate;
                 salesCustomerLedger.TransactionNo = accountReceivableAdjustment.TransactionNo;
                 salesCustomerLedger.DateInserted = DateTime.Now;
-   
+
                 unitOfWork.GLTranDetail.RemoveRange(resultAdjustmentReceivableAdjusment.tblGLTranHeaders.ToList()[0].tblGLTranDetails.ToList());
 
                 if (UseDefaultEntry)

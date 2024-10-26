@@ -43,6 +43,13 @@ namespace GeneralLedger.Tier.BAL
             return pbDAL.getProductSearch(criteria);
         }
 
+        public List<StockDetailsByProductId> getStockDetailsByProductId(int productID)
+        {
+
+            ProductDAL pbDAL = new ProductDAL();
+            return pbDAL.getStockDetailsByProductId(productID);
+        }
+
 
         public List<Product> getReturnPurchaseProductSearch(string criteria , int purchaseId)
         {

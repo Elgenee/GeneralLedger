@@ -44,6 +44,7 @@
           <Property Name="Descrpition" Type="nvarchar(max)" />
           <Property Name="TotalAmount" Type="money" />
           <Property Name="CustomerId" Type="int" />
+          <Property Name="TotalInventoryAmount" Type="money" />
         </EntityType>
         <EntityType Name="AccountReceivableAdjustmentsDetail">
           <Key>
@@ -221,7 +222,13 @@
           <Property Name="intIDProductType" Type="int" />
           <Property Name="intIDProductBrands" Type="int" />
           <Property Name="intIDSize" Type="int" />
+          <Property Name="intPerPiecePerBox" Type="int" />
+          <Property Name="intIDLocation" Type="int" />
+          <Property Name="intIDProductUnit" Type="int" />
           <Property Name="intIDColor" Type="int" />
+          <Property Name="intTotal" Type="int" />
+          <Property Name="intIDPriceType" Type="int" />
+          <Property Name="intIDProductCharacteristic" Type="int" />
           <Property Name="strCode" Type="nvarchar" MaxLength="500" />
           <Property Name="strPR" Type="nvarchar" MaxLength="500" />
           <Property Name="strPCD" Type="nvarchar" MaxLength="500" />
@@ -229,12 +236,6 @@
           <Property Name="strPattern" Type="nvarchar" MaxLength="500" />
           <Property Name="strOffsetCenterBore" Type="nvarchar" MaxLength="500" />
           <Property Name="strOrigin" Type="nvarchar" MaxLength="500" />
-          <Property Name="intPerPiecePerBox" Type="int" />
-          <Property Name="intIDLocation" Type="int" />
-          <Property Name="intTotal" Type="int" />
-          <Property Name="intIDPriceType" Type="int" />
-          <Property Name="intIDProductCharacteristic" Type="int" />
-          <Property Name="intIDProductUnit" Type="int" />
           <Property Name="intRemainingCount" Type="int" />
           <Property Name="curUnitPrice" Type="money" />
         </EntityType>
@@ -299,11 +300,11 @@
           <Property Name="SIDR" Type="nvarchar" MaxLength="500" />
           <Property Name="Total" Type="money" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="AdditionalDescription" Type="nvarchar(max)" />
           <Property Name="Terms" Type="int" />
           <Property Name="IsFullyPaid" Type="bit" />
           <Property Name="LastPaymentDate" Type="date" />
           <Property Name="IsPurchaseReturn" Type="bit" />
+          <Property Name="AdditionalDescription" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="PurchaseDetail">
           <Key>
@@ -359,7 +360,6 @@
           <Property Name="intIdAgent" Type="int" />
           <Property Name="TransactionDate" Type="date" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="AdditionalDescription" Type="nvarchar(max)" />
           <Property Name="Terms" Type="int" />
           <Property Name="IsFullyPaid" Type="bit" />
           <Property Name="LastPaymentDate" Type="date" />
@@ -367,6 +367,7 @@
           <Property Name="COMMAmount" Type="money" />
           <Property Name="CFAmount" Type="money" />
           <Property Name="IsSalesReturn" Type="bit" />
+          <Property Name="AdditionalDescription" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="SalesCustomerLedger">
           <Key>
@@ -3259,6 +3260,7 @@
           <NavigationProperty Name="tblGLTranHeaders" Relationship="GeneralLedgerModel.FK_tblGLTranHeader_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="tblGLTranHeader" />
           <NavigationProperty Name="AccountReceivableAdjustmentsDetails" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="AccountReceivableAdjustmentsDetail" />
           <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="Stock" />
+          <Property Name="TotalInventoryAmount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="AccountsReceivableAdjustmentsType">
           <Key>
@@ -5033,6 +5035,7 @@
           <EntitySetMapping Name="AccountReceivableAdjustments">
             <EntityTypeMapping TypeName="GeneralLedgerModel.AccountReceivableAdjustment">
               <MappingFragment StoreEntitySet="AccountReceivableAdjustments">
+                <ScalarProperty Name="TotalInventoryAmount" ColumnName="TotalInventoryAmount" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="Descrpition" ColumnName="Descrpition" />

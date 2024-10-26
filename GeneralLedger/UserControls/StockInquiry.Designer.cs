@@ -34,6 +34,7 @@
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.txtCriteria = new MetroFramework.Controls.MetroTextBox();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProduct)).BeginInit();
@@ -80,6 +81,9 @@
             this.dgProduct.RowTemplate.Height = 30;
             this.dgProduct.Size = new System.Drawing.Size(1541, 453);
             this.dgProduct.TabIndex = 64;
+            this.dgProduct.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProduct_CellClick);
+            this.dgProduct.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProduct_CellContentClick);
+            this.dgProduct.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProduct_CellContentDoubleClick);
             // 
             // btnSearch
             // 
@@ -134,6 +138,17 @@
             this.txtCriteria.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCriteria.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(665, 59);
+            this.metroButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(230, 28);
+            this.metroButton1.TabIndex = 40;
+            this.metroButton1.Text = "View stock inquiry details";
+            this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            // 
             // buttonX1
             // 
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -153,6 +168,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.btnSearch);
@@ -175,5 +191,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroTextBox txtCriteria;
         private DevComponents.DotNetBar.ButtonX buttonX1;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }

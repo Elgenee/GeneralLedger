@@ -24,6 +24,15 @@ namespace GeneralLedger.UserControls
         public int IndexGrid { get; set; }
         public int ID { get; set; }
 
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string ProductCategory { get; set; }
+        public string ProductTypeName { get; set; }
+        public string ProductBrandName { get; set; }
+        public string ProductColor { get; set; }
+        public string ProductSize { get; set; }
+        public string Code { get; set; }
+
         public StockInquiry()
         {
             InitializeComponent();
@@ -198,8 +207,8 @@ namespace GeneralLedger.UserControls
                     //
                     for (int i = 0; i < productsListDomain.Count; i++)
                     {
-                    
-                      //display all the data in productList to the datagridview
+
+                        //display all the data in productList to the datagridview
                         Product product = productsListDomain[i];
                         var total = product.intRemainingCount.Value * product.curUnitPrice.Value;
                         this.dgProduct.Rows[i].Cells[0].Value = product.Id;
@@ -247,6 +256,95 @@ namespace GeneralLedger.UserControls
         private void buttonX1_Click(object sender, EventArgs e)
         {
             this.MetroTabControl.TabPages.Remove(MetroTabPage);
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            if (this.ProductId == 0 )
+            {
+                MessageBox.Show("Please select item first...");
+                return;
+            }
+
+            StockInquiryDetails details = new StockInquiryDetails();
+            details.BringToFront();
+            details.TopMost = true;
+            details.ProductId = this.ProductId;
+            details.txtProductName.Text = this.ProductName;
+            details.txtProductCategory.Text = this.ProductCategory;
+            details.txtProductType.Text = ProductTypeName;
+            details.txtBrand.Text = ProductBrandName;
+            details.txtProductColor.Text = ProductColor;
+            details.txtProductCode.Text = Code;
+            details.txtProductSize.Text = ProductSize;
+
+
+            DialogResult res = details.ShowDialog(this);
+        }
+
+        private void dgProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                this.ProductId = Convert.ToInt32(this.dgProduct.Rows[e.RowIndex].Cells[0].Value);
+                this.ProductName = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[1].Value);
+                this.ProductCategory = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[6].Value);
+                this.ProductTypeName = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[8].Value);
+                this.ProductBrandName = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[10].Value);
+                this.ProductColor = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[15].Value);
+                this.ProductSize = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[17].Value);
+                this.Code = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[20].Value);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
+
+        private void dgProduct_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                this.ProductId = Convert.ToInt32(this.dgProduct.Rows[e.RowIndex].Cells[0].Value);
+                this.ProductName = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[1].Value);
+                this.ProductCategory = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[6].Value);
+                this.ProductTypeName = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[8].Value);
+                this.ProductBrandName = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[10].Value);
+                this.ProductColor = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[15].Value);
+                this.ProductSize = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[17].Value);
+                this.Code = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[20].Value);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
+
+        }
+
+        private void dgProduct_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            try
+            {
+                this.ProductId = Convert.ToInt32(this.dgProduct.Rows[e.RowIndex].Cells[0].Value);
+                this.ProductName = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[1].Value);
+                this.ProductCategory = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[6].Value);
+                this.ProductTypeName = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[8].Value);
+                this.ProductBrandName = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[10].Value);
+                this.ProductColor = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[15].Value);
+                this.ProductSize = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[17].Value);
+                this.Code = Convert.ToString(this.dgProduct.Rows[e.RowIndex].Cells[20].Value);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
         }
     }
 }

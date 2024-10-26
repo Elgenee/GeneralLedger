@@ -182,5 +182,15 @@ namespace GeneralLedger.UserControls
             }
 
         }
+
+        private void txtCriteria_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void metroLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -916,7 +916,7 @@ namespace GeneralLedger.Persistence.Services
         {
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
-                //TODO:okay na ang return quantity just need to test 05112024 
+        
                 UpdateAccountPayableAdjustmentDetails(accountPayableAdjustment, accountPayableAdjustmentsDetail, unitOfWork);
                 var resultAccountPayableAdjustment = unitOfWork.AccountsPayableAdjustments.GetAccountPayableAdjustmentsWithJournalEntry(accountPayableAdjustment.Id).SingleOrDefault();
 

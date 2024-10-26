@@ -151,6 +151,46 @@ namespace GeneralLedger.Tier.DAL
 
         }
 
+        public List<StockDetailsByProductId> getStockDetailsByProductId(int productID)
+        {
+
+            var dbUtil = new DatabaseManager();
+            var stockDetailsByProductIdList = new List<StockDetailsByProductId>();
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spGetStockDetailsByProductId";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@ProductID", productID);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            var stockDetailsByProductId = new StockDetailsByProductId
+                            {
+                              
+                                StockTransactionTypeName = ReferenceEquals(reader["StockTransactionTypeName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["StockTransactionTypeName"]),
+                                QuantityIn = ReferenceEquals(reader["QuantityIn"], DBNull.Value) ? 0 : Convert.ToInt32(reader["QuantityIn"]),
+                                QuantityOut = ReferenceEquals(reader["QuantityOut"], DBNull.Value) ? 0 : Convert.ToInt32(reader["QuantityOut"]),
+                                TransactionCode = ReferenceEquals(reader["strTransactionCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionCode"]),
+                              
+                            };
+
+                            stockDetailsByProductIdList.Add(stockDetailsByProductId);
+                        }
+                        return stockDetailsByProductIdList;
+                    }
+                }
+            }
+
+        }
+
 
 
         public List<Product> getProductSearch(string criteria)

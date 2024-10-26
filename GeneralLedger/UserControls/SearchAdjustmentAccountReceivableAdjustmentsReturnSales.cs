@@ -58,6 +58,10 @@ namespace GeneralLedger.UserControls
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["Description"].Value = adjustmentReceivableResult[i].Descrpition;
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["UseDefaultEntry"].Value = adjustmentReceivableResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["TotalAmount"].Value = adjustmentReceivableResult[i].TotalAmount;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SOPAmount"].Value = adjustmentReceivableResult[i].Sale.SOPAmount;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["CFAmount"].Value = adjustmentReceivableResult[i].Sale.CFAmount;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["COMMAmount"].Value = adjustmentReceivableResult[i].Sale.COMMAmount;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["TotalInventoryAmount"].Value = adjustmentReceivableResult[i].TotalInventoryAmount;
                     }
 
                     setRowNumber(this.dgSearchAccountReceivableAdjustments);
@@ -99,6 +103,7 @@ namespace GeneralLedger.UserControls
                         SalesId = Int32.Parse(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesId"].Value.ToString()),
                         Descrpition = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["Description"].Value.ToString(),
                         TotalAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["TotalAmount"].Value.ToString()),
+                        TotalInventoryAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["TotalInventoryAmount"].Value.ToString()),
                         Sale = new Sale {
                             Id = Int32.Parse(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesId"].Value.ToString()),
                             TRANo = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesTransactionNo"].Value.ToString(),
@@ -106,7 +111,10 @@ namespace GeneralLedger.UserControls
                             Customer = new Customer
                             {
                                 strName = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["Customer"].Value.ToString()
-                            }
+                            },
+                            SOPAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SOPAmount"].Value.ToString()),
+                            CFAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["CFAmount"].Value.ToString()),
+                            COMMAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["COMMAmount"].Value.ToString()),
                         },
                         tblGLTranHeaders = new List<tblGLTranHeader> {
                             new tblGLTranHeader {

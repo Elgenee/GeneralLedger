@@ -37,5 +37,13 @@ namespace GeneralLedger.Tier.BAL
             ProductSizeDAL psDAL = new ProductSizeDAL();
             return psDAL.getProductSize();
         }
+
+
+        public List<ProductSize> getProductSizeByCriteria(string criteria)
+        {
+
+            ProductSizeDAL psDAL = new ProductSizeDAL();
+            return psDAL.getProductSizeByCriteria(criteria);
+        }
     }
 }

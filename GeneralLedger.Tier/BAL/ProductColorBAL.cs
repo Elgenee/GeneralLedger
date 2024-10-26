@@ -37,5 +37,12 @@ namespace GeneralLedger.Tier.BAL
             ProductColorDAL pcDAL = new ProductColorDAL();
             return pcDAL.getProductColor();
         }
+
+        public List<ProductColor> getProductColorCriteria(string criteria)
+        {
+
+            ProductColorDAL pcDAL = new ProductColorDAL();
+            return pcDAL.getProductColorByCriteria(criteria);
+        }
     }
 }

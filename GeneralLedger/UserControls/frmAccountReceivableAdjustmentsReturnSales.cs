@@ -93,7 +93,7 @@ namespace GeneralLedger.UserControls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            //TODO:display SOP, COM and CF in the controls
             try
             {
                 if (this.SaleId == 0)
@@ -133,6 +133,8 @@ namespace GeneralLedger.UserControls
                 //    bankId = (this.cbBank.SelectedItem == null) ? 0 : ((Tier.BO.Bank)this.cbBank.SelectedItem).ID;
                 //}
 
+                //TODO:e check ang total
+
                 var adjustmentType = (this.cbAdjustmentType.SelectedItem == null) ? 0 : ((AccountsReceivableAdjustmentsType)this.cbAdjustmentType.SelectedItem).Id;
                 if (TransType.Equals("insert"))
                 {
@@ -145,7 +147,15 @@ namespace GeneralLedger.UserControls
                         TransactionDate = this.dtAdjustmentTransactionDate.Value,
                         Descrpition = this.txtDescription.Text,
                         TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
-                        SalesId = this.SaleId
+                        SalesId = this.SaleId,
+                        Sale = new Sale { 
+                            SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0,
+                            CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0,
+                            COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0,
+                            Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
+                        },
+                       TotalInventoryAmount = decimal.TryParse(this.txtInventoryPurchaseTotal.Text, out decimalParser) ? decimalParser : 0,
+
                     };
 
                     AccountReceivableAdjustment = AccountReceivableAdjustmentsServices.AddReturnSales(AccountReceivableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.AccountReceivableAdjustmentsDetailList);
@@ -166,7 +176,14 @@ namespace GeneralLedger.UserControls
                     AccountReceivableAdjustment.Descrpition = this.txtDescription.Text;
                     AccountReceivableAdjustment.SalesId = this.SaleId;
                     AccountReceivableAdjustment.TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
-
+                    AccountReceivableAdjustment.Sale = new Sale
+                    {
+                        SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0,
+                        CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0,
+                        COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0,
+                        Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
+                    };
+                    AccountReceivableAdjustment.TotalInventoryAmount = decimal.TryParse(this.txtInventoryPurchaseTotal.Text, out decimalParser) ? decimalParser : 0;
 
                     AccountReceivableAdjustment = AccountReceivableAdjustmentsServices.UpdateReturnSales(AccountReceivableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.AccountReceivableAdjustmentsDetailList);
                     if (AccountReceivableAdjustment != null)
@@ -483,11 +500,15 @@ namespace GeneralLedger.UserControls
                     this.txtCustomerName.Text = sje.AccountReceivableAdjustment.Sale.Customer.strName;
                     this.txtSaleID.Text = this.SaleId.ToString();
                     this.txtSalePONo.Text = sje.AccountReceivableAdjustment.Sale.PONo;
+                    this.txtSOPAmount.Text = sje.AccountReceivableAdjustment.Sale.SOPAmount.ToString();
+                    this.txtCFAmount.Text = sje.AccountReceivableAdjustment.Sale.CFAmount.ToString();
+                    this.txtCOMMAmount.Text = sje.AccountReceivableAdjustment.Sale.COMMAmount.ToString();
                     //this.txtCollectionTransactionNo.Text = sje.AccountReceivableAdjustment.Collection.TRANo.ToString();
                     //this.cbBank.SelectedValue = sje.AccountReceivableAdjustment.Collection.BankId;
                     //this.chkIsCash.Checked = (bool)sje.AccountReceivableAdjustment.Collection.IsCash;
                     //this.txtCheckDetails.Text = sje.AccountReceivableAdjustment.Collection.CheckDetail;
                     this.txtTotal.Text = sje.AccountReceivableAdjustment.TotalAmount.ToString();
+                    this.txtInventoryPurchaseTotal.Text = sje.AccountReceivableAdjustment.TotalInventoryAmount.ToString();
                     this.txtDescription.Text = sje.AccountReceivableAdjustment.Descrpition;
                     this.GLTranHeader = sje.AccountReceivableAdjustment.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                     this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
@@ -748,6 +769,9 @@ namespace GeneralLedger.UserControls
             this.txtInventoryPurchaseTotal.Text = string.Empty;
             this.txtTotalDebit.Text = string.Empty;
             this.txtTotalCredit.Text = string.Empty;
+            this.txtSOPAmount.Text = string.Empty;
+            this.txtCOMMAmount.Text = string.Empty;
+            this.txtCFAmount.Text = string.Empty;
             this.dgProduct.Rows.Clear();
             this.dgProduct.Refresh();
             this.dgInventoryEntry.Rows.Clear();
@@ -965,7 +989,7 @@ namespace GeneralLedger.UserControls
                     }
 
                     setRowNumber(this.dgJournalEntry);
-                    this.txtTotal.Text = string.Format("{0:0.00}", AccountReceivableAdjustmentsDetailList.Sum(g => g.TotalPrice));
+                    //this.txtTotal.Text = string.Format("{0:0.00}", AccountReceivableAdjustmentsDetailList.Sum(g => g.TotalPrice));
                     this.txtInventoryPurchaseTotal.Text = string.Format("{0:0.00}", AccountReceivableAdjustmentsDetailList.Sum(g => g.TotalPrice));
                     //this.txtTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice));
                 }

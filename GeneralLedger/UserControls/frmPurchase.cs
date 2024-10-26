@@ -143,8 +143,8 @@ namespace GeneralLedger.UserControls
 
                 }
                 //GLTranHeader = Purchase.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
-
-                this.GLTranDetail = GLTranServices.GetGLEntryByPurchaseId(Purchase.Id, 11).SelectMany(h => h.tblGLTranDetails).ToList();
+                //my local 11 is purchase ID and for the server is 9
+                this.GLTranDetail = GLTranServices.GetGLEntryByPurchaseId(Purchase.Id, 9).SelectMany(h => h.tblGLTranDetails).ToList();
                 if (GLTranDetail.Count > 0)
                 {
 

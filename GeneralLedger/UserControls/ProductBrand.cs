@@ -52,8 +52,15 @@ namespace GeneralLedger.UserControls
                 //this.dtgCoa.Columns[6].Name = "Accounting Type";
 
                 //this.dgProductCategory.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                this.dgProductBrand.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                //this.dgProductBrand.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 //this.dgTrialBalanceData.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                this.dgProductBrand.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None; // Keep it small
+                this.dgProductBrand.Columns[0].Width = 100; // Set a fixed width for the first column
+
+                // Set the second column (index 1) to AutoSizeMode.Fill and give it more weight
+                this.dgProductBrand.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                this.dgProductBrand.Columns[1].FillWeight = 80; // Larger weight to make it dominant
 
                 for (int i = 0; i < ProductBrandList.Count; i++)
                 {
@@ -156,6 +163,57 @@ namespace GeneralLedger.UserControls
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.MetroTabControl.TabPages.Remove(MetroTabPage);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            ProductBrandBAL ProductBrandBAL = new ProductBrandBAL();
+            List<GeneralLedger.Tier.BO.ProductBrand> ProductBrandList = ProductBrandBAL.getProductBrandByCriteria(this.txtCriteria.Text);
+            if ((ProductBrandList != null) && ProductBrandList.Count > 0)
+            {
+
+
+                this.dgProductBrand.ColumnCount = 2;
+
+
+                this.dgProductBrand.RowCount = ProductBrandList.Count;
+
+                //this.dtgCoa.Columns[0].Name = "ID";
+                //this.dtgCoa.Columns[1].Name = "Code";
+                //this.dtgCoa.Columns[2].Name = "Name";
+
+                //this.dtgCoa.Columns[3].Name = "Accounting Side";
+                //this.dtgCoa.Columns[4].Name = "IDMasCOAGroup";
+                //this.dtgCoa.Columns[5].Name = "Accounting Group";
+                //this.dtgCoa.Columns[6].Name = "Accounting Type";
+
+                //this.dgProductCategory.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                //this.dgProductBrand.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                //this.dgTrialBalanceData.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                this.dgProductBrand.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None; // Keep it small
+                this.dgProductBrand.Columns[0].Width = 100; // Set a fixed width for the first column
+
+                // Set the second column (index 1) to AutoSizeMode.Fill and give it more weight
+                this.dgProductBrand.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                this.dgProductBrand.Columns[1].FillWeight = 80; // Larger weight to make it dominant
+
+                for (int i = 0; i < ProductBrandList.Count; i++)
+                {
+                    this.dgProductBrand.Rows[i].Cells[0].Value = ProductBrandList[i].ID;
+                    this.dgProductBrand.Rows[i].Cells[1].Value = ProductBrandList[i].Name;
+
+
+                    setRowNumber(this.dgProductBrand);
+                }
+
+            }
+            else
+            {
+                this.dgProductBrand.Rows.Clear();
+                this.dgProductBrand.Refresh();
+                MessageBox.Show("No Result");
+            }
         }
     }
 }
