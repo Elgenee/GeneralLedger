@@ -226,7 +226,7 @@ namespace GeneralLedger.Persistence.Services
         {
 
             var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
-            var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+            var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1072).SingleOrDefault(); // COST OF GOODS SOLD
 
             var gLTranDetail = new List<tblGLTranDetail>
             {
@@ -697,7 +697,7 @@ namespace GeneralLedger.Persistence.Services
 
 
                 var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
-                var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1065).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+                var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1072).SingleOrDefault(); // COST OF GOODS SOLD
 
 
                 var gLTranDetail = new List<tblGLTranDetail>
