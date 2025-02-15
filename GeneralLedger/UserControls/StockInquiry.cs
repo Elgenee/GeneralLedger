@@ -244,6 +244,10 @@ namespace GeneralLedger.UserControls
                     }
                     setRowNumber(this.dgProduct);
                 }
+                else
+                {
+                    MessageBox.Show("No item found...");
+                }
 
             }
             catch (Exception ex)

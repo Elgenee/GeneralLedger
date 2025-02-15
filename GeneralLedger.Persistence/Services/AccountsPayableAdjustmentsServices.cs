@@ -662,6 +662,7 @@ namespace GeneralLedger.Persistence.Services
                 resultAccountPayableAdjustment.TransactionDate = accountPayableAdjustment.TransactionDate;
                 //resultAccountPayableAdjustment.PaymentId = accountPayableAdjustment.PaymentId;
                 resultAccountPayableAdjustment.Description = accountPayableAdjustment.Description;
+                resultAccountPayableAdjustment.AdditionalDescription = accountPayableAdjustment.AdditionalDescription;
                 resultAccountPayableAdjustment.PurchaseId = accountPayableAdjustment.PurchaseId;
                 resultAccountPayableAdjustment.SupplierId = accountPayableAdjustment.SupplierId;
                 resultAccountPayableAdjustment.TotalAmount = accountPayableAdjustment.TotalAmount;
@@ -734,6 +735,7 @@ namespace GeneralLedger.Persistence.Services
                 resultAccountPayableAdjustment.TransactionDate = accountPayableAdjustment.TransactionDate;
                 resultAccountPayableAdjustment.PaymentId = accountPayableAdjustment.PaymentId;
                 resultAccountPayableAdjustment.Description = accountPayableAdjustment.Description;
+                resultAccountPayableAdjustment.AdditionalDescription = accountPayableAdjustment.AdditionalDescription;
                 resultAccountPayableAdjustment.PurchaseId = accountPayableAdjustment.PurchaseId;
                 resultAccountPayableAdjustment.TotalAmount = accountPayableAdjustment.TotalAmount;
                 resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].strDescription = accountPayableAdjustment.Description;
@@ -925,6 +927,7 @@ namespace GeneralLedger.Persistence.Services
                 resultAccountPayableAdjustment.TransactionDate = accountPayableAdjustment.TransactionDate;
                 //resultAccountPayableAdjustment.PaymentId = accountPayableAdjustment.PaymentId;
                 //resultAccountPayableAdjustment.Description = accountPayableAdjustment.Description;
+                resultAccountPayableAdjustment.AdditionalDescription = accountPayableAdjustment.AdditionalDescription;
                 resultAccountPayableAdjustment.PurchaseId = accountPayableAdjustment.PurchaseId;
                 resultAccountPayableAdjustment.TotalAmount = accountPayableAdjustment.TotalAmount;
                 resultAccountPayableAdjustment.tblGLTranHeaders.ToList()[0].strDescription = accountPayableAdjustment.Description;

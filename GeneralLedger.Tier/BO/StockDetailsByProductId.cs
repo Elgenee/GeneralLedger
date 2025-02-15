@@ -12,6 +12,7 @@ namespace GeneralLedger.Tier.BO
         public int QuantityIn { get; set; }
         public int QuantityOut { get; set; }
         public string TransactionCode{ get; set; }
+        public DateTime TransactionDate { get; set; } // New property for Transaction Date
 
     }
 }

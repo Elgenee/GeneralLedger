@@ -29,6 +29,8 @@ namespace GeneralLedger.Persistence.Services
                     productDetailsBuilder.AppendLine("# " + product.strProductName +
                                                      "; Size: " + size.strName +
                                                      "; Color: " + color.strName +
+                                                     "; ProdType: " + product.ProductType.strName +
+                                                     (string.IsNullOrEmpty(product.strPR) ? "" : "; PR: " + product.strPR) +
                                                      "; Qty: " + detail.Quantity.ToString());
                 }
 
@@ -289,7 +291,11 @@ namespace GeneralLedger.Persistence.Services
 
         public Purchase GetPurchaseWithSupplier(int Id)
         {
-            throw new NotImplementedException();
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.Purchase.GetPurchaseWithSupplier(Id);
+
+            }
         }
 
         //public void Remove(Purchase purchase, List<PurchaseDetail> PurchaseDetailsList)
@@ -470,6 +476,8 @@ namespace GeneralLedger.Persistence.Services
                         productDetailsBuilder.AppendLine("# " + product.strProductName +
                                                          "; Size: " + size.strName +
                                                          "; Color: " + color.strName +
+                                                         "; ProdType: " + product.ProductType.strName +
+                                                         (string.IsNullOrEmpty(product.strPR) ? "" : "; PR: " + product.strPR) +
                                                          "; Qty: " + detail.Quantity.ToString());
                     }
                     pur.Description = string.Concat(productDetailsBuilder.ToString());

@@ -179,7 +179,8 @@ namespace GeneralLedger.Tier.DAL
                                 QuantityIn = ReferenceEquals(reader["QuantityIn"], DBNull.Value) ? 0 : Convert.ToInt32(reader["QuantityIn"]),
                                 QuantityOut = ReferenceEquals(reader["QuantityOut"], DBNull.Value) ? 0 : Convert.ToInt32(reader["QuantityOut"]),
                                 TransactionCode = ReferenceEquals(reader["strTransactionCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionCode"]),
-                              
+                                TransactionDate = ReferenceEquals(reader["strTransactionDate"], DBNull.Value) ? DateTime.MinValue : Convert.ToDateTime(reader["strTransactionDate"]) // New property for Transaction Date
+
                             };
 
                             stockDetailsByProductIdList.Add(stockDetailsByProductId);

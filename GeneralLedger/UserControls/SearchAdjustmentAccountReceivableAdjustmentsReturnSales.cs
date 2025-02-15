@@ -62,6 +62,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["CFAmount"].Value = adjustmentReceivableResult[i].Sale.CFAmount;
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["COMMAmount"].Value = adjustmentReceivableResult[i].Sale.COMMAmount;
                         this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["TotalInventoryAmount"].Value = adjustmentReceivableResult[i].TotalInventoryAmount;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AdditionalDescription"].Value = string.IsNullOrEmpty(adjustmentReceivableResult[i].AdditionalDescription) ? string.Empty : adjustmentReceivableResult[i].AdditionalDescription;
                     }
 
                     setRowNumber(this.dgSearchAccountReceivableAdjustments);
@@ -102,6 +103,7 @@ namespace GeneralLedger.UserControls
                         TransactionDate = Convert.ToDateTime(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["AccountsReceivableAdjustmentTransactionDate"].Value.ToString()),
                         SalesId = Int32.Parse(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesId"].Value.ToString()),
                         Descrpition = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["Description"].Value.ToString(),
+                        AdditionalDescription = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["AdditionalDescription"].Value.ToString(),
                         TotalAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["TotalAmount"].Value.ToString()),
                         TotalInventoryAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["TotalInventoryAmount"].Value.ToString()),
                         Sale = new Sale {

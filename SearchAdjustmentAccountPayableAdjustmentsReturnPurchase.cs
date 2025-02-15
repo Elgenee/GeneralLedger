@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,10 +15,10 @@ namespace GeneralLedger.UserControls
 {
     public partial class SearchAdjustmentAccountPayableAdjustmentsReturnPurchase : MetroForm
     {
-
         public AccountPayableAdjustment AccountPayableAdjustment { get; set; }
         public AccountsPayableAdjustmentsServices AccountsPayableAdjustmentsServices { get; set; }
         public int Index { get; set; }
+
         public SearchAdjustmentAccountPayableAdjustmentsReturnPurchase()
         {
             InitializeComponent();
@@ -74,7 +74,6 @@ namespace GeneralLedger.UserControls
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Error:" + ex.Message);
             }
         }
@@ -98,28 +97,31 @@ namespace GeneralLedger.UserControls
                         },
                         TransactionNo = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["AccountsPayableAdjustmentTransactionNo"].Value.ToString(),
                         TransactionDate = Convert.ToDateTime(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["AccountsPayableAdjustmentTransactionDate"].Value.ToString()),
-                        //PaymentId = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PaymentId"].Value.ToString()),
                         PurchaseId = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseId"].Value.ToString()),
                         Description = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["Description"].Value.ToString(),
                         TotalAmount = Convert.ToDecimal(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["TotalAmount"].Value.ToString()),
                         AdditionalDescription = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["AdditionalDescription"].Value.ToString(),
-                        Purchase = new Purchase {
+                        Purchase = new Purchase
+                        {
                             Id = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseId"].Value.ToString()),
                             PONo = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchasePONo"].Value.ToString(),
-                            SIDR =  this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseSIDR"].Value.ToString(),
+                            SIDR = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseSIDR"].Value.ToString(),
                             TRANo = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseTransactionNo"].Value.ToString(),
                             Total = Convert.ToDecimal(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseTotalAmount"].Value.ToString()),
-                            Supplier = new Supplier {
-                                 Id = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["SupplierID"].Value.ToString()),
-                                 strName = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["Supplier"].Value.ToString()
+                            Supplier = new Supplier
+                            {
+                                Id = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["SupplierID"].Value.ToString()),
+                                strName = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["Supplier"].Value.ToString()
                             }
                         },
-                        tblGLTranHeaders = new List<tblGLTranHeader> {
-                            new tblGLTranHeader {
-                             ID = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["GLTranHeaderID"].Value.ToString()),
-                             blnUseDefaultEntry = bool.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["UseDefaultEntry"].Value.ToString())
+                        tblGLTranHeaders = new List<tblGLTranHeader>
+                        {
+                            new tblGLTranHeader
+                            {
+                                ID = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["GLTranHeaderID"].Value.ToString()),
+                                blnUseDefaultEntry = bool.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["UseDefaultEntry"].Value.ToString())
                             }
-                         }
+                        }
                     };
                     this.DialogResult = DialogResult.OK;
                     this.Close();
@@ -131,7 +133,6 @@ namespace GeneralLedger.UserControls
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Error:" + ex.Message);
             }
         }

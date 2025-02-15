@@ -450,6 +450,7 @@
     <Compile Include="Services\IProductServices.cs" />
     <Compile Include="Services\IPurchaseDetailServices.cs" />
     <Compile Include="Services\IPurchaseServices.cs" />
+    <Compile Include="Services\IPurchaseSupplierLedgerServices.cs" />
     <Compile Include="Services\IRoleServices.cs" />
     <Compile Include="Services\ISaleDetailServices.cs" />
     <Compile Include="Services\ISalesCustomerLedgerServices.cs" />

@@ -52,6 +52,7 @@
             this.CFAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.COMMAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalInventoryAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdditionalDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchAccountReceivableAdjustments)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -143,7 +144,8 @@
             this.SOPAmount,
             this.CFAmount,
             this.COMMAmount,
-            this.TotalInventoryAmount});
+            this.TotalInventoryAmount,
+            this.AdditionalDescription});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -319,6 +321,15 @@
             this.TotalInventoryAmount.ReadOnly = true;
             this.TotalInventoryAmount.Width = 125;
             // 
+            // AdditionalDescription
+            // 
+            this.AdditionalDescription.HeaderText = "AdditionalDescription";
+            this.AdditionalDescription.MinimumWidth = 6;
+            this.AdditionalDescription.Name = "AdditionalDescription";
+            this.AdditionalDescription.ReadOnly = true;
+            this.AdditionalDescription.Visible = false;
+            this.AdditionalDescription.Width = 125;
+            // 
             // SearchAdjustmentAccountReceivableAdjustmentsReturnSales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -363,5 +374,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CFAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn COMMAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalInventoryAmount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdditionalDescription;
     }
 }

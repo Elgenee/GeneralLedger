@@ -184,6 +184,7 @@ namespace GeneralLedger.UserControls
                          TransactionDate = this.dtAdjustmentTransactionDate.Value,
                          Description = this.txtDescription.Text,
                          TotalAmount = decimal.TryParse(this.txtPurchaseTotal.Text, out decimalParser) ? decimalParser : 0,
+                         AdditionalDescription = this.txtAdditionalDescription.Text, // Added line
                          PurchaseId = this.PurchaseId
                     };
 
@@ -204,6 +205,7 @@ namespace GeneralLedger.UserControls
                     AccountPayableAdjustment.Description = this.txtDescription.Text;
                     AccountPayableAdjustment.PurchaseId = this.PurchaseId;
                     AccountPayableAdjustment.TotalAmount = decimal.TryParse(this.txtPurchaseTotal.Text, out decimalParser) ? decimalParser : 0;
+                    AccountPayableAdjustment.AdditionalDescription = this.txtAdditionalDescription.Text;
 
                     AccountPayableAdjustment = AccountsPayableAdjustmentsServices.UpdateReturnPurchases(AccountPayableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.AccountPayableAdjustmentsDetailList);
                   
@@ -384,7 +386,7 @@ namespace GeneralLedger.UserControls
                     this.GLTranHeader = spe.AccountPayableAdjustment.tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
                     this.GLTranDetail = GLTranServices.GetGLEntryById(this.GLTranHeader).SelectMany(h => h.tblGLTranDetails).ToList();
                     this.AccountPayableAdjustmentsDetailList = AccountsPayableAdjustmentsDetailServices.GetAccountPayableAdjustmentsDetailProductByAccountPayableAdjustmentId(this.ID).SelectMany(ar => ar.AccountPayableAdjustmentsDetails).ToList();
-                  
+                    this.txtAdditionalDescription.Text = spe.AccountPayableAdjustment.AdditionalDescription;
 
                     this.chkUseDefaultEntry.Checked = (bool)spe.AccountPayableAdjustment.tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
            

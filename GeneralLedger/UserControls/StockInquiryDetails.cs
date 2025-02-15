@@ -248,7 +248,7 @@ namespace GeneralLedger.UserControls
             //{
 
             //    MessageBox.Show("Error:" + ex.Message);
-            //}
+            //} 
         }
 
         private void dgProduct_CellDoubleClick(object sender, DataGridViewRowDividerDoubleClickEventArgs e)
@@ -273,12 +273,13 @@ namespace GeneralLedger.UserControls
             {
 
                 this.dgProduct.RowCount = stockDetailsList.Count;
-                this.dgProduct.ColumnCount = 4;
+                this.dgProduct.ColumnCount = 5;
                 this.dgProduct.Columns[0].Name = "Transaction Type";
                 this.dgProduct.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 this.dgProduct.Columns[1].Name = "Quantity In";
                 this.dgProduct.Columns[2].Name = "Quantity Out";
                 this.dgProduct.Columns[3].Name = "Transaction Code";
+                this.dgProduct.Columns[4].Name = "Transaction Date"; // New colu
 
                 for (int i = 0; i < stockDetailsList.Count; i++)
                 {
@@ -287,6 +288,7 @@ namespace GeneralLedger.UserControls
                     this.dgProduct.Rows[i].Cells[1].Value = stockDetailsByProductId.QuantityIn.ToString();
                     this.dgProduct.Rows[i].Cells[2].Value = stockDetailsByProductId.QuantityOut.ToString();
                     this.dgProduct.Rows[i].Cells[3].Value = stockDetailsByProductId.TransactionCode;
+                    this.dgProduct.Rows[i].Cells[4].Value = stockDetailsByProductId.TransactionDate.ToString("yyyy-MM-dd");
                 }
 
                     setRowNumber(this.dgProduct);

@@ -516,6 +516,7 @@ namespace GeneralLedger.Persistence.Services
                 resultAdjustmentReceivableAdjusment.AccountsReceivableAdjustmentsTypeId = accountReceivableAdjustment.AccountsReceivableAdjustmentsTypeId;
                 resultAdjustmentReceivableAdjusment.TransactionNo = accountReceivableAdjustment.TransactionNo;
                 resultAdjustmentReceivableAdjusment.TransactionDate = accountReceivableAdjustment.TransactionDate;
+                resultAdjustmentReceivableAdjusment.AdditionalDescription = accountReceivableAdjustment.AdditionalDescription;
                 //resultAdjustmentReceivableAdjusment.CollectionId = accountReceivableAdjustment.CollectionId;
 
                 resultAdjustmentReceivableAdjusment.SalesId = accountReceivableAdjustment.SalesId;

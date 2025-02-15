@@ -859,7 +859,50 @@ namespace GeneralLedger.UserControls
 
         private void btnViewLedger_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+                if (this.ID == 0)
+                {
+                    MessageBox.Show("Please select transaction first...");
+                    return;
+                }
+
+                //var result = SalesCustomerLedgerServices.GetSalesCustomerLedger(this.Sale.Id);
+
+                MetroTabPage metroTabPage = new MetroTabPage();
+                metroTabPage.Text = "Purchase Ledger";
+                metroTabPage.AutoScroll = true;
+                metroTabPage.HorizontalScrollbar = true;
+                metroTabPage.HorizontalScrollbarBarColor = true;
+                metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+                metroTabPage.HorizontalScrollbarSize = 15;
+                metroTabPage.UseStyleColors = true;
+                metroTabPage.VerticalScrollbar = true;
+                metroTabPage.VerticalScrollbarBarColor = true;
+                metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+                metroTabPage.VerticalScrollbarSize = 15;
+                //metroTabPage.Size = new System.Drawing.Size(1200, 1013);
+                metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+                metroTabPage.Location = new System.Drawing.Point(4, 38);
+                metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
+                frmPurchaseLedger frmPurchaseLedger = new frmPurchaseLedger(this.ID);
+                frmPurchaseLedger.Parent = metroTabPage;
+                frmPurchaseLedger.MetroTabPage = metroTabPage;
+                frmPurchaseLedger.AutoScroll = true;
+                frmPurchaseLedger.MetroTabControl = this.MetroTabControl;
+
+                metroTabPage.Controls.Add(frmPurchaseLedger);
+                MetroTabControl.TabPages.Add(metroTabPage);
+                MetroTabControl.SelectedTab = metroTabPage;
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)

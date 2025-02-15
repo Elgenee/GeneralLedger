@@ -146,6 +146,7 @@ namespace GeneralLedger.UserControls
                         TransactionNo = this.txtAdjustmentTransactionNo.Text,
                         TransactionDate = this.dtAdjustmentTransactionDate.Value,
                         Descrpition = this.txtDescription.Text,
+                        AdditionalDescription = this.txtAdditionalDescription.Text,
                         TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
                         SalesId = this.SaleId,
                         Sale = new Sale { 
@@ -174,6 +175,7 @@ namespace GeneralLedger.UserControls
                     AccountReceivableAdjustment.TransactionNo = this.txtAdjustmentTransactionNo.Text;
                     AccountReceivableAdjustment.TransactionDate = this.dtAdjustmentTransactionDate.Value;
                     AccountReceivableAdjustment.Descrpition = this.txtDescription.Text;
+                    AccountReceivableAdjustment.AdditionalDescription = this.txtAdditionalDescription.Text;
                     AccountReceivableAdjustment.SalesId = this.SaleId;
                     AccountReceivableAdjustment.TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
                     AccountReceivableAdjustment.Sale = new Sale
@@ -503,6 +505,7 @@ namespace GeneralLedger.UserControls
                     this.txtSOPAmount.Text = sje.AccountReceivableAdjustment.Sale.SOPAmount.ToString();
                     this.txtCFAmount.Text = sje.AccountReceivableAdjustment.Sale.CFAmount.ToString();
                     this.txtCOMMAmount.Text = sje.AccountReceivableAdjustment.Sale.COMMAmount.ToString();
+                    this.txtAdditionalDescription.Text = sje.AccountReceivableAdjustment.AdditionalDescription;
                     //this.txtCollectionTransactionNo.Text = sje.AccountReceivableAdjustment.Collection.TRANo.ToString();
                     //this.cbBank.SelectedValue = sje.AccountReceivableAdjustment.Collection.BankId;
                     //this.chkIsCash.Checked = (bool)sje.AccountReceivableAdjustment.Collection.IsCash;

@@ -81,7 +81,7 @@ namespace GeneralLedger.Persistence
             Collection = new CollectionRepository(_generalLedgerContext);
             SalesCustomerLedger = new SalesCustomerLedgerRepository(_generalLedgerContext);
             Purchase = new PurchaseRepository(_generalLedgerContext);
-            PurchaseSupplierLedger = new PurchaseCustomerLedgerRepository(_generalLedgerContext);
+            PurchaseSupplierLedger = new PurchaseSupplierLedgerRepository(_generalLedgerContext);
             AccountsReceivableAdjustmentsType = new AccountsReceivableAdjustmentsTypeRepository(_generalLedgerContext);
             AccountsReceivableAdjustmentsDetail = new AccountReceivableAdjustmentsDetailRepository(_generalLedgerContext);
             AccountsReceivableAdjustments = new AccountReceivableAdjustmentsRepository(_generalLedgerContext);

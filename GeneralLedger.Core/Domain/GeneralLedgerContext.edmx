@@ -45,6 +45,7 @@
           <Property Name="TotalAmount" Type="money" />
           <Property Name="CustomerId" Type="int" />
           <Property Name="TotalInventoryAmount" Type="money" />
+          <Property Name="AdditionalDescription" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="AccountReceivableAdjustmentsDetail">
           <Key>
@@ -3261,6 +3262,7 @@
           <NavigationProperty Name="AccountReceivableAdjustmentsDetails" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustmentsDetail_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="AccountReceivableAdjustmentsDetail" />
           <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="Stock" />
           <Property Name="TotalInventoryAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AdditionalDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AccountsReceivableAdjustmentsType">
           <Key>
@@ -5035,6 +5037,7 @@
           <EntitySetMapping Name="AccountReceivableAdjustments">
             <EntityTypeMapping TypeName="GeneralLedgerModel.AccountReceivableAdjustment">
               <MappingFragment StoreEntitySet="AccountReceivableAdjustments">
+                <ScalarProperty Name="AdditionalDescription" ColumnName="AdditionalDescription" />
                 <ScalarProperty Name="TotalInventoryAmount" ColumnName="TotalInventoryAmount" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
