@@ -38,6 +38,8 @@ namespace GeneralLedger.Core
         EntityState GetEntityState<TEntity>(TEntity entity) where TEntity : class;
 
         IStockRepository Stock { get; }
+
+        ICustomerRepository Customer { get; }
         int Complete();
     }
 }

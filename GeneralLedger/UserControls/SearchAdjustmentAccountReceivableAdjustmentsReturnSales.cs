@@ -45,24 +45,25 @@ namespace GeneralLedger.UserControls
 
                     for (int i = 0; i < adjustmentReceivableResult.Count; i++)
                     {
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["ID"].Value = adjustmentReceivableResult[i].Id;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AccountsReceivableAdjustmentsTypeId"].Value = adjustmentReceivableResult[i].AccountsReceivableAdjustmentsType.Id;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AccountsReceivableAdjustmentType"].Value = adjustmentReceivableResult[i].AccountsReceivableAdjustmentsType.Name;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AccountsReceivableAdjustmentTransactionNo"].Value = adjustmentReceivableResult[i].TransactionNo;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AccountsReceivableAdjustmentTransactionDate"].Value = adjustmentReceivableResult[i].TransactionDate.Value.ToShortDateString();
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SalesId"].Value = adjustmentReceivableResult[i].Sale.Id;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SalesTransactionNo"].Value = adjustmentReceivableResult[i].Sale.TRANo;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SalesPoNo"].Value = adjustmentReceivableResult[i].Sale.PONo;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["Customer"].Value = adjustmentReceivableResult[i].Sale.Customer.strName;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["GLTranHeaderID"].Value = adjustmentReceivableResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["Description"].Value = adjustmentReceivableResult[i].Descrpition;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["UseDefaultEntry"].Value = adjustmentReceivableResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["TotalAmount"].Value = adjustmentReceivableResult[i].TotalAmount;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SOPAmount"].Value = adjustmentReceivableResult[i].Sale.SOPAmount;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["CFAmount"].Value = adjustmentReceivableResult[i].Sale.CFAmount;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["COMMAmount"].Value = adjustmentReceivableResult[i].Sale.COMMAmount;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["TotalInventoryAmount"].Value = adjustmentReceivableResult[i].TotalInventoryAmount;
-                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AdditionalDescription"].Value = string.IsNullOrEmpty(adjustmentReceivableResult[i].AdditionalDescription) ? string.Empty : adjustmentReceivableResult[i].AdditionalDescription;
+                        var item = adjustmentReceivableResult[i];
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["ID"].Value = item.Id;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AccountsReceivableAdjustmentsTypeId"].Value = item.AccountsReceivableAdjustmentsType?.Id ?? 0;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AccountsReceivableAdjustmentType"].Value = item.AccountsReceivableAdjustmentsType?.Name ?? string.Empty;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AccountsReceivableAdjustmentTransactionNo"].Value = item.TransactionNo ?? string.Empty;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AccountsReceivableAdjustmentTransactionDate"].Value = item.TransactionDate?.ToShortDateString() ?? string.Empty;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SalesId"].Value = item.Sale?.Id ?? 0;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SalesTransactionNo"].Value = item.Sale?.TRANo ?? string.Empty;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SalesPoNo"].Value = item.Sale?.PONo ?? string.Empty;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["Customer"].Value = item.Sale?.Customer?.strName ?? string.Empty;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["GLTranHeaderID"].Value = item.tblGLTranHeaders?.Select(h => h.ID).FirstOrDefault();
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["Description"].Value = item.Descrpition ?? string.Empty;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["UseDefaultEntry"].Value = item.tblGLTranHeaders?.Select(h => h.blnUseDefaultEntry).FirstOrDefault() ?? false;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["TotalAmount"].Value = item.TotalAmount ?? 0;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["SOPAmount"].Value = item.SOPAmount ?? 0;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["CFAmount"].Value = item.CFAmount ?? 0;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["COMMAmount"].Value = item.COMMAmount ?? 0;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["TotalInventoryAmount"].Value = item.TotalInventoryAmount ?? 0;
+                        this.dgSearchAccountReceivableAdjustments.Rows[i].Cells["AdditionalDescription"].Value = string.IsNullOrEmpty(item.AdditionalDescription) ? string.Empty : item.AdditionalDescription;
                     }
 
                     setRowNumber(this.dgSearchAccountReceivableAdjustments);
@@ -106,6 +107,9 @@ namespace GeneralLedger.UserControls
                         AdditionalDescription = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["AdditionalDescription"].Value.ToString(),
                         TotalAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["TotalAmount"].Value.ToString()),
                         TotalInventoryAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["TotalInventoryAmount"].Value.ToString()),
+                        SOPAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SOPAmount"].Value.ToString()),
+                        CFAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["CFAmount"].Value.ToString()),
+                        COMMAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["COMMAmount"].Value.ToString()),
                         Sale = new Sale {
                             Id = Int32.Parse(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesId"].Value.ToString()),
                             TRANo = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SalesTransactionNo"].Value.ToString(),
@@ -114,9 +118,9 @@ namespace GeneralLedger.UserControls
                             {
                                 strName = this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["Customer"].Value.ToString()
                             },
-                            SOPAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SOPAmount"].Value.ToString()),
-                            CFAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["CFAmount"].Value.ToString()),
-                            COMMAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["COMMAmount"].Value.ToString()),
+                            //SOPAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["SOPAmount"].Value.ToString()),
+                            //CFAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["CFAmount"].Value.ToString()),
+                            //COMMAmount = Convert.ToDecimal(this.dgSearchAccountReceivableAdjustments.Rows[this.Index].Cells["COMMAmount"].Value.ToString()),
                         },
                         tblGLTranHeaders = new List<tblGLTranHeader> {
                             new tblGLTranHeader {

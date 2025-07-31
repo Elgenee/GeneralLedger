@@ -68,6 +68,8 @@ namespace GeneralLedger.Persistence
 
         public IAccountsReceivableAdjustmentsDetailRepository AccountsReceivableAdjustmentsDetail { get; set; }
 
+        public ICustomerRepository Customer { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -97,7 +99,8 @@ namespace GeneralLedger.Persistence
             Stock = new StockRepository(_generalLedgerContext);
             PurchaseDetail = new PurchaseDetailRepository(_generalLedgerContext);
             SaleDetail = new SaleDetailRepository(_generalLedgerContext);
-    
+            Customer = new CustomerRepository(_generalLedgerContext);
+
 
         }
         public int Complete()

@@ -149,13 +149,11 @@ namespace GeneralLedger.UserControls
                         AdditionalDescription = this.txtAdditionalDescription.Text,
                         TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
                         SalesId = this.SaleId,
-                        Sale = new Sale { 
-                            SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0,
-                            CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0,
-                            COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0,
-                            Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
-                        },
-                       TotalInventoryAmount = decimal.TryParse(this.txtInventoryPurchaseTotal.Text, out decimalParser) ? decimalParser : 0,
+                        SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0,
+                        CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0,
+                        COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0,
+                        Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
+                        TotalInventoryAmount = decimal.TryParse(this.txtInventoryPurchaseTotal.Text, out decimalParser) ? decimalParser : 0,
 
                     };
 
@@ -178,13 +176,10 @@ namespace GeneralLedger.UserControls
                     AccountReceivableAdjustment.AdditionalDescription = this.txtAdditionalDescription.Text;
                     AccountReceivableAdjustment.SalesId = this.SaleId;
                     AccountReceivableAdjustment.TotalAmount = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
-                    AccountReceivableAdjustment.Sale = new Sale
-                    {
-                        SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0,
-                        CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0,
-                        COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0,
-                        Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
-                    };
+                    AccountReceivableAdjustment.SOPAmount = decimal.TryParse(this.txtSOPAmount.Text, out decimalParser) ? decimalParser : 0;
+                    AccountReceivableAdjustment.CFAmount = decimal.TryParse(this.txtCFAmount.Text, out decimalParser) ? decimalParser : 0;
+                    AccountReceivableAdjustment.COMMAmount = decimal.TryParse(this.txtCOMMAmount.Text, out decimalParser) ? decimalParser : 0;
+                    AccountReceivableAdjustment.Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0;
                     AccountReceivableAdjustment.TotalInventoryAmount = decimal.TryParse(this.txtInventoryPurchaseTotal.Text, out decimalParser) ? decimalParser : 0;
 
                     AccountReceivableAdjustment = AccountReceivableAdjustmentsServices.UpdateReturnSales(AccountReceivableAdjustment, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.AccountReceivableAdjustmentsDetailList);
@@ -502,9 +497,9 @@ namespace GeneralLedger.UserControls
                     this.txtCustomerName.Text = sje.AccountReceivableAdjustment.Sale.Customer.strName;
                     this.txtSaleID.Text = this.SaleId.ToString();
                     this.txtSalePONo.Text = sje.AccountReceivableAdjustment.Sale.PONo;
-                    this.txtSOPAmount.Text = sje.AccountReceivableAdjustment.Sale.SOPAmount.ToString();
-                    this.txtCFAmount.Text = sje.AccountReceivableAdjustment.Sale.CFAmount.ToString();
-                    this.txtCOMMAmount.Text = sje.AccountReceivableAdjustment.Sale.COMMAmount.ToString();
+                    this.txtSOPAmount.Text = sje.AccountReceivableAdjustment.SOPAmount.ToString();
+                    this.txtCFAmount.Text = sje.AccountReceivableAdjustment.CFAmount.ToString();
+                    this.txtCOMMAmount.Text = sje.AccountReceivableAdjustment.COMMAmount.ToString();
                     this.txtAdditionalDescription.Text = sje.AccountReceivableAdjustment.AdditionalDescription;
                     //this.txtCollectionTransactionNo.Text = sje.AccountReceivableAdjustment.Collection.TRANo.ToString();
                     //this.cbBank.SelectedValue = sje.AccountReceivableAdjustment.Collection.BankId;
@@ -648,37 +643,39 @@ namespace GeneralLedger.UserControls
                             //display all the data in productList to the datagridview
                             AccountReceivableAdjustmentsDetail accountReceivableAdjustmentsDetail = AccountReceivableAdjustmentsDetailList[i];
                             this.AccountReceivableAdjustment.AccountReceivableAdjustmentsDetails.Add(accountReceivableAdjustmentsDetail);
+                            var product = accountReceivableAdjustmentsDetail.Product;
+
                             this.dgProduct.Rows[i].Cells[0].Value = accountReceivableAdjustmentsDetail.Id;
-                            this.dgProduct.Rows[i].Cells[1].Value = accountReceivableAdjustmentsDetail.Product.strProductName;
-                            this.dgProduct.Rows[i].Cells[2].Value = accountReceivableAdjustmentsDetail.Product.strDescription;
+                            this.dgProduct.Rows[i].Cells[1].Value = product?.strProductName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[2].Value = product?.strDescription ?? string.Empty;
                             this.dgProduct.Rows[i].Cells[3].Value = 0;
                             this.dgProduct.Rows[i].Cells[4].Value = string.Empty;
-                            this.dgProduct.Rows[i].Cells[5].Value = accountReceivableAdjustmentsDetail.Product.ProductCategory.Id;
-                            this.dgProduct.Rows[i].Cells[6].Value = accountReceivableAdjustmentsDetail.Product.ProductCategory.strName;
-                            this.dgProduct.Rows[i].Cells[7].Value = accountReceivableAdjustmentsDetail.Product.ProductType.Id;
-                            this.dgProduct.Rows[i].Cells[8].Value = accountReceivableAdjustmentsDetail.Product.ProductType.strName;
-                            this.dgProduct.Rows[i].Cells[9].Value = accountReceivableAdjustmentsDetail.Product.ProductBrand.Id;
-                            this.dgProduct.Rows[i].Cells[10].Value = accountReceivableAdjustmentsDetail.Product.ProductBrand.strName;
-                            //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
-                            //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
-                            //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
-                            this.dgProduct.Rows[i].Cells[14].Value = accountReceivableAdjustmentsDetail.Product.ProductColor.Id;
-                            this.dgProduct.Rows[i].Cells[15].Value = accountReceivableAdjustmentsDetail.Product.ProductColor.strName;
-                            this.dgProduct.Rows[i].Cells[16].Value = accountReceivableAdjustmentsDetail.Product.ProductSize.Id;
-                            this.dgProduct.Rows[i].Cells[17].Value = accountReceivableAdjustmentsDetail.Product.ProductSize.strName;
-                            this.dgProduct.Rows[i].Cells[18].Value = accountReceivableAdjustmentsDetail.Product.ProductUnit.Id;
-                            this.dgProduct.Rows[i].Cells[19].Value = accountReceivableAdjustmentsDetail.Product.ProductUnit.strName;
-                            this.dgProduct.Rows[i].Cells[20].Value = accountReceivableAdjustmentsDetail.Product.strCode;
-                            this.dgProduct.Rows[i].Cells[21].Value = accountReceivableAdjustmentsDetail.Product.strPR;
-                            this.dgProduct.Rows[i].Cells[22].Value = accountReceivableAdjustmentsDetail.Product.strPCD;
-                            this.dgProduct.Rows[i].Cells[23].Value = accountReceivableAdjustmentsDetail.Product.strMFLM;
-                            this.dgProduct.Rows[i].Cells[24].Value = accountReceivableAdjustmentsDetail.Product.strPattern;
-                            this.dgProduct.Rows[i].Cells[25].Value = accountReceivableAdjustmentsDetail.Product.strOffsetCenterBore;
-                            this.dgProduct.Rows[i].Cells[26].Value = accountReceivableAdjustmentsDetail.Product.strOrigin;
-                            this.dgProduct.Rows[i].Cells[27].Value = accountReceivableAdjustmentsDetail.UnitPrice;
-                            this.dgProduct.Rows[i].Cells[28].Value = accountReceivableAdjustmentsDetail.Quantity;
-                            this.dgProduct.Rows[i].Cells[29].Value = accountReceivableAdjustmentsDetail.TotalPrice;
-                            //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
+                            this.dgProduct.Rows[i].Cells[5].Value = product?.ProductCategory?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[6].Value = product?.ProductCategory?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[7].Value = product?.ProductType?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[8].Value = product?.ProductType?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[9].Value = product?.ProductBrand?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[10].Value = product?.ProductBrand?.strName ?? string.Empty;
+                            //this.dgProduct.Rows[i].Cells[11].Value = product?.PerPieceBox ?? 0;
+                            //this.dgProduct.Rows[i].Cells[12].Value = product?.Location?.ID ?? 0;
+                            //this.dgProduct.Rows[i].Cells[13].Value = product?.Location?.Name ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[14].Value = product?.ProductColor?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[15].Value = product?.ProductColor?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[16].Value = product?.ProductSize?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[17].Value = product?.ProductSize?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[18].Value = product?.ProductUnit?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[19].Value = product?.ProductUnit?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[20].Value = product?.strCode ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[21].Value = product?.strPR ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[22].Value = product?.strPCD ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[23].Value = product?.strMFLM ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[24].Value = product?.strPattern ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[25].Value = product?.strOffsetCenterBore ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[26].Value = product?.strOrigin ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[27].Value = accountReceivableAdjustmentsDetail.UnitPrice ?? 0;
+                            this.dgProduct.Rows[i].Cells[28].Value = accountReceivableAdjustmentsDetail.Quantity ?? 0;
+                            this.dgProduct.Rows[i].Cells[29].Value = accountReceivableAdjustmentsDetail.TotalPrice ?? 0;
+                            //this.dgProduct.Rows[i].Cells[27].Value = product?.curUnitPrice ?? 0;
                         }
 
                         setRowNumber(this.dgJournalEntry);

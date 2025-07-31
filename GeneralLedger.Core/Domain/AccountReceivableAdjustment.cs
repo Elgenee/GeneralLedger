@@ -34,6 +34,10 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> CustomerId { get; set; }
         public Nullable<decimal> TotalInventoryAmount { get; set; }
         public string AdditionalDescription { get; set; }
+        public Nullable<decimal> SOPAmount { get; set; }
+        public Nullable<decimal> COMMAmount { get; set; }
+        public Nullable<decimal> CFAmount { get; set; }
+        public Nullable<decimal> Total { get; set; }
     
         public virtual AccountsReceivableAdjustmentsType AccountsReceivableAdjustmentsType { get; set; }
         public virtual Collection Collection { get; set; }

@@ -360,10 +360,11 @@ namespace GeneralLedger.Persistence.Services
                     var size = product.ProductSize; // Assuming Product has a Size property
                     var color = product.ProductColor; // Assuming Product has a Color property
 
-                    productDetailsBuilder.AppendLine("# " + product.strProductName +
-                                                     "; Size: " + size.strName +
-                                                     "; Color: " + color.strName +
-                                                     "; Qty: " + detail.Quantity.ToString());
+                    productDetailsBuilder.AppendLine("# " +
+                                   (product?.strProductName ?? string.Empty) +
+                                   "; Size: " + (size?.strName ?? string.Empty) +
+                                   "; Color: " + (color?.strName ?? string.Empty) +
+                                   "; Qty: " + detail.Quantity.ToString());
                 }
 
                 accountPayableAdjustment.Description = productDetailsBuilder.ToString();
@@ -948,10 +949,11 @@ namespace GeneralLedger.Persistence.Services
                     var size = product.ProductSize; // Assuming Product has a Size property
                     var color = product.ProductColor; // Assuming Product has a Color property
 
-                    productDetailsBuilder.AppendLine("# " + product.strProductName +
-                                                     "; Size: " + size.strName +
-                                                     "; Color: " + color.strName +
-                                                     "; Qty: " + detail.Quantity.ToString());
+                    productDetailsBuilder.AppendLine("# " +
+                        (product?.strProductName ?? string.Empty) +
+                        "; Size: " + (size?.strName ?? string.Empty) +
+                        "; Color: " + (color?.strName ?? string.Empty) +
+                        "; Qty: " + detail.Quantity.ToString());
 
                 }
 

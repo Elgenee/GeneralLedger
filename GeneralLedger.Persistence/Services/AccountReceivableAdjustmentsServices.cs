@@ -230,7 +230,7 @@ namespace GeneralLedger.Persistence.Services
 
             var gLTranDetail = new List<tblGLTranDetail>
             {
-                CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, accountReceivableAdjustment.TotalInventoryAmount.Value,0),
+             CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, accountReceivableAdjustment.TotalInventoryAmount.Value,0),
                 CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, 0, accountReceivableAdjustment.TotalInventoryAmount.Value),
             };
 
@@ -330,28 +330,28 @@ namespace GeneralLedger.Persistence.Services
                              intIDMasCoa = (int)journalEntry2.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry2.ID,
                              curCredit = 0,
-                             curDebit = accountReceivableAdjustment.Sale.SOPAmount.Value,
+                             curDebit = accountReceivableAdjustment.SOPAmount.Value,
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry3.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry3.ID,
                              curCredit = 0,
-                             curDebit = accountReceivableAdjustment.Sale.COMMAmount.Value,
+                             curDebit = accountReceivableAdjustment.COMMAmount.Value,
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry4.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry4.ID,
                              curCredit = 0,
-                             curDebit =  accountReceivableAdjustment.Sale.CFAmount.Value,
+                             curDebit =  accountReceivableAdjustment.CFAmount.Value,
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry5.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry5.ID,
                              curCredit = 0,
-                             curDebit = accountReceivableAdjustment.TotalAmount.Value - (accountReceivableAdjustment.Sale.COMMAmount.Value + accountReceivableAdjustment.Sale.SOPAmount.Value + accountReceivableAdjustment.Sale.CFAmount.Value)
+                             curDebit = accountReceivableAdjustment.TotalAmount.Value - (accountReceivableAdjustment.COMMAmount.Value + accountReceivableAdjustment.SOPAmount.Value + accountReceivableAdjustment.CFAmount.Value)
                          }
                     };
 
@@ -539,10 +539,11 @@ namespace GeneralLedger.Persistence.Services
                     var size = product.ProductSize; // Assuming Product has a Size property
                     var color = product.ProductColor; // Assuming Product has a Color property
 
-                    productDetailsBuilder.AppendLine("# " + product.strProductName +
-                                                     "; Size: " + size.strName +
-                                                     "; Color: " + color.strName +
-                                                     "; Qty: " + detail.Quantity.ToString());
+                    productDetailsBuilder.AppendLine("# " +
+                                        (product?.strProductName ?? string.Empty) +
+                                        "; Size: " + (size?.strName ?? string.Empty) +
+                                        "; Color: " + (color?.strName ?? string.Empty) +
+                                        "; Qty: " + detail.Quantity.ToString());
 
                 }
 
@@ -605,28 +606,28 @@ namespace GeneralLedger.Persistence.Services
                              intIDMasCoa = (int)journalEntry2Inv.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry2Inv.ID,
                              curCredit = 0,
-                             curDebit = accountReceivableAdjustment.Sale.SOPAmount.Value
+                             curDebit = accountReceivableAdjustment.SOPAmount.Value
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry3Inv.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry3Inv.ID,
                              curCredit = 0,
-                             curDebit = accountReceivableAdjustment.Sale.COMMAmount.Value
+                             curDebit = accountReceivableAdjustment.COMMAmount.Value
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry4Inv.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry4Inv.ID,
                              curCredit = 0,
-                             curDebit =  accountReceivableAdjustment.Sale.CFAmount.Value
+                             curDebit =  accountReceivableAdjustment.CFAmount.Value
                          },
                          new tblGLTranDetail
                          {
                              intIDMasCoa = (int)journalEntry5Inv.intIDMasCOA ,
                              intIDMasCoaSub = journalEntry5Inv.ID,
                              curCredit = 0,
-                             curDebit = accountReceivableAdjustment.TotalAmount - (accountReceivableAdjustment.Sale.COMMAmount.Value + accountReceivableAdjustment.Sale.SOPAmount.Value + accountReceivableAdjustment.Sale.CFAmount.Value)
+                             curDebit = accountReceivableAdjustment.TotalAmount - (accountReceivableAdjustment.COMMAmount.Value + accountReceivableAdjustment.SOPAmount.Value + accountReceivableAdjustment.CFAmount.Value)
                          }
                     };
 
@@ -716,7 +717,7 @@ namespace GeneralLedger.Persistence.Services
                          intIDMasCoa = (int)journalEntry1.intIDMasCOA,
                          intIDMasCoaSub = journalEntry1.ID,
                          curCredit = 0,
-                         curDebit = accountReceivableAdjustment.TotalInventoryAmount.Value,
+                         curDebit =  accountReceivableAdjustment.TotalInventoryAmount.Value,
                          intIDGLTranHeader = existingGLTranHeaderInventory.ID
                      }
 

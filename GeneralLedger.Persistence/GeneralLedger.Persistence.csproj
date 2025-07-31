@@ -75,6 +75,7 @@
     <Compile Include="Repositories\CoaRepository.cs" />
     <Compile Include="Repositories\CoaSubRepository.cs" />
     <Compile Include="Repositories\CollectionRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\GLTranDetailRepository.cs" />
     <Compile Include="Repositories\GLTranRepository.cs" />
     <Compile Include="Repositories\JournalEntryRepository.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Services\AgentServices.cs" />
     <Compile Include="Services\AccountsPayableAdjustmentsDetailServices.cs" />
     <Compile Include="Services\CollectionServices.cs" />
+    <Compile Include="Services\CustomerServices.cs" />
     <Compile Include="Services\GlTranDetailServices.cs" />
     <Compile Include="Services\GLTranServices.cs" />
     <Compile Include="Services\PaymentServices.cs" />

@@ -22,9 +22,17 @@ namespace GeneralLedger.UserControls
 
         public int ProductId { get; set; }
 
+        private int currentPage = 1;
+        private int pageSize = 20; // You can adjust this as needed
+        private int totalItems = 0;
+        private int totalPages = 1;
+        private List<StockDetailsByProductId> allStockDetailsByProductId = new List<StockDetailsByProductId>();
+
+
         public StockInquiryDetails()
         {
             InitializeComponent();
+            cmbPageSelector.SelectedIndexChanged += cmbPageSelector_SelectedIndexChanged;
         }
 
         private void setRowNumber(DataGridView dgv)
@@ -271,6 +279,10 @@ namespace GeneralLedger.UserControls
             this.txtTotalRemainingCount.Text = totalRemainingCount.ToString();
             if ((stockDetailsList != null) && stockDetailsList.Count > 0)
             {
+                allStockDetailsByProductId = stockDetailsList;
+                totalItems = allStockDetailsByProductId.Count;
+                totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+                currentPage = 1; // Reset to first page
 
                 this.dgProduct.RowCount = stockDetailsList.Count;
                 this.dgProduct.ColumnCount = 5;
@@ -292,6 +304,91 @@ namespace GeneralLedger.UserControls
                 }
 
                     setRowNumber(this.dgProduct);
+            }
+        }
+
+        private void DisplayCurrentPage()
+        {
+            if (allStockDetailsByProductId == null || allStockDetailsByProductId.Count == 0)
+            {
+                this.dgProduct.Rows.Clear();
+                MessageBox.Show("No item found...");
+                return;
+            }
+
+            int startIndex = (currentPage - 1) * pageSize;
+            var pageItems = allStockDetailsByProductId.Skip(startIndex).Take(pageSize).ToList();
+
+            this.dgProduct.Rows.Clear();
+            this.dgProduct.RowCount = pageItems.Count;
+            this.dgProduct.ColumnCount = 5;
+            // (Set up columns as in your original code...)
+
+            this.dgProduct.Columns[0].Name = "Transaction Type";
+            this.dgProduct.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgProduct.Columns[1].Name = "Quantity In";
+            this.dgProduct.Columns[2].Name = "Quantity Out";
+            this.dgProduct.Columns[3].Name = "Transaction Code";
+            this.dgProduct.Columns[4].Name = "Transaction Date"; // New colu
+
+            for (int i = 0; i < pageItems.Count; i++)
+            {
+                StockDetailsByProductId stockDetailsByProductId = pageItems[i];
+                this.dgProduct.Rows[i].Cells[0].Value = stockDetailsByProductId.StockTransactionTypeName;
+                this.dgProduct.Rows[i].Cells[1].Value = stockDetailsByProductId.QuantityIn.ToString();
+                this.dgProduct.Rows[i].Cells[2].Value = stockDetailsByProductId.QuantityOut.ToString();
+                this.dgProduct.Rows[i].Cells[3].Value = stockDetailsByProductId.TransactionCode;
+                this.dgProduct.Rows[i].Cells[4].Value = stockDetailsByProductId.TransactionDate.ToString("yyyy-MM-dd");
+            }
+
+            setRowNumber(this.dgProduct);
+            UpdatePageControls(); // Add this line
+        }
+
+
+        private void UpdatePageControls()
+        {
+            // Update lblPageInfo
+            lblPageInfo.Text = $"Page {currentPage} of {totalPages}";
+
+            // Populate cmbPageSelector
+            cmbPageSelector.SelectedIndexChanged -= cmbPageSelector_SelectedIndexChanged;
+            cmbPageSelector.Items.Clear();
+            for (int i = 1; i <= totalPages; i++)
+            {
+                cmbPageSelector.Items.Add(i.ToString());
+            }
+            if (totalPages > 0)
+            {
+                cmbPageSelector.SelectedIndex = currentPage - 1;
+            }
+            cmbPageSelector.SelectedIndexChanged += cmbPageSelector_SelectedIndexChanged;
+        }
+
+        private void cmbPageSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbPageSelector.SelectedIndex >= 0)
+            {
+                currentPage = cmbPageSelector.SelectedIndex + 1;
+                DisplayCurrentPage();
+            }
+        }
+
+        private void btnPrevPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                DisplayCurrentPage();
+            }
+        }
+
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                DisplayCurrentPage();
             }
         }
     }

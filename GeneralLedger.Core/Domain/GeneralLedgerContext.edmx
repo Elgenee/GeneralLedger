@@ -46,6 +46,10 @@
           <Property Name="CustomerId" Type="int" />
           <Property Name="TotalInventoryAmount" Type="money" />
           <Property Name="AdditionalDescription" Type="nvarchar(max)" />
+          <Property Name="SOPAmount" Type="money" />
+          <Property Name="COMMAmount" Type="money" />
+          <Property Name="CFAmount" Type="money" />
+          <Property Name="Total" Type="money" />
         </EntityType>
         <EntityType Name="AccountReceivableAdjustmentsDetail">
           <Key>
@@ -3263,6 +3267,10 @@
           <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_AccountReceivableAdjustments" FromRole="AccountReceivableAdjustment" ToRole="Stock" />
           <Property Name="TotalInventoryAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="AdditionalDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SOPAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="COMMAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CFAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="AccountsReceivableAdjustmentsType">
           <Key>
@@ -5037,6 +5045,10 @@
           <EntitySetMapping Name="AccountReceivableAdjustments">
             <EntityTypeMapping TypeName="GeneralLedgerModel.AccountReceivableAdjustment">
               <MappingFragment StoreEntitySet="AccountReceivableAdjustments">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="CFAmount" ColumnName="CFAmount" />
+                <ScalarProperty Name="COMMAmount" ColumnName="COMMAmount" />
+                <ScalarProperty Name="SOPAmount" ColumnName="SOPAmount" />
                 <ScalarProperty Name="AdditionalDescription" ColumnName="AdditionalDescription" />
                 <ScalarProperty Name="TotalInventoryAmount" ColumnName="TotalInventoryAmount" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />

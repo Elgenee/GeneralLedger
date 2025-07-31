@@ -419,6 +419,7 @@
     <Compile Include="Repositories\ICoaRepository.cs" />
     <Compile Include="Repositories\ICoaSubRepository.cs" />
     <Compile Include="Repositories\ICollectionRepository.cs" />
+    <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Repositories\IGLTranDetailRepository.cs" />
     <Compile Include="Repositories\IGLTranRepository.cs" />
     <Compile Include="Repositories\IJournalEntryRepository.cs" />
@@ -444,6 +445,7 @@
     <Compile Include="Services\IAccountsReceivableAdjustmentsTypeServices.cs" />
     <Compile Include="Services\IAgentServices.cs" />
     <Compile Include="Services\ICollectionServices.cs" />
+    <Compile Include="Services\ICustomerServices.cs" />
     <Compile Include="Services\IGLTranDetailServices.cs" />
     <Compile Include="Services\IGLTranServices.cs" />
     <Compile Include="Services\IPaymentServices.cs" />

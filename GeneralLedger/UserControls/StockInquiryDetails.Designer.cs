@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.dgProduct = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.txtProductName = new MetroFramework.Controls.MetroLabel();
@@ -51,6 +51,11 @@
             this.txtTotalRemainingCount = new MetroFramework.Controls.MetroLabel();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.txtProductSize = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.lblPageInfo = new MetroFramework.Controls.MetroLabel();
+            this.cmbPageSelector = new MetroFramework.Controls.MetroComboBox();
+            this.btnPrevPage = new MetroFramework.Controls.MetroButton();
+            this.btnNextPage = new MetroFramework.Controls.MetroButton();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProduct)).BeginInit();
             this.SuspendLayout();
@@ -76,14 +81,14 @@
             this.dgProduct.AllowUserToDeleteRows = false;
             this.dgProduct.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgProduct.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgProduct.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgProduct.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgProduct.Location = new System.Drawing.Point(0, 0);
@@ -162,7 +167,7 @@
             // 
             this.txtTotalIn.AutoSize = true;
             this.txtTotalIn.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.txtTotalIn.Location = new System.Drawing.Point(157, 727);
+            this.txtTotalIn.Location = new System.Drawing.Point(157, 862);
             this.txtTotalIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtTotalIn.Name = "txtTotalIn";
             this.txtTotalIn.Size = new System.Drawing.Size(69, 25);
@@ -173,7 +178,7 @@
             // 
             this.txtTotalOut.AutoSize = true;
             this.txtTotalOut.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.txtTotalOut.Location = new System.Drawing.Point(478, 727);
+            this.txtTotalOut.Location = new System.Drawing.Point(478, 862);
             this.txtTotalOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtTotalOut.Name = "txtTotalOut";
             this.txtTotalOut.Size = new System.Drawing.Size(84, 25);
@@ -184,7 +189,7 @@
             // 
             this.txtTotalInAmount.AutoSize = true;
             this.txtTotalInAmount.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.txtTotalInAmount.Location = new System.Drawing.Point(252, 727);
+            this.txtTotalInAmount.Location = new System.Drawing.Point(252, 862);
             this.txtTotalInAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtTotalInAmount.Name = "txtTotalInAmount";
             this.txtTotalInAmount.Size = new System.Drawing.Size(139, 25);
@@ -195,7 +200,7 @@
             // 
             this.txtTotalOutAmount.AutoSize = true;
             this.txtTotalOutAmount.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.txtTotalOutAmount.Location = new System.Drawing.Point(600, 727);
+            this.txtTotalOutAmount.Location = new System.Drawing.Point(600, 862);
             this.txtTotalOutAmount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtTotalOutAmount.Name = "txtTotalOutAmount";
             this.txtTotalOutAmount.Size = new System.Drawing.Size(154, 25);
@@ -266,7 +271,7 @@
             // 
             this.metroLabel7.AutoSize = true;
             this.metroLabel7.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel7.Location = new System.Drawing.Point(814, 727);
+            this.metroLabel7.Location = new System.Drawing.Point(814, 862);
             this.metroLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel7.Name = "metroLabel7";
             this.metroLabel7.Size = new System.Drawing.Size(187, 25);
@@ -277,7 +282,7 @@
             // 
             this.txtTotalRemainingCount.AutoSize = true;
             this.txtTotalRemainingCount.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.txtTotalRemainingCount.Location = new System.Drawing.Point(1056, 727);
+            this.txtTotalRemainingCount.Location = new System.Drawing.Point(1056, 862);
             this.txtTotalRemainingCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtTotalRemainingCount.Name = "txtTotalRemainingCount";
             this.txtTotalRemainingCount.Size = new System.Drawing.Size(191, 25);
@@ -290,7 +295,7 @@
             this.metroLabel8.Location = new System.Drawing.Point(41, 165);
             this.metroLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel8.Name = "metroLabel8";
-            this.metroLabel8.Size = new System.Drawing.Size(111, 25);
+            this.metroLabel8.Size = new System.Drawing.Size(89, 20);
             this.metroLabel8.TabIndex = 52;
             this.metroLabel8.Text = "Product Size:";
             // 
@@ -300,15 +305,73 @@
             this.txtProductSize.Location = new System.Drawing.Point(213, 165);
             this.txtProductSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.txtProductSize.Name = "txtProductSize";
-            this.txtProductSize.Size = new System.Drawing.Size(120, 25);
+            this.txtProductSize.Size = new System.Drawing.Size(96, 20);
             this.txtProductSize.TabIndex = 51;
             this.txtProductSize.Text = "txtProductSize";
+            // 
+            // metroLabel9
+            // 
+            this.metroLabel9.AutoSize = true;
+            this.metroLabel9.Location = new System.Drawing.Point(928, 713);
+            this.metroLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel9.Name = "metroLabel9";
+            this.metroLabel9.Size = new System.Drawing.Size(39, 20);
+            this.metroLabel9.TabIndex = 150;
+            this.metroLabel9.Text = "Page";
+            // 
+            // lblPageInfo
+            // 
+            this.lblPageInfo.AutoSize = true;
+            this.lblPageInfo.Location = new System.Drawing.Point(985, 757);
+            this.lblPageInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPageInfo.Name = "lblPageInfo";
+            this.lblPageInfo.Size = new System.Drawing.Size(79, 20);
+            this.lblPageInfo.TabIndex = 149;
+            this.lblPageInfo.Text = "Page 0 of 0";
+            // 
+            // cmbPageSelector
+            // 
+            this.cmbPageSelector.FormattingEnabled = true;
+            this.cmbPageSelector.ItemHeight = 24;
+            this.cmbPageSelector.Location = new System.Drawing.Point(985, 713);
+            this.cmbPageSelector.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbPageSelector.Name = "cmbPageSelector";
+            this.cmbPageSelector.Size = new System.Drawing.Size(161, 30);
+            this.cmbPageSelector.TabIndex = 148;
+            this.cmbPageSelector.UseSelectable = true;
+            // 
+            // btnPrevPage
+            // 
+            this.btnPrevPage.Location = new System.Drawing.Point(1154, 713);
+            this.btnPrevPage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrevPage.Name = "btnPrevPage";
+            this.btnPrevPage.Size = new System.Drawing.Size(132, 28);
+            this.btnPrevPage.TabIndex = 147;
+            this.btnPrevPage.Text = "Previous Page";
+            this.btnPrevPage.UseSelectable = true;
+            this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
+            // 
+            // btnNextPage
+            // 
+            this.btnNextPage.Location = new System.Drawing.Point(1154, 749);
+            this.btnNextPage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Size = new System.Drawing.Size(132, 28);
+            this.btnNextPage.TabIndex = 146;
+            this.btnNextPage.Text = "Next Page";
+            this.btnNextPage.UseSelectable = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
             // 
             // StockInquiryDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1460, 803);
+            this.ClientSize = new System.Drawing.Size(1460, 934);
+            this.Controls.Add(this.metroLabel9);
+            this.Controls.Add(this.lblPageInfo);
+            this.Controls.Add(this.cmbPageSelector);
+            this.Controls.Add(this.btnPrevPage);
+            this.Controls.Add(this.btnNextPage);
             this.Controls.Add(this.metroLabel8);
             this.Controls.Add(this.txtProductSize);
             this.Controls.Add(this.txtTotalRemainingCount);
@@ -366,5 +429,10 @@
         public MetroFramework.Controls.MetroLabel txtTotalRemainingCount;
         public MetroFramework.Controls.MetroLabel metroLabel8;
         public MetroFramework.Controls.MetroLabel txtProductSize;
+        private MetroFramework.Controls.MetroLabel metroLabel9;
+        private MetroFramework.Controls.MetroLabel lblPageInfo;
+        private MetroFramework.Controls.MetroComboBox cmbPageSelector;
+        private MetroFramework.Controls.MetroButton btnPrevPage;
+        private MetroFramework.Controls.MetroButton btnNextPage;
     }
 }
