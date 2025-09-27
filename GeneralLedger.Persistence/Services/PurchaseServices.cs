@@ -14,37 +14,37 @@ namespace GeneralLedger.Persistence.Services
     public class PurchaseServices : IPurchaseServices
     {
         public Purchase Add(Purchase purchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<PurchaseDetail> PurchaseDetailsList)
-        {
-            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
-            {
-                AddPurchaseDetails(purchase, PurchaseDetailsList, unitOfWork);
-
-                StringBuilder productDetailsBuilder = new StringBuilder();
-                foreach (var detail in PurchaseDetailsList)
+        {      
+                using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
                 {
-                    var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
-                    var size = product.ProductSize; // Assuming Product has a Size property
-                    var color = product.ProductColor; // Assuming Product has a Color property
-                    var prodType = product?.ProductType;
+                    AddPurchaseDetails(purchase, PurchaseDetailsList, unitOfWork);
 
-                    productDetailsBuilder.AppendLine("# " +
-                           (product?.strProductName ?? string.Empty) +
-                           "; Size: " + (size?.strName ?? string.Empty) +
-                           "; Color: " + (color?.strName ?? string.Empty) +
-                           "; ProdType: " + (prodType?.strName ?? string.Empty) +
-                           (!string.IsNullOrEmpty(product?.strPR) ? "; PR: " + product.strPR : "") +
-                           "; Qty: " + detail.Quantity.ToString());
+                    StringBuilder productDetailsBuilder = new StringBuilder();
+                    foreach (var detail in PurchaseDetailsList)
+                    {
+                        var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
+                        var size = product.ProductSize; // Assuming Product has a Size property
+                        var color = product.ProductColor; // Assuming Product has a Color property
+                        var prodType = product?.ProductType;
+
+                        productDetailsBuilder.AppendLine("# " +
+                               (product?.strProductName ?? string.Empty) +
+                               "; Size: " + (size?.strName ?? string.Empty) +
+                               "; Color: " + (color?.strName ?? string.Empty) +
+                               "; ProdType: " + (prodType?.strName ?? string.Empty) +
+                               (!string.IsNullOrEmpty(product?.strPR) ? "; PR: " + product.strPR : "") +
+                               "; Qty: " + detail.Quantity.ToString());
+                    }
+
+                    purchase.Description = productDetailsBuilder.ToString();
+                    unitOfWork.Purchase.Add(purchase);
+                    UpdateRemainingCount(unitOfWork,purchase, PurchaseDetailsList);
+                    AddPurchaseSupplierLedger(unitOfWork, purchase);
+                    AddGLTran(unitOfWork, purchase, tblGLTranDetail, UseDefaultEntry);
+                    AddGLTranInventory(unitOfWork, purchase);
+                    unitOfWork.Complete();
+                    return purchase;
                 }
-
-                purchase.Description = productDetailsBuilder.ToString();
-                unitOfWork.Purchase.Add(purchase);
-                UpdateRemainingCount(unitOfWork,purchase, PurchaseDetailsList);
-                AddPurchaseSupplierLedger(unitOfWork, purchase);
-                AddGLTran(unitOfWork, purchase, tblGLTranDetail, UseDefaultEntry);
-                AddGLTranInventory(unitOfWork, purchase);
-                unitOfWork.Complete();
-                return purchase;
-            }
         }
 
         public int GetTotalRemainingStock(UnitOfWork unitOfWork, int productId, List<Stock> newStocks)

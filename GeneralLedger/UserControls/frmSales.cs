@@ -772,6 +772,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Columns[27].Name = "Unit Price";
                         this.dgProduct.Columns[28].Name = "Quantity";
                         this.dgProduct.Columns[29].Name = "Total Quantity Price";
+                        Sale.SalesDetails.Clear();
 
                         for (int i = 0; i < SalesDetailsList.Count; i++)
                         {
@@ -813,7 +814,7 @@ namespace GeneralLedger.UserControls
 
                         setRowNumber(this.dgJournalEntry);
                         this.txtSalesTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
-                        this.txtTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
+                        //this.txtTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
                     }
 
 

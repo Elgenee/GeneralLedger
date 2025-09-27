@@ -40,6 +40,12 @@ namespace GeneralLedger.Core
         IStockRepository Stock { get; }
 
         ICustomerRepository Customer { get; }
+
+        IInventoryAdjustment InventoryAdjustment { get; }
+
+        IInventoryAdjustmentDetails InventoryAdjustmentDetails { get; }
+
+        IInventoryAdjustmentType InventoryAdjustmentType { get; }
         int Complete();
     }
 }

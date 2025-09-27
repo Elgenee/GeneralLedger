@@ -113,6 +113,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeneralLedgerContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Domain\InventoryAdjustment.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryAdjustmentDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryAdjustmentType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\InventoryLog.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
@@ -422,6 +431,9 @@
     <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Repositories\IGLTranDetailRepository.cs" />
     <Compile Include="Repositories\IGLTranRepository.cs" />
+    <Compile Include="Repositories\IInventoryAdjustment.cs" />
+    <Compile Include="Repositories\IInventoryAdjustmentDetails.cs" />
+    <Compile Include="Repositories\IInventoryAdjustmentType.cs" />
     <Compile Include="Repositories\IJournalEntryRepository.cs" />
     <Compile Include="Repositories\IPaymentRepository.cs" />
     <Compile Include="Repositories\IPurchaseDetailRepository.cs" />
@@ -443,6 +455,9 @@
     <Compile Include="Services\IAccountsPayableAdjustmentsServices.cs" />
     <Compile Include="Services\IAccountsPayableAdjustmentsTypeServices.cs" />
     <Compile Include="Services\IAccountsReceivableAdjustmentsTypeServices.cs" />
+    <Compile Include="Services\IInventoryAdjustmentDetailsServices.cs" />
+    <Compile Include="Services\IInventoryAdjustmentServices.cs" />
+    <Compile Include="Services\IInventoryAdjustmentTypeServices.cs" />
     <Compile Include="Services\IAgentServices.cs" />
     <Compile Include="Services\ICollectionServices.cs" />
     <Compile Include="Services\ICustomerServices.cs" />

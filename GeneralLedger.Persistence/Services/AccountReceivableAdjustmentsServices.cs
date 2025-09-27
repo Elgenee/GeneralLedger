@@ -230,8 +230,8 @@ namespace GeneralLedger.Persistence.Services
 
             var gLTranDetail = new List<tblGLTranDetail>
             {
-             CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, accountReceivableAdjustment.TotalInventoryAmount.Value,0),
-                CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, 0, accountReceivableAdjustment.TotalInventoryAmount.Value),
+             CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID,0, accountReceivableAdjustment.TotalInventoryAmount.Value),
+                CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, accountReceivableAdjustment.TotalInventoryAmount.Value,0 ),
             };
 
             //AddGLTranHeader(unitOfWork, purchase, gLTranDetail);
@@ -708,16 +708,16 @@ namespace GeneralLedger.Persistence.Services
                      {
                          intIDMasCoa = (int)journalEntry3.intIDMasCOA,
                          intIDMasCoaSub = journalEntry3.ID,
-                         curCredit = accountReceivableAdjustment.TotalInventoryAmount.Value,
-                         curDebit = 0,
+                         curCredit = 0,
+                         curDebit = accountReceivableAdjustment.TotalInventoryAmount.Value,
                          intIDGLTranHeader = existingGLTranHeaderInventory.ID
                      },
                        new tblGLTranDetail
                      {
                          intIDMasCoa = (int)journalEntry1.intIDMasCOA,
                          intIDMasCoaSub = journalEntry1.ID,
-                         curCredit = 0,
-                         curDebit =  accountReceivableAdjustment.TotalInventoryAmount.Value,
+                         curCredit = accountReceivableAdjustment.TotalInventoryAmount.Value,
+                         curDebit =  0,
                          intIDGLTranHeader = existingGLTranHeaderInventory.ID
                      }
 

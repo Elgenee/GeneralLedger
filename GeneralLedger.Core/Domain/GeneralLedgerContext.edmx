@@ -145,6 +145,34 @@
           <Property Name="strAddress" Type="nvarchar" MaxLength="500" />
           <Property Name="strContact" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="InventoryAdjustment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionNo" Type="nvarchar" MaxLength="500" />
+          <Property Name="InventoryAdjustmentTypeId" Type="int" />
+          <Property Name="TransactionDate" Type="date" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="InventoryAdjustmentDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventoryAdjustmentId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalPrice" Type="money" />
+        </EntityType>
+        <EntityType Name="InventoryAdjustmentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="InventoryLog">
           <Key>
             <PropertyRef Name="Id" />
@@ -422,6 +450,7 @@
           <Property Name="SalesID" Type="int" />
           <Property Name="AccountsPayablePurchaseReturnID" Type="int" />
           <Property Name="AccountsReceivableSaleReturnID" Type="int" />
+          <Property Name="InventoryAdjustmentID" Type="int" />
         </EntityType>
         <EntityType Name="StockTransactionType">
           <Key>
@@ -485,7 +514,7 @@
           <Property Name="curCreditAmount" Type="money" />
           <Property Name="curDebitAmount" Type="money" />
           <Property Name="datInsertedDate" Type="datetime" />
-          <Property Name="strDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="strDescription" Type="nvarchar(max)" />
           <Property Name="intIdSales" Type="int" />
           <Property Name="intIdCollection" Type="int" />
           <Property Name="intIdPurchase" Type="int" />
@@ -763,6 +792,42 @@
             </Principal>
             <Dependent Role="Collection">
               <PropertyRef Name="SalesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryAdjustment_InventoryAdjustmentType">
+          <End Role="InventoryAdjustmentType" Type="Self.InventoryAdjustmentType" Multiplicity="0..1" />
+          <End Role="InventoryAdjustment" Type="Self.InventoryAdjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryAdjustmentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryAdjustment">
+              <PropertyRef Name="InventoryAdjustmentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryAdjustmentDetails_InventoryAdjustment">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="InventoryAdjustmentDetails" Type="Self.InventoryAdjustmentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryAdjustmentDetails">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryAdjustmentDetails_InventoryAdjustment1">
+          <End Role="InventoryAdjustment" Type="Self.InventoryAdjustment" Multiplicity="0..1" />
+          <End Role="InventoryAdjustmentDetails" Type="Self.InventoryAdjustmentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryAdjustment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryAdjustmentDetails">
+              <PropertyRef Name="InventoryAdjustmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1063,6 +1128,18 @@
             </Principal>
             <Dependent Role="Stock">
               <PropertyRef Name="AccountsReceivableSaleReturnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_InventoryAdjustment">
+          <End Role="InventoryAdjustment" Type="Self.InventoryAdjustment" Multiplicity="0..1" />
+          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryAdjustment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="InventoryAdjustmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1703,6 +1780,9 @@
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryAdjustment" EntityType="Self.InventoryAdjustment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryAdjustmentDetails" EntityType="Self.InventoryAdjustmentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryAdjustmentType" EntityType="Self.InventoryAdjustmentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryLog" EntityType="Self.InventoryLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryLogOperationType" EntityType="Self.InventoryLogOperationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryQuantityTotal" EntityType="Self.InventoryQuantityTotal" Schema="dbo" store:Type="Tables" />
@@ -1803,6 +1883,18 @@
             <End Role="Sales" EntitySet="Sales" />
             <End Role="Collection" EntitySet="Collection" />
           </AssociationSet>
+          <AssociationSet Name="FK_InventoryAdjustment_InventoryAdjustmentType" Association="Self.FK_InventoryAdjustment_InventoryAdjustmentType">
+            <End Role="InventoryAdjustmentType" EntitySet="InventoryAdjustmentType" />
+            <End Role="InventoryAdjustment" EntitySet="InventoryAdjustment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryAdjustmentDetails_InventoryAdjustment" Association="Self.FK_InventoryAdjustmentDetails_InventoryAdjustment">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="InventoryAdjustmentDetails" EntitySet="InventoryAdjustmentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryAdjustmentDetails_InventoryAdjustment1" Association="Self.FK_InventoryAdjustmentDetails_InventoryAdjustment1">
+            <End Role="InventoryAdjustment" EntitySet="InventoryAdjustment" />
+            <End Role="InventoryAdjustmentDetails" EntitySet="InventoryAdjustmentDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_Payment_Bank" Association="Self.FK_Payment_Bank">
             <End Role="Bank" EntitySet="Bank" />
             <End Role="Payment" EntitySet="Payment" />
@@ -1901,6 +1993,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Stock_AccountReceivableAdjustments" Association="Self.FK_Stock_AccountReceivableAdjustments">
             <End Role="AccountReceivableAdjustments" EntitySet="AccountReceivableAdjustments" />
+            <End Role="Stock" EntitySet="Stock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_InventoryAdjustment" Association="Self.FK_Stock_InventoryAdjustment">
+            <End Role="InventoryAdjustment" EntitySet="InventoryAdjustment" />
             <End Role="Stock" EntitySet="Stock" />
           </AssociationSet>
           <AssociationSet Name="FK_Stock_Product" Association="Self.FK_Stock_Product">
@@ -2160,6 +2256,7 @@
           <Property Name="curUnitPrice" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="AccountPayableAdjustmentsDetails" Relationship="GeneralLedgerModel.FK_AccountPayableAdjustmentsDetail_Product" FromRole="Product" ToRole="AccountPayableAdjustmentsDetail" />
           <NavigationProperty Name="AccountReceivableAdjustmentsDetails" Relationship="GeneralLedgerModel.FK_AccountReceivableAdjustmentsDetail_Product" FromRole="Product" ToRole="AccountReceivableAdjustmentsDetail" />
+          <NavigationProperty Name="InventoryAdjustmentDetails" Relationship="GeneralLedgerModel.FK_InventoryAdjustmentDetails_InventoryAdjustment" FromRole="Product" ToRole="InventoryAdjustmentDetail" />
         </EntityType>
         <EntityType Name="ProductBrand">
           <Key>
@@ -3098,6 +3195,25 @@
           <AssociationSet Name="FK_Stock_AccountReceivableAdjustments" Association="GeneralLedgerModel.FK_Stock_AccountReceivableAdjustments">
             <End Role="AccountReceivableAdjustment" EntitySet="AccountReceivableAdjustments" />
             <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <EntitySet Name="InventoryAdjustments" EntityType="GeneralLedgerModel.InventoryAdjustment" />
+          <EntitySet Name="InventoryAdjustmentDetails" EntityType="GeneralLedgerModel.InventoryAdjustmentDetail" />
+          <EntitySet Name="InventoryAdjustmentTypes" EntityType="GeneralLedgerModel.InventoryAdjustmentType" />
+          <AssociationSet Name="FK_InventoryAdjustment_InventoryAdjustmentType" Association="GeneralLedgerModel.FK_InventoryAdjustment_InventoryAdjustmentType">
+            <End Role="InventoryAdjustmentType" EntitySet="InventoryAdjustmentTypes" />
+            <End Role="InventoryAdjustment" EntitySet="InventoryAdjustments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_InventoryAdjustment" Association="GeneralLedgerModel.FK_Stock_InventoryAdjustment">
+            <End Role="InventoryAdjustment" EntitySet="InventoryAdjustments" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryAdjustmentDetails_InventoryAdjustment" Association="GeneralLedgerModel.FK_InventoryAdjustmentDetails_InventoryAdjustment">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="InventoryAdjustmentDetail" EntitySet="InventoryAdjustmentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryAdjustmentDetails_InventoryAdjustment1" Association="GeneralLedgerModel.FK_InventoryAdjustmentDetails_InventoryAdjustment1">
+            <End Role="InventoryAdjustment" EntitySet="InventoryAdjustments" />
+            <End Role="InventoryAdjustmentDetail" EntitySet="InventoryAdjustmentDetails" />
           </AssociationSet>
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
@@ -4278,6 +4394,8 @@
           <NavigationProperty Name="AccountPayableAdjustment" Relationship="GeneralLedgerModel.FK_Stock_AccountPayableAdjustments" FromRole="Stock" ToRole="AccountPayableAdjustment" />
           <Property Name="AccountsReceivableSaleReturnID" Type="Int32" />
           <NavigationProperty Name="AccountReceivableAdjustment" Relationship="GeneralLedgerModel.FK_Stock_AccountReceivableAdjustments" FromRole="Stock" ToRole="AccountReceivableAdjustment" />
+          <Property Name="InventoryAdjustmentID" Type="Int32" />
+          <NavigationProperty Name="InventoryAdjustment" Relationship="GeneralLedgerModel.FK_Stock_InventoryAdjustment" FromRole="Stock" ToRole="InventoryAdjustment" />
         </EntityType>
         <Association Name="FK_Stock_Purchase">
           <End Type="GeneralLedgerModel.Purchase" Role="Purchase" Multiplicity="0..1" />
@@ -4423,7 +4541,7 @@
           <Property Name="curCreditAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="curDebitAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="datInsertedDate" Type="DateTime" Precision="3" />
-          <Property Name="strDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="strDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="intIdSales" Type="Int32" />
           <Property Name="intIdCollection" Type="Int32" />
           <Property Name="intIdPurchase" Type="Int32" />
@@ -4644,6 +4762,88 @@
             </Principal>
             <Dependent Role="Stock">
               <PropertyRef Name="AccountsReceivableSaleReturnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InventoryAdjustment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TransactionNo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="InventoryAdjustmentTypeId" Type="Int32" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InventoryAdjustmentType" Relationship="GeneralLedgerModel.FK_InventoryAdjustment_InventoryAdjustmentType" FromRole="InventoryAdjustment" ToRole="InventoryAdjustmentType" />
+          <NavigationProperty Name="Stocks" Relationship="GeneralLedgerModel.FK_Stock_InventoryAdjustment" FromRole="InventoryAdjustment" ToRole="Stock" />
+          <NavigationProperty Name="InventoryAdjustmentDetails" Relationship="GeneralLedgerModel.FK_InventoryAdjustmentDetails_InventoryAdjustment1" FromRole="InventoryAdjustment" ToRole="InventoryAdjustmentDetail" />
+        </EntityType>
+        <EntityType Name="InventoryAdjustmentDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="InventoryAdjustmentId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product" Relationship="GeneralLedgerModel.FK_InventoryAdjustmentDetails_InventoryAdjustment" FromRole="InventoryAdjustmentDetail" ToRole="Product" />
+          <NavigationProperty Name="InventoryAdjustment" Relationship="GeneralLedgerModel.FK_InventoryAdjustmentDetails_InventoryAdjustment1" FromRole="InventoryAdjustmentDetail" ToRole="InventoryAdjustment" />
+        </EntityType>
+        <EntityType Name="InventoryAdjustmentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InventoryAdjustments" Relationship="GeneralLedgerModel.FK_InventoryAdjustment_InventoryAdjustmentType" FromRole="InventoryAdjustmentType" ToRole="InventoryAdjustment" />
+        </EntityType>
+        <Association Name="FK_InventoryAdjustment_InventoryAdjustmentType">
+          <End Type="GeneralLedgerModel.InventoryAdjustmentType" Role="InventoryAdjustmentType" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.InventoryAdjustment" Role="InventoryAdjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryAdjustmentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryAdjustment">
+              <PropertyRef Name="InventoryAdjustmentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_InventoryAdjustment">
+          <End Type="GeneralLedgerModel.InventoryAdjustment" Role="InventoryAdjustment" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryAdjustment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="InventoryAdjustmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryAdjustmentDetails_InventoryAdjustment">
+          <End Type="GeneralLedgerModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.InventoryAdjustmentDetail" Role="InventoryAdjustmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryAdjustmentDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryAdjustmentDetails_InventoryAdjustment1">
+          <End Type="GeneralLedgerModel.InventoryAdjustment" Role="InventoryAdjustment" Multiplicity="0..1" />
+          <End Type="GeneralLedgerModel.InventoryAdjustmentDetail" Role="InventoryAdjustmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryAdjustment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryAdjustmentDetail">
+              <PropertyRef Name="InventoryAdjustmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5950,6 +6150,7 @@
           <EntitySetMapping Name="Stocks">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Stock">
               <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="InventoryAdjustmentID" ColumnName="InventoryAdjustmentID" />
                 <ScalarProperty Name="AccountsReceivableSaleReturnID" ColumnName="AccountsReceivableSaleReturnID" />
                 <ScalarProperty Name="AccountsPayablePurchaseReturnID" ColumnName="AccountsPayablePurchaseReturnID" />
                 <ScalarProperty Name="SalesID" ColumnName="SalesID" />
@@ -6038,6 +6239,37 @@
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="AccountsReceivableAdjustmentsID" ColumnName="AccountsReceivableAdjustmentsID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryAdjustments">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.InventoryAdjustment">
+              <MappingFragment StoreEntitySet="InventoryAdjustment">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="InventoryAdjustmentTypeId" ColumnName="InventoryAdjustmentTypeId" />
+                <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryAdjustmentDetails">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.InventoryAdjustmentDetail">
+              <MappingFragment StoreEntitySet="InventoryAdjustmentDetails">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="InventoryAdjustmentId" ColumnName="InventoryAdjustmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryAdjustmentTypes">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.InventoryAdjustmentType">
+              <MappingFragment StoreEntitySet="InventoryAdjustmentType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

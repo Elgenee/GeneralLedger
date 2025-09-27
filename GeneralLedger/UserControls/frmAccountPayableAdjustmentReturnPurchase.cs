@@ -513,6 +513,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Columns[27].Name = "Unit Price";
                         this.dgProduct.Columns[28].Name = "Quantity";
                         this.dgProduct.Columns[29].Name = "Total Quantity Price";
+                        this.AccountPayableAdjustment.AccountPayableAdjustmentsDetails.Clear();
 
                         for (int i = 0; i < AccountPayableAdjustmentsDetailList.Count; i++)
                         {

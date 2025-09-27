@@ -215,6 +215,12 @@
     <Compile Include="UserControls\frmAgent.Designer.cs">
       <DependentUpon>frmAgent.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\frmChooseProductInventoryAdjustment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmChooseProductInventoryAdjustment.Designer.cs">
+      <DependentUpon>frmChooseProductInventoryAdjustment.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\frmChooseReturnSaleProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,6 +244,12 @@
     </Compile>
     <Compile Include="UserControls\frmCollection.Designer.cs">
       <DependentUpon>frmCollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmInventoryAdjustmentDMCM.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmInventoryAdjustmentDMCM.Designer.cs">
+      <DependentUpon>frmInventoryAdjustmentDMCM.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmPayment.cs">
       <SubType>UserControl</SubType>
@@ -581,6 +593,12 @@
     <Compile Include="UserControls\SearchPayment.Designer.cs">
       <DependentUpon>SearchPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchInventoryAdjustmentDMCM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchInventoryAdjustmentDMCM.Designer.cs">
+      <DependentUpon>SearchInventoryAdjustmentDMCM.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\StockInquiryDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -713,6 +731,9 @@
     <EmbeddedResource Include="UserControls\frmAgent.resx">
       <DependentUpon>frmAgent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmChooseProductInventoryAdjustment.resx">
+      <DependentUpon>frmChooseProductInventoryAdjustment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmChooseReturnSaleProduct.resx">
       <DependentUpon>frmChooseReturnSaleProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -724,6 +745,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmCollection.resx">
       <DependentUpon>frmCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmInventoryAdjustmentDMCM.resx">
+      <DependentUpon>frmInventoryAdjustmentDMCM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmPayment.resx">
       <DependentUpon>frmPayment.cs</DependentUpon>
@@ -902,6 +926,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchPayment.resx">
       <DependentUpon>SearchPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchInventoryAdjustmentDMCM.resx">
+      <DependentUpon>SearchInventoryAdjustmentDMCM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\StockInquiryDetails.resx">
       <DependentUpon>StockInquiryDetails.cs</DependentUpon>

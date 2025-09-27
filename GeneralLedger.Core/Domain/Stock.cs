@@ -23,6 +23,7 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> SalesID { get; set; }
         public Nullable<int> AccountsPayablePurchaseReturnID { get; set; }
         public Nullable<int> AccountsReceivableSaleReturnID { get; set; }
+        public Nullable<int> InventoryAdjustmentID { get; set; }
     
         public virtual Purchase Purchase { get; set; }
         public virtual Sale Sale { get; set; }
@@ -30,5 +31,6 @@ namespace GeneralLedger.Core.Domain
         public virtual Product Product { get; set; }
         public virtual AccountPayableAdjustment AccountPayableAdjustment { get; set; }
         public virtual AccountReceivableAdjustment AccountReceivableAdjustment { get; set; }
+        public virtual InventoryAdjustment InventoryAdjustment { get; set; }
     }
 }

@@ -417,5 +417,14 @@ namespace GeneralLedger.UserControls
                 DisplayCurrentPage();
             }
         }
+
+        private void btnStockAdjustment_Click(object sender, EventArgs e)
+        {
+            if (this.ProductId == 0)
+            {
+                MessageBox.Show("Please select item first...");
+                return;
+            }
+        }
     }
 }

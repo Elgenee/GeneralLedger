@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.dgProduct = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
@@ -41,6 +41,7 @@
             this.cmbPageSelector = new MetroFramework.Controls.MetroComboBox();
             this.lblPageInfo = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.btnStockAdjustment = new MetroFramework.Controls.MetroButton();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProduct)).BeginInit();
             this.SuspendLayout();
@@ -68,14 +69,14 @@
             this.dgProduct.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgProduct.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgProduct.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgProduct.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgProduct.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgProduct.Location = new System.Drawing.Point(0, 0);
@@ -222,10 +223,22 @@
             this.metroLabel1.TabIndex = 145;
             this.metroLabel1.Text = "Page";
             // 
+            // btnStockAdjustment
+            // 
+            this.btnStockAdjustment.Location = new System.Drawing.Point(903, 59);
+            this.btnStockAdjustment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnStockAdjustment.Name = "btnStockAdjustment";
+            this.btnStockAdjustment.Size = new System.Drawing.Size(230, 28);
+            this.btnStockAdjustment.TabIndex = 146;
+            this.btnStockAdjustment.Text = "Stock Adjustment";
+            this.btnStockAdjustment.UseSelectable = true;
+            this.btnStockAdjustment.Click += new System.EventHandler(this.btnStockAdjustment_Click);
+            // 
             // StockInquiry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnStockAdjustment);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.lblPageInfo);
             this.Controls.Add(this.cmbPageSelector);
@@ -260,5 +273,6 @@
         private MetroFramework.Controls.MetroComboBox cmbPageSelector;
         private MetroFramework.Controls.MetroLabel lblPageInfo;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroButton btnStockAdjustment;
     }
 }

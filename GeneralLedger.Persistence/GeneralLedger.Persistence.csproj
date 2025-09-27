@@ -78,6 +78,9 @@
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\GLTranDetailRepository.cs" />
     <Compile Include="Repositories\GLTranRepository.cs" />
+    <Compile Include="Repositories\InventoryAdjustmentDetailsRepository.cs" />
+    <Compile Include="Repositories\InventoryAdjustmentRepository.cs" />
+    <Compile Include="Repositories\InventoryAdjustmentTypeRepository.cs" />
     <Compile Include="Repositories\JournalEntryRepository.cs" />
     <Compile Include="Repositories\PaymentRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
@@ -104,6 +107,9 @@
     <Compile Include="Services\CustomerServices.cs" />
     <Compile Include="Services\GlTranDetailServices.cs" />
     <Compile Include="Services\GLTranServices.cs" />
+    <Compile Include="Services\InventoryAdjustmentDetailServices.cs" />
+    <Compile Include="Services\InventoryAdjustmentServices.cs" />
+    <Compile Include="Services\InventoryAdjustmentTypeServices.cs" />
     <Compile Include="Services\PaymentServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
     <Compile Include="Services\PurchaseDetailServices.cs" />

@@ -79,6 +79,9 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<tblGLTranHeader> tblGLTranHeaders { get; set; }
         public virtual DbSet<AccountPayableAdjustmentsDetail> AccountPayableAdjustmentsDetails { get; set; }
         public virtual DbSet<AccountReceivableAdjustmentsDetail> AccountReceivableAdjustmentsDetails { get; set; }
+        public virtual DbSet<InventoryAdjustment> InventoryAdjustments { get; set; }
+        public virtual DbSet<InventoryAdjustmentDetail> InventoryAdjustmentDetails { get; set; }
+        public virtual DbSet<InventoryAdjustmentType> InventoryAdjustmentTypes { get; set; }
     
         public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
         {

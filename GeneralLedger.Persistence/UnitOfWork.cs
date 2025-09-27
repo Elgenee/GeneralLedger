@@ -70,6 +70,18 @@ namespace GeneralLedger.Persistence
 
         public ICustomerRepository Customer { get; set; }
 
+        //public IInventoryAdjustment InventoryAdjustment { get; set; }
+
+        //public IInventoryAdjustmentDetails InventoryAdjustmentDetails { get; set; }
+
+        //public IInventoryAdjustmentType InventoryAdjustmentType { get; set; }
+
+        public IInventoryAdjustment InventoryAdjustment { get; set; }
+
+        public IInventoryAdjustmentDetails InventoryAdjustmentDetails { get; set; }
+
+        public IInventoryAdjustmentType InventoryAdjustmentType { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -100,6 +112,9 @@ namespace GeneralLedger.Persistence
             PurchaseDetail = new PurchaseDetailRepository(_generalLedgerContext);
             SaleDetail = new SaleDetailRepository(_generalLedgerContext);
             Customer = new CustomerRepository(_generalLedgerContext);
+            InventoryAdjustment = new InventoryAdjustmentRepository(_generalLedgerContext);
+            InventoryAdjustmentDetails = new InventoryAdjustmentDetailsRepository(_generalLedgerContext);
+            InventoryAdjustmentType = new InventoryAdjustmentTypeRepository(_generalLedgerContext);
 
 
         }
