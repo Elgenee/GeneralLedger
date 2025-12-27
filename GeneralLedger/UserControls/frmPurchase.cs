@@ -143,7 +143,7 @@ namespace GeneralLedger.UserControls
 
                 }
                 //GLTranHeader = Purchase.tblGLTranHeaders.Select(h => h.ID).SingleOrDefault();
-
+                //my local 11 is purchase ID and for the server is 9
                 this.GLTranDetail = GLTranServices.GetGLEntryByPurchaseId(Purchase.Id, 9).SelectMany(h => h.tblGLTranDetails).ToList();
                 if (GLTranDetail.Count > 0)
                 {
@@ -629,43 +629,45 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Columns[27].Name = "Unit Price";
                         this.dgProduct.Columns[28].Name = "Quantity";
                         this.dgProduct.Columns[29].Name = "Total Quantity Price";
+                        this.Purchase.PurchaseDetails.Clear();
 
                         for (int i = 0; i < PurchaseDetailsList.Count; i++)
                         {
                             //display all the data in productList to the datagridview
                             PurchaseDetail purchaseDetail = PurchaseDetailsList[i];
+                            var product = purchaseDetail.Product;
                             this.Purchase.PurchaseDetails.Add(purchaseDetail);
                             this.dgProduct.Rows[i].Cells[0].Value = purchaseDetail.Id;
-                            this.dgProduct.Rows[i].Cells[1].Value = purchaseDetail.Product.strProductName;
-                            this.dgProduct.Rows[i].Cells[2].Value = purchaseDetail.Product.strDescription;
-                            this.dgProduct.Rows[i].Cells[3].Value = 0;
-                            this.dgProduct.Rows[i].Cells[4].Value = string.Empty;
-                            this.dgProduct.Rows[i].Cells[5].Value = purchaseDetail.Product.ProductCategory.Id;
-                            this.dgProduct.Rows[i].Cells[6].Value = purchaseDetail.Product.ProductCategory.strName;
-                            this.dgProduct.Rows[i].Cells[7].Value = purchaseDetail.Product.ProductType.Id;
-                            this.dgProduct.Rows[i].Cells[8].Value = purchaseDetail.Product.ProductType.strName;
-                            this.dgProduct.Rows[i].Cells[9].Value = purchaseDetail.Product.ProductBrand.Id;
-                            this.dgProduct.Rows[i].Cells[10].Value = purchaseDetail.Product.ProductBrand.strName;
-                            //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
-                            //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
-                            //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
-                            this.dgProduct.Rows[i].Cells[14].Value = purchaseDetail.Product.ProductColor.Id;
-                            this.dgProduct.Rows[i].Cells[15].Value = purchaseDetail.Product.ProductColor.strName;
-                            this.dgProduct.Rows[i].Cells[16].Value = purchaseDetail.Product.ProductSize.Id;
-                            this.dgProduct.Rows[i].Cells[17].Value = purchaseDetail.Product.ProductSize.strName;
-                            this.dgProduct.Rows[i].Cells[18].Value = purchaseDetail.Product.ProductUnit.Id;
-                            this.dgProduct.Rows[i].Cells[19].Value = purchaseDetail.Product.ProductUnit.strName;
-                            this.dgProduct.Rows[i].Cells[20].Value = purchaseDetail.Product.strCode;
-                            this.dgProduct.Rows[i].Cells[21].Value = purchaseDetail.Product.strPR;
-                            this.dgProduct.Rows[i].Cells[22].Value = purchaseDetail.Product.strPCD;
-                            this.dgProduct.Rows[i].Cells[23].Value = purchaseDetail.Product.strMFLM;
-                            this.dgProduct.Rows[i].Cells[24].Value = purchaseDetail.Product.strPattern;
-                            this.dgProduct.Rows[i].Cells[25].Value = purchaseDetail.Product.strOffsetCenterBore;
-                            this.dgProduct.Rows[i].Cells[26].Value = purchaseDetail.Product.strOrigin;
-                            this.dgProduct.Rows[i].Cells[27].Value = purchaseDetail.UnitPrice;
-                            this.dgProduct.Rows[i].Cells[28].Value = purchaseDetail.Quantity;
-                            this.dgProduct.Rows[i].Cells[29].Value = purchaseDetail.TotalPrice;
-                            //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
+                            this.dgProduct.Rows[i].Cells[1].Value = product?.strProductName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[2].Value = product?.strDescription ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[3].Value = product?.ProductCharacteristic?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[4].Value = product?.ProductCharacteristic?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[5].Value = product?.ProductCategory?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[6].Value = product?.ProductCategory?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[7].Value = product?.ProductType?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[8].Value = product?.ProductType?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[9].Value = product?.ProductBrand?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[10].Value = product?.ProductBrand?.strName ?? string.Empty;
+                            //this.dgProduct.Rows[i].Cells[11].Value = product?.PerPieceBox ?? 0;
+                            //this.dgProduct.Rows[i].Cells[12].Value = product?.Location?.ID ?? 0;
+                            //this.dgProduct.Rows[i].Cells[13].Value = product?.Location?.Name ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[14].Value = product?.ProductColor?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[15].Value = product?.ProductColor?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[16].Value = product?.ProductSize?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[17].Value = product?.ProductSize?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[18].Value = product?.ProductUnit?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[19].Value = product?.ProductUnit?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[20].Value = product?.strCode ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[21].Value = product?.strPR ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[22].Value = product?.strPCD ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[23].Value = product?.strMFLM ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[24].Value = product?.strPattern ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[25].Value = product?.strOffsetCenterBore ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[26].Value = product?.strOrigin ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[27].Value = purchaseDetail.UnitPrice ?? 0;
+                            this.dgProduct.Rows[i].Cells[28].Value = purchaseDetail.Quantity ?? 0;
+                            this.dgProduct.Rows[i].Cells[29].Value = purchaseDetail.TotalPrice != null ? purchaseDetail.TotalPrice : 0m;
+                            //this.dgProduct.Rows[i].Cells[27].Value = product?.curUnitPrice ?? 0;
                         }
 
                         setRowNumber(this.dgJournalEntry);
@@ -859,7 +861,50 @@ namespace GeneralLedger.UserControls
 
         private void btnViewLedger_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+                if (this.ID == 0)
+                {
+                    MessageBox.Show("Please select transaction first...");
+                    return;
+                }
+
+                //var result = SalesCustomerLedgerServices.GetSalesCustomerLedger(this.Sale.Id);
+
+                MetroTabPage metroTabPage = new MetroTabPage();
+                metroTabPage.Text = "Purchase Ledger";
+                metroTabPage.AutoScroll = true;
+                metroTabPage.HorizontalScrollbar = true;
+                metroTabPage.HorizontalScrollbarBarColor = true;
+                metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+                metroTabPage.HorizontalScrollbarSize = 15;
+                metroTabPage.UseStyleColors = true;
+                metroTabPage.VerticalScrollbar = true;
+                metroTabPage.VerticalScrollbarBarColor = true;
+                metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+                metroTabPage.VerticalScrollbarSize = 15;
+                //metroTabPage.Size = new System.Drawing.Size(1200, 1013);
+                metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+                metroTabPage.Location = new System.Drawing.Point(4, 38);
+                metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
+                frmPurchaseLedger frmPurchaseLedger = new frmPurchaseLedger(this.ID);
+                frmPurchaseLedger.Parent = metroTabPage;
+                frmPurchaseLedger.MetroTabPage = metroTabPage;
+                frmPurchaseLedger.AutoScroll = true;
+                frmPurchaseLedger.MetroTabControl = this.MetroTabControl;
+
+                metroTabPage.Controls.Add(frmPurchaseLedger);
+                MetroTabControl.TabPages.Add(metroTabPage);
+                MetroTabControl.SelectedTab = metroTabPage;
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error:" + ex.Message);
+            }
         }
 
         private void btnAddProduct_Click(object sender, EventArgs e)
@@ -974,7 +1019,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Rows[i].Cells[10].Value = purchaseDetail.Product.ProductBrand.strName;
                         //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
                         //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
-                        //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
+                        //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;pl
                         this.dgProduct.Rows[i].Cells[14].Value = purchaseDetail.Product.ProductColor.Id;
                         this.dgProduct.Rows[i].Cells[15].Value = purchaseDetail.Product.ProductColor.strName;
                         this.dgProduct.Rows[i].Cells[16].Value = purchaseDetail.Product.ProductSize.Id;

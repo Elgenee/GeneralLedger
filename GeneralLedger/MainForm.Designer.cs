@@ -30,6 +30,7 @@
         {
             this.metroTabControlMain = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPageHome = new MetroFramework.Controls.MetroTabPage();
+            this.btnInventoryAdjustment = new MetroFramework.Controls.MetroTile();
             this.btnStockInquiry = new MetroFramework.Controls.MetroTile();
             this.btnProductUnit = new MetroFramework.Controls.MetroTile();
             this.btnAPDMCM = new MetroFramework.Controls.MetroTile();
@@ -67,6 +68,7 @@
             this.btnChartOfAccounts = new MetroFramework.Controls.MetroTile();
             this.btnJournalEntry = new MetroFramework.Controls.MetroTile();
             this.LoginUser = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControlMain.SuspendLayout();
             this.metroTabPageHome.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +93,7 @@
             // metroTabPageHome
             // 
             this.metroTabPageHome.AutoScroll = true;
+            this.metroTabPageHome.Controls.Add(this.btnInventoryAdjustment);
             this.metroTabPageHome.Controls.Add(this.btnStockInquiry);
             this.metroTabPageHome.Controls.Add(this.btnProductUnit);
             this.metroTabPageHome.Controls.Add(this.btnAPDMCM);
@@ -146,6 +149,23 @@
             this.metroTabPageHome.VerticalScrollbarSize = 13;
             this.metroTabPageHome.Click += new System.EventHandler(this.metroTabPageHome_Click);
             // 
+            // btnInventoryAdjustment
+            // 
+            this.btnInventoryAdjustment.ActiveControl = null;
+            this.btnInventoryAdjustment.Enabled = false;
+            this.btnInventoryAdjustment.Location = new System.Drawing.Point(535, 144);
+            this.btnInventoryAdjustment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInventoryAdjustment.Name = "btnInventoryAdjustment";
+            this.btnInventoryAdjustment.Size = new System.Drawing.Size(315, 86);
+            this.btnInventoryAdjustment.Style = MetroFramework.MetroColorStyle.Silver;
+            this.btnInventoryAdjustment.TabIndex = 39;
+            this.btnInventoryAdjustment.Text = "Inventory Adjustments";
+            this.btnInventoryAdjustment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnInventoryAdjustment.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnInventoryAdjustment.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.btnInventoryAdjustment.UseSelectable = true;
+            this.btnInventoryAdjustment.Click += new System.EventHandler(this.metroTile2_Click_3);
+            // 
             // btnStockInquiry
             // 
             this.btnStockInquiry.ActiveControl = null;
@@ -153,7 +173,7 @@
             this.btnStockInquiry.Location = new System.Drawing.Point(535, 52);
             this.btnStockInquiry.Margin = new System.Windows.Forms.Padding(4);
             this.btnStockInquiry.Name = "btnStockInquiry";
-            this.btnStockInquiry.Size = new System.Drawing.Size(248, 86);
+            this.btnStockInquiry.Size = new System.Drawing.Size(315, 86);
             this.btnStockInquiry.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnStockInquiry.TabIndex = 38;
             this.btnStockInquiry.Text = "Stock Inquiry";
@@ -744,11 +764,22 @@
             this.LoginUser.TabIndex = 6;
             this.LoginUser.Text = "LoginUser";
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(492, 34);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(226, 20);
+            this.metroLabel1.TabIndex = 7;
+            this.metroLabel1.Text = "******TEST ENVIRONMENT *******";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2739, 1017);
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.LoginUser);
             this.Controls.Add(this.metroTabControlMain);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -808,5 +839,7 @@
         private MetroFramework.Controls.MetroTile btnAPDMCM;
         private MetroFramework.Controls.MetroTile btnProductUnit;
         private MetroFramework.Controls.MetroTile btnStockInquiry;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroTile btnInventoryAdjustment;
     }
 }

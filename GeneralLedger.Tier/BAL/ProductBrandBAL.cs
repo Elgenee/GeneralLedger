@@ -38,5 +38,12 @@ namespace GeneralLedger.Tier.BAL
             ProductBrandDAL pbDAL = new ProductBrandDAL();
             return pbDAL.getProductBrand();
         }
+
+        public List<ProductBrand> getProductBrandByCriteria(string criteria)
+        {
+
+            ProductBrandDAL pbDAL = new ProductBrandDAL();
+            return pbDAL.getProductBrandByCriteria(criteria);
+        }
     }
 }

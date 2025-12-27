@@ -15,5 +15,9 @@ namespace GeneralLedger.Core.Services
         List<tblGLTranHeader> GetGLEntryByPurchaseId(int PurchaseId, int BookTypeId);
 
         List<tblGLTranHeader> GetGLEntryBySalesId(int SalesId, int BookTypeId);
+
+        List<tblGLTranHeader> GetGLEntryByAdjustmentReturnPurchaseId(int ReturnPurchaseId, int BookTypeId);
+
+        List<tblGLTranHeader> GetGLEntryByAdjustmentReturnSaleId(int ReturnSaleId, int BookTypeId);
     }
 }

@@ -116,6 +116,7 @@
     <Compile Include="BO\rptJournalProoflist.cs" />
     <Compile Include="BO\rptOtherAsset.cs" />
     <Compile Include="BO\SearchProductAndColorAndSize.cs" />
+    <Compile Include="BO\StockDetailsByProductId.cs" />
     <Compile Include="BO\Supplier.cs" />
     <Compile Include="DAL\BankDAL.cs" />
     <Compile Include="DAL\COADAL.cs" />

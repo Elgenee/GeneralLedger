@@ -14,33 +14,37 @@ namespace GeneralLedger.Persistence.Services
     public class PurchaseServices : IPurchaseServices
     {
         public Purchase Add(Purchase purchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<PurchaseDetail> PurchaseDetailsList)
-        {
-            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
-            {
-                AddPurchaseDetails(purchase, PurchaseDetailsList, unitOfWork);
-
-                StringBuilder productDetailsBuilder = new StringBuilder();
-                foreach (var detail in PurchaseDetailsList)
+        {      
+                using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
                 {
-                    var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
-                    var size = product.ProductSize; // Assuming Product has a Size property
-                    var color = product.ProductColor; // Assuming Product has a Color property
+                    AddPurchaseDetails(purchase, PurchaseDetailsList, unitOfWork);
 
-                    productDetailsBuilder.AppendLine("# " + product.strProductName +
-                                                     "; Size: " + size.strName +
-                                                     "; Color: " + color.strName +
-                                                     "; Qty: " + detail.Quantity.ToString());
+                    StringBuilder productDetailsBuilder = new StringBuilder();
+                    foreach (var detail in PurchaseDetailsList)
+                    {
+                        var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
+                        var size = product.ProductSize; // Assuming Product has a Size property
+                        var color = product.ProductColor; // Assuming Product has a Color property
+                        var prodType = product?.ProductType;
+
+                        productDetailsBuilder.AppendLine("# " +
+                               (product?.strProductName ?? string.Empty) +
+                               "; Size: " + (size?.strName ?? string.Empty) +
+                               "; Color: " + (color?.strName ?? string.Empty) +
+                               "; ProdType: " + (prodType?.strName ?? string.Empty) +
+                               (!string.IsNullOrEmpty(product?.strPR) ? "; PR: " + product.strPR : "") +
+                               "; Qty: " + detail.Quantity.ToString());
+                    }
+
+                    purchase.Description = productDetailsBuilder.ToString();
+                    unitOfWork.Purchase.Add(purchase);
+                    UpdateRemainingCount(unitOfWork,purchase, PurchaseDetailsList);
+                    AddPurchaseSupplierLedger(unitOfWork, purchase);
+                    AddGLTran(unitOfWork, purchase, tblGLTranDetail, UseDefaultEntry);
+                    AddGLTranInventory(unitOfWork, purchase);
+                    unitOfWork.Complete();
+                    return purchase;
                 }
-
-                purchase.Description = productDetailsBuilder.ToString();
-                unitOfWork.Purchase.Add(purchase);
-                UpdateRemainingCount(unitOfWork,purchase, PurchaseDetailsList);
-                AddPurchaseSupplierLedger(unitOfWork, purchase);
-                AddGLTran(unitOfWork, purchase, tblGLTranDetail, UseDefaultEntry);
-                AddGLTranInventory(unitOfWork, purchase);
-                unitOfWork.Complete();
-                return purchase;
-            }
         }
 
         public int GetTotalRemainingStock(UnitOfWork unitOfWork, int productId, List<Stock> newStocks)
@@ -66,7 +70,6 @@ namespace GeneralLedger.Persistence.Services
                 //var stocks = unitOfWork.Stock.FindLocal(s => s.ProductId == detail.ProductId).ToList();
 
                     var newStocks = purchase.Stocks.ToList();
-                //TODO: here minus the last updated Product
                     product.intRemainingCount = GetTotalRemainingStock(unitOfWork , productID, newStocks);
                    
                    
@@ -290,7 +293,11 @@ namespace GeneralLedger.Persistence.Services
 
         public Purchase GetPurchaseWithSupplier(int Id)
         {
-            throw new NotImplementedException();
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            {
+                return unitOfWork.Purchase.GetPurchaseWithSupplier(Id);
+
+            }
         }
 
         //public void Remove(Purchase purchase, List<PurchaseDetail> PurchaseDetailsList)
@@ -467,11 +474,15 @@ namespace GeneralLedger.Persistence.Services
                         var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
                         var size = product.ProductSize; // Assuming Product has a Size property
                         var color = product.ProductColor; // Assuming Product has a Color property
+                        var prodType = product?.ProductType;
 
-                        productDetailsBuilder.AppendLine("# " + product.strProductName +
-                                                         "; Size: " + size.strName +
-                                                         "; Color: " + color.strName +
-                                                         "; Qty: " + detail.Quantity.ToString());
+                        productDetailsBuilder.AppendLine("# " +
+                              (product?.strProductName ?? string.Empty) +
+                              "; Size: " + (size?.strName ?? string.Empty) +
+                              "; Color: " + (color?.strName ?? string.Empty) +
+                              "; ProdType: " + (prodType?.strName ?? string.Empty) +
+                              (!string.IsNullOrEmpty(product?.strPR) ? "; PR: " + product.strPR : "") +
+                              "; Qty: " + detail.Quantity.ToString());
                     }
                     pur.Description = string.Concat(productDetailsBuilder.ToString());
 

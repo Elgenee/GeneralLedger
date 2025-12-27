@@ -135,7 +135,9 @@ namespace GeneralLedger.Persistence.Services
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 AddSaleDetails(sale, saleDetailsList, unitOfWork);
-
+               
+                var customer = unitOfWork.Customer.Get(sale.intIdCustomer.Value);
+               
                 StringBuilder productDetailsBuilder = new StringBuilder();
                 foreach (var detail in saleDetailsList)
                 {
@@ -143,13 +145,15 @@ namespace GeneralLedger.Persistence.Services
                     var size = product.ProductSize; // Assuming Product has a Size property
                     var color = product.ProductColor; // Assuming Product has a Color property
 
-                    productDetailsBuilder.AppendLine("# " + product.strProductName +
-                                                     "; Size: " + size.strName +
-                                                     "; Color: " + color.strName +
-                                                     "; Qty: " + detail.Quantity.ToString());
+                    productDetailsBuilder.AppendLine("# " +
+                                        (product?.strProductName ?? string.Empty) +
+                                        "; Size: " + (size?.strName ?? string.Empty) +
+                                        "; Color: " + (color?.strName ?? string.Empty) +
+                                        "; Qty: " + detail.Quantity.ToString());
                 }
 
-          
+                productDetailsBuilder.AppendLine("Customer: " + customer?.strName ?? string.Empty);
+
                 sale.Description = productDetailsBuilder.ToString();
                 unitOfWork.Sale.Add(sale);
                 UpdateSaleCount(unitOfWork, sale, saleDetailsList);
@@ -553,6 +557,8 @@ namespace GeneralLedger.Persistence.Services
                 saleInDb.AdditionalDescription = updatedSale.AdditionalDescription;
                 saleInDb.TransactionDate = updatedSale.TransactionDate;
 
+                var customer = unitOfWork.Customer.Get(updatedSale.intIdCustomer.Value);
+
                 StringBuilder productDetailsBuilder = new StringBuilder();
                 foreach (var detail in updatedSalesDetailsList)
                 {
@@ -560,11 +566,13 @@ namespace GeneralLedger.Persistence.Services
                     var size = product.ProductSize; // Assuming Product has a Size property
                     var color = product.ProductColor; // Assuming Product has a Color property
 
-                    productDetailsBuilder.AppendLine("# " + product.strProductName +
-                                                     "; Size: " + size.strName +
-                                                     "; Color: " + color.strName +
-                                                     "; Qty: " + detail.Quantity.ToString());
+                    productDetailsBuilder.AppendLine("# " +
+                            (product?.strProductName ?? string.Empty) +
+                            "; Size: " + (size?.strName ?? string.Empty) +
+                            "; Color: " + (color?.strName ?? string.Empty) +
+                            "; Qty: " + detail.Quantity.ToString());
                 }
+                productDetailsBuilder.AppendLine("Customer: " + customer?.strName ?? string.Empty);
                 saleInDb.Description = string.Concat(productDetailsBuilder.ToString());
 
                 saleInDb.SalesDetails = updatedSale.SalesDetails;
@@ -659,7 +667,6 @@ namespace GeneralLedger.Persistence.Services
                 //var stocks = unitOfWork.Stock.FindLocal(s => s.ProductId == detail.ProductId).ToList();
 
                 var newStocks = sale.Stocks.ToList();
-                //TODO: here minus the last updated Product
                 var intRemainingCount =  GetTotalRemainingStockAfterSale(unitOfWork, productID, newStocks);
 
                 if (intRemainingCount < 0)

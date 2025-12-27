@@ -434,7 +434,7 @@ namespace GeneralLedger.UserControls
                 Product.ProductName = this.txtProductName.Text;
                 Product.Description = this.txtDescription.Text;
                 //Product.PerPieceBox = decimal.TryParse(this.txtPerPiecePerBox.Text, out decimalParser) ? decimalParser : 0;
-                //Product.ProductCharacteristicID = (this.cbCharacteristic.SelectedItem == null) ? 0 : ((Tier.BO.ProductCharacteristic)this.cbCharacteristic.SelectedItem).ID;
+                Product.ProductCharacteristicID = 3;
                 Product.ProductCategoryID = (this.cbCategories.SelectedItem == null) ? 0 : ((Tier.BO.ProductCategory)this.cbCategories.SelectedItem).ID;
                 Product.ProductTypeID = (this.cbProductTypes.SelectedItem == null) ? 0 : ((Tier.BO.ProductType)this.cbProductTypes.SelectedItem).ID;
                 Product.ProductBrandID = (this.cbProductBrand.SelectedItem == null) ? 0 : ((Tier.BO.ProductBrand)this.cbProductBrand.SelectedItem).ID;

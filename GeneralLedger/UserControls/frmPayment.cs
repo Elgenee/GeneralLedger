@@ -33,7 +33,7 @@ namespace GeneralLedger.UserControls
         public int GLTranHeader { get; set; }
 
 
-        //TODO:add total purchase when searching
+   
         public frmPayment()
         {
             InitializeComponent();
@@ -504,7 +504,7 @@ namespace GeneralLedger.UserControls
                 MessageBox.Show("Error:" + ex.Message);
             }
         }
-        //TODO:ADD
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try

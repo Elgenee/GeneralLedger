@@ -63,6 +63,8 @@ namespace GeneralLedger.Persistence.Repositories
         public IEnumerable<AccountPayableAdjustment> GetAccountPayableAdjustmentsWithJournalEntry(int Id)
         {
             return GeneralLedgerContext.AccountPayableAdjustments
+               .Include(a => a.AccountPayableAdjustmentsDetails)
+               .Include(a => a.Stocks)
                .Include(a => a.tblGLTranHeaders)
                 .Include(a => a.tblGLTranHeaders.Select(h => h.tblGLTranDetails))
                 .Include(a => a.tblGLTranHeaders.Select(h => h.tblGLTranDetails.Select(d => d.tblMasCOA)))
