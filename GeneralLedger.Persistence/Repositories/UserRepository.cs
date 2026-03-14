@@ -45,7 +45,7 @@ namespace GeneralLedger.Persistence.Repositories
                .Where(u => u.Username.ToLower().Contains(criteria.ToLower())
                || u.Name.ToLower().Contains(criteria.ToLower())
                || u.UserRoles.Select(ur => ur.Role.Name.ToLower()).Contains(criteria.ToLower())
-               ).ToList().Take(100);
+               ).Take(100).ToList();
         }
 
 

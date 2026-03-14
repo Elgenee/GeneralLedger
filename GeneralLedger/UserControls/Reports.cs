@@ -140,6 +140,15 @@ namespace GeneralLedger.UserControls
                     frmReportInventoryProoflist frmReportInventoryProoflist = new frmReportInventoryProoflist();
                     frmReportInventoryProoflist.Show();
                 }
+
+                if (item.ToUpper().Equals("INVENTORY MONTHLY OUSTANDING SUMMARY"))
+                {
+
+                    MetroTabPage metroTabPage = new MetroTabPage();
+                    metroTabPage.Text = "Inventory Monthly Oustanding Summary";
+                    frmReportInventoryMonthlyOutstandingSummary frmReportInventoryMonthlyOutstandingSummary = new frmReportInventoryMonthlyOutstandingSummary();
+                    frmReportInventoryMonthlyOutstandingSummary.Show();
+                }
                 //rest of your logic 
             }
         }

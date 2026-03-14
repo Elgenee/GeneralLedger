@@ -63,6 +63,12 @@ namespace GeneralLedger.Tier.BAL
 
         }
 
+        public List<rptInventoryMonthlyOutstandingSummary> getInventoryMonthlyOutstandingSummary(DateTime monthDate)
+        {
+            GLDAL gltb = new GLDAL();
+            return gltb.getInventoryMonthlyOutstandingSummary(monthDate);
+        }
+
         public List<rptJournalProoflist> getCollectionEntryProoflist(string datDateFrom, string datDateTo)
         {
             GLDAL gltb = new GLDAL();

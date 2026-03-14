@@ -246,7 +246,8 @@ namespace GeneralLedger.Persistence.Services
                     QuantityOut = item.Quantity,
                     StockTransactionTypeID = 1002,
                     AccountsPayablePurchaseReturnID = accountPayableAdjustment.Id,
-                    Product = product
+                    Product = product,
+                    TransactionDate = accountPayableAdjustment.TransactionDate
                 });
             }
         }
@@ -910,7 +911,8 @@ namespace GeneralLedger.Persistence.Services
                     QuantityIn = 0,
                     QuantityOut = updatedDetail.Quantity,
                     StockTransactionTypeID = 1002,
-                    AccountsPayablePurchaseReturnID = accountPayableAdjustment.Id
+                    AccountsPayablePurchaseReturnID = accountPayableAdjustment.Id,
+                    TransactionDate = accountPayableAdjustment.TransactionDate
                 });
             }
         }

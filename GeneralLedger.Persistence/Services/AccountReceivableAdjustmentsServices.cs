@@ -176,7 +176,9 @@ namespace GeneralLedger.Persistence.Services
                     QuantityOut = 0,
                     StockTransactionTypeID = 2002,
                     AccountsReceivableSaleReturnID = accountReceivableAdjustment.Id,
-                    Product = product
+                    Product = product,
+                    TransactionDate = accountReceivableAdjustment.TransactionDate
+
                 });
             }
         }
@@ -501,7 +503,8 @@ namespace GeneralLedger.Persistence.Services
                     QuantityIn = updatedDetail.Quantity,
                     QuantityOut = 0,
                     StockTransactionTypeID = 2002,
-                    AccountsReceivableSaleReturnID = accountReceivableAdjustment.Id
+                    AccountsReceivableSaleReturnID = accountReceivableAdjustment.Id,
+                    TransactionDate = accountReceivableAdjustment.TransactionDate,
                 });
             }
         }

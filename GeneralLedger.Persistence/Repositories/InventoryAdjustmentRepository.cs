@@ -26,7 +26,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .AsQueryable()
                 .Where(i => i.TransactionNo.ToLower().Contains(criteria.ToLower())
                 || i.InventoryAdjustmentType.Name.ToLower().Contains(criteria.ToLower()))
-                .ToList().Take(100);
+                .Take(100).ToList();
 
         }
     }

@@ -82,6 +82,8 @@ namespace GeneralLedger.Persistence
 
         public IInventoryAdjustmentType InventoryAdjustmentType { get; set; }
 
+        public ISupplierRepository Supplier { get; set; }
+
         public UnitOfWork(GeneralLedgerContext generalLedgerContext)
         {
             _generalLedgerContext = generalLedgerContext;
@@ -115,6 +117,7 @@ namespace GeneralLedger.Persistence
             InventoryAdjustment = new InventoryAdjustmentRepository(_generalLedgerContext);
             InventoryAdjustmentDetails = new InventoryAdjustmentDetailsRepository(_generalLedgerContext);
             InventoryAdjustmentType = new InventoryAdjustmentTypeRepository(_generalLedgerContext);
+            Supplier = new SupplierRepository(_generalLedgerContext);
 
 
         }

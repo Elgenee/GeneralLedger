@@ -102,6 +102,7 @@
     <Compile Include="BO\rptGetCustomerLedgerOverall.cs" />
     <Compile Include="BO\rptGetSummaryOfAccountsReceivablesSales.cs" />
     <Compile Include="BO\rptGetSupplierLedgerOverall.cs" />
+    <Compile Include="BO\rptInventoryMonthlyOutstandingSummary.cs" />
     <Compile Include="BO\rptInventoryProoflist.cs" />
     <Compile Include="BO\rptISExpenses.cs" />
     <Compile Include="BO\rptISIncome.cs" />

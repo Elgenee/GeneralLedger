@@ -21,8 +21,9 @@ namespace GeneralLedger
         const int CLOSE_AREA = 15;
         public MainForm()
         {
-
+           
             InitializeComponent();
+            ReleaseCounter();
             this.WindowState = FormWindowState.Maximized;
             this.metroTabControlMain.Parent = this;
             this.metroTabControlMain.Dock = DockStyle.Top;
@@ -30,7 +31,7 @@ namespace GeneralLedger
             this.WindowState = FormWindowState.Maximized;
             var roles = UserProfile.UserProfileRoles;
             this.LoginUser.Text = "*" + UserProfile.UserUserProfile.Name;
-
+            
             if (UserProfile.UserUserProfile.Name != "Administrator")
             {
 
@@ -333,8 +334,32 @@ namespace GeneralLedger
                     this.btnInventoryAdjustment.Style = MetroFramework.MetroColorStyle.Blue;
 
             }
+
+           
         }
 
+
+        private void ReleaseCounter() {
+
+            // Path to store the release counter
+            string releaseCounterFile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "release_counter.txt");
+
+            // Get today's date as build indicator
+            string buildDate = DateTime.Now.ToString("yyyyMMdd");
+
+            // Read and increment the counter
+            int releaseCounter = 1;
+            if (System.IO.File.Exists(releaseCounterFile))
+            {
+                string counterText = System.IO.File.ReadAllText(releaseCounterFile);
+                int.TryParse(counterText, out releaseCounter);
+                releaseCounter++;
+            }
+            System.IO.File.WriteAllText(releaseCounterFile, releaseCounter.ToString());
+
+            // Assign to txtReleaseNo
+            this.metroLabel2.Text = $"{buildDate}-{releaseCounter}";
+        }
         private void MetroTabControlMain_DrawItem(object sender, DrawItemEventArgs e)
         {
 

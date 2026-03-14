@@ -124,6 +124,12 @@
     <Compile Include="Report\frmReportAccountsReceivableSales.Designer.cs">
       <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\frmReportInventoryMonthlyOutstandingSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportInventoryMonthlyOutstandingSummary.Designer.cs">
+      <DependentUpon>frmReportInventoryMonthlyOutstandingSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\frmReportPaymentProoflist.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -676,6 +682,9 @@
     <EmbeddedResource Include="Report\frmReportAccountsReceivableSales.resx">
       <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportInventoryMonthlyOutstandingSummary.resx">
+      <DependentUpon>frmReportInventoryMonthlyOutstandingSummary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\frmReportPaymentProoflist.resx">
       <DependentUpon>frmReportPaymentProoflist.cs</DependentUpon>
     </EmbeddedResource>
@@ -697,6 +706,7 @@
     <EmbeddedResource Include="Report\frmReportSaleProoflist.resx">
       <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\RDLC\InventoryMonthlyOutstandingSummary.rdlc" />
     <EmbeddedResource Include="Report\RDLC\PaymentProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\InventoryProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\PurchaseProoflist.rdlc" />
@@ -745,6 +755,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmCollection.resx">
       <DependentUpon>frmCollection.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmInventoryAdjustmentDMCM.resx">
       <DependentUpon>frmInventoryAdjustmentDMCM.cs</DependentUpon>

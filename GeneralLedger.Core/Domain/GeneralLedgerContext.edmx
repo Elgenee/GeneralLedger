@@ -451,6 +451,7 @@
           <Property Name="AccountsPayablePurchaseReturnID" Type="int" />
           <Property Name="AccountsReceivableSaleReturnID" Type="int" />
           <Property Name="InventoryAdjustmentID" Type="int" />
+          <Property Name="TransactionDate" Type="date" />
         </EntityType>
         <EntityType Name="StockTransactionType">
           <Key>
@@ -4396,6 +4397,7 @@
           <NavigationProperty Name="AccountReceivableAdjustment" Relationship="GeneralLedgerModel.FK_Stock_AccountReceivableAdjustments" FromRole="Stock" ToRole="AccountReceivableAdjustment" />
           <Property Name="InventoryAdjustmentID" Type="Int32" />
           <NavigationProperty Name="InventoryAdjustment" Relationship="GeneralLedgerModel.FK_Stock_InventoryAdjustment" FromRole="Stock" ToRole="InventoryAdjustment" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_Stock_Purchase">
           <End Type="GeneralLedgerModel.Purchase" Role="Purchase" Multiplicity="0..1" />
@@ -6150,6 +6152,7 @@
           <EntitySetMapping Name="Stocks">
             <EntityTypeMapping TypeName="GeneralLedgerModel.Stock">
               <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
                 <ScalarProperty Name="InventoryAdjustmentID" ColumnName="InventoryAdjustmentID" />
                 <ScalarProperty Name="AccountsReceivableSaleReturnID" ColumnName="AccountsReceivableSaleReturnID" />
                 <ScalarProperty Name="AccountsPayablePurchaseReturnID" ColumnName="AccountsPayablePurchaseReturnID" />

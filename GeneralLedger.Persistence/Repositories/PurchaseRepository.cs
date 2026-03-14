@@ -41,7 +41,7 @@ namespace GeneralLedger.Persistence.Repositories
                  || p.TRANo.ToLower().Contains(criteria.ToLower())
                  || p.Supplier.strName.ToLower().Contains(criteria.ToLower())
                  || p.SIDR.ToLower().Contains(criteria.ToLower())))
-                 .ToList().Take(100);
+                 .Take(100).ToList();
         }
 
         public IEnumerable<Purchase> GetPurchaseWithSupplier(string criteria)
@@ -55,7 +55,7 @@ namespace GeneralLedger.Persistence.Repositories
                 || p.TRANo.ToLower().Contains(criteria.ToLower())
                 || p.Supplier.strName.ToLower().Contains(criteria.ToLower())
                 || p.SIDR.ToLower().Contains(criteria.ToLower()))
-                .ToList().Take(100);
+                .Take(100).ToList();
         }
 
         public Purchase GetPurchaseWithSupplier(int Id)

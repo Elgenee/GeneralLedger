@@ -32,7 +32,7 @@ namespace GeneralLedger.Persistence.Repositories
                 //.Include(aj => aj.Collection.Sale.Customer)
                 .Where(aj => (aj.TransactionNo.ToLower().Contains(criteria.ToLower())
                 || aj.Customer.strName.ToLower().Contains(criteria.ToLower()))
-                && (aj.AccountsReceivableAdjustmentsTypeId == 2 || aj.AccountsReceivableAdjustmentsTypeId == 3)).ToList().Take(100);
+                && (aj.AccountsReceivableAdjustmentsTypeId == 2 || aj.AccountsReceivableAdjustmentsTypeId == 3)).Take(100).ToList();
         }
 
         public IEnumerable<AccountReceivableAdjustment> GetAccountReceivableAdjustmentsWithCollectionSales(string criteria, int intIdAccountsReceivableAdjustmentsType)
@@ -47,7 +47,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .Where(aj => (aj.TransactionNo.ToLower().Contains(criteria.ToLower())
                 || aj.Collection.Sale.Customer.strName.ToLower().Contains(criteria.ToLower())
                 || aj.Collection.TRANo.ToLower().Contains(criteria.ToLower()))
-                && aj.AccountsReceivableAdjustmentsTypeId == intIdAccountsReceivableAdjustmentsType).ToList().Take(100);
+                && aj.AccountsReceivableAdjustmentsTypeId == intIdAccountsReceivableAdjustmentsType).Take(100).ToList();
         }
 
         public IEnumerable<AccountReceivableAdjustment> GetAccountReceivableAdjustmentsWithCustomer(string criteria, int intIdAccountsReceivableAdjustmentsType)
@@ -62,7 +62,7 @@ namespace GeneralLedger.Persistence.Repositories
                 //.Include(aj => aj.Collection.Sale.Customer)
                 .Where(aj => (aj.TransactionNo.ToLower().Contains(criteria.ToLower())
                 || aj.Customer.strName.ToLower().Contains(criteria.ToLower()))
-                && aj.AccountsReceivableAdjustmentsTypeId == intIdAccountsReceivableAdjustmentsType).ToList().Take(100);
+                && aj.AccountsReceivableAdjustmentsTypeId == intIdAccountsReceivableAdjustmentsType).Take(100).ToList();
         }
 
         public IEnumerable<AccountReceivableAdjustment> GetAccountReceivableAdjustmentsWithJournalEntry(int Id)
@@ -92,7 +92,7 @@ namespace GeneralLedger.Persistence.Repositories
                .Where(aj => (aj.TransactionNo.ToLower().Contains(criteria.ToLower())
                || aj.Sale.Customer.strName.ToLower().Contains(criteria.ToLower())
                || aj.Sale.TRANo.ToLower().Contains(criteria.ToLower()))
-               && aj.AccountsReceivableAdjustmentsTypeId == intIdAccountsReceivableAdjustmentsType).ToList().Take(100);
+               && aj.AccountsReceivableAdjustmentsTypeId == intIdAccountsReceivableAdjustmentsType).Take(100).ToList();
         }
     }
 }

@@ -72,7 +72,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchPurchase.Rows[i].Cells["Terms"].Value = purchaseResult[i].Terms;
                         this.dgSearchPurchase.Rows[i].Cells["AdditionalDescription"].Value = string.IsNullOrEmpty(purchaseResult[i].AdditionalDescription)?string.Empty:purchaseResult[i].AdditionalDescription;
                         this.dgSearchPurchase.Rows[i].Cells["Description"].Value = purchaseResult[i].Description;
-                        this.dgSearchPurchase.Rows[i].Cells["GLTranHeaderID"].Value = purchaseResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
+                        this.dgSearchPurchase.Rows[i].Cells["GLTranHeaderID"].Value = purchaseResult[i].tblGLTranHeaders.Where(h => h.intIDGLBookType == 9).Select(h => h.ID).FirstOrDefault();
                         this.dgSearchPurchase.Rows[i].Cells["UseDefaultEntry"].Value = purchaseResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
                     }
 

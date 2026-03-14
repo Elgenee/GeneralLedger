@@ -41,7 +41,7 @@ namespace GeneralLedger.Persistence.Repositories
                 || c.Sale.Customer.strName.ToLower().Contains(criteria.ToLower())
                 || c.Sale.PONo.ToLower().Contains(criteria.ToLower())
                 || c.Sale.TRANo.ToLower().Contains(criteria.ToLower()))
-                .ToList().Take(100);
+                .Take(100).ToList();
         }
     }
 }

@@ -93,6 +93,7 @@
     <Compile Include="Repositories\SaleRepository.cs" />
     <Compile Include="Repositories\SalesCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\StockRepository.cs" />
+    <Compile Include="Repositories\SupplierRepository.cs" />
     <Compile Include="Repositories\tblTBBatchHdrRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\UserRoleRepository.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Services\SalesCustomerLedgerServices.cs" />
     <Compile Include="Services\SaleServices.cs" />
     <Compile Include="Services\StockServices.cs" />
+    <Compile Include="Services\SupplierServices.cs" />
     <Compile Include="Services\tblTBBatchHdrServices.cs" />
     <Compile Include="Services\UserServices.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />

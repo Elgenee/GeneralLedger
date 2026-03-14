@@ -77,7 +77,8 @@ namespace GeneralLedger.Persistence.Services
                         QuantityOut = item.Quantity,
                         StockTransactionTypeID = 4002, // Use appropriate transaction type for adjustment
                         InventoryAdjustmentID = inventoryAdjustment.Id,
-                        Product = product
+                        Product = product,
+                        TransactionDate = inventoryAdjustment.TransactionDate
                     });
                 }
                 else
@@ -89,7 +90,8 @@ namespace GeneralLedger.Persistence.Services
                         QuantityOut = 0,
                         StockTransactionTypeID = 4002, // Use appropriate transaction type for adjustment
                         InventoryAdjustmentID = inventoryAdjustment.Id,
-                        Product = product
+                        Product = product,
+                        TransactionDate = inventoryAdjustment.TransactionDate
                     });
                 }
 
@@ -347,7 +349,8 @@ namespace GeneralLedger.Persistence.Services
                         QuantityOut = updatedDetail.Quantity,
                         StockTransactionTypeID = 4002,
                         InventoryAdjustmentID = updatedAdjustment.Id,
-                        Product = product
+                        Product = product,
+                        TransactionDate = updatedAdjustment.TransactionDate
                     });
                 }
                 else
@@ -359,7 +362,8 @@ namespace GeneralLedger.Persistence.Services
                         QuantityOut = 0,
                         StockTransactionTypeID = 4002,
                         InventoryAdjustmentID = updatedAdjustment.Id,
-                        Product = product
+                        Product = product,
+                        TransactionDate = updatedAdjustment.TransactionDate
                     });
                 }
             }

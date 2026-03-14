@@ -24,6 +24,7 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> AccountsPayablePurchaseReturnID { get; set; }
         public Nullable<int> AccountsReceivableSaleReturnID { get; set; }
         public Nullable<int> InventoryAdjustmentID { get; set; }
+        public Nullable<System.DateTime> TransactionDate { get; set; }
     
         public virtual Purchase Purchase { get; set; }
         public virtual Sale Sale { get; set; }

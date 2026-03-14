@@ -91,10 +91,12 @@ namespace GeneralLedger.Persistence.Services
                         curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                         intIDGLBookType = 7,
                         datBatchDate = collection.TransactionDate,
+                        strDescription = collection.Description,
                         datInsertedDate = DateTime.Now,
                         tblGLTranDetails = gLTranDetail,
                         intIdCollection = collection.Id,
-                        blnUseDefaultEntry = UseDefaultEntry
+                        blnUseDefaultEntry = UseDefaultEntry,
+                        strTransactionCode = collection.TRANo
                     };
 
                     unitOfWork.GLTran.Add(gLTranHeader);
@@ -109,6 +111,8 @@ namespace GeneralLedger.Persistence.Services
                         intIDGLBookType = 7,
                         datBatchDate = collection.TransactionDate,
                         datInsertedDate = DateTime.Now,
+                        strDescription = collection.Description,
+                        strTransactionCode = collection.TRANo,
                         //tblGLTranDetails = tblGLTranDetail,
                         intIdCollection = collection.Id,
                         blnUseDefaultEntry = UseDefaultEntry
@@ -211,6 +215,7 @@ namespace GeneralLedger.Persistence.Services
                 resultCollection.BankId = collection.BankId;
                 resultCollection.CheckDetail = collection.CheckDetail;
                 resultCollection.IsCash = collection.IsCash;
+                resultCollection.tblGLTranHeaders.ToList()[0].strTransactionCode = collection.TRANo;
                 resultCollection.tblGLTranHeaders.ToList()[0].strDescription = collection.Description;
                 resultCollection.tblGLTranHeaders.ToList()[0].datBatchDate = collection.TransactionDate;
 

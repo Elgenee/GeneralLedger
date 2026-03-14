@@ -1,6 +1,6 @@
 ﻿namespace GeneralLedger.Report
 {
-    partial class frmReportGLIncomeStatement
+    partial class frmReportInventoryMonthlyOutstandingSummary
     {
         /// <summary>
         /// Required designer variable.
@@ -147,16 +147,16 @@
             this.reportViewer1.Size = new System.Drawing.Size(1371, 680);
             this.reportViewer1.TabIndex = 1;
             // 
-            // frmReportGLIncomeStatement
+            // frmReportInventoryMonthlyOutstandingSummary
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1431, 860);
             this.Controls.Add(this.reportViewer1);
             this.Controls.Add(this.metroPanel1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "frmReportGLIncomeStatement";
+            this.Name = "frmReportInventoryMonthlyOutstandingSummary";
             this.Padding = new System.Windows.Forms.Padding(30, 92, 30, 31);
-            this.Text = "GL Income Statement";
+            this.Text = "Inventory Monthly Outstanding Summary";
             this.Load += new System.EventHandler(this.frmReportGLIncomeStatement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rptISTotalBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rptISProvisionITBindingSource)).EndInit();

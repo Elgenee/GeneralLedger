@@ -446,6 +446,7 @@
     <Compile Include="Repositories\ISaleRepository.cs" />
     <Compile Include="Repositories\ISalesCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\IStockRepository.cs" />
+    <Compile Include="Repositories\ISupplierRepository.cs" />
     <Compile Include="Repositories\ItblTBBatchHdrRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\IUserRoleRepository.cs" />
@@ -473,6 +474,7 @@
     <Compile Include="Services\ISalesCustomerLedgerServices.cs" />
     <Compile Include="Services\ISaleServices.cs" />
     <Compile Include="Services\IStockServices.cs" />
+    <Compile Include="Services\ISupplierServices.cs" />
     <Compile Include="Services\ItblTBBatchHdrServices.cs" />
     <Compile Include="Services\IUserServices.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />

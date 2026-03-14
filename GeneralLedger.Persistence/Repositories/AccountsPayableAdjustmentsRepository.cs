@@ -27,7 +27,7 @@ namespace GeneralLedger.Persistence.Repositories
                  .Include(a => a.Purchase)
                  .Where(a => (a.TransactionNo.ToLower().Contains(criteria.ToLower())
                 || a.Supplier.strName.ToLower().Contains(criteria.ToLower()))
-                && (a.AccountsPayableAdjustmentTypeId == 2 || a.AccountsPayableAdjustmentTypeId == 3)).ToList().Take(100);
+                && (a.AccountsPayableAdjustmentTypeId == 2 || a.AccountsPayableAdjustmentTypeId == 3)).Take(100).ToList();
         }
 
 
@@ -44,7 +44,7 @@ namespace GeneralLedger.Persistence.Repositories
                 || a.Payment.Purchase.Supplier.strName.ToLower().Contains(criteria.ToLower())
                  || a.Payment.PaymentSIDR.ToLower().Contains(criteria.ToLower())
                 || a.Payment.PaymentCV.ToLower().Contains(criteria.ToLower()))
-                && a.AccountsPayableAdjustmentTypeId == intIdAccountsPayableAdjustmentsType).ToList().Take(100);
+                && a.AccountsPayableAdjustmentTypeId == intIdAccountsPayableAdjustmentsType).Take(100).ToList();
 
             //return new List<AccountPayableAdjustment>();
         }
@@ -57,7 +57,7 @@ namespace GeneralLedger.Persistence.Repositories
                  .Include(a => a.Supplier)
                  .Where(a => (a.TransactionNo.ToLower().Contains(criteria.ToLower())
                 || a.Supplier.strName.ToLower().Contains(criteria.ToLower()))
-                && a.AccountsPayableAdjustmentTypeId == intIdAccountsPayableAdjustmentsType).ToList().Take(100);
+                && a.AccountsPayableAdjustmentTypeId == intIdAccountsPayableAdjustmentsType).Take(100).ToList();
         }
 
         public IEnumerable<AccountPayableAdjustment> GetAccountPayableAdjustmentsWithJournalEntry(int Id)
@@ -82,7 +82,7 @@ namespace GeneralLedger.Persistence.Repositories
              .Where(a => (a.TransactionNo.ToLower().Contains(criteria.ToLower())
             || a.Payment.Purchase.Supplier.strName.ToLower().Contains(criteria.ToLower())
             || a.Payment.PaymentCV.ToLower().Contains(criteria.ToLower()))
-            && a.AccountsPayableAdjustmentTypeId == intIdAccountsPayableAdjustmentsType).ToList().Take(100);
+            && a.AccountsPayableAdjustmentTypeId == intIdAccountsPayableAdjustmentsType).Take(100).ToList();
         }
 
 
