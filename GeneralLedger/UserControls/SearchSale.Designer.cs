@@ -34,7 +34,6 @@
             this.txtCriteria = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.dgSearchSale = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TransactionNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PONo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +52,7 @@
             this.SOPAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CFAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.COMMAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgSearchSale)).BeginInit();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -110,6 +110,7 @@
             this.txtCriteria.UseSelectable = true;
             this.txtCriteria.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCriteria.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCriteria.Click += new System.EventHandler(this.txtCriteria_Click);
             // 
             // metroLabel2
             // 
@@ -120,6 +121,7 @@
             this.metroLabel2.Size = new System.Drawing.Size(53, 20);
             this.metroLabel2.TabIndex = 32;
             this.metroLabel2.Text = "Criteria";
+            this.metroLabel2.Click += new System.EventHandler(this.metroLabel2_Click);
             // 
             // dgSearchSale
             // 
@@ -164,21 +166,6 @@
             this.dgSearchSale.RowTemplate.Height = 30;
             this.dgSearchSale.Size = new System.Drawing.Size(1285, 478);
             this.dgSearchSale.TabIndex = 66;
-            // 
-            // metroPanel1
-            // 
-            this.metroPanel1.Controls.Add(this.dgSearchSale);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 12;
-            this.metroPanel1.Location = new System.Drawing.Point(39, 128);
-            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1285, 478);
-            this.metroPanel1.TabIndex = 30;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 13;
             // 
             // ID
             // 
@@ -275,7 +262,7 @@
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
             this.Description.Visible = false;
-            this.Description.Width = 104;
+            this.Description.Width = 125;
             // 
             // AdditionalDescription
             // 
@@ -334,6 +321,21 @@
             this.COMMAmount.Name = "COMMAmount";
             this.COMMAmount.ReadOnly = true;
             this.COMMAmount.Width = 125;
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.Controls.Add(this.dgSearchSale);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 12;
+            this.metroPanel1.Location = new System.Drawing.Point(39, 128);
+            this.metroPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(1285, 478);
+            this.metroPanel1.TabIndex = 30;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 13;
             // 
             // SearchSale
             // 

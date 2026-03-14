@@ -76,7 +76,44 @@ namespace GeneralLedger.Tier.DAL
                 }
 
             }
+        }
 
+
+        public List<ProductType> getProductTypeByCriteria(string criteria)
+        {
+            var dbUtil = new DatabaseManager();
+            var productTypeList = new List<ProductType>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spMasGetProductTypesByCriteria";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@strCriteria", criteria);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            var productType = new ProductType
+                            {
+
+                                ID = ReferenceEquals(reader["ID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ID"]),
+                                Name = ReferenceEquals(reader["strName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strName"])
+                            };
+                            productTypeList.Add(productType);
+                        }
+                        return productTypeList;
+                    }
+                }
+
+            }
         }
         //public List<ProductType> getProductType()
         //{

@@ -37,7 +37,6 @@ namespace GeneralLedger.UserControls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            //TODO:add column sales here
             try
             {
                 var adjustmentReceivableResult = AccountReceivableAdjustmentsServices.GetAccountReceivableAdjustmentsDMCM(this.txtCriteria.Text);

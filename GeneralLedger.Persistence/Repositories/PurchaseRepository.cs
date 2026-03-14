@@ -40,10 +40,8 @@ namespace GeneralLedger.Persistence.Repositories
                  .Where(p => (p.PONo.ToLower().Contains(criteria.ToLower())
                  || p.TRANo.ToLower().Contains(criteria.ToLower())
                  || p.Supplier.strName.ToLower().Contains(criteria.ToLower())
-                 || p.SIDR.ToLower().Contains(criteria.ToLower())) &&
-                 ((p.AccountPayableAdjustments.Count > 0 && p.AccountPayableAdjustments.Any(a => a.AccountsPayableAdjustmentTypeId != 4))
-                 || p.AccountPayableAdjustments.Count == 0))
-                 .ToList().Take(100);
+                 || p.SIDR.ToLower().Contains(criteria.ToLower())))
+                 .Take(100).ToList();
         }
 
         public IEnumerable<Purchase> GetPurchaseWithSupplier(string criteria)
@@ -57,7 +55,7 @@ namespace GeneralLedger.Persistence.Repositories
                 || p.TRANo.ToLower().Contains(criteria.ToLower())
                 || p.Supplier.strName.ToLower().Contains(criteria.ToLower())
                 || p.SIDR.ToLower().Contains(criteria.ToLower()))
-                .ToList().Take(100);
+                .Take(100).ToList();
         }
 
         public Purchase GetPurchaseWithSupplier(int Id)

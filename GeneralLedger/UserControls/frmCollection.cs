@@ -90,6 +90,7 @@ namespace GeneralLedger.UserControls
                     this.txtSaleTransactionNo.Text = sje.Sale.TRANo;
                     this.txtSalePONo.Text = sje.Sale.PONo;
                     this.txtCustomerName.Text = sje.Sale.Customer.strName;
+                    this.txtSalesTotal.Text = sje.Sale.Total.ToString();
                 }
             }
             catch (Exception ex)
@@ -116,6 +117,34 @@ namespace GeneralLedger.UserControls
                 {
                     MessageBox.Show("Please select sales...");
                     return;
+                }
+
+                decimal totalAmount, salesTotalAmount;
+                if (!decimal.TryParse(this.txtTotal.Text, out totalAmount))
+                {
+                    MessageBox.Show("Invalid total amount.");
+                    return;
+                }
+
+                if (!this.chkUseDefaultEntry.Checked)
+                {
+                    decimal coaSubCreditSum = GLTranDetail
+                        .Where(d => d.tblMasCOASub != null && d.tblMasCOASub.ID == 1029 && d.curCredit.HasValue)
+                        .Sum(d => d.curCredit.Value);
+
+                    if (coaSubCreditSum != totalAmount)
+                    {
+                        var result = MessageBox.Show(
+                            "Accounts receivable - sales does not match on collection total amount.\nDo you want to proceed?",
+                            "Amount Mismatch",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning
+                        );
+                        if (result == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
                 }
 
                 if (this.GLTranDetail.Sum(d => d.curCredit) != this.GLTranDetail.Sum(d => d.curDebit))

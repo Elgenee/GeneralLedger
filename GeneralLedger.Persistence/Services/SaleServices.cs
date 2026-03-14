@@ -135,7 +135,9 @@ namespace GeneralLedger.Persistence.Services
             using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
             {
                 AddSaleDetails(sale, saleDetailsList, unitOfWork);
-
+               
+                var customer = unitOfWork.Customer.Get(sale.intIdCustomer.Value);
+               
                 StringBuilder productDetailsBuilder = new StringBuilder();
                 foreach (var detail in saleDetailsList)
                 {
@@ -143,13 +145,15 @@ namespace GeneralLedger.Persistence.Services
                     var size = product.ProductSize; // Assuming Product has a Size property
                     var color = product.ProductColor; // Assuming Product has a Color property
 
-                    productDetailsBuilder.AppendLine("# " + product.strProductName +
-                                                     "; Size: " + size.strName +
-                                                     "; Color: " + color.strName +
-                                                     "; Qty: " + detail.Quantity.ToString());
+                    productDetailsBuilder.AppendLine("# " +
+                                        (product?.strProductName ?? string.Empty) +
+                                        "; Size: " + (size?.strName ?? string.Empty) +
+                                        "; Color: " + (color?.strName ?? string.Empty) +
+                                        "; Qty: " + detail.Quantity.ToString());
                 }
 
-          
+                productDetailsBuilder.AppendLine("Customer: " + customer?.strName ?? string.Empty);
+
                 sale.Description = productDetailsBuilder.ToString();
                 unitOfWork.Sale.Add(sale);
                 UpdateSaleCount(unitOfWork, sale, saleDetailsList);
@@ -184,7 +188,8 @@ namespace GeneralLedger.Persistence.Services
                     QuantityOut = item.Quantity,
                     StockTransactionTypeID = 2, // Assuming 2 is the ID for sale transaction
                     SalesID = sale.Id,
-                    Product = product
+                    Product = product,
+                    TransactionDate = sale.TransactionDate
                 });
             }
         }
@@ -376,7 +381,7 @@ namespace GeneralLedger.Persistence.Services
                 curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
                 intIDGLBookType = 1011,
                 strDescription = productDetailsBuilder.ToString(),
-                strTransactionCode = sale.PONo,
+                strTransactionCode = sale.TRANo,
                 datBatchDate = sale.TransactionDate,
                 datInsertedDate = DateTime.Now,
                 tblGLTranDetails = gLTranDetail,
@@ -553,6 +558,8 @@ namespace GeneralLedger.Persistence.Services
                 saleInDb.AdditionalDescription = updatedSale.AdditionalDescription;
                 saleInDb.TransactionDate = updatedSale.TransactionDate;
 
+                var customer = unitOfWork.Customer.Get(updatedSale.intIdCustomer.Value);
+
                 StringBuilder productDetailsBuilder = new StringBuilder();
                 foreach (var detail in updatedSalesDetailsList)
                 {
@@ -560,11 +567,13 @@ namespace GeneralLedger.Persistence.Services
                     var size = product.ProductSize; // Assuming Product has a Size property
                     var color = product.ProductColor; // Assuming Product has a Color property
 
-                    productDetailsBuilder.AppendLine("# " + product.strProductName +
-                                                     "; Size: " + size.strName +
-                                                     "; Color: " + color.strName +
-                                                     "; Qty: " + detail.Quantity.ToString());
+                    productDetailsBuilder.AppendLine("# " +
+                            (product?.strProductName ?? string.Empty) +
+                            "; Size: " + (size?.strName ?? string.Empty) +
+                            "; Color: " + (color?.strName ?? string.Empty) +
+                            "; Qty: " + detail.Quantity.ToString());
                 }
+                productDetailsBuilder.AppendLine("Customer: " + customer?.strName ?? string.Empty);
                 saleInDb.Description = string.Concat(productDetailsBuilder.ToString());
 
                 saleInDb.SalesDetails = updatedSale.SalesDetails;
@@ -641,7 +650,8 @@ namespace GeneralLedger.Persistence.Services
                     QuantityIn = 0,  // For sales, there's no incoming stock
                     QuantityOut = updatedDetail.Quantity,
                     StockTransactionTypeID = 2,  // Assuming '2' indicates a sales transaction. Adjust if needed.
-                    SalesID = updatedSale.Id
+                    SalesID = updatedSale.Id,
+                    TransactionDate = updatedSale.TransactionDate,
                 });
             }
         }
@@ -659,7 +669,6 @@ namespace GeneralLedger.Persistence.Services
                 //var stocks = unitOfWork.Stock.FindLocal(s => s.ProductId == detail.ProductId).ToList();
 
                 var newStocks = sale.Stocks.ToList();
-                //TODO: here minus the last updated Product
                 var intRemainingCount =  GetTotalRemainingStockAfterSale(unitOfWork, productID, newStocks);
 
                 if (intRemainingCount < 0)
@@ -686,7 +695,7 @@ namespace GeneralLedger.Persistence.Services
         private void UpdateSalesCustomerLedger(UnitOfWork unitOfWork, Sale updatedSale)
         {
             // Find and delete existing sales customer ledger record
-            var existingSalesCustomerLedger = unitOfWork.SalesCustomerLedger.Find(scl => scl.intIdSales == updatedSale.Id).SingleOrDefault();
+            var existingSalesCustomerLedger = unitOfWork.SalesCustomerLedger.Find(scl => scl.intIdSales == updatedSale.Id && scl.intIdSalesCustomerLedgerTransctionType == 1).SingleOrDefault();
             if (existingSalesCustomerLedger != null)
             {
                 unitOfWork.SalesCustomerLedger.Remove(existingSalesCustomerLedger);
@@ -814,6 +823,38 @@ namespace GeneralLedger.Persistence.Services
         {
             // Delete existing GLTran entries for the sale
             var existingGLTranHeader = unitOfWork.GLTran.Find(h => h.intIdSales == updatedSale.Id && h.intIDGLBookType == 1011).SingleOrDefault();
+
+            StringBuilder productDetailsBuilder = new StringBuilder();
+            productDetailsBuilder.AppendLine(updatedSale.Description);
+            productDetailsBuilder.AppendLine("( " + updatedSale.AdditionalDescription + " )");
+
+            var inventorySaleTotal = updatedSale.SalesDetails.Sum(i => i.TotalPrice).Value;
+
+            // Re-insert the GLTran entries for the sale
+            var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1072).SingleOrDefault(); // Example: COST OF GOODS SOLD
+            var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
+
+            var gLTranDetail = new List<tblGLTranDetail>
+            {
+                 new tblGLTranDetail
+                {
+                    intIDMasCoa = (int)journalEntry1.intIDMasCOA,
+                    intIDMasCoaSub = journalEntry1.ID,
+                    curCredit = 0,
+                    curDebit = inventorySaleTotal,
+                    //intIDGLTranHeader = existingGLTranHeader.ID
+                },
+                new tblGLTranDetail
+                {
+                    intIDMasCoa = (int)journalEntry3.intIDMasCOA,
+                    intIDMasCoaSub = journalEntry3.ID,
+                    curCredit =  inventorySaleTotal,
+                    curDebit = 0,
+                    //intIDGLTranHeader = existingGLTranHeader.ID
+                }
+
+            };
+
             if (existingGLTranHeader != null)
             {
                 var existingGLTranDetail = unitOfWork.GLTranDetail.Find(g => g.intIDGLTranHeader == existingGLTranHeader.ID);
@@ -824,53 +865,40 @@ namespace GeneralLedger.Persistence.Services
                 }
                 // If you wish to delete the GLTran header, you can uncomment the line below.
                 //unitOfWork.GLTran.Remove(existingGLTranHeader);
-            }
 
+                existingGLTranHeader.datBatchDate = updatedSale.TransactionDate;
+                existingGLTranHeader.strDescription = productDetailsBuilder.ToString();
+                existingGLTranHeader.strTransactionCode = updatedSale.TRANo;
+                existingGLTranHeader.blnUseDefaultEntry = true;
 
-            StringBuilder productDetailsBuilder = new StringBuilder();
-
-            productDetailsBuilder.AppendLine(updatedSale.Description);
-            productDetailsBuilder.AppendLine("( " + updatedSale.AdditionalDescription + " )");
-
-            existingGLTranHeader.datBatchDate = updatedSale.TransactionDate;
-            existingGLTranHeader.strDescription = productDetailsBuilder.ToString();
-            existingGLTranHeader.strTransactionCode = updatedSale.PONo;
-            existingGLTranHeader.blnUseDefaultEntry = true;
-
-            // Re-insert the GLTran entries for the sale
-            var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1072).SingleOrDefault(); // Example: COST OF GOODS SOLD
-            var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
-
-
-            var inventorySaleTotal = updatedSale.SalesDetails.Sum(i => i.TotalPrice).Value;
-
-
-            var gLTranDetail = new List<tblGLTranDetail>
-            {
-                 new tblGLTranDetail
+                foreach (var detail in gLTranDetail)
                 {
-                    intIDMasCoa = (int)journalEntry1.intIDMasCOA,
-                    intIDMasCoaSub = journalEntry1.ID,
-                    curCredit = 0,
-                    curDebit = inventorySaleTotal,
-                    intIDGLTranHeader = existingGLTranHeader.ID
-                },
-                new tblGLTranDetail
-                {
-                    intIDMasCoa = (int)journalEntry3.intIDMasCOA,
-                    intIDMasCoaSub = journalEntry3.ID,
-                    curCredit =  inventorySaleTotal,
-                    curDebit = 0,
-                    intIDGLTranHeader = existingGLTranHeader.ID
+                    detail.intIDGLTranHeader = existingGLTranHeader.ID;
                 }
-              
-            };
 
-            unitOfWork.GLTranDetail.AddRange(gLTranDetail);
-            existingGLTranHeader.curDebitAmount = gLTranDetail.Sum(c => c.curDebit);
-            existingGLTranHeader.curCreditAmount = gLTranDetail.Sum(c => c.curCredit);
+                unitOfWork.GLTranDetail.AddRange(gLTranDetail);
+                existingGLTranHeader.curDebitAmount = gLTranDetail.Sum(c => c.curDebit);
+                existingGLTranHeader.curCreditAmount = gLTranDetail.Sum(c => c.curCredit);
+            }
+            else
+            {
+                // Add new header and details
+                var newGLTranHeader = new tblGLTranHeader
+                {
+                    curCreditAmount = gLTranDetail.Sum(d => d.curCredit),
+                    curDebitAmount = gLTranDetail.Sum(d => d.curDebit),
+                    intIDGLBookType = 1011,
+                    strDescription = productDetailsBuilder.ToString(),
+                    strTransactionCode = updatedSale.PONo,
+                    datBatchDate = updatedSale.TransactionDate,
+                    datInsertedDate = DateTime.Now,
+                    tblGLTranDetails = gLTranDetail,
+                    intIdSales = updatedSale.Id,
+                    blnUseDefaultEntry = true
+                };
+                unitOfWork.GLTran.Add(newGLTranHeader);
+
+            }
         }
-
-
     }
 }

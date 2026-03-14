@@ -665,6 +665,45 @@ namespace GeneralLedger.Tier.DAL
             }
         }
 
+        public List<rptInventoryMonthlyOutstandingSummary> getInventoryMonthlyOutstandingSummary(DateTime monthDate)
+        {
+            var dbUtil = new DatabaseManager();
+            var summaryList = new List<rptInventoryMonthlyOutstandingSummary>();
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spInventoryMonthlyOutstandingSummary";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@MonthDate", monthDate);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var summary = new rptInventoryMonthlyOutstandingSummary
+                            {
+                                ProductId = ReferenceEquals(reader["ProductId"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductId"]),
+                                strProductName = ReferenceEquals(reader["strProductName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strProductName"]),
+                                OpeningQty = ReferenceEquals(reader["OpeningQty"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["OpeningQty"]),
+                                QtyInMonth = ReferenceEquals(reader["QtyInMonth"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["QtyInMonth"]),
+                                QtyOutMonth = ReferenceEquals(reader["QtyOutMonth"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["QtyOutMonth"]),
+                                ClosingQty = ReferenceEquals(reader["ClosingQty"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["ClosingQty"]),
+                                UnitPrice = ReferenceEquals(reader["UnitPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["UnitPrice"]),
+                                OutstandingBalance = ReferenceEquals(reader["OutstandingBalance"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["OutstandingBalance"])
+                            };
+                            summaryList.Add(summary);
+                        }
+                        return summaryList;
+                    }
+                }
+            }
+        }
+
 
         public List<rptJournalProoflist> getCollectionEntryProoflist(string datDateFrom, string datDateTo)
         {

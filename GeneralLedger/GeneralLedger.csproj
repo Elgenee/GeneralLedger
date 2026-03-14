@@ -55,16 +55,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>4C19A626D38B28794E191A991AE8BDB409491BE4</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>C80B563C0C8B7189653C8677BA5FCA82212EBDB4</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GeneralLedger_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>GeneralLedger_5_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar.Layout, Version=14.1.0.18, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
@@ -123,6 +123,12 @@
     </Compile>
     <Compile Include="Report\frmReportAccountsReceivableSales.Designer.cs">
       <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmReportInventoryMonthlyOutstandingSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportInventoryMonthlyOutstandingSummary.Designer.cs">
+      <DependentUpon>frmReportInventoryMonthlyOutstandingSummary.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\frmReportPaymentProoflist.cs">
       <SubType>Form</SubType>
@@ -215,6 +221,24 @@
     <Compile Include="UserControls\frmAgent.Designer.cs">
       <DependentUpon>frmAgent.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\frmChooseProductInventoryAdjustment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmChooseProductInventoryAdjustment.Designer.cs">
+      <DependentUpon>frmChooseProductInventoryAdjustment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmChooseReturnSaleProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmChooseReturnSaleProduct.Designer.cs">
+      <DependentUpon>frmChooseReturnSaleProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmChooseReturnPurchaseProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmChooseReturnPurchaseProduct.Designer.cs">
+      <DependentUpon>frmChooseReturnPurchaseProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\frmChooseProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +251,12 @@
     <Compile Include="UserControls\frmCollection.Designer.cs">
       <DependentUpon>frmCollection.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\frmInventoryAdjustmentDMCM.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmInventoryAdjustmentDMCM.Designer.cs">
+      <DependentUpon>frmInventoryAdjustmentDMCM.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\frmPayment.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -238,12 +268,6 @@
     </Compile>
     <Compile Include="UserControls\frmPurchase.Designer.cs">
       <DependentUpon>frmPurchase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\frmPurchaseLedger.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\frmPurchaseLedger.Designer.cs">
-      <DependentUpon>frmPurchaseLedger.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmSales.cs">
       <SubType>UserControl</SubType>
@@ -388,6 +412,12 @@
     </Compile>
     <Compile Include="UserControls\frmPurchaseOrderPaymentLedger.Designer.cs">
       <DependentUpon>frmPurchaseOrderPaymentLedger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseLedger.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\frmPurchaseLedger.Designer.cs">
+      <DependentUpon>frmPurchaseLedger.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\frmSalesLedger.cs">
       <SubType>UserControl</SubType>
@@ -569,6 +599,18 @@
     <Compile Include="UserControls\SearchPayment.Designer.cs">
       <DependentUpon>SearchPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchInventoryAdjustmentDMCM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchInventoryAdjustmentDMCM.Designer.cs">
+      <DependentUpon>SearchInventoryAdjustmentDMCM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\StockInquiryDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\StockInquiryDetails.Designer.cs">
+      <DependentUpon>StockInquiryDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SearchProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -640,6 +682,9 @@
     <EmbeddedResource Include="Report\frmReportAccountsReceivableSales.resx">
       <DependentUpon>frmReportAccountsReceivableSales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportInventoryMonthlyOutstandingSummary.resx">
+      <DependentUpon>frmReportInventoryMonthlyOutstandingSummary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\frmReportPaymentProoflist.resx">
       <DependentUpon>frmReportPaymentProoflist.cs</DependentUpon>
     </EmbeddedResource>
@@ -661,6 +706,7 @@
     <EmbeddedResource Include="Report\frmReportSaleProoflist.resx">
       <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\RDLC\InventoryMonthlyOutstandingSummary.rdlc" />
     <EmbeddedResource Include="Report\RDLC\PaymentProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\InventoryProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\PurchaseProoflist.rdlc" />
@@ -695,20 +741,30 @@
     <EmbeddedResource Include="UserControls\frmAgent.resx">
       <DependentUpon>frmAgent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmChooseProductInventoryAdjustment.resx">
+      <DependentUpon>frmChooseProductInventoryAdjustment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmChooseReturnSaleProduct.resx">
+      <DependentUpon>frmChooseReturnSaleProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmChooseReturnPurchaseProduct.resx">
+      <DependentUpon>frmChooseReturnPurchaseProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmChooseProduct.resx">
       <DependentUpon>frmChooseProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmCollection.resx">
       <DependentUpon>frmCollection.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmInventoryAdjustmentDMCM.resx">
+      <DependentUpon>frmInventoryAdjustmentDMCM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmPayment.resx">
       <DependentUpon>frmPayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmPurchase.resx">
       <DependentUpon>frmPurchase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\frmPurchaseLedger.resx">
-      <DependentUpon>frmPurchaseLedger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmSales.resx">
       <DependentUpon>frmSales.cs</DependentUpon>
@@ -790,6 +846,10 @@
     <EmbeddedResource Include="UserControls\frmPurchaseOrderPaymentLedger.resx">
       <DependentUpon>frmPurchaseOrderPaymentLedger.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\frmPurchaseLedger.resx">
+      <DependentUpon>frmPurchaseLedger.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmSalesLedger.resx">
       <DependentUpon>frmSalesLedger.cs</DependentUpon>
     </EmbeddedResource>
@@ -849,6 +909,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsReturnSales.resx">
       <DependentUpon>SearchAdjustmentAccountReceivableAdjustmentsReturnSales.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchAdjustmentAccountReceivableAdjustmentsReturnCheck.resx">
       <DependentUpon>SearchAdjustmentAccountReceivableAdjustmentsReturnCheck.cs</DependentUpon>
@@ -876,6 +937,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchPayment.resx">
       <DependentUpon>SearchPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchInventoryAdjustmentDMCM.resx">
+      <DependentUpon>SearchInventoryAdjustmentDMCM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\StockInquiryDetails.resx">
+      <DependentUpon>StockInquiryDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchProduct.resx">
       <DependentUpon>SearchProduct.cs</DependentUpon>
@@ -933,6 +1000,7 @@
       <DependentUpon>GeneralLedgerDataSet1.xsd</DependentUpon>
     </None>
     <None Include="GeneralLedger_1_TemporaryKey.pfx" />
+    <None Include="GeneralLedger_5_TemporaryKey.pfx" />
     <None Include="GeneralLedger_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\GeneralLedger.GeneralLedgerDataSet1TableAdapters.rptISExpenseTableAdapter.datasource" />

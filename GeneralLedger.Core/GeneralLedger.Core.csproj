@@ -65,7 +65,13 @@
     <Compile Include="Domain\AccountPayableAdjustment.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\AccountPayableAdjustmentsDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\AccountReceivableAdjustment.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\AccountReceivableAdjustmentsDetail.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\AccountsPayableAdjustmentsType.cs">
@@ -106,6 +112,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GeneralLedgerContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryAdjustment.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryAdjustmentDetail.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\InventoryAdjustmentType.cs">
+      <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\InventoryLog.cs">
       <DependentUpon>GeneralLedgerContext.tt</DependentUpon>
@@ -405,14 +420,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAccountReceivableAdjustmentsRepository.cs" />
     <Compile Include="Repositories\IAccountsPayableAdjustmentsRepository.cs" />
+    <Compile Include="Repositories\IAccountsPayableAdjustmentsDetailRepository.cs" />
     <Compile Include="Repositories\IAccountsPayableAdjustmentsType.cs" />
+    <Compile Include="Repositories\IAccountsReceivableAdjustmentsDetailRepository.cs" />
     <Compile Include="Repositories\IAccountsReceivableAdjustmentsTypeRepository.cs" />
     <Compile Include="Repositories\IAgentRepository.cs" />
     <Compile Include="Repositories\ICoaRepository.cs" />
     <Compile Include="Repositories\ICoaSubRepository.cs" />
     <Compile Include="Repositories\ICollectionRepository.cs" />
+    <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Repositories\IGLTranDetailRepository.cs" />
     <Compile Include="Repositories\IGLTranRepository.cs" />
+    <Compile Include="Repositories\IInventoryAdjustment.cs" />
+    <Compile Include="Repositories\IInventoryAdjustmentDetails.cs" />
+    <Compile Include="Repositories\IInventoryAdjustmentType.cs" />
     <Compile Include="Repositories\IJournalEntryRepository.cs" />
     <Compile Include="Repositories\IPaymentRepository.cs" />
     <Compile Include="Repositories\IPurchaseDetailRepository.cs" />
@@ -425,26 +446,35 @@
     <Compile Include="Repositories\ISaleRepository.cs" />
     <Compile Include="Repositories\ISalesCustomerLedgerRepository.cs" />
     <Compile Include="Repositories\IStockRepository.cs" />
+    <Compile Include="Repositories\ISupplierRepository.cs" />
     <Compile Include="Repositories\ItblTBBatchHdrRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\IUserRoleRepository.cs" />
+    <Compile Include="Services\IAccountPayableAdjustmentsDetailsServices.cs" />
+    <Compile Include="Services\IAccountReceivableAdjustmentsDetailsServices.cs" />
     <Compile Include="Services\IAccountReceivableAdjustmentsServices.cs" />
     <Compile Include="Services\IAccountsPayableAdjustmentsServices.cs" />
     <Compile Include="Services\IAccountsPayableAdjustmentsTypeServices.cs" />
     <Compile Include="Services\IAccountsReceivableAdjustmentsTypeServices.cs" />
+    <Compile Include="Services\IInventoryAdjustmentDetailsServices.cs" />
+    <Compile Include="Services\IInventoryAdjustmentServices.cs" />
+    <Compile Include="Services\IInventoryAdjustmentTypeServices.cs" />
     <Compile Include="Services\IAgentServices.cs" />
     <Compile Include="Services\ICollectionServices.cs" />
+    <Compile Include="Services\ICustomerServices.cs" />
     <Compile Include="Services\IGLTranDetailServices.cs" />
     <Compile Include="Services\IGLTranServices.cs" />
     <Compile Include="Services\IPaymentServices.cs" />
     <Compile Include="Services\IProductServices.cs" />
     <Compile Include="Services\IPurchaseDetailServices.cs" />
     <Compile Include="Services\IPurchaseServices.cs" />
+    <Compile Include="Services\IPurchaseSupplierLedgerServices.cs" />
     <Compile Include="Services\IRoleServices.cs" />
     <Compile Include="Services\ISaleDetailServices.cs" />
     <Compile Include="Services\ISalesCustomerLedgerServices.cs" />
     <Compile Include="Services\ISaleServices.cs" />
     <Compile Include="Services\IStockServices.cs" />
+    <Compile Include="Services\ISupplierServices.cs" />
     <Compile Include="Services\ItblTBBatchHdrServices.cs" />
     <Compile Include="Services\IUserServices.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />

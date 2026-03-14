@@ -74,7 +74,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchSale.Rows[i].Cells["Agent"].Value = saleResult[i].Agent.Name;
                         this.dgSearchSale.Rows[i].Cells["Description"].Value = saleResult[i].Description;
                         this.dgSearchSale.Rows[i].Cells["AdditionalDescription"].Value = saleResult[i].AdditionalDescription;
-                        this.dgSearchSale.Rows[i].Cells["GLTranHeaderID"].Value = saleResult[i].tblGLTranHeaders.Select(h => h.ID).FirstOrDefault();
+                        this.dgSearchSale.Rows[i].Cells["GLTranHeaderID"].Value = saleResult[i].tblGLTranHeaders.Where(h => h.intIDGLBookType == 6).Select(h => h.ID).FirstOrDefault();
                         this.dgSearchSale.Rows[i].Cells["UseDefaultEntry"].Value = saleResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
                         this.dgSearchSale.Rows[i].Cells["SOPAmount"].Value = saleResult[i].SOPAmount;
                         this.dgSearchSale.Rows[i].Cells["CFAmount"].Value = saleResult[i].CFAmount;
@@ -180,6 +180,16 @@ namespace GeneralLedger.UserControls
 
                 MessageBox.Show("Error:" + ex.Message);
             }
+
+        }
+
+        private void txtCriteria_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void metroLabel2_Click(object sender, EventArgs e)
+        {
 
         }
     }

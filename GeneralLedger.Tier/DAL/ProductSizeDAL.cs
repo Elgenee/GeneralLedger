@@ -61,6 +61,46 @@ namespace GeneralLedger.Tier.DAL
                     cmd.CommandTimeout = 180;
                     cmd.Parameters.Clear();
 
+             
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            var productSize = new ProductSize
+                            {
+
+                                ID = ReferenceEquals(reader["ID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ID"]),
+                                Name = ReferenceEquals(reader["strName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strName"])
+                            };
+                            productSizeList.Add(productSize);
+                        }
+                        return productSizeList;
+                    }
+                }
+            }
+
+        }
+
+        public List<ProductSize> getProductSizeByCriteria(string criteria)
+        {
+            var dbUtil = new DatabaseManager();
+            var productSizeList = new List<ProductSize>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spMasGetProductSizeCriteria";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@strCriteria", criteria);
+
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())

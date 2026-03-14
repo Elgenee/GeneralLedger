@@ -23,12 +23,14 @@ namespace GeneralLedger.Core
         IPurchaseRepository Purchase { get; }
         IPurchaseSupplierLedgerRepository PurchaseSupplierLedger { get; }
         IAccountsReceivableAdjustmentsTypeRepository AccountsReceivableAdjustmentsType { get; }
+        IAccountsReceivableAdjustmentsDetailRepository AccountsReceivableAdjustmentsDetail { get; set; }
         IAccountReceivableAdjustmentsRepository AccountsReceivableAdjustments { get; }
         IUserRepository User { get; }
         IRoleRepository Role { get; }
         IUserRoleRepository UserRole { get; }
         ItblTBBatchHdrRepository tblTBBatchHdr { get; }
         IAccountsPayableAdjustmentsRepository AccountsPayableAdjustments { get; }
+        IAccountsPayableAdjustmentsDetailRepository AccountsPayableAdjustmentsDetail { get; }
         IAccountsPayableAdjustmentsTypeRepository AccountsPayableAdjustmentsType { get; }
         IProductRepository Products { get; }
 
@@ -36,6 +38,14 @@ namespace GeneralLedger.Core
         EntityState GetEntityState<TEntity>(TEntity entity) where TEntity : class;
 
         IStockRepository Stock { get; }
+
+        ICustomerRepository Customer { get; }
+
+        IInventoryAdjustment InventoryAdjustment { get; }
+
+        IInventoryAdjustmentDetails InventoryAdjustmentDetails { get; }
+
+        IInventoryAdjustmentType InventoryAdjustmentType { get; }
         int Complete();
     }
 }

@@ -102,6 +102,7 @@
     <Compile Include="BO\rptGetCustomerLedgerOverall.cs" />
     <Compile Include="BO\rptGetSummaryOfAccountsReceivablesSales.cs" />
     <Compile Include="BO\rptGetSupplierLedgerOverall.cs" />
+    <Compile Include="BO\rptInventoryMonthlyOutstandingSummary.cs" />
     <Compile Include="BO\rptInventoryProoflist.cs" />
     <Compile Include="BO\rptISExpenses.cs" />
     <Compile Include="BO\rptISIncome.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="BO\rptJournalProoflist.cs" />
     <Compile Include="BO\rptOtherAsset.cs" />
     <Compile Include="BO\SearchProductAndColorAndSize.cs" />
+    <Compile Include="BO\StockDetailsByProductId.cs" />
     <Compile Include="BO\Supplier.cs" />
     <Compile Include="DAL\BankDAL.cs" />
     <Compile Include="DAL\COADAL.cs" />

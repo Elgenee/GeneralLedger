@@ -34,8 +34,8 @@ namespace GeneralLedger.Persistence.Repositories
                || s.Agent.Name.ToLower().Contains(criteria.ToLower())) &&
                ((s.AccountReceivableAdjustments.Count > 0 && s.AccountReceivableAdjustments.Any(a => a.AccountsReceivableAdjustmentsTypeId != 1002))
                 || s.AccountReceivableAdjustments.Count == 0))
-               .ToList()
-               .Take(100);
+               .Take(100)
+               .ToList();
         }
 
         public IEnumerable<Sale> GetSaleWithCustomerAgent(string criteria)
@@ -48,7 +48,7 @@ namespace GeneralLedger.Persistence.Repositories
                 .AsQueryable()
                 .Where(s => (s.PONo.ToLower().Contains(criteria.ToLower())
                 || s.TRANo.ToLower().Contains(criteria.ToLower())
-                || s.Customer.strName.ToLower().Contains(criteria.ToLower()))).ToList().Take(100);
+                || s.Customer.strName.ToLower().Contains(criteria.ToLower()))).Take(100).ToList();
 
         }
 

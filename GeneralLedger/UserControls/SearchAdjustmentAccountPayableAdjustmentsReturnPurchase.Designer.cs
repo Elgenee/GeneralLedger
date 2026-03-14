@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.txtCriteria = new MetroFramework.Controls.MetroTextBox();
             this.btnSelect = new MetroFramework.Controls.MetroButton();
@@ -36,6 +36,7 @@
             this.dgSearchAccountsPayableAdjustments = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdditionalDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseSIDR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchasePONo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -127,6 +128,7 @@
             this.dgSearchAccountsPayableAdjustments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSearchAccountsPayableAdjustments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
+            this.AdditionalDescription,
             this.PurchaseTotalAmount,
             this.PurchaseSIDR,
             this.PurchasePONo,
@@ -142,14 +144,14 @@
             this.GLTranHeaderID,
             this.Description,
             this.UseDefaultEntry});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgSearchAccountsPayableAdjustments.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgSearchAccountsPayableAdjustments.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgSearchAccountsPayableAdjustments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgSearchAccountsPayableAdjustments.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgSearchAccountsPayableAdjustments.Location = new System.Drawing.Point(0, 0);
@@ -183,6 +185,15 @@
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
             this.ID.Width = 62;
+            // 
+            // AdditionalDescription
+            // 
+            this.AdditionalDescription.HeaderText = "AdditionalDescription";
+            this.AdditionalDescription.MinimumWidth = 6;
+            this.AdditionalDescription.Name = "AdditionalDescription";
+            this.AdditionalDescription.ReadOnly = true;
+            this.AdditionalDescription.Visible = false;
+            this.AdditionalDescription.Width = 125;
             // 
             // PurchaseTotalAmount
             // 
@@ -337,6 +348,7 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dgSearchAccountsPayableAdjustments;
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdditionalDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseSIDR;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchasePONo;

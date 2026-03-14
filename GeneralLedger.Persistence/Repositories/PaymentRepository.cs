@@ -41,7 +41,7 @@ namespace GeneralLedger.Persistence.Repositories
                 || p.PaymentSIDR.ToLower().Contains(criteria.ToLower())
                 || p.Purchase.Supplier.strName.ToLower().Contains(criteria.ToLower())
                 || p.Purchase.PONo.ToLower().Contains(criteria.ToLower()))
-                .ToList().Take(100);    
+                .Take(100).ToList();    
                 
         }
     }

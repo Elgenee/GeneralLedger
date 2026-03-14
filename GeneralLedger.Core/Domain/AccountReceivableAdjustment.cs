@@ -19,6 +19,8 @@ namespace GeneralLedger.Core.Domain
         {
             this.SalesCustomerLedgers = new HashSet<SalesCustomerLedger>();
             this.tblGLTranHeaders = new HashSet<tblGLTranHeader>();
+            this.AccountReceivableAdjustmentsDetails = new HashSet<AccountReceivableAdjustmentsDetail>();
+            this.Stocks = new HashSet<Stock>();
         }
     
         public int Id { get; set; }
@@ -30,6 +32,12 @@ namespace GeneralLedger.Core.Domain
         public string Descrpition { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
         public Nullable<int> CustomerId { get; set; }
+        public Nullable<decimal> TotalInventoryAmount { get; set; }
+        public string AdditionalDescription { get; set; }
+        public Nullable<decimal> SOPAmount { get; set; }
+        public Nullable<decimal> COMMAmount { get; set; }
+        public Nullable<decimal> CFAmount { get; set; }
+        public Nullable<decimal> Total { get; set; }
     
         public virtual AccountsReceivableAdjustmentsType AccountsReceivableAdjustmentsType { get; set; }
         public virtual Collection Collection { get; set; }
@@ -39,5 +47,9 @@ namespace GeneralLedger.Core.Domain
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblGLTranHeader> tblGLTranHeaders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountReceivableAdjustmentsDetail> AccountReceivableAdjustmentsDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Stock> Stocks { get; set; }
     }
 }

@@ -21,8 +21,9 @@ namespace GeneralLedger
         const int CLOSE_AREA = 15;
         public MainForm()
         {
-
+           
             InitializeComponent();
+            ReleaseCounter();
             this.WindowState = FormWindowState.Maximized;
             this.metroTabControlMain.Parent = this;
             this.metroTabControlMain.Dock = DockStyle.Top;
@@ -30,7 +31,7 @@ namespace GeneralLedger
             this.WindowState = FormWindowState.Maximized;
             var roles = UserProfile.UserProfileRoles;
             this.LoginUser.Text = "*" + UserProfile.UserUserProfile.Name;
-
+            
             if (UserProfile.UserUserProfile.Name != "Administrator")
             {
 
@@ -256,6 +257,14 @@ namespace GeneralLedger
                     // this.btnPostNew.Visible = true;
                 }
 
+
+                if (UserProfile.UserProfileRoles.Exists(r => r.Name.ToUpper() == "INVENTORY ADJUSTMENT"))
+                {
+                    this.btnInventoryAdjustment.Enabled = true;
+                    this.btnInventoryAdjustment.Style = MetroFramework.MetroColorStyle.Blue;
+                    // this.btnPostNew.Visible = true;
+                }
+
             }
             else
             {
@@ -321,10 +330,36 @@ namespace GeneralLedger
                     this.btnProductUnit.Style = MetroFramework.MetroColorStyle.Blue;
                     this.btnStockInquiry.Enabled = true;
                     this.btnStockInquiry.Style = MetroFramework.MetroColorStyle.Blue;
+                    this.btnInventoryAdjustment.Enabled = true;
+                    this.btnInventoryAdjustment.Style = MetroFramework.MetroColorStyle.Blue;
 
             }
+
+           
         }
 
+
+        private void ReleaseCounter() {
+
+            // Path to store the release counter
+            string releaseCounterFile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "release_counter.txt");
+
+            // Get today's date as build indicator
+            string buildDate = DateTime.Now.ToString("yyyyMMdd");
+
+            // Read and increment the counter
+            int releaseCounter = 1;
+            if (System.IO.File.Exists(releaseCounterFile))
+            {
+                string counterText = System.IO.File.ReadAllText(releaseCounterFile);
+                int.TryParse(counterText, out releaseCounter);
+                releaseCounter++;
+            }
+            System.IO.File.WriteAllText(releaseCounterFile, releaseCounter.ToString());
+
+            // Assign to txtReleaseNo
+            this.metroLabel2.Text = $"{buildDate}-{releaseCounter}";
+        }
         private void MetroTabControlMain_DrawItem(object sender, DrawItemEventArgs e)
         {
 
@@ -1093,6 +1128,33 @@ namespace GeneralLedger
             //metroTabPage.Location = new System.Drawing.Point(15, 38);
             //metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             StockInquiry StockInquiry = new StockInquiry();
+            StockInquiry.Parent = metroTabPage;
+            StockInquiry.MetroTabPage = metroTabPage;
+            StockInquiry.MetroTabControl = this.metroTabControlMain;
+            metroTabPage.Controls.Add(StockInquiry);
+            metroTabControlMain.TabPages.Add(metroTabPage);
+            metroTabControlMain.SelectedTab = metroTabPage;
+        }
+
+        private void metroTile2_Click_3(object sender, EventArgs e)
+        {
+
+            MetroTabPage metroTabPage = new MetroTabPage();
+            metroTabPage.Text = "Inventory Adjustment";
+            metroTabPage.AutoScroll = true;
+            metroTabPage.HorizontalScrollbar = true;
+            metroTabPage.HorizontalScrollbarBarColor = true;
+            metroTabPage.HorizontalScrollbarHighlightOnWheel = true;
+            metroTabPage.HorizontalScrollbarSize = 15;
+            metroTabPage.UseStyleColors = true;
+            metroTabPage.VerticalScrollbar = true;
+            metroTabPage.VerticalScrollbarBarColor = true;
+            metroTabPage.VerticalScrollbarHighlightOnWheel = true;
+            metroTabPage.VerticalScrollbarSize = 15;
+            //metroTabPage.Style = MetroFramework.MetroColorStyle.Orange;
+            //metroTabPage.Location = new System.Drawing.Point(15, 38);
+            //metroTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            frmInventoryAdjustmentDMCM StockInquiry = new frmInventoryAdjustmentDMCM();
             StockInquiry.Parent = metroTabPage;
             StockInquiry.MetroTabPage = metroTabPage;
             StockInquiry.MetroTabControl = this.metroTabControlMain;

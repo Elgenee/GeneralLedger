@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.metroTabControlMain = new MetroFramework.Controls.MetroTabControl();
-            this.metroTabPageHome = new MetroFramework.Controls.MetroTabPage();
+            this.txtReleaseNo = new MetroFramework.Controls.MetroTabPage();
+            this.btnInventoryAdjustment = new MetroFramework.Controls.MetroTile();
             this.btnStockInquiry = new MetroFramework.Controls.MetroTile();
             this.btnProductUnit = new MetroFramework.Controls.MetroTile();
             this.btnAPDMCM = new MetroFramework.Controls.MetroTile();
@@ -67,13 +68,15 @@
             this.btnChartOfAccounts = new MetroFramework.Controls.MetroTile();
             this.btnJournalEntry = new MetroFramework.Controls.MetroTile();
             this.LoginUser = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControlMain.SuspendLayout();
-            this.metroTabPageHome.SuspendLayout();
+            this.txtReleaseNo.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControlMain
             // 
-            this.metroTabControlMain.Controls.Add(this.metroTabPageHome);
+            this.metroTabControlMain.Controls.Add(this.txtReleaseNo);
             this.metroTabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControlMain.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.metroTabControlMain.Location = new System.Drawing.Point(27, 74);
@@ -88,63 +91,81 @@
             this.metroTabControlMain.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.metroTabControlMain_DrawItem_1);
             this.metroTabControlMain.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.metroTabControlMain_ControlAdded);
             // 
-            // metroTabPageHome
+            // txtReleaseNo
             // 
-            this.metroTabPageHome.AutoScroll = true;
-            this.metroTabPageHome.Controls.Add(this.btnStockInquiry);
-            this.metroTabPageHome.Controls.Add(this.btnProductUnit);
-            this.metroTabPageHome.Controls.Add(this.btnAPDMCM);
-            this.metroTabPageHome.Controls.Add(this.btnReturnPayment);
-            this.metroTabPageHome.Controls.Add(this.btnReturnPurchase);
-            this.metroTabPageHome.Controls.Add(this.ARDMCM);
-            this.metroTabPageHome.Controls.Add(this.btnReturnSales);
-            this.metroTabPageHome.Controls.Add(this.btnReturnCheck);
-            this.metroTabPageHome.Controls.Add(this.btnPayment);
-            this.metroTabPageHome.Controls.Add(this.btnPurchase);
-            this.metroTabPageHome.Controls.Add(this.metroLink4);
-            this.metroTabPageHome.Controls.Add(this.btnCollection);
-            this.metroTabPageHome.Controls.Add(this.btnSales);
-            this.metroTabPageHome.Controls.Add(this.lblOffset);
-            this.metroTabPageHome.Controls.Add(this.metroTile1);
-            this.metroTabPageHome.Controls.Add(this.metroLink3);
-            this.metroTabPageHome.Controls.Add(this.btnLocation);
-            this.metroTabPageHome.Controls.Add(this.btnPriceType);
-            this.metroTabPageHome.Controls.Add(this.btnUser);
-            this.metroTabPageHome.Controls.Add(this.btnProductSize);
-            this.metroTabPageHome.Controls.Add(this.btnAgents);
-            this.metroTabPageHome.Controls.Add(this.btnProductColor);
-            this.metroTabPageHome.Controls.Add(this.btnProductBrand);
-            this.metroTabPageHome.Controls.Add(this.btnProductType);
-            this.metroTabPageHome.Controls.Add(this.btnProductCategory);
-            this.metroTabPageHome.Controls.Add(this.btnProduct);
-            this.metroTabPageHome.Controls.Add(this.btnBankAccounts);
-            this.metroTabPageHome.Controls.Add(this.btnSupplier);
-            this.metroTabPageHome.Controls.Add(this.btnCompanies);
-            this.metroTabPageHome.Controls.Add(this.metroLink2);
-            this.metroTabPageHome.Controls.Add(this.metroLink1);
-            this.metroTabPageHome.Controls.Add(this.btnCustomer);
-            this.metroTabPageHome.Controls.Add(this.btnReports);
-            this.metroTabPageHome.Controls.Add(this.btnTrialBalance);
-            this.metroTabPageHome.Controls.Add(this.btnChartOfAccounts);
-            this.metroTabPageHome.Controls.Add(this.btnJournalEntry);
-            this.metroTabPageHome.HorizontalScrollbar = true;
-            this.metroTabPageHome.HorizontalScrollbarBarColor = true;
-            this.metroTabPageHome.HorizontalScrollbarHighlightOnWheel = true;
-            this.metroTabPageHome.HorizontalScrollbarSize = 12;
-            this.metroTabPageHome.ImageKey = "(none)";
-            this.metroTabPageHome.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPageHome.Margin = new System.Windows.Forms.Padding(4);
-            this.metroTabPageHome.Name = "metroTabPageHome";
-            this.metroTabPageHome.Size = new System.Drawing.Size(2677, 876);
-            this.metroTabPageHome.Style = MetroFramework.MetroColorStyle.Silver;
-            this.metroTabPageHome.TabIndex = 0;
-            this.metroTabPageHome.Text = "Home";
-            this.metroTabPageHome.UseStyleColors = true;
-            this.metroTabPageHome.VerticalScrollbar = true;
-            this.metroTabPageHome.VerticalScrollbarBarColor = true;
-            this.metroTabPageHome.VerticalScrollbarHighlightOnWheel = true;
-            this.metroTabPageHome.VerticalScrollbarSize = 13;
-            this.metroTabPageHome.Click += new System.EventHandler(this.metroTabPageHome_Click);
+            this.txtReleaseNo.AutoScroll = true;
+            this.txtReleaseNo.Controls.Add(this.btnInventoryAdjustment);
+            this.txtReleaseNo.Controls.Add(this.btnStockInquiry);
+            this.txtReleaseNo.Controls.Add(this.btnProductUnit);
+            this.txtReleaseNo.Controls.Add(this.btnAPDMCM);
+            this.txtReleaseNo.Controls.Add(this.btnReturnPayment);
+            this.txtReleaseNo.Controls.Add(this.btnReturnPurchase);
+            this.txtReleaseNo.Controls.Add(this.ARDMCM);
+            this.txtReleaseNo.Controls.Add(this.btnReturnSales);
+            this.txtReleaseNo.Controls.Add(this.btnReturnCheck);
+            this.txtReleaseNo.Controls.Add(this.btnPayment);
+            this.txtReleaseNo.Controls.Add(this.btnPurchase);
+            this.txtReleaseNo.Controls.Add(this.metroLink4);
+            this.txtReleaseNo.Controls.Add(this.btnCollection);
+            this.txtReleaseNo.Controls.Add(this.btnSales);
+            this.txtReleaseNo.Controls.Add(this.lblOffset);
+            this.txtReleaseNo.Controls.Add(this.metroTile1);
+            this.txtReleaseNo.Controls.Add(this.metroLink3);
+            this.txtReleaseNo.Controls.Add(this.btnLocation);
+            this.txtReleaseNo.Controls.Add(this.btnPriceType);
+            this.txtReleaseNo.Controls.Add(this.btnUser);
+            this.txtReleaseNo.Controls.Add(this.btnProductSize);
+            this.txtReleaseNo.Controls.Add(this.btnAgents);
+            this.txtReleaseNo.Controls.Add(this.btnProductColor);
+            this.txtReleaseNo.Controls.Add(this.btnProductBrand);
+            this.txtReleaseNo.Controls.Add(this.btnProductType);
+            this.txtReleaseNo.Controls.Add(this.btnProductCategory);
+            this.txtReleaseNo.Controls.Add(this.btnProduct);
+            this.txtReleaseNo.Controls.Add(this.btnBankAccounts);
+            this.txtReleaseNo.Controls.Add(this.btnSupplier);
+            this.txtReleaseNo.Controls.Add(this.btnCompanies);
+            this.txtReleaseNo.Controls.Add(this.metroLink2);
+            this.txtReleaseNo.Controls.Add(this.metroLink1);
+            this.txtReleaseNo.Controls.Add(this.btnCustomer);
+            this.txtReleaseNo.Controls.Add(this.btnReports);
+            this.txtReleaseNo.Controls.Add(this.btnTrialBalance);
+            this.txtReleaseNo.Controls.Add(this.btnChartOfAccounts);
+            this.txtReleaseNo.Controls.Add(this.btnJournalEntry);
+            this.txtReleaseNo.HorizontalScrollbar = true;
+            this.txtReleaseNo.HorizontalScrollbarBarColor = true;
+            this.txtReleaseNo.HorizontalScrollbarHighlightOnWheel = true;
+            this.txtReleaseNo.HorizontalScrollbarSize = 12;
+            this.txtReleaseNo.ImageKey = "(none)";
+            this.txtReleaseNo.Location = new System.Drawing.Point(4, 38);
+            this.txtReleaseNo.Margin = new System.Windows.Forms.Padding(4);
+            this.txtReleaseNo.Name = "txtReleaseNo";
+            this.txtReleaseNo.Size = new System.Drawing.Size(2677, 876);
+            this.txtReleaseNo.Style = MetroFramework.MetroColorStyle.Silver;
+            this.txtReleaseNo.TabIndex = 0;
+            this.txtReleaseNo.Text = "Home";
+            this.txtReleaseNo.UseStyleColors = true;
+            this.txtReleaseNo.VerticalScrollbar = true;
+            this.txtReleaseNo.VerticalScrollbarBarColor = true;
+            this.txtReleaseNo.VerticalScrollbarHighlightOnWheel = true;
+            this.txtReleaseNo.VerticalScrollbarSize = 13;
+            this.txtReleaseNo.Click += new System.EventHandler(this.metroTabPageHome_Click);
+            // 
+            // btnInventoryAdjustment
+            // 
+            this.btnInventoryAdjustment.ActiveControl = null;
+            this.btnInventoryAdjustment.Enabled = false;
+            this.btnInventoryAdjustment.Location = new System.Drawing.Point(535, 144);
+            this.btnInventoryAdjustment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInventoryAdjustment.Name = "btnInventoryAdjustment";
+            this.btnInventoryAdjustment.Size = new System.Drawing.Size(315, 86);
+            this.btnInventoryAdjustment.Style = MetroFramework.MetroColorStyle.Silver;
+            this.btnInventoryAdjustment.TabIndex = 39;
+            this.btnInventoryAdjustment.Text = "Inventory Adjustments";
+            this.btnInventoryAdjustment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnInventoryAdjustment.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.btnInventoryAdjustment.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Regular;
+            this.btnInventoryAdjustment.UseSelectable = true;
+            this.btnInventoryAdjustment.Click += new System.EventHandler(this.metroTile2_Click_3);
             // 
             // btnStockInquiry
             // 
@@ -153,7 +174,7 @@
             this.btnStockInquiry.Location = new System.Drawing.Point(535, 52);
             this.btnStockInquiry.Margin = new System.Windows.Forms.Padding(4);
             this.btnStockInquiry.Name = "btnStockInquiry";
-            this.btnStockInquiry.Size = new System.Drawing.Size(248, 86);
+            this.btnStockInquiry.Size = new System.Drawing.Size(315, 86);
             this.btnStockInquiry.Style = MetroFramework.MetroColorStyle.Silver;
             this.btnStockInquiry.TabIndex = 38;
             this.btnStockInquiry.Text = "Stock Inquiry";
@@ -744,11 +765,33 @@
             this.LoginUser.TabIndex = 6;
             this.LoginUser.Text = "LoginUser";
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(492, 34);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(226, 20);
+            this.metroLabel1.TabIndex = 7;
+            this.metroLabel1.Text = "******TEST ENVIRONMENT *******";
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(2284, 34);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(83, 20);
+            this.metroLabel2.TabIndex = 8;
+            this.metroLabel2.Text = "Release No:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2739, 1017);
+            this.Controls.Add(this.metroLabel2);
+            this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.LoginUser);
             this.Controls.Add(this.metroTabControlMain);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -760,8 +803,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.metroTabControlMain.ResumeLayout(false);
-            this.metroTabPageHome.ResumeLayout(false);
-            this.metroTabPageHome.PerformLayout();
+            this.txtReleaseNo.ResumeLayout(false);
+            this.txtReleaseNo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -770,7 +813,7 @@
         #endregion
 
         private MetroFramework.Controls.MetroTabControl metroTabControlMain;
-        private MetroFramework.Controls.MetroTabPage metroTabPageHome;
+        private MetroFramework.Controls.MetroTabPage txtReleaseNo;
         private MetroFramework.Controls.MetroTile btnChartOfAccounts;
         private MetroFramework.Controls.MetroTile btnJournalEntry;
         private MetroFramework.Controls.MetroTile btnTrialBalance;
@@ -808,5 +851,8 @@
         private MetroFramework.Controls.MetroTile btnAPDMCM;
         private MetroFramework.Controls.MetroTile btnProductUnit;
         private MetroFramework.Controls.MetroTile btnStockInquiry;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroTile btnInventoryAdjustment;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
     }
 }

@@ -21,10 +21,17 @@ namespace GeneralLedger.Core.Domain
         public Nullable<int> QuantityOut { get; set; }
         public Nullable<int> PurchaseID { get; set; }
         public Nullable<int> SalesID { get; set; }
+        public Nullable<int> AccountsPayablePurchaseReturnID { get; set; }
+        public Nullable<int> AccountsReceivableSaleReturnID { get; set; }
+        public Nullable<int> InventoryAdjustmentID { get; set; }
+        public Nullable<System.DateTime> TransactionDate { get; set; }
     
         public virtual Purchase Purchase { get; set; }
         public virtual Sale Sale { get; set; }
         public virtual StockTransactionType StockTransactionType { get; set; }
         public virtual Product Product { get; set; }
+        public virtual AccountPayableAdjustment AccountPayableAdjustment { get; set; }
+        public virtual AccountReceivableAdjustment AccountReceivableAdjustment { get; set; }
+        public virtual InventoryAdjustment InventoryAdjustment { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace GeneralLedger.Core.Domain
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
         public decimal TotalPrice { get; set; }
+        public Nullable<int> ReturnedQuantity { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual Purchase Purchase { get; set; }

@@ -81,5 +81,44 @@ namespace GeneralLedger.Tier.DAL
             }
 
         }
+
+
+        public List<ProductColor> getProductColorByCriteria(string criteria)
+        {
+            var dbUtil = new DatabaseManager();
+            var productColorList = new List<ProductColor>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spMasGetProductColorCriteria";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@strCriteria", criteria);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            var productColor = new ProductColor
+                            {
+
+                                ID = ReferenceEquals(reader["ID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ID"]),
+                                Name = ReferenceEquals(reader["strName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strName"])
+                            };
+                            productColorList.Add(productColor);
+                        }
+                        return productColorList;
+                    }
+                }
+
+            }
+
+        }
     }
 }

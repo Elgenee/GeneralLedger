@@ -13,11 +13,11 @@ namespace GeneralLedger.Core.Services
 
         AccountPayableAdjustment AddReturnPayment(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
         AccountPayableAdjustment UpdateReturnPayment(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
-        void RemoveReturnPayment(AccountPayableAdjustment accountPayableAdjustment);
-        AccountPayableAdjustment AddReturnPurchases(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
-        AccountPayableAdjustment UpdateReturnPurchases(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
+        void RemoveReturnPayment(AccountPayableAdjustment accountPayableAdjustment );
+        AccountPayableAdjustment AddReturnPurchases(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<AccountPayableAdjustmentsDetail> accountPayableAdjustmentsDetailsList);
+        AccountPayableAdjustment UpdateReturnPurchases(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<AccountPayableAdjustmentsDetail> accountPayableAdjustmentsDetailsList);
 
-        void RemoveReturnPurchases(AccountPayableAdjustment accountPayableAdjustment);
+        void RemoveReturnPurchases(AccountPayableAdjustment accountPayableAdjustment, List<AccountPayableAdjustmentsDetail> accountPayableAdjustmentsDetailsList);
 
         AccountPayableAdjustment AddDebitCreditMemo(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);
         AccountPayableAdjustment UpdateDebitCreditMemo(AccountPayableAdjustment accountPayableAdjustment, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry);

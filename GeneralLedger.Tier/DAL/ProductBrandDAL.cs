@@ -79,5 +79,44 @@ namespace GeneralLedger.Tier.DAL
             }
        
         }
+
+
+        public List<ProductBrand> getProductBrandByCriteria(string criteria)
+        {
+            var dbUtil = new DatabaseManager();
+            var productBrandList = new List<ProductBrand>();
+
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spMasGetProductBrandByCriteria";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@strCriteria", criteria);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+
+                            var productBrand = new ProductBrand
+                            {
+
+                                ID = ReferenceEquals(reader["ID"], DBNull.Value) ? 0 : Convert.ToInt32(reader["ID"]),
+                                Name = ReferenceEquals(reader["strName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strName"])
+                            };
+                            productBrandList.Add(productBrand);
+                        }
+                        return productBrandList;
+                    }
+                }
+
+            }
+
+        }
     }
 }

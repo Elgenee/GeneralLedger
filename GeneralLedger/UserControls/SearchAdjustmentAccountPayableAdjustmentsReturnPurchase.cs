@@ -61,6 +61,7 @@ namespace GeneralLedger.UserControls
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["Description"].Value = adjustmentPayableResult[i].Description;
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["UseDefaultEntry"].Value = adjustmentPayableResult[i].tblGLTranHeaders.Select(h => h.blnUseDefaultEntry).FirstOrDefault();
                         this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["TotalAmount"].Value = adjustmentPayableResult[i].TotalAmount;
+                        this.dgSearchAccountsPayableAdjustments.Rows[i].Cells["AdditionalDescription"].Value = string.IsNullOrEmpty(adjustmentPayableResult[i].AdditionalDescription) ? string.Empty : adjustmentPayableResult[i].AdditionalDescription;
                     }
                     setRowNumber(this.dgSearchAccountsPayableAdjustments);
                 }
@@ -101,6 +102,7 @@ namespace GeneralLedger.UserControls
                         PurchaseId = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseId"].Value.ToString()),
                         Description = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["Description"].Value.ToString(),
                         TotalAmount = Convert.ToDecimal(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["TotalAmount"].Value.ToString()),
+                        AdditionalDescription = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["AdditionalDescription"].Value.ToString(),
                         Purchase = new Purchase {
                             Id = Int32.Parse(this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchaseId"].Value.ToString()),
                             PONo = this.dgSearchAccountsPayableAdjustments.Rows[this.Index].Cells["PurchasePONo"].Value.ToString(),

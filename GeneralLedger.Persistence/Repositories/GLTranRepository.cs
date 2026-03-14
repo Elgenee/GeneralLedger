@@ -19,6 +19,26 @@ namespace GeneralLedger.Persistence.Repositories
             get { return Context as GeneralLedgerContext; }
         }
 
+        public List<tblGLTranHeader> GetGLEntryByAdjustmentReturnPurchaseId(int ReturnPurchaseId, int BookTypeId)
+        {
+            return GeneralLedgerContext.tblGLTranHeaders
+                    .Include(j => j.tblGLTranDetails)
+                    .Include(j => j.tblGLTranDetails.Select(d => d.tblMasCOA))
+                    .Include(j => j.tblGLTranDetails.Select(d => d.tblMasCOASub))
+                    .Where(j => j.intIdAccountPayableAdjustment == ReturnPurchaseId && j.intIDGLBookType == BookTypeId)
+                    .ToList();
+        }
+
+        public List<tblGLTranHeader> GetGLEntryByAdjustmentReturnSaleId(int ReturnSaleId, int BookTypeId)
+        {
+            return GeneralLedgerContext.tblGLTranHeaders
+                    .Include(j => j.tblGLTranDetails)
+                    .Include(j => j.tblGLTranDetails.Select(d => d.tblMasCOA))
+                    .Include(j => j.tblGLTranDetails.Select(d => d.tblMasCOASub))
+                    .Where(j => j.intIdAccountReceivableAdjustment == ReturnSaleId && j.intIDGLBookType == BookTypeId)
+                    .ToList();
+        }
+
         public IEnumerable<tblGLTranHeader> GetGLEntryById(int Id)
         {
             return GeneralLedgerContext.tblGLTranHeaders

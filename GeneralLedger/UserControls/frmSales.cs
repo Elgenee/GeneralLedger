@@ -772,6 +772,7 @@ namespace GeneralLedger.UserControls
                         this.dgProduct.Columns[27].Name = "Unit Price";
                         this.dgProduct.Columns[28].Name = "Quantity";
                         this.dgProduct.Columns[29].Name = "Total Quantity Price";
+                        Sale.SalesDetails.Clear();
 
                         for (int i = 0; i < SalesDetailsList.Count; i++)
                         {
@@ -779,41 +780,41 @@ namespace GeneralLedger.UserControls
                             SalesDetail SalesDetail = SalesDetailsList[i];
                             this.Sale.SalesDetails.Add(SalesDetail);
                             this.dgProduct.Rows[i].Cells[0].Value = SalesDetail.Id;
-                            this.dgProduct.Rows[i].Cells[1].Value = SalesDetail.Product.strProductName;
-                            this.dgProduct.Rows[i].Cells[2].Value = SalesDetail.Product.strDescription;
+                            this.dgProduct.Rows[i].Cells[1].Value = SalesDetail.Product?.strProductName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[2].Value = SalesDetail.Product?.strDescription ?? string.Empty;
                             this.dgProduct.Rows[i].Cells[3].Value = 0;
                             this.dgProduct.Rows[i].Cells[4].Value = string.Empty;
-                            this.dgProduct.Rows[i].Cells[5].Value = SalesDetail.Product.ProductCategory.Id;
-                            this.dgProduct.Rows[i].Cells[6].Value = SalesDetail.Product.ProductCategory.strName;
-                            this.dgProduct.Rows[i].Cells[7].Value = SalesDetail.Product.ProductType.Id;
-                            this.dgProduct.Rows[i].Cells[8].Value = SalesDetail.Product.ProductType.strName;
-                            this.dgProduct.Rows[i].Cells[9].Value = SalesDetail.Product.ProductBrand.Id;
-                            this.dgProduct.Rows[i].Cells[10].Value = SalesDetail.Product.ProductBrand.strName;
+                            this.dgProduct.Rows[i].Cells[5].Value = SalesDetail.Product?.ProductCategory?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[6].Value = SalesDetail.Product?.ProductCategory?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[7].Value = SalesDetail.Product?.ProductType?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[8].Value = SalesDetail.Product?.ProductType?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[9].Value = SalesDetail.Product?.ProductBrand?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[10].Value = SalesDetail.Product?.ProductBrand?.strName ?? string.Empty;
                             //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
                             //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
                             //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
-                            this.dgProduct.Rows[i].Cells[14].Value = SalesDetail.Product.ProductColor.Id;
-                            this.dgProduct.Rows[i].Cells[15].Value = SalesDetail.Product.ProductColor.strName;
-                            this.dgProduct.Rows[i].Cells[16].Value = SalesDetail.Product.ProductSize.Id;
-                            this.dgProduct.Rows[i].Cells[17].Value = SalesDetail.Product.ProductSize.strName;
-                            this.dgProduct.Rows[i].Cells[18].Value = SalesDetail.Product.ProductUnit.Id;
-                            this.dgProduct.Rows[i].Cells[19].Value = SalesDetail.Product.ProductUnit.strName;
-                            this.dgProduct.Rows[i].Cells[20].Value = SalesDetail.Product.strCode;
-                            this.dgProduct.Rows[i].Cells[21].Value = SalesDetail.Product.strPR;
-                            this.dgProduct.Rows[i].Cells[22].Value = SalesDetail.Product.strPCD;
-                            this.dgProduct.Rows[i].Cells[23].Value = SalesDetail.Product.strMFLM;
-                            this.dgProduct.Rows[i].Cells[24].Value = SalesDetail.Product.strPattern;
-                            this.dgProduct.Rows[i].Cells[25].Value = SalesDetail.Product.strOffsetCenterBore;
-                            this.dgProduct.Rows[i].Cells[26].Value = SalesDetail.Product.strOrigin;
-                            this.dgProduct.Rows[i].Cells[27].Value = SalesDetail.UnitPrice;
-                            this.dgProduct.Rows[i].Cells[28].Value = SalesDetail.Quantity;
-                            this.dgProduct.Rows[i].Cells[29].Value = SalesDetail.TotalPrice;
+                            this.dgProduct.Rows[i].Cells[14].Value = SalesDetail.Product?.ProductColor?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[15].Value = SalesDetail.Product?.ProductColor?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[16].Value = SalesDetail.Product?.ProductSize?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[17].Value = SalesDetail.Product?.ProductSize?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[18].Value = SalesDetail.Product?.ProductUnit?.Id ?? 0;
+                            this.dgProduct.Rows[i].Cells[19].Value = SalesDetail.Product?.ProductUnit?.strName ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[20].Value = SalesDetail.Product?.strCode ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[21].Value = SalesDetail.Product?.strPR ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[22].Value = SalesDetail.Product?.strPCD ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[23].Value = SalesDetail.Product?.strMFLM ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[24].Value = SalesDetail.Product?.strPattern ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[25].Value = SalesDetail.Product?.strOffsetCenterBore ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[26].Value = SalesDetail.Product?.strOrigin ?? string.Empty;
+                            this.dgProduct.Rows[i].Cells[27].Value = SalesDetail.UnitPrice ?? 0;
+                            this.dgProduct.Rows[i].Cells[28].Value = SalesDetail.Quantity ?? 0;
+                            this.dgProduct.Rows[i].Cells[29].Value = SalesDetail.TotalPrice ?? 0;
                             //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
                         }
 
                         setRowNumber(this.dgJournalEntry);
                         this.txtSalesTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
-                        this.txtTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
+                        //this.txtTotal.Text = string.Format("{0:0.00}", SalesDetailsList.Sum(g => g.TotalPrice));
                     }
 
 
@@ -1329,8 +1330,8 @@ namespace GeneralLedger.UserControls
                     {
                         SalesDetail saleDetail = SalesDetailsList[i];
                         this.dgProduct.Rows[i].Cells[0].Value = saleDetail.Id;
-                        this.dgProduct.Rows[i].Cells[1].Value = saleDetail.Product.strProductName;
-                        this.dgProduct.Rows[i].Cells[2].Value = saleDetail.Product.strDescription;
+                        this.dgProduct.Rows[i].Cells[1].Value = saleDetail.Product?.strProductName ?? string.Empty;
+                        this.dgProduct.Rows[i].Cells[2].Value = saleDetail.Product?.strDescription ?? string.Empty;
                         //this.dgProduct.Rows[i].Cells[3].Value = saleDetail.Product.ProductCharacteristic.Id;
                         //this.dgProduct.Rows[i].Cells[4].Value = saleDetail.Product.ProductCharacteristic.strName;
                         //this.dgProduct.Rows[i].Cells[5].Value = saleDetail.Product.ProductCategory.Id;
@@ -1342,22 +1343,22 @@ namespace GeneralLedger.UserControls
                         //this.dgProduct.Rows[i].Cells[11].Value = product.PerPieceBox;
                         //this.dgProduct.Rows[i].Cells[12].Value = product.Location.ID;
                         //this.dgProduct.Rows[i].Cells[13].Value = product.Location.Name;
-                        this.dgProduct.Rows[i].Cells[14].Value = saleDetail.Product.ProductColor.Id;
-                        this.dgProduct.Rows[i].Cells[15].Value = saleDetail.Product.ProductColor.strName;
-                        this.dgProduct.Rows[i].Cells[16].Value = saleDetail.Product.ProductSize.Id;
-                        this.dgProduct.Rows[i].Cells[17].Value = saleDetail.Product.ProductSize.strName;
+                        this.dgProduct.Rows[i].Cells[14].Value = saleDetail.Product?.ProductColor?.Id ?? 0;
+                        this.dgProduct.Rows[i].Cells[15].Value = saleDetail.Product?.ProductColor?.strName ?? string.Empty;
+                        this.dgProduct.Rows[i].Cells[16].Value = saleDetail.Product?.ProductSize?.Id ?? 0;
+                        this.dgProduct.Rows[i].Cells[17].Value = saleDetail.Product?.ProductSize?.strName ?? string.Empty;
                         this.dgProduct.Rows[i].Cells[18].Value = saleDetail.Product.ProductUnit.Id;
-                        this.dgProduct.Rows[i].Cells[19].Value = saleDetail.Product.ProductUnit.strName;
-                        this.dgProduct.Rows[i].Cells[20].Value = saleDetail.Product.strCode;
-                        this.dgProduct.Rows[i].Cells[21].Value = saleDetail.Product.strPR;
-                        this.dgProduct.Rows[i].Cells[22].Value = saleDetail.Product.strPCD;
-                        this.dgProduct.Rows[i].Cells[23].Value = saleDetail.Product.strMFLM;
-                        this.dgProduct.Rows[i].Cells[24].Value = saleDetail.Product.strPattern;
-                        this.dgProduct.Rows[i].Cells[25].Value = saleDetail.Product.strOffsetCenterBore;
-                        this.dgProduct.Rows[i].Cells[26].Value = saleDetail.Product.strOrigin;
+                        this.dgProduct.Rows[i].Cells[19].Value = saleDetail.Product?.ProductUnit?.strName ?? string.Empty;
+                        this.dgProduct.Rows[i].Cells[20].Value = saleDetail.Product?.strCode ?? string.Empty;
+                        this.dgProduct.Rows[i].Cells[21].Value = saleDetail.Product?.strPR ?? string.Empty;
+                        this.dgProduct.Rows[i].Cells[22].Value = saleDetail.Product?.strPCD ?? string.Empty;
+                        this.dgProduct.Rows[i].Cells[23].Value = saleDetail.Product?.strMFLM ?? string.Empty;
+                        this.dgProduct.Rows[i].Cells[24].Value = saleDetail.Product?.strPattern ?? string.Empty;
+                        this.dgProduct.Rows[i].Cells[25].Value = saleDetail.Product?.strOffsetCenterBore ?? string.Empty;
+                        this.dgProduct.Rows[i].Cells[26].Value = saleDetail.Product?.strOrigin ?? string.Empty;
                         //this.dgProduct.Rows[i].Cells[27].Value = saleDetail.Product.curSellingPrice;
-                        this.dgProduct.Rows[i].Cells[28].Value = saleDetail.Quantity;
-                        this.dgProduct.Rows[i].Cells[29].Value = saleDetail.TotalPrice;
+                        this.dgProduct.Rows[i].Cells[28].Value = saleDetail.Quantity ?? 0;
+                        this.dgProduct.Rows[i].Cells[29].Value = saleDetail.TotalPrice ?? 0;
                         //this.dgProduct.Rows[i].Cells[27].Value = product.curUnitPrice;
                     }
 
