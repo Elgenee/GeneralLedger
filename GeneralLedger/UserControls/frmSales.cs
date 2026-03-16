@@ -1161,6 +1161,8 @@ namespace GeneralLedger.UserControls
             this.txtSalesTotal.Text = string.Empty;
             this.txtAdditionalDescription.Text = string.Empty;
             GLTranDetail = new List<tblGLTranDetail>();
+            this.Sale.SalesDetails = new List<SalesDetail>();
+            GLTranDetailInventoryEntry = new List<tblGLTranDetail>();
            
 
         }

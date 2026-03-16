@@ -854,7 +854,8 @@ namespace GeneralLedger.UserControls
             this.txtPurchaseTotal.Text = string.Empty;
             this.txtAdditionalDescription.Text = string.Empty;
             GLTranDetail = new List<tblGLTranDetail>();
-    
+            this.Purchase.PurchaseDetails = new List<PurchaseDetail>();
+            GLTranDetailInventoryEntry = new List<tblGLTranDetail>();
 
 
         }
