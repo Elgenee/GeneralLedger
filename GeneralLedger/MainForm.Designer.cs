@@ -771,9 +771,9 @@
             this.metroLabel1.Location = new System.Drawing.Point(492, 34);
             this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(275, 25);
+            this.metroLabel1.Size = new System.Drawing.Size(274, 25);
             this.metroLabel1.TabIndex = 7;
-            this.metroLabel1.Text = "******Live ENVIRONMENT *******";
+            this.metroLabel1.Text = "******Test ENVIRONMENT *******";
             // 
             // metroLabel2
             // 

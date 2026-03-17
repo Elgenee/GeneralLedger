@@ -11,6 +11,7 @@ using MetroFramework.Forms;
 using MetroFramework.Controls;
 using GeneralLedger.UserControls;
 using System.Runtime.InteropServices;
+using System.Reflection;
 
 namespace GeneralLedger
 {
@@ -339,26 +340,32 @@ namespace GeneralLedger
         }
 
 
-        private void ReleaseCounter() {
+        private void ReleaseCounter()
+        {
+            //// Use AppData folder for persistence
+            //string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            //string appFolder = System.IO.Path.Combine(appDataFolder, "GeneralLedger");
+            //if (!System.IO.Directory.Exists(appFolder))
+            //{
+            //    System.IO.Directory.CreateDirectory(appFolder);
+            //}
+            //string releaseCounterFile = System.IO.Path.Combine(appFolder, "release_counter.txt");
 
-            // Path to store the release counter
-            string releaseCounterFile = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "release_counter.txt");
+            //string buildDate = DateTime.Now.ToString("yyyyMMdd");
+            //int releaseCounter = 1;
+            //if (System.IO.File.Exists(releaseCounterFile))
+            //{
+            //    string counterText = System.IO.File.ReadAllText(releaseCounterFile);
+            //    int.TryParse(counterText, out releaseCounter);
+            //    releaseCounter++;
+            //}
+            //System.IO.File.WriteAllText(releaseCounterFile, releaseCounter.ToString());
 
-            // Get today's date as build indicator
-            string buildDate = DateTime.Now.ToString("yyyyMMdd");
+            //this.metroLabel2.Text = $"{buildDate}-{releaseCounter}";
 
-            // Read and increment the counter
-            int releaseCounter = 1;
-            if (System.IO.File.Exists(releaseCounterFile))
-            {
-                string counterText = System.IO.File.ReadAllText(releaseCounterFile);
-                int.TryParse(counterText, out releaseCounter);
-                releaseCounter++;
-            }
-            System.IO.File.WriteAllText(releaseCounterFile, releaseCounter.ToString());
-
-            // Assign to txtReleaseNo
-            this.metroLabel2.Text = $"{buildDate}-{releaseCounter}";
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            var buildDate = DateTime.Now.ToString("yyyy-MM-dd");
+            this.metroLabel2.Text = $"Version: {version} | Date: {buildDate}";
         }
         private void MetroTabControlMain_DrawItem(object sender, DrawItemEventArgs e)
         {

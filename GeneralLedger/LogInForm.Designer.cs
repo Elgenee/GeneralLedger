@@ -157,9 +157,9 @@
             this.metroLabel3.Location = new System.Drawing.Point(312, 34);
             this.metroLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(275, 25);
+            this.metroLabel3.Size = new System.Drawing.Size(274, 25);
             this.metroLabel3.TabIndex = 43;
-            this.metroLabel3.Text = "******Live ENVIRONMENT *******";
+            this.metroLabel3.Text = "******Test ENVIRONMENT *******";
             // 
             // LogInForm
             // 
