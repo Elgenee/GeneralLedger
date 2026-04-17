@@ -1,18 +1,20 @@
-﻿using System;
+﻿using GeneralLedger.Core.Domain;
+using GeneralLedger.Persistence.Services;
+using GeneralLedger.Tier.BAL;
+using GeneralLedger.Tier.BO;
+using MetroFramework.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MetroFramework.Forms;
-using GeneralLedger.Tier.BO;
-using GeneralLedger.Tier.BAL;
-using System.Globalization;
-using GeneralLedger.Persistence.Services;
-using GeneralLedger.Core.Domain;
 
 namespace GeneralLedger
 {
@@ -25,6 +27,31 @@ namespace GeneralLedger
             InitializeComponent();
             UserServices = new UserServices();
             RoleServices = new RoleServices();
+            SetVersionInfo();
+        }
+
+        private void SetVersionInfo()
+        {
+            string versionText = "";
+
+            // Try to get ClickOnce publish version first
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                ApplicationDeployment deployment = ApplicationDeployment.CurrentDeployment;
+                Version publishVersion = deployment.CurrentVersion;
+                DateTime buildDate = DateTime.Now;
+                versionText = $"Version {publishVersion.Major}.{publishVersion.Minor}.{publishVersion.Build}.{publishVersion.Revision} - Published: {buildDate:yyyy-MM-dd}";
+            }
+            else
+            {
+                // Fallback to assembly version
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                Version version = assembly.GetName().Version;
+                DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
+                versionText = $"Version {version.Major}.{version.Minor}.{version.Build}.{version.Revision} - Build Date: {buildDate:yyyy-MM-dd HH:mm}";
+            }
+
+            this.metroLabel3.Text = versionText;
         }
 
         private void LogInForm_Load(object sender, EventArgs e)

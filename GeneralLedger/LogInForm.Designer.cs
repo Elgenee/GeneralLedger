@@ -35,6 +35,7 @@
             this.btnLogin = new DevComponents.DotNetBar.ButtonX();
             this.txtError = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // txtUsername
@@ -43,18 +44,16 @@
             // 
             // 
             this.txtUsername.CustomButton.Image = null;
-            this.txtUsername.CustomButton.Location = new System.Drawing.Point(364, 1);
-            this.txtUsername.CustomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUsername.CustomButton.Location = new System.Drawing.Point(234, 1);
             this.txtUsername.CustomButton.Name = "";
-            this.txtUsername.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.txtUsername.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.txtUsername.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtUsername.CustomButton.TabIndex = 1;
             this.txtUsername.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtUsername.CustomButton.UseSelectable = true;
             this.txtUsername.CustomButton.Visible = false;
             this.txtUsername.Lines = new string[0];
-            this.txtUsername.Location = new System.Drawing.Point(256, 108);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUsername.Location = new System.Drawing.Point(205, 86);
             this.txtUsername.MaxLength = 32767;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.PasswordChar = '\0';
@@ -63,7 +62,7 @@
             this.txtUsername.SelectionLength = 0;
             this.txtUsername.SelectionStart = 0;
             this.txtUsername.ShortcutsEnabled = true;
-            this.txtUsername.Size = new System.Drawing.Size(392, 29);
+            this.txtUsername.Size = new System.Drawing.Size(314, 23);
             this.txtUsername.TabIndex = 0;
             this.txtUsername.UseSelectable = true;
             this.txtUsername.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -74,20 +73,18 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(145, 108);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel1.Location = new System.Drawing.Point(116, 86);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(73, 20);
+            this.metroLabel1.Size = new System.Drawing.Size(68, 19);
             this.metroLabel1.TabIndex = 1;
             this.metroLabel1.Text = "Username";
             // 
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(145, 144);
-            this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel2.Location = new System.Drawing.Point(116, 115);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(66, 20);
+            this.metroLabel2.Size = new System.Drawing.Size(63, 19);
             this.metroLabel2.TabIndex = 3;
             this.metroLabel2.Text = "Password";
             // 
@@ -97,18 +94,16 @@
             // 
             // 
             this.txtPassword.CustomButton.Image = null;
-            this.txtPassword.CustomButton.Location = new System.Drawing.Point(364, 1);
-            this.txtPassword.CustomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPassword.CustomButton.Location = new System.Drawing.Point(234, 1);
             this.txtPassword.CustomButton.Name = "";
-            this.txtPassword.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.txtPassword.CustomButton.Size = new System.Drawing.Size(17, 17);
             this.txtPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtPassword.CustomButton.TabIndex = 1;
             this.txtPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtPassword.CustomButton.UseSelectable = true;
             this.txtPassword.CustomButton.Visible = false;
             this.txtPassword.Lines = new string[0];
-            this.txtPassword.Location = new System.Drawing.Point(256, 144);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPassword.Location = new System.Drawing.Point(205, 115);
             this.txtPassword.MaxLength = 32767;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -117,7 +112,7 @@
             this.txtPassword.SelectionLength = 0;
             this.txtPassword.SelectionStart = 0;
             this.txtPassword.ShortcutsEnabled = true;
-            this.txtPassword.Size = new System.Drawing.Size(392, 29);
+            this.txtPassword.Size = new System.Drawing.Size(314, 23);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.UseSelectable = true;
             this.txtPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -129,10 +124,10 @@
             this.btnLogin.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnLogin.ColorTable = DevComponents.DotNetBar.eButtonColor.Magenta;
             this.btnLogin.Image = global::GeneralLedger.Properties.Resources.profile;
-            this.btnLogin.Location = new System.Drawing.Point(556, 188);
+            this.btnLogin.Location = new System.Drawing.Point(445, 150);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(89, 41);
+            this.btnLogin.Size = new System.Drawing.Size(71, 33);
             this.btnLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
             this.btnLogin.TabIndex = 41;
             this.btnLogin.Text = "Login";
@@ -143,8 +138,7 @@
             this.txtError.AutoSize = true;
             this.txtError.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.txtError.ForeColor = System.Drawing.Color.Red;
-            this.txtError.Location = new System.Drawing.Point(256, 188);
-            this.txtError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.txtError.Location = new System.Drawing.Point(205, 150);
             this.txtError.Name = "txtError";
             this.txtError.Size = new System.Drawing.Size(0, 0);
             this.txtError.Style = MetroFramework.MetroColorStyle.Red;
@@ -154,18 +148,27 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(312, 34);
-            this.metroLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.metroLabel3.Location = new System.Drawing.Point(23, 180);
             this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(274, 25);
+            this.metroLabel3.Size = new System.Drawing.Size(51, 19);
             this.metroLabel3.TabIndex = 43;
-            this.metroLabel3.Text = "******Test ENVIRONMENT *******";
+            this.metroLabel3.Text = "Version";
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(246, 30);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(210, 19);
+            this.metroLabel4.TabIndex = 44;
+            this.metroLabel4.Text = "******Live ENVIRONMENT *******";
             // 
             // LogInForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(701, 274);
+            this.ClientSize = new System.Drawing.Size(561, 219);
+            this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.txtError);
             this.Controls.Add(this.btnLogin);
@@ -173,9 +176,7 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.txtUsername);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LogInForm";
-            this.Padding = new System.Windows.Forms.Padding(25, 75, 25, 25);
             this.Resizable = false;
             this.Text = "Royal Marketing";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogInForm_FormClosed);
@@ -194,5 +195,6 @@
         private DevComponents.DotNetBar.ButtonX btnLogin;
         private MetroFramework.Controls.MetroLabel txtError;
         private MetroFramework.Controls.MetroLabel metroLabel3;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
     }
 }
