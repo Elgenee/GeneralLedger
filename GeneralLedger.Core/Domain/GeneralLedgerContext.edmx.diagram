@@ -130,6 +130,7 @@
         <AssociationConnector Association="GeneralLedgerModel.FK_Stock_InventoryAdjustment" />
         <AssociationConnector Association="GeneralLedgerModel.FK_InventoryAdjustmentDetails_InventoryAdjustment" />
         <AssociationConnector Association="GeneralLedgerModel.FK_InventoryAdjustmentDetails_InventoryAdjustment1" />
+        <EntityTypeShape EntityType="GeneralLedgerModel.MAY2025" Width="1.5" PointX="8.375" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -84,5 +84,17 @@ namespace GeneralLedger.Tier.BAL
             return pbDAL.ManageProductDetail(ojectToXml, transactionType);
            // return string.Empty;
         }
+
+        public bool AddBeginningBalance(int productId, decimal quantityIn)
+        {
+            ProductDAL pbDAL = new ProductDAL();
+            return pbDAL.AddBeginningBalance(productId, quantityIn);
+        }
+
+        public bool DeleteBeginningBalance(int productId)
+        {
+            ProductDAL pbDAL = new ProductDAL();
+            return pbDAL.DeleteBeginningBalance(productId);
+        }
     }
 }

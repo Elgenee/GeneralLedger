@@ -215,6 +215,32 @@
           <Property Name="blnIsActive" Type="int" />
           <Property Name="datLastModified" Type="date" />
         </EntityType>
+        <EntityType Name="MAY2025">
+          <Key>
+            <PropertyRef Name="MAY2025ID" />
+          </Key>
+          <Property Name="Product ID" Type="nvarchar" MaxLength="255" />
+          <Property Name="PRODUCT NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Price Type" Type="nvarchar" MaxLength="255" />
+          <Property Name="TOTAL NUMBER OF PCS#" Type="float" />
+          <Property Name="Product Unit" Type="nvarchar" MaxLength="255" />
+          <Property Name="Unit Price" Type="float" />
+          <Property Name="Product Categories" Type="nvarchar" MaxLength="255" />
+          <Property Name="Product Types" Type="nvarchar" MaxLength="255" />
+          <Property Name="Product Brand" Type="nvarchar" MaxLength="255" />
+          <Property Name="Product Color" Type="nvarchar" MaxLength="255" />
+          <Property Name="Product Size" Type="nvarchar" MaxLength="255" />
+          <Property Name="Location" Type="nvarchar" MaxLength="255" />
+          <Property Name="PR" Type="nvarchar" MaxLength="255" />
+          <Property Name="Origin" Type="nvarchar" MaxLength="255" />
+          <Property Name="Pattern" Type="nvarchar" MaxLength="255" />
+          <Property Name="MF/LM" Type="nvarchar" MaxLength="255" />
+          <Property Name="PCD" Type="nvarchar" MaxLength="255" />
+          <Property Name="Offset/CenterBore" Type="nvarchar" MaxLength="255" />
+          <Property Name="MAY2025ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="Id" />
@@ -1788,6 +1814,7 @@
           <EntitySet Name="InventoryLogOperationType" EntityType="Self.InventoryLogOperationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryQuantityTotal" EntityType="Self.InventoryQuantityTotal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryStock" EntityType="Self.InventoryStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAY2025" EntityType="Self.MAY2025" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PriceType" EntityType="Self.PriceType" Schema="dbo" store:Type="Tables" />
@@ -3216,6 +3243,7 @@
             <End Role="InventoryAdjustment" EntitySet="InventoryAdjustments" />
             <End Role="InventoryAdjustmentDetail" EntitySet="InventoryAdjustmentDetails" />
           </AssociationSet>
+          <EntitySet Name="MAY2025" EntityType="GeneralLedgerModel.MAY2025" />
           </EntityContainer>
         <Association Name="FK_tblGLTranDetail_tblMasCOA">
           <End Type="GeneralLedgerModel.tblMasCOA" Role="tblMasCOA" Multiplicity="1" />
@@ -4849,6 +4877,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MAY2025">
+          <Key>
+            <PropertyRef Name="MAY2025ID" />
+          </Key>
+          <Property Name="Product_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCT_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Price_Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TOTAL_NUMBER_OF_PCS_" Type="Double" />
+          <Property Name="Product_Unit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Unit_Price" Type="Double" />
+          <Property Name="Product_Categories" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Types" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Brand" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Color" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Size" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PR" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Origin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Pattern" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MF_LM" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PCD" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Offset_CenterBore" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MAY2025ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6274,6 +6328,33 @@
               <MappingFragment StoreEntitySet="InventoryAdjustmentType">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAY2025">
+            <EntityTypeMapping TypeName="GeneralLedgerModel.MAY2025">
+              <MappingFragment StoreEntitySet="MAY2025">
+                <ScalarProperty Name="MAY2025ID" ColumnName="MAY2025ID" />
+                <ScalarProperty Name="Offset_CenterBore" ColumnName="Offset/CenterBore" />
+                <ScalarProperty Name="PCD" ColumnName="PCD" />
+                <ScalarProperty Name="MF_LM" ColumnName="MF/LM" />
+                <ScalarProperty Name="Pattern" ColumnName="Pattern" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="PR" ColumnName="PR" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Product_Size" ColumnName="Product Size" />
+                <ScalarProperty Name="Product_Color" ColumnName="Product Color" />
+                <ScalarProperty Name="Product_Brand" ColumnName="Product Brand" />
+                <ScalarProperty Name="Product_Types" ColumnName="Product Types" />
+                <ScalarProperty Name="Product_Categories" ColumnName="Product Categories" />
+                <ScalarProperty Name="Unit_Price" ColumnName="Unit Price" />
+                <ScalarProperty Name="Product_Unit" ColumnName="Product Unit" />
+                <ScalarProperty Name="TOTAL_NUMBER_OF_PCS_" ColumnName="TOTAL NUMBER OF PCS#" />
+                <ScalarProperty Name="Price_Type" ColumnName="Price Type" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT NAME" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

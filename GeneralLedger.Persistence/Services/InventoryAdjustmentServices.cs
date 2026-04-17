@@ -34,7 +34,7 @@ namespace GeneralLedger.Persistence.Services
                         "; Qty: " + detail.Quantity.ToString());
                 }
 
-                inventoryAdjustment.Description = productDetailsBuilder.ToString();
+                //inventoryAdjustment.Description = productDetailsBuilder.ToString();
 
                 // Add InventoryAdjustment to repository
                 unitOfWork.InventoryAdjustment.Add(inventoryAdjustment);
@@ -275,7 +275,7 @@ namespace GeneralLedger.Persistence.Services
                             (!string.IsNullOrEmpty(product?.strPR) ? "; PR: " + product.strPR : "") +
                             "; Qty: " + detail.Quantity.ToString());
                     }
-                    adj.Description = productDetailsBuilder.ToString();
+                    //adj.Description = productDetailsBuilder.ToString();
 
                     adj.InventoryAdjustmentDetails = updatedAdjustment.InventoryAdjustmentDetails;
                     adj.Stocks = updatedAdjustment.Stocks;

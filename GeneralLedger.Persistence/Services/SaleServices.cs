@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using GeneralLedger.Core.Domain;
 using GeneralLedger.Core.Services;
 using GeneralLedger.Persistence;
+using GeneralLedger.Persistence.Logging;
+
 
 namespace GeneralLedger.Persistence.Services
 {
@@ -132,45 +134,56 @@ namespace GeneralLedger.Persistence.Services
 
         public Sale Add(Sale sale, List<tblGLTranDetail> tblGLTranDetail, bool useDefaultEntry, List<SalesDetail> saleDetailsList)
         {
-            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            try
             {
-                AddSaleDetails(sale, saleDetailsList, unitOfWork);
-               
-                var customer = unitOfWork.Customer.Get(sale.intIdCustomer.Value);
-               
-                StringBuilder productDetailsBuilder = new StringBuilder();
-                foreach (var detail in saleDetailsList)
+                SimpleLogger.LogSaleOperation("ADD_START", 0, sale.intIdCustomer, sale.intIdAgent, sale.Total);
+                using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
                 {
-                    var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
-                    var size = product.ProductSize; // Assuming Product has a Size property
-                    var color = product.ProductColor; // Assuming Product has a Color property
+                    AddSaleDetails(sale, saleDetailsList, unitOfWork);
+               
+                    var customer = unitOfWork.Customer.Get(sale.intIdCustomer.Value);
+               
+                    StringBuilder productDetailsBuilder = new StringBuilder();
+                    foreach (var detail in saleDetailsList)
+                    {
+                        var product = detail.Product; // Assuming you can navigate to Product from SalesDetail
+                        var size = product.ProductSize; // Assuming Product has a Size property
+                        var color = product.ProductColor; // Assuming Product has a Color property
 
-                    productDetailsBuilder.AppendLine("# " +
-                                        (product?.strProductName ?? string.Empty) +
-                                        "; Size: " + (size?.strName ?? string.Empty) +
-                                        "; Color: " + (color?.strName ?? string.Empty) +
-                                        "; Qty: " + detail.Quantity.ToString());
+                        productDetailsBuilder.AppendLine("# " +
+                                            (product?.strProductName ?? string.Empty) +
+                                            "; Size: " + (size?.strName ?? string.Empty) +
+                                            "; Color: " + (color?.strName ?? string.Empty) +
+                                            "; Qty: " + detail.Quantity.ToString());
+                    }
+
+                    productDetailsBuilder.AppendLine("Customer: " + customer?.strName ?? string.Empty);
+
+                    sale.Description = productDetailsBuilder.ToString();
+                    unitOfWork.Sale.Add(sale);
+                    UpdateSaleCount(unitOfWork, sale, saleDetailsList);
+                    AddSalesCustomerLedger(unitOfWork, sale);
+                    AddGLTranForSale(unitOfWork, sale, tblGLTranDetail, useDefaultEntry);
+                    AddGLTranInventoryForSale(unitOfWork, sale);
+                    unitOfWork.Complete();
+                    SimpleLogger.LogSaleOperation("ADD_SUCCESS", sale.Id, sale.intIdCustomer, sale.intIdAgent, sale.Total);
+                    return sale;
                 }
 
-                productDetailsBuilder.AppendLine("Customer: " + customer?.strName ?? string.Empty);
-
-                sale.Description = productDetailsBuilder.ToString();
-                unitOfWork.Sale.Add(sale);
-                UpdateSaleCount(unitOfWork, sale, saleDetailsList);
-                AddSalesCustomerLedger(unitOfWork, sale);
-                AddGLTranForSale(unitOfWork, sale, tblGLTranDetail, useDefaultEntry);
-                AddGLTranInventoryForSale(unitOfWork, sale);
-                unitOfWork.Complete();
-                return sale;
+            }
+            catch (Exception ex)
+            {
+                SimpleLogger.LogCriticalError("ADD_SALE", $"CustomerId: {sale.intIdCustomer}, AgentId: {sale.intIdAgent}", ex);
+                throw;
             }
         }
 
         private void AddSaleDetails(Sale sale, List<SalesDetail> saleDetailsList, UnitOfWork unitOfWork)
         {
-            
+            SimpleLogger.Info($"AddSaleDetails: Processing {saleDetailsList.Count} details for Sale");
             foreach (var item in saleDetailsList)
             {
-         
+                SimpleLogger.LogSaleDetailOperation("ADD", null, sale.Id, item.ProductId, item.Quantity, item.UnitPrice, item.TotalPrice);
                 var product = unitOfWork.Products.GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(item.ProductId ?? 0);
                 sale.SalesDetails.Add(new SalesDetail
                 {
@@ -180,6 +193,17 @@ namespace GeneralLedger.Persistence.Services
                     UnitPrice = item.UnitPrice,
                     Product = product
                 });
+
+                // ✅ UPDATE THIS LINE (around line 161)
+                SimpleLogger.LogStockCreation(
+                    item.ProductId.Value,
+                    sale.Id,      // salesId
+                    null,         // purchaseId
+                    null,         // inventoryAdjustmentId
+                    2,            // stockTransactionTypeId (2 = Sales)
+                    0,            // quantityIn
+                    item.Quantity.Value  // quantityOut
+                );
 
                 sale.Stocks.Add(new Stock
                 {
@@ -201,21 +225,27 @@ namespace GeneralLedger.Persistence.Services
                 int productID = (detail.ProductId.HasValue) ? detail.ProductId.Value : 0;
 
                 if (productID == 0)
+                {
+                    SimpleLogger.Warning($"UpdateSaleCount: Skipping detail with ProductId = 0");
                     continue; // Skip the iteration if ProductId is not set
-
+                }
                 var product = unitOfWork.Products.Get(productID);
 
                 if (product == null)
+                {
+                    SimpleLogger.Warning($"UpdateSaleCount: Product not found for ProductId: {productID}");
                     continue; // Skip the iteration if no product is found for the given ID
+                }
 
                 var newStocksOut = sale.Stocks.ToList();
                 var intRemainingCount = GetTotalRemainingStock(unitOfWork, productID, newStocksOut);
+                SimpleLogger.LogStockValidation(productID, product.strProductName, intRemainingCount, (int)detail.Quantity.Value, intRemainingCount >= 0);
 
                 if (intRemainingCount < 0)
                 {
-
-                    throw new Exception($"Product " + product.strProductName + " " + product.ProductBrand.strName + " has no remaing count");
-                    return;
+                    string errorMsg = $"Product {product.strProductName} {product.ProductBrand.strName} has no remaining count";
+                    SimpleLogger.Error(errorMsg);
+                    throw new Exception(errorMsg);
                 }
                 product.intRemainingCount = intRemainingCount;
 
@@ -492,16 +522,48 @@ namespace GeneralLedger.Persistence.Services
 
         private void RemoveSaleDetail(UnitOfWork unitOfWork, SalesDetail detail)
         {
+            SimpleLogger.LogSaleDetailOperation("REMOVE", detail.Id, detail.SalesId, detail.ProductId, detail.Quantity, detail.UnitPrice, detail.TotalPrice);
             var saleDetailExist = unitOfWork.SaleDetail.Get(detail.Id);
             if (saleDetailExist != null)
             {
                 unitOfWork.SaleDetail.Remove(saleDetailExist);
             }
 
+            int productID = detail.ProductId.HasValue ? detail.ProductId.Value : 0;
+            int saleId = detail.SalesId.HasValue ? detail.SalesId.Value : 0;
+
+
+            // ✅ UPDATE THIS LINE (around line 570)
+            SimpleLogger.LogStockQuery(
+                productID,
+                saleId,       // salesId
+                null,         // purchaseId
+                null,         // inventoryAdjustmentId
+                2             // stockTransactionTypeId
+            );
+
             var existingStock = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId && s.SalesID == detail.SalesId).FirstOrDefault();
             if (existingStock != null)
             {
+                // ✅ UPDATE THIS LINE (around line 582)
+                SimpleLogger.LogStockDeletion(
+                    existingStock.Id,
+                    existingStock.ProductId.Value,
+                    existingStock.SalesID,           // salesId
+                    null,                            // purchaseId
+                    null,                            // inventoryAdjustmentId
+                    existingStock.StockTransactionTypeID.Value,
+                    existingStock.QuantityIn.Value,
+                    existingStock.QuantityOut.Value,
+                    $"Sale Detail Removal - SaleDetailId: {detail.Id}"
+                );
+
                 unitOfWork.Stock.Remove(existingStock);
+            }
+            else
+            {
+                // ✅ UPDATE THIS LINE (around line 596)
+                SimpleLogger.LogStockNotFound(productID, saleId, null, null);
             }
         }
 
@@ -603,25 +665,93 @@ namespace GeneralLedger.Persistence.Services
 
         private void UpdateSaleDetails(Sale updatedSale, List<SalesDetail> updatedSalesDetailsList, UnitOfWork unitOfWork)
         {
-            // Delete existing sales details and stock records
-            foreach (var existingDetail in updatedSale.SalesDetails.ToList())
-            {
-                var salesDetailExist = unitOfWork.SaleDetail.Get(existingDetail.Id);
-                unitOfWork.SaleDetail.Remove(salesDetailExist);
 
-                // We assume that the stock decreases when a sale is made. 
-                var existingStock = unitOfWork.Stock.Find(s => s.ProductId == existingDetail.ProductId && s.SalesID == existingDetail.SalesId).FirstOrDefault();
-                if (existingStock != null)
+            // ✅ CRITICAL: Use the parent Sale's ID to ensure we only delete stocks for THIS sale
+            int saleId = updatedSale.Id;
+
+            if (saleId <= 0)
+            {
+                SimpleLogger.Error($"UpdateSaleDetails: Invalid Sale ID: {saleId}");
+                throw new InvalidOperationException("Cannot update sale details: Invalid Sale ID");
+            }
+
+            SimpleLogger.LogSaleOperation("UPDATE_DETAILS_START", saleId, updatedSale.intIdCustomer, updatedSale.intIdAgent, updatedSale.Total);
+            // ✅ Load existing details directly from database to ensure proper IDs
+            var existingDetailsFromDb = unitOfWork.SaleDetail
+                .Find(sd => sd.SalesId == saleId)
+                .ToList();
+
+            SimpleLogger.Info($"UpdateSaleDetails: Found {existingDetailsFromDb.Count} existing details for SaleId: {saleId}");
+            // Delete existing sales details and stock records
+            foreach (var existingDetail in existingDetailsFromDb)
+            {
+                int productID = existingDetail.ProductId.HasValue ? existingDetail.ProductId.Value : 0;
+                SimpleLogger.LogSaleDetailOperation("DELETE", existingDetail.Id, saleId, existingDetail.ProductId, existingDetail.Quantity, existingDetail.UnitPrice, existingDetail.TotalPrice);
+                var salesDetailExist = unitOfWork.SaleDetail.Get(existingDetail.Id);
+                if (salesDetailExist != null)
                 {
-                    unitOfWork.Stock.Remove(existingStock);
+                    unitOfWork.SaleDetail.Remove(salesDetailExist);
                 }
 
-                int productID = (existingDetail.ProductId.HasValue) ? existingDetail.ProductId.Value : 0;
+                // ✅ CRITICAL SAFETY CHECKS:
+                // 1. Use parent saleId (not detail's SalesId which might be null)
+                // 2. Filter by StockTransactionTypeID = 2 (Sales only)
+                // 3. Ensure we have a valid ProductId
+               
+                if (productID <= 0)
+                {
+                    SimpleLogger.Warning($"UpdateSaleDetails: Invalid ProductId in existing detail: {existingDetail.Id}");
+                    continue; // Skip if invalid product
+                }
+
+                // ✅ UPDATE THIS LINE (around line 225)
+                SimpleLogger.LogStockQuery(
+                    productID,
+                    saleId,       // salesId
+                    null,         // purchaseId
+                    null,         // inventoryAdjustmentId
+                    2             // stockTransactionTypeId
+                );
+
+                // We assume that the stock decreases when a sale is made. 
+                var existingStock = unitOfWork.Stock.Find(s =>
+                            s.ProductId == productID &&
+                            s.SalesID == saleId &&  // ✅ Use parent ID, NOT existingDetail.SalesId
+                            s.StockTransactionTypeID == 2  // ✅ CRITICAL: Only delete Sales transactions (2)
+                        ).FirstOrDefault();
+
+                if (existingStock != null)
+                {
+                    // ✅ UPDATE THIS LINE (around line 238)
+                    SimpleLogger.LogStockDeletion(
+                        existingStock.Id,
+                        existingStock.ProductId.Value,
+                        existingStock.SalesID,           // salesId
+                        null,                            // purchaseId
+                        null,                            // inventoryAdjustmentId
+                        existingStock.StockTransactionTypeID.Value,
+                        existingStock.QuantityIn.Value,
+                        existingStock.QuantityOut.Value,
+                        $"Sale Update - SaleId: {saleId}"
+                    );
+                    unitOfWork.Stock.Remove(existingStock);
+                }
+                else
+                {
+                    SimpleLogger.LogStockNotFound(productID, saleId, null, null);
+                }
+
+                //int productID = (existingDetail.ProductId.HasValue) ? existingDetail.ProductId.Value : 0;
                 var product = unitOfWork.Products.Get(productID);
-                var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == existingDetail.ProductId).ToList();
-                existingStockList = existingStockList.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
-                var totalStocks = (int)existingStockList.Sum(stock => stock.QuantityIn - stock.QuantityOut);
-                product.intRemainingCount = totalStocks;
+                if (product != null)
+                {
+                    var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == productID).ToList();
+                    existingStockList = existingStockList.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
+                    var totalStocks = (int)existingStockList.Sum(stock => stock.QuantityIn - stock.QuantityOut);
+                    SimpleLogger.LogStockValidation(productID, product.strProductName, totalStocks, 0, true);
+                    product.intRemainingCount = totalStocks;
+                }
+               
             }
             updatedSale.SalesDetails.Clear();
             updatedSale.Stocks.Clear();
@@ -631,8 +761,15 @@ namespace GeneralLedger.Persistence.Services
             {
 
                 int productID = (updatedDetail.ProductId.HasValue) ? updatedDetail.ProductId.Value : 0;
+
+                if (productID <= 0)
+                {
+                    SimpleLogger.Warning($"UpdateSaleDetails: Skipping detail with invalid ProductId");
+                    continue; // Skip invalid products
+                }
                 var product = unitOfWork.Products.GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(productID);
 
+                SimpleLogger.LogSaleDetailOperation("ADD_NEW", null, saleId, productID, updatedDetail.Quantity, updatedDetail.UnitPrice, updatedDetail.TotalPrice);
                 updatedSale.SalesDetails.Add(new SalesDetail
                 {
                     //SaleId = updatedDetail.Id, 
@@ -644,6 +781,18 @@ namespace GeneralLedger.Persistence.Services
 
                 });
 
+
+                // ✅ UPDATE THIS LINE (around line 295)
+                SimpleLogger.LogStockCreation(
+                    productID,
+                    saleId,       // salesId
+                    null,         // purchaseId
+                    null,         // inventoryAdjustmentId
+                    2,            // stockTransactionTypeId
+                    0,            // quantityIn
+                    updatedDetail.Quantity.Value  // quantityOut
+                );
+
                 updatedSale.Stocks.Add(new Stock
                 {
                     ProductId = updatedDetail.ProductId,
@@ -654,6 +803,8 @@ namespace GeneralLedger.Persistence.Services
                     TransactionDate = updatedSale.TransactionDate,
                 });
             }
+
+            SimpleLogger.LogSaleOperation("UPDATE_DETAILS_COMPLETE", saleId, updatedSale.intIdCustomer, updatedSale.intIdAgent, updatedSale.Total);
         }
 
         public void UpdateRemainingCountForSale(UnitOfWork unitOfWork, Sale sale, List<SalesDetail> SalesDetailsList)

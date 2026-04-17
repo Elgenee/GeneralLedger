@@ -82,6 +82,7 @@ namespace GeneralLedger.Core.Domain
         public virtual DbSet<InventoryAdjustment> InventoryAdjustments { get; set; }
         public virtual DbSet<InventoryAdjustmentDetail> InventoryAdjustmentDetails { get; set; }
         public virtual DbSet<InventoryAdjustmentType> InventoryAdjustmentTypes { get; set; }
+        public virtual DbSet<MAY2025> MAY2025 { get; set; }
     
         public virtual ObjectResult<rptISExpense_Result> rptISExpense(Nullable<int> intFiscalYear, Nullable<int> intMonth)
         {

@@ -1,4 +1,9 @@
-﻿using System;
+﻿using GeneralLedger.Core.Domain;
+using GeneralLedger.Tier.BAL;
+using GeneralLedger.Tier.BO;
+using MetroFramework.Controls;
+using MetroFramework.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,10 +12,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MetroFramework.Forms;
-using GeneralLedger.Tier.BAL;
-using GeneralLedger.Tier.BO;
-using GeneralLedger.Core.Domain;
 
 
 namespace GeneralLedger.UserControls
@@ -33,6 +34,16 @@ namespace GeneralLedger.UserControls
         {
             InitializeComponent();
             cmbPageSelector.SelectedIndexChanged += cmbPageSelector_SelectedIndexChanged;
+
+            if (UserProfile.UserUserProfile.Name != "Administrator")
+            {
+                AddBegBalanceBtn.Visible = false;
+                DeleteBegBalanceBtn.Visible = false;
+            }
+            else {
+                AddBegBalanceBtn.Visible = true;
+                DeleteBegBalanceBtn.Visible = true;
+            }
         }
 
         private void setRowNumber(DataGridView dgv)
@@ -390,6 +401,129 @@ namespace GeneralLedger.UserControls
                 currentPage++;
                 DisplayCurrentPage();
             }
+        }
+
+        public static string ShowInputDialog(string prompt, string title, string defaultValue = "", Form owner = null)
+        {
+            Form inputForm = new Form
+            {
+                Width = 400,
+                Height = 150,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = title,
+                StartPosition = FormStartPosition.CenterParent, // Changed to CenterParent
+                TopMost = true, // This forces the form to stay on top
+                MaximizeBox = false,
+                MinimizeBox = false
+            };
+
+            Label textLabel = new Label { Left = 20, Top = 20, Text = prompt, AutoSize = true };
+            TextBox textBox = new TextBox { Left = 20, Top = 50, Width = 340, Text = defaultValue };
+            Button confirmation = new Button { Text = "OK", Left = 200, Width = 80, Top = 80, DialogResult = DialogResult.OK };
+            Button cancel = new Button { Text = "Cancel", Left = 290, Width = 80, Top = 80, DialogResult = DialogResult.Cancel };
+
+            confirmation.Click += (sender, e) => { inputForm.Close(); };
+            cancel.Click += (sender, e) => { inputForm.Close(); };
+
+            inputForm.Controls.Add(textLabel);
+            inputForm.Controls.Add(textBox);
+            inputForm.Controls.Add(confirmation);
+            inputForm.Controls.Add(cancel);
+            inputForm.AcceptButton = confirmation;
+            inputForm.CancelButton = cancel;
+
+            // Show with owner parameter
+            return inputForm.ShowDialog(owner) == DialogResult.OK ? textBox.Text : null;
+        }
+
+        private void AddBegBalanceBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Show input dialog for quantity
+                string input = ShowInputDialog(
+                    "Enter beginning balance quantity:",
+                    "Add Beginning Balance",
+                    "0");
+
+                // Validate input
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return; // User cancelled
+                }
+
+                decimal quantity;
+                if (!decimal.TryParse(input, out quantity))
+                {
+                    MessageBox.Show("Please enter a valid numeric quantity.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (quantity <= 0)
+                {
+                    MessageBox.Show("Quantity must be greater than zero.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Save to database
+                ProductBAL productBAL = new ProductBAL();
+                bool success = productBAL.AddBeginningBalance(this.ProductId, quantity);
+
+                if (success)
+                {
+                    //MessageBox.Show("Beginning balance added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                    // Reload the stock details
+                    //LoadStockDetails();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to add beginning balance.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void DeleteBegBalanceBtn_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                // Confirm deletion
+                DialogResult result = MessageBox.Show(
+                    "Are you sure you want to delete the beginning balance entry for this product?",
+                    "Confirm Delete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Delete from database
+                    ProductBAL productBAL = new ProductBAL();
+                    bool success = productBAL.DeleteBeginningBalance(this.ProductId);
+
+                    if (success)
+                    {
+                        //MessageBox.Show("Beginning balance deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                        // Reload the stock details
+                        //LoadStockDetails();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete beginning balance or no beginning balance found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }
