@@ -1,21 +1,28 @@
-﻿using System;
+﻿using GeneralLedger.Core.Domain;
+using GeneralLedger.Core.Services;
+using GeneralLedger.Persistence;
+using GeneralLedger.Persistence.Logging;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GeneralLedger.Core.Domain;
-using GeneralLedger.Core.Services;
-using GeneralLedger.Persistence;
 
 namespace GeneralLedger.Persistence.Services
 {
     public class PurchaseServices : IPurchaseServices
     {
         public Purchase Add(Purchase purchase, List<tblGLTranDetail> tblGLTranDetail, bool UseDefaultEntry, List<PurchaseDetail> PurchaseDetailsList)
-        {      
-                using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+        {
+            try
+            {
+
+          
+            // ✅ Changed from: SimpleLogger.Info($"Add Purchase: Starting...")
+            SimpleLogger.LogPurchaseOperation("ADD_START", 0, purchase.intIDSupplier, purchase.Total);
+            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
                 {
                     AddPurchaseDetails(purchase, PurchaseDetailsList, unitOfWork);
 
@@ -54,8 +61,17 @@ namespace GeneralLedger.Persistence.Services
                     AddGLTran(unitOfWork, purchase, tblGLTranDetail, UseDefaultEntry);
                     AddGLTranInventory(unitOfWork, purchase);
                     unitOfWork.Complete();
+                    // ✅ Changed from: SimpleLogger.Info($"Add Purchase: Success...")
+                    SimpleLogger.LogPurchaseOperation("ADD_SUCCESS", purchase.Id, purchase.intIDSupplier, purchase.Total);
                     return purchase;
                 }
+
+            }
+            catch (Exception ex)
+            {
+                SimpleLogger.LogCriticalError("ADD_PURCHASE", $"SupplierId: {purchase.intIDSupplier}, Total: {purchase.Total}", ex);
+                throw;
+            }
         }
 
         public int GetTotalRemainingStock(UnitOfWork unitOfWork, int productId, List<Stock> newStocks)
@@ -89,10 +105,13 @@ namespace GeneralLedger.Persistence.Services
 
         private void AddPurchaseDetails(Purchase purchase, List<PurchaseDetail> PurchaseDetailsList, UnitOfWork unitOfWork)
         {
+            // ✅ Changed from: SimpleLogger.Info($"AddPurchaseDetails: Processing...")
+            SimpleLogger.LogPurchaseOperation("ADD_DETAILS_START", purchase.Id, null, null);
             foreach (var item in PurchaseDetailsList)
             {
+                // ✅ Use purchase detail logging
+                SimpleLogger.LogPurchaseDetailOperation("ADD", null, purchase.Id, item.ProductId, item.Quantity, item.UnitPrice, item.TotalPrice);
 
-             
                 var product = unitOfWork.Products.GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(item.ProductId ?? 0);
                 purchase.PurchaseDetails.Add(new PurchaseDetail
                 {
@@ -103,6 +122,18 @@ namespace GeneralLedger.Persistence.Services
                     Product = product
               
                 });
+
+                // ✅ UPDATE THIS LINE (around line 107)
+                SimpleLogger.LogStockCreation(
+                    item.ProductId.Value,
+                    null,         // salesId
+                    purchase.Id,  // purchaseId
+                    null,         // inventoryAdjustmentId
+                    1,            // stockTransactionTypeId (1 = Purchase)
+                    item.Quantity.Value,  // quantityIn
+                    0             // quantityOut
+                );
+
 
                 purchase.Stocks.Add(new Stock
                 {
@@ -138,11 +169,12 @@ namespace GeneralLedger.Persistence.Services
 
             var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
             var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1071).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+            var inventoryTotal = purchase.PurchaseDetails.Sum(g => g.TotalPrice);
 
             var gLTranDetail = new List<tblGLTranDetail>
             {
-                CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, 0, purchase.Total.Value),
-                CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, purchase.Total.Value, 0),
+                CreateGLTranDetail((int)journalEntry3.intIDMasCOA, journalEntry3.ID, 0, inventoryTotal),
+                CreateGLTranDetail((int)journalEntry1.intIDMasCOA, journalEntry1.ID, inventoryTotal, 0),
             };
 
             //AddGLTranHeader(unitOfWork, purchase, gLTranDetail);
@@ -353,25 +385,42 @@ namespace GeneralLedger.Persistence.Services
 
         public void Remove(Purchase purchase, List<PurchaseDetail> PurchaseDetailsList)
         {
-            using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
+            try
             {
-                var resultPurchase = unitOfWork.Purchase.GetPurchasesWithJournalEntry(purchase.Id).SingleOrDefault();
-                if (resultPurchase == null)
+                // ✅ Changed from: SimpleLogger.Info($"Remove Purchase: Starting...")
+                SimpleLogger.LogPurchaseOperation("REMOVE_START", purchase.Id, purchase.intIDSupplier, purchase.Total);
+                using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
                 {
-                    throw new Exception("Purchase not found!");
+                    var resultPurchase = unitOfWork.Purchase.GetPurchasesWithJournalEntry(purchase.Id).SingleOrDefault();
+                    if (resultPurchase == null)
+                    {
+                        SimpleLogger.Error($"Remove Purchase: Purchase not found - PurchaseId: {purchase.Id}");
+                        throw new Exception("Purchase not found!");
+                    }
+
+                    RemovePurchaseDetails(unitOfWork, PurchaseDetailsList);
+                    RemoveGLTran(unitOfWork, resultPurchase);
+                    RemovePurchaseSupplierLedger(unitOfWork, purchase);
+                    unitOfWork.Purchase.Remove(resultPurchase);
+
+                    unitOfWork.Complete();
+
+                    // ✅ Changed from: SimpleLogger.Info($"Remove Purchase: Success...")
+                    SimpleLogger.LogPurchaseOperation("REMOVE_SUCCESS", purchase.Id, purchase.intIDSupplier, purchase.Total);
                 }
+            }
+            catch (Exception ex)
+            {
 
-                RemovePurchaseDetails(unitOfWork, PurchaseDetailsList);
-                RemoveGLTran(unitOfWork, resultPurchase);
-                RemovePurchaseSupplierLedger(unitOfWork, purchase);
-                unitOfWork.Purchase.Remove(resultPurchase);
-
-                unitOfWork.Complete();
+                SimpleLogger.LogCriticalError("REMOVE_PURCHASE", $"PurchaseId: {purchase.Id}", ex);
+                throw;
             }
         }
 
         private void RemovePurchaseDetails(UnitOfWork unitOfWork, List<PurchaseDetail> PurchaseDetailsList)
         {
+            // ✅ Changed from: SimpleLogger.Info($"RemovePurchaseDetails: Removing...")
+            SimpleLogger.LogPurchaseOperation("REMOVE_DETAILS_START", 0, null, null);
             foreach (var detail in PurchaseDetailsList)
             {
                 RemovePurchaseDetail(unitOfWork, detail);
@@ -382,17 +431,51 @@ namespace GeneralLedger.Persistence.Services
 
         private void RemovePurchaseDetail(UnitOfWork unitOfWork, PurchaseDetail detail)
         {
+            // ✅ Use purchase detail logging
+            SimpleLogger.LogPurchaseDetailOperation("REMOVE", detail.Id, detail.PurchaseId, detail.ProductId, detail.Quantity, detail.UnitPrice, detail.TotalPrice);
+
             var purchaseDetailExist = unitOfWork.PurchaseDetail.Get(detail.Id);
             if (purchaseDetailExist != null)
             {
                 unitOfWork.PurchaseDetail.Remove(purchaseDetailExist);
             }
 
+            int productID = detail.ProductId.HasValue ? detail.ProductId.Value : 0;
+            int purchaseId = detail.PurchaseId.HasValue ? detail.PurchaseId.Value : 0;
+
+            // ✅ UPDATE THIS LINE (around line 269)
+            SimpleLogger.LogStockQuery(
+                productID,
+                null,         // salesId
+                purchaseId,   // purchaseId
+                null,         // inventoryAdjustmentId
+                1             // stockTransactionTypeId
+            );
+
             var existingStock = unitOfWork.Stock.Find(s => s.ProductId == detail.ProductId && s.PurchaseID == detail.PurchaseId).FirstOrDefault();
             if (existingStock != null)
             {
+                // ✅ UPDATE THIS LINE (around line 281)
+                SimpleLogger.LogStockDeletion(
+                    existingStock.Id,
+                    existingStock.ProductId.Value,
+                    null,                            // salesId
+                    existingStock.PurchaseID,        // purchaseId
+                    null,                            // inventoryAdjustmentId
+                    existingStock.StockTransactionTypeID.Value,
+                    existingStock.QuantityIn.Value,
+                    existingStock.QuantityOut.Value,
+                    $"Purchase Detail Removal - DetailId: {detail.Id}"
+                );
+
                 unitOfWork.Stock.Remove(existingStock);
             }
+            else
+            {
+                // ✅ UPDATE THIS LINE (around line 295)
+                SimpleLogger.LogStockNotFound(productID, null, purchaseId, null);
+            }
+
         }
 
         private void UpdateRemainingStock(UnitOfWork unitOfWork, PurchaseDetail detail)
@@ -466,6 +549,8 @@ namespace GeneralLedger.Persistence.Services
         {
             try
             {
+                // ✅ Changed from: SimpleLogger.Info($"Update Purchase: Starting...")
+                SimpleLogger.LogPurchaseOperation("UPDATE_START", updatedPurchase.Id, updatedPurchase.intIDSupplier, updatedPurchase.Total);
                 using (var unitOfWork = new UnitOfWork(new GeneralLedgerContext()))
                 {
                     // 1. Update purchase details and associated stock records
@@ -476,6 +561,14 @@ namespace GeneralLedger.Persistence.Services
 
                     // 2. Update purchase record in the repository
                     var pur = unitOfWork.Purchase.Get(updatedPurchase.Id);
+
+                    // ✅ Log individual property updates
+                    if (pur.PONo != updatedPurchase.PONo)
+                        SimpleLogger.LogPurchaseUpdate(updatedPurchase.Id, "PONo", pur.PONo, updatedPurchase.PONo);
+
+                    if (pur.Total != updatedPurchase.Total)
+                        SimpleLogger.LogPurchaseUpdate(updatedPurchase.Id, "Total", pur.Total?.ToString("F2"), updatedPurchase.Total?.ToString("F2"));
+
                     pur.PONo = updatedPurchase.PONo;
                     pur.SIDR = updatedPurchase.SIDR;
                     pur.TRANo = updatedPurchase.TRANo;
@@ -527,13 +620,17 @@ namespace GeneralLedger.Persistence.Services
 
                     // 6. Commit changes to the database
                     unitOfWork.Complete();
-                
+
+
+                    // ✅ Changed from: SimpleLogger.Info($"Update Purchase: Success...")
+                    SimpleLogger.LogPurchaseOperation("UPDATE_SUCCESS", updatedPurchase.Id, updatedPurchase.intIDSupplier, updatedPurchase.Total);
+
                     return updatedPurchase;
                 }
             }
             catch (Exception ex)
             {
-
+                SimpleLogger.LogCriticalError("UPDATE_PURCHASE", $"PurchaseId: {updatedPurchase.Id}", ex);
                 throw ex;
             }
        
@@ -542,24 +639,85 @@ namespace GeneralLedger.Persistence.Services
 
         private void UpdatePurchaseDetails(Purchase updatedPurchase, List<PurchaseDetail> updatedPurchaseDetailsList, UnitOfWork unitOfWork)
         {
-            // Delete existing purchase details and stock records
-            foreach (var existingDetail in updatedPurchase.PurchaseDetails.ToList())
-            {
-                var purchaseDetailExist = unitOfWork.PurchaseDetail.Get(existingDetail.Id);
-                unitOfWork.PurchaseDetail.Remove(purchaseDetailExist);
-                //var existingStock = updatedPurchase.Stocks.FirstOrDefault(s => s.ProductId == existingDetail.ProductId);
+            int purchaseId = updatedPurchase.Id;
 
-                var existingStock = unitOfWork.Stock.Find(s => s.ProductId == existingDetail.ProductId && s.PurchaseID == existingDetail.PurchaseId).FirstOrDefault();
-                if (existingStock != null)
+            if (purchaseId <= 0)
+            {
+                SimpleLogger.Error($"UpdatePurchaseDetails: Invalid Purchase ID: {purchaseId}");
+                throw new InvalidOperationException("Cannot update purchase details: Invalid Purchase ID");
+            }
+
+            // ✅ Changed from: SimpleLogger.Info($"UpdatePurchaseDetails: Starting...")
+            SimpleLogger.LogPurchaseOperation("UPDATE_DETAILS_START", purchaseId, null, null);
+
+            var existingDetailsFromDb = unitOfWork.PurchaseDetail
+                .Find(pd => pd.PurchaseId == purchaseId)
+                .ToList();
+
+            SimpleLogger.Info($"UpdatePurchaseDetails: Found {existingDetailsFromDb.Count} existing details for PurchaseId: {purchaseId}");
+            // Delete existing purchase details and stock records
+            foreach (var existingDetail in existingDetailsFromDb)
+            {
+
+                int productID = existingDetail.ProductId.HasValue ? existingDetail.ProductId.Value : 0;
+                // ✅ Use purchase detail logging
+                SimpleLogger.LogPurchaseDetailOperation("DELETE", existingDetail.Id, purchaseId, existingDetail.ProductId, existingDetail.Quantity, existingDetail.UnitPrice, existingDetail.TotalPrice);
+
+                var purchaseDetailExist = unitOfWork.PurchaseDetail.Get(existingDetail.Id);
+                if (purchaseDetailExist != null)
                 {
-                    unitOfWork.Stock.Remove(existingStock);
+                    unitOfWork.PurchaseDetail.Remove(purchaseDetailExist);
                 }
 
-                int productID = (existingDetail.ProductId.HasValue) ? existingDetail.ProductId.Value : 0;
+                if (productID <= 0)
+                {
+                    SimpleLogger.Warning($"UpdatePurchaseDetails: Invalid ProductId in existing detail: {existingDetail.Id}");
+                    continue;
+                }
+
+                // ✅ UPDATE THIS LINE (around line 352)
+                SimpleLogger.LogStockQuery(
+                    productID,
+                    null,         // salesId
+                    purchaseId,   // purchaseId
+                    null,         // inventoryAdjustmentId
+                    1             // stockTransactionTypeId
+                );
+
+                var existingStock = unitOfWork.Stock.Find(s =>
+                    s.ProductId == productID &&
+                    s.PurchaseID == purchaseId &&
+                    s.StockTransactionTypeID == 1
+                ).FirstOrDefault();
+                //var existingStock = updatedPurchase.Stocks.FirstOrDefault(s => s.ProductId == existingDetail.ProductId);
+
+                if (existingStock != null)
+                {
+                    // ✅ UPDATE THIS LINE (around line 365)
+                    SimpleLogger.LogStockDeletion(
+                        existingStock.Id,
+                        existingStock.ProductId.Value,
+                        null,                            // salesId
+                        existingStock.PurchaseID,        // purchaseId
+                        null,                            // inventoryAdjustmentId
+                        existingStock.StockTransactionTypeID.Value,
+                        existingStock.QuantityIn.Value,
+                        existingStock.QuantityOut.Value,
+                        $"Purchase Update - PurchaseId: {purchaseId}"
+                    );
+
+                    unitOfWork.Stock.Remove(existingStock);
+                }
+                else
+                {
+                    SimpleLogger.LogStockNotFound(productID, null, purchaseId, null);
+                }
+
                 var product = unitOfWork.Products.Get(productID);
-                var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == existingDetail.ProductId).ToList();
+                var existingStockList = unitOfWork.Stock.Find(s => s.ProductId == productID).ToList();
                 existingStockList = existingStockList.Where(stock => unitOfWork.GetEntityState(stock) != EntityState.Deleted).ToList();
                 var totalStocks = (int)existingStockList.Sum(stock => stock.QuantityIn - stock.QuantityOut);
+                SimpleLogger.LogStockValidation(productID, product.strProductName, totalStocks, 0, true);
                 product.intRemainingCount = totalStocks;
 
             }
@@ -572,6 +730,16 @@ namespace GeneralLedger.Persistence.Services
 
                 int productID = (updatedDetail.ProductId.HasValue) ? updatedDetail.ProductId.Value : 0;
                 var product = unitOfWork.Products.GetProductWithCategoryTypeBrandsSizeColorUnitCharacteristic(productID);
+                if (productID <= 0)
+                {
+                    SimpleLogger.Warning($"UpdatePurchaseDetails: Skipping detail with invalid ProductId");
+                    continue;
+                }
+
+
+                // ✅ Use purchase detail logging
+                SimpleLogger.LogPurchaseDetailOperation("ADD_NEW", null, purchaseId, productID, updatedDetail.Quantity, updatedDetail.UnitPrice, updatedDetail.TotalPrice);
+
 
                 updatedPurchase.PurchaseDetails.Add(new PurchaseDetail
                 {
@@ -583,6 +751,17 @@ namespace GeneralLedger.Persistence.Services
                     Product = product
                 });
 
+                // ✅ UPDATE THIS LINE (around line 423)
+                SimpleLogger.LogStockCreation(
+                    productID,
+                    null,         // salesId
+                    purchaseId,   // purchaseId
+                    null,         // inventoryAdjustmentId
+                    1,            // stockTransactionTypeId
+                    updatedDetail.Quantity.Value,  // quantityIn
+                    0             // quantityOut
+                );
+
                 updatedPurchase.Stocks.Add(new Stock
                 {
                     ProductId = updatedDetail.ProductId,
@@ -593,6 +772,9 @@ namespace GeneralLedger.Persistence.Services
                     TransactionDate = updatedPurchase.TransactionDate,
                 });
             }
+
+            // ✅ Changed from: SimpleLogger.Info($"UpdatePurchaseDetails: Complete...")
+            SimpleLogger.LogPurchaseOperation("UPDATE_DETAILS_COMPLETE", purchaseId, null, null);
         }
 
         private void UpdatePurchaseSupplierLedger(UnitOfWork unitOfWork, Purchase updatedPurchase)
@@ -633,6 +815,7 @@ namespace GeneralLedger.Persistence.Services
 
             var journalEntry3 = unitOfWork.CoaSub.Find(c => c.ID == 1028).SingleOrDefault(); // INVENTORY
             var journalEntry1 = unitOfWork.CoaSub.Find(c => c.ID == 1071).SingleOrDefault(); // ACCOUNTS RECEIVABLE- SALES
+            var inventoryTotal = updatedPurchase.PurchaseDetails.Sum(g => g.TotalPrice);
 
             var gLTranDetail = new List<tblGLTranDetail>
              {
@@ -641,14 +824,14 @@ namespace GeneralLedger.Persistence.Services
                         intIDMasCoa = (int)journalEntry3.intIDMasCOA,
                         intIDMasCoaSub = journalEntry3.ID,
                         curCredit = 0,
-                        curDebit = updatedPurchase.Total.Value,
+                        curDebit = inventoryTotal,
                         //intIDGLTranHeader = existingGLTranHeader.ID
                     },
                   new tblGLTranDetail
                     {
                         intIDMasCoa = (int)journalEntry1.intIDMasCOA,
                         intIDMasCoaSub = journalEntry1.ID,
-                        curCredit = updatedPurchase.Total.Value,
+                        curCredit = inventoryTotal,
                         curDebit = 0,
                         //intIDGLTranHeader = existingGLTranHeader.ID
                     }

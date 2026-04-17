@@ -56,6 +56,8 @@
             this.cmbPageSelector = new MetroFramework.Controls.MetroComboBox();
             this.btnPrevPage = new MetroFramework.Controls.MetroButton();
             this.btnNextPage = new MetroFramework.Controls.MetroButton();
+            this.AddBegBalanceBtn = new MetroFramework.Controls.MetroButton();
+            this.DeleteBegBalanceBtn = new MetroFramework.Controls.MetroButton();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProduct)).BeginInit();
             this.SuspendLayout();
@@ -362,11 +364,35 @@
             this.btnNextPage.UseSelectable = true;
             this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
             // 
+            // AddBegBalanceBtn
+            // 
+            this.AddBegBalanceBtn.Location = new System.Drawing.Point(971, 192);
+            this.AddBegBalanceBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.AddBegBalanceBtn.Name = "AddBegBalanceBtn";
+            this.AddBegBalanceBtn.Size = new System.Drawing.Size(132, 28);
+            this.AddBegBalanceBtn.TabIndex = 151;
+            this.AddBegBalanceBtn.Text = "Add Beg Balance";
+            this.AddBegBalanceBtn.UseSelectable = true;
+            this.AddBegBalanceBtn.Click += new System.EventHandler(this.AddBegBalanceBtn_Click);
+            // 
+            // DeleteBegBalanceBtn
+            // 
+            this.DeleteBegBalanceBtn.Location = new System.Drawing.Point(1111, 190);
+            this.DeleteBegBalanceBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.DeleteBegBalanceBtn.Name = "DeleteBegBalanceBtn";
+            this.DeleteBegBalanceBtn.Size = new System.Drawing.Size(150, 28);
+            this.DeleteBegBalanceBtn.TabIndex = 152;
+            this.DeleteBegBalanceBtn.Text = "Delete Beg Balance";
+            this.DeleteBegBalanceBtn.UseSelectable = true;
+            this.DeleteBegBalanceBtn.Click += new System.EventHandler(this.DeleteBegBalanceBtn_Click);
+            // 
             // StockInquiryDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1460, 934);
+            this.Controls.Add(this.DeleteBegBalanceBtn);
+            this.Controls.Add(this.AddBegBalanceBtn);
             this.Controls.Add(this.metroLabel9);
             this.Controls.Add(this.lblPageInfo);
             this.Controls.Add(this.cmbPageSelector);
@@ -434,5 +460,7 @@
         private MetroFramework.Controls.MetroComboBox cmbPageSelector;
         private MetroFramework.Controls.MetroButton btnPrevPage;
         private MetroFramework.Controls.MetroButton btnNextPage;
+        private MetroFramework.Controls.MetroButton AddBegBalanceBtn;
+        private MetroFramework.Controls.MetroButton DeleteBegBalanceBtn;
     }
 }

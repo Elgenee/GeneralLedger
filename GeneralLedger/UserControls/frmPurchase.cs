@@ -92,6 +92,33 @@ namespace GeneralLedger.UserControls
                     MessageBox.Show("Please check the products");
                     return;
                 }
+                decimal totalAmount;
+                if (!decimal.TryParse(this.txtTotal.Text, out totalAmount))
+                {
+                    MessageBox.Show("Invalid total amount.");
+                    return;
+                }
+
+                if (!this.chkUseDefaultEntry.Checked)
+                {
+                    decimal coaSubCreditSum = GLTranDetail
+                        .Where(d => d.tblMasCOASub != null && d.tblMasCOASub.ID == 1056 && d.curCredit.HasValue)
+                        .Sum(d => d.curCredit.Value);
+
+                    if (coaSubCreditSum != totalAmount)
+                    {
+                        var result = MessageBox.Show(
+                            "Accounts payable - supplier does not match on purchase total amount.\nDo you want to proceed?",
+                            "Amount Mismatch",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning
+                        );
+                        if (result == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                }
 
                 string TransType = (this.ID == 0) ? "insert" : "update";
 
@@ -106,7 +133,7 @@ namespace GeneralLedger.UserControls
                      Total = decimal.TryParse(this.txtTotal.Text, out decimalParser) ? decimalParser : 0,
                      TransactionDate = this.dtTransactionDate.Value,
                      AdditionalDescription = this.txtAdditionalDescription.Text,
-                     Description = this.txtDescription.Text
+                     Description = this.txtDescription.Text          
                     };
 
                     Purchase = PurchaseServices.Add(Purchase, this.GLTranDetail, this.chkUseDefaultEntry.Checked, this.PurchaseDetailsList);
@@ -308,11 +335,13 @@ namespace GeneralLedger.UserControls
             {
                 this.btnAddEntry.Enabled = false;
                 this.btnDeleteEntry.Enabled = false;
+                this.txtTotal.Enabled = false;
             }
             else
             {
                 this.btnAddEntry.Enabled = true;
                 this.btnDeleteEntry.Enabled = true;
+                this.txtTotal.Enabled = true;
             }
         }
 
@@ -672,7 +701,9 @@ namespace GeneralLedger.UserControls
 
                         setRowNumber(this.dgJournalEntry);
                         this.txtPurchaseTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice));
-                        this.txtTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice));
+                        //this.txtTotal.Text = string.Format("{0:0.00}", PurchaseDetailsList.Sum(g => g.TotalPrice)); 
+
+                        this.txtTotal.Text = sp.Purchase.Total.ToString();
                     }
 
 
@@ -1180,6 +1211,11 @@ namespace GeneralLedger.UserControls
 
                MessageBox.Show("Error:" + ex.Message);
             }
+        }
+
+        private void chkUseDefaultEntry_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -262,6 +262,7 @@ namespace GeneralLedger
                 {
                     this.btnInventoryAdjustment.Enabled = true;
                     this.btnInventoryAdjustment.Style = MetroFramework.MetroColorStyle.Blue;
+                    
                     // this.btnPostNew.Visible = true;
                 }
 
@@ -1161,6 +1162,11 @@ namespace GeneralLedger
             metroTabPage.Controls.Add(StockInquiry);
             metroTabControlMain.TabPages.Add(metroTabPage);
             metroTabControlMain.SelectedTab = metroTabPage;
+        }
+
+        private void metroTile2_Click_4(object sender, EventArgs e)
+        {
+            
         }
     }
 }

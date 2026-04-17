@@ -485,6 +485,64 @@ namespace GeneralLedger.Tier.DAL
 
         }
 
+        public bool AddBeginningBalance(int productId, decimal quantityIn)
+        {
+            var dbUtil = new DatabaseManager();
+
+            using (SqlConnection conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = @"INSERT INTO dbo.Stock
+                                        (
+                                            ProductId,
+                                            StockTransactionTypeID,
+                                            QuantityIn,
+                                            TransactionDate
+                                        )
+                                        VALUES
+                                        (
+                                            @ProductId,
+                                            3002,
+                                            @QuantityIn,
+                                            '2025-12-31'
+                                        )";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@ProductId", productId);
+                    cmd.Parameters.AddWithValue("@QuantityIn", quantityIn);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+
+        public bool DeleteBeginningBalance(int productId)
+        {
+            var dbUtil = new DatabaseManager();
+
+            using (SqlConnection conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = @"DELETE FROM dbo.Stock 
+                                       WHERE ProductId = @ProductId 
+                                       AND StockTransactionTypeID = 3002";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@ProductId", productId);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+
 
         public List<SearchProductAndColorAndSize> getProductDetails(int ProductID)
         {
