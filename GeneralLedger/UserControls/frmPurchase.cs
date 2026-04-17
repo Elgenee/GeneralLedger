@@ -99,6 +99,12 @@ namespace GeneralLedger.UserControls
                     return;
                 }
 
+                if (this.GLTranDetail.Sum(d => d.curCredit) != this.GLTranDetail.Sum(d => d.curDebit))
+                {
+                    MessageBox.Show("Disbal journal entry");
+                    return;
+                }
+
                 if (!this.chkUseDefaultEntry.Checked)
                 {
                     decimal coaSubCreditSum = GLTranDetail
