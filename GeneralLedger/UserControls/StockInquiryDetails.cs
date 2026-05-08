@@ -28,7 +28,7 @@ namespace GeneralLedger.UserControls
         private int totalItems = 0;
         private int totalPages = 1;
         private List<StockDetailsByProductId> allStockDetailsByProductId = new List<StockDetailsByProductId>();
-
+        public int StockId { get; set; } = 0;
 
         public StockInquiryDetails()
         {
@@ -166,6 +166,11 @@ namespace GeneralLedger.UserControls
             try
             {
 
+                if (e.RowIndex >= 0)
+                {
+                    this.StockId = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[5].Value.ToString());
+                }
+
                 //if (e.RowIndex >= 0)
                 //{
                 //    this.Product = new Product
@@ -178,68 +183,68 @@ namespace GeneralLedger.UserControls
                 //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[3].Value.ToString()),
                 //            Name = this.dgProduct.Rows[e.RowIndex].Cells[4].Value.ToString()
 
-                //        },
-                //        ProductCategory = new Tier.BO.ProductCategory
-                //        {
-                //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[5].Value.ToString()),
-                //            Name = this.dgProduct.Rows[e.RowIndex].Cells[6].Value.ToString()
-                //        },
-                //        PriceType = new Tier.BO.PriceType
-                //        {
-                //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[7].Value.ToString()),
-                //            Name = this.dgProduct.Rows[e.RowIndex].Cells[8].Value.ToString()
+                    //        },
+                    //        ProductCategory = new Tier.BO.ProductCategory
+                    //        {
+                    //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[5].Value.ToString()),
+                    //            Name = this.dgProduct.Rows[e.RowIndex].Cells[6].Value.ToString()
+                    //        },
+                    //        PriceType = new Tier.BO.PriceType
+                    //        {
+                    //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[7].Value.ToString()),
+                    //            Name = this.dgProduct.Rows[e.RowIndex].Cells[8].Value.ToString()
 
-                //        },
+                    //        },
 
-                //        ProductType = new Tier.BO.ProductType
-                //        {
-                //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[7].Value.ToString()),
-                //            Name = this.dgProduct.Rows[e.RowIndex].Cells[8].Value.ToString()
+                    //        ProductType = new Tier.BO.ProductType
+                    //        {
+                    //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[7].Value.ToString()),
+                    //            Name = this.dgProduct.Rows[e.RowIndex].Cells[8].Value.ToString()
 
-                //        },
-                //        ProductSize = new Tier.BO.ProductSize
-                //        {
-                //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[16].Value.ToString()),
-                //            Name = this.dgProduct.Rows[e.RowIndex].Cells[17].Value.ToString()
+                    //        },
+                    //        ProductSize = new Tier.BO.ProductSize
+                    //        {
+                    //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[16].Value.ToString()),
+                    //            Name = this.dgProduct.Rows[e.RowIndex].Cells[17].Value.ToString()
 
-                //        },
-                //        ProductColor = new Tier.BO.ProductColor
-                //        {
-                //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[14].Value.ToString()),
-                //            Name = this.dgProduct.Rows[e.RowIndex].Cells[15].Value.ToString()
+                    //        },
+                    //        ProductColor = new Tier.BO.ProductColor
+                    //        {
+                    //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[14].Value.ToString()),
+                    //            Name = this.dgProduct.Rows[e.RowIndex].Cells[15].Value.ToString()
 
-                //        },
-                //        ProductUnit = new Tier.BO.ProductUnit
-                //        {
-                //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[18].Value.ToString()),
-                //            Name = this.dgProduct.Rows[e.RowIndex].Cells[19].Value.ToString()
+                    //        },
+                    //        ProductUnit = new Tier.BO.ProductUnit
+                    //        {
+                    //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[18].Value.ToString()),
+                    //            Name = this.dgProduct.Rows[e.RowIndex].Cells[19].Value.ToString()
 
-                //        },
-                //        strCode = this.dgProduct.Rows[e.RowIndex].Cells[20].Value.ToString(),
-                //        strPR = this.dgProduct.Rows[e.RowIndex].Cells[21].Value.ToString(),
-                //        strPCD = this.dgProduct.Rows[e.RowIndex].Cells[22].Value.ToString(),
-                //        strMFLM = this.dgProduct.Rows[e.RowIndex].Cells[23].Value.ToString(),
-                //        strPattern = this.dgProduct.Rows[e.RowIndex].Cells[24].Value.ToString(),
-                //        strOffsetCenterBase = this.dgProduct.Rows[e.RowIndex].Cells[25].Value.ToString(),
-                //        strOrigin = this.dgProduct.Rows[e.RowIndex].Cells[26].Value.ToString(),
-                //        UnitPrice = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[27].Value.ToString()),
-                //        //SellingPrice = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[28].Value.ToString()),
-                //        ProductBrand = new Tier.BO.ProductBrand
-                //        {
-                //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[9].Value.ToString()),
-                //            Name = this.dgProduct.Rows[e.RowIndex].Cells[10].Value.ToString()
+                    //        },
+                    //        strCode = this.dgProduct.Rows[e.RowIndex].Cells[20].Value.ToString(),
+                    //        strPR = this.dgProduct.Rows[e.RowIndex].Cells[21].Value.ToString(),
+                    //        strPCD = this.dgProduct.Rows[e.RowIndex].Cells[22].Value.ToString(),
+                    //        strMFLM = this.dgProduct.Rows[e.RowIndex].Cells[23].Value.ToString(),
+                    //        strPattern = this.dgProduct.Rows[e.RowIndex].Cells[24].Value.ToString(),
+                    //        strOffsetCenterBase = this.dgProduct.Rows[e.RowIndex].Cells[25].Value.ToString(),
+                    //        strOrigin = this.dgProduct.Rows[e.RowIndex].Cells[26].Value.ToString(),
+                    //        UnitPrice = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[27].Value.ToString()),
+                    //        //SellingPrice = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[28].Value.ToString()),
+                    //        ProductBrand = new Tier.BO.ProductBrand
+                    //        {
+                    //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[9].Value.ToString()),
+                    //            Name = this.dgProduct.Rows[e.RowIndex].Cells[10].Value.ToString()
 
-                //        },
-                //        PerPieceBox = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[11].Value.ToString()),
-                //        Location = new Tier.BO.Location
-                //        {
-                //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[12].Value.ToString()),
-                //            Name = this.dgProduct.Rows[e.RowIndex].Cells[13].Value.ToString()
+                    //        },
+                    //        PerPieceBox = decimal.Parse(this.dgProduct.Rows[e.RowIndex].Cells[11].Value.ToString()),
+                    //        Location = new Tier.BO.Location
+                    //        {
+                    //            ID = Int32.Parse(this.dgProduct.Rows[e.RowIndex].Cells[12].Value.ToString()),
+                    //            Name = this.dgProduct.Rows[e.RowIndex].Cells[13].Value.ToString()
 
-                //        }
+                    //        }
 
-                //    };
-                //}
+                    //    };
+                    //}
             }
             catch (Exception ex)
             {
@@ -296,13 +301,14 @@ namespace GeneralLedger.UserControls
                 currentPage = 1; // Reset to first page
 
                 this.dgProduct.RowCount = stockDetailsList.Count;
-                this.dgProduct.ColumnCount = 5;
+                this.dgProduct.ColumnCount = 6;
                 this.dgProduct.Columns[0].Name = "Transaction Type";
                 this.dgProduct.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 this.dgProduct.Columns[1].Name = "Quantity In";
                 this.dgProduct.Columns[2].Name = "Quantity Out";
                 this.dgProduct.Columns[3].Name = "Transaction Code";
                 this.dgProduct.Columns[4].Name = "Transaction Date"; // New colu
+                this.dgProduct.Columns[5].Name = "Id"; // New colu
 
                 for (int i = 0; i < stockDetailsList.Count; i++)
                 {
@@ -312,6 +318,7 @@ namespace GeneralLedger.UserControls
                     this.dgProduct.Rows[i].Cells[2].Value = stockDetailsByProductId.QuantityOut.ToString();
                     this.dgProduct.Rows[i].Cells[3].Value = stockDetailsByProductId.TransactionCode;
                     this.dgProduct.Rows[i].Cells[4].Value = stockDetailsByProductId.TransactionDate.ToString("yyyy-MM-dd");
+                    this.dgProduct.Rows[i].Cells[5].Value = stockDetailsByProductId.Id;
                 }
 
                     setRowNumber(this.dgProduct);
@@ -332,7 +339,7 @@ namespace GeneralLedger.UserControls
 
             this.dgProduct.Rows.Clear();
             this.dgProduct.RowCount = pageItems.Count;
-            this.dgProduct.ColumnCount = 5;
+            this.dgProduct.ColumnCount = 6;
             // (Set up columns as in your original code...)
 
             this.dgProduct.Columns[0].Name = "Transaction Type";
@@ -341,6 +348,7 @@ namespace GeneralLedger.UserControls
             this.dgProduct.Columns[2].Name = "Quantity Out";
             this.dgProduct.Columns[3].Name = "Transaction Code";
             this.dgProduct.Columns[4].Name = "Transaction Date"; // New colu
+            this.dgProduct.Columns[5].Name = "Id"; // New colu
 
             for (int i = 0; i < pageItems.Count; i++)
             {
@@ -350,6 +358,7 @@ namespace GeneralLedger.UserControls
                 this.dgProduct.Rows[i].Cells[2].Value = stockDetailsByProductId.QuantityOut.ToString();
                 this.dgProduct.Rows[i].Cells[3].Value = stockDetailsByProductId.TransactionCode;
                 this.dgProduct.Rows[i].Cells[4].Value = stockDetailsByProductId.TransactionDate.ToString("yyyy-MM-dd");
+                this.dgProduct.Rows[i].Cells[5].Value = stockDetailsByProductId.Id;
             }
 
             setRowNumber(this.dgProduct);
@@ -471,6 +480,7 @@ namespace GeneralLedger.UserControls
 
                 if (success)
                 {
+                    this.DialogResult = DialogResult.OK;
                     //MessageBox.Show("Beginning balance added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                     // Reload the stock details
@@ -504,11 +514,13 @@ namespace GeneralLedger.UserControls
                 {
                     // Delete from database
                     ProductBAL productBAL = new ProductBAL();
-                    bool success = productBAL.DeleteBeginningBalance(this.ProductId);
+                    bool success = productBAL.DeleteBeginningBalance(this.ProductId, this.StockId);
 
                     if (success)
                     {
-                        //MessageBox.Show("Beginning balance deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.StockId = 0; // Reset StockId after deletion
+                                          //MessageBox.Show("Beginning balance deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
                         this.Close();
                         // Reload the stock details
                         //LoadStockDetails();

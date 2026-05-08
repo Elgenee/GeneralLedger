@@ -174,7 +174,7 @@ namespace GeneralLedger.Tier.DAL
 
                             var stockDetailsByProductId = new StockDetailsByProductId
                             {
-                              
+                                Id = ReferenceEquals(reader["Id"], DBNull.Value) ? 0 : Convert.ToInt32(reader["Id"]),
                                 StockTransactionTypeName = ReferenceEquals(reader["StockTransactionTypeName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["StockTransactionTypeName"]),
                                 QuantityIn = ReferenceEquals(reader["QuantityIn"], DBNull.Value) ? 0 : Convert.ToInt32(reader["QuantityIn"]),
                                 QuantityOut = ReferenceEquals(reader["QuantityOut"], DBNull.Value) ? 0 : Convert.ToInt32(reader["QuantityOut"]),
@@ -492,35 +492,86 @@ namespace GeneralLedger.Tier.DAL
             using (SqlConnection conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
             {
                 conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"INSERT INTO dbo.Stock
-                                        (
-                                            ProductId,
-                                            StockTransactionTypeID,
-                                            QuantityIn,
-                                            TransactionDate
-                                        )
-                                        VALUES
-                                        (
-                                            @ProductId,
-                                            3002,
-                                            @QuantityIn,
-                                            '2025-12-31'
-                                        )";
-                    cmd.CommandTimeout = 180;
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@ProductId", productId);
-                    cmd.Parameters.AddWithValue("@QuantityIn", quantityIn);
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                // First, delete any existing beginning balance for this product
+                //using (SqlCommand deleteCmd = conn.CreateCommand())
+                //{
+                //    deleteCmd.CommandType = CommandType.Text;
+                //    deleteCmd.CommandText = @"DELETE FROM dbo.Stock 
+                //                             WHERE ProductId = @ProductId 
+                //                             AND StockTransactionTypeID = 3002";
+                //    deleteCmd.CommandTimeout = 180;
+                //    deleteCmd.Parameters.Clear();
+                //    deleteCmd.Parameters.AddWithValue("@ProductId", productId);
+                //    deleteCmd.ExecuteNonQuery();
+                //}
+
+                // Then, insert the new beginning balance
+                using (SqlCommand insertCmd = conn.CreateCommand())
+                {
+                    insertCmd.CommandType = CommandType.Text;
+                    insertCmd.CommandText = @"INSERT INTO dbo.Stock
+                                            (
+                                                ProductId,
+                                                StockTransactionTypeID,
+                                                QuantityIn,
+                                                QuantityOut,
+                                                TransactionDate
+                                            )
+                                            VALUES
+                                            (
+                                                @ProductId,
+                                                3002,
+                                                @QuantityIn,
+                                                0,
+                                                '2025-12-31'
+                                            )";
+                    insertCmd.CommandTimeout = 180;
+                    insertCmd.Parameters.Clear();
+                    insertCmd.Parameters.AddWithValue("@ProductId", productId);
+                    insertCmd.Parameters.AddWithValue("@QuantityIn", quantityIn);
+
+                    int rowsAffected = insertCmd.ExecuteNonQuery();
+                    
+                    if (rowsAffected > 0)
+                    {
+                        // Update the product's remaining count by recomputing all stock transactions
+                        UpdateProductRemainingCount(conn, productId);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void UpdateProductRemainingCount(SqlConnection conn, int productId)
+        {
+            // Calculate total remaining stock using the same logic as GetTotalRemainingStock
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = @"SELECT ISNULL(SUM(ISNULL(QuantityIn,0) - ISNULL(QuantityOut,0)), 0) AS TotalRemaining
+                                   FROM dbo.Stock
+                                   WHERE ProductId = @ProductId";
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+
+                var totalRemaining = Convert.ToInt32(cmd.ExecuteScalar());
+
+                // Update the product's remaining count
+                using (SqlCommand updateCmd = conn.CreateCommand())
+                {
+                    updateCmd.CommandType = CommandType.Text;
+                    updateCmd.CommandText = @"UPDATE dbo.Product
+                                             SET intRemainingCount = @RemainingCount
+                                             WHERE ID = @ProductId";
+                    updateCmd.Parameters.AddWithValue("@RemainingCount", totalRemaining);
+                    updateCmd.Parameters.AddWithValue("@ProductId", productId);
+                    updateCmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public bool DeleteBeginningBalance(int productId)
+        public bool DeleteBeginningBalance(int productId , int stockId)
         {
             var dbUtil = new DatabaseManager();
 
@@ -532,15 +583,24 @@ namespace GeneralLedger.Tier.DAL
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = @"DELETE FROM dbo.Stock 
                                        WHERE ProductId = @ProductId 
-                                       AND StockTransactionTypeID = 3002";
+                                       AND StockTransactionTypeID = 3002
+                                       AND Id = @stockId";
                     cmd.CommandTimeout = 180;
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@ProductId", productId);
+                    cmd.Parameters.AddWithValue("@stockId", stockId);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
+                    
+                    if (rowsAffected > 0)
+                    {
+                        // Update the product's remaining count after deletion
+                        UpdateProductRemainingCount(conn, productId);
+                        return true;
+                    }
                 }
             }
+            return false;
         }
 
 
