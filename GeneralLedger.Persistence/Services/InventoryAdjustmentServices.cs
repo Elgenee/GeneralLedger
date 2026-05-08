@@ -276,10 +276,10 @@ namespace GeneralLedger.Persistence.Services
                             "; Qty: " + detail.Quantity.ToString());
                     }
                     //adj.Description = productDetailsBuilder.ToString();
-
+                    adj.Description = updatedAdjustment.Description;
                     adj.InventoryAdjustmentDetails = updatedAdjustment.InventoryAdjustmentDetails;
                     adj.Stocks = updatedAdjustment.Stocks;
-                    updatedAdjustment.Description = adj.Description;
+                    //updatedAdjustment.Description = adj.Description;
 
                     // 3. Update remaining stock count for products in adjustment details
                     UpdateRemainingCount(unitOfWork, updatedAdjustment, updatedAdjustmentDetailsList);
