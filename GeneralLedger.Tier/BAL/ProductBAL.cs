@@ -91,10 +91,10 @@ namespace GeneralLedger.Tier.BAL
             return pbDAL.AddBeginningBalance(productId, quantityIn);
         }
 
-        public bool DeleteBeginningBalance(int productId)
+        public bool DeleteBeginningBalance(int productId, int stockId)
         {
             ProductDAL pbDAL = new ProductDAL();
-            return pbDAL.DeleteBeginningBalance(productId);
+            return pbDAL.DeleteBeginningBalance(productId, stockId);
         }
     }
 }

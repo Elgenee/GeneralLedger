@@ -59,112 +59,7 @@ namespace GeneralLedger.UserControls
         {
             try
             {
-                ProductBAL productBAL = new ProductBAL();
-                var productListOld = productBAL.getProductSearch(this.txtCriteria.Text);
-
-                //create a list of product from GeneralLedger.Core.Domain and map the data from productList to product
-                List<Product> productsListDomain = new List<Product>();
-                foreach (var item in productListOld)
-                {
-                    Product product = new Product();
-                    product.Id = item.ID;
-                    product.strProductName = item.ProductName;
-                    product.strDescription = item.Description;
-                    product.ProductCharacteristic = new ProductCharacteristic
-                    {
-                        Id = item.ProductCharacteristic.ID,
-                        strName = item.ProductCharacteristic.Name
-                    };
-                    product.intIDProductCharacteristic = item.ProductCharacteristic.ID;
-
-                    product.ProductCategory = new Core.Domain.ProductCategory
-                    {
-                        Id = item.ProductCategory.ID,
-                        strName = item.ProductCategory.Name
-                    };
-                    product.intIDProductCategory = item.ProductCategory.ID;
-
-
-                    //product.ProductCategoryID = item.ProductCategoryID;
-                    //product.ProductCategoryName = item.ProductCategoryName;
-
-                    product.ProductType = new Core.Domain.ProductType
-                    {
-                        Id = item.ProductType.ID,
-                        strName = item.ProductType.Name
-                    };
-
-                    product.intIDProductType = item.ProductType.ID;
-                    //product.ProductTypeID = item.ProductTypeID;
-                    //product.ProductTypeName = item.ProductTypeName;
-
-                    product.ProductBrand = new Core.Domain.ProductBrand
-                    {
-                        Id = item.ProductBrand.ID,
-                        strName = item.ProductBrand.Name
-                    };
-
-                    product.intIDProductBrands = item.ProductBrand.ID;
-
-
-                    product.ProductColor = new Core.Domain.ProductColor
-                    {
-                        Id = item.ProductColor.ID,
-                        strName = item.ProductColor.Name
-                    };
-
-                    product.intIDColor = item.ProductColor.ID;
-
-                    //product.ProductSizeID = item.ProductSizeID;
-                    //product.ProductSizeName = item.ProductSizeName;
-
-                    product.ProductSize = new Core.Domain.ProductSize
-                    {
-                        Id = item.ProductSize.ID,
-                        strName = item.ProductSize.Name
-                    };
-
-                    product.intIDSize = item.ProductSize.ID;
-                    //product.ProductUnitID = item.ProductUnitID;
-                    //product.ProductUnitName = item.ProductUnitName;
-
-                    product.ProductUnit = new Core.Domain.ProductUnit
-                    {
-                        Id = item.ProductUnit.ID,
-                        strName = item.ProductUnit.Name
-                    };
-
-                    product.intIDProductUnit = item.ProductUnit.ID;
-                    product.strCode = item.strCode;
-                    product.strPR = item.strPR;
-                    product.strPCD = item.strPCD;
-                    product.strMFLM = item.strMFLM;
-                    product.strPattern = item.strPattern;
-                    product.strOffsetCenterBore = item.strOffsetCenterBase;
-                    product.strOrigin = item.strOrigin;
-                    product.intRemainingCount = item.intRemainingCount;
-                    product.curUnitPrice = item.UnitPrice;
-                    product.intRemainingCount = item.intRemainingCount;
-
-                    //product.ProductStatusID = item.ProductStatusID;
-                    //product.ProductStatusName = item.ProductStatusName;
-                    productsListDomain.Add(product);
-                }
-                //productsListDomain.Clear();
-                if ((productsListDomain != null) && productsListDomain.Count > 0)
-                {
-
-
-                    allProducts = productsListDomain;
-                    totalItems = allProducts.Count;
-                    totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
-                    currentPage = 1; // Reset to first page
-                    DisplayCurrentPage(); 
-                }
-                else
-                {
-                    MessageBox.Show("No item found...");
-                }
+                SearchProduct();
 
             }
             catch (Exception ex)
@@ -172,6 +67,117 @@ namespace GeneralLedger.UserControls
 
                 MessageBox.Show("Error:" + ex.Message);
             }
+        }
+
+        private void SearchProduct() {
+
+            ProductBAL productBAL = new ProductBAL();
+            var productListOld = productBAL.getProductSearch(this.txtCriteria.Text);
+
+            //create a list of product from GeneralLedger.Core.Domain and map the data from productList to product
+            List<Product> productsListDomain = new List<Product>();
+            foreach (var item in productListOld)
+            {
+                Product product = new Product();
+                product.Id = item.ID;
+                product.strProductName = item.ProductName;
+                product.strDescription = item.Description;
+                product.ProductCharacteristic = new ProductCharacteristic
+                {
+                    Id = item.ProductCharacteristic.ID,
+                    strName = item.ProductCharacteristic.Name
+                };
+                product.intIDProductCharacteristic = item.ProductCharacteristic.ID;
+
+                product.ProductCategory = new Core.Domain.ProductCategory
+                {
+                    Id = item.ProductCategory.ID,
+                    strName = item.ProductCategory.Name
+                };
+                product.intIDProductCategory = item.ProductCategory.ID;
+
+
+                //product.ProductCategoryID = item.ProductCategoryID;
+                //product.ProductCategoryName = item.ProductCategoryName;
+
+                product.ProductType = new Core.Domain.ProductType
+                {
+                    Id = item.ProductType.ID,
+                    strName = item.ProductType.Name
+                };
+
+                product.intIDProductType = item.ProductType.ID;
+                //product.ProductTypeID = item.ProductTypeID;
+                //product.ProductTypeName = item.ProductTypeName;
+
+                product.ProductBrand = new Core.Domain.ProductBrand
+                {
+                    Id = item.ProductBrand.ID,
+                    strName = item.ProductBrand.Name
+                };
+
+                product.intIDProductBrands = item.ProductBrand.ID;
+
+
+                product.ProductColor = new Core.Domain.ProductColor
+                {
+                    Id = item.ProductColor.ID,
+                    strName = item.ProductColor.Name
+                };
+
+                product.intIDColor = item.ProductColor.ID;
+
+                //product.ProductSizeID = item.ProductSizeID;
+                //product.ProductSizeName = item.ProductSizeName;
+
+                product.ProductSize = new Core.Domain.ProductSize
+                {
+                    Id = item.ProductSize.ID,
+                    strName = item.ProductSize.Name
+                };
+
+                product.intIDSize = item.ProductSize.ID;
+                //product.ProductUnitID = item.ProductUnitID;
+                //product.ProductUnitName = item.ProductUnitName;
+
+                product.ProductUnit = new Core.Domain.ProductUnit
+                {
+                    Id = item.ProductUnit.ID,
+                    strName = item.ProductUnit.Name
+                };
+
+                product.intIDProductUnit = item.ProductUnit.ID;
+                product.strCode = item.strCode;
+                product.strPR = item.strPR;
+                product.strPCD = item.strPCD;
+                product.strMFLM = item.strMFLM;
+                product.strPattern = item.strPattern;
+                product.strOffsetCenterBore = item.strOffsetCenterBase;
+                product.strOrigin = item.strOrigin;
+                product.intRemainingCount = item.intRemainingCount;
+                product.curUnitPrice = item.UnitPrice;
+                product.intRemainingCount = item.intRemainingCount;
+
+                //product.ProductStatusID = item.ProductStatusID;
+                //product.ProductStatusName = item.ProductStatusName;
+                productsListDomain.Add(product);
+            }
+            //productsListDomain.Clear();
+            if ((productsListDomain != null) && productsListDomain.Count > 0)
+            {
+
+
+                allProducts = productsListDomain;
+                totalItems = allProducts.Count;
+                totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+                currentPage = 1; // Reset to first page
+                DisplayCurrentPage();
+            }
+            else
+            {
+                MessageBox.Show("No item found...");
+            }
+
         }
 
         private void DisplayCurrentPage()
@@ -333,6 +339,13 @@ namespace GeneralLedger.UserControls
 
 
             DialogResult res = details.ShowDialog(this);
+
+            if (res == DialogResult.OK)
+            {
+                this.ProductId = 0;
+                SearchProduct();
+
+            }
         }
 
         private void dgProduct_CellContentClick(object sender, DataGridViewCellEventArgs e)
