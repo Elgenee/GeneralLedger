@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>71</ApplicationRevision>
+    <ApplicationRevision>73</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -129,6 +129,12 @@
     </Compile>
     <Compile Include="Report\frmReportInventoryMonthlyOutstandingSummary.Designer.cs">
       <DependentUpon>frmReportInventoryMonthlyOutstandingSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmReportInventoryAdjustmentProoflist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportInventoryAdjustmentProoflist.Designer.cs">
+      <DependentUpon>frmReportInventoryAdjustmentProoflist.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\frmReportPaymentProoflist.cs">
       <SubType>Form</SubType>
@@ -685,6 +691,9 @@
     <EmbeddedResource Include="Report\frmReportInventoryMonthlyOutstandingSummary.resx">
       <DependentUpon>frmReportInventoryMonthlyOutstandingSummary.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportInventoryAdjustmentProoflist.resx">
+      <DependentUpon>frmReportInventoryAdjustmentProoflist.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\frmReportPaymentProoflist.resx">
       <DependentUpon>frmReportPaymentProoflist.cs</DependentUpon>
     </EmbeddedResource>
@@ -707,6 +716,7 @@
       <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\RDLC\InventoryMonthlyOutstandingSummary.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\InventoryAdjustmentProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\PaymentProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\InventoryProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\PurchaseProoflist.rdlc" />

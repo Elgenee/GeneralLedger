@@ -477,6 +477,84 @@ namespace GeneralLedger.Tier.DAL
             }
         }
 
+
+        public List<rptInventoryAdjustmentProoflist> getInventoryAdjustmentProoflist(string datDateFrom, string datDateTo)
+        {
+            var dbUtil = new DatabaseManager();
+            var rptInventoryAdjustmentProoflistList = new List<rptInventoryAdjustmentProoflist>();
+
+            using (var conn = new SqlConnection(dbUtil.getSQLConnectionString("MainDB")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "spRPTInventoryAdjustmentProoflist";
+                    cmd.CommandTimeout = 180;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@datDateFrom", datDateFrom);
+                    cmd.Parameters.AddWithValue("@datDateTo", datDateTo);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rptInventoryAdjustmentProoflist = new rptInventoryAdjustmentProoflist
+                            {
+                                strTransactionNumber = ReferenceEquals(reader["strTransactionNumber"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strTransactionNumber"]),
+                                datTransactionDate = ReferenceEquals(reader["datTransactionDate"], DBNull.Value) ? string.Empty : Convert.ToString(reader["datTransactionDate"]),
+                                strAdjustmentType = ReferenceEquals(reader["strAdjustmentType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strAdjustmentType"]),
+                                strDescription = ReferenceEquals(reader["strDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strDescription"]),
+
+                                // Product Information
+                                strProductCode = ReferenceEquals(reader["strProductCode"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strProductCode"]),
+                                strProductName = ReferenceEquals(reader["strProductName"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strProductName"]),
+                                strProductDescription = ReferenceEquals(reader["strProductDescription"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strProductDescription"]),
+
+                                // Product Brand
+                                strBrand = ReferenceEquals(reader["strBrand"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strBrand"]),
+
+                                // Product Category
+                                strCategory = ReferenceEquals(reader["strCategory"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strCategory"]),
+
+                                // Product Type
+                                strProductType = ReferenceEquals(reader["strProductType"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strProductType"]),
+
+                                // Product Characteristic
+                                strCharacteristic = ReferenceEquals(reader["strCharacteristic"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strCharacteristic"]),
+
+                                // Product Color
+                                strColor = ReferenceEquals(reader["strColor"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strColor"]),
+
+                                // Product Size
+                                strSize = ReferenceEquals(reader["strSize"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strSize"]),
+
+                                // Additional Product Details
+                                strPR = ReferenceEquals(reader["strPR"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPR"]),
+                                strPCD = ReferenceEquals(reader["strPCD"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPCD"]),
+                                strMFLM = ReferenceEquals(reader["strMFLM"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strMFLM"]),
+                                strPattern = ReferenceEquals(reader["strPattern"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strPattern"]),
+                                strOrigin = ReferenceEquals(reader["strOrigin"], DBNull.Value) ? string.Empty : Convert.ToString(reader["strOrigin"]),
+
+                                // Transaction Details
+                                decQuantity = ReferenceEquals(reader["decQuantity"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["decQuantity"]),
+                                curUnitPrice = ReferenceEquals(reader["curUnitPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curUnitPrice"]),
+                                curTotalPrice = ReferenceEquals(reader["curTotalPrice"], DBNull.Value) ? 0 : Convert.ToDecimal(reader["curTotalPrice"]),
+
+                                // IDs for reference
+                                intAdjustmentId = ReferenceEquals(reader["intAdjustmentId"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intAdjustmentId"]),
+                                intAdjustmentTypeId = ReferenceEquals(reader["intAdjustmentTypeId"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intAdjustmentTypeId"]),
+                                intProductId = ReferenceEquals(reader["intProductId"], DBNull.Value) ? 0 : Convert.ToInt32(reader["intProductId"])
+                            };
+
+                            rptInventoryAdjustmentProoflistList.Add(rptInventoryAdjustmentProoflist);
+                        }
+                        return rptInventoryAdjustmentProoflistList;
+                    }
+                }
+            }
+        }
+
         public List<rptJournalProoflist> getJournalEntryProoflist(string datDateFrom, string datDateTo)
         {
             var dbUtil = new DatabaseManager();

@@ -141,6 +141,13 @@ namespace GeneralLedger.UserControls
                     frmReportInventoryProoflist.Show();
                 }
 
+
+                if (item.ToUpper().Equals("INVENTORY ADJUSTMENT PROOFLIST"))
+                {
+                    frmReportInventoryAdjustmentProoflist frmReportInventoryAdjustmentProoflist = new frmReportInventoryAdjustmentProoflist();
+                    frmReportInventoryAdjustmentProoflist.Show();
+                }
+
                 if (item.ToUpper().Equals("INVENTORY MONTHLY OUSTANDING SUMMARY"))
                 {
 
