@@ -66,7 +66,7 @@ namespace GeneralLedger {
         
         private spRPTSalesProoflist1DataTable tablespRPTSalesProoflist1;
         
-        private spInventoryMonthlyOutstandingSummaryDataTable tablespInventoryMonthlyOutstandingSummary;
+        private spRPTInventoryAdjustmentProoflistDataTable tablespRPTInventoryAdjustmentProoflist;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -159,8 +159,8 @@ namespace GeneralLedger {
                 if ((ds.Tables["spRPTSalesProoflist1"] != null)) {
                     base.Tables.Add(new spRPTSalesProoflist1DataTable(ds.Tables["spRPTSalesProoflist1"]));
                 }
-                if ((ds.Tables["spInventoryMonthlyOutstandingSummary"] != null)) {
-                    base.Tables.Add(new spInventoryMonthlyOutstandingSummaryDataTable(ds.Tables["spInventoryMonthlyOutstandingSummary"]));
+                if ((ds.Tables["spRPTInventoryAdjustmentProoflist"] != null)) {
+                    base.Tables.Add(new spRPTInventoryAdjustmentProoflistDataTable(ds.Tables["spRPTInventoryAdjustmentProoflist"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -394,9 +394,9 @@ namespace GeneralLedger {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public spInventoryMonthlyOutstandingSummaryDataTable spInventoryMonthlyOutstandingSummary {
+        public spRPTInventoryAdjustmentProoflistDataTable spRPTInventoryAdjustmentProoflist {
             get {
-                return this.tablespInventoryMonthlyOutstandingSummary;
+                return this.tablespRPTInventoryAdjustmentProoflist;
             }
         }
         
@@ -530,8 +530,8 @@ namespace GeneralLedger {
                 if ((ds.Tables["spRPTSalesProoflist1"] != null)) {
                     base.Tables.Add(new spRPTSalesProoflist1DataTable(ds.Tables["spRPTSalesProoflist1"]));
                 }
-                if ((ds.Tables["spInventoryMonthlyOutstandingSummary"] != null)) {
-                    base.Tables.Add(new spInventoryMonthlyOutstandingSummaryDataTable(ds.Tables["spInventoryMonthlyOutstandingSummary"]));
+                if ((ds.Tables["spRPTInventoryAdjustmentProoflist"] != null)) {
+                    base.Tables.Add(new spRPTInventoryAdjustmentProoflistDataTable(ds.Tables["spRPTInventoryAdjustmentProoflist"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -692,10 +692,10 @@ namespace GeneralLedger {
                     this.tablespRPTSalesProoflist1.InitVars();
                 }
             }
-            this.tablespInventoryMonthlyOutstandingSummary = ((spInventoryMonthlyOutstandingSummaryDataTable)(base.Tables["spInventoryMonthlyOutstandingSummary"]));
+            this.tablespRPTInventoryAdjustmentProoflist = ((spRPTInventoryAdjustmentProoflistDataTable)(base.Tables["spRPTInventoryAdjustmentProoflist"]));
             if ((initTable == true)) {
-                if ((this.tablespInventoryMonthlyOutstandingSummary != null)) {
-                    this.tablespInventoryMonthlyOutstandingSummary.InitVars();
+                if ((this.tablespRPTInventoryAdjustmentProoflist != null)) {
+                    this.tablespRPTInventoryAdjustmentProoflist.InitVars();
                 }
             }
         }
@@ -750,8 +750,8 @@ namespace GeneralLedger {
             base.Tables.Add(this.tablespRPTInventoryProoflist);
             this.tablespRPTSalesProoflist1 = new spRPTSalesProoflist1DataTable();
             base.Tables.Add(this.tablespRPTSalesProoflist1);
-            this.tablespInventoryMonthlyOutstandingSummary = new spInventoryMonthlyOutstandingSummaryDataTable();
-            base.Tables.Add(this.tablespInventoryMonthlyOutstandingSummary);
+            this.tablespRPTInventoryAdjustmentProoflist = new spRPTInventoryAdjustmentProoflistDataTable();
+            base.Tables.Add(this.tablespRPTInventoryAdjustmentProoflist);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -882,7 +882,7 @@ namespace GeneralLedger {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private bool ShouldSerializespInventoryMonthlyOutstandingSummary() {
+        private bool ShouldSerializespRPTInventoryAdjustmentProoflist() {
             return false;
         }
         
@@ -1005,7 +1005,7 @@ namespace GeneralLedger {
         public delegate void spRPTSalesProoflist1RowChangeEventHandler(object sender, spRPTSalesProoflist1RowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public delegate void spInventoryMonthlyOutstandingSummaryRowChangeEventHandler(object sender, spInventoryMonthlyOutstandingSummaryRowChangeEvent e);
+        public delegate void spRPTInventoryAdjustmentProoflistRowChangeEventHandler(object sender, spRPTInventoryAdjustmentProoflistRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -8208,28 +8208,60 @@ namespace GeneralLedger {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class spInventoryMonthlyOutstandingSummaryDataTable : global::System.Data.TypedTableBase<spInventoryMonthlyOutstandingSummaryRow> {
+        public partial class spRPTInventoryAdjustmentProoflistDataTable : global::System.Data.TypedTableBase<spRPTInventoryAdjustmentProoflistRow> {
             
-            private global::System.Data.DataColumn columnProductId;
+            private global::System.Data.DataColumn columnstrTransactionNumber;
+            
+            private global::System.Data.DataColumn columndatTransactionDate;
+            
+            private global::System.Data.DataColumn columnstrAdjustmentType;
+            
+            private global::System.Data.DataColumn columnstrDescription;
+            
+            private global::System.Data.DataColumn columnstrProductCode;
             
             private global::System.Data.DataColumn columnstrProductName;
             
-            private global::System.Data.DataColumn columnOpeningQty;
+            private global::System.Data.DataColumn columnstrProductDescription;
             
-            private global::System.Data.DataColumn columnQtyInMonth;
+            private global::System.Data.DataColumn columnstrBrand;
             
-            private global::System.Data.DataColumn columnQtyOutMonth;
+            private global::System.Data.DataColumn columnstrCategory;
             
-            private global::System.Data.DataColumn columnClosingQty;
+            private global::System.Data.DataColumn columnstrProductType;
             
-            private global::System.Data.DataColumn columnUnitPrice;
+            private global::System.Data.DataColumn columnstrCharacteristic;
             
-            private global::System.Data.DataColumn columnOutstandingBalance;
+            private global::System.Data.DataColumn columnstrColor;
+            
+            private global::System.Data.DataColumn columnstrSize;
+            
+            private global::System.Data.DataColumn columnstrPR;
+            
+            private global::System.Data.DataColumn columnstrPCD;
+            
+            private global::System.Data.DataColumn columnstrMFLM;
+            
+            private global::System.Data.DataColumn columnstrPattern;
+            
+            private global::System.Data.DataColumn columnstrOrigin;
+            
+            private global::System.Data.DataColumn columndecQuantity;
+            
+            private global::System.Data.DataColumn columncurUnitPrice;
+            
+            private global::System.Data.DataColumn columncurTotalPrice;
+            
+            private global::System.Data.DataColumn columnintAdjustmentId;
+            
+            private global::System.Data.DataColumn columnintAdjustmentTypeId;
+            
+            private global::System.Data.DataColumn columnintProductId;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spInventoryMonthlyOutstandingSummaryDataTable() {
-                this.TableName = "spInventoryMonthlyOutstandingSummary";
+            public spRPTInventoryAdjustmentProoflistDataTable() {
+                this.TableName = "spRPTInventoryAdjustmentProoflist";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -8237,7 +8269,7 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal spInventoryMonthlyOutstandingSummaryDataTable(global::System.Data.DataTable table) {
+            internal spRPTInventoryAdjustmentProoflistDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -8254,16 +8286,48 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            protected spInventoryMonthlyOutstandingSummaryDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected spRPTInventoryAdjustmentProoflistDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn ProductIdColumn {
+            public global::System.Data.DataColumn strTransactionNumberColumn {
                 get {
-                    return this.columnProductId;
+                    return this.columnstrTransactionNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn datTransactionDateColumn {
+                get {
+                    return this.columndatTransactionDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strAdjustmentTypeColumn {
+                get {
+                    return this.columnstrAdjustmentType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strDescriptionColumn {
+                get {
+                    return this.columnstrDescription;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strProductCodeColumn {
+                get {
+                    return this.columnstrProductCode;
                 }
             }
             
@@ -8277,49 +8341,145 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn OpeningQtyColumn {
+            public global::System.Data.DataColumn strProductDescriptionColumn {
                 get {
-                    return this.columnOpeningQty;
+                    return this.columnstrProductDescription;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn QtyInMonthColumn {
+            public global::System.Data.DataColumn strBrandColumn {
                 get {
-                    return this.columnQtyInMonth;
+                    return this.columnstrBrand;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn QtyOutMonthColumn {
+            public global::System.Data.DataColumn strCategoryColumn {
                 get {
-                    return this.columnQtyOutMonth;
+                    return this.columnstrCategory;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn ClosingQtyColumn {
+            public global::System.Data.DataColumn strProductTypeColumn {
                 get {
-                    return this.columnClosingQty;
+                    return this.columnstrProductType;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn UnitPriceColumn {
+            public global::System.Data.DataColumn strCharacteristicColumn {
                 get {
-                    return this.columnUnitPrice;
+                    return this.columnstrCharacteristic;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn OutstandingBalanceColumn {
+            public global::System.Data.DataColumn strColorColumn {
                 get {
-                    return this.columnOutstandingBalance;
+                    return this.columnstrColor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strSizeColumn {
+                get {
+                    return this.columnstrSize;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strPRColumn {
+                get {
+                    return this.columnstrPR;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strPCDColumn {
+                get {
+                    return this.columnstrPCD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strMFLMColumn {
+                get {
+                    return this.columnstrMFLM;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strPatternColumn {
+                get {
+                    return this.columnstrPattern;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn strOriginColumn {
+                get {
+                    return this.columnstrOrigin;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn decQuantityColumn {
+                get {
+                    return this.columndecQuantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn curUnitPriceColumn {
+                get {
+                    return this.columncurUnitPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn curTotalPriceColumn {
+                get {
+                    return this.columncurTotalPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn intAdjustmentIdColumn {
+                get {
+                    return this.columnintAdjustmentId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn intAdjustmentTypeIdColumn {
+                get {
+                    return this.columnintAdjustmentTypeId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn intProductIdColumn {
+                get {
+                    return this.columnintProductId;
                 }
             }
             
@@ -8334,59 +8494,89 @@ namespace GeneralLedger {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spInventoryMonthlyOutstandingSummaryRow this[int index] {
+            public spRPTInventoryAdjustmentProoflistRow this[int index] {
                 get {
-                    return ((spInventoryMonthlyOutstandingSummaryRow)(this.Rows[index]));
+                    return ((spRPTInventoryAdjustmentProoflistRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event spInventoryMonthlyOutstandingSummaryRowChangeEventHandler spInventoryMonthlyOutstandingSummaryRowChanging;
+            public event spRPTInventoryAdjustmentProoflistRowChangeEventHandler spRPTInventoryAdjustmentProoflistRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event spInventoryMonthlyOutstandingSummaryRowChangeEventHandler spInventoryMonthlyOutstandingSummaryRowChanged;
+            public event spRPTInventoryAdjustmentProoflistRowChangeEventHandler spRPTInventoryAdjustmentProoflistRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event spInventoryMonthlyOutstandingSummaryRowChangeEventHandler spInventoryMonthlyOutstandingSummaryRowDeleting;
+            public event spRPTInventoryAdjustmentProoflistRowChangeEventHandler spRPTInventoryAdjustmentProoflistRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event spInventoryMonthlyOutstandingSummaryRowChangeEventHandler spInventoryMonthlyOutstandingSummaryRowDeleted;
+            public event spRPTInventoryAdjustmentProoflistRowChangeEventHandler spRPTInventoryAdjustmentProoflistRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void AddspInventoryMonthlyOutstandingSummaryRow(spInventoryMonthlyOutstandingSummaryRow row) {
+            public void AddspRPTInventoryAdjustmentProoflistRow(spRPTInventoryAdjustmentProoflistRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spInventoryMonthlyOutstandingSummaryRow AddspInventoryMonthlyOutstandingSummaryRow(string strProductName, decimal OpeningQty, decimal QtyInMonth, decimal QtyOutMonth, decimal ClosingQty, decimal UnitPrice, decimal OutstandingBalance) {
-                spInventoryMonthlyOutstandingSummaryRow rowspInventoryMonthlyOutstandingSummaryRow = ((spInventoryMonthlyOutstandingSummaryRow)(this.NewRow()));
+            public spRPTInventoryAdjustmentProoflistRow AddspRPTInventoryAdjustmentProoflistRow(
+                        string strTransactionNumber, 
+                        string datTransactionDate, 
+                        string strAdjustmentType, 
+                        string strDescription, 
+                        string strProductCode, 
+                        string strProductName, 
+                        string strProductDescription, 
+                        string strBrand, 
+                        string strCategory, 
+                        string strProductType, 
+                        string strCharacteristic, 
+                        string strColor, 
+                        string strSize, 
+                        string strPR, 
+                        string strPCD, 
+                        string strMFLM, 
+                        string strPattern, 
+                        string strOrigin, 
+                        int decQuantity, 
+                        decimal curUnitPrice, 
+                        decimal curTotalPrice) {
+                spRPTInventoryAdjustmentProoflistRow rowspRPTInventoryAdjustmentProoflistRow = ((spRPTInventoryAdjustmentProoflistRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
+                        strTransactionNumber,
+                        datTransactionDate,
+                        strAdjustmentType,
+                        strDescription,
+                        strProductCode,
                         strProductName,
-                        OpeningQty,
-                        QtyInMonth,
-                        QtyOutMonth,
-                        ClosingQty,
-                        UnitPrice,
-                        OutstandingBalance};
-                rowspInventoryMonthlyOutstandingSummaryRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowspInventoryMonthlyOutstandingSummaryRow);
-                return rowspInventoryMonthlyOutstandingSummaryRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spInventoryMonthlyOutstandingSummaryRow FindByProductId(int ProductId) {
-                return ((spInventoryMonthlyOutstandingSummaryRow)(this.Rows.Find(new object[] {
-                            ProductId})));
+                        strProductDescription,
+                        strBrand,
+                        strCategory,
+                        strProductType,
+                        strCharacteristic,
+                        strColor,
+                        strSize,
+                        strPR,
+                        strPCD,
+                        strMFLM,
+                        strPattern,
+                        strOrigin,
+                        decQuantity,
+                        curUnitPrice,
+                        curTotalPrice,
+                        null,
+                        null,
+                        null};
+                rowspRPTInventoryAdjustmentProoflistRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowspRPTInventoryAdjustmentProoflistRow);
+                return rowspRPTInventoryAdjustmentProoflistRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                spInventoryMonthlyOutstandingSummaryDataTable cln = ((spInventoryMonthlyOutstandingSummaryDataTable)(base.Clone()));
+                spRPTInventoryAdjustmentProoflistDataTable cln = ((spRPTInventoryAdjustmentProoflistDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -8394,81 +8584,148 @@ namespace GeneralLedger {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new spInventoryMonthlyOutstandingSummaryDataTable();
+                return new spRPTInventoryAdjustmentProoflistDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columnProductId = base.Columns["ProductId"];
+                this.columnstrTransactionNumber = base.Columns["strTransactionNumber"];
+                this.columndatTransactionDate = base.Columns["datTransactionDate"];
+                this.columnstrAdjustmentType = base.Columns["strAdjustmentType"];
+                this.columnstrDescription = base.Columns["strDescription"];
+                this.columnstrProductCode = base.Columns["strProductCode"];
                 this.columnstrProductName = base.Columns["strProductName"];
-                this.columnOpeningQty = base.Columns["OpeningQty"];
-                this.columnQtyInMonth = base.Columns["QtyInMonth"];
-                this.columnQtyOutMonth = base.Columns["QtyOutMonth"];
-                this.columnClosingQty = base.Columns["ClosingQty"];
-                this.columnUnitPrice = base.Columns["UnitPrice"];
-                this.columnOutstandingBalance = base.Columns["OutstandingBalance"];
+                this.columnstrProductDescription = base.Columns["strProductDescription"];
+                this.columnstrBrand = base.Columns["strBrand"];
+                this.columnstrCategory = base.Columns["strCategory"];
+                this.columnstrProductType = base.Columns["strProductType"];
+                this.columnstrCharacteristic = base.Columns["strCharacteristic"];
+                this.columnstrColor = base.Columns["strColor"];
+                this.columnstrSize = base.Columns["strSize"];
+                this.columnstrPR = base.Columns["strPR"];
+                this.columnstrPCD = base.Columns["strPCD"];
+                this.columnstrMFLM = base.Columns["strMFLM"];
+                this.columnstrPattern = base.Columns["strPattern"];
+                this.columnstrOrigin = base.Columns["strOrigin"];
+                this.columndecQuantity = base.Columns["decQuantity"];
+                this.columncurUnitPrice = base.Columns["curUnitPrice"];
+                this.columncurTotalPrice = base.Columns["curTotalPrice"];
+                this.columnintAdjustmentId = base.Columns["intAdjustmentId"];
+                this.columnintAdjustmentTypeId = base.Columns["intAdjustmentTypeId"];
+                this.columnintProductId = base.Columns["intProductId"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columnProductId = new global::System.Data.DataColumn("ProductId", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnProductId);
+                this.columnstrTransactionNumber = new global::System.Data.DataColumn("strTransactionNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrTransactionNumber);
+                this.columndatTransactionDate = new global::System.Data.DataColumn("datTransactionDate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndatTransactionDate);
+                this.columnstrAdjustmentType = new global::System.Data.DataColumn("strAdjustmentType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrAdjustmentType);
+                this.columnstrDescription = new global::System.Data.DataColumn("strDescription", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrDescription);
+                this.columnstrProductCode = new global::System.Data.DataColumn("strProductCode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrProductCode);
                 this.columnstrProductName = new global::System.Data.DataColumn("strProductName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstrProductName);
-                this.columnOpeningQty = new global::System.Data.DataColumn("OpeningQty", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnOpeningQty);
-                this.columnQtyInMonth = new global::System.Data.DataColumn("QtyInMonth", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQtyInMonth);
-                this.columnQtyOutMonth = new global::System.Data.DataColumn("QtyOutMonth", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQtyOutMonth);
-                this.columnClosingQty = new global::System.Data.DataColumn("ClosingQty", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnClosingQty);
-                this.columnUnitPrice = new global::System.Data.DataColumn("UnitPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUnitPrice);
-                this.columnOutstandingBalance = new global::System.Data.DataColumn("OutstandingBalance", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnOutstandingBalance);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnProductId}, true));
-                this.columnProductId.AutoIncrement = true;
-                this.columnProductId.AutoIncrementSeed = -1;
-                this.columnProductId.AutoIncrementStep = -1;
-                this.columnProductId.AllowDBNull = false;
-                this.columnProductId.ReadOnly = true;
-                this.columnProductId.Unique = true;
+                this.columnstrProductDescription = new global::System.Data.DataColumn("strProductDescription", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrProductDescription);
+                this.columnstrBrand = new global::System.Data.DataColumn("strBrand", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrBrand);
+                this.columnstrCategory = new global::System.Data.DataColumn("strCategory", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrCategory);
+                this.columnstrProductType = new global::System.Data.DataColumn("strProductType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrProductType);
+                this.columnstrCharacteristic = new global::System.Data.DataColumn("strCharacteristic", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrCharacteristic);
+                this.columnstrColor = new global::System.Data.DataColumn("strColor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrColor);
+                this.columnstrSize = new global::System.Data.DataColumn("strSize", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrSize);
+                this.columnstrPR = new global::System.Data.DataColumn("strPR", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrPR);
+                this.columnstrPCD = new global::System.Data.DataColumn("strPCD", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrPCD);
+                this.columnstrMFLM = new global::System.Data.DataColumn("strMFLM", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrMFLM);
+                this.columnstrPattern = new global::System.Data.DataColumn("strPattern", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrPattern);
+                this.columnstrOrigin = new global::System.Data.DataColumn("strOrigin", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstrOrigin);
+                this.columndecQuantity = new global::System.Data.DataColumn("decQuantity", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndecQuantity);
+                this.columncurUnitPrice = new global::System.Data.DataColumn("curUnitPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurUnitPrice);
+                this.columncurTotalPrice = new global::System.Data.DataColumn("curTotalPrice", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncurTotalPrice);
+                this.columnintAdjustmentId = new global::System.Data.DataColumn("intAdjustmentId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnintAdjustmentId);
+                this.columnintAdjustmentTypeId = new global::System.Data.DataColumn("intAdjustmentTypeId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnintAdjustmentTypeId);
+                this.columnintProductId = new global::System.Data.DataColumn("intProductId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnintProductId);
+                this.columnstrTransactionNumber.MaxLength = 500;
+                this.columndatTransactionDate.ReadOnly = true;
+                this.columndatTransactionDate.MaxLength = 10;
+                this.columnstrAdjustmentType.MaxLength = 500;
+                this.columnstrDescription.MaxLength = 2147483647;
+                this.columnstrProductCode.MaxLength = 500;
                 this.columnstrProductName.MaxLength = 500;
-                this.columnOpeningQty.AllowDBNull = false;
-                this.columnQtyInMonth.AllowDBNull = false;
-                this.columnQtyOutMonth.AllowDBNull = false;
-                this.columnClosingQty.ReadOnly = true;
-                this.columnOutstandingBalance.ReadOnly = true;
+                this.columnstrProductDescription.MaxLength = 500;
+                this.columnstrBrand.MaxLength = 500;
+                this.columnstrCategory.MaxLength = 500;
+                this.columnstrProductType.MaxLength = 50;
+                this.columnstrCharacteristic.MaxLength = 50;
+                this.columnstrColor.MaxLength = 50;
+                this.columnstrSize.MaxLength = 50;
+                this.columnstrPR.MaxLength = 500;
+                this.columnstrPCD.MaxLength = 500;
+                this.columnstrMFLM.MaxLength = 500;
+                this.columnstrPattern.MaxLength = 500;
+                this.columnstrOrigin.MaxLength = 500;
+                this.columnintAdjustmentId.AutoIncrement = true;
+                this.columnintAdjustmentId.AutoIncrementSeed = -1;
+                this.columnintAdjustmentId.AutoIncrementStep = -1;
+                this.columnintAdjustmentId.AllowDBNull = false;
+                this.columnintAdjustmentId.ReadOnly = true;
+                this.columnintAdjustmentTypeId.AutoIncrement = true;
+                this.columnintAdjustmentTypeId.AutoIncrementSeed = -1;
+                this.columnintAdjustmentTypeId.AutoIncrementStep = -1;
+                this.columnintAdjustmentTypeId.AllowDBNull = false;
+                this.columnintAdjustmentTypeId.ReadOnly = true;
+                this.columnintProductId.AutoIncrement = true;
+                this.columnintProductId.AutoIncrementSeed = -1;
+                this.columnintProductId.AutoIncrementStep = -1;
+                this.columnintProductId.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spInventoryMonthlyOutstandingSummaryRow NewspInventoryMonthlyOutstandingSummaryRow() {
-                return ((spInventoryMonthlyOutstandingSummaryRow)(this.NewRow()));
+            public spRPTInventoryAdjustmentProoflistRow NewspRPTInventoryAdjustmentProoflistRow() {
+                return ((spRPTInventoryAdjustmentProoflistRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new spInventoryMonthlyOutstandingSummaryRow(builder);
+                return new spRPTInventoryAdjustmentProoflistRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(spInventoryMonthlyOutstandingSummaryRow);
+                return typeof(spRPTInventoryAdjustmentProoflistRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.spInventoryMonthlyOutstandingSummaryRowChanged != null)) {
-                    this.spInventoryMonthlyOutstandingSummaryRowChanged(this, new spInventoryMonthlyOutstandingSummaryRowChangeEvent(((spInventoryMonthlyOutstandingSummaryRow)(e.Row)), e.Action));
+                if ((this.spRPTInventoryAdjustmentProoflistRowChanged != null)) {
+                    this.spRPTInventoryAdjustmentProoflistRowChanged(this, new spRPTInventoryAdjustmentProoflistRowChangeEvent(((spRPTInventoryAdjustmentProoflistRow)(e.Row)), e.Action));
                 }
             }
             
@@ -8476,8 +8733,8 @@ namespace GeneralLedger {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.spInventoryMonthlyOutstandingSummaryRowChanging != null)) {
-                    this.spInventoryMonthlyOutstandingSummaryRowChanging(this, new spInventoryMonthlyOutstandingSummaryRowChangeEvent(((spInventoryMonthlyOutstandingSummaryRow)(e.Row)), e.Action));
+                if ((this.spRPTInventoryAdjustmentProoflistRowChanging != null)) {
+                    this.spRPTInventoryAdjustmentProoflistRowChanging(this, new spRPTInventoryAdjustmentProoflistRowChangeEvent(((spRPTInventoryAdjustmentProoflistRow)(e.Row)), e.Action));
                 }
             }
             
@@ -8485,8 +8742,8 @@ namespace GeneralLedger {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.spInventoryMonthlyOutstandingSummaryRowDeleted != null)) {
-                    this.spInventoryMonthlyOutstandingSummaryRowDeleted(this, new spInventoryMonthlyOutstandingSummaryRowChangeEvent(((spInventoryMonthlyOutstandingSummaryRow)(e.Row)), e.Action));
+                if ((this.spRPTInventoryAdjustmentProoflistRowDeleted != null)) {
+                    this.spRPTInventoryAdjustmentProoflistRowDeleted(this, new spRPTInventoryAdjustmentProoflistRowChangeEvent(((spRPTInventoryAdjustmentProoflistRow)(e.Row)), e.Action));
                 }
             }
             
@@ -8494,14 +8751,14 @@ namespace GeneralLedger {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.spInventoryMonthlyOutstandingSummaryRowDeleting != null)) {
-                    this.spInventoryMonthlyOutstandingSummaryRowDeleting(this, new spInventoryMonthlyOutstandingSummaryRowChangeEvent(((spInventoryMonthlyOutstandingSummaryRow)(e.Row)), e.Action));
+                if ((this.spRPTInventoryAdjustmentProoflistRowDeleting != null)) {
+                    this.spRPTInventoryAdjustmentProoflistRowDeleting(this, new spRPTInventoryAdjustmentProoflistRowChangeEvent(((spRPTInventoryAdjustmentProoflistRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void RemovespInventoryMonthlyOutstandingSummaryRow(spInventoryMonthlyOutstandingSummaryRow row) {
+            public void RemovespRPTInventoryAdjustmentProoflistRow(spRPTInventoryAdjustmentProoflistRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -8528,7 +8785,7 @@ namespace GeneralLedger {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "spInventoryMonthlyOutstandingSummaryDataTable";
+                attribute2.FixedValue = "spRPTInventoryAdjustmentProoflistDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -13270,25 +13527,99 @@ namespace GeneralLedger {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class spInventoryMonthlyOutstandingSummaryRow : global::System.Data.DataRow {
+        public partial class spRPTInventoryAdjustmentProoflistRow : global::System.Data.DataRow {
             
-            private spInventoryMonthlyOutstandingSummaryDataTable tablespInventoryMonthlyOutstandingSummary;
+            private spRPTInventoryAdjustmentProoflistDataTable tablespRPTInventoryAdjustmentProoflist;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal spInventoryMonthlyOutstandingSummaryRow(global::System.Data.DataRowBuilder rb) : 
+            internal spRPTInventoryAdjustmentProoflistRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tablespInventoryMonthlyOutstandingSummary = ((spInventoryMonthlyOutstandingSummaryDataTable)(this.Table));
+                this.tablespRPTInventoryAdjustmentProoflist = ((spRPTInventoryAdjustmentProoflistDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int ProductId {
+            public string strTransactionNumber {
                 get {
-                    return ((int)(this[this.tablespInventoryMonthlyOutstandingSummary.ProductIdColumn]));
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strTransactionNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strTransactionNumber\' in table \'spRPTInventoryAdjustmentPro" +
+                                "oflist\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tablespInventoryMonthlyOutstandingSummary.ProductIdColumn] = value;
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strTransactionNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string datTransactionDate {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.datTransactionDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'datTransactionDate\' in table \'spRPTInventoryAdjustmentProof" +
+                                "list\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.datTransactionDateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strAdjustmentType {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strAdjustmentTypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strAdjustmentType\' in table \'spRPTInventoryAdjustmentProofl" +
+                                "ist\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strAdjustmentTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strDescription {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strDescriptionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strDescription\' in table \'spRPTInventoryAdjustmentProoflist" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strDescriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strProductCode {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strProductCodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strProductCode\' in table \'spRPTInventoryAdjustmentProoflist" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strProductCodeColumn] = value;
                 }
             }
             
@@ -13297,148 +13628,574 @@ namespace GeneralLedger {
             public string strProductName {
                 get {
                     try {
-                        return ((string)(this[this.tablespInventoryMonthlyOutstandingSummary.strProductNameColumn]));
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strProductNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'strProductName\' in table \'spInventoryMonthlyOutstandingSumm" +
-                                "ary\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'strProductName\' in table \'spRPTInventoryAdjustmentProoflist" +
+                                "\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablespInventoryMonthlyOutstandingSummary.strProductNameColumn] = value;
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strProductNameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal OpeningQty {
-                get {
-                    return ((decimal)(this[this.tablespInventoryMonthlyOutstandingSummary.OpeningQtyColumn]));
-                }
-                set {
-                    this[this.tablespInventoryMonthlyOutstandingSummary.OpeningQtyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal QtyInMonth {
-                get {
-                    return ((decimal)(this[this.tablespInventoryMonthlyOutstandingSummary.QtyInMonthColumn]));
-                }
-                set {
-                    this[this.tablespInventoryMonthlyOutstandingSummary.QtyInMonthColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal QtyOutMonth {
-                get {
-                    return ((decimal)(this[this.tablespInventoryMonthlyOutstandingSummary.QtyOutMonthColumn]));
-                }
-                set {
-                    this[this.tablespInventoryMonthlyOutstandingSummary.QtyOutMonthColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal ClosingQty {
+            public string strProductDescription {
                 get {
                     try {
-                        return ((decimal)(this[this.tablespInventoryMonthlyOutstandingSummary.ClosingQtyColumn]));
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strProductDescriptionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ClosingQty\' in table \'spInventoryMonthlyOutstandingSummary\'" +
-                                " is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'strProductDescription\' in table \'spRPTInventoryAdjustmentPr" +
+                                "ooflist\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablespInventoryMonthlyOutstandingSummary.ClosingQtyColumn] = value;
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strProductDescriptionColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal UnitPrice {
+            public string strBrand {
                 get {
                     try {
-                        return ((decimal)(this[this.tablespInventoryMonthlyOutstandingSummary.UnitPriceColumn]));
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strBrandColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'UnitPrice\' in table \'spInventoryMonthlyOutstandingSummary\' " +
+                        throw new global::System.Data.StrongTypingException("The value for column \'strBrand\' in table \'spRPTInventoryAdjustmentProoflist\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strBrandColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strCategory {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strCategoryColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strCategory\' in table \'spRPTInventoryAdjustmentProoflist\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strCategoryColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strProductType {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strProductTypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strProductType\' in table \'spRPTInventoryAdjustmentProoflist" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strProductTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strCharacteristic {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strCharacteristicColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strCharacteristic\' in table \'spRPTInventoryAdjustmentProofl" +
+                                "ist\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strCharacteristicColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strColor {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strColorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strColor\' in table \'spRPTInventoryAdjustmentProoflist\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strColorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strSize {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strSizeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strSize\' in table \'spRPTInventoryAdjustmentProoflist\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strSizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strPR {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strPRColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strPR\' in table \'spRPTInventoryAdjustmentProoflist\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strPRColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strPCD {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strPCDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strPCD\' in table \'spRPTInventoryAdjustmentProoflist\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strPCDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strMFLM {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strMFLMColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strMFLM\' in table \'spRPTInventoryAdjustmentProoflist\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strMFLMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strPattern {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strPatternColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strPattern\' in table \'spRPTInventoryAdjustmentProoflist\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strPatternColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string strOrigin {
+                get {
+                    try {
+                        return ((string)(this[this.tablespRPTInventoryAdjustmentProoflist.strOriginColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'strOrigin\' in table \'spRPTInventoryAdjustmentProoflist\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.strOriginColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int decQuantity {
+                get {
+                    try {
+                        return ((int)(this[this.tablespRPTInventoryAdjustmentProoflist.decQuantityColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'decQuantity\' in table \'spRPTInventoryAdjustmentProoflist\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.decQuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal curUnitPrice {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablespRPTInventoryAdjustmentProoflist.curUnitPriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'curUnitPrice\' in table \'spRPTInventoryAdjustmentProoflist\' " +
                                 "is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablespInventoryMonthlyOutstandingSummary.UnitPriceColumn] = value;
+                    this[this.tablespRPTInventoryAdjustmentProoflist.curUnitPriceColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal OutstandingBalance {
+            public decimal curTotalPrice {
                 get {
                     try {
-                        return ((decimal)(this[this.tablespInventoryMonthlyOutstandingSummary.OutstandingBalanceColumn]));
+                        return ((decimal)(this[this.tablespRPTInventoryAdjustmentProoflist.curTotalPriceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'OutstandingBalance\' in table \'spInventoryMonthlyOutstanding" +
-                                "Summary\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'curTotalPrice\' in table \'spRPTInventoryAdjustmentProoflist\'" +
+                                " is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablespInventoryMonthlyOutstandingSummary.OutstandingBalanceColumn] = value;
+                    this[this.tablespRPTInventoryAdjustmentProoflist.curTotalPriceColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int intAdjustmentId {
+                get {
+                    return ((int)(this[this.tablespRPTInventoryAdjustmentProoflist.intAdjustmentIdColumn]));
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.intAdjustmentIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int intAdjustmentTypeId {
+                get {
+                    return ((int)(this[this.tablespRPTInventoryAdjustmentProoflist.intAdjustmentTypeIdColumn]));
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.intAdjustmentTypeIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int intProductId {
+                get {
+                    try {
+                        return ((int)(this[this.tablespRPTInventoryAdjustmentProoflist.intProductIdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'intProductId\' in table \'spRPTInventoryAdjustmentProoflist\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablespRPTInventoryAdjustmentProoflist.intProductIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrTransactionNumberNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strTransactionNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrTransactionNumberNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strTransactionNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsdatTransactionDateNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.datTransactionDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetdatTransactionDateNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.datTransactionDateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrAdjustmentTypeNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strAdjustmentTypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrAdjustmentTypeNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strAdjustmentTypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrDescriptionNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strDescriptionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrDescriptionNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strDescriptionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrProductCodeNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strProductCodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrProductCodeNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strProductCodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsstrProductNameNull() {
-                return this.IsNull(this.tablespInventoryMonthlyOutstandingSummary.strProductNameColumn);
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strProductNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetstrProductNameNull() {
-                this[this.tablespInventoryMonthlyOutstandingSummary.strProductNameColumn] = global::System.Convert.DBNull;
+                this[this.tablespRPTInventoryAdjustmentProoflist.strProductNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsClosingQtyNull() {
-                return this.IsNull(this.tablespInventoryMonthlyOutstandingSummary.ClosingQtyColumn);
+            public bool IsstrProductDescriptionNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strProductDescriptionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetClosingQtyNull() {
-                this[this.tablespInventoryMonthlyOutstandingSummary.ClosingQtyColumn] = global::System.Convert.DBNull;
+            public void SetstrProductDescriptionNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strProductDescriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsUnitPriceNull() {
-                return this.IsNull(this.tablespInventoryMonthlyOutstandingSummary.UnitPriceColumn);
+            public bool IsstrBrandNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strBrandColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetUnitPriceNull() {
-                this[this.tablespInventoryMonthlyOutstandingSummary.UnitPriceColumn] = global::System.Convert.DBNull;
+            public void SetstrBrandNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strBrandColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsOutstandingBalanceNull() {
-                return this.IsNull(this.tablespInventoryMonthlyOutstandingSummary.OutstandingBalanceColumn);
+            public bool IsstrCategoryNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strCategoryColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetOutstandingBalanceNull() {
-                this[this.tablespInventoryMonthlyOutstandingSummary.OutstandingBalanceColumn] = global::System.Convert.DBNull;
+            public void SetstrCategoryNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strCategoryColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrProductTypeNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strProductTypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrProductTypeNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strProductTypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrCharacteristicNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strCharacteristicColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrCharacteristicNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strCharacteristicColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrColorNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strColorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrColorNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strColorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrSizeNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strSizeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrSizeNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strSizeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrPRNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strPRColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrPRNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strPRColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrPCDNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strPCDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrPCDNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strPCDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrMFLMNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strMFLMColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrMFLMNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strMFLMColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrPatternNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strPatternColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrPatternNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strPatternColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsstrOriginNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.strOriginColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetstrOriginNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.strOriginColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsdecQuantityNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.decQuantityColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetdecQuantityNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.decQuantityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscurUnitPriceNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.curUnitPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcurUnitPriceNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.curUnitPriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IscurTotalPriceNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.curTotalPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetcurTotalPriceNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.curTotalPriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsintProductIdNull() {
+                return this.IsNull(this.tablespRPTInventoryAdjustmentProoflist.intProductIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetintProductIdNull() {
+                this[this.tablespRPTInventoryAdjustmentProoflist.intProductIdColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -14160,22 +14917,22 @@ namespace GeneralLedger {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public class spInventoryMonthlyOutstandingSummaryRowChangeEvent : global::System.EventArgs {
+        public class spRPTInventoryAdjustmentProoflistRowChangeEvent : global::System.EventArgs {
             
-            private spInventoryMonthlyOutstandingSummaryRow eventRow;
+            private spRPTInventoryAdjustmentProoflistRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spInventoryMonthlyOutstandingSummaryRowChangeEvent(spInventoryMonthlyOutstandingSummaryRow row, global::System.Data.DataRowAction action) {
+            public spRPTInventoryAdjustmentProoflistRowChangeEvent(spRPTInventoryAdjustmentProoflistRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public spInventoryMonthlyOutstandingSummaryRow Row {
+            public spRPTInventoryAdjustmentProoflistRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -18436,7 +19193,7 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class spInventoryMonthlyOutstandingSummaryTableAdapter : global::System.ComponentModel.Component {
+    public partial class spRPTInventoryAdjustmentProoflistTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -18450,7 +19207,7 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public spInventoryMonthlyOutstandingSummaryTableAdapter() {
+        public spRPTInventoryAdjustmentProoflistTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -18547,15 +19304,31 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "spInventoryMonthlyOutstandingSummary";
-            tableMapping.ColumnMappings.Add("ProductId", "ProductId");
+            tableMapping.DataSetTable = "spRPTInventoryAdjustmentProoflist";
+            tableMapping.ColumnMappings.Add("strTransactionNumber", "strTransactionNumber");
+            tableMapping.ColumnMappings.Add("datTransactionDate", "datTransactionDate");
+            tableMapping.ColumnMappings.Add("strAdjustmentType", "strAdjustmentType");
+            tableMapping.ColumnMappings.Add("strDescription", "strDescription");
+            tableMapping.ColumnMappings.Add("strProductCode", "strProductCode");
             tableMapping.ColumnMappings.Add("strProductName", "strProductName");
-            tableMapping.ColumnMappings.Add("OpeningQty", "OpeningQty");
-            tableMapping.ColumnMappings.Add("QtyInMonth", "QtyInMonth");
-            tableMapping.ColumnMappings.Add("QtyOutMonth", "QtyOutMonth");
-            tableMapping.ColumnMappings.Add("ClosingQty", "ClosingQty");
-            tableMapping.ColumnMappings.Add("UnitPrice", "UnitPrice");
-            tableMapping.ColumnMappings.Add("OutstandingBalance", "OutstandingBalance");
+            tableMapping.ColumnMappings.Add("strProductDescription", "strProductDescription");
+            tableMapping.ColumnMappings.Add("strBrand", "strBrand");
+            tableMapping.ColumnMappings.Add("strCategory", "strCategory");
+            tableMapping.ColumnMappings.Add("strProductType", "strProductType");
+            tableMapping.ColumnMappings.Add("strCharacteristic", "strCharacteristic");
+            tableMapping.ColumnMappings.Add("strColor", "strColor");
+            tableMapping.ColumnMappings.Add("strSize", "strSize");
+            tableMapping.ColumnMappings.Add("strPR", "strPR");
+            tableMapping.ColumnMappings.Add("strPCD", "strPCD");
+            tableMapping.ColumnMappings.Add("strMFLM", "strMFLM");
+            tableMapping.ColumnMappings.Add("strPattern", "strPattern");
+            tableMapping.ColumnMappings.Add("strOrigin", "strOrigin");
+            tableMapping.ColumnMappings.Add("decQuantity", "decQuantity");
+            tableMapping.ColumnMappings.Add("curUnitPrice", "curUnitPrice");
+            tableMapping.ColumnMappings.Add("curTotalPrice", "curTotalPrice");
+            tableMapping.ColumnMappings.Add("intAdjustmentId", "intAdjustmentId");
+            tableMapping.ColumnMappings.Add("intAdjustmentTypeId", "intAdjustmentTypeId");
+            tableMapping.ColumnMappings.Add("intProductId", "intProductId");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -18563,7 +19336,7 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GeneralLedger.Properties.Settings.Default.GeneralLedgerConnectionString;
+            this._connection.ConnectionString = global::GeneralLedger.Properties.Settings.Default.GeneralLedgerConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -18572,23 +19345,30 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "dbo.spInventoryMonthlyOutstandingSummary";
+            this._commandCollection[0].CommandText = "dbo.spRPTInventoryAdjustmentProoflist";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MonthDate", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@datDateFrom", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@datDateTo", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(GeneralLedgerDataSet.spInventoryMonthlyOutstandingSummaryDataTable dataTable, global::System.Nullable<global::System.DateTime> MonthDate) {
+        public virtual int Fill(GeneralLedgerDataSet.spRPTInventoryAdjustmentProoflistDataTable dataTable, global::System.Nullable<global::System.DateTime> datDateFrom, global::System.Nullable<global::System.DateTime> datDateTo) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((MonthDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(MonthDate.Value));
+            if ((datDateFrom.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(datDateFrom.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((datDateTo.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(datDateTo.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -18601,15 +19381,21 @@ namespace GeneralLedger.GeneralLedgerDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual GeneralLedgerDataSet.spInventoryMonthlyOutstandingSummaryDataTable GetData(global::System.Nullable<global::System.DateTime> MonthDate) {
+        public virtual GeneralLedgerDataSet.spRPTInventoryAdjustmentProoflistDataTable GetData(global::System.Nullable<global::System.DateTime> datDateFrom, global::System.Nullable<global::System.DateTime> datDateTo) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((MonthDate.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(MonthDate.Value));
+            if ((datDateFrom.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(datDateFrom.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            GeneralLedgerDataSet.spInventoryMonthlyOutstandingSummaryDataTable dataTable = new GeneralLedgerDataSet.spInventoryMonthlyOutstandingSummaryDataTable();
+            if ((datDateTo.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(datDateTo.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            GeneralLedgerDataSet.spRPTInventoryAdjustmentProoflistDataTable dataTable = new GeneralLedgerDataSet.spRPTInventoryAdjustmentProoflistDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

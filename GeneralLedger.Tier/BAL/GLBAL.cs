@@ -41,6 +41,13 @@ namespace GeneralLedger.Tier.BAL
 
         }
 
+        public List<rptInventoryAdjustmentProoflist> getInventoryAdjustmentProoflist(string datDateFrom, string datDateTo)
+        {
+            GLDAL gltb = new GLDAL();
+            return gltb.getInventoryAdjustmentProoflist(datDateFrom, datDateTo);
+
+        }
+
         public List<rptJournalProoflist> getSalesEntryProoflist(string datDateFrom, string datDateTo)
         {
             GLDAL gltb = new GLDAL();
