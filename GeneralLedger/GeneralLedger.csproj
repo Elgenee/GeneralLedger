@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\DESKTOP-GMON3EJ\Royal Marketing Installer\</UpdateUrl>
-    <ApplicationRevision>73</ApplicationRevision>
+    <ApplicationRevision>74</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -103,6 +103,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Entity" />
@@ -171,6 +172,12 @@
     </Compile>
     <Compile Include="Report\frmReportCustomerLedger.Designer.cs">
       <DependentUpon>frmReportCustomerLedger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\frmReportStatementOfAccounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\frmReportStatementOfAccounts.Designer.cs">
+      <DependentUpon>frmReportStatementOfAccounts.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\frmReportSaleProoflist.cs">
       <SubType>Form</SubType>
@@ -712,6 +719,9 @@
     <EmbeddedResource Include="Report\frmReportCustomerLedger.resx">
       <DependentUpon>frmReportCustomerLedger.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\frmReportStatementOfAccounts.resx">
+      <DependentUpon>frmReportStatementOfAccounts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\frmReportSaleProoflist.resx">
       <DependentUpon>frmReportSaleProoflist.cs</DependentUpon>
     </EmbeddedResource>
@@ -722,6 +732,7 @@
     <EmbeddedResource Include="Report\RDLC\PurchaseProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\SupplierLedgerOverall.rdlc" />
     <EmbeddedResource Include="Report\RDLC\CustomerLedgerOverall.rdlc" />
+    <EmbeddedResource Include="Report\RDLC\rptReportStatementOfAccounts.rdlc" />
     <EmbeddedResource Include="Report\RDLC\CollectionProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\SalesProoflist.rdlc" />
     <EmbeddedResource Include="Report\RDLC\rptReportAccountsReceivableSales.rdlc">

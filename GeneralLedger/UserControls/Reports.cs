@@ -115,6 +115,12 @@ namespace GeneralLedger.UserControls
                     frmReportCustomerLedger.Show();
                 }
 
+                if (item.ToUpper().Equals("STATEMENT OF ACCOUNTS"))
+                {
+                    frmReportStatementOfAccounts frmReportStatementOfAccounts = new frmReportStatementOfAccounts();
+                    frmReportStatementOfAccounts.Show();
+                }
+
 
                 if (item.ToUpper().Equals("SUPPLIER LEDGER"))
                 {
