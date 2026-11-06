@@ -45,6 +45,7 @@
             System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Summary Of Accounts Receivable-Sales");
             System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Supplier Ledger");
             System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Trial Balance");
+            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Statement of Accounts");
             this.metroListView1 = new MetroFramework.Controls.MetroListView();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.ViewReport = new MetroFramework.Controls.MetroButton();
@@ -73,7 +74,8 @@
             listViewItem14,
             listViewItem15,
             listViewItem16,
-            listViewItem17});
+            listViewItem17,
+            listViewItem18});
             this.metroListView1.Location = new System.Drawing.Point(0, 0);
             this.metroListView1.Margin = new System.Windows.Forms.Padding(4);
             this.metroListView1.Name = "metroListView1";
