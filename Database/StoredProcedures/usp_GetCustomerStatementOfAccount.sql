@@ -60,7 +60,7 @@
 
     Returns one result set with one row per Sales.Id, ordered by invoice date,
     invoice number, then Sales.Id to break ties. InvoiceNumber is Sales.TRANo,
-    kept as text to preserve leading zeroes. DueDate is exactly 60 calendar days
+    kept as text to preserve leading zeroes. DueDate is exactly 90 calendar days
     after Sales.TransactionDate, regardless of customer or invoice Terms.
     Amounts use decimal(28,4): the four fractional digits of existing money
     columns are preserved, with additional aggregate capacity. Format/round for
@@ -240,7 +240,7 @@ BEGIN
     )
     SELECT
         InvoiceDate,
-        DATEADD(DAY, 60, InvoiceDate) AS DueDate,
+        DATEADD(DAY, 90, InvoiceDate) AS DueDate,
         InvoiceNumber,
         OriginalInvoiceAmount,
         TotalPaymentsApplied,
