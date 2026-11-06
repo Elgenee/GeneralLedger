@@ -1070,7 +1070,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>TERMS:60DAYS</Value>
+                      <Value>TERMS:90DAYS</Value>
                       <Style>
                         <FontFamily>Arial</FontFamily>
                         <FontSize>11pt</FontSize>
